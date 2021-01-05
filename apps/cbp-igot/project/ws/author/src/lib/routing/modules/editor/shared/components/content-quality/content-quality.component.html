@@ -110,9 +110,8 @@
         Methods ii. Assessment
         Design iii.
         Competency and Skills iv. Learner Engagement v. Learner Support vi. Accessibility
-        Please mark your answers from the drop down menu across the given range : Strongly Agree, Agree, Disagree,
-        Strongly
-        Disagree. Once you have filled your questionnaire, please click on submit button and you will see the category
+        Please mark your answers from the drop down menu across the given range : Yes, no and not applicable. Once you
+        have filled your questionnaire, please click on submit button and you will see the category
         of your
         course.</span>
       <div class="flex flex-column new-color padding-s margin-s">
@@ -215,7 +214,8 @@
       <span class="mat-subheading-2 padding-xs" style="vertical-align: unset;" i18n>Take test again
       </span>
     </button>
-    <button mat-raised-button type="button" (click)="data.emit('next')"
+    <button mat-raised-button type="button"
+      (click)="minPassPercentage<=getQualityPercent? data.emit('next'): showMinDialogue()"
       class="text-white ws-mat-primary-background margin-left-s">
       <span class="mat-subheading-2 padding-xs" style="vertical-align: unset;" i18n>Self curation
       </span>

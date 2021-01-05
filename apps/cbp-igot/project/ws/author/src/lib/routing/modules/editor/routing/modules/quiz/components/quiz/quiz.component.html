@@ -77,7 +77,7 @@
         <span class="ws-mat-default-text">Assessment</span>
       </ng-template> -->
   <!-- <ng-container [ngTemplateOutlet]="top"></ng-container> -->
-  <ws-auth-quiz-questions *ngIf="currentStep === 1" (data)="action($event)"></ws-auth-quiz-questions>
+  <ws-auth-quiz-questions (data)="action($event)"></ws-auth-quiz-questions>
   <!-- <div class="mat-app-background mb-10 br-8">
         <div class="margin-top-xl margin-right-xl">
           <ng-container *ngIf="contentLoaded">
@@ -131,9 +131,9 @@
     <mat-step state="create1">
       <ng-template matStepLabel><span class="ws-mat-default-text">Basic Details</span>
       </ng-template> -->
-  <ws-auth-edit-meta *ngIf="currentStep > 1" type="ASSE" [stage]="currentStep" [nextAction]="'done'"
+  <!-- <ws-auth-edit-meta *ngIf="currentStep > 1" type="ASSE" [stage]="currentStep" [nextAction]="'done'"
     (data)="action($event)">
-  </ws-auth-edit-meta>
+  </ws-auth-edit-meta> -->
   <!-- </mat-step>
     <mat-step state="create1">
       <ng-template matStepLabel><span class="ws-mat-default-text">Classification</span>

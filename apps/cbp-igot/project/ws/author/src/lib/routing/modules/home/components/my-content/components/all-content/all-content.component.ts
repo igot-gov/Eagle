@@ -739,4 +739,7 @@ export class AllContentComponent implements OnInit, OnDestroy {
   setCurrentLanguage(lang: string) {
     this.searchLanguage = lang
   }
+  get isAllowed() {
+    return this.accessService.hasRole(['admin', 'super-admin', 'content-admin', 'editor', 'author', 'content-creator'])
+  }
 }

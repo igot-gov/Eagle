@@ -30,7 +30,7 @@ import { WebStoreService } from './services/store.service'
   ],
   providers: [WebStoreService],
   entryComponents: [UploadAudioComponent],
-  exports: [AddWebPagesComponent],
+  exports: [AddWebPagesComponent, WebModuleEditorComponent],
 
 })
 export class WebPageModule { }

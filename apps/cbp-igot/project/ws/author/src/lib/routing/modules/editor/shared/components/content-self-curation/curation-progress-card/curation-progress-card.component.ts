@@ -34,12 +34,12 @@ export class CurationProgressCardComponent implements OnInit, OnDestroy {
     return ''
   }
   fetchProgress() {
-    const data = {
-      contentId: this.contentMeta.identifier,
-      fileName: this.getFileName,
-    }
-    this.curationService.fetchresult(data).subscribe(result => {
-      this.progressData = result
-    })
+    // const data = {
+    //   contentId: this.contentMeta.identifier,
+    //   fileName: this.getFileName,
+    // }
+    // this.curationService.fetchresult(data).subscribe(result => {
+    //   this.progressData = result
+    // })
   }
 }

@@ -32,6 +32,7 @@ import { mergeMap, tap } from 'rxjs/operators'
 import { IFormMeta } from './../../../../../../../../interface/form'
 import { AuthInitService } from './../../../../../../../../services/init.service'
 import { ProfanityPopUpComponent } from '../profanity-popup/profanity-popup'
+import { ProfanityService } from '../../services/profanity.service'
 // import { ProfanityService } from '../../services/profanity.service'
 
 @Component({
@@ -80,7 +81,7 @@ export class FileUploadComponent implements OnInit {
     private authInitService: AuthInitService,
     private valueSvc: ValueService,
     private accessService: AccessControlService,
-    // private profanityService: ProfanityService,
+    private profanityService: ProfanityService,
   ) { }
 
   ngOnInit() {
@@ -343,7 +344,7 @@ export class FileUploadComponent implements OnInit {
           //     .pipe(map(() => v))
           // }
           if (this.mimeType === 'application/pdf') {
-            // this.profanityCheckAPICall(v.downloadURL)
+            this.profanityCheckAPICall(v.downloadURL)
           }
           return of(v)
         }),
@@ -372,14 +373,9 @@ export class FileUploadComponent implements OnInit {
         },
       )
   }
-  // profanityCheckAPICall(url: string) {
-  //   this.profanityService.featchProfanity(this.currentContent, url).subscribe(data => {
-  //     this.profanityData = data
-  //     if (this.profanityData !== null && this.profanityData !== undefined) {
-  //       this.startProfanityPopup()
-  //     }
-  //   })
-  // }
+  profanityCheckAPICall(url: string) {
+    this.profanityService.featchProfanity(this.currentContent, url, (this.file ? this.file.name : this.currentContent)).subscribe()
+  }
   startProfanityPopup() {
     this.loaderService.changeLoad.next(false)
     const dialogRef = this.dialog.open(ProfanityPopUpComponent, {

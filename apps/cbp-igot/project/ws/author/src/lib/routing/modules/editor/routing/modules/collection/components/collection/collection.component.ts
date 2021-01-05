@@ -26,6 +26,8 @@ import { VIEWER_ROUTE_FROM_MIME } from '@ws-widget/collection'
 import { NotificationService } from '@ws/author/src/lib/services/notification.service'
 import { AccessControlService } from '@ws/author/src/lib/modules/shared/services/access-control.service'
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout'
+import { ContentQualityService } from '../../../../../shared/services/content-quality.service'
+import { ConfigurationsService } from '../../../../../../../../../../../../../library/ws-widget/utils/src/public-api'
 
 /**
  * @description
@@ -89,6 +91,10 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
     private notificationSvc: NotificationService,
     private accessControlSvc: AccessControlService,
     private breakpointObserver: BreakpointObserver,
+    private _qualityService: ContentQualityService,
+    private _configurationsService: ConfigurationsService,
+
+
   ) {
     this.selectedIndex = 0
   }
@@ -306,16 +312,79 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
     //   })
     //   return
     // }
-    if (this.validationCheck) {
-      const dialogRef = this.dialog.open(CommentsDialogComponent, {
-        width: '750px',
-        height: '450px',
-        data: this.contentService.getOriginalMeta(this.currentParentId),
-      })
+    if (this.validationCheck && this._configurationsService.userProfile) {
+      const reqObj = {
+        resourceId: this.currentContent,
+        resourceType: 'content',
+        userId: this._configurationsService.userProfile.userId,
+        getLatestRecordEnabled: true,
+      }
+      this._qualityService.fetchresult(reqObj).subscribe((result: any) => {
+        if (result && result.result && result.result.resources) {
+          const rse = result.result.resources || []
+          if (rse.length === 1) {
+            const qualityScore = rse[0]
+            if (qualityScore) {
+              if (qualityScore) {
+                const score = (qualityScore.finalTotalScore / qualityScore.finalMaxScore) * 100
+                let minPassPercentage = 20
+                if (this.initService.authAdditionalConfig.contentQuality) {
+                  minPassPercentage = this.initService.authAdditionalConfig.contentQuality.passPercentage
+                }
+                if (score >= minPassPercentage) {
+                  /** final call */
+                  const dialogRef = this.dialog.open(CommentsDialogComponent, {
+                    width: '750px',
+                    height: '450px',
+                    data: this.contentService.getOriginalMeta(this.currentParentId),
+                  })
 
-      dialogRef.afterClosed().subscribe((commentsForm: FormGroup) => {
-        this.finalCall(commentsForm)
+                  dialogRef.afterClosed().subscribe((commentsForm: FormGroup) => {
+                    if (this.isQualityScorePassed()) {
+                      this.finalCall(commentsForm)
+                    }
+                  })
+                  /** final call */
+                } else {
+                  this.snackBar.open(`To proceed further minimum quality score must be  ${minPassPercentage}% or greater`)
+                }
+              }
+            }
+
+          }
+        }
       })
+    }
+  }
+
+  isQualityScorePassed(): boolean | undefined {
+    if (this._configurationsService.userProfile) {
+      const reqObj = {
+        resourceId: this.currentContent,
+        resourceType: 'content',
+        userId: this._configurationsService.userProfile.userId,
+        getLatestRecordEnabled: true,
+      }
+      this._qualityService.fetchresult(reqObj).subscribe((result: any) => {
+        if (result && result.result && result.result.resources) {
+          const rse = result.result.resources || []
+          if (rse.length === 1) {
+            const qualityScore = rse[0]
+            if (qualityScore) {
+              const score = (qualityScore.finalTotalScore / qualityScore.finalMaxScore) * 100
+              return score >= 70
+            } else {
+              return false
+            }
+          } else {
+            return false
+          }
+        } else {
+          return false
+        }
+      })
+    } else {
+      return false
     }
   }
 
@@ -560,7 +629,7 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
   setVeiwMetaByType(content: NSContent.IContentMeta) {
     if (['application/pdf', 'application/x-mpegURL'].includes(content.mimeType)) {
       this.viewMode = 'upload'
-    } else if (content.mimeType === 'application/html' && !content.isExternal) {
+    } else if ((content.mimeType === 'application/html' && !content.isExternal) || content.mimeType === 'audio/mpeg') {
       this.viewMode = 'upload'
     } else if (content.mimeType === 'application/html') {
       this.viewMode = 'curate'
@@ -631,7 +700,7 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
             if (this.contents.length) {
               this.contentService.changeActiveCont.next(this.contents[0].identifier)
             } else {
-              this.router.navigateByUrl('/author')
+              this.router.navigateByUrl('/author/cbp/me')
             }
           }
         })
@@ -643,7 +712,7 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
         break
 
       case 'close':
-        this.router.navigateByUrl('/author')
+        this.router.navigateByUrl('/author/cbp/me')
         break
     }
   }

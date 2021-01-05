@@ -53,28 +53,30 @@
             <!-- <ng-container *ngIf="viewMode==='quiz'">
               <ws-auth-quiz-questions [isSubmitPressed]="isSubmitPressed" (data)="action($event)">
               </ws-auth-quiz-questions>
-            </ng-container>
+            </ng-container>-->
             <ng-container *ngIf="viewMode==='web'">
-              <ws-auth-web-module-editor [isSubmitPressed]="isSubmitPressed" (data)="action($event)">
-              </ws-auth-web-module-editor>
-            </ng-container> -->
-            <!-- <ws-auth-quiz-questions *ngIf="viewMode === 'quiz'" [isSubmitPressed]="isSubmitPressed" (data)="action($event)">
+              <ws-auth-add-web-pages (data)="action($event)">
+              </ws-auth-add-web-pages>
+            </ng-container>
+            <!-- <ws-auth-quiz-questions *ngIf="viewMode === 'quiz'"  (data)="action($event)">
         </ws-auth-quiz-questions> -->
-            <div *ngIf="viewMode === 'quiz'">
+            <ng-container *ngIf="viewMode === 'quiz'">
+              <ws-auth-quiz (data)="action($event)"></ws-auth-quiz>
+            </ng-container>
+            <!-- <div *ngIf="viewMode === 'quiz'">
               Please go to drafts to edit Web Pages or Click
               <a class="m-auto" routerLink="/author/editor/{{currentContent}}/assessment" i18n-aria-label
                 aria-label="Back">
                 here
               </a>
-            </div>
-            <ng-container *ngIf="viewMode === 'web'">
-
+            </div> -->
+            <!-- <ng-container *ngIf="viewMode === 'web'">
               Please go to drafts to edit Web Pages or Click
               <a class="m-auto" routerLink="/author/editor/{{currentContent}}/web-module" i18n-aria-label
                 aria-label="Back">
                 here
               </a>
-            </ng-container>
+            </ng-container> -->
             <ng-container *ngIf="viewMode === 'meta' && (!currentContent || !currentParentId)">
               <ws-auth-generic></ws-auth-generic>
             </ng-container>

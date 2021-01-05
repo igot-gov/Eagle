@@ -191,14 +191,10 @@
       }
     }
   ],
-  "mandatoryCourses": [
-    {
-      "roles": [
-        "author"
-      ],
-      "courseId": "lex_auth_013064126678122496519"
-    }
-  ],
+  "mandatoryCourses": {},
+  "contentQuality": {
+    "passPercentage": 70
+  },
   "menus": {
     "widgetType": "menus",
     "widgetSubType": "leftMenu",
