@@ -78,8 +78,7 @@ export class DirectoryViewComponent implements OnInit, AfterViewInit, OnDestroy 
     }
     this.getDepartDataByKey(this.departmentHearders[0])
     this.tabledata = {
-      actions: [{ name: 'Approve', label: 'Approve', icon: 'remove_red_eye', type: 'Approve' },
-      { name: 'Reject', label: 'Reject', icon: 'remove_red_eye', type: 'Reject' }],
+      actions: [{ name: 'Edit', label: 'Edit info', icon: 'remove_red_eye', type: 'button' }],
       columns: [
         { displayName: this.currentFilter, key: 'mdo' },
         { displayName: 'Type', key: 'type' },
@@ -128,8 +127,15 @@ export class DirectoryViewComponent implements OnInit, AfterViewInit, OnDestroy 
           mdo: dept.deptName,
           type: dept.deptTypeInfo.deptSubType,
           user: dept.noOfUsers,
+          typeid: dept.deptTypeInfo.id,
         }
       })
+
     }
   }
+  actionClick(clickedData: any) {
+    this.router.navigate([`/app/roles/${this.currentFilter}/basicinfo`, { 'data': JSON.stringify(clickedData) }])
+
+  }
+
 }

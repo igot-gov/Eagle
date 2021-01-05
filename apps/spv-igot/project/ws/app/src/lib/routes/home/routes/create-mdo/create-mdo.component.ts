@@ -81,26 +81,36 @@ export class CreateMdoComponent implements OnInit {
   { isActive: false, isCompleted: false, name: 'Classification', step: 1 },
   { isActive: false, isCompleded: false, name: 'Intended for', step: 2 }]
   constructor(public dialog: MatDialog,
-              private uploadService: UploadService,
-              private snackBar: MatSnackBar,
-              private contentService: EditorContentService,
-              private loader: LoaderService,
-              private authInitService: AuthInitService,
-              private createMdoService: CreateMDOService,
-              private router: Router,
-              private activatedRoute: ActivatedRoute) {
-    this.activatedRoute.params.subscribe(params => {
-      this.department = params['department']
-    })
-  }
-  ngOnInit() {
-    this.typeCheck()
+    private uploadService: UploadService,
+    private snackBar: MatSnackBar,
+    private contentService: EditorContentService,
+    private loader: LoaderService,
+    private authInitService: AuthInitService,
+    private createMdoService: CreateMDOService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute) {
     this.contentForm = new FormGroup({
       name: new FormControl(),
       head: new FormControl(),
       deptSubTypeId: new FormControl(),
       fileUpload: new FormControl(),
     })
+    this.activatedRoute.params.subscribe(params => {
+      let data = params['data']
+      this.department = params['department']
+      data = JSON.parse(data)
+      console.log(data.row)
+      this.contentForm = new FormGroup({
+        name: new FormControl(data.row.mdo),
+        head: new FormControl(data.row.head),
+        deptSubTypeId: new FormControl(data.row.typeid),
+        fileUpload: new FormControl(),
+      })
+    })
+  }
+  ngOnInit() {
+    this.typeCheck()
+
     // this.ordinals = this.authInitService.ordinals
     // this.audienceList = this.ordinals.audience
     // this.jobProfileList = this.ordinals.jobProfile
@@ -531,6 +541,9 @@ export class CreateMdoComponent implements OnInit {
 
       })
     })
+  }
+  textOnly(event: any) {
+    console.log(event.key)
   }
   onSubmit() {
     if (this.contentForm.value.name !== null && this.contentForm.value.head !== null

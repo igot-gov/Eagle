@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { FormGroup, Validators, FormControl, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms'
 import { MatSnackBar } from '@angular/material'
 import { ConfigurationsService } from '@ws-widget/utils'
@@ -33,6 +33,7 @@ export class CreateUserComponent implements OnInit {
     private createUserSvc: CreateUserService,
     private roleManagementSvc: SystemRolesManagementService,
     private activatedRoute: ActivatedRoute,
+    public router: Router, public route: ActivatedRoute
   ) {
     if (this.activatedRoute.parent && this.activatedRoute.parent.parent) {
       this.activatedRoute.parent.parent.data.subscribe(data => {
@@ -46,6 +47,7 @@ export class CreateUserComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.registerUser = new FormGroup(
       {
         firstname: new FormControl(null, [Validators.required]),
