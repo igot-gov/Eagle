@@ -33,7 +33,7 @@ export const NON_STREAM_FILES = `/artifacts/`
 
 export const EMPLOYEE_LIST = `${AUTHORING_SEARCH_BASE}v1/autoComplete/`
 // to get JSON File
-export const GET_JSON = `${PROTECTED_SLAG_V8}scroing/getTemplate/`
+export const GET_JSON = `/apis/protected/v8/scroing/getTemplate/`
 
 // get loggedin department
 export const GET_MY_DEPARTMENT = `${PROTECTED_SLAG_V8}dept/getAllDept`

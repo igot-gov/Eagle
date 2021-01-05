@@ -1,0 +1,62 @@
+<div class="card">
+    <mat-card>
+        <mat-card-header>
+            <mat-icon mat-card-avatar>photo</mat-icon>
+            <mat-card-title>Select Image</mat-card-title>
+        </mat-card-header>
+    </mat-card>
+
+
+    <ng-container>
+        <mat-card class="recent-tabs">
+            <div class="flex flex-1 flex-column">
+                <div class="flex flex-1 filter flex-wrap">
+                    <a href="javascript:void(0)" role="button" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'myimages',
+                              'ws-mat-accent-border font-medium':currentFilter !== 'myimages'}" mat-button
+                        (click)="filter('myimages')">
+                        My Images </a>
+                    <a href="javascript:void(0)" role="button" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'all',
+                              'ws-mat-accent-border font-medium':currentFilter !== 'all'}" mat-button
+                        (click)="filter('all')">
+                        All Images </a>
+                </div>
+            </div>
+        </mat-card>
+    </ng-container>
+
+    <ng-container *ngIf="imageList && imageList.length > 0">
+        <div class="imageCard">
+            <mat-card class="category-card" *ngFor="let data of imageList">
+                <!-- <mat-card-content class="home-card-content"> -->
+                <img mat-card-image src={{data.downloadUrl}} alt="image">
+                <!-- </mat-card-content> -->
+            </mat-card>
+        </div>
+
+    </ng-container>
+    <ng-container *ngIf="!(imageList && imageList.length > 0)">
+        <mat-card class="mat-card margin-bottom-l">
+            <mat-card-header>
+                <mat-card-title>No Data</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <span>&nbsp;</span>
+            </mat-card-content>
+        </mat-card>
+    </ng-container>
+    <ng-container>
+        <mat-card>
+            <mat-card-actions>
+                <div class="flex flex-1 justify-end">
+                    <button mat-button class="mr-2">
+                        <span class="noocoments"> Cancel</span>
+                    </button>
+                    <button mat-raised-button type="button"
+                        class="text-white ws-mat-primary-background flex-auto-display">
+                        <span class="text-white" i18n>Upload</span>
+                    </button>
+                </div>
+            </mat-card-actions>
+        </mat-card>
+    </ng-container>
+</div>

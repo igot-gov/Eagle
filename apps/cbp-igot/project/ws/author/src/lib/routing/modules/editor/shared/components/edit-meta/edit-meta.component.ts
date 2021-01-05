@@ -50,6 +50,8 @@ import {
 import { CompetenceService } from '../../services/competence.service'
 import { NSCompetencie } from '../../../../../../interface/competencies.model'
 import { CompetenceViewComponent } from './competencies-view/competencies-view.component'
+import {  AddThumbnailComponent } from '../../../shared/components/add-thumbnail/add-thumbnail.component'
+
 // import { NsWidgetResolver } from '@ws-widget/resolver'
 // import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper'
 /* tslint:disable */
@@ -93,6 +95,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   allCompetencies!: NSCompetencie.ICompetencie[]
   /**for side competency: END */
   location = CONTENT_BASE_STATIC
+  display = 'none'
   selectable = true
   removable = true
   addOnBlur = true
@@ -249,6 +252,10 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       },
     }
   }
+
+  addImage(){
+    this.dialog.open<AddThumbnailComponent>(AddThumbnailComponent)
+ }
 
   ngAfterViewInit() {
     this.ref.detach()

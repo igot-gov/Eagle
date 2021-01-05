@@ -10,12 +10,14 @@ import { AceEditorComponent } from './components/ace-editor/ace-editor.component
 import { AuthEditorActionButtonsComponent } from './components/auth-editor-action-buttons/auth-editor-action-buttons.component'
 import { AuthLanguageSelectBarComponent } from './components/auth-language-select-bar/auth-language-select-bar.component'
 import { AuthPickerComponent } from './components/auth-picker/auth-picker.component'
+import { AddThumbnailComponent } from './components/add-thumbnail/add-thumbnail.component'
 import { EditMetaComponent } from './components/edit-meta/edit-meta.component'
 import { PlainCKEditorComponent } from './components/plain-ckeditor/plain-ckeditor.component'
 import { MatQuillComponent } from './components/rich-text-editor/my-own.component'
 import { QuillComponent } from './components/rich-text-editor/quill.component'
 import { DragDropDirective } from './directives/drag-drop.directive'
 import { UploadService } from './services/upload.service'
+import { MyContentService } from '../../my-content/services/my-content.service'
 import { BaseComponent } from './components/editor/base/base.component'
 import { EditMetaV2Component } from './components/editor/edit-meta-v2/edit-meta-v2.component'
 import { LiveHtmlEditorComponent } from './components/live-html-editor/live-html-editor.component'
@@ -56,6 +58,7 @@ import { CompetenceCardComponent } from './components/edit-meta/competencies-car
     ContentSummaryComponent,
     CompetenceViewComponent,
     CompetenceCardComponent,
+    AddThumbnailComponent
   ],
   imports: [
     CommonModule,
@@ -78,6 +81,7 @@ import { CompetenceCardComponent } from './components/edit-meta/competencies-car
     QuillComponent,
     PlainCKEditorComponent,
     EditMetaComponent,
+    AddThumbnailComponent,
     DragDropDirective,
     AceEditorComponent,
     AuthEditorActionButtonsComponent,
@@ -90,7 +94,7 @@ import { CompetenceCardComponent } from './components/edit-meta/competencies-car
     ContentSummaryComponent,
     CompetenceCardComponent,
   ],
-  entryComponents: [AuthPickerComponent, CompetencyAddPopUpComponent, CompetenceViewComponent],
-  providers: [UploadService, SelfCurationService, ContentQualityService],
+  entryComponents: [AuthPickerComponent, AddThumbnailComponent, CompetencyAddPopUpComponent, CompetenceViewComponent],
+  providers: [MyContentService,UploadService, SelfCurationService, ContentQualityService,AddThumbnailComponent],
 })
 export class EditorSharedModule { }

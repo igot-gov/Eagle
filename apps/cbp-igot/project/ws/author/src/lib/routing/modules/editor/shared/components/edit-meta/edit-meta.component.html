@@ -127,11 +127,11 @@
                             <!-- (error)="changeToDefaultImg($event)" -->
                           </div>
                           <div class="photo mat-elevation-z4 ws-mat-primary-background"
-                            (click)="uploadThumbnail.click()">
-                            <mat-icon class="photo-icon text-white">photo_camera</mat-icon>
-                            <input type="file" #uploadThumbnail
+                            (click)="addImage()">
+                              <mat-icon class="photo-icon text-white" >photo_camera</mat-icon>
+                            <!-- <input type="file" #uploadThumbnail
                               (change)="uploadAppIcon($event.target.files[0]); uploadThumbnail.value = null"
-                              style="display: none;" [accept]="imageTypes.toString()" />
+                              style="display: none;" [accept]="imageTypes.toString()" /> -->
                           </div>
                         </div>
                       </div>
