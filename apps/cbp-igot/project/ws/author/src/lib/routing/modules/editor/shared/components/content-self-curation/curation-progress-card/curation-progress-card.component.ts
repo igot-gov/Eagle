@@ -3,7 +3,7 @@ import { NSContent } from '@ws/author/src/lib/interface/content'
 /* tslint:disable */
 import _ from 'lodash'
 import { NSISelfCuration } from '../../../../../../../interface/self-curation'
-import { SelfCurationService } from '../../../services/self-curation.service'
+// import { SelfCurationService } from '../../../services/self-curation.service'
 /* tslint:enable */
 @Component({
   selector: 'ws-auth-curation-progress-card',
@@ -16,7 +16,7 @@ export class CurationProgressCardComponent implements OnInit, OnDestroy {
   @Input() parentId = ''
   progressData!: NSISelfCuration.ISelfCurationData[]
   constructor(
-    private curationService: SelfCurationService
+    // private curationService: SelfCurationService
 
   ) {
   }

@@ -108,6 +108,9 @@ export class ContentSelfCurationComponent implements OnInit, OnDestroy, AfterVie
           // response.push()
           this.curationService.fetchresult(element.identifier).subscribe(data => {
             // console.log(data)
+            if (data) {
+
+            }
           })
         }
       })

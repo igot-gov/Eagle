@@ -338,9 +338,7 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
                   })
 
                   dialogRef.afterClosed().subscribe((commentsForm: FormGroup) => {
-                    if (this.isQualityScorePassed()) {
-                      this.finalCall(commentsForm)
-                    }
+                    this.finalCall(commentsForm)
                   })
                   /** final call */
                 } else {
