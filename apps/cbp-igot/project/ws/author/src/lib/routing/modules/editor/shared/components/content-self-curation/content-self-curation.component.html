@@ -54,7 +54,7 @@
       </div>
       <div class="flex flex-1 flex-column">
         <span class="flex flex-1 mat-subheading-1"> In progress</span>
-        <ng-container *ngFor="let chield of contentMeta.children">
+        <ng-container *ngFor="let chield of contentMeta">
           {{chield.mimeType}}
           <ws-auth-curation-progress-card *ngIf="chield.mimeType === 'application/pdf'" [contentMeta]="chield"
             [parentId]="contentMeta.identifier" [parentName]="contentMeta.name">
