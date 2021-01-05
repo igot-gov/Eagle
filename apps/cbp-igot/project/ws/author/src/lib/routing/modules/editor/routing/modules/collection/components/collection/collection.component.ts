@@ -192,7 +192,8 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
   save(nextAction?: string) {
     const updatedContent = this.contentService.upDatedContent || {}
     if (
-      Object.keys(updatedContent).length ||
+      (Object.keys(updatedContent).length &&
+        (Object.values(updatedContent).length && JSON.stringify(Object.values(updatedContent)[0]) !== '{}')) ||
       Object.keys(this.storeService.changedHierarchy).length
     ) {
       this.isChanged = true
@@ -251,6 +252,12 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
       )
     } else {
       if (nextAction) {
+        this.snackBar.openFromComponent(NotificationComponent, {
+          data: {
+            type: Notify.UP_TO_DATE,
+          },
+          duration: NOTIFICATION_TIME * 1000,
+        })
         this.action(nextAction)
       } else {
         this.snackBar.openFromComponent(NotificationComponent, {
@@ -499,38 +506,63 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
         metadata: {},
       }
     }
-    let requestBody: NSApiRequest.IContentUpdateV2 = {
+    let requestBodyV2: NSApiRequest.IContentUpdateV3 = {
       request: {
-        content: nodesModified[Object.keys(this.contentService.upDatedContent)[0]].metadata
+        data: {
+          nodesModified,
+          hierarchy: this.storeService.changedHierarchy,
+        }
       }
     }
-    requestBody.request.content = this.contentService.cleanProperties(requestBody.request.content)
-    if (requestBody.request.content.duration) {
-      requestBody.request.content.duration = (isNumber(requestBody.request.content.duration) ? `${requestBody.request.content.duration}` : requestBody.request.content.duration)
+    if (Object.keys(this.contentService.upDatedContent)[0] && nodesModified[Object.keys(this.contentService.upDatedContent)[0]]) {
+      let requestBody: NSApiRequest.IContentUpdateV2 = {
+        request: {
+          content: nodesModified[Object.keys(this.contentService.upDatedContent)[0]].metadata
+        }
+      }
+      requestBody.request.content = this.contentService.cleanProperties(requestBody.request.content)
+      if (requestBody.request.content.duration) {
+        requestBody.request.content.duration = (isNumber(requestBody.request.content.duration) ? `${requestBody.request.content.duration}` : requestBody.request.content.duration)
+      }
+      if (requestBody.request.content.subTitle) {
+        delete requestBody.request.content.subTitle
+      }
+      if (requestBody.request.content.sourceName) {
+        requestBody.request.content.source = requestBody.request.content.sourceName
+        delete requestBody.request.content.sourceName
+      }
+      if (requestBody.request.content.complexityLevel) {
+        requestBody.request.content.difficultyLevel = requestBody.request.content.complexityLevel
+        delete requestBody.request.content.complexityLevel
+      }
+      if (requestBody.request.content.learningMode) {
+        requestBody.request.content.learningMode = requestBody.request.content.learningMode.split('-').join(' ')
+      }
+      return this.editorService.updateContentV3(requestBody, Object.keys(this.contentService.upDatedContent)[0]).pipe(
+        tap(() => {
+          this.storeService.changedHierarchy = {}
+          Object.keys(this.contentService.upDatedContent).forEach(id => {
+            this.contentService.resetOriginalMeta(this.contentService.upDatedContent[id], id)
+            this.editorService.readContentV2(id).subscribe(resData => {
+              this.contentService.resetVersionKey(resData.versionKey, resData.identifier)
+            })
+          })
+          this.contentService.upDatedContent = {}
+        }),
+      )
     }
-    if (requestBody.request.content.subTitle) {
-      delete requestBody.request.content.subTitle
+    else {
+      return this.editorService.updateContentV4(requestBodyV2).pipe(
+        tap(() => {
+          this.storeService.changedHierarchy = {}
+          Object.keys(this.contentService.upDatedContent).forEach(async id => {
+            this.contentService.resetOriginalMeta(this.contentService.upDatedContent[id], id)
+          })
+          this.contentService.upDatedContent = {}
+        }),
+      )
     }
-    if (requestBody.request.content.sourceName) {
-      requestBody.request.content.source = requestBody.request.content.sourceName
-      delete requestBody.request.content.sourceName
-    }
-    if (requestBody.request.content.complexityLevel) {
-      requestBody.request.content.difficultyLevel = requestBody.request.content.complexityLevel
-      delete requestBody.request.content.complexityLevel
-    }
-    if (requestBody.request.content.learningMode) {
-      requestBody.request.content.learningMode = requestBody.request.content.learningMode.split('-').join(' ')
-    }
-    return this.editorService.updateContentV3(requestBody, Object.keys(this.contentService.upDatedContent)[0]).pipe(
-      tap(() => {
-        this.storeService.changedHierarchy = {}
-        Object.keys(this.contentService.upDatedContent).forEach(id => {
-          this.contentService.resetOriginalMeta(this.contentService.upDatedContent[id], id)
-        })
-        this.contentService.upDatedContent = {}
-      }),
-    )
+
     // const requestBody: NSApiRequest.IContentUpdate = {
     //   nodesModified,
     //   hierarchy: this.storeService.changedHierarchy,

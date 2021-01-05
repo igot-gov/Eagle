@@ -115,23 +115,20 @@ export class CollectionStoreService {
       this.changedHierarchy[oldParentNode.identifier] = {
         root: this.parentNode.includes(oldParentNode.identifier),
         children: oldParentChildList.map(v => {
-          const child = {
-            identifier: v.identifier,
-            reasonAdded: 'Added from Authoring Tool',
-            childrenClassifiers: [],
-          }
+          const child = v.identifier
           return child
         }),
       }
     }
+    // {
+    //   identifier: v.identifier,
+    //     reasonAdded: 'Added from Authoring Tool',
+    //       childrenClassifiers: [],
+    //       }
     this.changedHierarchy[newParentNode.identifier] = {
       root: this.parentNode.includes(newParentNode.identifier),
       children: newParentChildList.map(v => {
-        const child = {
-          identifier: v.identifier,
-          reasonAdded: 'Added from Authoring Tool',
-          childrenClassifiers: [],
-        }
+        const child = v.identifier
         return child
       }),
     }
