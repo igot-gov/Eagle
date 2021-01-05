@@ -317,10 +317,6 @@ export class MyContentComponent implements OnInit, OnDestroy {
           "trackable"
         ],
         facets: [
-          "board",
-          "gradeLevel",
-          "subject",
-          "medium",
           "primaryCategory",
           "mimeType"
         ]
