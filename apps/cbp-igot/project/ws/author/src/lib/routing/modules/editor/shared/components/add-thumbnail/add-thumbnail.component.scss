@@ -6,6 +6,21 @@
   @extend %page-center;
 }
 
+// .container {
+//   position: relative;
+//   width: auto;
+//   height: 100px;
+//   float: left;
+//   margin-left: 10px;
+// }
+
+.checkbox {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  color: #4177F6 !important;
+}
+
 .card {
   width: 800px;
   height: 500px;
@@ -25,8 +40,10 @@
 .imageCard{
   display: flex;
   flex-wrap: wrap;
-  flex:1;
   justify-content: space-between;
+  gap: 10px;
+  // height: 100px;
+
 }
 
 .home-card-content {

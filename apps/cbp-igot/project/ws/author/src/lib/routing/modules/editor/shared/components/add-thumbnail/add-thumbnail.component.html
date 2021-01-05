@@ -28,8 +28,12 @@
 
         <div class="imageCard">
             <mat-card class="category-card" *ngFor="let data of imageList">
-                <img (click)="addCheckbox()" mat-card-image src={{data.downloadUrl}} alt="image">
-
+                <!-- <mat-checkbox class="example-margin"> -->
+                <div>
+                    <img (click)="addCheckbox"  mat-card-image src={{data.downloadUrl}} alt="image">
+                    <mat-icon *ngIf="IsChecked" mat-card-avatar class="checkbox">check_circle</mat-icon>
+                </div>
+                <!-- </mat-checkbox> -->
             </mat-card>
 
         </div>
@@ -50,19 +54,19 @@
             </mat-card-content>
         </mat-card>
     </ng-container>
-    <ng-container>
-        <mat-card>
-            <mat-card-actions>
-                <div class="flex flex-1 justify-end">
-                    <button mat-button class="mr-2" [mat-dialog-close]="true">
-                        <span class="noocoments"> Cancel</span>
-                    </button>
-                    <button mat-raised-button type="button"
-                        class="text-white ws-mat-primary-background flex-auto-display" [disabled]="!IsChecked">
-                        <span class="text-white" i18n>Upload</span>
-                    </button>
-                </div>
-            </mat-card-actions>
-        </mat-card>
-    </ng-container>
+
+    <mat-card>
+        <ng-container>
+
+            <div mat-dialog-actions class="flex flex-1 justify-end">
+                <button mat-button class="mr-2" [mat-dialog-close]="true">
+                    <span class="noocoments"> Cancel</span>
+                </button>
+                <button mat-raised-button type="button" class="text-white ws-mat-primary-background flex-auto-display"
+                    [disabled]="!IsChecked">
+                    <span class="text-white" i18n>Upload</span>
+                </button>
+            </div>
+        </ng-container>
+    </mat-card>
 </div>

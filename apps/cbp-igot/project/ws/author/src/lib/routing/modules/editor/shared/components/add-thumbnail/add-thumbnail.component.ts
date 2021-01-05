@@ -30,8 +30,7 @@ export class AddThumbnailComponent implements OnInit {
   showLoadMore!: boolean
   totalContent!: number
   routerSubscription = <Subscription>{}
-  public IsChecked!: boolean
-  // public closeDialog : false
+  IsChecked: boolean
 
   constructor(private loadService: LoaderService,
     private myContSvc: MyContentService,
@@ -64,7 +63,8 @@ export class AddThumbnailComponent implements OnInit {
   }
 
   addCheckbox() {
-
+    console.log('-----------clicking')
+    this.IsChecked = true
   }
 
   filter(key: string | 'myimages' | 'all') {
