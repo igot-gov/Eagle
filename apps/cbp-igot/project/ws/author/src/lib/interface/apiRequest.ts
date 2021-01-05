@@ -96,6 +96,21 @@ export namespace NSApiRequest {
     hierarchy: {} | { [key: string]: { root: boolean; children: string[] } }
   }
 
+  export interface IContentUpdateV3 {
+    request: {
+      data: {
+        nodesModified: {
+          [key: string]: {
+            isNew: boolean
+            root: boolean
+            metadata: NSContent.IContentMeta
+          }
+        }
+        hierarchy: {} | { [key: string]: { root: boolean; children: string[] } }
+      }
+    }
+  }
+
   export interface IContentUpdateV2 {
     request: {
       content: NSContent.IContentMeta

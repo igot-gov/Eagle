@@ -78,6 +78,10 @@ export class EditorContentService {
     delete this.upDatedContent[id]
   }
 
+  resetVersionKey(versionKey: number, id: string) {
+    this.originalContent[id].versionKey = versionKey
+  }
+
   setUpdatedMeta(meta: NSContent.IContentMeta, id: string, emit = true) {
     this.upDatedContent[id] = {
       ...(this.upDatedContent[id] ? this.upDatedContent[id] : {}),

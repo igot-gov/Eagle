@@ -6,7 +6,7 @@ import {
   CONTENT_BASE_COPY,
   CONTENT_CREATE,
   CONTENT_DELETE,
-  CONTENT_READ,
+  // CONTENT_READ,
   CONTENT_SAVE,
   CONTENT_SAVE_V2,
   SEARCH,
@@ -153,6 +153,13 @@ export class EditorService {
   updateContentV3(meta: NSApiRequest.IContentUpdateV2, id: string): Observable<null> {
     return this.apiService.patch<null>(
       `${AUTHORING_BASE}content/v3/update/${id}`,
+      meta,
+    )
+  }
+
+  updateContentV4(meta: NSApiRequest.IContentUpdateV3): Observable<null> {
+    return this.apiService.patch<null>(
+      `/apis/proxies/v8/action/content/v3/hierarchy/update`,
       meta,
     )
   }

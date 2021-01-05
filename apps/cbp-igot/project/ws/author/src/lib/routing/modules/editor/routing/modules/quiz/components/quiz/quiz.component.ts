@@ -78,7 +78,7 @@ export class QuizComponent implements OnInit, OnDestroy {
    */
   canEditJson = true
   mediumScreenSize = false
-  quizDuration!: number
+  quizDuration!: string
   mediumSizeBreakpoint$ = this.breakpointObserver
     .observe([Breakpoints.XSmall, Breakpoints.Small])
     .pipe(map((res: BreakpointState) => res.matches))
