@@ -23,7 +23,7 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
   /* tslint:disable */
   Math: any
   /* tslint:enable */
-  currentFilter = 'underreview'
+  currentFilter = 'active'
   discussionList!: any
   discussProfileData!: any
   portalProfile!: NSProfileDataV2.IProfile
@@ -65,8 +65,6 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
     // int left blank
     this.tabledata = {
-      // actions: [{ name: 'Approve', label: 'Approve', icon: 'remove_red_eye', type: 'Approve' },
-      // { name: 'Reject', label: 'Reject', icon: 'remove_red_eye', type: 'Reject' }],
       columns: [
         { displayName: 'Full Name', key: 'fullname' },
         { displayName: 'Email', key: 'email' },
@@ -78,11 +76,13 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
       sortState: 'asc',
     }
     this.getAllActiveUsersAPI()
+
   }
 
   getAllActiveUsersAPI() {
     this.userViewServcie.getAllDepartments().subscribe(res => {
       this.fullUserData = res
+      this.data = this.getAllUserByKey(this.fullUserData.active_users)
     })
   }
 
@@ -102,9 +102,6 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
     if (key) {
       this.currentFilter = key
       switch (key) {
-        case 'underreview':
-          this.data = this.getAllUserByKey(this.fullUserData.user_review)
-          break
         case 'active':
           this.data = this.getAllUserByKey(this.fullUserData.active_users)
           break

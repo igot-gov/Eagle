@@ -206,7 +206,7 @@ const routes: Routes = [
     canActivate: [ExternalUrlResolverService],
     component: ErrorResolverComponent,
   },
-  { path: 'home', redirectTo: 'app/home', pathMatch: 'full', },
+  { path: 'home', redirectTo: 'app/home', pathMatch: 'full' },
   {
     path: 'login',
     canActivate: [LoginGuard],

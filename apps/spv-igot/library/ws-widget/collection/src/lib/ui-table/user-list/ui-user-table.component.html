@@ -9,16 +9,19 @@
             <!-- <div class="lsearch">
                 <span class="searchText">Search:</span>
             </div> -->
-            <div class=rsearch>
+            <div class=rsearch *ngIf="dataSource.data.length > 0">
                 <input class="sinput" type="Standard" label="" (input)="applyFilter($event.target.value)"
                     placeholder="Search">
             </div>
         </div>
 
         <!-- </mat-form-field> -->
+        <div *ngIf="dataSource.data.length <= 0" class="titleclass">
+            <h3>No Information Available</h3>
+        </div>
         <mat-table #table matSort [ngStyle]="{'height': bodyHeight}" [matSortActive]="tableData!.sortColumn"
-            [matSortDirection]="tableData!.sortState" [dataSource]="dataSource"
-            class="example-table table1 responsiveTable">
+            [matSortDirection]="tableData!.sortState" [dataSource]="dataSource" *ngIf="dataSource.data.length > 0"
+            class=" example-table table1 responsiveTable">
 
             <ng-container matColumnDef="{{col.key}}" *ngFor="let col of tableData!.columns">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> {{col.displayName}} </mat-header-cell>
@@ -68,7 +71,8 @@
         </mat-table>
     </div>
 
-    <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" *ngIf="viewPaginator">
+    <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+        *ngIf="dataSource.data.length > 0">
     </mat-paginator>
 </div>
 

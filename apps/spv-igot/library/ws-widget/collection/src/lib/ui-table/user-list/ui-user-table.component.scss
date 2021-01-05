@@ -625,17 +625,21 @@ $title-line-count: 2;
 .rsearch {
   display: flex;
   flex: 1 1 auto;
+
 }
 
 .sinput {
-  width: 29%;
+  width: 22%;
   border-radius: 4px;
   border: 1px solid #d5d0d0;
-  padding: 9px;
+  padding: 12px;
   margin-bottom: 20px;
   margin-top: 10px;
+  min-height: 20px;
 }
-
+.titleclass{
+  text-align: center;
+}
 .searchText {
   display: flex;
   flex-direction: row-reverse;

@@ -58,6 +58,7 @@ export class UIUserTableComponent implements OnInit, AfterViewInit, OnChanges {
   ngAfterViewInit() { }
 
   applyFilter(filterValue: any) {
+
     if (filterValue) {
       let fValue = filterValue.trim()
       fValue = filterValue.toLowerCase()

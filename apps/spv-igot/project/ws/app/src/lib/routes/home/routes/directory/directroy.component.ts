@@ -20,7 +20,7 @@ export class DirectoryViewComponent implements OnInit, AfterViewInit, OnDestroy 
   /* tslint:disable */
   Math: any
   /* tslint:enable */
-  currentFilter = 'underreview'
+  currentFilter = 'MDO'
   discussionList!: any
   discussProfileData!: any
   portalProfile!: NSProfileDataV2.IProfile
@@ -64,22 +64,7 @@ export class DirectoryViewComponent implements OnInit, AfterViewInit, OnDestroy 
 
   ngOnInit() {
     // int left blank
-
     this.getAllDepartmentsAPI()
-    this.tabledata = {
-      actions: [{ name: 'Approve', label: 'Approve', icon: 'remove_red_eye', type: 'Approve' },
-      { name: 'Reject', label: 'Reject', icon: 'remove_red_eye', type: 'Reject' }],
-      columns: [
-        { displayName: 'MDO', key: 'mdo' },
-        { displayName: 'Type', key: 'type' },
-        { displayName: 'Users', key: 'user' },
-      ],
-      needCheckBox: false,
-      needHash: false,
-      sortColumn: '',
-      sortState: 'asc',
-    }
-
   }
   getDepartmentHeader() {
     this.wholeData.forEach((head: { deptTypeInfo: { deptType: void } }) => {
@@ -92,6 +77,19 @@ export class DirectoryViewComponent implements OnInit, AfterViewInit, OnDestroy 
       this.departmentHearders.splice(index, 1)
     }
     this.getDepartDataByKey(this.departmentHearders[0])
+    this.tabledata = {
+      actions: [{ name: 'Approve', label: 'Approve', icon: 'remove_red_eye', type: 'Approve' },
+      { name: 'Reject', label: 'Reject', icon: 'remove_red_eye', type: 'Reject' }],
+      columns: [
+        { displayName: this.currentFilter, key: 'mdo' },
+        { displayName: 'Type', key: 'type' },
+        { displayName: 'Users', key: 'user' },
+      ],
+      needCheckBox: false,
+      needHash: false,
+      sortColumn: '',
+      sortState: 'asc',
+    }
   }
   getAllDepartmentsAPI() {
     this.directoryService.getAllDepartments().subscribe(res => {
@@ -128,7 +126,7 @@ export class DirectoryViewComponent implements OnInit, AfterViewInit, OnDestroy 
         return {
           id: dept.id,
           mdo: dept.deptName,
-          type: dept.deptTypeInfo.deptType,
+          type: dept.deptTypeInfo.deptSubType,
           user: dept.noOfUsers,
         }
       })

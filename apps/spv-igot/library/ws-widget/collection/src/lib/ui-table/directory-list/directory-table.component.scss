@@ -628,12 +628,13 @@ $title-line-count: 2;
 }
 
 .sinput {
-  width: 29%;
+  width: 22%;
   border-radius: 4px;
   border: 1px solid #d5d0d0;
-  padding: 9px;
+  padding: 12px;
   margin-bottom: 20px;
   margin-top: 10px;
+  min-height: 20px;
 }
 
 .searchText {
