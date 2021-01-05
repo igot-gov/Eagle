@@ -25,19 +25,25 @@
     </ng-container>
 
     <ng-container *ngIf="imageList && imageList.length > 0">
+
         <div class="imageCard">
             <mat-card class="category-card" *ngFor="let data of imageList">
-                <!-- <mat-card-content class="home-card-content"> -->
-                <img mat-card-image src={{data.downloadUrl}} alt="image">
-                <!-- </mat-card-content> -->
+                <img (click)="addCheckbox()" mat-card-image src={{data.downloadUrl}} alt="image">
+
             </mat-card>
+
         </div>
+
 
     </ng-container>
     <ng-container *ngIf="!(imageList && imageList.length > 0)">
         <mat-card class="mat-card margin-bottom-l">
             <mat-card-header>
-                <mat-card-title>No Data</mat-card-title>
+                <mat-card-title>No result found.<a href="javascript:void(0)" role="button" class="filter-option"
+                        [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'all',
+                    'ws-mat-accent-border font-medium':currentFilter !== 'all'}" mat-button (click)="filter('all')">
+                        Click here </a> to search in All images
+                </mat-card-title>
             </mat-card-header>
             <mat-card-content>
                 <span>&nbsp;</span>
@@ -48,11 +54,11 @@
         <mat-card>
             <mat-card-actions>
                 <div class="flex flex-1 justify-end">
-                    <button mat-button class="mr-2">
+                    <button mat-button class="mr-2" [mat-dialog-close]="true">
                         <span class="noocoments"> Cancel</span>
                     </button>
                     <button mat-raised-button type="button"
-                        class="text-white ws-mat-primary-background flex-auto-display">
+                        class="text-white ws-mat-primary-background flex-auto-display" [disabled]="!IsChecked">
                         <span class="text-white" i18n>Upload</span>
                     </button>
                 </div>

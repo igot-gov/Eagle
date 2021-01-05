@@ -30,15 +30,16 @@ export class AddThumbnailComponent implements OnInit {
   showLoadMore!: boolean
   totalContent!: number
   routerSubscription = <Subscription>{}
+  public IsChecked!: boolean
+  // public closeDialog : false
 
   constructor(private loadService: LoaderService,
     private myContSvc: MyContentService,
     private accessService: AccessControlService,
     private activatedRoute: ActivatedRoute,
-
   ) {
     this.userId = this.accessService.userId
-
+    this.IsChecked = false
   }
 
   ngOnDestroy() {
@@ -60,6 +61,10 @@ export class AddThumbnailComponent implements OnInit {
       this.status = params.status
       this.fetchContent(false, this.userId)
     })
+  }
+
+  addCheckbox() {
+
   }
 
   filter(key: string | 'myimages' | 'all') {

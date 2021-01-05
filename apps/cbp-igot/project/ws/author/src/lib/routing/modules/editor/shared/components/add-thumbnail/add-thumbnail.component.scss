@@ -12,18 +12,20 @@
 }
 
 .category-card {
-  flex: 1;
+  // flex: 1;
   height: 50px;
   max-width: 80px;
-  width: max-content;
+  // width: max-content;
 
-  display: flex;
-  flex-wrap: wrap;
-  align-content: space-evenly;
+  // display: flex;
+  // flex-wrap: wrap;
+  // align-content: space-evenly;
 }
 
 .imageCard{
   display: flex;
+  flex-wrap: wrap;
+  flex:1;
   justify-content: space-between;
 }
 
