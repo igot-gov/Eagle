@@ -22,12 +22,12 @@ import { navigatorApi } from './navigator'
 import { networkConnectionApi } from './network'
 import { networkHubApi } from './network-hub'
 import { recommendationApi } from './recommendation'
+import { scoringTemplateApi } from './scoring'
 import { scromApi } from './scrom'
 import { socialApi } from './social'
 import { trainingApi } from './training'
 import { translateApi } from './translate'
 import { user } from './user/user'
-import { scoringTemplateApi } from './scoring'
 
 export const protectedApiV8 = express.Router()
 
