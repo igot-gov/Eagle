@@ -75,8 +75,10 @@ export class CreateMdoComponent implements OnInit {
   departmentId!: string
   departmentRoleId!: string
   data1: any
+  updateId !: number
   department!: string
   subDepartments!: any
+  isUpdate = false
   workFlow = [{ isActive: true, isCompleted: false, name: 'Basic Details', step: 0 },
   { isActive: false, isCompleted: false, name: 'Classification', step: 1 },
   { isActive: false, isCompleded: false, name: 'Intended for', step: 2 }]
@@ -99,23 +101,22 @@ export class CreateMdoComponent implements OnInit {
       let data = params['data']
       this.department = params['department']
       data = JSON.parse(data)
-      console.log(data.row)
+      console.log(data)
+      if (this.data !== undefined || this.data !== null) {
+        this.isUpdate = true
+        this.updateId = data.row.id
+      }
       this.contentForm = new FormGroup({
         name: new FormControl(data.row.mdo),
         head: new FormControl(data.row.head),
         deptSubTypeId: new FormControl(data.row.typeid),
         fileUpload: new FormControl(),
+
       })
     })
   }
   ngOnInit() {
     this.typeCheck()
-
-    // this.ordinals = this.authInitService.ordinals
-    // this.audienceList = this.ordinals.audience
-    // this.jobProfileList = this.ordinals.jobProfile
-    // this.complexityLevelList = this.ordinals.audience
-
     this.creatorContactsCtrl = new FormControl()
     this.trackContactsCtrl = new FormControl()
     this.publisherDetailsCtrl = new FormControl()
@@ -546,14 +547,26 @@ export class CreateMdoComponent implements OnInit {
     console.log(event.key)
   }
   onSubmit() {
-    if (this.contentForm.value.name !== null && this.contentForm.value.head !== null
-      && this.contentForm.value.deptSubTypeId !== null) {
-      this.createMdoService.createDepartment(this.contentForm.value).subscribe(res => {
-        this.departmentId = res.id
-        this.departmentRoleId = res.rolesInfo[0].deptRoleId
-      })
-      this.submittedForm = false
+    if (!this.isUpdate) {
+      if (this.contentForm.value.name !== null && this.contentForm.value.head !== null
+        && this.contentForm.value.deptSubTypeId !== null) {
+        this.createMdoService.createDepartment(this.contentForm.value).subscribe(res => {
+          this.departmentId = res.id
+          this.departmentRoleId = res.rolesInfo[0].deptRoleId
+        })
+        this.submittedForm = false
+      }
+    } else {
+      if (this.contentForm.value.name !== null && this.contentForm.value.head !== null
+        && this.contentForm.value.deptSubTypeId !== null) {
+        this.createMdoService.updateDepartment(this.contentForm.value, this.updateId).subscribe(res => {
+          this.departmentId = res.id
+          this.departmentRoleId = res.rolesInfo[0].deptRoleId
+        })
+        this.submittedForm = false
+      }
     }
+
   }
 
 }

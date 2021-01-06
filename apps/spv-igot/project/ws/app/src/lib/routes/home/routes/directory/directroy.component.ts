@@ -122,11 +122,13 @@ export class DirectoryViewComponent implements OnInit, AfterViewInit, OnDestroy 
         }
       })
       this.data = filteredData.map((dept: any) => {
+        console.log(dept)
         return {
           id: dept.id,
           mdo: dept.deptName,
           type: dept.deptTypeInfo.deptSubType,
           user: dept.noOfUsers,
+          head: dept.headquarters,
           typeid: dept.deptTypeInfo.id,
         }
       })

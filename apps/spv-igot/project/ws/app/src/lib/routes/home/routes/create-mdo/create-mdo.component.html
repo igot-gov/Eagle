@@ -72,8 +72,13 @@
             </div>
           </div>
         </div>
-        <button mat-raised-button type="submit" class="text-white ws-mat-primary-background text-white margin-right-m">
+        <button *ngIf="!isUpdate" mat-raised-button type="submit"
+          class="text-white ws-mat-primary-background text-white margin-right-m">
           <b class="text-white" i18n>Create Department</b>
+        </button>
+        <button *ngIf="isUpdate" mat-raised-button type="submit"
+          class="text-white ws-mat-primary-background text-white margin-right-m">
+          <b class="text-white" i18n>Update Department</b>
         </button>
       </form>
     </div>
