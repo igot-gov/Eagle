@@ -13,6 +13,7 @@
               <mat-form-field appearance="outline" class="margin-top-xs"
                 [ngClass]="{ 'mat-form-field-invalid': showError('name') }">
                 <input matInput #name formControlName="name" maxlength="500" i18n-placeholder placeholder="Type here"
+                  (keypress)="textOnly($event)" type="text"
                   [required]="checkCondition('name', 'required') ? true : null" />
                 <mat-error *ngIf="showError('name')" i18n="Name Error|Explains name is required">
                   Department name is mandatory
@@ -44,7 +45,7 @@
             <div class="margin-top-s">
               <mat-form-field appearance="outline" class="margin-top-xs"
                 [ngClass]="{ 'mat-form-field-invalid': showError('depatmentType') }">
-                <mat-select formControlName="deptSubTypeId" i18n-placeholder placeholder="--Select--"
+                <mat-select formControlName="deptSubTypeId" i18n-placeholder placeholder="--Select--" [value]="3"
                   [required]="checkCondition('subTitle', 'required') ? true : null">
                   <mat-option *ngFor="let subDepartment of subDepartments" [value]="subDepartment.id" i18n>
                     {{subDepartment.deptSubType}}</mat-option>
@@ -71,8 +72,13 @@
             </div>
           </div>
         </div>
-        <button mat-raised-button type="submit" class="text-white ws-mat-primary-background text-white margin-right-m">
+        <button *ngIf="!isUpdate" mat-raised-button type="submit"
+          class="text-white ws-mat-primary-background text-white margin-right-m">
           <b class="text-white" i18n>Create Department</b>
+        </button>
+        <button *ngIf="isUpdate" mat-raised-button type="submit"
+          class="text-white ws-mat-primary-background text-white margin-right-m">
+          <b class="text-white" i18n>Update Department</b>
         </button>
       </form>
     </div>

@@ -19,7 +19,7 @@
       </div>
       <ng-container>
         <ws-widget-directory-table [selectedDepartment]='currentDepartment' [tableData]='tabledata' [data]='data'
-          (eOnRowClick)="onRoleClick($event)">
+          (eOnRowClick)="onRoleClick($event)" (actionsClick)="actionClick($event)">
         </ws-widget-directory-table>
       </ng-container>
     </mat-card-content>

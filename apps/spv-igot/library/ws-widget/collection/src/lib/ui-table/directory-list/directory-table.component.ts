@@ -21,11 +21,6 @@ export class UIDirectoryTableComponent implements OnInit, AfterViewInit, OnChang
   @Input() data?: []
   @Input() selectedDepartment!: string
   @Input() departmentID!: string
-
-  // @Input() columns?: IColums[]
-  // @Input() needCheckBox?: Boolean
-  // @Input() needHash?: boolean
-  // @Input() actions: IAction[]
   @Output() clicked?: EventEmitter<any>
   @Output() actionsClick?: EventEmitter<any>
   @Output() eOnRowClick = new EventEmitter<any>()
@@ -96,10 +91,10 @@ export class UIDirectoryTableComponent implements OnInit, AfterViewInit, OnChang
         columns.splice(0, 0, 'SR')
       }
       if (this.tableData.actions && this.tableData.actions.length > 0) {
-        // columns.push('Actions')
+        columns.push('Actions')
       }
       if (this.tableData.actions && this.tableData.actions.length > 0) {
-        columns.push('Menu')
+        // columns.push('Menu')
       }
       return columns
     }

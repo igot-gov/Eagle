@@ -5,8 +5,11 @@ import { Observable } from 'rxjs'
 const API_END_POINTS = {
   GET_ALL_DEPARTMENTS: '/apis/protected/v8/portal/departmentType/',
   CREATE_DEPARTMENT: '/apis/protected/v8/portal/spv/department',
+  UPDATE_DEPARTMENT: '/apis/protected/v8/portal/spv/department',
   ASSIGN_ADMIN_TO_CREATED_DEPARTMENT: '/apis/protected/v8/portal/deptAction/',
   GET_DEPARTMENT_BY_ID: '/apis/protected/v8/portal/deptAction/',
+
+
 }
 
 const DEPARTMENT_NAME = 'igot'
@@ -25,10 +28,22 @@ export class CreateMDOService {
       deptName: deptData.name,
       deptTypeId: deptData.deptSubTypeId,
       description: '',
-      headquarters: '',
+      headquarters: deptData.head,
       logo: deptData.fileUpload,
     }
     return this.http.post<any>(`${API_END_POINTS.CREATE_DEPARTMENT}`, departmentData)
+  }
+  updateDepartment(deptData: any, updateId: number): Observable<any> {
+    const departmentData = {
+      id: updateId,
+      rootOrg: DEPARTMENT_NAME,
+      deptName: deptData.name,
+      deptTypeId: deptData.deptSubTypeId,
+      description: '',
+      headquarters: deptData.head,
+      logo: deptData.fileUpload,
+    }
+    return this.http.post<any>(`${API_END_POINTS.UPDATE_DEPARTMENT}`, departmentData)
   }
   assignAdminToDepartment(userId: string, deptId: string, deptRoleID: string): Observable<any> {
     const departmentData = {
