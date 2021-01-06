@@ -26,6 +26,7 @@ export class ContentSummaryComponent implements OnInit, OnDestroy {
   @Input() type = ''
   @Input() parentContent: string | null = null
   contentQualityPercent = '0'
+  leftmenudata!: any
   contentQualityData!: NSIQuality.IQualityResponse
   tocStructure: IAtGlanceComponentData.ICounts | null = null
   // qualityForm!: FormGroup
@@ -128,31 +129,64 @@ export class ContentSummaryComponent implements OnInit, OnDestroy {
     return null
   }
   fetchSelfCurationProgress() {
-    if (this.contentMeta.children) {
-      _.each(this.contentMeta.children, (element: NSContent.IContentMeta) => {
-        const data = {
-          contentId: element.identifier,
-          fileName: this.getFileName(element.artifactUrl),
-        }
-        this.curationService.fetchresult(data).subscribe(result => {
-          this.progressData.push(...result)
-        })
-      })
-    }
-  }
-  get getSelfCurationProgress() {
-    const response: NSISelfCuration.ISelfCurationData[] = []
-    if (this.contentMeta.children) {
-      _.each(this.contentMeta.children, (element: NSContent.IContentMeta) => {
-        response.push(this.curationService.getOriginalData(element.identifier))
-      })
-    } else if (this.contentMeta.artifactUrl) {
-      response.push(this.curationService.getOriginalData(this.contentMeta.identifier))
-    }
-    // response = _.compact(response)
-    // return _.map(response, i => i.profanityWordList.length) || []
-    return 0
+    this.curationService.fetchresult(this.contentService.parentContent).subscribe(data => {
+      this.progressData = data
 
+      if (this.progressData.length > 0) {
+        this.leftmenudata = [{
+          count: this.getCriticalIssues,
+          critical: true,
+          name: 'Critical Issues'
+        },
+        {
+          count: this.getPotentialIssues,
+          potential: true,
+          name: 'Potential issues'
+        }]
+      }
+    })
+  }
+
+  get getPotentialIssues(): number {
+    if (this.progressData && this.progressData.length > 0) {
+      return _.chain(this.progressData).map(i => i.profanityWordList)
+        .compact().flatten()
+        .filter(i => i.category === 'offensive' || i.category === 'lightly offensive')
+        .sumBy("no_of_occurrence").value()
+    }
+    return 0
+  }
+  get getCriticalIssues(): number {
+    if (this.progressData && this.progressData.length > 0) {
+      let data = _.chain(this.progressData).map('profanityWordList')
+        .compact().flatten()
+        .filter(i => i.category === 'exptermly offensive')
+        .sumBy("no_of_occurrence").value()
+      return data
+    }
+    return 0
+  }
+  get getCleanIssues(): number {
+    if (this.progressData && this.progressData.length > 0) {
+      return _.chain(this.progressData).map(i => {
+        if (i.profanity_word_count == 0) {
+          return i
+        }
+        return null
+      }).compact().flatten()
+        .value().length
+    }
+    return 0
+  }
+  get getProgressPercent(): number {
+    if (this.progressData && this.progressData.length > 0) {
+      const completed = _.chain(this.progressData).map(i => i.completed)
+        .compact().flatten()
+        .value().length
+
+      return parseFloat(((completed / this.progressData.length) * 100).toFixed(2))
+    }
+    return 0
   }
   changeToDefaultImg($event: any) {
     $event.target.src = '/assets/instances/eagle/app_logos/default.png'

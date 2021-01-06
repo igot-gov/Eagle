@@ -1,15 +1,16 @@
 export namespace NSISelfCuration {
   export interface ISelfCurationData {
-    primaryKey: IPrimaryKey
-    total_pages: number
-    profanity_word_count: number
-    total_page_images: any
-    score: number
+    completed: boolean
+    errorMessage: any
     image_occurances: string
+    noOfPagesCompleted: number
     overall_text_classification: string
-    errorMessage: string
+    primaryKey: IPrimaryKey
     profanityWordList: IProfanityWordList[]
-    completed: true
+    profanity_word_count: number
+    score: number
+    total_page_images: number
+    total_pages: number
   }
   export interface IProfanityWordList {
     no_of_occurrence: number
