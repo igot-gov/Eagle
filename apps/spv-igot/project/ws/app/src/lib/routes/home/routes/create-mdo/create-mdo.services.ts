@@ -8,8 +8,6 @@ const API_END_POINTS = {
   UPDATE_DEPARTMENT: '/apis/protected/v8/portal/spv/department',
   ASSIGN_ADMIN_TO_CREATED_DEPARTMENT: '/apis/protected/v8/portal/deptAction/',
   GET_DEPARTMENT_BY_ID: '/apis/protected/v8/portal/deptAction/',
-
-
 }
 
 const DEPARTMENT_NAME = 'igot'

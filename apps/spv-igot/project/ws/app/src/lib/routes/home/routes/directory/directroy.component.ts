@@ -122,7 +122,7 @@ export class DirectoryViewComponent implements OnInit, AfterViewInit, OnDestroy 
         }
       })
       this.data = filteredData.map((dept: any) => {
-        console.log(dept)
+        // console.log(dept)
         return {
           id: dept.id,
           mdo: dept.deptName,
@@ -136,8 +136,7 @@ export class DirectoryViewComponent implements OnInit, AfterViewInit, OnDestroy 
     }
   }
   actionClick(clickedData: any) {
-    this.router.navigate([`/app/roles/${this.currentFilter}/basicinfo`, { 'data': JSON.stringify(clickedData) }])
-
+    this.router.navigate([`/app/roles/${this.currentFilter}/basicinfo`, { data : JSON.stringify(clickedData) }])
   }
 
 }

@@ -83,14 +83,14 @@ export class CreateMdoComponent implements OnInit {
   { isActive: false, isCompleted: false, name: 'Classification', step: 1 },
   { isActive: false, isCompleded: false, name: 'Intended for', step: 2 }]
   constructor(public dialog: MatDialog,
-    private uploadService: UploadService,
-    private snackBar: MatSnackBar,
-    private contentService: EditorContentService,
-    private loader: LoaderService,
-    private authInitService: AuthInitService,
-    private createMdoService: CreateMDOService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute) {
+              private uploadService: UploadService,
+              private snackBar: MatSnackBar,
+              private contentService: EditorContentService,
+              private loader: LoaderService,
+              private authInitService: AuthInitService,
+              private createMdoService: CreateMDOService,
+              private router: Router,
+              private activatedRoute: ActivatedRoute) {
     this.contentForm = new FormGroup({
       name: new FormControl(),
       head: new FormControl(),
@@ -101,7 +101,7 @@ export class CreateMdoComponent implements OnInit {
       let data = params['data']
       this.department = params['department']
       data = JSON.parse(data)
-      console.log(data)
+      // console.log(data)
       if (this.data !== undefined || this.data !== null) {
         this.isUpdate = true
         this.updateId = data.row.id
@@ -544,7 +544,7 @@ export class CreateMdoComponent implements OnInit {
     })
   }
   textOnly(event: any) {
-    console.log(event.key)
+    // console.log(event.key)
   }
   onSubmit() {
     if (!this.isUpdate) {
