@@ -524,17 +524,6 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
       if (requestBody.request.content.duration) {
         requestBody.request.content.duration = (isNumber(requestBody.request.content.duration) ? `${requestBody.request.content.duration}` : requestBody.request.content.duration)
       }
-      if (requestBody.request.content.sourceName) {
-        requestBody.request.content.source = requestBody.request.content.sourceName
-        delete requestBody.request.content.sourceName
-      }
-      if (requestBody.request.content.complexityLevel) {
-        requestBody.request.content.difficultyLevel = requestBody.request.content.complexityLevel
-        delete requestBody.request.content.complexityLevel
-      }
-      if (requestBody.request.content.learningMode) {
-        requestBody.request.content.learningMode = requestBody.request.content.learningMode.split('-').join(' ')
-      }
       return this.editorService.updateContentV3(requestBody, Object.keys(this.contentService.upDatedContent)[0]).pipe(
         tap(() => {
           this.storeService.changedHierarchy = {}

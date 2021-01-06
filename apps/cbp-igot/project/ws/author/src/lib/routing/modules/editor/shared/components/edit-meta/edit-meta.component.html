@@ -55,17 +55,17 @@
                     </div>
 
                   </div>
-                  <div class="margin-top-s" *ngIf="checkCondition('subTitle', 'show')"
-                    [ngClass]="{ disable: checkCondition('subTitle', 'disabled') }">
+                  <div class="margin-top-s" *ngIf="checkCondition('purpose', 'show')"
+                    [ngClass]="{ disable: checkCondition('purpose', 'disabled') }">
                     <span class="mat-subheading-2 margin-0"
-                      [ngClass]="{ required: checkCondition('subTitle', 'required') }">
+                      [ngClass]="{ required: checkCondition('purpose', 'required') }">
                       Subtitle
                     </span>
                     <mat-form-field appearance="outline" class="margin-top-xs"
                       [ngClass]="{ 'mat-form-field-invalid': showError('purpose') }">
                       <input matInput formControlName="purpose" #purpose maxlength="1000" i18n-placeholder
                         placeholder="Enter subtitle here"
-                        [required]="checkCondition('subTitle', 'required') ? true : null" />
+                        [required]="checkCondition('purpose', 'required') ? true : null" />
                       <mat-hint align="end">{{ purpose.value.length }} / 1000</mat-hint>
                       <mat-error *ngIf="showError('purpose')" i18n="Subtitle Error|Explains Subtitle is required">
                         Subtitle is mandatory
@@ -311,12 +311,12 @@
                   </div>
                 </div>
               </div>
-              <div class="margin-top-s" *ngIf="checkCondition('body', 'show')"
-                [ngClass]="{ disable: checkCondition('body', 'disabled') }">
+              <div class="margin-top-s" *ngIf="checkCondition('instructions', 'show')"
+                [ngClass]="{ disable: checkCondition('instructions', 'disabled') }">
                 <label>
                   <div class="margin-top-xs flex flex-middle">
                     <span i18n class="mat-subheading-2 margin-0"
-                      [ngClass]="{ required: checkCondition('body', 'required') }">Description
+                      [ngClass]="{ required: checkCondition('instructions', 'required') }">Description
                     </span>
                     <!-- <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('contentBody')">info
                       </mat-icon> -->
@@ -383,21 +383,21 @@
                   </div>
                 </div>
                 <div class="flex new-mobile">
-                  <div class="margin-top-l flex-1" *ngIf="checkCondition('sourceName', 'show')"
-                    [ngClass]="{ disable: checkCondition('sourceName', 'disabled') }">
-                    <label [ngClass]="{ required: checkCondition('sourceName', 'required') }">
+                  <div class="margin-top-l flex-1" *ngIf="checkCondition('source', 'show')"
+                    [ngClass]="{ disable: checkCondition('source', 'disabled') }">
+                    <label [ngClass]="{ required: checkCondition('source', 'required') }">
                       <span i18n class="mat-subheading-2 margin-0">Provider</span>
                     </label>
                     <div class="">
                       <mat-form-field appearance="outline" class="margin-top-s"
-                        [ngClass]="{ 'mat-form-field-invalid': showError('sourceName') }">
-                        <mat-select formControlName="sourceName" i18n-placeholder placeholder="--Select--">
-                          <mat-option *ngIf="!checkCondition('sourceName', 'required')" i18n [value]="null">None
+                        [ngClass]="{ 'mat-form-field-invalid': showError('source') }">
+                        <mat-select formControlName="source" i18n-placeholder placeholder="--Select--">
+                          <mat-option *ngIf="!checkCondition('source', 'required')" i18n [value]="null">None
                           </mat-option>
                           <mat-option *ngFor="let sourceName of ordinals.sourceName" [value]="sourceName">
                             {{ sourceName }}</mat-option>
                         </mat-select>
-                        <mat-error *ngIf="showError('sourceName')" i18n>Source is mandatory </mat-error>
+                        <mat-error *ngIf="showError('source')" i18n>Source is mandatory </mat-error>
                       </mat-form-field>
                     </div>
                   </div>
@@ -515,11 +515,11 @@
                   </div>
                 </div>
                 <div class="flex new-mobile">
-                  <div class="flex-1 margin-top-l" *ngIf="checkCondition('complexityLevel', 'show')"
-                    [ngClass]="{ disable: checkCondition('complexityLevel', 'disabled') }">
+                  <div class="flex-1 margin-top-l" *ngIf="checkCondition('difficultyLevel', 'show')"
+                    [ngClass]="{ disable: checkCondition('difficultyLevel', 'disabled') }">
                     <label>
                       <div class="flex flex-middle"
-                        [ngClass]="{ required: checkCondition('complexityLevel', 'required') }">
+                        [ngClass]="{ required: checkCondition('difficultyLevel', 'required') }">
                         <span i18n class="mat-subheading-2 margin-0">Knowledge level</span>
                         <!-- <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('knowledgeLevel')">info
                                   </mat-icon> -->
@@ -529,7 +529,7 @@
                     </label>
 
                     <!-- <mat-form-field appearance="none" -->
-                    <div [ngClass]="{ 'mat-form-field-invalid': showError('complexityLevel') }">
+                    <div [ngClass]="{ 'mat-form-field-invalid': showError('difficultyLevel') }">
                       <!-- <mat-button-toggle-group class="tgl-group" formControlName="complexityLevel"
                           aria-label="Best viewed in">
                           <mat-button-toggle *ngFor="let complexityLevels of complexityLevelList"
@@ -544,7 +544,7 @@
                         <input matInput #complexityLevel hidden /> -->
                       <ng-container [formGroup]="contentForm">
                         <mat-radio-group name="cmlvl" class="flex tgl-group margin-top-s" aria-label="Select an option"
-                          formControlName="complexityLevel">
+                          formControlName="difficultyLevel">
                           <mat-radio-button [name]="'radio-' + _complexityLevel"
                             class="flex flex-row itm-center ws-mat-accent-border margin-right-s"
                             *ngFor="let _complexityLevel of complexityLevelList" [value]="_complexityLevel">
@@ -558,7 +558,7 @@
                           <mat-option *ngFor="let complexityLevel of complexityLevelList" [value]="complexityLevel">
                             {{ complexityLevel }}</mat-option>
                         </mat-select> -->
-                      <mat-error *ngIf="showError('complexityLevel')" i18n>Knowledge Level is mandatory
+                      <mat-error *ngIf="showError('difficultyLevel')" i18n>Knowledge Level is mandatory
                       </mat-error>
                       <!-- </mat-form-field> -->
                     </div>
@@ -576,7 +576,8 @@
                           aria-label="Select an option" formControlName="learningMode">
                           <mat-radio-button matInput [name]="'radio-' + _learnMode"
                             class="flex flex-row itm-center ws-mat-accent-border margin-right-s"
-                            *ngFor="let _learnMode of ordinals.learningMode" [value]="_learnMode">
+                            *ngFor="let _learnMode of ordinals.learningMode"
+                            [value]="(_learnMode).split('-').join(' ')">
                             <span class="mat-body-2">{{_learnMode}}</span>
                           </mat-radio-button>
                         </mat-radio-group>
