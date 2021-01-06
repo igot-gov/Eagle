@@ -136,12 +136,12 @@ export class ContentSummaryComponent implements OnInit, OnDestroy {
         this.leftmenudata = [{
           count: this.getCriticalIssues,
           critical: true,
-          name: 'Critical Issues'
+          name: 'Critical Issues',
         },
         {
           count: this.getPotentialIssues,
           potential: true,
-          name: 'Potential issues'
+          name: 'Potential issues',
         }]
       }
     })
@@ -152,24 +152,23 @@ export class ContentSummaryComponent implements OnInit, OnDestroy {
       return _.chain(this.progressData).map(i => i.profanityWordList)
         .compact().flatten()
         .filter(i => i.category === 'offensive' || i.category === 'lightly offensive')
-        .sumBy("no_of_occurrence").value()
+        .sumBy('no_of_occurrence').value()
     }
     return 0
   }
   get getCriticalIssues(): number {
     if (this.progressData && this.progressData.length > 0) {
-      let data = _.chain(this.progressData).map('profanityWordList')
+      return _.chain(this.progressData).map('profanityWordList')
         .compact().flatten()
         .filter(i => i.category === 'exptermly offensive')
-        .sumBy("no_of_occurrence").value()
-      return data
+        .sumBy('no_of_occurrence').value()
     }
     return 0
   }
   get getCleanIssues(): number {
     if (this.progressData && this.progressData.length > 0) {
       return _.chain(this.progressData).map(i => {
-        if (i.profanity_word_count == 0) {
+        if (i.profanity_word_count === 0) {
           return i
         }
         return null

@@ -27,19 +27,17 @@ export class CurationProgressCardComponent implements OnInit, OnDestroy {
   }
   get getPotentialIssues(): number {
     if (this.progressData && this.progressData.profanity_word_count > 0) {
-      let data = _.chain(this.progressData).get('profanityWordList')
+      return _.chain(this.progressData).get('profanityWordList')
         .filter(i => i.category === 'offensive' || i.category === 'lightly offensive')
-        .sumBy("no_of_occurrence").value()
-      return data
+        .sumBy('no_of_occurrence').value()
     }
     return 0
   }
   get getCriticalIssues(): number {
     if (this.progressData && this.progressData.profanity_word_count > 0) {
-      let data = _.chain(this.progressData).get('profanityWordList')
+      return _.chain(this.progressData).get('profanityWordList')
         .filter(i => i.category === 'exptermly offensive')
-        .sumBy("no_of_occurrence").value()
-      return data
+        .sumBy('no_of_occurrence').value()
     }
     return 0
   }
