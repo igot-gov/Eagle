@@ -20,7 +20,7 @@ import { SelfCurationService } from '../../services/self-curation.service'
   /* tslint:enable */
 })
 export class ContentSelfCurationComponent implements OnInit, OnDestroy, AfterViewInit {
-  contentMeta!: NSContent.IContentMeta
+  contentMeta!: NSContent.IContentMeta[]
   @Output() data = new EventEmitter<string>()
   @Input() isSubmitPressed = false
   @Input() nextAction = 'done'
@@ -85,24 +85,34 @@ export class ContentSelfCurationComponent implements OnInit, OnDestroy, AfterVie
   //   console.log(val)
   // }
   getMeta() {
-    this.contentService.changeActiveCont.subscribe(data => {
-      // if (this.contentMeta && this.canUpdate) {
-      //   this.storeData()
-      // }
-      this.contentMeta = this.contentService.getUpdatedMeta(data)
-      setTimeout(
-        () => {
-          this.getProgress()
-        },
-        2000)
-    })
+    // this.contentService.changeActiveCont.subscribe(data => {
+    // if (this.contentMeta && this.canUpdate) {
+    //   this.storeData()
+    // }
+    // this.contentMeta = this.contentService.getUpdatedMeta(data)
+    _.set(this, 'contentMeta', _.map(this.contentService.originalContent))
+    //   debugger
+    //   setTimeout(
+    //     () => {
+    this.getProgress()
+    //     },
+    //     2000)
+    // })
   }
   getProgress() {
     // this.leftmenudata = []
     const response: NSISelfCuration.ISelfCurationData[] = []
-    if (this.contentMeta.children) {
-      _.each(this.contentMeta.children, (element: NSContent.IContentMeta) => {
-        response.push(this.curationService.getOriginalData(element.identifier))
+    if (this.contentMeta && this.contentMeta) {
+      _.each(this.contentMeta, (element: NSContent.IContentMeta) => {
+        if (element.artifactUrl && element.mimeType.indexOf('application/pdf') >= 0) {
+          // response.push()
+          this.curationService.fetchresult(element.identifier).subscribe(data => {
+            // console.log(data)
+            if (data) {
+
+            }
+          })
+        }
       })
     }
     if (response.length > 0) {

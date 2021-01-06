@@ -19,7 +19,7 @@ import { NSISelfCuration } from '../../../../../interface/self-curation'
 const PROTECTED_SLAG_V8 = '/apis/protected/v8'
 
 const API_END_POINTS = {
-  GET_PROFANITY: `${PROTECTED_SLAG_V8}/profanity/getPdfProfanity`,
+  GET_PROFANITY: `${PROTECTED_SLAG_V8}/profanity/getPdfProfanityForContent`,
 }
 
 @Injectable()
@@ -38,13 +38,15 @@ export class SelfCurationService {
   }
 
   setcurationData(meta: NSISelfCuration.ISelfCurationData[]) {
-    for (let i = 0; i < meta.length; i += 1) {
-      this.curationData[meta[i].primaryKey.contentId] = JSON.parse(JSON.stringify(meta))
+    if (meta) {
+      for (let i = 0; i < meta.length; i += 1) {
+        this.curationData[meta[i].primaryKey.contentId] = JSON.parse(JSON.stringify(meta))
+      }
     }
   }
 
-  fetchresult(data: any): Observable<NSISelfCuration.ISelfCurationData[]> {
-    return this.http.post<NSISelfCuration.ISelfCurationData[]>(`${API_END_POINTS.GET_PROFANITY}`, data)
+  fetchresult(contentId: any): Observable<NSISelfCuration.ISelfCurationData[]> {
+    return this.http.get<NSISelfCuration.ISelfCurationData[]>(`${API_END_POINTS.GET_PROFANITY}/${contentId}`)
       .pipe(tap(v => this.setcurationData(v)))
   }
 

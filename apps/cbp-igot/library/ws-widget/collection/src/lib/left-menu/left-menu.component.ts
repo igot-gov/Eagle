@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core'
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import { ILeftMenu, IMenu } from './left-menu.model'
 
@@ -12,7 +12,7 @@ export class LeftMenuComponent extends WidgetBaseComponent
   implements OnInit, OnDestroy, NsWidgetResolver.IWidgetData<ILeftMenu>  {
   @Input() widgetData!: ILeftMenu
   // @Input() Source
-  constructor(private activatedRoute: ActivatedRoute) {
+  constructor(private activatedRoute: ActivatedRoute, private router: Router) {
     super()
   }
   ngOnDestroy(): void {
@@ -22,6 +22,7 @@ export class LeftMenuComponent extends WidgetBaseComponent
   ngOnInit(): void {
 
   }
+
   changeToDefaultImg($event: any) {
     $event.target.src = '/assets/instances/eagle/app_logos/default.png'
   }
@@ -36,7 +37,17 @@ export class LeftMenuComponent extends WidgetBaseComponent
     }
     return returnVal
   }
-
+  public isLinkActive2(url?: string): boolean {
+    let returnval = false
+    if (url) {
+      const st = this.router.url.split('?')
+      if (st && st[0] && st[0] === (url)) {
+        returnval = true
+      }
+      // if(route.url.con)
+    }
+    return returnval
+  }
   getLink(tab: IMenu) {
     if (tab && tab.customRouting && this.activatedRoute.snapshot && this.activatedRoute.snapshot.firstChild && tab.paramaterName) {
       return (tab.routerLink.replace('<param>', this.activatedRoute.snapshot.firstChild.params[tab.paramaterName]))

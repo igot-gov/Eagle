@@ -1,16 +1,16 @@
 import { AuthExpiryDateConfirmComponent } from '@ws/author/src/lib/modules/shared/components/auth-expiry-date-confirm/auth-expiry-date-confirm.component'
-import { FlatTreeControl } from '@angular/cdk/tree'
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core'
+// import { FlatTreeControl } from '@angular/cdk/tree'
+import { Component, OnDestroy, OnInit, Input } from '@angular/core'
 import { FormGroup } from '@angular/forms'
-import { MatDialog, MatSnackBar, MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material'
+import { MatDialog, MatSnackBar } from '@angular/material'
 import { ActivatedRoute, Router } from '@angular/router'
 import { NOTIFICATION_TIME } from '@ws/author/src/lib/constants/constant'
 import { Notify } from '@ws/author/src/lib/constants/notificationMessage'
 import { NSApiRequest } from '@ws/author/src/lib/interface/apiRequest'
 import {
   IAuthoringPagination,
-  IFilterMenuNode,
-  IMenuFlatNode,
+  // IFilterMenuNode,
+  // IMenuFlatNode,
 } from '@ws/author/src/lib/interface/authored'
 import { NSContent } from '@ws/author/src/lib/interface/content'
 import { CommentsDialogComponent } from '@ws/author/src/lib/modules/shared/components/comments-dialog/comments-dialog.component'
@@ -21,39 +21,36 @@ import { AccessControlService } from '@ws/author/src/lib/modules/shared/services
 import { AuthInitService } from '@ws/author/src/lib/services/init.service'
 import { LoaderService } from '@ws/author/src/lib/services/loader.service'
 import { Subscription } from 'rxjs'
-import { MyContentService } from '../../services/my-content.service'
+
 import { map } from 'rxjs/operators'
 import { PipeDurationTransformPipe, ValueService } from '@ws-widget/utils'
 
 /* tslint:disable */
 import _ from 'lodash'
-import { ILeftMenu, ITable } from '@ws-widget/collection'
-import { PipeContentTypePipe } from '../../../../../../../../../../../../library/ws-widget/utils/src/lib/pipes/pipe-content-type/pipe-content-type.pipe'
+import { IAtGlanceComponentData, IAuthorData, ITable } from '@ws-widget/collection'
+import { MyContentService } from '../../services/my-content.service'
+import { LocalDataService } from '../../../content-detail/services/local-data.service'
+import { MyTocService } from '../../../content-detail/services/my-toc.service'
+import { environment } from '../../../../../../../../../../../../src/environments/environment'
+// import { NsAppToc } from '../../interface/app-toc.model'
 /* tslint:enable */
 
-const defaultFilter = [
-  {
-    key: 'contentType',
-    value: [
-      'Collection', 'Course', 'Learning Path',
-    ],
-  },
-]
 @Component({
-  selector: 'ws-auth-my-content',
-  templateUrl: './my-content.component.html',
-  styleUrls: ['./my-content.component.scss'],
+  selector: 'ws-auth-mandatory-content',
+  templateUrl: './mandatory-content.component.html',
+  styleUrls: ['./mandatory-content.component.scss'],
   providers: [PipeDurationTransformPipe],
 })
-export class MyContentComponent implements OnInit, OnDestroy {
-  public sideNavBarOpened = false
-  public sideNavBarOpenedMain = true
+export class MandatoryContentComponent implements OnInit, OnDestroy {
+  public sideNavBarOpened = true
   newDesign = true
   tableData!: ITable
   // currentFilter = 'publish'
-  filterMenuTreeControl: FlatTreeControl<IMenuFlatNode>
+  // filterMenuTreeControl: FlatTreeControl<IMenuFlatNode>
+  tocStructure: IAtGlanceComponentData.ICounts | null = null
   filterMenuTreeFlattener: any
   public cardContent!: any[]
+  public content!: NSContent.IContentMeta
   public filters: any[] = []
   // public status = 'draft'
   public status = 'published'
@@ -61,7 +58,7 @@ export class MyContentComponent implements OnInit, OnDestroy {
   contentType: string[] = []
   complexityLevel: string[] = []
   unit: string[] = []
-  finalFilters: any = defaultFilter
+  finalFilters: any = []
   allLanguages: any[] = []
   searchLanguage = ''
   public pagination!: IAuthoringPagination
@@ -74,33 +71,11 @@ export class MyContentComponent implements OnInit, OnDestroy {
   isAdmin = false
   currentAction: 'author' | 'reviewer' | 'expiry' | 'deleted' = 'author'
   count: any = {}
-  @ViewChild('searchInput', { static: false }) searchInputElem: ElementRef<any> = {} as ElementRef<
-    any
-  >
   isLtMedium$ = this.valueSvc.isLtMedium$
   private defaultSideNavBarOpenedSubscription: any
   mode$ = this.isLtMedium$.pipe(map(isMedium => (isMedium ? 'over' : 'side')))
   public screenSizeIsLtMedium = false
-  leftmenues!: ILeftMenu
-  public filterMenuItems: any = []
-  /* tslint:disable */
-  courseTaken = this.activatedRoute.snapshot.data.courseTaken.data
-  resourses: any
-  dataSource: any
-  hasChild = (_: number, node: IMenuFlatNode) => node.expandable
-
-  private _transformer = (node: IFilterMenuNode, level: number) => {
-    return {
-      expandable: !!node.values && node.values.length > 0,
-      displayName: node.name,
-      checked: node.checked,
-      type: node.name,
-      count: node.count ? node.count : 0,
-      levels: level,
-    }
-  }
-  /* tslint:enable */
-
+  @Input() contentId!: string
   constructor(
     private myContSvc: MyContentService,
     private activatedRoute: ActivatedRoute,
@@ -112,74 +87,12 @@ export class MyContentComponent implements OnInit, OnDestroy {
     private authInitService: AuthInitService,
     // private durationPipe: PipeDurationTransformPipe,
     private valueSvc: ValueService,
+    private dataService: LocalDataService,
+    private myTocService: MyTocService
   ) {
-    this.courseTaken = {
-      mandatoryCourseCompleted: true
-    }
-    this.filterMenuTreeControl = new FlatTreeControl<IMenuFlatNode>(
-      node => node.levels,
-      node => node.expandable,
-    )
-    this.filterMenuTreeFlattener = new MatTreeFlattener(
-      this._transformer,
-      node => node.levels,
-      node => node.expandable,
-      node => node.values,
-    )
-    this.dataSource = new MatTreeFlatDataSource(
-      this.filterMenuTreeControl,
-      this.filterMenuTreeFlattener,
-    )
-    this.dataSource.data = this.filterMenuItems
-    this.userId = this.accessService.userId
-
-    if (this.activatedRoute.snapshot.data.departmentData) {
-      const leftData = this.authInitService.authAdditionalConfig.menus
-      _.set(leftData, 'widgetData.logo', true)
-      _.set(leftData, 'widgetData.logoPath', _.get(this.activatedRoute, 'snapshot.data.departmentData.logo'))
-      _.set(leftData, 'widgetData.name', _.get(this.activatedRoute, 'snapshot.data.departmentData.description'))
-      this.leftmenues = leftData
-    } else {
-      this.leftmenues = this.authInitService.authAdditionalConfig.menus
-    }
     this.isAdmin = this.accessService.hasRole(['admin', 'super-admin', 'content-admin', 'editor'])
-    // if (this.courseTaken.mandatoryCourseCompleted) {
-    this.initCardTable()
-    // } else {
-    //   this.resourses = _.map(this.courseTaken.contentDetails, (v, k) => {
-    //     return { key: k, ...v }
-    //   })
-    // }
   }
 
-  initCardTable() {
-    this.tableData = {
-      columns: [
-        {
-          displayName: 'Course Name', key: 'name', isList: false, prop: '',
-          link: { path: '/author/content-detail/', dParams: 'identifier' },
-          defaultValue: 'Untitled Content',
-          image: 'appIcon',
-        },
-        { displayName: 'Kind', key: 'contentType', isList: false, prop: '', defaultValue: 'NA', pipe: PipeContentTypePipe },
-        { displayName: 'Active users', key: 'uniqueUsersCount', isList: false, prop: '', defaultValue: 0 },
-        { displayName: 'Duration', key: 'duration', defaultValue: 0, pipe: PipeDurationTransformPipe },
-      ], //  :> this will load from json
-      actions: [], // :> this will load from json
-      needCheckBox: false,
-      needHash: false,
-      sortColumn: 'name',
-      sortState: 'asc',
-      actionsMenu: {
-        headIcon: 'apps',
-        menus: [
-          { name: 'Edit', action: 'edit', disabled: false, icon: 'edit' },
-          { name: 'Delete', action: 'delete', disabled: false, icon: 'delete' },
-        ],
-        rowIcon: 'more_vert',
-      },
-    }
-  }
   ngOnDestroy() {
     if (this.routerSubscription.unsubscribe) {
       this.routerSubscription.unsubscribe()
@@ -198,21 +111,15 @@ export class MyContentComponent implements OnInit, OnDestroy {
     this.newDesign = this.accessService.authoringConfig.newDesign
     this.ordinals = this.authInitService.ordinals
     this.allLanguages = this.authInitService.ordinals.subTitles || []
-    this.defaultSideNavBarOpenedSubscription = this.isLtMedium$.subscribe(isLtMedium => {
-      this.sideNavBarOpenedMain = !isLtMedium
-      this.screenSizeIsLtMedium = isLtMedium
-    })
     this.activatedRoute.queryParams.subscribe(params => {
       this.status = params.status || 'published'
       this.setAction()
-      this.fetchContent(false)
+      this.fetchContent()
     })
   }
-
-  createNewComponent() {
-    this.router.navigate(['author', 'editor', 'new', 'collection'])
+  changeToDefaultImg($event: any) {
+    $event.target.src = '/assets/instances/eagle/app_logos/default.png'
   }
-
   fetchStatus() {
     switch (this.status) {
       case 'draft':
@@ -236,7 +143,71 @@ export class MyContentComponent implements OnInit, OnDestroy {
     }
     return ['Draft']
   }
+  resetAndFetchTocStructure() {
+    this.tocStructure = {
+      assessment: 0,
+      course: 0,
+      handsOn: 0,
+      interactiveVideo: 0,
+      learningModule: 0,
+      other: 0,
+      pdf: 0,
+      podcast: 0,
+      quiz: 0,
+      video: 0,
+      webModule: 0,
+      webPage: 0,
+      youtube: 0,
+    }
+    if (this.content) {
+      this.tocStructure.learningModule = this.content.contentType === 'Collection' ? -1 : 0
+      this.tocStructure.course = this.content.contentType === 'Course' ? -1 : 0
+      this.tocStructure = this.myTocService.getTocStructure(this.content, this.tocStructure)
+      // for (const progType in this.tocStructure) {
+      //   if (this.tocStructure[progType] > 0) {
+      //     break
+      //   }
+      // }
+    }
+  }
 
+  getGlanceData(): IAtGlanceComponentData.IData | null {
+    if (this.contentId && this.content && this.tocStructure) {
+      return {
+        displayName: 'At a glance', // now not using JSON
+        buttonName: 'Start now',
+        customLink: `${environment.karmYogi}/app/toc/${this.contentId}/overview`,
+        contentId: this.contentId,
+        contentType: this.content.categoryType,
+        cost: this.content.exclusiveContent ? 'Paid' : 'Free',
+        duration: this.content.duration.toString(),
+        lastUpdate: this.content.lastUpdatedOn,
+        counts: this.tocStructure,
+      }
+    }
+    return null
+  }
+  getAuthors(): IAuthorData[] {
+    if (this.content) {
+      const lst = []
+      const curators = _.map(_.get(this.content, 'creatorContacts'), i => {
+        return {
+          name: i.name,
+          authorType: 'Curator',
+        }
+      })
+      const authors = _.map(_.get(this.content, 'creatorDetails'), i => {
+        return {
+          name: i.name,
+          authorType: 'Author',
+        }
+      })
+      lst.push(...authors)
+      lst.push(...curators)
+      return lst
+    }
+    return []
+  }
   setAction() {
     switch (this.status) {
       case 'draft':
@@ -257,239 +228,28 @@ export class MyContentComponent implements OnInit, OnDestroy {
   }
   actionClick(event: any) {
     if (event) {
-      switch (event.action) {
-        case 'edit':
-        case 'delete':
-          this.action({ type: event.action, data: event.data })
-          break
-        default:
-          break
-      }
+      /* tslint:disable */
+      console.log(event)
+      /* tslint:enable */
     }
   }
-  fetchContent(loadMoreFlag: boolean, changeFilter = true) {
-    const searchV6Data = this.myContSvc.getSearchBody(
-      this.status,
-      this.searchLanguage ? [this.searchLanguage] : [],
-      loadMoreFlag ? this.pagination.offset : 0,
-      this.queryFilter,
-      this.isAdmin,
-    )
-    const requestData = {
-      locale: this.searchLanguage ? [this.searchLanguage] : ["en"],
-      query: this.queryFilter,
-      request: {
-        query: this.queryFilter,
-        filters: {
-
-          // primaryCategory: [
-          //   "Collection",
-          //   "Resource",
-          //   "Content Playlist",
-          //   "Course",
-          //   "Course Assessment",
-          //   "Digital Textbook",
-          //   "eTextbook",
-          //   "Explanation Content",
-          //   "Learning Resource",
-          //   "Lesson Plan Unit",
-          //   "Practice Question Set",
-          //   "Teacher Resource",
-          //   "Textbook Unit",
-          //   "LessonPlan",
-          //   "FocusSpot",
-          //   "Learning Outcome Definition",
-          //   "Curiosity Questions",
-          //   "MarkingSchemeRubric",
-          //   "ExplanationResource",
-          //   "ExperientialResource",
-          //   "Practice Resource",
-          //   "TVLesson"
-          // ],
-          status: this.fetchStatus(),
-          // creatorContacts: <string[]>[],
-          // trackContacts: <string[]>[],
-          // publisherDetails: <string[]>[],
-          // isMetaEditingDisabled: [false],
-          // isContentEditingDisabled: [false]
-        },
-        // pageNo: loadMoreFlag ? this.pagination.offset : 0,
-        sort_by: { lastUpdatedOn: 'desc' },
-        // pageSize: this.pagination.limit,
-        fields: [
-          "name",
-          "appIcon",
-          "mimeType",
-          "gradeLevel",
-          "identifier",
-          "medium",
-          "pkgVersion",
-          "board",
-          "subject",
-          "resourceType",
-          "primaryCategory",
-          "contentType",
-          "channel",
-          "organisation",
-          "trackable"
-        ],
-        facets: [
-          "primaryCategory",
-          "mimeType"
-        ],
-        pageNo: loadMoreFlag ? this.pagination.offset : 0,
-        sort: [{ lastUpdatedOn: 'desc' }],
-        pageSize: this.pagination.limit,
-        uuid: this.userId,
-        rootOrg: this.accessService.rootOrg,
-        // this is for Author Only
-        isUserRecordEnabled: true,
-      },
-    }
-    if (this.finalFilters.length) {
-      this.finalFilters.forEach((v: any) => {
-        searchV6Data.filters.forEach((filter: any) => {
-          filter.andFilters[0] = {
-            ...filter.andFilters[0],
-            [v.key]: v.value,
-          }
-        })
-        requestData.request.filters = { ...requestData.request.filters, [v.key]: v.value }
+  fetchContent() {
+    // this.contentId = this.activatedRoute.snapshot.paramMap.get('contentId') || null
+    if (this.contentId) {
+      this.myContSvc.readContent(this.contentId).subscribe(s => {
+        _.set(this, 'content', s)
+        this.dataService.initData(s)
+        this.resetAndFetchTocStructure()
       })
     }
-    // if (this.queryFilter) {
-    //   // tslint:disable
-    //   delete requestData.request.sort
-    //   // tslint:enable
-    // }
-    // if (
-    //   [
-    //     'draft',
-    //     'rejected',
-    //     'inreview',
-    //     'published',
-    //     'unpublished',
-    //     'processing',
-    //     'deleted',
-    //   ].indexOf(this.status) > -1 &&
-    //   !this.isAdmin
-    // ) {
-    //   requestData.request.filters.creatorContacts.push(this.userId)
-    // }
-    // if (this.status === 'review' && !this.isAdmin) {
-    //   requestData.request.filters.trackContacts.push(this.userId)
-    // }
-    // if (this.status === 'publish' && !this.isAdmin) {
-    //   requestData.request.filters.publisherDetails.push(this.userId)
-    // }
-
-    this.loadService.changeLoad.next(true)
-    const observable =
-      this.status === 'expiry' || this.newDesign
-        ? this.myContSvc.fetchFromSearchV6(searchV6Data, this.isAdmin).pipe(
-          map((v: any) => {
-            return {
-              result: {
-                response: v,
-              },
-            }
-          }),
-        )
-        : this.myContSvc.fetchContent(requestData)
-    this.loadService.changeLoad.next(true)
-    observable.subscribe(
-      data => {
-        this.loadService.changeLoad.next(false)
-        if (changeFilter) {
-          this.filterMenuItems =
-            data && data.result && data.result.facets
-              ? data.result.facets
-              : this.filterMenuItems
-          this.dataSource.data = this.filterMenuItems
-        }
-        this.cardContent =
-          loadMoreFlag && !this.queryFilter
-            ? (this.cardContent || []).concat(
-              data && data.result ? data.result.content : [],
-            )
-            : data && data.result.content
-              ? data.result.content
-              : []
-        this.totalContent = data && data.result ? data.result.count : 0
-        // const index = _.findIndex(this.count, i => i.n === this.status)
-        // if (index >= 0) {
-        this.count[this.status] = this.totalContent
-        // }
-        this.showLoadMore =
-          this.pagination.offset * this.pagination.limit + this.pagination.limit < this.totalContent
-            ? true
-            : false
-        this.fetchError = false
-      },
-      () => {
-        this.fetchError = true
-        this.cardContent = []
-        this.showLoadMore = false
-        this.loadService.changeLoad.next(false)
-      },
-    )
-  }
-  getTableData(): any[] {
-    if (this.cardContent && this.cardContent.length > 0) {
-      return _.map(this.cardContent, i => {
-        // const duration = this.durationPipe.transform(i.duration || 0, 'hms') || '0'
-        // i.duration = duration
-        return i
-      })
-    }
-    return []
-  }
-  search() {
-    if (this.searchInputElem.nativeElement) {
-      this.queryFilter = this.searchInputElem.nativeElement.value.trim()
-    }
-    this.fetchContent(false, false)
   }
 
-  filterApplyEvent(node: any) {
-    this.pagination.offset = 0
-    this.sideNavBarOpened = false
-    const filterIndex = this.filters.findIndex(v => v.displayName === node.displayName)
-    console.log(filterIndex)
-    const filterMenuItemsIndex = this.filterMenuItems.findIndex((obj: any) =>
-      obj.values.some((val: any) => val.name == node.type)
-    )
-    const ind = this.finalFilters.indexOf(this.filterMenuItems[filterMenuItemsIndex].name)
-    console.log('---------------------inx -----------', ind, this.finalFilters)
-    if (filterIndex === -1 && node.checked) {
-      this.filters.push(node)
-      this.filterMenuItems[filterMenuItemsIndex].values.find(
-        (v: any) => v.name === node.displayName ,
-      ).checked = true
-
-
-      if (ind === -1) {
-        this.finalFilters.push({
-          key: this.filterMenuItems[filterMenuItemsIndex].name,
-          value: [node.type],
-        })
-      } else {
-        this.finalFilters[ind].value.push(node.type)
-        // this.finalFilters.push({
-        //   key: node.displayName,
-        //   value: [node.type],
-        // })
-      }
-    } else {
-      this.filterMenuItems[filterMenuItemsIndex].values.find(
-        (v: any) => v.name === node.displayName,
-      ).checked = false
-      this.filters.splice(filterIndex, 1)
-      this.finalFilters.splice(ind, 1)
-    }
-    this.dataSource.data = this.filterMenuItems
-    this.fetchContent(false, false)
-  }
+  // search() {
+  //   if (this.searchInputElem.nativeElement) {
+  //     this.queryFilter = this.searchInputElem.nativeElement.value.trim()
+  //   }
+  //   this.fetchContent(false, false)
+  // }
 
   deleteContent(request: NSContent.IContentMeta) {
     this.loadService.changeLoad.next(true)
@@ -597,20 +357,20 @@ export class MyContentComponent implements OnInit, OnDestroy {
     )
   }
 
-  clearAllFilters() {
-    this.finalFilters = defaultFilter
-    this.searchInputElem.nativeElement.value = ''
-    this.queryFilter = ''
-    this.filterMenuItems.map((val: any) => val.values.map((v: any) => (v.checked = false)))
-    this.dataSource.data = this.filterMenuItems
-    this.filters = []
-    this.fetchContent(false)
-  }
+  // clearAllFilters() {
+  //   this.finalFilters = []
+  //   this.searchInputElem.nativeElement.value = ''
+  //   this.queryFilter = ''
+  //   this.filterMenuItems.map((val: any) => val.content.map((v: any) => (v.checked = false)))
+  //   this.dataSource.data = this.filterMenuItems
+  //   this.filters = []
+  //   this.fetchContent(false)
+  // }
 
-  loadMore() {
-    this.pagination.offset += 1
-    this.fetchContent(true, false)
-  }
+  // loadMore() {
+  //   this.pagination.offset += 1
+  //   this.fetchContent(true, false)
+  // }
 
   confirmAction(content: any) {
     let message = ''
@@ -754,7 +514,6 @@ export class MyContentComponent implements OnInit, OnDestroy {
   }
 
   action(event: { data: NSContent.IContentMeta; type: string }) {
-    console.log('-------------action-------------', event.data, event.data.identifier)
     switch (event.type) {
       case 'create':
         this.createContent(event.data)

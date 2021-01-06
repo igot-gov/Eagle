@@ -1,0 +1,24 @@
+<div class="nav-container" autosize name="auth-tool-detail">
+  <div class="flex">
+    <div class="flex flex-3 flex-column">
+      <div class="flex flex-1">
+        <div class="mt-10">
+          <img mat-card-image class="content-image" [src]="content?.appIcon" alt="Content Image"
+            (error)="changeToDefaultImg($event)" />
+        </div>
+        <div class="flex flex-column ml-10 mt-8">
+          <span class="mat-headline">{{content?.name}}</span>
+          <span class="mat-body-1">{{content?.description}}
+          </span>
+        </div>
+      </div>
+      <div class="flex flex-1">
+        <span class="mat-body-1" [innerHTML]="content?.body">
+        </span>
+      </div>
+    </div>
+    <div class="flex flex-1">
+      <ws-widget-at-glance *ngIf="content && tocStructure" [widgetData]="getGlanceData()"></ws-widget-at-glance>
+    </div>
+  </div>
+</div>

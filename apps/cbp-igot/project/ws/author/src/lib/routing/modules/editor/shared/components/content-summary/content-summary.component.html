@@ -74,16 +74,18 @@
     </mat-card>
     <!-- <mat-card-actions> -->
     <div class="flex flex-start margin-top-l margin-bottom-s">
-      <button mat-raised-button type="button" class="ws-mat-accent-text ws-mat-accent-border-active">
+      <button mat-raised-button type="button" class="ws-mat-accent-text ws-mat-accent-border-active"
+        (click)="data.emit('back')">
         <span class="mat-subheading-2 padding-xs custom-line-h" style="vertical-align: unset;" i18n>
           Back: Self Curation
         </span>
       </button>
       <!-- <ng-container [ngTemplateOutlet]="count">
       </ng-container> -->
-      <button mat-raised-button type="button" class="text-white ws-mat-primary-background margin-left-s">
+      <button mat-raised-button type="button" class="text-white ws-mat-primary-background margin-left-s"
+        (click)="data.emit('push')">
         <span class="mat-subheading-2 padding-xs custom-line-h" style="vertical-align: unset;" i18n>
-          Submit for review
+          Done
         </span>
       </button>
 

@@ -14,10 +14,13 @@ export class AtGlanceComponent extends WidgetBaseComponent
   ngOnInit() {
 
   }
-  getPreviewLink() {
+  get getPreviewLink() {
     if (this.widgetData && this.widgetData.contentId) {
       return `/author/toc/${this.widgetData.contentId}/overview`
     }
     return null
+  }
+  get getCourseLink() {
+    return this.widgetData.customLink
   }
 }

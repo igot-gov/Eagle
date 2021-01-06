@@ -10,7 +10,9 @@ import { AuthInitService } from '@ws/author/src/lib/services/init.service'
 import { BehaviorSubject, ReplaySubject } from 'rxjs'
 import { IContentNode, IContentTreeNode } from './../interface/icontent-tree'
 import { CollectionResolverService } from './resolver.service'
-
+/* tslint:disable */
+import _ from 'lodash'
+/* tslint:enable */
 interface IProcessedError {
   id: string | number
   name: string
@@ -41,7 +43,7 @@ export class CollectionStoreService {
 
   currentParentNode!: number
   currentSelectedNode!: number
-
+  expendedNode = new Set<number>()
   constructor(
     private contentService: EditorContentService,
     private editorService: EditorService,
@@ -178,6 +180,10 @@ export class CollectionStoreService {
     name: string = 'Untitled Content'
   ): Promise<boolean> {
     try {
+      /* tslint:disable */
+      // const parentMeta = this.contentService.originalContent[
+      //   (this.flatNodeMap.get(this.currentParentNode) as IContentNode).identifier]
+      /* tslint:disable */
       const meta = this.authInitService.creationEntity.get(type) as ICreateEntity
       const requestBody = {
         name,

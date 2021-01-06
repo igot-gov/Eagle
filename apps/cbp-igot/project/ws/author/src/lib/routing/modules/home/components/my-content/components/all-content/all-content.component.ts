@@ -28,7 +28,7 @@ import { PipeDurationTransformPipe, ValueService } from '@ws-widget/utils'
 /* tslint:disable */
 import _ from 'lodash'
 import { ILeftMenu, ITable } from '@ws-widget/collection'
-import { PipeContentTypePipe } from '../../../../../../../../../../../../library/ws-widget/utils/src/lib/pipes/pipe-content-type/pipe-content-type.pipe'
+import { PipeContentTypePipe } from '@ws-widget/utils'
 /* tslint:enable */
 
 const defaultFilter = [
@@ -40,12 +40,12 @@ const defaultFilter = [
   },
 ]
 @Component({
-  selector: 'ws-auth-my-content',
-  templateUrl: './my-content.component.html',
-  styleUrls: ['./my-content.component.scss'],
+  selector: 'ws-auth-all-content',
+  templateUrl: './all-content.component.html',
+  styleUrls: ['./all-content.component.scss'],
   providers: [PipeDurationTransformPipe],
 })
-export class MyContentComponent implements OnInit, OnDestroy {
+export class AllContentComponent implements OnInit, OnDestroy {
   public sideNavBarOpened = false
   public sideNavBarOpenedMain = true
   newDesign = true
@@ -91,11 +91,11 @@ export class MyContentComponent implements OnInit, OnDestroy {
 
   private _transformer = (node: IFilterMenuNode, level: number) => {
     return {
-      expandable: !!node.values && node.values.length > 0,
-      displayName: node.name,
+      expandable: !!node.content && node.content.length > 0,
+      displayName: node.displayName,
       checked: node.checked,
-      type: node.name,
-      count: node.count ? node.count : 0,
+      type: node.type,
+      count: node.count,
       levels: level,
     }
   }
@@ -115,7 +115,7 @@ export class MyContentComponent implements OnInit, OnDestroy {
   ) {
     this.courseTaken = {
       mandatoryCourseCompleted: true
-    }
+    } // this has to be removed after sunbird integration
     this.filterMenuTreeControl = new FlatTreeControl<IMenuFlatNode>(
       node => node.levels,
       node => node.expandable,
@@ -124,7 +124,7 @@ export class MyContentComponent implements OnInit, OnDestroy {
       this._transformer,
       node => node.levels,
       node => node.expandable,
-      node => node.values,
+      node => node.content,
     )
     this.dataSource = new MatTreeFlatDataSource(
       this.filterMenuTreeControl,
@@ -143,7 +143,7 @@ export class MyContentComponent implements OnInit, OnDestroy {
       this.leftmenues = this.authInitService.authAdditionalConfig.menus
     }
     this.isAdmin = this.accessService.hasRole(['admin', 'super-admin', 'content-admin', 'editor'])
-    // if (this.courseTaken.mandatoryCourseCompleted) {
+    // if (this.courseTaken && this.courseTaken.mandatoryCourseCompleted) {
     this.initCardTable()
     // } else {
     //   this.resourses = _.map(this.courseTaken.contentDetails, (v, k) => {
@@ -276,74 +276,24 @@ export class MyContentComponent implements OnInit, OnDestroy {
       this.isAdmin,
     )
     const requestData = {
-      locale: this.searchLanguage ? [this.searchLanguage] : ["en"],
-      query: this.queryFilter,
       request: {
+        locale: this.searchLanguage ? [this.searchLanguage] : [],
         query: this.queryFilter,
         filters: {
-
-          // primaryCategory: [
-          //   "Collection",
-          //   "Resource",
-          //   "Content Playlist",
-          //   "Course",
-          //   "Course Assessment",
-          //   "Digital Textbook",
-          //   "eTextbook",
-          //   "Explanation Content",
-          //   "Learning Resource",
-          //   "Lesson Plan Unit",
-          //   "Practice Question Set",
-          //   "Teacher Resource",
-          //   "Textbook Unit",
-          //   "LessonPlan",
-          //   "FocusSpot",
-          //   "Learning Outcome Definition",
-          //   "Curiosity Questions",
-          //   "MarkingSchemeRubric",
-          //   "ExplanationResource",
-          //   "ExperientialResource",
-          //   "Practice Resource",
-          //   "TVLesson"
-          // ],
           status: this.fetchStatus(),
-          // creatorContacts: <string[]>[],
-          // trackContacts: <string[]>[],
-          // publisherDetails: <string[]>[],
-          // isMetaEditingDisabled: [false],
-          // isContentEditingDisabled: [false]
+          creatorContacts: <string[]>[],
+          trackContacts: <string[]>[],
+          publisherDetails: <string[]>[],
+          isMetaEditingDisabled: [false],
+          isContentEditingDisabled: [false],
         },
-        // pageNo: loadMoreFlag ? this.pagination.offset : 0,
-        sort_by: { lastUpdatedOn: 'desc' },
-        // pageSize: this.pagination.limit,
-        fields: [
-          "name",
-          "appIcon",
-          "mimeType",
-          "gradeLevel",
-          "identifier",
-          "medium",
-          "pkgVersion",
-          "board",
-          "subject",
-          "resourceType",
-          "primaryCategory",
-          "contentType",
-          "channel",
-          "organisation",
-          "trackable"
-        ],
-        facets: [
-          "primaryCategory",
-          "mimeType"
-        ],
         pageNo: loadMoreFlag ? this.pagination.offset : 0,
         sort: [{ lastUpdatedOn: 'desc' }],
         pageSize: this.pagination.limit,
         uuid: this.userId,
         rootOrg: this.accessService.rootOrg,
-        // this is for Author Only
-        isUserRecordEnabled: true,
+        // this is for Author/Admin Only
+        isUserRecordEnabled: !this.isAdmin,
       },
     }
     if (this.finalFilters.length) {
@@ -357,31 +307,31 @@ export class MyContentComponent implements OnInit, OnDestroy {
         requestData.request.filters = { ...requestData.request.filters, [v.key]: v.value }
       })
     }
-    // if (this.queryFilter) {
-    //   // tslint:disable
-    //   delete requestData.request.sort
-    //   // tslint:enable
-    // }
-    // if (
-    //   [
-    //     'draft',
-    //     'rejected',
-    //     'inreview',
-    //     'published',
-    //     'unpublished',
-    //     'processing',
-    //     'deleted',
-    //   ].indexOf(this.status) > -1 &&
-    //   !this.isAdmin
-    // ) {
-    //   requestData.request.filters.creatorContacts.push(this.userId)
-    // }
-    // if (this.status === 'review' && !this.isAdmin) {
-    //   requestData.request.filters.trackContacts.push(this.userId)
-    // }
-    // if (this.status === 'publish' && !this.isAdmin) {
-    //   requestData.request.filters.publisherDetails.push(this.userId)
-    // }
+    if (this.queryFilter) {
+      // tslint:disable
+      delete requestData.request.sort
+      // tslint:enable
+    }
+    if (
+      [
+        'draft',
+        'rejected',
+        'inreview',
+        'published',
+        'unpublished',
+        'processing',
+        'deleted',
+      ].indexOf(this.status) > -1 &&
+      !this.isAdmin
+    ) {
+      requestData.request.filters.creatorContacts.push(this.userId)
+    }
+    if (this.status === 'review' && !this.isAdmin) {
+      requestData.request.filters.trackContacts.push(this.userId)
+    }
+    if (this.status === 'publish' && !this.isAdmin) {
+      requestData.request.filters.publisherDetails.push(this.userId)
+    }
 
     this.loadService.changeLoad.next(true)
     const observable =
@@ -402,20 +352,20 @@ export class MyContentComponent implements OnInit, OnDestroy {
         this.loadService.changeLoad.next(false)
         if (changeFilter) {
           this.filterMenuItems =
-            data && data.result && data.result.facets
-              ? data.result.facets
+            data && data.result && data.result.response && data.result.response.filters
+              ? data.result.response.filters
               : this.filterMenuItems
           this.dataSource.data = this.filterMenuItems
         }
         this.cardContent =
           loadMoreFlag && !this.queryFilter
             ? (this.cardContent || []).concat(
-              data && data.result ? data.result.content : [],
+              data && data.result && data.result.response ? data.result.response.result : [],
             )
-            : data && data.result.content
-              ? data.result.content
+            : data && data.result.response
+              ? data.result.response.result
               : []
-        this.totalContent = data && data.result ? data.result.count : 0
+        this.totalContent = data && data.result.response ? data.result.response.totalHits : 0
         // const index = _.findIndex(this.count, i => i.n === this.status)
         // if (index >= 0) {
         this.count[this.status] = this.totalContent
@@ -434,7 +384,7 @@ export class MyContentComponent implements OnInit, OnDestroy {
       },
     )
   }
-  getTableData(): any[] {
+  get getTableData(): any[] {
     if (this.cardContent && this.cardContent.length > 0) {
       return _.map(this.cardContent, i => {
         // const duration = this.durationPipe.transform(i.duration || 0, 'hms') || '0'
@@ -455,34 +405,27 @@ export class MyContentComponent implements OnInit, OnDestroy {
     this.pagination.offset = 0
     this.sideNavBarOpened = false
     const filterIndex = this.filters.findIndex(v => v.displayName === node.displayName)
-    console.log(filterIndex)
     const filterMenuItemsIndex = this.filterMenuItems.findIndex((obj: any) =>
-      obj.values.some((val: any) => val.name == node.type)
+      obj.content.some((val: any) => val.type === node.type),
     )
-    const ind = this.finalFilters.indexOf(this.filterMenuItems[filterMenuItemsIndex].name)
-    console.log('---------------------inx -----------', ind, this.finalFilters)
+    const ind = this.finalFilters.indexOf(this.filterMenuItems[filterMenuItemsIndex].type)
     if (filterIndex === -1 && node.checked) {
       this.filters.push(node)
-      this.filterMenuItems[filterMenuItemsIndex].values.find(
-        (v: any) => v.name === node.displayName ,
+      this.filterMenuItems[filterMenuItemsIndex].content.find(
+        (v: any) => v.displayName === node.displayName,
       ).checked = true
-
 
       if (ind === -1) {
         this.finalFilters.push({
-          key: this.filterMenuItems[filterMenuItemsIndex].name,
+          key: this.filterMenuItems[filterMenuItemsIndex].type,
           value: [node.type],
         })
       } else {
         this.finalFilters[ind].value.push(node.type)
-        // this.finalFilters.push({
-        //   key: node.displayName,
-        //   value: [node.type],
-        // })
       }
     } else {
-      this.filterMenuItems[filterMenuItemsIndex].values.find(
-        (v: any) => v.name === node.displayName,
+      this.filterMenuItems[filterMenuItemsIndex].content.find(
+        (v: any) => v.displayName === node.displayName,
       ).checked = false
       this.filters.splice(filterIndex, 1)
       this.finalFilters.splice(ind, 1)
@@ -601,7 +544,7 @@ export class MyContentComponent implements OnInit, OnDestroy {
     this.finalFilters = defaultFilter
     this.searchInputElem.nativeElement.value = ''
     this.queryFilter = ''
-    this.filterMenuItems.map((val: any) => val.values.map((v: any) => (v.checked = false)))
+    this.filterMenuItems.map((val: any) => val.content.map((v: any) => (v.checked = false)))
     this.dataSource.data = this.filterMenuItems
     this.filters = []
     this.fetchContent(false)
@@ -754,7 +697,6 @@ export class MyContentComponent implements OnInit, OnDestroy {
   }
 
   action(event: { data: NSContent.IContentMeta; type: string }) {
-    console.log('-------------action-------------', event.data, event.data.identifier)
     switch (event.type) {
       case 'create':
         this.createContent(event.data)
@@ -798,5 +740,8 @@ export class MyContentComponent implements OnInit, OnDestroy {
 
   setCurrentLanguage(lang: string) {
     this.searchLanguage = lang
+  }
+  get isAllowed() {
+    return this.accessService.hasRole(['admin', 'super-admin', 'content-admin', 'editor', 'author', 'content-creator'])
   }
 }

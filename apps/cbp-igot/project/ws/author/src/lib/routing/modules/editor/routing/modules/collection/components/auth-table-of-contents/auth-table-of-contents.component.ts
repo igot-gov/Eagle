@@ -9,10 +9,9 @@ import { NotificationComponent } from '@ws/author/src/lib/modules/shared/compone
 import { AuthInitService } from '@ws/author/src/lib/services/init.service'
 import { LoaderService } from '@ws/author/src/lib/services/loader.service'
 import { EditorContentService } from '../../../../../services/editor-content.service'
-import { IContentNode } from '../../interface/icontent-tree'
-import { AuthPickerComponent } from './../../../../../shared/components/auth-picker/auth-picker.component'
-import { IContentTreeNode } from './../../interface/icontent-tree'
-import { CollectionStoreService } from './../../services/store.service'
+import { IContentNode, IContentTreeNode } from '../../interface/icontent-tree'
+import { AuthPickerComponent } from '../../../../../shared/components/auth-picker/auth-picker.component'
+import { CollectionStoreService } from '../../services/store.service'
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout'
 import { map } from 'rxjs/operators'
 import { PickNameComponent } from './pick-name/pick-name.component'
@@ -148,6 +147,9 @@ export class AuthTableOfContentsComponent implements OnInit, OnDestroy {
       this.store.currentSelectedNode = node.id
       this.editorStore.changeActiveCont.next(node.identifier)
       this.action.emit({ type: 'editContent', identifier: node.identifier })
+      this.store.selectedNodeChange.next(node.id)
+      // this.store.selectedNode
+      this.preserveExpandedNodes()
     }
   }
 
@@ -257,20 +259,26 @@ export class AuthTableOfContentsComponent implements OnInit, OnDestroy {
         this.expandedNodes.add(v.id)
       }
     })
+    this.store.expendedNode = this.expandedNodes
   }
 
   expandNodesById(ids?: number[]) {
-    const idSet = ids ? new Set(ids) : this.expandedNodes
-    this.treeControl.dataNodes.forEach(node => {
-      if (idSet.has(node.id)) {
-        this.treeControl.expand(node)
-        let parent = this.getParentNode(node)
-        while (parent) {
-          this.treeControl.expand(parent)
-          parent = this.getParentNode(parent)
+    let idSet = ids ? new Set(ids) : this.expandedNodes
+    if (!idSet || idSet.size === 0) {
+      idSet = this.store.expendedNode
+    }
+    if (this.treeControl.dataNodes && this.treeControl.dataNodes.length > 0) {
+      this.treeControl.dataNodes.forEach(node => {
+        if (idSet.has(node.id)) {
+          this.treeControl.expand(node)
+          let parent = this.getParentNode(node)
+          while (parent) {
+            this.treeControl.expand(parent)
+            parent = this.getParentNode(parent)
+          }
         }
-      }
-    })
+      })
+    }
   }
   /*
    Get the parent node of a node

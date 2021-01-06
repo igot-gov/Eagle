@@ -13,6 +13,8 @@ import { NSIQuality } from '../../../../../../interface/content-quality'
 import { ContentQualityService } from '../../services/content-quality.service'
 import { ConfigurationsService } from '../../../../../../../../../../../library/ws-widget/utils/src/public-api'
 import { ActivatedRoute } from '@angular/router'
+import { AuthInitService } from '../../../../../../services/init.service'
+import { MatSnackBar } from '@angular/material'
 
 @Component({
   selector: 'ws-auth-content-quality',
@@ -42,6 +44,7 @@ export class ContentQualityComponent implements OnInit, OnDestroy, AfterViewInit
   lastQ = false
   displayResult = false
   selectedQIndex = 0
+  minPassPercentage = 10
   /**for side nav */
   mediumScreen = false
   sideBarOpened = false
@@ -63,11 +66,15 @@ export class ContentQualityComponent implements OnInit, OnDestroy, AfterViewInit
     private _configurationsService: ConfigurationsService,
     private breakpointObserver: BreakpointObserver,
     private loaderService: LoaderService,
-    // private authInitService: AuthInitService,
+    private authInitService: AuthInitService,
     private formBuilder: FormBuilder,
-    private _qualityService: ContentQualityService
+    private _qualityService: ContentQualityService,
+    private snackBar: MatSnackBar,
   ) {
     this.getJSON()
+    if (this.authInitService.authAdditionalConfig.contentQuality) {
+      this.minPassPercentage = this.authInitService.authAdditionalConfig.contentQuality.passPercentage
+    }
     this.contentService.changeActiveCont.subscribe(data => {
       // this.currentContent = data.replace('.img', '')
       if (data) {
@@ -333,7 +340,7 @@ export class ContentQualityComponent implements OnInit, OnDestroy, AfterViewInit
         userId: this._configurationsService.userProfile.userId,
         criteriaModels: responses
       }
-      console.log(data)
+      // console.log(data)
 
       this._qualityService.postResponse(data).subscribe(response => {
         if (response) {
@@ -360,5 +367,8 @@ export class ContentQualityComponent implements OnInit, OnDestroy, AfterViewInit
     this.selectedIndex = 0
     this.selectedQIndex = 0
     this.selectedKey = this.questionData[0].type
+  }
+  showMinDialogue() {
+    this.snackBar.open(`To proceed further minimum quality score must be  ${this.minPassPercentage}% or greater`)
   }
 }

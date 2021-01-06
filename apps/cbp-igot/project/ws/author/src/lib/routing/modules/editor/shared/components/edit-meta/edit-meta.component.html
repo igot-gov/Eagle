@@ -652,16 +652,16 @@
                             <span class="mat-body-2">{{license}}</span>
                           </mat-radio-button>
                         </mat-radio-group>
+                        <mat-error *ngIf="showError('license')" i18n>License is mandatory
+                        </mat-error>
                       </ng-container>
-
                       <!-- <mat-select formControlName="license" i18n-placeholder placeholder="--Select--">
                           <mat-option *ngIf="!checkCondition('license', 'required')" i18n [value]="null">None
                           </mat-option>
                           <mat-option *ngFor="let license of ordinals.licenses" [value]="license">
                             {{ license }}</mat-option>
                         </mat-select> -->
-                      <mat-error *ngIf="showError('license')" i18n>License is mandatory
-                      </mat-error>
+
                     </div>
                   </div>
                 </div>
@@ -1421,10 +1421,10 @@
               class="ws-mat-default-text ws-mat-accent-border-active" (click)="data.emit('save')">
               <span class="mat-subheading-2 padding-xs" i18n style="vertical-align: unset;">Save</span>
             </button>
-            <button mat-raised-button type="button" style="line-height: 48px;"
+            <!-- <button mat-raised-button type="button" style="line-height: 48px;"
               class="text-white ws-mat-primary-background margin-left-s" (click)="data.emit('saveAndNext')">
               <span class="mat-subheading-2 padding-xs" i18n style="vertical-align: unset;">Next: Content quality</span>
-            </button>
+            </button> -->
           </div>
         </form>
       </div>

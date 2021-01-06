@@ -83,7 +83,18 @@ export class AddWebPagesComponent implements OnInit, OnDestroy {
     private notificationSvc: NotificationService,
     private webStoreSvc: WebStoreService,
 
-  ) { }
+  ) {
+    this.activeContentSubscription = this.metaContentService.changeActiveCont.subscribe(id => {
+      if (!this.userData[id]) {
+        this.userData[id] = new WebModuleData({})
+        this.webStoreSvc.reset()
+      }
+      this.currentId = id
+      this.webStoreSvc.currentId = id
+      this.webStoreSvc.changeWeb(0)
+      this.changePage(0)
+    })
+  }
 
   ngOnDestroy() {
     if (this.activeContentSubscription) {
@@ -186,16 +197,7 @@ export class AddWebPagesComponent implements OnInit, OnDestroy {
     this.allLanguages = this.authInitService.ordinals.subTitles
     this.loaderService.changeLoadState(true)
     // active lex id
-    this.activeContentSubscription = this.metaContentService.changeActiveCont.subscribe(id => {
-      if (!this.userData[id]) {
-        this.userData[id] = new WebModuleData({})
-        this.webStoreSvc.reset()
-      }
-      this.currentId = id
-      this.webStoreSvc.currentId = id
-      this.webStoreSvc.changeWeb(0)
-      this.changePage(0)
-    })
+
   }
 
   drop(event: CdkDragDrop<string[]>) {

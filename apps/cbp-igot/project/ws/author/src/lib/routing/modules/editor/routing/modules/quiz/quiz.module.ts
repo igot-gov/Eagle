@@ -37,7 +37,6 @@ import { QuizQusetionsComponent } from './components/quiz/quiz-questions/quiz-qu
     DragDropModule,
     QuizRoutingModule,
     AuthViewerModule,
-
   ],
   providers: [QuizStoreService],
   entryComponents: [OpenPlainCkEditorComponent],

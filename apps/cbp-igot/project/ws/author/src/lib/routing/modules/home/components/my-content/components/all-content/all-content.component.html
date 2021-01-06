@@ -53,27 +53,27 @@
         <span class="flex mat-h1 mt-1"> All CBPs</span>
         <div class="flex flex-1 flex-column margin-fix">
           <div class="flex flex-1 filter max-height-60">
-            <a [routerLink]="['/author/cbp/me']" [queryParams]="{ status: 'published' }"
+            <a [routerLink]="['/author/cbp']" [queryParams]="{ status: 'published' }"
               routerLinkActive=" router-link-active" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : status === 'published',
 'ws-mat-accent-border font-medium':status !== 'published'}" mat-button role="button">
               Live {{this.count && this.count['published']? '('+this.count['published']+')': null }}</a>
 
-            <a [routerLink]="['/author/cbp/me']" [queryParams]="{ status: 'publish' }"
+            <a [routerLink]="['/author/cbp']" [queryParams]="{ status: 'publish' }"
               routerLinkActive=" router-link-active" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : status === 'publish',
   'ws-mat-accent-border font-medium':status !== 'publish'}" mat-button role="button">
               Publish {{this.count && this.count['publish']? '('+this.count['publish']+')': null }}</a>
 
-            <a [routerLink]="['/author/cbp/me']" [queryParams]="{ status: 'inreview' }"
+            <a [routerLink]="['/author/cbp']" [queryParams]="{ status: 'inreview' }"
               routerLinkActive="router-link-active" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : status === 'inreview',
                     'ws-mat-accent-border font-medium':status !== 'inreview'}" mat-button role="button">
               Under Review {{ this.count && this.count['inreview']? '('+this.count['inreview']+')': null }}
             </a>
-            <a [routerLink]="['/author/cbp/me']" [queryParams]="{ status: 'draft' }"
-              routerLinkActive="router-link-active" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : status === 'draft',
+            <a [routerLink]="['/author/cbp']" [queryParams]="{ status: 'draft' }" routerLinkActive="router-link-active"
+              class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : status === 'draft',
 'ws-mat-accent-border font-medium':status !== 'draft'}" mat-button role="button">
               Drafts {{this.count && this.count['draft']? '('+this.count['draft']+')': null}}
             </a>
-            <a [routerLink]="['/author/cbp/me']" [queryParams]="{ status: 'unpublished' }"
+            <a [routerLink]="['/author/cbp']" [queryParams]="{ status: 'unpublished' }"
               routerLinkActive="router-link-active" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : status === 'unpublished',
 'ws-mat-accent-border font-medium':status !== 'unpublished'}" mat-button role="button">
               Inactive {{this.count && this.count['unpublished']? '('+this.count['unpublished']+')': null}}
@@ -150,13 +150,14 @@
           </div>
           <div class="flex flex-1 flex-row-reverse margin-right-xs">
             <div class="block">
-              <button mat-button class="text-white ws-mat-primary-background"
+              <button mat-button class="text-white ws-mat-primary-background" *ngIf="isAllowed"
                 (click)="createNewComponent()">Create</button>
             </div>
           </div>
         </div>
-        <div *ngIf="cardContent" class="flex flex-wrapped flex-dynamic margin-xs">
-          <ws-widget-table-card-content class="flex-1" [widgetData]="tableData" [data]="getTableData()"
+        <div *ngIf="courseTaken.mandatoryCourseCompleted && cardContent && getTableData && getTableData.length>0"
+          class="flex flex-wrapped flex-dynamic margin-xs">
+          <ws-widget-table-card-content class="flex-1" [widgetData]="tableData" [data]="getTableData"
             (actionsClick)="actionClick($event)">
           </ws-widget-table-card-content>
         </div>
@@ -181,7 +182,6 @@
           succesful
           content. This course is mandatory for all the content providers who wish to contribute content to iGOT
           Karmayogi.
-
         </span>
         <div class="flex flex-column margin-xs padding-xs">
           <ng-container *ngFor="let res of resourses">
@@ -192,6 +192,7 @@
             </ng-container>
           </ng-container>
         </div>
+
       </mat-sidenav-content>
     </mat-sidenav-container>
   </mat-sidenav-content>
