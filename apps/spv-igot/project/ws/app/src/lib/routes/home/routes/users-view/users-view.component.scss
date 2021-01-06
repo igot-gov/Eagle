@@ -281,3 +281,13 @@ a:not([href]):not([tabindex]) {
 .no-shadow {
   box-shadow: none !important;
 }
+
+::ng-deep#usercs  {
+  .mat-card-header-text {
+    display: none !important;
+    margin: 0 !important;
+  }
+  .flex-1{
+    outline: none !important;
+  }
+}

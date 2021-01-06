@@ -607,7 +607,7 @@ $title-line-count: 2;
 
 .textclass {
   word-break: break-word;
-  margin: 5px;
+  // margin: 5px;
   cursor: pointer;
   // word-break: break-all;
 }
@@ -629,14 +629,27 @@ $title-line-count: 2;
 }
 
 .sinput {
-  width: 22%;
+  width: 24%;
   border-radius: 4px;
   border: 1px solid #d5d0d0;
-  padding: 12px;
+  padding: 4px 8px 8px;
   margin-bottom: 20px;
   margin-top: 10px;
   min-height: 20px;
+
+  .material-icons {
+    vertical-align: bottom;
+    font-size: 20px;
+    margin-right: 7px;
+  }
+
+  input {
+    border: 0 !important;
+    width: 84%;
+    outline: none !important;
+  }
 }
+
 .titleclass{
   text-align: center;
 }
@@ -649,12 +662,14 @@ $title-line-count: 2;
 .action-btn{
   border: none;
   background: transparent;
+  width: auto !important;
 }
 
-mat-header-row{
+.mat-header-row{
   min-height: 40px;
 }
 
 .mat-header-cell{
   background-color: #F5F5F5;
+  font-size: 14px;
 }

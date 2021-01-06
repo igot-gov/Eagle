@@ -10,18 +10,16 @@
                 <span class="searchText">Search:</span>
             </div> -->
             <div class=rsearch>
-                <input class="sinput" type="Standard" label="" (input)="applyFilter($event.target.value)"
-                    placeholder="Search">
+                <div class="sinput">
+                    <span class="material-icons"> search </span>
+                    <input type="Standard" label="" (input)="applyFilter($event.target.value)" placeholder="Search">
+                </div>
             </div>
             <button mat-raised-button type="button"
-                class="text-white ws-mat-primary-background text-white margin-right-m" (click)="gotoCreateNew()">
+                class="text-white ws-mat-primary-background text-white margin-right-m custom-btn" (click)="gotoCreateNew()">
                 <b class="text-white" i18n>Create New</b>
             </button>
         </div>
-
-
-
-
 
         <!-- </mat-form-field> -->
         <mat-table #table matSort [ngStyle]="{'height': bodyHeight}" [matSortActive]="tableData!.sortColumn"
