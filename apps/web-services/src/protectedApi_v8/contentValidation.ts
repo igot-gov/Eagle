@@ -113,6 +113,7 @@ contentValidationApi.get('/getPdfProfanityForContent/:contentId', async (req, re
         const contentId = req.params.contentId
         const response = await axios.get(API_END_POINTS.getPdfProfanityForContent(contentId), {
             ...axiosRequestConfig,
+            headers: { 'Content-Type': 'application/json' },
         })
         res.status(response.status).send(response.data)
     } catch (err) {
