@@ -81,19 +81,23 @@ export class ContentQualityService {
   }
 
   downloadFile(url: string, name: string) {
-    var a = window.document.createElement("a")
+    const a = window.document.createElement('a')
     a.href = url
     a.download = name
     document.body.appendChild(a)
-    a.click() // IE: "Access is denied"; see: https://connect.microsoft.com/IE/feedback/details/797361/ie-10-treats-blob-url-as-cross-origin-and-denies-access
+    a.click() // IE: "Access is denied";
+    // see: https://connect.microsoft.com/IE/feedback/details/797361/ie-10-treats-blob-url-as-cross-origin-and-denies-access
     document.body.removeChild(a)
   }
 
   s2ab(s: any) {
     const buf = new ArrayBuffer(s.length)
     const view = new Uint8Array(buf)
-    for (let i = 0; i !== s.length; ++i)
+    for (let i = 0; i !== s.length; i += 1) {
+      /* tslint:disable */
       view[i] = s.charCodeAt(i) & 0xFF
+      /* tslint:enable */
+    }
     return buf
   }
 
@@ -103,31 +107,25 @@ export class ContentQualityService {
       let ws = null
       if (!needseprate) {
         ws = XLSX.utils.json_to_sheet(data)
-
         wb.SheetNames.push(name || '')
         wb.Sheets[name || ''] = ws
       } else {
-        for (var i = 0; i < Object.keys(data).length; i++) {
+        for (let i = 0; i < Object.keys(data).length; i += 1) {
           ws = XLSX.utils.json_to_sheet(data[Object.keys(data)[i]])
           wb.SheetNames.push(Object.keys(data)[i])
           // wb.SheetNames.push(data[i][0].name)
           wb.Sheets[Object.keys(data)[i]] = ws
         }
       }
-
       const wbout = XLSX.write(wb, {
         bookType: 'xlsx',
         bookSST: true,
-        type: 'binary'
+        type: 'binary',
       })
-
-
-      let url = window.URL.createObjectURL(new Blob([this.s2ab(wbout)], {
-        type: 'application/octet-stream'
+      const url = window.URL.createObjectURL(new Blob([this.s2ab(wbout)], {
+        type: 'application/octet-stream',
       }))
-
       this.downloadFile(url, `${name}.xlsx`)
     })
-
   }
 }

@@ -81,7 +81,7 @@ export class ContentSummaryComponent implements OnInit, OnDestroy {
   //   })
   // }
   download() {
-    let data = _.map(this.contentQualityData.criteriaModels, ii => ii.qualifiers)
+    const data = _.map(this.contentQualityData.criteriaModels, ii => ii.qualifiers)
     this.cqs.getFile({ ...data }, `Content-Quality-Report`, true)
   }
   ngOnDestroy(): void {

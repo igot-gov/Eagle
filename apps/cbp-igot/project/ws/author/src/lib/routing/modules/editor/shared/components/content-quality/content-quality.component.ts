@@ -224,7 +224,7 @@ export class ContentQualityComponent implements OnInit, OnDestroy, AfterViewInit
   }
 
   download() {
-    let data = _.map(this.qualityResponse.criteriaModels, ii => ii.qualifiers)
+    const data = _.map(this.qualityResponse.criteriaModels, ii => ii.qualifiers)
     this._qualityService.getFile({ ...data }, `Content-Quality-Report`, true)
   }
   start() {
