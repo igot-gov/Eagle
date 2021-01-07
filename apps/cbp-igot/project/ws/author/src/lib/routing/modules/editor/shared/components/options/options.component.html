@@ -60,6 +60,26 @@
         Publish
       </p>
     </div>
+    <!-- <div class="new-style-grid cursor-pointer ws-primary-background" (click)="action.emit('unpublish');"
+      *ngIf="getAction() === 'unpublish'">
+      <button mat-icon-button
+        class="ws-primary-background mat-elevation-z5 small-button ws-mat-auth-tool-option margin-top-m mat-app-background settings">
+        <mat-icon class="text-white small-icon ws-mat-primary-text">reply</mat-icon>
+      </button>
+      <p class="mat-h5 margin-remove button-text">
+        Unpublish content
+      </p>
+    </div>
+    <div class="new-style-grid cursor-pointer ws-primary-background" (click)="action.emit('moveToDraft');"
+      *ngIf="getAction() === 'moveToDraft'">
+      <button mat-icon-button
+        class="ws-primary-background mat-elevation-z5 small-button ws-mat-auth-tool-option margin-top-m mat-app-background settings">
+        <mat-icon class="text-white small-icon ws-mat-primary-text">reply</mat-icon>
+      </button>
+      <p class="mat-h5 margin-remove button-text">
+        Recall content to draft
+      </p>
+    </div> -->
     <div *ngIf="canDelete()" class="new-style-grid cursor-pointer ws-primary-background"
       (click)="action.emit('delete')">
       <button mat-icon-button

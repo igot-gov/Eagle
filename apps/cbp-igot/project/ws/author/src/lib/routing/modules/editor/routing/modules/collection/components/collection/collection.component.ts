@@ -678,6 +678,7 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
       case 'close':
         this.router.navigateByUrl('/author/cbp/me')
         break
+
     }
   }
 

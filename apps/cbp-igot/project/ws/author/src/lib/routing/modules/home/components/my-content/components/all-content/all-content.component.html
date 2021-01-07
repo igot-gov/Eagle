@@ -157,8 +157,8 @@
         </div>
         <div *ngIf="courseTaken.mandatoryCourseCompleted && cardContent && getTableData && getTableData.length>0"
           class="flex flex-wrapped flex-dynamic margin-xs">
-          <ws-widget-table-card-content class="flex-1" [widgetData]="tableData" [data]="getTableData"
-            (actionsClick)="actionClick($event)">
+          <ws-widget-table-card-content class="flex-1" [userRoles]="myRoles" [userId]="userId" [widgetData]="tableData"
+            [data]="getTableData" (actionsClick)="action($event)">
           </ws-widget-table-card-content>
         </div>
         <div class="text-right margin-right-xxl margin-bottom-m" *ngIf="showLoadMore">

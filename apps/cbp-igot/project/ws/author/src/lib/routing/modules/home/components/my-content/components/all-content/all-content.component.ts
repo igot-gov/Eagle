@@ -23,7 +23,7 @@ import { LoaderService } from '@ws/author/src/lib/services/loader.service'
 import { Subscription } from 'rxjs'
 import { MyContentService } from '../../services/my-content.service'
 import { map } from 'rxjs/operators'
-import { PipeDurationTransformPipe, ValueService } from '@ws-widget/utils'
+import { ConfigurationsService, PipeDurationTransformPipe, ValueService } from '@ws-widget/utils'
 
 /* tslint:disable */
 import _ from 'lodash'
@@ -66,6 +66,7 @@ export class AllContentComponent implements OnInit, OnDestroy {
   searchLanguage = ''
   public pagination!: IAuthoringPagination
   userId!: string
+  myRoles!: Set<string>
   totalContent!: number
   showLoadMore!: boolean
   routerSubscription = <Subscription>{}
@@ -112,8 +113,11 @@ export class AllContentComponent implements OnInit, OnDestroy {
     private authInitService: AuthInitService,
     // private durationPipe: PipeDurationTransformPipe,
     private valueSvc: ValueService,
+    private configService: ConfigurationsService,
   ) {
-
+    if (this.configService.userRoles) {
+      this.myRoles = this.configService.userRoles
+    }
     this.filterMenuTreeControl = new FlatTreeControl<IMenuFlatNode>(
       node => node.levels,
       node => node.expandable,
