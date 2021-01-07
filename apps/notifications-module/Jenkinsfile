@@ -41,7 +41,8 @@ node() {
    				 def scannerHome = tool 'sonar_scanner';
    				 withSonarQubeEnv('sonarqube') {
     					   sh '''
-                   cd $docker_file_path && pwd && /var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonar_scanner/bin/sonar-scanner
+                   cd $docker_file_path && mvn clean package sonar:sonar -DskipTests  
+                  
                  '''
     			 }
   	}
