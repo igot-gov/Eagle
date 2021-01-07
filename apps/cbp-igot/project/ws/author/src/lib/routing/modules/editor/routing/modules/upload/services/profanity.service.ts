@@ -18,7 +18,9 @@ export class ProfanityService {
   startProfanity(content: string, url: string, fileName: string) {
     const finalUrl = url.replace('?type=main', '')
     const finalFileName = this.getFileName(url)
-    fileName = fileName
+    if (fileName) {
+      // will remove
+    }
     // if (fileName && finalFileName) {
     const requestData = {
       fileName: finalFileName,
