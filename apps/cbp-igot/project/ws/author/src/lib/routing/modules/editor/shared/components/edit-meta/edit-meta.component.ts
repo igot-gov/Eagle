@@ -50,7 +50,7 @@ import {
 import { CompetenceService } from '../../services/competence.service'
 import { NSCompetencie } from '../../../../../../interface/competencies.model'
 import { CompetenceViewComponent } from './competencies-view/competencies-view.component'
-import {  AddThumbnailComponent } from '../../../shared/components/add-thumbnail/add-thumbnail.component'
+import { AddThumbnailComponent } from '../../../shared/components/add-thumbnail/add-thumbnail.component'
 
 // import { NsWidgetResolver } from '@ws-widget/resolver'
 // import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper'
@@ -253,9 +253,9 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  addImage(){
+  addImage() {
     this.dialog.open<AddThumbnailComponent>(AddThumbnailComponent)
- }
+  }
 
   ngAfterViewInit() {
     this.ref.detach()
@@ -1258,6 +1258,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       certificationUrl: [],
       clients: [],
       complexityLevel: [],
+      difficultyLevel: [],
       concepts: [],
       contentIdAtSource: [],
       contentType: [],
@@ -1311,14 +1312,16 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       sampleCertificates: [],
       skills: [],
       softwareRequirements: [],
-      sourceName: [],
+      // sourceName: [],
+      source: [],
       creatorLogo: [],
       creatorPosterImage: [],
       creatorThumbnail: [],
       status: [],
       // studyDuration: [],
       studyMaterials: [],
-      subTitle: [],
+      // subTitle: [],
+      purpose: '',
       subTitles: [],
       systemRequirements: [],
       thumbnail: [],
@@ -1327,6 +1330,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       unit: [],
       verifiers: [],
       visibility: [],
+      instructions: '',
       versionKey: '',
     })
 

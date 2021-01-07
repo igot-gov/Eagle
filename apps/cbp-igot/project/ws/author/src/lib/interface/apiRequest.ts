@@ -64,6 +64,7 @@ export namespace NSApiRequest {
         creator?: string
         primaryCategory: string
         isExternal: boolean
+        license: string
       }
     }
   }

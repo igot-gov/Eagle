@@ -28,7 +28,17 @@ import { PipeDurationTransformPipe, ValueService } from '@ws-widget/utils'
 /* tslint:disable */
 import _ from 'lodash'
 import { ILeftMenu, ITable } from '@ws-widget/collection'
+import { PipeContentTypePipe } from '../../../../../../../../../../../../library/ws-widget/utils/src/lib/pipes/pipe-content-type/pipe-content-type.pipe'
 /* tslint:enable */
+
+const defaultFilter = [
+  {
+    key: 'contentType',
+    value: [
+      'Collection', 'Course', 'Learning Path',
+    ],
+  },
+]
 @Component({
   selector: 'ws-auth-my-content',
   templateUrl: './my-content.component.html',
@@ -51,7 +61,7 @@ export class MyContentComponent implements OnInit, OnDestroy {
   contentType: string[] = []
   complexityLevel: string[] = []
   unit: string[] = []
-  finalFilters: any = []
+  finalFilters: any = defaultFilter
   allLanguages: any[] = []
   searchLanguage = ''
   public pagination!: IAuthoringPagination
@@ -74,7 +84,8 @@ export class MyContentComponent implements OnInit, OnDestroy {
   leftmenues!: ILeftMenu
   public filterMenuItems: any = []
   /* tslint:disable */
-  courseTaken = true  // this.activatedRoute.snapshot.data.courseTaken.data
+  courseTaken = this.activatedRoute.snapshot.data.courseTaken.data
+  resourses: any
   dataSource: any
   hasChild = (_: number, node: IMenuFlatNode) => node.expandable
 
@@ -102,7 +113,9 @@ export class MyContentComponent implements OnInit, OnDestroy {
     // private durationPipe: PipeDurationTransformPipe,
     private valueSvc: ValueService,
   ) {
-
+    this.courseTaken = {
+      mandatoryCourseCompleted: true
+    }
     this.filterMenuTreeControl = new FlatTreeControl<IMenuFlatNode>(
       node => node.levels,
       node => node.expandable,
@@ -130,9 +143,13 @@ export class MyContentComponent implements OnInit, OnDestroy {
       this.leftmenues = this.authInitService.authAdditionalConfig.menus
     }
     this.isAdmin = this.accessService.hasRole(['admin', 'super-admin', 'content-admin', 'editor'])
-    if (this.courseTaken) {
-      this.initCardTable()
-    }
+    // if (this.courseTaken.mandatoryCourseCompleted) {
+    this.initCardTable()
+    // } else {
+    //   this.resourses = _.map(this.courseTaken.contentDetails, (v, k) => {
+    //     return { key: k, ...v }
+    //   })
+    // }
   }
 
   initCardTable() {
@@ -144,9 +161,9 @@ export class MyContentComponent implements OnInit, OnDestroy {
           defaultValue: 'Untitled Content',
           image: 'appIcon',
         },
-        { displayName: 'Kind', key: 'contentType', isList: false, prop: '', defaultValue: 'NA' },
+        { displayName: 'Kind', key: 'contentType', isList: false, prop: '', defaultValue: 'NA', pipe: PipeContentTypePipe },
         { displayName: 'Active users', key: 'uniqueUsersCount', isList: false, prop: '', defaultValue: 0 },
-        { displayName: 'Duration', key: 'duration', defaultValue: 0 },
+        { displayName: 'Duration', key: 'duration', defaultValue: 0, pipe: PipeDurationTransformPipe },
       ], //  :> this will load from json
       actions: [], // :> this will load from json
       needCheckBox: false,
@@ -319,7 +336,14 @@ export class MyContentComponent implements OnInit, OnDestroy {
         facets: [
           "primaryCategory",
           "mimeType"
-        ]
+        ],
+        pageNo: loadMoreFlag ? this.pagination.offset : 0,
+        sort: [{ lastUpdatedOn: 'desc' }],
+        pageSize: this.pagination.limit,
+        uuid: this.userId,
+        rootOrg: this.accessService.rootOrg,
+        // this is for Author Only
+        isUserRecordEnabled: true,
       },
     }
     if (this.finalFilters.length) {
@@ -435,7 +459,7 @@ export class MyContentComponent implements OnInit, OnDestroy {
     const filterMenuItemsIndex = this.filterMenuItems.findIndex((obj: any) =>
       obj.values.some((val: any) => val.name == node.type)
     )
-    const ind =  this.finalFilters.indexOf(this.filterMenuItems[filterMenuItemsIndex].name) ;
+    const ind = this.finalFilters.indexOf(this.filterMenuItems[filterMenuItemsIndex].name)
     console.log('---------------------inx -----------', ind, this.finalFilters)
     if (filterIndex === -1 && node.checked) {
       this.filters.push(node)
@@ -574,7 +598,7 @@ export class MyContentComponent implements OnInit, OnDestroy {
   }
 
   clearAllFilters() {
-    this.finalFilters = []
+    this.finalFilters = defaultFilter
     this.searchInputElem.nativeElement.value = ''
     this.queryFilter = ''
     this.filterMenuItems.map((val: any) => val.values.map((v: any) => (v.checked = false)))
@@ -730,7 +754,7 @@ export class MyContentComponent implements OnInit, OnDestroy {
   }
 
   action(event: { data: NSContent.IContentMeta; type: string }) {
-    console.log('-------------action-------------',event.data,event.data.identifier)
+    console.log('-------------action-------------', event.data, event.data.identifier)
     switch (event.type) {
       case 'create':
         this.createContent(event.data)

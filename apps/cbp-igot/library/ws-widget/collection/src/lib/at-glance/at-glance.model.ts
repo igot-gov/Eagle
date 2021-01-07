@@ -1,12 +1,14 @@
 export namespace IAtGlanceComponentData {
   export interface IData {
     displayName: string
+    buttonName?: string
     contentType: string
     cost: string
     lastUpdate: string
     duration: string
     contentId: string,
     counts: ICounts
+    customLink?: string
   }
 
   export interface ICounts {

@@ -26,7 +26,7 @@ import { AuthInitService } from '@ws/author/src/lib/services/init.service'
 const PROTECTED_SLAG_V8 = '/apis/protected/v8'
 const API_END_POINTS = {
   // https://d136953gtttd92.cloudfront.net/apis/protected/v8/user/mandatoryContent/checkStatus/60840612-6d85-4fe9-8c91-649ea093ea95
-  MANDATORY_CONTENT: (userId: string) => `${PROTECTED_SLAG_V8}/user/mandatoryContent/checkStatus/${userId}`,
+  MANDATORY_CONTENT: `${PROTECTED_SLAG_V8}/user/mandatoryContent/checkStatus`,
 }
 @Injectable()
 export class MyContentService {
@@ -337,9 +337,9 @@ export class MyContentService {
     return searchV6Body
   }
 
-  getUserCourseDetail(userId: string) {
+  getUserCourseDetail() {
     return this.apiService.get<any>(
-      API_END_POINTS.MANDATORY_CONTENT(userId)
+      API_END_POINTS.MANDATORY_CONTENT
     )
   }
 

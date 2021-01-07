@@ -1,5 +1,5 @@
 import { DeleteDialogComponent } from '@ws/author/src/lib/modules/shared/components/delete-dialog/delete-dialog.component'
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core'
+import { Component, OnInit, OnDestroy, ViewChild, EventEmitter, Output } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { UploadAudioComponent } from '../upload-audio/upload-audio.component'
 import { MatSnackBar } from '@angular/material/snack-bar'
@@ -52,7 +52,7 @@ import { WebStoreService } from '../../services/store.service'
 })
 
 export class WebModuleEditorComponent implements OnInit, OnDestroy {
-
+  @Output() data = new EventEmitter<string>()
   userData: { [key: string]: WebModuleData } = {}
   currentId = ''
   selectedPage = 0

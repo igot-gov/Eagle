@@ -1,6 +1,14 @@
 <mat-card class="flex flex-wrap flex-column at-glance ws-mat-accent-border" tabindex="0">
-  <div class="flex flex-center text-white ws-mat-primary-background cursor-pointer preview-div" *ngIf="widgetData">
-    <a class="preview mat-subheading-2 margin-0" [routerLink]="getPreviewLink()">Preview CBP</a>
+  <div class="flex flex-center cursor-pointer preview-div" *ngIf="widgetData">
+    <a class="preview mat-subheading-2 margin-0 ws-mat-primary-background flex-1" *ngIf="!this.widgetData.customLink"
+      [routerLink]="getPreviewLink">
+      <span class="text-white m-auto"> {{ widgetData.buttonName ? widgetData.buttonName :'Preview CBP'}}</span>
+    </a>
+    <a class="preview mat-subheading-2 margin-0 text-white ws-mat-primary-background flex-1"
+      *ngIf="this.widgetData.customLink" target="_blank" [href]="getCourseLink">
+      <span class="text-white m-auto"> {{ widgetData.buttonName ? widgetData.buttonName :'Start now'}}
+      </span>
+    </a>
   </div>
   <span class="mat-subheading-1 margin-top-s">{{widgetData.displayName}}</span>
   <div class="flex flex-1 flex-column" *ngIf="widgetData">
@@ -37,6 +45,10 @@
     <span *ngIf="widgetData.counts.video > 0" class="flex margin-top-xs margin-bottom-xs">
       <mat-icon class="ws-mat-black40-text margin-right-s">play_circle_filled</mat-icon>{{widgetData.counts.video}}
       Videos
+    </span>
+    <span *ngIf="widgetData.counts.podcast > 0" class="flex margin-top-xs margin-bottom-xs">
+      <mat-icon class="ws-mat-black40-text margin-right-s">audiotrack</mat-icon>{{widgetData.counts.podcast}}
+      Audios
     </span>
     <span *ngIf="widgetData.counts.pdf > 0" class="flex margin-top-xs margin-bottom-xs">
       <mat-icon class="ws-mat-black40-text margin-right-s">picture_as_pdf</mat-icon>{{widgetData.counts.pdf}} PDFs

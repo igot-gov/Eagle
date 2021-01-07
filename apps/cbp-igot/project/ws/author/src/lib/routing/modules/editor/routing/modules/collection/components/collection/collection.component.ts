@@ -27,6 +27,8 @@ import { NotificationService } from '@ws/author/src/lib/services/notification.se
 import { AccessControlService } from '@ws/author/src/lib/modules/shared/services/access-control.service'
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout'
 import { isNumber } from 'lodash'
+import { ContentQualityService } from '../../../../../shared/services/content-quality.service'
+import { ConfigurationsService } from '../../../../../../../../../../../../../library/ws-widget/utils/src/public-api'
 
 /**
  * @description
@@ -90,6 +92,8 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
     private notificationSvc: NotificationService,
     private accessControlSvc: AccessControlService,
     private breakpointObserver: BreakpointObserver,
+    private _qualityService: ContentQualityService,
+    private _configurationsService: ConfigurationsService,
   ) {
     this.selectedIndex = 0
   }
@@ -154,6 +158,7 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
       this.mediumScreen = isLtMedium
       this.sideBarOpened = !isLtMedium
     })
+    // this.currentParentId
   }
   ngAfterViewInit(): void {
     if (this.tabGroup) {
@@ -303,29 +308,58 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
 
   takeAction() {
     this.isSubmitPressed = true
-    const needSave = Object.keys(this.contentService.upDatedContent || {}).length
-    if (!needSave && !this.isChanged) {
-      this.snackBar.openFromComponent(NotificationComponent, {
-        data: {
-          type: Notify.UP_TO_DATE,
-        },
-        duration: NOTIFICATION_TIME * 1000,
-      })
-      return
-    }
-    if (this.validationCheck) {
-      const dialogRef = this.dialog.open(CommentsDialogComponent, {
-        width: '750px',
-        height: '450px',
-        data: this.contentService.getOriginalMeta(this.currentParentId),
-      })
+    // const needSave = Object.keys(this.contentService.upDatedContent || {}).length
+    // if (!needSave && !this.isChanged) {
+    //   this.snackBar.openFromComponent(NotificationComponent, {
+    //     data: {
+    //       type: Notify.UP_TO_DATE,
+    //     },
+    //     duration: NOTIFICATION_TIME * 1000,
+    //   })
+    //   return
+    // }
+    if (this.validationCheck && this._configurationsService.userProfile) {
+      const reqObj = {
+        resourceId: this.currentContent,
+        resourceType: 'content',
+        userId: this._configurationsService.userProfile.userId,
+        getLatestRecordEnabled: true,
+      }
+      this._qualityService.fetchresult(reqObj).subscribe((result: any) => {
+        if (result && result.result && result.result.resources) {
+          const rse = result.result.resources || []
+          if (rse.length === 1) {
+            const qualityScore = rse[0]
+            if (qualityScore) {
+              if (qualityScore) {
+                const score = (qualityScore.finalTotalScore / qualityScore.finalMaxScore) * 100
+                let minPassPercentage = 20
+                if (this.initService.authAdditionalConfig.contentQuality) {
+                  minPassPercentage = this.initService.authAdditionalConfig.contentQuality.passPercentage
+                }
+                if (score >= minPassPercentage) {
+                  /** final call */
+                  const dialogRef = this.dialog.open(CommentsDialogComponent, {
+                    width: '750px',
+                    height: '450px',
+                    data: this.contentService.getOriginalMeta(this.currentParentId),
+                  })
 
-      dialogRef.afterClosed().subscribe((commentsForm: FormGroup) => {
-        this.finalCall(commentsForm)
+                  dialogRef.afterClosed().subscribe((commentsForm: FormGroup) => {
+                    this.finalCall(commentsForm)
+                  })
+                  /** final call */
+                } else {
+                  this.snackBar.open(`To proceed further minimum quality score must be  ${minPassPercentage}% or greater`)
+                }
+              }
+            }
+
+          }
+        }
       })
     }
   }
-
   finalCall(commentsForm: FormGroup) {
     if (commentsForm) {
       const body: NSApiRequest.IForwardBackwardActionGeneral = {
@@ -524,20 +558,6 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
       if (requestBody.request.content.duration) {
         requestBody.request.content.duration = (isNumber(requestBody.request.content.duration) ? `${requestBody.request.content.duration}` : requestBody.request.content.duration)
       }
-      if (requestBody.request.content.subTitle) {
-        delete requestBody.request.content.subTitle
-      }
-      if (requestBody.request.content.sourceName) {
-        requestBody.request.content.source = requestBody.request.content.sourceName
-        delete requestBody.request.content.sourceName
-      }
-      if (requestBody.request.content.complexityLevel) {
-        requestBody.request.content.difficultyLevel = requestBody.request.content.complexityLevel
-        delete requestBody.request.content.complexityLevel
-      }
-      if (requestBody.request.content.learningMode) {
-        requestBody.request.content.learningMode = requestBody.request.content.learningMode.split('-').join(' ')
-      }
       return this.editorService.updateContentV3(requestBody, Object.keys(this.contentService.upDatedContent)[0]).pipe(
         tap(() => {
           this.storeService.changedHierarchy = {}
@@ -624,7 +644,7 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
   setVeiwMetaByType(content: NSContent.IContentMeta) {
     if (['application/pdf', 'application/x-mpegURL'].includes(content.mimeType)) {
       this.viewMode = 'upload'
-    } else if (content.mimeType === 'application/html' && !content.isExternal) {
+    } else if ((content.mimeType === 'application/html' && !content.isExternal) || content.mimeType === 'audio/mpeg') {
       this.viewMode = 'upload'
     } else if (content.mimeType === 'application/html') {
       this.viewMode = 'curate'
@@ -695,7 +715,7 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
             if (this.contents.length) {
               this.contentService.changeActiveCont.next(this.contents[0].identifier)
             } else {
-              this.router.navigateByUrl('/author')
+              this.router.navigateByUrl('/author/cbp/me')
             }
           }
         })
@@ -707,7 +727,7 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
         break
 
       case 'close':
-        this.router.navigateByUrl('/author')
+        this.router.navigateByUrl('/author/cbp/me')
         break
     }
   }

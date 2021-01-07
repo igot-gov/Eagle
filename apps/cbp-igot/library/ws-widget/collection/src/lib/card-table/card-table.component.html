@@ -1,4 +1,4 @@
-<div class="example-container">
+<div class="example-container" *ngIf="widgetData">
   <!-- [ngClass]="{'mat-elevation-z8': display === 'table'}" -->
   <div class="example-table-container">
     <ng-container *ngIf="display === 'table'; else card">
@@ -38,8 +38,11 @@
             <img class="small-list-logo margin-xs" *ngIf="col.image && element[col.image]" [src]="element[col.image]"
               (error)="changeToDefaultImg($event)" [alt]="element[col.key]" />
 
-            <span *ngIf="!col.isList && !col.link" class="textclass mat-body-2">
+            <span *ngIf="!col.isList && !col.link && !col.pipe" class="textclass mat-body-2">
               {{element[col.key]}}
+            </span>
+            <span *ngIf="!col.isList && !col.link && col.pipe" class="textclass mat-body-2">
+              {{element[col.key] | metaPipe:[col.pipe] }}
             </span>
 
             <a *ngIf="col.link" [routerLink]="col.link.path+element[col.link.dParams]"
@@ -93,7 +96,9 @@
   <!-- <mat-paginator [length]="5" [pageSize]="10" [pageSizeOptions]="[5, 10, 25]">
     </mat-paginator> -->
 </div>
-
+<div class="example-container" *ngIf="!widgetData">
+  <h3>No data</h3>
+</div>
 
 <ng-template #card>
   <mat-card class="example-card padding-0 no-box-shadow">

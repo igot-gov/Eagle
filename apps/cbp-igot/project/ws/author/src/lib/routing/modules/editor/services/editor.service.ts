@@ -84,6 +84,7 @@ export class EditorService {
           organisation: [environment.organisation],
           isExternal: meta.mimeType === 'application/html',
           primaryCategory: meta.primaryCategory,
+          license: 'CC BY 4.0'
         },
       }
     }
@@ -118,6 +119,16 @@ export class EditorService {
     )
   }
 
+  readcontentV3(id: string): Observable<NSContent.IContentMeta> {
+    return this.apiService.get<NSContent.IContentMeta>(
+      `/apis/proxies/v8/action/content/v3/hierarchy/${id}?mode=edit`
+    ).pipe(
+      map((data: any) => {
+        return data.result.content
+      })
+    )
+  }
+
   readMultipleContent(ids: string[]): Observable<NSContent.IContentMeta[]> {
     return this.apiService.get<NSContent.IContentMeta>(
       `${CONTENT_READ_MULTIPLE_HIERARCHY}${ids.join()}`,
@@ -125,7 +136,7 @@ export class EditorService {
   }
 
   createAndReadContent(
-    meta: NSApiRequest.ICreateMetaRequestGeneral,
+    meta: any, // NSApiRequest.ICreateMetaRequestGeneral to enable top-bottom Aproach
   ): Observable<NSContent.IContentMeta> {
     return this.create(meta).pipe(mergeMap(data => this.readContent(data)))
   }

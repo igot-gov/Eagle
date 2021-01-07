@@ -10,6 +10,7 @@ export interface IColums {
     sParams?: string
   }
   defaultValue: any
+  pipe?: any
 }
 export interface IAction {
   name: String

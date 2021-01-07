@@ -1,5 +1,6 @@
 <div class="flex flex-1 padding-xs margin-left-l">
-  <a class="mat-title ws-mat-black60-text" [routerLink]="'/author/my-content'"><span>All CBPs</span></a>
+  <a href="javascript:void(0)" class="mat-title ws-mat-black60-text cursor-pointer" (click)="back()"><span>All
+      CBPs</span></a>
   <mat-icon>chevron_right</mat-icon>
   <span class="mat-title">{{toc.contentTitle | async}}</span>
 </div>

@@ -70,9 +70,9 @@ export class PipeDurationTransformPipe implements PipeTransform {
 
   defaultDuration(h: number, m: number, s: number) {
     let duration = ''
-    duration += h > 0 ? `${h.toString().padStart(2)}:` : ''
-    duration += m > 0 ? `${m.toString().padStart(2)}:` : '00:'
-    duration += s > 0 ? s.toString().padStart(2) : '00'
+    duration += h > 0 ? `${h.toString().padStart(2)} h : ` : ''
+    duration += m > 0 ? `${m.toString().padStart(2)} m : ` : '00 m : '
+    duration += s > 0 ? `${s.toString().padStart(2)} s` : '00 s'
     return duration
   }
 
