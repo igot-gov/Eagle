@@ -64,8 +64,12 @@ export class ContentSummaryComponent implements OnInit, OnDestroy {
         this.cqs.fetchresult(params).subscribe(response => {
           if (response && _.get(response, 'result')) {
             this.contentQualityData = this.cqs.getScore(data)
-            this.contentQualityPercent =
-              ((this.contentQualityData.finalTotalScore / this.contentQualityData.finalMaxScore) * 100).toFixed(2)
+            if (this.contentQualityData && this.contentQualityData.finalTotalScore && this.contentQualityData.finalMaxScore) {
+              this.contentQualityPercent =
+                ((this.contentQualityData.finalTotalScore / this.contentQualityData.finalMaxScore) * 100).toFixed(2)
+            } else {
+              this.contentQualityPercent = "0"
+            }
           }
         })
       }
