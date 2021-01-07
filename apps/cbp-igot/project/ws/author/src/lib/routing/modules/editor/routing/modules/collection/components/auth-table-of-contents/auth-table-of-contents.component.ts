@@ -13,8 +13,11 @@ import { IContentNode, IContentTreeNode } from '../../interface/icontent-tree'
 import { AuthPickerComponent } from '../../../../../shared/components/auth-picker/auth-picker.component'
 import { CollectionStoreService } from '../../services/store.service'
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout'
-import { map } from 'rxjs/operators'
+import { map, tap } from 'rxjs/operators'
 import { PickNameComponent } from './pick-name/pick-name.component'
+import { NSApiRequest } from '../../../../../../../../interface/apiRequest'
+import { EditorService } from '@ws/author/src/lib/routing/modules/editor/services/editor.service'
+import { isNumber } from 'lodash'
 @Component({
   selector: 'ws-auth-table-of-contents',
   templateUrl: './auth-table-of-contents.component.html',
@@ -51,6 +54,7 @@ export class AuthTableOfContentsComponent implements OnInit, OnDestroy {
     .observe([Breakpoints.XSmall, Breakpoints.Small])
     .pipe(map((res: BreakpointState) => res.matches))
   leftarrow = true
+  currentContent!: string
   constructor(
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
@@ -59,6 +63,7 @@ export class AuthTableOfContentsComponent implements OnInit, OnDestroy {
     private loaderService: LoaderService,
     private authInitService: AuthInitService,
     private breakpointObserver: BreakpointObserver,
+    private editorService: EditorService,
   ) { }
 
   private _transformer = (node: IContentNode, level: number): IContentTreeNode => {
@@ -76,6 +81,9 @@ export class AuthTableOfContentsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.editorStore.changeActiveCont.subscribe(data => {
+      this.currentContent = data
+    })
     this.parentNodeId = this.store.currentParentNode
     if (this.parentNodeId) {
       this.treeControl = new FlatTreeControl<IContentTreeNode>(
@@ -382,6 +390,9 @@ export class AuthTableOfContentsComponent implements OnInit, OnDestroy {
           'below',
           v.name
         )
+        if (isDone) {
+          this.triggerSave().subscribe()
+        }
         this.snackBar.openFromComponent(NotificationComponent, {
           data: {
             type: isDone ? Notify.SUCCESS : Notify.FAIL,
@@ -424,5 +435,83 @@ export class AuthTableOfContentsComponent implements OnInit, OnDestroy {
       default:
         break
     }
+  }
+
+  triggerSave() {
+    const nodesModified: any = {}
+    let isRootPresent = false
+    Object.keys(this.editorStore.upDatedContent).forEach(v => {
+      if (!isRootPresent) {
+        isRootPresent = this.store.parentNode.includes(v)
+      }
+      nodesModified[v] = {
+        isNew: false,
+        root: this.store.parentNode.includes(v),
+        metadata: this.editorStore.upDatedContent[v],
+      }
+    })
+    if (!isRootPresent) {
+      nodesModified[this.currentContent] = {
+        isNew: false,
+        root: true,
+        metadata: {},
+      }
+    }
+    let requestBodyV2: NSApiRequest.IContentUpdateV3 = {
+      request: {
+        data: {
+          nodesModified,
+          hierarchy: this.store.changedHierarchy,
+        }
+      }
+    }
+    if (Object.keys(this.editorStore.upDatedContent)[0] && nodesModified[Object.keys(this.editorStore.upDatedContent)[0]]) {
+      let requestBody: NSApiRequest.IContentUpdateV2 = {
+        request: {
+          content: nodesModified[Object.keys(this.editorStore.upDatedContent)[0]].metadata
+        }
+      }
+      requestBody.request.content = this.editorStore.cleanProperties(requestBody.request.content)
+      if (requestBody.request.content.duration) {
+        requestBody.request.content.duration = (isNumber(requestBody.request.content.duration) ? `${requestBody.request.content.duration}` : requestBody.request.content.duration)
+      }
+      return this.editorService.updateContentV3(requestBody, Object.keys(this.editorStore.upDatedContent)[0]).pipe(
+        tap(() => {
+          this.store.changedHierarchy = {}
+          Object.keys(this.editorStore.upDatedContent).forEach(id => {
+            this.editorStore.resetOriginalMeta(this.editorStore.upDatedContent[id], id)
+            this.editorService.readContentV2(id).subscribe(resData => {
+              this.editorStore.resetVersionKey(resData.versionKey, resData.identifier)
+            })
+          })
+          this.editorStore.upDatedContent = {}
+        }),
+      )
+    }
+    else {
+      return this.editorService.updateContentV4(requestBodyV2).pipe(
+        tap(() => {
+          this.store.changedHierarchy = {}
+          Object.keys(this.editorStore.upDatedContent).forEach(async id => {
+            this.editorStore.resetOriginalMeta(this.editorStore.upDatedContent[id], id)
+          })
+          this.editorStore.upDatedContent = {}
+        }),
+      )
+    }
+
+    // const requestBody: NSApiRequest.IContentUpdate = {
+    //   nodesModified,
+    //   hierarchy: this.store.changedHierarchy,
+    // }
+    // return this.editorService.updateContentV2(requestBody).pipe(
+    //   tap(() => {
+    //     this.store.changedHierarchy = {}
+    //     Object.keys(this.editorStore.upDatedContent).forEach(id => {
+    //       this.editorStore.resetOriginalMeta(this.editorStore.upDatedContent[id], id)
+    //     })
+    //     this.editorStore.upDatedContent = {}
+    //   }),
+    // )
   }
 }
