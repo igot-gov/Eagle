@@ -116,6 +116,13 @@ export namespace NSApiRequest {
       content: NSContent.IContentMeta
     }
   }
+  export interface IThumbnailUpdateV3 {
+    request: {
+      content: {
+        appIcon: string | undefined
+      }
+    }
+  }
 
   export interface IContentData {
     contentId: string

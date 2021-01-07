@@ -157,6 +157,14 @@ export class EditorService {
     )
   }
 
+  updateThumbnailV3(meta: NSApiRequest.IThumbnailUpdateV3, id: string): Observable<null> {
+    console.log(meta,id)
+    return this.apiService.patch<null>(
+      `${AUTHORING_BASE}content/v3/update/${id}`,
+      meta,
+    )
+  }
+
   updateContentV4(meta: NSApiRequest.IContentUpdateV3): Observable<null> {
     return this.apiService.patch<null>(
       `/apis/proxies/v8/action/content/v3/hierarchy/update`,
