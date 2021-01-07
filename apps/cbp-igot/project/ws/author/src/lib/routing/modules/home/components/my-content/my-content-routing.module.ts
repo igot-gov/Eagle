@@ -5,16 +5,22 @@ import { MyContentComponent } from './components/my-content/my-content.component
 import { MandatoryContentResolverService } from './resolvers/mandatory-content-resolver.service'
 
 const routes: Routes = [
+
   {
     path: '',
-    component: AllContentComponent,
+    pathMatch: 'full',
+    redirectTo: 'me'
+  },
+  {
+    path: 'me',
+    component: MyContentComponent,
     resolve: {
       courseTaken: MandatoryContentResolverService,
     },
   },
   {
-    path: 'me',
-    component: MyContentComponent,
+    path: 'all',
+    component: AllContentComponent,
     resolve: {
       courseTaken: MandatoryContentResolverService,
     },

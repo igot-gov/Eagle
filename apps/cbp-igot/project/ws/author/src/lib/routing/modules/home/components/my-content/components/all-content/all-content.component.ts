@@ -46,6 +46,7 @@ const defaultFilter = [
   providers: [PipeDurationTransformPipe],
 })
 export class AllContentComponent implements OnInit, OnDestroy {
+  filterPath = '/author/cbp/all'
   public sideNavBarOpened = false
   public sideNavBarOpenedMain = true
   newDesign = true
@@ -140,6 +141,7 @@ export class AllContentComponent implements OnInit, OnDestroy {
       _.set(leftData, 'widgetData.logo', true)
       _.set(leftData, 'widgetData.logoPath', _.get(this.activatedRoute, 'snapshot.data.departmentData.logo'))
       _.set(leftData, 'widgetData.name', _.get(this.activatedRoute, 'snapshot.data.departmentData.description'))
+      _.set(leftData, 'widgetData.userRoles', this.myRoles)
       this.leftmenues = leftData
     } else {
       this.leftmenues = this.authInitService.authAdditionalConfig.menus

@@ -54,4 +54,18 @@ export class LeftMenuComponent extends WidgetBaseComponent
     }
     return
   }
+
+  isAllowed(tab: IMenu): boolean {
+    let returnValue = false
+    if (tab.requiredRoles && tab.requiredRoles.length > 0) {
+      (tab.requiredRoles).forEach(v => {
+        if ((this.widgetData.userRoles || new Set()).has(v)) {
+          returnValue = true
+        }
+      })
+    } else {
+      returnValue = true
+    }
+    return returnValue
+  }
 }

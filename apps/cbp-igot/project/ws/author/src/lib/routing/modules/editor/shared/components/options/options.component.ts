@@ -49,7 +49,6 @@ export class OptionsComponent implements OnInit, OnDestroy, AfterViewInit {
 
   getAction(): string {
     if (this.contentService.getParentUpdatedMeta().identifier === this.currentContent) {
-      debugger
       if (
         ((this.accessService.authoringConfig.isMultiStepFlow && this.isDirectPublish()) ||
           !this.accessService.authoringConfig.isMultiStepFlow) &&

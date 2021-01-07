@@ -15,7 +15,7 @@ import {
 } from '@angular/core'
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
-import { IColums, ITable, ITableMenu } from './card-table.model'
+import { IColums, ITable } from './card-table.model'
 /* tslint:disable */
 import _ from 'lodash'
 import { NSContent } from '../../../../../../project/ws/author/src/lib/interface/content'
