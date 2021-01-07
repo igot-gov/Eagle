@@ -46,7 +46,7 @@ export class SelfCurationService {
   }
 
   fetchresult(contentId: any): Observable<NSISelfCuration.ISelfCurationData[]> {
-    return this.http.get<NSISelfCuration.ISelfCurationData[]>(`${API_END_POINTS.GET_PROFANITY}/${contentId}`)
+    return this.http.get<NSISelfCuration.ISelfCurationData[]>(`${API_END_POINTS.GET_PROFANITY}/${'lex_auth_013177743114027008329'}`)
       .pipe(tap(v => this.setcurationData(v)))
   }
 

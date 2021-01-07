@@ -211,7 +211,7 @@ export class ContentQualityComponent implements OnInit, OnDestroy, AfterViewInit
     }
   }
   get getQualityPercent() {
-    const score = (this.qualityResponse.finalTotalScore / this.qualityResponse.finalMaxScore) * 100
+    const score = this.qualityResponse.finalWeightedScore || 0
     return score.toFixed(2)
   }
   getFirstHeadingName(idx: number) {
