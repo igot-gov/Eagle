@@ -223,22 +223,9 @@ export class ContentQualityComponent implements OnInit, OnDestroy, AfterViewInit
     })
   }
 
-  selectMenu(key: string, index: number) {
-    this.selectedKey = key
-    this.selectedIndex = index
-    this.selectedQIndex = 0
-  }
-  isLinkActive(key: string, index: number) {
-    if (!this.selectedIndex && this.selectedQIndex === 0 && index === 0) {
-      return true
-    }
-    if (key && index >= 0) {
-      if (this.selectedKey === key) {
-        return true
-      }
-      return false
-    }
-    return false
+  download() {
+    let data = _.map(this.qualityResponse.criteriaModels, ii => ii.qualifiers)
+    this._qualityService.getFile({ ...data }, `Content-Quality-Report`, true)
   }
   start() {
     if (this.questionData && this.questionData[1] && this.questionData[1].type) {
@@ -370,5 +357,24 @@ export class ContentQualityComponent implements OnInit, OnDestroy, AfterViewInit
   }
   showMinDialogue() {
     this.snackBar.open(`To proceed further minimum quality score must be  ${this.minPassPercentage}% or greater`)
+  }
+
+  selectMenu(key: string, index: number) {
+    this.selectedKey = key
+    this.selectedIndex = index
+    this.selectedQIndex = 0
+  }
+
+  isLinkActive(key: string, index: number) {
+    if (!this.selectedIndex && this.selectedQIndex === 0 && index === 0) {
+      return true
+    }
+    if (key && index >= 0) {
+      if (this.selectedKey === key) {
+        return true
+      }
+      return false
+    }
+    return false
   }
 }

@@ -52,7 +52,7 @@ export class ContentSummaryComponent implements OnInit, OnDestroy {
       this.contentMeta = this.contentService.getUpdatedMeta(data)
       this.contentQualityData = this.cqs.getScore(data)
       if (this.contentQualityData) {
-        this.contentQualityPercent = ((this.contentQualityData.finalTotalScore / this.contentQualityData.finalMaxScore) * 100).toFixed(2)
+        this.contentQualityPercent = (this.contentQualityData.finalWeightedScore).toFixed(2)
       } else if (this._configurationsService.userProfile) {
         this.contentQualityPercent = '0'
         const params = {
@@ -64,9 +64,8 @@ export class ContentSummaryComponent implements OnInit, OnDestroy {
         this.cqs.fetchresult(params).subscribe(response => {
           if (response && _.get(response, 'result')) {
             this.contentQualityData = this.cqs.getScore(data)
-            if (this.contentQualityData && this.contentQualityData.finalTotalScore && this.contentQualityData.finalMaxScore) {
-              this.contentQualityPercent =
-                ((this.contentQualityData.finalTotalScore / this.contentQualityData.finalMaxScore) * 100).toFixed(2)
+            if (this.contentQualityData && this.contentQualityData.finalWeightedScore) {
+              this.contentQualityPercent = this.contentQualityData.finalWeightedScore.toFixed(2)
             } else {
               this.contentQualityPercent = '0'
             }
@@ -81,6 +80,10 @@ export class ContentSummaryComponent implements OnInit, OnDestroy {
   //     return row
   //   })
   // }
+  download() {
+    let data = _.map(this.contentQualityData.criteriaModels, ii => ii.qualifiers)
+    this.cqs.getFile({ ...data }, `Content-Quality-Report`, true)
+  }
   ngOnDestroy(): void {
 
   }

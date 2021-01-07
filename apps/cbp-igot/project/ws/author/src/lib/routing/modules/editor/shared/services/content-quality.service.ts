@@ -79,4 +79,55 @@ export class ContentQualityService {
     this.curationData = {}
     this.currentContent = ''
   }
+
+  downloadFile(url: string, name: string) {
+    var a = window.document.createElement("a")
+    a.href = url
+    a.download = name
+    document.body.appendChild(a)
+    a.click() // IE: "Access is denied"; see: https://connect.microsoft.com/IE/feedback/details/797361/ie-10-treats-blob-url-as-cross-origin-and-denies-access
+    document.body.removeChild(a)
+  }
+
+  s2ab(s: any) {
+    const buf = new ArrayBuffer(s.length)
+    const view = new Uint8Array(buf)
+    for (let i = 0; i !== s.length; ++i)
+      view[i] = s.charCodeAt(i) & 0xFF
+    return buf
+  }
+
+  getFile(data: any, name: string, needseprate: boolean) {
+    import('xlsx').then(XLSX => {
+      const wb = XLSX.utils.book_new()
+      let ws = null
+      if (!needseprate) {
+        ws = XLSX.utils.json_to_sheet(data)
+
+        wb.SheetNames.push(name || '')
+        wb.Sheets[name || ''] = ws
+      } else {
+        for (var i = 0; i < Object.keys(data).length; i++) {
+          ws = XLSX.utils.json_to_sheet(data[Object.keys(data)[i]])
+          wb.SheetNames.push(Object.keys(data)[i])
+          // wb.SheetNames.push(data[i][0].name)
+          wb.Sheets[Object.keys(data)[i]] = ws
+        }
+      }
+
+      const wbout = XLSX.write(wb, {
+        bookType: 'xlsx',
+        bookSST: true,
+        type: 'binary'
+      })
+
+
+      let url = window.URL.createObjectURL(new Blob([this.s2ab(wbout)], {
+        type: 'application/octet-stream'
+      }))
+
+      this.downloadFile(url, `${name}.xlsx`)
+    })
+
+  }
 }
