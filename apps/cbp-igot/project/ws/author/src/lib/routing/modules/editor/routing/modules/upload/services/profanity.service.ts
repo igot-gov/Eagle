@@ -15,21 +15,21 @@ export class ProfanityService {
     private apiService: ApiService,
   ) { }
 
-  featchProfanity(content: string, url: string, fileName: string) {
+  startProfanity(content: string, url: string, fileName: string) {
     const finalUrl = url.replace('?type=main', '')
     const finalFileName = this.getFileName(url)
-    if (fileName && finalFileName) {
-      const requestData = {
-        fileName: finalFileName,
-        pdfDownloadUrl: finalUrl,
-        contentId: content,
-      }
-      return this.apiService.post<any>(
-        `${VALIDATE_PDF_CONTENT}`, requestData
-      )
-    } else {
-      return {}
+    fileName = fileName
+    // if (fileName && finalFileName) {
+    const requestData = {
+      fileName: finalFileName,
+      pdfDownloadUrl: finalUrl,
+      contentId: content,
     }
+    return this.apiService.post<any>(
+      `${VALIDATE_PDF_CONTENT}`, requestData
+    )
+    // }
+    // return {}
   }
 
   getFileName(url: string) {

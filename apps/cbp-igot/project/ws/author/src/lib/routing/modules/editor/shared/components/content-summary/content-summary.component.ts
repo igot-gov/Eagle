@@ -68,7 +68,7 @@ export class ContentSummaryComponent implements OnInit, OnDestroy {
               this.contentQualityPercent =
                 ((this.contentQualityData.finalTotalScore / this.contentQualityData.finalMaxScore) * 100).toFixed(2)
             } else {
-              this.contentQualityPercent = "0"
+              this.contentQualityPercent = '0'
             }
           }
         })
