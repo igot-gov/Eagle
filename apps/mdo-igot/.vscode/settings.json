@@ -172,5 +172,6 @@
   },
   "[ignore]": {
     "editor.defaultFormatter": "foxundermoon.shell-format"
-  }
+  },
+  "git.ignoreLimitWarning": true
 }
