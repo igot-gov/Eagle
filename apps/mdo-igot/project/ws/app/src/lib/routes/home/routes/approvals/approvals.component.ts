@@ -28,6 +28,7 @@ export class ApprovalsComponent implements OnInit, OnDestroy {
     needHash: false,
     sortColumn: 'fullname',
     sortState: 'asc',
+    needUserMenus: false
   }
 
   constructor(private router: Router, private apprService: ApprovalsService) {
