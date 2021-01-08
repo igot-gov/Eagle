@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  sitePath: 'mdo-sb.idc.tarento.com',
+  sitePath: 'spv-sb.idc.tarento.com',
 }

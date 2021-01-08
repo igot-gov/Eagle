@@ -1,10 +1,10 @@
 {
-  "name": "mdo",
+  "name": "spv",
   "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "node --max_old_space_size=8000 ./node_modules/@angular/cli/bin/ng serve --proxy-config proxy/localhost.proxy.json -o",
-    "dev": "npm run start:mdo-dev",
+    "dev": "npm run start:spv-dev",
     "prebuild": "npm run lint:fix",
     "build": "node --max_old_space_size=8000 ./node_modules/@angular/cli/bin/ng build --prod --outputPath=dist/www/en --baseHref=/ --i18nLocale=en",
     "postbuild": "npm run compress:gzip && npm run compress:brotli",
@@ -12,7 +12,7 @@
     "compress:gzip": "gzipper --verbose --gzip-level=9 ./dist/www",
     "build:local": "node --max_old_space_size=8000 ./node_modules/@angular/cli/bin/ng build --prod",
     "build:stats": "ng build --stats-json",
-    "start:mdo-dev": "node --max_old_space_size=12288 ./node_modules/@angular/cli/bin/ng serve --proxy-config proxy/mdo-dev-ip.proxy.json -o",
+    "start:spv-dev": "node --max_old_space_size=12288 ./node_modules/@angular/cli/bin/ng serve --proxy-config proxy/spv-dev-ip.proxy.json -o",
     "analyse": "webpack-bundle-analyzer ./dist/www/ng serve --proxy-config proxy/localhost.proxy.json -o/stats-es5.json",
     "test": "ng test",
     "lint": "ng lint",
