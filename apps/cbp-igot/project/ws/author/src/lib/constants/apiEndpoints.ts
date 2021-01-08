@@ -35,7 +35,7 @@ export const EMPLOYEE_LIST = `${AUTHORING_SEARCH_BASE}v1/autoComplete/`
 export const GET_JSON = `${PROTECTED_SLAG_V8}scroing/getTemplate/`
 
 // get loggedin department
-export const GET_MY_DEPARTMENT = `${PROTECTED_SLAG_V8}portal/mydepartment`
+export const GET_MY_DEPARTMENT = `${PROTECTED_SLAG_V8}portal/cbp/mydepartment`
 // File Base
 export const CONTENT_BASE = `${AUTHORING_CONTENT_BASE}upload/`
 export const CONTENT_BASE_ENCODE = `${AUTHORING_BASE}encode`
