@@ -83,36 +83,39 @@ export class CreateMdoComponent implements OnInit {
   { isActive: false, isCompleted: false, name: 'Classification', step: 1 },
   { isActive: false, isCompleded: false, name: 'Intended for', step: 2 }]
   constructor(public dialog: MatDialog,
-    private uploadService: UploadService,
-    private snackBar: MatSnackBar,
-    private contentService: EditorContentService,
-    private loader: LoaderService,
-    private authInitService: AuthInitService,
-    private createMdoService: CreateMDOService,
+              private uploadService: UploadService,
+              private snackBar: MatSnackBar,
+              private contentService: EditorContentService,
+              private loader: LoaderService,
+              private authInitService: AuthInitService,
+              private createMdoService: CreateMDOService,
     // private router: Router,
-    private activatedRoute: ActivatedRoute) {
-    this.contentForm = new FormGroup({
-      name: new FormControl(),
-      head: new FormControl(),
-      deptSubTypeId: new FormControl(),
-      fileUpload: new FormControl(),
-    })
-    this.activatedRoute.params.subscribe(params => {
-      let data = params['data']
-      this.department = params['department']
-      data = JSON.parse(data)
-      if (this.data !== undefined || this.data !== null) {
-        this.isUpdate = true
-        this.updateId = data.row.id
-      }
-      this.contentForm = new FormGroup({
-        name: new FormControl(data.row.mdo),
-        head: new FormControl(data.row.head),
-        deptSubTypeId: new FormControl(data.row.typeid),
-        fileUpload: new FormControl(),
+              private activatedRoute: ActivatedRoute) {
+    {
 
+      this.contentForm = new FormGroup({
+        name: new FormControl(),
+        head: new FormControl(),
+        deptSubTypeId: new FormControl(),
+        fileUpload: new FormControl(),
       })
-    })
+      this.activatedRoute.params.subscribe(params => {
+        let data = params['data']
+        this.department = params['department']
+        data = JSON.parse(data)
+        if (this.data !== undefined || this.data !== null) {
+          this.isUpdate = true
+          this.updateId = data.row.id
+        }
+        this.contentForm = new FormGroup({
+          name: new FormControl(data.row.mdo),
+          head: new FormControl(data.row.head),
+          deptSubTypeId: new FormControl(data.row.typeid),
+          fileUpload: new FormControl(),
+
+        })
+      })
+    }
   }
   ngOnInit() {
     this.typeCheck()
@@ -530,10 +533,7 @@ export class CreateMdoComponent implements OnInit {
     })
     dialogRef.afterClosed().subscribe((response: any) => {
       this.data = this.getAllResponse(response)
-      console.log(this.departmentRoleId)
-      console.log(this.departmentId)
       this.data.forEach((element: { userId: string }) => {
-        console.log(element)
         this.createMdoService.assignAdminToDepartment(element.userId, this.departmentId, this.departmentRoleId).subscribe(res => {
           this.departmentId = res.id
           this.departmentRoleId = res.rolesInfo[0].deptRoleId
@@ -549,16 +549,13 @@ export class CreateMdoComponent implements OnInit {
           userId: users.userId,
           fullName: `${users.fullname}`,
           email: users.email,
-          role: "ADMIN"
+          role: 'ADMIN',
         }
         tempArray.push(obj)
       })
       return tempArray
     }
     return []
-  }
-  textOnly(event: any) {
-    console.log(event.key)
   }
   onSubmit() {
     if (!this.isUpdate) {

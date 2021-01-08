@@ -281,3 +281,17 @@ a:not([href]):not([tabindex]) {
 .no-shadow {
   box-shadow: none !important;
 }
+
+::ng-deep#directorycs {
+  .mat-card-header-text {
+    display: none !important;
+    margin: 0 !important;
+  }
+}
+
+::ng-deep.custom-btn {
+  padding: 10px 16px !important;
+  margin: 10px 0 !important;
+  line-height: 1;
+  align-self: center;
+}

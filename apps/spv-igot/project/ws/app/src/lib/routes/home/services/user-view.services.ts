@@ -16,7 +16,7 @@ export class UserViewService {
     return this.http.get<any>(`${API_END_POINTS.GET_ALL_SPV_USERS}`)
   }
   getAllUsersByDepartments(searchString: string): Observable<any> {
-    let department = { departments: ['igot', 'istm', 'iGOT', 'NPA', 'NACIN', 'LSNAA'] }
+    const department = { departments: ['igot', 'istm', 'iGOT', 'NPA', 'NACIN', 'LSNAA'] }
     return this.http.post<any>(`${API_END_POINTS.GET_ALL_USER_BY_DEPARTMENT}${searchString}`, department)
   }
 }

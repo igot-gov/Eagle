@@ -12,7 +12,7 @@ const API_END_POINTS = {
 export class UserViewPopUpService {
   constructor(private http: HttpClient) { }
   getAllUsersByDepartments(searchString: string): Observable<any> {
-    let department = { departments: ['igot', 'istm', 'iGOT', 'NPA', 'NACIN', 'LSNAA'] }
+    const department = { departments: ['igot', 'istm', 'iGOT', 'NPA', 'NACIN', 'LSNAA'] }
     return this.http.post<any>(`${API_END_POINTS.GET_ALL_USER_BY_DEPARTMENT}${searchString}`, department)
   }
 }

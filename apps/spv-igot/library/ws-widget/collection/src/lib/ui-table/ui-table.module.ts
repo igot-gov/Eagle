@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { UIUserTableComponent } from './user-list/ui-user-table.component'
-import { UIUserTableComponentPopUp } from './user-list-popup/ui-user-table-pop-up.component'
+import { UIUserTablePopUpComponent } from './user-list-popup/ui-user-table-pop-up.component'
 import { UIDirectoryTableComponent } from './directory-list/directory-table.component'
 import { MatTableModule } from '@angular/material/table'
 import { MatTooltipModule } from '@angular/material/tooltip'
@@ -19,7 +19,7 @@ import { UserPopupComponent } from './user-popup/user-popup'
 import { MatDialogModule, MatButtonModule, MatCheckboxModule } from '@angular/material'
 import { FormsModule } from '@angular/forms'
 @NgModule({
-  declarations: [UIUserTableComponent, AppButtonComponent, UIDirectoryTableComponent, UserPopupComponent, UIUserTableComponentPopUp],
+  declarations: [UIUserTableComponent, AppButtonComponent, UIDirectoryTableComponent, UserPopupComponent, UIUserTablePopUpComponent],
   imports: [
     CommonModule,
     MatTableModule,
@@ -37,10 +37,10 @@ import { FormsModule } from '@angular/forms'
     MatPaginatorModule,
     MatDialogModule, MatButtonModule,
     MatCheckboxModule,
-    FormsModule
+    FormsModule,
 
   ],
   entryComponents: [UserPopupComponent],
-  exports: [UIUserTableComponent, UIDirectoryTableComponent, UIUserTableComponentPopUp],
+  exports: [UIUserTableComponent, UIDirectoryTableComponent, UIUserTablePopUpComponent],
 })
 export class UITableModule { }

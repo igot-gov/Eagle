@@ -10,8 +10,10 @@
                 <span class="searchText">Search:</span>
             </div> -->
             <div class=rsearch *ngIf="dataSource.data.length > 0">
-                <input class="sinput" type="Standard" label="" (input)="applyFilter($event.target.value)"
-                    placeholder="Search">
+                <div class="sinput">
+                    <span class="material-icons"> search </span>
+                    <input type="Standard" label="" (input)="applyFilter($event.target.value)" placeholder="Search">
+                </div>
             </div>
         </div>
 

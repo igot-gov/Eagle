@@ -1,6 +1,6 @@
 import {
   Component, OnInit, Output, EventEmitter, ViewChild,
-  AfterViewInit, OnChanges, SimpleChanges
+  AfterViewInit, OnChanges, SimpleChanges,
 } from '@angular/core'
 import { SelectionModel } from '@angular/cdk/collections'
 import { MatTableDataSource } from '@angular/material/table'
@@ -16,7 +16,7 @@ interface IUser { fullname: string; email: string, userId: string }
   templateUrl: './ui-user-table-pop-up.component.html',
   styleUrls: ['./ui-user-table-pop-up.component.scss'],
 })
-export class UIUserTableComponentPopUp implements OnInit, AfterViewInit, OnChanges {
+export class UIUserTablePopUpComponent implements OnInit, AfterViewInit, OnChanges {
   tableData!: ITableData | undefined
   data!: IUser[] | undefined
   @Output() clicked?: EventEmitter<any>
@@ -107,7 +107,7 @@ export class UIUserTableComponentPopUp implements OnInit, AfterViewInit, OnChang
         const obj: IUser = {
           userId: users.wid,
           fullname: `${users.first_name} ${users.last_name}`,
-          email: users.email
+          email: users.email,
         }
         this.dataSource.data.push(obj)
         this.dataSource.data = this.dataSource.data.slice()

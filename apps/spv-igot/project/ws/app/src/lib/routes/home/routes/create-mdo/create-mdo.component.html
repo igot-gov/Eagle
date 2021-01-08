@@ -13,8 +13,7 @@
               <mat-form-field appearance="outline" class="margin-top-xs"
                 [ngClass]="{ 'mat-form-field-invalid': showError('name') }">
                 <input matInput #name formControlName="name" maxlength="500" i18n-placeholder placeholder="Type here"
-                  (keypress)="textOnly($event)" type="text"
-                  [required]="checkCondition('name', 'required') ? true : null" />
+                  type="text" [required]="checkCondition('name', 'required') ? true : null" />
                 <mat-error *ngIf="showError('name')" i18n="Name Error|Explains name is required">
                   Department name is mandatory
                 </mat-error>
