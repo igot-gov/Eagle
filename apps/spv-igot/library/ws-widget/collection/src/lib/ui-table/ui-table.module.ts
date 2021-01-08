@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { UIUserTableComponent } from './user-list/ui-user-table.component'
+import { UIUserTableComponentPopUp } from './user-list-popup/ui-user-table-pop-up.component'
 import { UIDirectoryTableComponent } from './directory-list/directory-table.component'
 import { MatTableModule } from '@angular/material/table'
 import { MatTooltipModule } from '@angular/material/tooltip'
@@ -15,9 +16,10 @@ import { BtnContentLikeModule } from '../btn-content-like/btn-content-like.modul
 import { BtnContentMailMeModule } from '../btn-content-mail-me/btn-content-mail-me.module'
 import { MatPaginatorModule } from '@angular/material/paginator'
 import { UserPopupComponent } from './user-popup/user-popup'
-import { MatDialogModule, MatButtonModule } from '@angular/material'
+import { MatDialogModule, MatButtonModule, MatCheckboxModule } from '@angular/material'
+import { FormsModule } from '@angular/forms'
 @NgModule({
-  declarations: [UIUserTableComponent, AppButtonComponent, UIDirectoryTableComponent, UserPopupComponent],
+  declarations: [UIUserTableComponent, AppButtonComponent, UIDirectoryTableComponent, UserPopupComponent, UIUserTableComponentPopUp],
   imports: [
     CommonModule,
     MatTableModule,
@@ -34,8 +36,11 @@ import { MatDialogModule, MatButtonModule } from '@angular/material'
     BtnContentLikeModule,
     MatPaginatorModule,
     MatDialogModule, MatButtonModule,
+    MatCheckboxModule,
+    FormsModule
+
   ],
   entryComponents: [UserPopupComponent],
-  exports: [UIUserTableComponent, UIDirectoryTableComponent],
+  exports: [UIUserTableComponent, UIDirectoryTableComponent, UIUserTableComponentPopUp],
 })
 export class UITableModule { }

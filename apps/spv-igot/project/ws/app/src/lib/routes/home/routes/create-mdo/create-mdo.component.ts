@@ -19,9 +19,9 @@ import { AccessControlService } from '../../services/access-control.service'
 import { EditorService } from '../../services/editor.service'
 import { startWith, debounceTime, distinctUntilChanged, filter, switchMap } from 'rxjs/operators'
 import { of } from 'rxjs'
-import { Router, ActivatedRoute } from '@angular/router'
+import { ActivatedRoute } from '@angular/router'
 import { CreateMDOService } from './create-mdo.services'
-
+interface IUser { userId: string, fullName: string; email: string; role: string }
 @Component({
   selector: 'ws-app-create-mdo',
   providers: [UploadService, ApiService, AccessControlService, EditorContentService, EditorService, AuthInitService, LoaderService],
@@ -89,7 +89,7 @@ export class CreateMdoComponent implements OnInit {
     private loader: LoaderService,
     private authInitService: AuthInitService,
     private createMdoService: CreateMDOService,
-    private router: Router,
+    // private router: Router,
     private activatedRoute: ActivatedRoute) {
     this.contentForm = new FormGroup({
       name: new FormControl(),
@@ -101,7 +101,6 @@ export class CreateMdoComponent implements OnInit {
       let data = params['data']
       this.department = params['department']
       data = JSON.parse(data)
-      console.log(data)
       if (this.data !== undefined || this.data !== null) {
         this.isUpdate = true
         this.updateId = data.row.id
@@ -530,18 +529,33 @@ export class CreateMdoComponent implements OnInit {
       panelClass: 'remove-pad',
     })
     dialogRef.afterClosed().subscribe((response: any) => {
-      this.data = [{
-        fullName: `${response.data.first_name} ${response.data.last_name}`,
-        email: response.data.email, role: response.data.department_name,
-      }]
-      this.userId = response.data.wid
-      this.createMdoService.assignAdminToDepartment(this.userId, this.departmentId, this.departmentRoleId).subscribe(res => {
-        if (res !== null && res !== undefined) {
-          this.router.navigate(['/app/home/directory'])
-        }
-
+      this.data = this.getAllResponse(response)
+      console.log(this.departmentRoleId)
+      console.log(this.departmentId)
+      this.data.forEach((element: { userId: string }) => {
+        console.log(element)
+        this.createMdoService.assignAdminToDepartment(element.userId, this.departmentId, this.departmentRoleId).subscribe(res => {
+          this.departmentId = res.id
+          this.departmentRoleId = res.rolesInfo[0].deptRoleId
+        })
       })
     })
+  }
+  getAllResponse(response: any) {
+    const tempArray: IUser[] = []
+    if (response && response !== null && response !== undefined) {
+      this.data = response.data.forEach((users: any) => {
+        const obj: IUser = {
+          userId: users.userId,
+          fullName: `${users.fullname}`,
+          email: users.email,
+          role: "ADMIN"
+        }
+        tempArray.push(obj)
+      })
+      return tempArray
+    }
+    return []
   }
   textOnly(event: any) {
     console.log(event.key)

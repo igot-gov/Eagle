@@ -11,26 +11,30 @@
             </div> -->
             <div class=rsearch>
                 <input class="sinput" type="Standard" label="" (input)="applyFilter($event.target.value)"
-                    placeholder="Search">
+                    placeholder="Search to find the Users">
             </div>
-            <button mat-raised-button type="button"
-                class="text-white ws-mat-primary-background text-white margin-right-m" (click)="gotoCreateNew()">
-                <b class="text-white" i18n>Create New</b>
-            </button>
         </div>
 
-
-
-
-
         <!-- </mat-form-field> -->
+        <div class="titleclass" *ngIf="this.dataSource.data.length===0">
+            <h3>No Information Available</h3>
+        </div>
         <mat-table #table matSort [ngStyle]="{'height': bodyHeight}" [matSortActive]="tableData!.sortColumn"
             [matSortDirection]="tableData!.sortState" [dataSource]="dataSource"
-            class="example-table table1 responsiveTable">
-
+            class=" example-table table1 responsiveTable" *ngIf="this.dataSource.data.length>0">
+            <ng-container matColumnDef="Actions" *ngIf="tableData!.actions && tableData!.actions.length > 0">
+                <mat-header-cell *matHeaderCellDef class="clr-darkish-blue action-header"> Mark as Admin
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row" class="action-cell">
+                    <div *ngFor="let ac of tableData.actions">
+                        <mat-checkbox [color]="green" (click)="buttonClick(ac.name,row)">
+                        </mat-checkbox>
+                    </div>
+                </mat-cell>
+            </ng-container>
             <ng-container matColumnDef="{{col.key}}" *ngFor="let col of tableData!.columns">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> {{col.displayName}} </mat-header-cell>
-                <mat-cell *matCellDef="let element" (click)="selection.toggle(element); onRowClick(element)">
+                <mat-cell *matCellDef="let element">
                     <span *ngIf="col.isList" class="textclass"
                         [matTooltip]="(element[col.key]).split('<br />').join(', ')">
                         <div innerHTML="{{element[col.key]}}"></div>
@@ -38,24 +42,6 @@
                     <span *ngIf="!col.isList" class="textclass">
                         {{element[col.key]}} {{col.isList}}
                     </span>
-                </mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="Actions" *ngIf="tableData!.actions && tableData!.actions.length > 0">
-                <mat-header-cell *matHeaderCellDef class="clr-darkish-blue action-header"> Actions </mat-header-cell>
-                <mat-cell *matCellDef="let row" class="action-cell">
-                    <div *ngFor="let ac of tableData.actions">
-                        <div *ngIf="ac.optional">
-                            <ws-widget-app-button *ngIf="row[ac.optional_key] === ac.optional_Value" [type]="ac.type"
-                                [icon]="ac.icon" [disabled]="ac.disabled || false" [label]="ac.label"
-                                (click)="buttonClick(ac.name,row)"></ws-widget-app-button>
-                        </div>
-                        <div *ngIf="!ac.optional">
-                            <ws-widget-app-button [type]="ac.type" [icon]="ac.icon" [label]="ac.label"
-                                [disabled]="ac.disabled || false" (click)="buttonClick(ac.name,row)">
-                            </ws-widget-app-button>
-                        </div>
-                    </div>
                 </mat-cell>
             </ng-container>
             <ng-container matColumnDef="Menu">
@@ -71,14 +57,13 @@
             </ng-container>
 
             <mat-header-row *matHeaderRowDef="getFinalColumns()"></mat-header-row>
-            <!-- <mat-row *matRowDef="let row; columns: getFinalColumns();" (click)="selection.toggle(row); onRowClick(row)">
-            </mat-row> -->
-            <mat-row *matRowDef="let row; columns: getFinalColumns();">
+            <mat-row *matRowDef="let row; columns: getFinalColumns();" (click)="selection.toggle(row); onRowClick(row)">
             </mat-row>
         </mat-table>
     </div>
 
-    <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions">
+    <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+        *ngIf="this.dataSource.data.length===-32">
     </mat-paginator>
 </div>
 

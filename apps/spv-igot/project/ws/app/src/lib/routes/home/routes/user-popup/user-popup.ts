@@ -7,7 +7,6 @@ export interface IDialogData {
   name: string
   data: any
 }
-
 @Component({
   selector: 'ws-auth-content-quality-popup',
   templateUrl: './user-popup.html',
@@ -15,10 +14,11 @@ export interface IDialogData {
 })
 export class UserPopupComponent implements OnInit {
 
-  selectedUser!: any
+  selectedUser: any = []
   dataSources: any
   finalArray = []
-  showTable = true
+  tabledata: any = []
+  dataTable: any = []
   score: any
   currentSelection = false
   constructor(
@@ -27,7 +27,9 @@ export class UserPopupComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: IDialogData) { }
 
   ngOnInit() {
+
   }
+
   onNoClick(): void {
     this.dialogRef.close()
   }
@@ -39,14 +41,24 @@ export class UserPopupComponent implements OnInit {
     }
 
   }
-  dataHandler($event: any) {
-    this.finalArray = $event
-    this.currentSelection = false
-  }
-  updateSize() {
-    this.dialogRef.updateSize('auto', 'auto')
-  }
-  public getSelectedUserData(date: any): void {
-    this.selectedUser = date
+  selectedUserFrom(user: any) {
+    const userId = user.row.userId
+    let index
+    let isUserFound = false
+    if (this.selectedUser.length > 0) {
+      this.selectedUser.forEach((element: any) => {
+        if (element.userId === userId) {
+          index = this.selectedUser.indexOf(element)
+          isUserFound = true
+        }
+      })
+      if (isUserFound) {
+        this.selectedUser.splice(index, 1)
+      } else {
+        this.selectedUser.push(user.row)
+      }
+    } else {
+      this.selectedUser.push(user.row)
+    }
   }
 }

@@ -6,8 +6,8 @@ import { ActivatedRoute } from '@angular/router'
 import { ConfigurationsService } from '@ws-widget/utils/src/public-api'
 /* tslint:disable */
 import _ from 'lodash'
-import { UserViewService } from './user-view.services'
-interface IUser { fullname: string; email: string; type: string }
+import { UserViewService } from '../../services/user-view.services'
+interface IUser { userid: string, fullname: string; email: string; type: string }
 
 @Component({
   selector: 'ws-app-users-view',
@@ -122,6 +122,7 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
       const tempArray: IUser[] = []
       userObj.forEach((users: any) => {
         const obj: IUser = {
+          userid: users.wid,
           fullname: `${users.firstName} ${users.lastName}`,
           email: users.emailId,
           type: users.roleInfo.roleName,
