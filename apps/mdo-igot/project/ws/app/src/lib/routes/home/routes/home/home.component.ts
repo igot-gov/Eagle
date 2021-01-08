@@ -1,7 +1,7 @@
 
 import { Component, OnInit, OnDestroy, AfterViewInit, ElementRef, HostListener, ViewChild } from '@angular/core'
 import { Router, Event, NavigationEnd, ActivatedRoute } from '@angular/router'
-import { ValueService } from '@ws-widget/utils/src/public-api'
+import { ConfigurationsService, ValueService } from '@ws-widget/utils/src/public-api'
 import { map } from 'rxjs/operators'
 import { NsWidgetResolver } from 'library/ws-widget/resolver/src/public-api'
 /* tslint:disable */
@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   titles = [{ title: 'NETWORK', url: '/app/network-v2', icon: 'group' }]
   widgetData!: NsWidgetResolver.IWidgetData<ILeftMenu>
   unread = 0
+  myRoles!: Set<string>
   currentRoute = 'home'
   banner!: NsWidgetResolver.IWidgetData<any>
   private bannerSubscription: any
@@ -46,12 +47,27 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       this.sticky = false
     }
   }
-  constructor(private valueSvc: ValueService, private router: Router, private activeRoute: ActivatedRoute) {
+  constructor(private valueSvc: ValueService, private router: Router, private activeRoute: ActivatedRoute, private configService: ConfigurationsService) {
+    if (this.configService.userRoles) {
+      this.myRoles = this.configService.userRoles
+    }
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
         this.bindUrl(event.urlAfterRedirects.replace('/app/home/', ''))
-        this.widgetData = this.activeRoute.snapshot.data &&
-          this.activeRoute.snapshot.data.pageData.data.menus || []
+        // this.widgetData = this.activeRoute.snapshot.data &&
+        //   this.activeRoute.snapshot.data.pageData.data.menus || []
+        if (this.activeRoute.snapshot.data.department.data) {
+          const leftData = this.activeRoute.snapshot.data.pageData.data.menus
+          _.set(leftData, 'widgetData.logo', true)
+          _.set(leftData, 'widgetData.logoPath', _.get(this.activeRoute, 'snapshot.data.department.data.logo'))
+          _.set(leftData, 'widgetData.name', _.get(this.activeRoute, 'snapshot.data.department.data.description'))
+          _.set(leftData, 'widgetData.userRoles', this.myRoles)
+          this.widgetData = leftData
+        } else {
+          this.widgetData = this.activeRoute.snapshot.data.pageData.data.menus
+        }
+
+
         this.department = this.activeRoute.snapshot.data.department.data
         this.departmentName = this.department ? this.department.deptName : ''
       }

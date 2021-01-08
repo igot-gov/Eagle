@@ -2,35 +2,38 @@
   "menus": {
     "widgetType": "menus",
     "widgetSubType": "leftMenu",
-    "widgetData": [
-      {
-        "name": "Users",
-        "key": "users",
-        "fragment": false,
-        "render": true,
-        "badges": {
-          "enabled": false,
-          "uri": ""
+    "widgetData": {
+      "logo": true,
+      "menus": [
+        {
+          "name": "Users",
+          "key": "users",
+          "fragment": false,
+          "render": true,
+          "badges": {
+            "enabled": false,
+            "uri": ""
+          },
+          "enabled": true,
+          "paramaterName": "role",
+          "routerLink": "/app/roles/<param>/users",
+          "customRouting": true
         },
-        "enabled": true,
-        "paramaterName": "role",
-        "routerLink": "/app/roles/<param>/users",
-        "customRouting": true
-      },
-      {
-        "name": "Privileges",
-        "key": "privileges",
-        "fragment": false,
-        "render": false,
-        "badges": {
+        {
+          "name": "Privileges",
+          "key": "privileges",
+          "fragment": false,
+          "render": false,
+          "badges": {
+            "enabled": false,
+            "uri": ""
+          },
           "enabled": false,
-          "uri": ""
-        },
-        "enabled": false,
-        "paramaterName": "role",
-        "routerLink": "/app/roles/<param>/privileges",
-        "customRouting": true
-      }
-    ]
+          "paramaterName": "role",
+          "routerLink": "/app/roles/<param>/privileges",
+          "customRouting": true
+        }
+      ]
+    }
   }
 }
