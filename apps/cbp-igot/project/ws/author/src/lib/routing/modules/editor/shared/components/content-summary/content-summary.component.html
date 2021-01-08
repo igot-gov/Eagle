@@ -32,7 +32,8 @@
             </mat-progress-bar>
           </div>
           <div class="flex flex-1">
-            <button mat-button type="button" class="margin-top-s margin-bottom-s ws-mat-accent-border margin-left-s">
+            <button mat-button type="button" class="margin-top-s margin-bottom-s ws-mat-accent-border margin-left-s"
+              (click)="download()">
               <mat-icon>cloud_download</mat-icon>
               <span class="mat-subheading-2 padding-xs" style="vertical-align: unset;" i18n>
                 download
@@ -51,23 +52,13 @@
 
       <mat-card-content class="flex flex-1 margin-top-xs mobile-break mat-app-background">
         <div class="flex flex-1 flex-column clean-div">
-          <span class="mat-title margin-left-m margin-top-m">0</span>
+          <span class="mat-title margin-left-m margin-top-m">{{getCleanIssues}}</span>
           <span class="mat-subheading-2 margin-left-m">Clean</span>
         </div>
         <ng-container *ngIf="progressData?.length>0">
-          <ng-container *ngFor="let ld of getSelfCurationProgress">
-            <ng-container [ngTemplateOutlet]="leftIssues" [ngTemplateOutletContext]="{data:{
-                    count:ld,
-                    critical: true,
-                    name:'Critical Issues'
-                  }}">
+          <ng-container *ngFor="let ld of leftmenudata">
+            <ng-container [ngTemplateOutlet]="leftIssues" [ngTemplateOutletContext]="{data:ld}">
             </ng-container>
-            <!-- <ng-container [ngTemplateOutlet]="leftIssues" [ngTemplateOutletContext]="{data:{
-                     count:1,
-                    potential: true,
-                    name: 'Potential issues'
-                  }}">
-                  </ng-container> -->
           </ng-container>
         </ng-container>
       </mat-card-content>

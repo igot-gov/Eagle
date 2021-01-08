@@ -1,5 +1,4 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core'
-import { NSContent } from '@ws/author/src/lib/interface/content'
 /* tslint:disable */
 import _ from 'lodash'
 import { NSISelfCuration } from '../../../../../../../interface/self-curation'
@@ -11,35 +10,43 @@ import { NSISelfCuration } from '../../../../../../../interface/self-curation'
   styleUrls: ['./curation-progress-card.component.scss'],
 })
 export class CurationProgressCardComponent implements OnInit, OnDestroy {
-  @Input() contentMeta!: NSContent.IContentMeta
   @Input() parentName = 'CBP'
   @Input() parentId = ''
-  progressData!: NSISelfCuration.ISelfCurationData[]
+  @Input() resourseName = ''
+  @Input() progressData!: NSISelfCuration.ISelfCurationData
   constructor(
     // private curationService: SelfCurationService
 
   ) {
   }
   ngOnInit(): void {
-    this.fetchProgress()
   }
 
   ngOnDestroy(): void {
 
   }
+  get getPotentialIssues(): number {
+    if (this.progressData && this.progressData.profanity_word_count > 0) {
+      return _.chain(this.progressData).get('profanityWordList')
+        .filter(i => i.category === 'offensive' || i.category === 'lightly offensive')
+        .sumBy('no_of_occurrence').value()
+    }
+    return 0
+  }
+  get getCriticalIssues(): number {
+    if (this.progressData && this.progressData.profanity_word_count > 0) {
+      return _.chain(this.progressData).get('profanityWordList')
+        .filter(i => i.category === 'exptermly offensive')
+        .sumBy('no_of_occurrence').value()
+    }
+    return 0
+  }
+
   get getFileName(): string | undefined {
-    if (this.contentMeta.artifactUrl) {
-      return _.last(this.contentMeta.artifactUrl.split('/'))
+    if (this.progressData.primaryKey && this.progressData.primaryKey.pdfFileName) {
+      return _.get(this.progressData, 'primaryKey.pdfFileName')
     }
     return ''
   }
-  fetchProgress() {
-    // const data = {
-    //   contentId: this.contentMeta.identifier,
-    //   fileName: this.getFileName,
-    // }
-    // this.curationService.fetchresult(data).subscribe(result => {
-    //   this.progressData = result
-    // })
-  }
+
 }

@@ -4,6 +4,7 @@ export interface ILeftMenu {
   logoPath?: string
   name: string
   menus: IMenu[]
+  userRoles?: Set<string>
 }
 export interface IMenu {
   name: string
@@ -19,6 +20,6 @@ export interface IMenu {
   customRouting?: boolean
   paramaterName?: string
   queryParams?: string
-  // requiredRoles?: any[]
+  requiredRoles?: any[]
   isAllowed?: boolean
 }

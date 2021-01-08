@@ -1,6 +1,5 @@
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout'
 import { AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewEncapsulation } from '@angular/core'
-import { FormGroup } from '@angular/forms'
 import { NSContent } from '@ws/author/src/lib/interface/content'
 import { map } from 'rxjs/operators'
 import { LoaderService } from '../../../../../../services/loader.service'
@@ -27,10 +26,11 @@ export class ContentSelfCurationComponent implements OnInit, OnDestroy, AfterVie
   @Input() stage = 1
   @Input() type = ''
   @Input() parentContent: string | null = null
-  qualityForm!: FormGroup
+  // qualityForm!: FormGroup
   currentContent!: string
   viewMode = 'meta'
   mimeTypeRoute = ''
+  qualityData!: NSISelfCuration.ISelfCurationData[]
   isResultExpend = false
   selectedKey = ''
   selectedIndex = 0
@@ -67,7 +67,7 @@ export class ContentSelfCurationComponent implements OnInit, OnDestroy, AfterVie
         this.viewMode = 'meta'
       }
     })
-    this.qualityForm = new FormGroup({})
+    // this.qualityForm = new FormGroup({})
     // if (this.activateRoute.parent && this.activateRoute.parent.parent) {
     // this.leftmenues = _.get(this.activateRoute.parent.snapshot.data, 'questions')
 
@@ -92,38 +92,94 @@ export class ContentSelfCurationComponent implements OnInit, OnDestroy, AfterVie
     // this.contentMeta = this.contentService.getUpdatedMeta(data)
     _.set(this, 'contentMeta', _.map(this.contentService.originalContent))
     //   debugger
-    //   setTimeout(
-    //     () => {
+    // setTimeout(
+    //   () => {
     this.getProgress()
-    //     },
-    //     2000)
+    // },
+    // 2000)
     // })
   }
   getProgress() {
     // this.leftmenudata = []
-    const response: NSISelfCuration.ISelfCurationData[] = []
-    if (this.contentMeta && this.contentMeta) {
-      _.each(this.contentMeta, (element: NSContent.IContentMeta) => {
-        if (element.artifactUrl && element.mimeType.indexOf('application/pdf') >= 0) {
-          // response.push()
-          this.curationService.fetchresult(element.identifier).subscribe(data => {
-            // console.log(data)
-            if (data) {
+    // const response: NSISelfCuration.ISelfCurationData[] = []
+    // if (this.contentMeta && this.contentMeta) {
+    //   _.each(this.contentMeta, (element: NSContent.IContentMeta) => {
+    //     if (element.artifactUrl && element.mimeType.indexOf('application/pdf') >= 0) {
+    // response.push()
+    this.curationService.fetchresult(this.contentService.parentContent).subscribe(data => {
+      this.qualityData = data
 
-            }
-          })
+      // }
+      // })
+      // }
+      if (this.qualityData.length > 0) {
+        this.leftmenudata = [{
+          count: this.getCriticalIssues,
+          critical: true,
+          name: 'Critical Issues',
+        },
+        {
+          count: this.getPotentialIssues,
+          potential: true,
+          name: 'Potential issues',
+        }]
+      }
+    })
+  }
+  get getPotentialIssues(): number {
+    if (this.qualityData && this.qualityData.length > 0) {
+      return _.chain(this.qualityData).map(i => i.profanityWordList)
+        .compact().flatten()
+        .filter(i => i.category === 'offensive' || i.category === 'lightly offensive')
+        .sumBy('no_of_occurrence').value()
+    }
+    return 0
+  }
+  get getCriticalIssues(): number {
+    if (this.qualityData && this.qualityData.length > 0) {
+      return _.chain(this.qualityData).map('profanityWordList')
+        .compact().flatten()
+        .filter(i => i.category === 'exptermly offensive')
+        .sumBy('no_of_occurrence').value()
+    }
+    return 0
+  }
+  get getCleanIssues(): number {
+    if (this.qualityData && this.qualityData.length > 0) {
+      return _.chain(this.qualityData).map(i => {
+        if (i.profanity_word_count === 0) {
+          return i
         }
-      })
+        return null
+      }).compact().flatten()
+        .value().length
     }
-    if (response.length > 0) {
-      // this.leftmenudata = _.map(response, (i: NSISelfCuration.ISelfCurationData[]) => _.first(i.).profanityWordList.length)
+    return 0
+  }
+  get getProgressPercent(): number {
+    if (this.qualityData && this.qualityData.length > 0) {
+      const completed = _.chain(this.qualityData).map(i => i.completed)
+        .compact().flatten()
+        .value().length
+
+      return parseFloat(((completed / this.qualityData.length) * 100).toFixed(2))
     }
+    return 0
   }
   ngOnDestroy(): void {
     this.loaderService.changeLoad.next(false)
   }
   ngAfterViewInit(): void {
   }
+
+  getResourseName(id: string) {
+    if (id) {
+      const resource = _.first(_.filter(this.contentMeta, i => (i.identifier).replace('.img', '') === id || i.identifier === id))
+      return resource ? resource.name : 'Untitled Resource'
+    }
+    return 'Resource'
+  }
+
   sidenavClose() {
     setTimeout(() => (this.leftArrow = true), 500)
   }

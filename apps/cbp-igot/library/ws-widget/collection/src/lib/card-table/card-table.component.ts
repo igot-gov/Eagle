@@ -18,6 +18,7 @@ import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import { IColums, ITable } from './card-table.model'
 /* tslint:disable */
 import _ from 'lodash'
+import { NSContent } from '../../../../../../project/ws/author/src/lib/interface/content'
 /* tslint:enable */
 @Component({
   selector: 'ws-widget-table-card-content',
@@ -33,7 +34,8 @@ export class CardTableComponent extends WidgetBaseComponent
 
   @Input() data?: []
   selection = new SelectionModel<any>(true, [])
-
+  @Input() userRoles: Set<string> | null = null
+  @Input() userId!: string
   @Output() clicked?: EventEmitter<any>
   @Output() actionsClick?: EventEmitter<any>
   bodyHeight = document.body.clientHeight - 125
@@ -165,4 +167,118 @@ export class CardTableComponent extends WidgetBaseComponent
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`
   }
 
+  showMenuItem(menuType: string, row: any) {
+    let returnValue = false
+    switch (menuType) {
+      case 'edit':
+      case 'delete':
+        if (row.status === 'Draft' || row.status === 'Live') {
+          returnValue = this.hasAccess(row)
+        }
+        if (row.authoringDisabled && menuType === 'edit') {
+          returnValue = false
+        }
+        break
+      case 'moveToDraft':
+        if (
+          row.status === 'InReview' ||
+          row.status === 'Unpublished' ||
+          row.status === 'Reviewed' ||
+          row.status === 'QualityReview'
+        ) {
+          returnValue = this.hasAccess({ ...row, status: 'Draft' })
+        }
+        break
+      case 'moveToInReview':
+        if (row.status === 'Reviewed' || row.status === 'QualityReview') {
+          returnValue = this.hasAccess({ ...row, status: 'InReview' })
+        }
+        break
+      case 'publish':
+        if (row.status === 'Reviewed') {
+          returnValue = this.hasAccess(row)
+        }
+        break
+      case 'unpublish':
+        if (row.status === 'Live') {
+          returnValue = this.hasAccess(row)
+        }
+        break
+      case 'review':
+        if (row.status === 'InReview' || row.status === 'QualityReview') {
+          returnValue = this.hasAccess(row)
+        }
+        break
+      case 'lang':
+        returnValue = this.hasAccess({ ...row, status: 'Draft' })
+        break
+    }
+    return returnValue
+  }
+  takeAction(action: string, row: any) {
+    const isDisabled = _.get(_.find(this.widgetData.actions, ac => ac.name === action), 'disabled') || false
+    if (!isDisabled && this.actionsClick) {
+      this.actionsClick.emit({ type: action, data: row })
+    }
+  }
+  hasAccess(
+    meta: NSContent.IContentMeta,
+    forPreview = false,
+    parentMeta?: NSContent.IContentMeta,
+  ): boolean {
+    if (this.hasRole(['editor', 'admin'])) {
+      return true
+    }
+    let returnValue = false
+    if (['Draft', 'Live'].indexOf(meta.status) > -1) {
+      if (meta.creatorContacts && meta.creatorContacts.length) {
+        meta.creatorContacts.forEach(v => {
+          if (v.id === this.userId) {
+            returnValue = true
+          }
+        })
+      }
+    }
+    if (meta.status === 'InReview' && this.hasRole(['reviewer'])) {
+      if (meta.trackContacts && meta.trackContacts.length) {
+        meta.trackContacts.forEach(v => {
+          if (v.id === this.userId) {
+            returnValue = true
+          }
+        })
+      }
+      if (!returnValue && parentMeta && parentMeta.creatorContacts && meta.creatorContacts) {
+        returnValue = parentMeta.creatorContacts.some(v =>
+          meta.creatorContacts.find(cv => cv.id === v.id),
+        )
+      }
+    }
+    if (['Reviewed'].indexOf(meta.status) > -1 && this.hasRole(['publisher'])) {
+      if (meta.publisherDetails && meta.publisherDetails.length) {
+        meta.publisherDetails.forEach(v => {
+          if (v.id === this.userId) {
+            returnValue = true
+          }
+        })
+      }
+      if (!returnValue && parentMeta && parentMeta.creatorContacts && meta.creatorContacts) {
+        returnValue = parentMeta.creatorContacts.some(v =>
+          meta.creatorContacts.find(cv => cv.id === v.id),
+        )
+      }
+    }
+    if (forPreview && meta.visibility === 'Public') {
+      returnValue = true
+    }
+    return returnValue
+  }
+  hasRole(role: string[]): boolean {
+    let returnValue = false
+    role.forEach(v => {
+      if ((this.userRoles || new Set()).has(v)) {
+        returnValue = true
+      }
+    })
+    return returnValue
+  }
 }

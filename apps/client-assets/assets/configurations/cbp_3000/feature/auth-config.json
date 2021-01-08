@@ -202,23 +202,6 @@
       "logo": true,
       "menus": [
         {
-          "name": "All CBPs",
-          "key": "cbp",
-          "fragment": false,
-          "render": true,
-          "badges": {
-            "enabled": false,
-            "uri": ""
-          },
-          "enabled": true,
-          "routerLink": "/author/cbp",
-          "queryParams": "draft",
-          "requiredRoles": [
-            "editor",
-            "admin"
-          ]
-        },
-        {
           "name": "My CBPs",
           "key": "mycbp",
           "fragment": false,
@@ -234,6 +217,23 @@
             "reviewer",
             "content-creator",
             "publisher",
+            "editor",
+            "admin"
+          ]
+        },
+        {
+          "name": "All CBPs",
+          "key": "cbp",
+          "fragment": false,
+          "render": true,
+          "badges": {
+            "enabled": false,
+            "uri": ""
+          },
+          "enabled": true,
+          "routerLink": "/author/cbp/all",
+          "queryParams": "draft",
+          "requiredRoles": [
             "editor",
             "admin"
           ]

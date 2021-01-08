@@ -64,12 +64,13 @@ export class OptionsComponent implements OnInit, OnDestroy, AfterViewInit {
       }
       switch (this.contentService.originalContent[this.currentContent].status) {
         case 'Draft':
-        case 'Live':
           return 'sendForReview'
         case 'InReview':
           return 'review'
         case 'Reviewed':
           return 'publish'
+        case 'Live':
+          return 'unpublish'
         default:
           return 'sendForReview'
       }
