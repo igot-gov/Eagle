@@ -222,7 +222,7 @@
       "show": true,
       "status": "live",
       "toolTip": "Dashboard",
-      "url": "/page/home",
+      "url": "/app/home/users",
       "shortName": "Home"
     },
     "feature_badges": {
