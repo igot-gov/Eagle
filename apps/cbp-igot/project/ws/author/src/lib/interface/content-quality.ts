@@ -40,6 +40,7 @@ export namespace NSIQuality {
     finalMaxWeightedAvg: number
     finalMinWeightedAvg: number
     criteriaModels: ICriteriaModels[]
+    finalWeightedScore: number
     timeStamp: string
   }
   export interface ICriteriaModels {

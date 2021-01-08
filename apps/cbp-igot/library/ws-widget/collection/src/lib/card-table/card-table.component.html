@@ -168,51 +168,50 @@
 
 <mat-menu #moreMenu="matMenu">
   <ng-template matMenuContent let-rowData="data">
-    <ng-container *ngFor="let menu of widgetData.actionsMenu.menus">
+    <!-- <ng-container *ngFor="let menu of widgetData.actionsMenu.menus">
       <a mat-menu-item (click)="actionsClick.emit({'action':menu.action,data:rowData})">
-        <!-- (click)="takeAction('edit')" -->
         <mat-icon>{{menu.icon}}</mat-icon>
         <span i18n>{{menu.name}}</span>
-        <!-- {{menuItems | json}} -->
       </a>
-    </ng-container>
-  </ng-template>
-  <!-- <a *ngIf="showMenuItem('edit')" mat-menu-item (click)="takeAction('edit')">
-    <mat-icon>edit</mat-icon>
-    <span i18n>Edit </span>
-  </a>
-  <a *ngIf="showMenuItem('delete')" mat-menu-item (click)="takeAction('delete')">
-    <mat-icon>delete</mat-icon>
-    <span i18n>Delete </span>
-  </a>
-  <a *ngIf="showMenuItem('comments')" mat-menu-item (click)="viewComments()">
+    </ng-container> -->
+
+    <a *ngIf="showMenuItem('edit',rowData)" mat-menu-item (click)="takeAction('edit',rowData)">
+      <mat-icon>edit</mat-icon>
+      <span i18n>Edit </span>
+    </a>
+    <a *ngIf="showMenuItem('delete',rowData)" mat-menu-item (click)="takeAction('delete',rowData)">
+      <mat-icon>delete</mat-icon>
+      <span i18n>Delete </span>
+    </a>
+    <!-- <a *ngIf="showMenuItem('comments')" mat-menu-item (click)="viewComments()">
     <mat-icon>comment</mat-icon>
     <span i18n>View comments</span>
-  </a>
-  <a *ngIf="showMenuItem('publish')" mat-menu-item (click)="takeAction('publish')">
-    <mat-icon>publish</mat-icon>
-    <span i18n>Publish</span>
-  </a>
-  <a *ngIf="showMenuItem('unpublish')" mat-menu-item (click)="takeAction('unpublish')">
-    <mat-icon>reply</mat-icon>
-    <span i18n>Unpublish content</span>
-  </a>
-  <a *ngIf="showMenuItem('review')" mat-menu-item (click)="takeAction('review')">
-    <mat-icon>rate_review</mat-icon>
-    <span i18n>Review</span>
-  </a>
-  <a *ngIf="showMenuItem('moveToDraft')" mat-menu-item (click)="takeAction('moveToDraft')">
-    <mat-icon>reply</mat-icon>
-    <span i18n>Recall content to draft</span>
-  </a>
-  <a *ngIf="showMenuItem('moveToInReview')" mat-menu-item (click)="takeAction('moveToInReview')">
-    <mat-icon>reply</mat-icon>
-    <span i18n>Send content to previous state</span>
-  </a>
-  <ng-container>
+  </a> -->
+    <a *ngIf="showMenuItem('publish',rowData)" mat-menu-item (click)="takeAction('publish',rowData)">
+      <mat-icon>publish</mat-icon>
+      <span i18n>Publish</span>
+    </a>
+    <a *ngIf="showMenuItem('unpublish',rowData)" mat-menu-item (click)="takeAction('unpublish',rowData)">
+      <mat-icon>reply</mat-icon>
+      <span i18n>Unpublish content</span>
+    </a>
+    <a *ngIf="showMenuItem('review',rowData)" mat-menu-item (click)="takeAction('review',rowData)">
+      <mat-icon>rate_review</mat-icon>
+      <span i18n>Review</span>
+    </a>
+    <a *ngIf="showMenuItem('moveToDraft',rowData)" mat-menu-item (click)="takeAction('moveToDraft',rowData)">
+      <mat-icon>reply</mat-icon>
+      <span i18n>Recall content to draft</span>
+    </a>
+    <a *ngIf="showMenuItem('moveToInReview',rowData)" mat-menu-item (click)="takeAction('moveToInReview',rowData)">
+      <mat-icon>reply</mat-icon>
+      <span i18n>Send content to previous state</span>
+    </a>
+    <!-- <ng-container>
     <a *ngIf="showMenuItem('lang')" mat-menu-item [matMenuTriggerFor]="langMenu">
       <mat-icon>translate</mat-icon>
       <span i18n>Languages</span>
     </a>
   </ng-container> -->
+  </ng-template>
 </mat-menu>

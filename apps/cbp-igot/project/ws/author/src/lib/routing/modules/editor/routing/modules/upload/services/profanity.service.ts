@@ -3,6 +3,9 @@ import { ApiService } from '@ws/author/src/lib/modules/shared/services/api.servi
 // tslint:disable-next-line:max-line-length
 const VALIDATE_PDF_CONTENT = '/apis/protected/v8/profanity/startPdfProfanity'
 // const backwordSlash = '/'
+/* tslint:disable */
+import _ from 'lodash'
+/* tslint:enable */
 
 @Injectable()
 export class ProfanityService {
@@ -12,21 +15,32 @@ export class ProfanityService {
     private apiService: ApiService,
   ) { }
 
-  featchProfanity(content: string, url: string, fileName: string) {
-    // tslint:disable-next-line:no-console
-    console.log(content)
-    // tslint:disable-next-line:no-console
-    // const finalUrl = url.replace('type=main', '')
-    // tslint:disable-next-line:no-console
-    console.log(url)
+  startProfanity(content: string, url: string, fileName: string) {
+    const finalUrl = url.replace('?type=main', '')
+    const finalFileName = this.getFileName(url)
+    if (fileName) {
+      // will remove
+    }
+    // if (fileName && finalFileName) {
     const requestData = {
-      fileName,
-      pdfDownloadUrl: url,
+      fileName: finalFileName,
+      pdfDownloadUrl: finalUrl,
       contentId: content,
     }
-    // const userId = this.configSvc.userProfile && this.configSvc.userProfile.userId
     return this.apiService.post<any>(
       `${VALIDATE_PDF_CONTENT}`, requestData
     )
+    // }
+    // return {}
+  }
+
+  getFileName(url: string) {
+    const nameArr = (url.match(new RegExp('%2Fartifacts%2F' + '(.*)' + '?type=main')))
+    if (nameArr && nameArr[0]) {
+      let finalFileName = nameArr[0].replace('%2Fartifacts%2F', '')
+      finalFileName = finalFileName.replace('?type=main', '')
+      return finalFileName
+    }
+    return null
   }
 }

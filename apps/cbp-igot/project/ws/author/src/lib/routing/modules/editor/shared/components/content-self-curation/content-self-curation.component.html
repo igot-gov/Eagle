@@ -12,24 +12,25 @@
     <div class="sticky1">
       <div class="contain">
         <div class="pad-l-4r flex-column">
-          <div class="flex flex-1 status-div flex-center center text-white mat-gray-016">
+          <div *ngIf="getProgressPercent === 100"
+            class="flex flex-1 status-div text-white ws-mat-primary-background flex-center center">
+            <span class="mat-subheading-2">{{'Curation Finished'}}</span>
+          </div>
+          <div *ngIf="getProgressPercent < 100"
+            class="flex flex-1 status-div flex-center center text-white mat-gray-016">
             <span class="mat-subheading-2">{{'Curation in progress'}}</span>
           </div>
           <div class="flex flex-1 flex-column margin-top-l">
             <span class="flex mat-body-2">Results</span>
             <div class="flex flex-1 flex-column clean-div">
-              <span class="mat-title margin-left-m margin-top-m">0</span>
+              <span class="mat-title margin-left-m margin-top-m">{{getCleanIssues}}</span>
               <span class="mat-subheading-2 margin-left-m">Clean</span>
             </div>
           </div>
           <!-- {{leftmenudata | json }} -->
           <ng-container *ngIf="leftmenudata && leftmenudata.length>0">
             <ng-container *ngFor="let ld of leftmenudata">
-              <ng-container [ngTemplateOutlet]="leftIssues" [ngTemplateOutletContext]="{data:{
-            count:ld,
-            critical: true,
-            name:'Critical Issues'
-          }}">
+              <ng-container [ngTemplateOutlet]="leftIssues" [ngTemplateOutletContext]="{data:ld}">
               </ng-container>
               <!-- <ng-container [ngTemplateOutlet]="leftIssues" [ngTemplateOutletContext]="{data:{
              count:1,
@@ -47,17 +48,17 @@
   <mat-sidenav-content class="pl-6 pr-6 ml-6">
     <div class="flex flex-1 flex-column">
       <div class="flex flex-1 flex-column">
-        <span class="flex flex-1 mat-subheading-1">Curation in progress (25%)</span>
+        <span class="flex flex-1 mat-subheading-1">Curation in progress ({{getProgressPercent}}%)</span>
         <mat-progress-bar class="margin-bottom-m quality-progress" aria-labelledby="content-result" mode="determinate"
-          [value]="79">
+          [value]="getProgressPercent">
         </mat-progress-bar>
       </div>
       <div class="flex flex-1 flex-column">
         <span class="flex flex-1 mat-subheading-1"> In progress</span>
-        <ng-container *ngFor="let chield of contentMeta">
-          {{chield.mimeType}}
-          <ws-auth-curation-progress-card *ngIf="chield.mimeType === 'application/pdf'" [contentMeta]="chield"
-            [parentId]="contentMeta.identifier" [parentName]="contentMeta.name">
+        <ng-container *ngFor="let chield of qualityData">
+          <ws-auth-curation-progress-card [parentId]="currentContent" [progressData]="chield"
+            [parentName]="getResourseName(currentContent)"
+            [resourseName]="getResourseName(chield.primaryKey.contentId)">
           </ws-auth-curation-progress-card>
         </ng-container>
       </div>

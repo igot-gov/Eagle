@@ -374,7 +374,7 @@ export class FileUploadComponent implements OnInit {
       )
   }
   profanityCheckAPICall(url: string) {
-    this.profanityService.featchProfanity(this.currentContent, url, (this.file ? this.file.name : this.currentContent)).subscribe()
+    this.profanityService.startProfanity(this.currentContent, url, (this.file ? this.file.name : this.currentContent)).subscribe()
   }
   startProfanityPopup() {
     this.loaderService.changeLoad.next(false)

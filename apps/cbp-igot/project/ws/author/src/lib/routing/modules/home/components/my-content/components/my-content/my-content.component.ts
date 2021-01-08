@@ -23,7 +23,7 @@ import { LoaderService } from '@ws/author/src/lib/services/loader.service'
 import { Subscription } from 'rxjs'
 import { MyContentService } from '../../services/my-content.service'
 import { map } from 'rxjs/operators'
-import { PipeDurationTransformPipe, ValueService } from '@ws-widget/utils'
+import { ConfigurationsService, PipeDurationTransformPipe, ValueService } from '@ws-widget/utils'
 
 /* tslint:disable */
 import _ from 'lodash'
@@ -46,6 +46,7 @@ const defaultFilter = [
   providers: [PipeDurationTransformPipe],
 })
 export class MyContentComponent implements OnInit, OnDestroy {
+  filterPath = '/author/cbp/me'
   public sideNavBarOpened = false
   public sideNavBarOpenedMain = true
   newDesign = true
@@ -66,6 +67,7 @@ export class MyContentComponent implements OnInit, OnDestroy {
   searchLanguage = ''
   public pagination!: IAuthoringPagination
   userId!: string
+  myRoles!: Set<string>
   totalContent!: number
   showLoadMore!: boolean
   routerSubscription = <Subscription>{}
@@ -112,9 +114,14 @@ export class MyContentComponent implements OnInit, OnDestroy {
     private authInitService: AuthInitService,
     // private durationPipe: PipeDurationTransformPipe,
     private valueSvc: ValueService,
+    private configService: ConfigurationsService,
+
   ) {
     this.courseTaken = {
       mandatoryCourseCompleted: true
+    }
+    if (this.configService.userRoles) {
+      this.myRoles = this.configService.userRoles
     }
     this.filterMenuTreeControl = new FlatTreeControl<IMenuFlatNode>(
       node => node.levels,
@@ -138,6 +145,7 @@ export class MyContentComponent implements OnInit, OnDestroy {
       _.set(leftData, 'widgetData.logo', true)
       _.set(leftData, 'widgetData.logoPath', _.get(this.activatedRoute, 'snapshot.data.departmentData.logo'))
       _.set(leftData, 'widgetData.name', _.get(this.activatedRoute, 'snapshot.data.departmentData.description'))
+      _.set(leftData, 'widgetData.userRoles', this.myRoles)
       this.leftmenues = leftData
     } else {
       this.leftmenues = this.authInitService.authAdditionalConfig.menus

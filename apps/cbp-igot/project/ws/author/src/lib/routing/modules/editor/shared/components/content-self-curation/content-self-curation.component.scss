@@ -51,6 +51,17 @@
   }
 }
 
+.status-div-done {
+  min-width: 184px;
+  min-height: 48px;
+  border-radius: 4px;
+
+  span {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+}
+
 .width-100 {
   width: 100%;
 }
