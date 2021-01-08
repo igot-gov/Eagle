@@ -34,7 +34,7 @@ export class UsersComponent implements OnInit, AfterViewInit, OnDestroy {
       needHash: false,
       sortColumn: 'fullName',
       sortState: 'asc',
-      needUserMenus: true
+      needUserMenus: true,
     }
   }
 
@@ -51,7 +51,7 @@ export class UsersComponent implements OnInit, AfterViewInit, OnDestroy {
           email: user.email,
           position: user.department_name,
           role: this.role,
-          wid: user.wid
+          wid: user.wid,
         }
       })
     })
