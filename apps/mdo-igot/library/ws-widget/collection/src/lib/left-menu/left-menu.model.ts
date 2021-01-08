@@ -1,4 +1,3 @@
-
 export interface ILeftMenu {
   logo?: boolean
   logoPath?: string
@@ -23,6 +22,3 @@ export interface IMenu {
   requiredRoles?: any[]
   isAllowed?: boolean
 }
-
-
-

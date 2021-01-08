@@ -1,4 +1,3 @@
-
 import { Component, OnInit, OnDestroy, AfterViewInit, ElementRef, HostListener, ViewChild } from '@angular/core'
 import { Router, Event, NavigationEnd, ActivatedRoute } from '@angular/router'
 import { ConfigurationsService, ValueService } from '@ws-widget/utils/src/public-api'
@@ -47,7 +46,12 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       this.sticky = false
     }
   }
-  constructor(private valueSvc: ValueService, private router: Router, private activeRoute: ActivatedRoute, private configService: ConfigurationsService) {
+  constructor(
+    private valueSvc: ValueService,
+    private router: Router,
+    private activeRoute: ActivatedRoute,
+    private configService: ConfigurationsService
+  ) {
     if (this.configService.userRoles) {
       this.myRoles = this.configService.userRoles
     }
@@ -66,7 +70,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         } else {
           this.widgetData = this.activeRoute.snapshot.data.pageData.data.menus
         }
-
 
         this.department = this.activeRoute.snapshot.data.department.data
         this.departmentName = this.department ? this.department.deptName : ''
