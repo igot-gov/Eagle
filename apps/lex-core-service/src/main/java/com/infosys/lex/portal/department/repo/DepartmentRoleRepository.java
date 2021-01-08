@@ -2,20 +2,21 @@ package com.infosys.lex.portal.department.repo;
 
 import java.util.List;
 
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.query.Param;
 
 import com.infosys.lex.portal.department.dto.DepartmentRole;
 
 public interface DepartmentRoleRepository extends CrudRepository<DepartmentRole, Integer> {
-	DepartmentRole findByRoleIdAndDeptId(Integer roleId, Integer deptId);
-
-	List<DepartmentRole> findByRoleId(Integer roleId);
+	DepartmentRole findByDeptType(String deptType);
+	List<DepartmentRole> findAllByDeptTypeIn(List<String> deptTypes);
 	
-	List<DepartmentRole> findAllByRoleIdAndDeptIdIn(Integer roleId, List<Integer> deptIds);
-	
-	Iterable<DepartmentRole> findByDeptId(Integer deptId);
+//	DepartmentRole findByRoleIdAndDeptId(Integer roleId, Integer deptId);
+//
+//	List<DepartmentRole> findByRoleId(Integer roleId);
+//	
+//	List<DepartmentRole> findAllByRoleIdAndDeptTypeIdIn(Integer roleId, List<Integer> deptIds);
+//	
+//	Iterable<DepartmentRole> findByDeptTypeIds(List<Integer> deptTypeIds);
 
 //	@Query("select dRole from department_roles where dRole.role_id in (:role_ids)")
 //	Iterable<DepartmentRole> findByRoleIds(@Param("role_ids") List<Integer> role_ids);

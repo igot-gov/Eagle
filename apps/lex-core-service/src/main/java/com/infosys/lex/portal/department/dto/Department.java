@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Type;
+
 import com.infosys.lex.portal.department.model.DepartmentInfo;
 
 @Entity
@@ -17,7 +19,7 @@ public class Department {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer deptId;
+	private Integer id;
 
 	@Column(name = "root_org")
 	@NotNull
@@ -27,9 +29,10 @@ public class Department {
 	@NotNull
 	private String deptName;
 
-	@Column(name = "dept_type_id")
+	@Column(name = "dept_type_ids")
 	@NotNull
-	private Integer deptTypeId;
+	@Type(type = "com.infosys.lex.portal.department.dto.GenericArrayUserType")
+	private Integer[] deptTypeId;
 
 	@Column(name = "description")
 	@NotNull
@@ -44,8 +47,8 @@ public class Department {
 	public Department() {
 	}
 
-	public Department(Integer deptId, String rootOrg, String dept, Integer deptTypeId, String description) {
-		this.deptId = deptId;
+	public Department(Integer id, String rootOrg, String dept, Integer[] deptTypeId, String description) {
+		this.id = id;
 		this.rootOrg = rootOrg;
 		this.deptName = dept;
 		this.deptTypeId = deptTypeId;
@@ -53,11 +56,11 @@ public class Department {
 	}
 
 	public Integer getDeptId() {
-		return deptId;
+		return id;
 	}
 
 	public void setDeptId(Integer deptId) {
-		this.deptId = deptId;
+		this.id = deptId;
 	}
 
 	public String getRootOrg() {
@@ -76,11 +79,11 @@ public class Department {
 		this.deptName = deptName;
 	}
 
-	public Integer getDeptTypeId() {
+	public Integer[] getDeptTypeIds() {
 		return deptTypeId;
 	}
 
-	public void setDeptTypeId(Integer deptTypeId) {
+	public void setDeptTypeIds(Integer[] deptTypeId) {
 		this.deptTypeId = deptTypeId;
 	}
 
@@ -111,7 +114,7 @@ public class Department {
 	public static Department clone(DepartmentInfo deptInfo) {
 		Department dept = new Department();
 		dept.setDeptName(deptInfo.getDeptName());
-		dept.setDeptTypeId(deptInfo.getDeptTypeId());
+		dept.setDeptTypeIds(deptInfo.getDeptTypeIds());
 		dept.setDescription(deptInfo.getDescription());
 		dept.setHeadquarters(deptInfo.getHeadquarters());
 		dept.setRootOrg(deptInfo.getRootOrg());

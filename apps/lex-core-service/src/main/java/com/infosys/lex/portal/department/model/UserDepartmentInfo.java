@@ -1,9 +1,11 @@
 package com.infosys.lex.portal.department.model;
 
+import com.infosys.lex.portal.department.dto.Role;
+
 public class UserDepartmentInfo {
 	private String userId;
 	private DepartmentInfo deptInfo;
-	private DeptRoleInfo deptRoleInfo;
+	private Iterable<Role> roleInfo;
 	private Boolean isActive;
 	private Boolean isBlocked;
 
@@ -23,12 +25,12 @@ public class UserDepartmentInfo {
 		this.deptInfo = deptInfo;
 	}
 
-	public DeptRoleInfo getDeptRoleInfo() {
-		return deptRoleInfo;
+	public Iterable<Role> getRoleInfo() {
+		return roleInfo;
 	}
 
-	public void setDeptRoleInfo(DeptRoleInfo deptRoleInfo) {
-		this.deptRoleInfo = deptRoleInfo;
+	public void setRoleInfo(Iterable<Role> roleInfo) {
+		this.roleInfo = roleInfo;
 	}
 
 	public Boolean getIsActive() {

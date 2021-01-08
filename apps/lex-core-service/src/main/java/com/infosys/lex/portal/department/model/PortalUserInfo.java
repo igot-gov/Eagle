@@ -1,5 +1,9 @@
 package com.infosys.lex.portal.department.model;
 
+import java.util.List;
+
+import com.infosys.lex.portal.department.dto.Role;
+
 public class PortalUserInfo {
 	private String userId;
 	private String firstName;
@@ -7,7 +11,7 @@ public class PortalUserInfo {
 	private String emailId;
 	private boolean isActive;
 	private boolean isBlocked;
-	private DeptRoleInfo roleInfo;
+	private List<Role> roleInfo;
 
 	public String getUserId() {
 		return userId;
@@ -57,11 +61,11 @@ public class PortalUserInfo {
 		this.isBlocked = isBlocked;
 	}
 
-	public DeptRoleInfo getRoleInfo() {
+	public List<Role> getRoleInfo() {
 		return roleInfo;
 	}
 
-	public void setRoleInfo(DeptRoleInfo roleInfo) {
+	public void setRoleInfo(List<Role> roleInfo) {
 		this.roleInfo = roleInfo;
 	}
 }

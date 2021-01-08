@@ -150,8 +150,11 @@ public class LexServerProperties {
 	@Value("${java.eval.endpoint}")
 	private String javaEvalEndpoint;
 	
+	@Value("${wf.service.host}")
+	private String wfServiceHost;
 	
-	
+	@Value("${wf.service.updateUserProfilePath}")
+	private String wfServicePath;
 
 	public Integer getCertificationRetryGapInDays() {
 		return certificationRetryGapInDays;
@@ -563,9 +566,21 @@ public class LexServerProperties {
 		this.javaEvalEndpoint = javaEvalEndpoint;
 	}
 	
-	
-	
+	public String getWfServiceHost() {
+		return wfServiceHost;
+	}
 
+	public void setWfServiceHost(String wfServiceHost) {
+		this.wfServiceHost = wfServiceHost;
+	}
+
+	public String getWfServicePath() {
+		return wfServicePath;
+	}
+
+	public void setWfServicePath(String wfServicePath) {
+		this.wfServicePath = wfServicePath;
+	}
 
 	@Override
 	public String toString() {
@@ -579,7 +594,8 @@ public class LexServerProperties {
 				+ ", clientId=" + clientId + ", clientSecret=" + clientSecret + ", lhubUrl=" + lhubUrl
 				+ ", lhubCertificationUrl=" + lhubCertificationUrl + ", iapSubmissonsUrl=" + iapSubmissonsUrl
 				+ ", iapSubmissonsClientId=" + iapSubmissonsClientId + ", iapSubmissonsClientSecret="
-				+ iapSubmissonsClientSecret + ", enableRealTime=" + enableRealTime + "]";
+				+ iapSubmissonsClientSecret + ", enableRealTime=" + enableRealTime + ", wfServiceHost=" + wfServiceHost 
+				+", wfServicePath="+ wfServicePath + "]";
 	}
 
 

@@ -3,15 +3,16 @@ package com.infosys.lex.portal.department.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.infosys.lex.portal.department.dto.Role;
 import com.infosys.lex.portal.department.dto.UserDepartmentRole;
 
 public class DepartmentInfo {
 	private Integer id;
 	private String rootOrg;
 	private String deptName;
-	private Integer deptTypeId;
-	private DeptTypeInfo deptTypeInfo;
-	private List<DeptRoleInfo> rolesInfo;
+	private Integer[] deptTypeIds;
+	private List<DeptTypeInfo> deptTypeInfos;
+	private List<Role> rolesInfo;
 	private String description;
 	private long noOfUsers;
 	private String headquarters;
@@ -20,7 +21,8 @@ public class DepartmentInfo {
 	private List<PortalUserInfo> active_users;
 	private List<PortalUserInfo> inActive_users;
 	private List<PortalUserInfo> blocked_users;
-
+	private List<String> currentUserRoles;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -45,20 +47,20 @@ public class DepartmentInfo {
 		this.deptName = deptName;
 	}
 
-	public Integer getDeptTypeId() {
-		return deptTypeId;
+	public Integer[] getDeptTypeIds() {
+		return deptTypeIds;
 	}
 
-	public void setDeptTypeId(Integer deptTypeId) {
-		this.deptTypeId = deptTypeId;
+	public void setDeptTypeIds(Integer[] deptTypeIds) {
+		this.deptTypeIds = deptTypeIds;
 	}
 
-	public DeptTypeInfo getDeptTypeInfo() {
-		return deptTypeInfo;
+	public List<DeptTypeInfo> getDeptTypeInfos() {
+		return deptTypeInfos;
 	}
 
-	public void setDeptTypeInfo(DeptTypeInfo deptTypeInfo) {
-		this.deptTypeInfo = deptTypeInfo;
+	public void setDeptTypeInfos(List<DeptTypeInfo> deptTypeInfo) {
+		this.deptTypeInfos = deptTypeInfo;
 	}
 
 	public String getDescription() {
@@ -77,11 +79,11 @@ public class DepartmentInfo {
 		this.noOfUsers = noOfUsers;
 	}
 
-	public List<DeptRoleInfo> getRolesInfo() {
+	public List<Role> getRolesInfo() {
 		return rolesInfo;
 	}
 
-	public void setRolesInfo(List<DeptRoleInfo> rolesInfo) {
+	public void setRolesInfo(List<Role> rolesInfo) {
 		this.rolesInfo = rolesInfo;
 	}
 
@@ -133,11 +135,11 @@ public class DepartmentInfo {
 		this.blocked_users = blocked_users;
 	}
 
-	public void addDeptRoleInfo(DeptRoleInfo deptRoleInfo) {
+	public void addRoleInfo(Role roleInfo) {
 		if (this.rolesInfo == null) {
-			this.rolesInfo = new ArrayList<DeptRoleInfo>();
+			this.rolesInfo = new ArrayList<Role>();
 		}
-		this.rolesInfo.add(deptRoleInfo);
+		this.rolesInfo.add(roleInfo);
 	}
 
 	public void addActiveUser(PortalUserInfo pUserInfo) {
@@ -160,12 +162,20 @@ public class DepartmentInfo {
 		}
 		this.blocked_users.add(pUserInfo);
 	}
-	
+
 	public void addAdminUser(UserDepartmentRole pUserInfo) {
-		if(this.adminUserList == null) {
+		if (this.adminUserList == null) {
 			this.adminUserList = new ArrayList<UserDepartmentRole>();
 		}
 		this.adminUserList.add(pUserInfo);
+	}
+
+	public List<String> getCurrentUserRoles() {
+		return currentUserRoles;
+	}
+
+	public void setCurrentUserRoles(List<String> currentUserRoles) {
+		this.currentUserRoles = currentUserRoles;
 	}
 
 	public String toString() {
@@ -173,8 +183,8 @@ public class DepartmentInfo {
 		str.append(" Id:").append(id);
 		str.append(", RootOrg:").append(rootOrg);
 		str.append(", DepartmentName: ").append(deptName);
-		str.append(", DeptTypeId: ").append(deptTypeId);
-		str.append(", DeptTypeInfo: ").append(deptTypeInfo);
+		str.append(", DeptTypeId: ").append(deptTypeIds);
+		str.append(", DeptTypeInfo: ").append(deptTypeInfos);
 		str.append(", Description: ").append(description);
 		str.append(", headquarters: ").append(headquarters);
 		str.append(", noOfUsers: ").append(noOfUsers);

@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Type;
+
 @Entity
 @Table(name = "department_roles", schema = "wingspan")
 public class DepartmentRole {
@@ -16,13 +18,14 @@ public class DepartmentRole {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@Column(name = "role_id")
+	@Column(name = "role_ids")
 	@NotNull
-	private Integer roleId;
+	@Type(type = "com.infosys.lex.portal.department.dto.GenericArrayUserType")
+	private Integer[] roleIds;
 
-	@Column(name = "dept_id")
+	@Column(name = "dept_type")
 	@NotNull
-	private Integer deptId;
+	private String deptType;
 
 	public Integer getId() {
 		return id;
@@ -32,21 +35,19 @@ public class DepartmentRole {
 		this.id = id;
 	}
 
-	public Integer getRoleId() {
-		return roleId;
+	public Integer[] getRoleIds() {
+		return roleIds;
 	}
 
-	public void setRoleId(Integer roleId) {
-		this.roleId = roleId;
+	public void setRoleIds(Integer[] roleIds) {
+		this.roleIds = roleIds;
 	}
 
-	public Integer getDeptId() {
-		return deptId;
+	public String getDeptType() {
+		return deptType;
 	}
 
-	public void setDeptId(Integer deptId) {
-		this.deptId = deptId;
+	public void setDeptType(String deptType) {
+		this.deptType = deptType;
 	}
-	
-	
 }

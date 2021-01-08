@@ -2,7 +2,6 @@ package com.infosys.lex.portal.department.repo;
 
 import java.util.List;
 
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import com.infosys.lex.portal.department.dto.DepartmentType;

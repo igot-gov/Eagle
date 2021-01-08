@@ -1,12 +1,17 @@
 package com.infosys.lex.portal.department.dto;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
+
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "user_department_role", schema = "wingspan")
@@ -24,9 +29,10 @@ public class UserDepartmentRole {
 	@NotNull
 	Integer deptId;
 
-	@Column(name = "dept_role_id")
+	@Column(name = "role_ids")
 	@NotNull
-	Integer deptRoleId;
+	@Type(type = "com.infosys.lex.portal.department.dto.GenericArrayUserType")
+	Integer[] roleIds;
 
 	@Column(name = "isactive")
 	@NotNull
@@ -36,14 +42,17 @@ public class UserDepartmentRole {
 	@NotNull
 	Boolean isBlocked;
 
+	@Transient
+	List<String> roles;
+
 	public UserDepartmentRole() {
 	}
 
-	public UserDepartmentRole(Integer id, String userId, Integer deptId, Integer deptRoleId, Boolean isActive) {
+	public UserDepartmentRole(Integer id, String userId, Integer deptId, Integer[] roleIds, Boolean isActive) {
 		this.id = id;
 		this.userId = userId;
 		this.deptId = deptId;
-		this.deptRoleId = deptRoleId;
+		this.roleIds = roleIds;
 		this.isActive = isActive;
 	}
 
@@ -71,12 +80,12 @@ public class UserDepartmentRole {
 		this.deptId = deptId;
 	}
 
-	public Integer getDeptRoleId() {
-		return deptRoleId;
+	public Integer[] getRoleIds() {
+		return roleIds;
 	}
 
-	public void setDeptRoleId(Integer deptRoleId) {
-		this.deptRoleId = deptRoleId;
+	public void setRoleIds(Integer[] roleIds) {
+		this.roleIds = roleIds;
 	}
 
 	public Boolean getIsActive() {
@@ -95,8 +104,16 @@ public class UserDepartmentRole {
 		this.isBlocked = isBlocked;
 	}
 
+	public List<String> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<String> roles) {
+		this.roles = roles;
+	}
+
 	public String toString() {
 		return "[UserDepartmentRole = " + ", Id: " + ((id == null) ? 0 : id) + ", userId: " + userId + ", DeptRoleId: "
-				+ deptRoleId + ", isActive: " + isActive + ", isBlocked: " + isBlocked + "]";
+				+ roleIds + ", isActive: " + isActive + ", isBlocked: " + isBlocked + "]";
 	}
 }
