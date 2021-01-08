@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Type;
@@ -26,6 +27,9 @@ public class DepartmentRole {
 	@Column(name = "dept_type")
 	@NotNull
 	private String deptType;
+
+	@Transient
+	private Iterable<Role> roles;
 
 	public Integer getId() {
 		return id;
@@ -49,5 +53,13 @@ public class DepartmentRole {
 
 	public void setDeptType(String deptType) {
 		this.deptType = deptType;
+	}
+
+	public Iterable<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Iterable<Role> roles) {
+		this.roles = roles;
 	}
 }

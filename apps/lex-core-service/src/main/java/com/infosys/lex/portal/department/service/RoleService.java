@@ -15,7 +15,7 @@ public interface RoleService {
 
 	DepartmentRole addDepartmentRole(DepartmentRole deptRole) throws Exception;
 	
-	DepartmentRole getDepartmentRoleById(Integer deptRoleId);
+	DepartmentRole getDepartmentRoleById(String deptRoleId);
 
 	boolean removeDepartmentRole(Integer deptRoleId) throws Exception;
 

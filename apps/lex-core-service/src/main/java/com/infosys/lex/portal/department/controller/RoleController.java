@@ -48,10 +48,10 @@ public class RoleController {
 		return new ResponseEntity<Iterable<DepartmentRole>>(roleService.getAllDepartmentRoles(), HttpStatus.OK);
 	}
 
-	@GetMapping("/portal/deptRole/{dept_role_id}")
-	public ResponseEntity<DepartmentRole> getDepartmentRolesById(@PathVariable("dept_role_id") Integer deptRoleId)
+	@GetMapping("/portal/deptRole/{deptType}")
+	public ResponseEntity<DepartmentRole> getDepartmentRolesById(@PathVariable("deptType") String deptType)
 			throws Exception {
-		return new ResponseEntity<DepartmentRole>(roleService.getDepartmentRoleById(deptRoleId), HttpStatus.OK);
+		return new ResponseEntity<DepartmentRole>(roleService.getDepartmentRoleById(deptType), HttpStatus.OK);
 	}
 
 	@PostMapping("/portal/deptRole")

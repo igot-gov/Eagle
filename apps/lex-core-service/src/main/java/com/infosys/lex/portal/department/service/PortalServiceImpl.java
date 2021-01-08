@@ -663,7 +663,7 @@ public class PortalServiceImpl implements PortalService {
 	public boolean validateCBPUserLogin(String userId) {
 		List<UserDepartmentRole> userDeptRoleList = userDepartmentRoleRepo
 				.findAllByUserIdAndIsActiveAndIsBlocked(userId, true, false);
-		DepartmentRole cbpRole = deptRoleRepo.findByDeptType(PortalConstants.CBP_DEPT_TYPE);
+		DepartmentRole cbpRole = deptRoleRepo.findByDeptTypeIgnoreCase(PortalConstants.CBP_DEPT_TYPE);
 		Set<Integer> cbpRoleIds = new HashSet<Integer>();
 		if (cbpRole != null) {
 			cbpRoleIds.addAll(Arrays.asList(cbpRole.getRoleIds()));

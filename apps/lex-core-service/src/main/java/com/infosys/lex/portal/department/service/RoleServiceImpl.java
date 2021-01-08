@@ -1,5 +1,6 @@
 package com.infosys.lex.portal.department.service;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 import javax.transaction.NotSupportedException;
@@ -7,6 +8,7 @@ import javax.transaction.NotSupportedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.infosys.lex.common.util.DataValidator;
 import com.infosys.lex.portal.department.dto.DepartmentRole;
 import com.infosys.lex.portal.department.dto.Role;
 import com.infosys.lex.portal.department.repo.DepartmentRoleRepository;
@@ -55,12 +57,12 @@ public class RoleServiceImpl implements RoleService {
 
 	@Override
 	public Iterable<DepartmentRole> getAllDepartmentRoles() {
-		return deptRoleRepo.findAll();
+		return enrichDepartmentRoleInfo(deptRoleRepo.findAll());
 	}
 
 	@Override
-	public DepartmentRole getDepartmentRoleById(Integer deptRoleId) {
-		return deptRoleRepo.findById(deptRoleId).get();
+	public DepartmentRole getDepartmentRoleById(String deptType) {
+		return enrichDepartmentRoleInfo(deptRoleRepo.findByDeptTypeIgnoreCase(deptType));
 	}
 
 	@Override
@@ -89,4 +91,20 @@ public class RoleServiceImpl implements RoleService {
 		throw new NotSupportedException("Yet to implement this method");
 	}
 
+	private Iterable<DepartmentRole> enrichDepartmentRoleInfo(Iterable<DepartmentRole> deptRoleList) {
+		if (!DataValidator.isCollectionEmpty(deptRoleList)) {
+			for (DepartmentRole deptRole : deptRoleList) {
+				enrichDepartmentRoleInfo(deptRole);
+			}
+		}
+		return deptRoleList;
+	}
+	
+	private DepartmentRole enrichDepartmentRoleInfo(DepartmentRole deptRole) {
+		if(deptRole != null) {
+			Iterable<Role> rList = roleRepo.findAllById(Arrays.asList(deptRole.getRoleIds()));
+			deptRole.setRoles(rList);
+		}
+		return deptRole;
+	}
 }

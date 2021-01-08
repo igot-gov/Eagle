@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import com.infosys.lex.portal.department.dto.DepartmentRole;
 
 public interface DepartmentRoleRepository extends CrudRepository<DepartmentRole, Integer> {
-	DepartmentRole findByDeptType(String deptType);
+	DepartmentRole findByDeptTypeIgnoreCase(String deptType);
 	List<DepartmentRole> findAllByDeptTypeIn(List<String> deptTypes);
 	
 //	DepartmentRole findByRoleIdAndDeptId(Integer roleId, Integer deptId);
