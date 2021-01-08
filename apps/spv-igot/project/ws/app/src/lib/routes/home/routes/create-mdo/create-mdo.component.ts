@@ -19,7 +19,7 @@ import { AccessControlService } from '../../services/access-control.service'
 import { EditorService } from '../../services/editor.service'
 import { startWith, debounceTime, distinctUntilChanged, filter, switchMap } from 'rxjs/operators'
 import { of } from 'rxjs'
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { CreateMDOService } from './create-mdo.services'
 interface IUser { userId: string, fullName: string; email: string; role: string }
 @Component({
@@ -83,14 +83,14 @@ export class CreateMdoComponent implements OnInit {
   { isActive: false, isCompleted: false, name: 'Classification', step: 1 },
   { isActive: false, isCompleded: false, name: 'Intended for', step: 2 }]
   constructor(public dialog: MatDialog,
-              private uploadService: UploadService,
-              private snackBar: MatSnackBar,
-              private contentService: EditorContentService,
-              private loader: LoaderService,
-              private authInitService: AuthInitService,
-              private createMdoService: CreateMDOService,
-    // private router: Router,
-              private activatedRoute: ActivatedRoute) {
+    private uploadService: UploadService,
+    private snackBar: MatSnackBar,
+    private contentService: EditorContentService,
+    private loader: LoaderService,
+    private authInitService: AuthInitService,
+    private createMdoService: CreateMDOService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute) {
     {
 
       this.contentForm = new FormGroup({
@@ -537,9 +537,13 @@ export class CreateMdoComponent implements OnInit {
         this.createMdoService.assignAdminToDepartment(element.userId, this.departmentId, this.departmentRoleId).subscribe(res => {
           this.departmentId = res.id
           this.departmentRoleId = res.rolesInfo[0].deptRoleId
+
         })
       })
+      this.snackBar.open('Admin assigned Successfully')
+      this.router.navigate(['/app/home/directory'])
     })
+
   }
   getAllResponse(response: any) {
     const tempArray: IUser[] = []
