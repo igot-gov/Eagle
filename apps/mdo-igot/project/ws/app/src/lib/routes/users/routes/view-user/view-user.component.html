@@ -30,7 +30,7 @@
                           <ng-container>
                             <mat-grid-list cols="1" rowHeight="100px">
                               <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
-                                <img [src]="basicInfo.photo">
+                                <img [src]="basicInfo.photo" alt="User Avatar" (error)="changeToDefaultImg($event)">
                               </mat-grid-tile>
                               <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
                                 <label class="appr-text-label">First name</label>

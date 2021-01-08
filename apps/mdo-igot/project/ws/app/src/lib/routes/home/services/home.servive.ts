@@ -11,7 +11,7 @@ const API_END_POINTS = {
   SOCIAL_VIEW_CONVERSATION: `${PROTECTED_SLAG_V8}/social/post/viewConversation`,
   getUserdetailsV2FromRegistry: '/apis/protected/v8/user/profileDetails/getUserRegistryById',
   CHECK_ISADMIN: '/apis/protected/v8/portal/isAdmin/mdo',
-  GET_MY_DEPARTMENT: '/apis/protected/v8/portal/mydepartment?allUsers=true',
+  GET_MY_DEPARTMENT: '/apis/protected/v8/portal/mdo/mydepartment?allUsers=true',
 }
 
 @Injectable({

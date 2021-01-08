@@ -32,7 +32,7 @@
             <ng-container matColumnDef="{{col.key}}" *ngFor="let col of tableData!.columns">
                 <mat-header-cell *matHeaderCellDef mat-sort-header class=".h-400-r-14-l color-60"> {{col.displayName}}
                 </mat-header-cell>
-                <mat-cell *matCellDef="let element">
+                <mat-cell *matCellDef="let element" (click)="onRowClick(element)">
                     <span *ngIf="col.isList" class="h-400-r-14-l color-87 textclass">
                         <div innerHTML="{{element[col.key]}}"></div>
                     </span>
@@ -61,11 +61,11 @@
             </ng-container>
             <ng-container matColumnDef="Menu">
                 <mat-header-cell *matHeaderCellDef class="clr-darkish-blue action-header">
-                    <!-- <mat-icon>view_comfy</mat-icon> -->
+                    <mat-icon>view_comfy</mat-icon>
                 </mat-header-cell>
                 <mat-cell *matCellDef="let row" class="action-cell">
                     <button type="button" mat-icon-button i18n-aria-label aria-label="action items"
-                        [matMenuTriggerFor]="cardMenu" class="action-btn">
+                        [matMenuTriggerFor]="cardMenu" [matMenuTriggerData]="{'data':row}" class="action-btn">
                         <mat-icon>more_horiz</mat-icon>
                     </button>
                 </mat-cell>
@@ -73,7 +73,7 @@
 
             <mat-header-row *matHeaderRowDef="getFinalColumns()"></mat-header-row>
 
-            <mat-row *matRowDef="let row; columns: getFinalColumns();" (click)="selection.toggle(row); onRowClick(row)">
+            <mat-row *matRowDef="let row; columns: getFinalColumns();" (click)="selection.toggle(row);">
             </mat-row>
 
             <!-- <div *ngIf="dataSource.filteredData.length <= 0">
@@ -92,30 +92,30 @@
 </div>
 
 <mat-menu #cardMenu="matMenu">
-    <ng-template matMenuContent>
-        <div mat-menu-item>
-            <button name="channel-analytics-button" class="ws-mat-primary-text" mat-icon-button i18n-aria-label
-                aria-label="Analytics">
-                <mat-icon>input</mat-icon> <span>Show on Karmayogi</span>
-            </button>
-        </div>
-        <div mat-menu-item>
-            <button name="channel-analytics-button" class="ws-mat-primary-text" mat-icon-button i18n-aria-label
-                aria-label="Analytics">
-                <mat-icon>block</mat-icon><span>Block user</span>
-            </button>
-        </div>
-        <div mat-menu-item>
-            <button name="channel-analytics-button" class="ws-mat-primary-text" mat-icon-button i18n-aria-label
-                aria-label="Analytics">
-                <mat-icon>edit_attributes</mat-icon><span>Deactivate User</span>
-            </button>
-        </div>
-        <div mat-menu-item>
-            <button name="channel-analytics-button" class="ws-mat-primary-text" mat-icon-button i18n-aria-label
-                aria-label="Analytics">
-                <mat-icon>delete</mat-icon><span>Delete User</span>
-            </button>
-        </div>
+    <ng-template matMenuContent let-rowData="data">
+        <!-- <div > -->
+        <button (click)="buttonClick('showOnKarma',rowData)" mat-menu-item name="channel-analytics-button"
+            class="ws-mat-primary-text" i18n-aria-label aria-label="Analytics">
+            <mat-icon>input</mat-icon> <span>Show on Karmayogi</span>
+        </button>
+        <!-- </div> -->
+        <!-- <div mat-menu-item> -->
+        <button (click)="buttonClick('block',rowData)" mat-menu-item name="channel-analytics-button"
+            class="ws-mat-primary-text" i18n-aria-label aria-label="Analytics">
+            <mat-icon>block</mat-icon><span>Block user</span>
+        </button>
+        <!-- </div> -->
+        <!-- <div mat-menu-item> -->
+        <button (click)="buttonClick('deactive',rowData)" mat-menu-item name="channel-analytics-button"
+            class="ws-mat-primary-text" i18n-aria-label aria-label="Analytics">
+            <mat-icon>edit_attributes</mat-icon><span>Deactivate User</span>
+        </button>
+        <!-- </div> -->
+        <!-- <div mat-menu-item> -->
+        <button (click)="buttonClick('delete',rowData)" mat-menu-item name="channel-analytics-button"
+            class="ws-mat-primary-text" i18n-aria-label aria-label="Analytics">
+            <mat-icon>delete</mat-icon><span>Delete User</span>
+        </button>
+        <!-- </div> -->
     </ng-template>
 </mat-menu>

@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs'
 
 const API_END_POINTS = {
-  GET_ALL_USERS: '/apis/protected/v8/portal/mydepartment?allUsers=true',
-  GET_MY_DEPARTMENT: '/apis/protected/v8/portal/mydepartment?allUsers=true',
+  GET_ALL_USERS: '/apis/protected/v8/portal/mdo/mydepartment?allUsers=true',
+  GET_MY_DEPARTMENT: '/apis/protected/v8/portal/mdo/mydepartment?allUsers=true',
   CREATE_USER: 'apis/protected/v8/admin/userRegistration/create-user',
   PROFILE_REGISTRY: 'apis/protected/v8/user/profileRegistry/getUserRegistryByUser/',
   ADD_USER_TO_DEPARTMENT: 'apis/protected/v8/portal/deptAction',

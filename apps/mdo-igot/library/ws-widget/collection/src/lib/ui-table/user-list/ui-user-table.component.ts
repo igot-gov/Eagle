@@ -96,7 +96,7 @@ export class UIUserTableComponent implements OnInit, AfterViewInit, OnChanges {
       // if (this.tableData.actions && this.tableData.actions.length > 0) {
       //   columns.push('Actions')
       // }
-      if (this.tableData.actions && this.tableData.actions.length > 0) {
+      if (this.tableData.needUserMenus) {
         columns.push('Menu')
       }
       return columns
@@ -137,4 +137,5 @@ export class UIUserTableComponent implements OnInit, AfterViewInit, OnChanges {
   onCreateClick() {
     this.eOnCreateClick.emit()
   }
+
 }

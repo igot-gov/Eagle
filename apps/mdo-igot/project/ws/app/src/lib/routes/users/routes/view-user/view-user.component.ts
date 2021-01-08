@@ -134,5 +134,7 @@ export class ViewUserComponent implements OnInit, AfterViewInit {
       el.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' })
     }
   }
-
+  changeToDefaultImg($event: any) {
+    $event.target.src = '/assets/instances/eagle/app_logos/default.png'
+  }
 }

@@ -1,5 +1,7 @@
 import { AfterViewInit, Component, OnInit, OnDestroy } from '@angular/core'
 import { Router } from '@angular/router'
+import { ITableData } from '../../../../../../../../../library/ws-widget/collection/src/public-api'
+import { environment } from '../../../../../../../../../src/environments/environment'
 import { UsersService } from '../../services/users.service'
 
 @Component({
@@ -9,7 +11,7 @@ import { UsersService } from '../../services/users.service'
 })
 
 export class UsersComponent implements OnInit, AfterViewInit, OnDestroy {
-  tabledata: any = []
+  tabledata!: ITableData
   data: any = []
   role: any
   private defaultSideNavBarOpenedSubscription: any
@@ -30,8 +32,9 @@ export class UsersComponent implements OnInit, AfterViewInit, OnDestroy {
       ],
       needCheckBox: false,
       needHash: false,
-      sortColumn: '',
+      sortColumn: 'fullName',
       sortState: 'asc',
+      needUserMenus: true
     }
   }
 
@@ -48,6 +51,7 @@ export class UsersComponent implements OnInit, AfterViewInit, OnDestroy {
           email: user.email,
           position: user.department_name,
           role: this.role,
+          wid: user.wid
         }
       })
     })
@@ -56,6 +60,19 @@ export class UsersComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy() {
     if (this.defaultSideNavBarOpenedSubscription) {
       this.defaultSideNavBarOpenedSubscription.unsubscribe()
+    }
+  }
+  menuActions($event: { action: string, row: any }) {
+    switch ($event.action) {
+      case 'showOnKarma':
+        window.open(`${environment.karmYogiPath}/app/person-profile/${$event.row.wid}`)
+        break
+      case 'block':
+        break
+      case 'deactive':
+        break
+      case 'delete':
+        break
     }
   }
 }

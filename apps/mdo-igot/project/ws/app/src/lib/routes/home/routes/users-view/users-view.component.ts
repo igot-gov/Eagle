@@ -7,6 +7,8 @@ import { ConfigurationsService } from '@ws-widget/utils/src/public-api'
 import { UsersService } from '../../../users/services/users.service'
 /* tslint:disable */
 import _ from 'lodash'
+import { environment } from 'src/environments/environment'
+import { ITableData } from '../../../../../../../../../library/ws-widget/collection/src/public-api'
 
 @Component({
   selector: 'ws-app-users-view',
@@ -30,7 +32,7 @@ export class UsersViewComponent implements OnInit, OnDestroy {
   tabsData: NSProfileDataV2.IProfileTab[]
   currentUser!: string | null
   connectionRequests!: any[]
-  tabledata: any = []
+  tabledata!: ITableData
   data: any = []
   usersData!: any
 
@@ -65,8 +67,7 @@ export class UsersViewComponent implements OnInit, OnDestroy {
   }
   ngOnInit() {
     this.tabledata = {
-      // actions: [{ name: 'Approve', label: 'Approve', icon: 'remove_red_eye', type: 'Approve' },
-      // { name: 'Reject', label: 'Reject', icon: 'remove_red_eye', type: 'Reject' }],
+      actions: [],
       columns: [
         { displayName: 'Full Name', key: 'fullname' },
         { displayName: 'Email', key: 'email' },
@@ -75,8 +76,9 @@ export class UsersViewComponent implements OnInit, OnDestroy {
       ],
       needCheckBox: false,
       needHash: false,
-      sortColumn: '',
+      sortColumn: 'fullName',
       sortState: 'asc',
+      needUserMenus: true,
     }
 
     this.getAllUsers()
@@ -93,6 +95,8 @@ export class UsersViewComponent implements OnInit, OnDestroy {
           email: user.emailId,
           role: user.roleInfo.roleName,
           userId: user.userId,
+          active: user.active,
+          blocked: user.blocked,
         })
       })
     }
@@ -100,10 +104,13 @@ export class UsersViewComponent implements OnInit, OnDestroy {
     if (this.usersData.blocked_users && this.usersData.blocked_users.length > 0) {
       this.usersData.blocked_users.forEach((user: any) => {
         blockedUsersData.push({
+
           fullname: user ? `${user.firstName} ${user.lastName}` : null,
           email: user.emailId,
           role: user.roleInfo.roleName,
           userId: user.userId,
+          active: user.active,
+          blocked: user.blocked,
         })
       })
     }
@@ -114,6 +121,8 @@ export class UsersViewComponent implements OnInit, OnDestroy {
           email: user.emailId,
           role: user.roleInfo.roleName,
           userId: user.userId,
+          active: user.active,
+          blocked: user.blocked,
         })
       })
     }
@@ -150,5 +159,18 @@ export class UsersViewComponent implements OnInit, OnDestroy {
 
   onRoleClick(user: any) {
     this.router.navigate([`/app/users/${user.userId}/details`])
+  }
+  menuActions($event: { action: string, row: any }) {
+    switch ($event.action) {
+      case 'showOnKarma':
+        window.open(`${environment.karmYogiPath}/app/person-profile/${$event.row.userId}`)
+        break
+      case 'block':
+        break
+      case 'deactive':
+        break
+      case 'delete':
+        break
+    }
   }
 }
