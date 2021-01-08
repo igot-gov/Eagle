@@ -19,6 +19,8 @@ const API_END_POINTS = {
         `${CONSTANTS.SB_EXT_API_BASE_2}/portal/department/${deptId}/user/${userId}/isAdmin`,
     myDeptApi: (portalName: string, isUserInfoRequired: boolean) =>
         `${CONSTANTS.SB_EXT_API_BASE_2}/portal/${portalName}/mydepartment?allUsers=${isUserInfoRequired}`,
+    roleApi: `${CONSTANTS.SB_EXT_API_BASE_2}/portal/deptRole`,
+    roleByTypeApi: (deptType: string) => `${CONSTANTS.SB_EXT_API_BASE_2}/portal/deptRole/${deptType}`,
     spvDeptApi: `${CONSTANTS.SB_EXT_API_BASE_2}/portal/spv/department`,
     spvDeptByIdApi: (deptId: string, isUserInfoRequired: boolean) =>
         `${CONSTANTS.SB_EXT_API_BASE_2}/portal/spv/department/${deptId}?allUsers=${isUserInfoRequired}`,
@@ -175,6 +177,43 @@ portalApi.patch('/cbp/deptAction/userrole', async (req, res) => {
     updateUserRole(cbpPortal, req, res)
 })
 
+// ------------------ Role APIs ----------------------
+portalApi.get('/deptRole', async (req, res) => {
+    try {
+        const response = await axios.get(API_END_POINTS.roleApi, {
+            ...axiosRequestConfig,
+            headers: req.headers,
+        })
+        res.status(response.status).send(response.data)
+    } catch (err) {
+        logError(failedToProcess + err)
+        res.status((err && err.response && err.response.status) || 500).send(
+            (err && err.response && err.response.data) || {
+                error: unknownError,
+            }
+        )
+    }
+})
+
+portalApi.get('/deptRole/:deptTypeName', async (req, res) => {
+    try {
+        const deptTypeName = req.params.deptTypeName as string
+        const response = await axios.get(API_END_POINTS.roleByTypeApi(deptTypeName), {
+            ...axiosRequestConfig,
+            headers: req.headers,
+        })
+        res.status(response.status).send(response.data)
+    } catch (err) {
+        logError(failedToProcess + err)
+        res.status((err && err.response && err.response.status) || 500).send(
+            (err && err.response && err.response.data) || {
+                error: unknownError,
+            }
+        )
+    }
+})
+
+// ------------------ Private Functions ----------------------
 // tslint:disable-next-line: no-any
 export async function getMyDepartment(portalName: string, req: any, res: any) {
     try {
