@@ -75,3 +75,7 @@
     </mat-card>
 </div>
 <!-- </form> -->
+
+<ng-template #top>
+    <ws-auth-options [currentContent]="contentMeta.identifier" (action)="data.emit($event)"></ws-auth-options>
+</ng-template>

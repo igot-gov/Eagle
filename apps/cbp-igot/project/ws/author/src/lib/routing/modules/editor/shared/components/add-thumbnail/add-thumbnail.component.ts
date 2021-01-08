@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { LoaderService } from '@ws/author/src/lib/services/loader.service'
 import { ActivatedRoute } from '@angular/router'
 import {
@@ -15,6 +15,10 @@ import { CollectionStoreService } from '../../../../editor/routing/modules/colle
 import { NSApiRequest } from '@ws/author/src/lib/interface/apiRequest'
 import { CollectionResolverService } from '../../../../editor/routing/modules/collection/services/resolver.service'
 import { NsContent } from '@ws-widget/collection/src/lib/_services/widget-content.model'
+import { NSContent } from '@ws/author/src/lib/interface/content'
+import { AuthInitService } from '@ws/author/src/lib/services/init.service'
+import { IFormMeta } from './../../../../../../interface/form'
+import { MatSnackBar } from '@angular/material/snack-bar'
 
 @Component({
   selector: 'ws-utils-add-thumbnail',
@@ -24,6 +28,7 @@ import { NsContent } from '@ws-widget/collection/src/lib/_services/widget-conten
 })
 export class AddThumbnailComponent implements OnInit {
   // toggle: NsContent.IContent[] = []
+  contentMeta!: NSContent.IContentMeta
   toggle: NsContent.IContent | null = null
   currentParentId!: string
   startForm!: FormGroup
@@ -43,6 +48,10 @@ export class AddThumbnailComponent implements OnInit {
   IsChecked: boolean
   isEditEnabled = false
   thumbanilSelectval!: string
+  @Input() stage = 1
+  @Input() type = ''
+  canUpdate = true
+
 
   constructor(private loadService: LoaderService,
     private myContSvc: MyContentService,
@@ -52,6 +61,8 @@ export class AddThumbnailComponent implements OnInit {
     private contentService: EditorContentService,
     private editorService: EditorService,
     private storeService: CollectionStoreService,
+    private authInitService: AuthInitService,
+    private snackBar: MatSnackBar,
   ) {
     this.userId = this.accessService.userId
     this.IsChecked = false
@@ -78,6 +89,13 @@ export class AddThumbnailComponent implements OnInit {
       this.status = params.status
       this.fetchContent(false, this.userId)
     })
+    this.contentService.changeActiveCont.subscribe(data => {
+      console.log('----data=========------',data,this.contentMeta)
+      // if (this.contentMeta && this.canUpdate) {
+        this.storeData()
+      // }
+      // this.content = this.contentService.getUpdatedMeta(data)
+    })
   }
 
 
@@ -96,7 +114,6 @@ export class AddThumbnailComponent implements OnInit {
           this.fetchContent(false, this.userId)
           break
         case 'all':
-          console.log('------------', this.imageList)
           this.fetchContent(false, null)
           break
 
@@ -159,13 +176,63 @@ export class AddThumbnailComponent implements OnInit {
     )
   }
 
+  storeData() {
+    try {
+      const originalMeta = this.contentService.getOriginalMeta(this.contentMeta.identifier)
+      console.log(originalMeta, '---originalMeta-----------------')
+      // if (originalMeta && this.isEditEnabled) {
+      //   const currentMeta: NSContent.IContentMeta = JSON.parse(JSON.stringify(this.contentForm.value))
+      //   if (originalMeta.mimeType) {
+      //     currentMeta.mimeType = originalMeta.mimeType
+      //   }
+      //   const meta = <any>{}
+      //   Object.keys(currentMeta).map(v => {
+      //     if (
+      //       v !== 'versionKey' &&
+      //       JSON.stringify(currentMeta[v as keyof NSContent.IContentMeta]) !==
+      //       JSON.stringify(originalMeta[v as keyof NSContent.IContentMeta])
+      //     ) {
+      //       if (
+      //         currentMeta[v as keyof NSContent.IContentMeta] ||
+      //         (this.authInitService.authConfig[v as keyof IFormMeta].type === 'boolean' &&
+      //           currentMeta[v as keyof NSContent.IContentMeta] === false)
+      //       ) {
+      //         meta[v as keyof NSContent.IContentMeta] = currentMeta[v as keyof NSContent.IContentMeta]
+      //       } else {
+      //         meta[v as keyof NSContent.IContentMeta] = JSON.parse(
+      //           JSON.stringify(
+      //             this.authInitService.authConfig[v as keyof IFormMeta].defaultValue[
+      //               originalMeta.contentType
+      //               // tslint:disable-next-line: ter-computed-property-spacing
+      //             ][0].value,
+      //           ),
+      //         )
+      //       }
+      //     } else if (v === 'versionKey') {
+      //       meta[v as keyof NSContent.IContentMeta] = originalMeta[v as keyof NSContent.IContentMeta]
+      //     }
+      //   })
+      //   // Quick FIX
+      //   if (this.stage >= 1 && !this.type) {
+      //     delete meta.artifactUrl
+      //   }
+
+      //   this.contentService.setUpdatedMeta(meta, this.contentMeta.identifier)
+      // }
+    } catch (ex) {
+      this.snackBar.open('Please Save Parent first and refresh page.')
+    }
+  }
+
   public uploadThumbnail() {
     console.log('----------------------------', this.contentService)
     console.log('----------------------------', this.toggle)
+    // this.storeData()
 
     const nodesModified: any = {}
     let isRootPresent = false
     Object.keys(this.contentService.upDatedContent).forEach(v => {
+      console.log(v)
       if (!isRootPresent) {
         isRootPresent = this.storeService.parentNode.includes(v)
       }
@@ -183,11 +250,11 @@ export class AddThumbnailComponent implements OnInit {
       }
     }
 
-    console.log('----------------------------',Object.keys(this.contentService.upDatedContent)[0], nodesModified[Object.keys(this.contentService.upDatedContent)[0]].metadata)
-    let requestBody: NSApiRequest.IThumbnailUpdateV3 = {
+    console.log('----------------------------', Object.keys(this.contentService.upDatedContent)[0], nodesModified[Object.keys(this.contentService.upDatedContent)[0]].metadata)
+    let requestBody: NSApiRequest.IContentUpdateV2 = {
       request: {
         content: {
-          appIcon: this.toggle ? this.toggle.downloadUrl : ''
+          // appIcon: this.toggle ? this.toggle.downloadUrl : ''
         }
       }
     }
