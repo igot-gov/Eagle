@@ -22,7 +22,7 @@ import { navigatorApi } from './navigator'
 import { networkConnectionApi } from './network'
 
 import { networkHubApi } from './network-hub'
-import { portalApi } from './portal'
+import { portalApi } from './portal-v3'
 import { recommendationApi } from './recommendation'
 import { scoringApi } from './scoring'
 import { scromApi } from './scrom'
