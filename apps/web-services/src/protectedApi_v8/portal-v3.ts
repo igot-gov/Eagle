@@ -38,6 +38,7 @@ const mdoPortal = 'mdo'
 const cbpPortal = 'cbp'
 const spvDeptPath = '/spv/department'
 const spvDeptPathAction = '/spv/deptAction/userrole'
+const departmentType = '/departmentType'
 
 portalApi.get('/spv/mydepartment', async (req, res) => {
     try {
@@ -294,3 +295,32 @@ export async function updateUserRole(portalName: string, req: any, res: any) {
         )
     }
 }
+
+portalApi.get(departmentType, async (req, res) => {
+    try {
+        const response = await axios.get(API_END_POINTS.deptType)
+        res.status(response.status).send(response.data)
+    } catch (err) {
+        logError(failedToProcess + req.originalUrl + err)
+        res.status((err && err.response && err.response.status) || 500).send(
+            (err && err.response && err.response.data) || {
+                error: unknownError,
+            }
+        )
+    }
+})
+
+portalApi.get(departmentType + '/:deptType', async (req, res) => {
+    try {
+        const deptType = req.params.deptType as string
+        const response = await axios.get(API_END_POINTS.deptTypeByName(deptType))
+        res.status(response.status).send(response.data)
+    } catch (err) {
+        logError(failedToProcess + req.originalUrl + err)
+        res.status((err && err.response && err.response.status) || 500).send(
+            (err && err.response && err.response.data) || {
+                error: unknownError,
+            }
+        )
+    }
+})
