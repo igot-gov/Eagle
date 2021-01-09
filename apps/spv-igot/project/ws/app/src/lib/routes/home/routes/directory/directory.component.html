@@ -13,7 +13,7 @@
       <div class="flex flex-1 flex-column margin-fix">
         <div class="flex flex-1 filter max-height-60">
           <a *ngFor="let department of departmentHearders" href="javascript:void(0)" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter ===department,
-              'ws-mat-accent-border font-medium':currentFilter !== 'underreview'}" mat-button
+              'ws-mat-accent-border font-medium':currentFilter !== 'department'}" mat-button
             (click)="filter(department)" role="button">{{department}}</a>
         </div>
       </div>

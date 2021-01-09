@@ -13,9 +13,9 @@
               <mat-form-field appearance="outline" class="margin-top-xs"
                 [ngClass]="{ 'mat-form-field-invalid': showError('name') }">
                 <input matInput #name formControlName="name" maxlength="500" i18n-placeholder placeholder="Type here"
-                  type="text" [required]="checkCondition('name', 'required') ? true : null" />
+                  type="text" [required]="checkCondition('name', 'required') ? true : null" pattern="[a-zA-Z ]*" />
                 <mat-error *ngIf="showError('name')" i18n="Name Error|Explains name is required">
-                  Department name is mandatory
+                  Department name not valid
                 </mat-error>
               </mat-form-field>
             </div>
@@ -30,7 +30,7 @@
               <input matInput formControlName="head" #subTitle maxlength="1000" i18n-placeholder placeholder="Type here"
                 [required]="checkCondition('subTitle', 'required') ? true : null" />
               <mat-error *ngIf="showError('subTitle')" i18n="Subtitle Error|Explains Subtitle is required">
-                Head Quaters is mandatory
+                Head Quaters not valid
               </mat-error>
             </mat-form-field>
           </div>
@@ -93,7 +93,7 @@
       (click)="openPopup()">
       <b class="text-white" i18n>Add User</b>
     </button>
-    <ws-widget-ui-user-table [tableData]="tabledata" [data]="data">
+    <ws-widget-ui-user-table [tableData]="tabledata" [data]="data" [isFromDirectory]="isFromDirectory">
     </ws-widget-ui-user-table>
   </mat-card>
 </ng-container>

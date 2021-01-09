@@ -9,6 +9,7 @@ import { MatSort } from '@angular/material/sort'
 import * as _ from 'lodash'
 
 import { ITableData, IColums } from '../interface/interfaces'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'ws-widget-ui-user-table',
@@ -18,6 +19,7 @@ import { ITableData, IColums } from '../interface/interfaces'
 export class UIUserTableComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() tableData!: ITableData | undefined
   @Input() data?: []
+  @Input() isFromDirectory?: boolean
   @Output() clicked?: EventEmitter<any>
   @Output() actionsClick?: EventEmitter<any>
   @Output() eOnRowClick = new EventEmitter<any>()
@@ -33,7 +35,7 @@ export class UIUserTableComponent implements OnInit, AfterViewInit, OnChanges {
   @ViewChild(MatSort, { static: true }) sort?: MatSort
   selection = new SelectionModel<any>(true, [])
 
-  constructor() {
+  constructor(private router: Router) {
     this.dataSource = new MatTableDataSource<any>()
     this.actionsClick = new EventEmitter()
     this.clicked = new EventEmitter()
@@ -127,5 +129,8 @@ export class UIUserTableComponent implements OnInit, AfterViewInit, OnChanges {
   onRowClick(e: any) {
     this.eOnRowClick.emit(e)
 
+  }
+  gotoCreateUser() {
+    this.router.navigate([`/app/home/create-user`])
   }
 }

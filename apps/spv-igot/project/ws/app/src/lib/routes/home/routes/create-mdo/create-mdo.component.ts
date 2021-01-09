@@ -77,20 +77,21 @@ export class CreateMdoComponent implements OnInit {
   data1: any
   updateId !: number
   department!: string
+  isFromDirectory = false
   subDepartments!: any
   isUpdate = false
   workFlow = [{ isActive: true, isCompleted: false, name: 'Basic Details', step: 0 },
   { isActive: false, isCompleted: false, name: 'Classification', step: 1 },
   { isActive: false, isCompleded: false, name: 'Intended for', step: 2 }]
   constructor(public dialog: MatDialog,
-    private uploadService: UploadService,
-    private snackBar: MatSnackBar,
-    private contentService: EditorContentService,
-    private loader: LoaderService,
-    private authInitService: AuthInitService,
-    private createMdoService: CreateMDOService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute) {
+              private uploadService: UploadService,
+              private snackBar: MatSnackBar,
+              private contentService: EditorContentService,
+              private loader: LoaderService,
+              private authInitService: AuthInitService,
+              private createMdoService: CreateMDOService,
+              private router: Router,
+              private activatedRoute: ActivatedRoute) {
     {
 
       this.contentForm = new FormGroup({
@@ -102,6 +103,7 @@ export class CreateMdoComponent implements OnInit {
       this.activatedRoute.params.subscribe(params => {
         let data = params['data']
         this.department = params['department']
+        this.isFromDirectory = params['isFromDirectory']
         data = JSON.parse(data)
         if (this.data !== undefined || this.data !== null) {
           this.isUpdate = true
@@ -527,7 +529,7 @@ export class CreateMdoComponent implements OnInit {
   openPopup() {
     const dialogRef = this.dialog.open(UserPopupComponent, {
       maxHeight: 'auto',
-      height: '70%',
+      height: '65%',
       width: '80%',
       panelClass: 'remove-pad',
     })
@@ -541,7 +543,7 @@ export class CreateMdoComponent implements OnInit {
         })
       })
       this.snackBar.open('Admin assigned Successfully')
-      this.router.navigate(['/app/home/directory'])
+      this.router.navigate(['/app/home/directory', { department: this.department }])
     })
 
   }
@@ -568,8 +570,13 @@ export class CreateMdoComponent implements OnInit {
         this.createMdoService.createDepartment(this.contentForm.value).subscribe(res => {
           this.departmentId = res.id
           this.departmentRoleId = res.rolesInfo[0].deptRoleId
+          if (this.departmentId !== undefined && this.departmentRoleId) {
+            this.submittedForm = false
+          }
+        },                                                                       (err: { error: any }) => {
+          this.openSnackbar(err.error.errors[0].message)
         })
-        this.submittedForm = false
+
       }
     } else {
       if (this.contentForm.value.name !== null && this.contentForm.value.head !== null
@@ -577,11 +584,21 @@ export class CreateMdoComponent implements OnInit {
         this.createMdoService.updateDepartment(this.contentForm.value, this.updateId).subscribe(res => {
           this.departmentId = res.id
           this.departmentRoleId = res.rolesInfo[0].deptRoleId
+          if (this.departmentId !== undefined && this.departmentRoleId) {
+            this.submittedForm = false
+          }
+        },                                                                                      (err: { error: any }) => {
+          this.openSnackbar(err.error.errors[0].message)
         })
-        this.submittedForm = false
+
       }
     }
 
+  }
+  private openSnackbar(primaryMsg: string, duration: number = 5000) {
+    this.snackBar.open(primaryMsg, 'X', {
+      duration,
+    })
   }
 
 }

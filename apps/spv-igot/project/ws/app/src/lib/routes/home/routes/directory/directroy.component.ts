@@ -53,6 +53,9 @@ export class DirectoryViewComponent implements OnInit, AfterViewInit, OnDestroy 
         && data.profile.data[0]
       this.decideAPICall()
     })
+    // this.route.params.subscribe(params => {
+    //   const currentDepartment = params['department']
+    // })
   }
   decideAPICall() {
   }
@@ -67,16 +70,23 @@ export class DirectoryViewComponent implements OnInit, AfterViewInit, OnDestroy 
     this.getAllDepartmentsAPI()
   }
   getDepartmentHeader() {
-    this.wholeData.forEach((head: { deptTypeInfo: { deptType: void } }) => {
-      if (this.departmentHearders.indexOf(head.deptTypeInfo.deptType) === -1) {
-        this.departmentHearders.push(head.deptTypeInfo.deptType)
+    this.wholeData.forEach((head: { deptTypeInfos: [{ deptType: void }] }) => {
+      if (this.departmentHearders.indexOf(head.deptTypeInfos[0].deptType) === -1) {
+
+        this.departmentHearders.push(head.deptTypeInfos[0].deptType)
       }
     })
     const index = this.departmentHearders.indexOf('SPV')
     if (index > -1) {
       this.departmentHearders.splice(index, 1)
     }
-    this.getDepartDataByKey(this.departmentHearders[0])
+    const deptIndex = this.departmentHearders.indexOf(this.currentFilter)
+    if (deptIndex > -1) {
+      this.getDepartDataByKey(this.departmentHearders[deptIndex])
+    } else {
+      this.getDepartDataByKey(this.departmentHearders[0])
+    }
+
     this.tabledata = {
       actions: [{ name: 'Edit', label: 'Edit info', icon: 'remove_red_eye', type: 'button' }],
       columns: [
@@ -117,7 +127,7 @@ export class DirectoryViewComponent implements OnInit, AfterViewInit, OnDestroy 
       this.currentDepartment = key
       const filteredData: any[] = []
       this.wholeData.map((dept: any) => {
-        if (dept.deptTypeInfo.deptType === this.currentFilter) {
+        if (dept.deptTypeInfos[0].deptType === this.currentFilter) {
           filteredData.push(dept)
         }
       })
@@ -125,10 +135,10 @@ export class DirectoryViewComponent implements OnInit, AfterViewInit, OnDestroy 
         return {
           id: dept.id,
           mdo: dept.deptName,
-          type: dept.deptTypeInfo.deptSubType,
+          type: dept.deptTypeInfos[0].deptSubType,
           user: dept.noOfUsers,
           head: dept.headquarters,
-          typeid: dept.deptTypeInfo.id,
+          typeid: dept.deptTypeInfos.id,
         }
       })
 

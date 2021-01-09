@@ -8,6 +8,7 @@ import { UsersViewComponent } from './routes/users-view/users-view.component'
 import { RolesAccessComponent } from './routes/roles-access/roles-access.component'
 import { DirectoryViewComponent } from './routes/directory/directroy.component'
 import { CreateMdoComponent } from './routes/create-mdo/create-mdo.component'
+import { CreateUserComponent } from './routes/create-user/create-user.component'
 // import { PageResolve } from '@ws-widget/utils'
 const routes: Routes = [
   {
@@ -39,6 +40,10 @@ const routes: Routes = [
       {
         path: 'create-department',
         component: CreateMdoComponent,
+      },
+      {
+        path: 'create-user',
+        component: CreateUserComponent,
       },
     ],
   },

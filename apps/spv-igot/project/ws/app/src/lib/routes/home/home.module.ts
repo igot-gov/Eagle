@@ -35,6 +35,7 @@ import { UserPopupComponent } from './routes/user-popup/user-popup'
 import { UsersComponent } from './routes/users/users.component'
 import { OpenRolesDialogComponent } from './routes/users/components/open-roles-dialog/open-roles-dialog.component'
 import { EditDepartmentDialogComponent } from './routes/users/components/edit-department-dialog/edit-department-dialog.component'
+import { CreateUserComponent } from './routes/create-user/create-user.component'
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { EditDepartmentDialogComponent } from './routes/users/components/edit-de
     UsersComponent,
     OpenRolesDialogComponent,
     EditDepartmentDialogComponent,
+    CreateUserComponent,
   ],
   imports: [
     CommonModule,

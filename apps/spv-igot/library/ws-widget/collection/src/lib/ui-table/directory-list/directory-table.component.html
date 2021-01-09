@@ -16,12 +16,14 @@
                 </div>
             </div>
             <button mat-raised-button type="button"
-                class="text-white ws-mat-primary-background text-white margin-right-m custom-btn" (click)="gotoCreateNew()">
+                class="text-white ws-mat-primary-background text-white margin-right-m custom-btn"
+                (click)="gotoCreateNew()">
                 <b class="text-white" i18n>Create New</b>
             </button>
         </div>
 
         <!-- </mat-form-field> -->
+
         <mat-table #table matSort [ngStyle]="{'height': bodyHeight}" [matSortActive]="tableData!.sortColumn"
             [matSortDirection]="tableData!.sortState" [dataSource]="dataSource"
             class="example-table table1 responsiveTable">
@@ -74,6 +76,7 @@
             <mat-row *matRowDef="let row; columns: getFinalColumns();">
             </mat-row>
         </mat-table>
+        <div *ngIf="dataSource.length === 0">No records found</div>
     </div>
 
     <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions">
