@@ -70,7 +70,7 @@ export class OptionsComponent implements OnInit, OnDestroy, AfterViewInit {
         case 'Reviewed':
           return 'publish'
         case 'Live':
-          return 'unpublish'
+          return 'sendForReview'
         default:
           return 'sendForReview'
       }

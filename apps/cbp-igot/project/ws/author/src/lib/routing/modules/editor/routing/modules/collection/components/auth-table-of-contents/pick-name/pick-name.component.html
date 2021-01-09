@@ -1,4 +1,4 @@
-<form [formGroup]="createCourseForm" (ngSubmit)="createContent()">
+<form [formGroup]="createCourseForm" (ngSubmit)="!createCourseForm.invalid?createContent():null">
   <mat-card class="ws-mat-accent-border flex-1">
     <mat-card-header>
       <mat-card-title>
@@ -31,7 +31,8 @@
     </mat-card-content>
     <mat-card-actions>
       <div class="flex flex-start margin-top-l margin-bottom-s margin-left-s">
-        <button mat-raised-button type="submit" class="ws-mat-accent-text ws-mat-accent-border-active margin-left-s">
+        <button [disabled]="createCourseForm.invalid" mat-raised-button type="submit"
+          class="ws-mat-accent-text ws-mat-accent-border-active margin-left-s">
           <span class="mat-subheading-2 padding-xs" style="vertical-align: unset;" i18n>Save
           </span>
         </button>

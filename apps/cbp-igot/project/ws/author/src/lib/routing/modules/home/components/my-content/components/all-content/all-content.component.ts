@@ -139,8 +139,8 @@ export class AllContentComponent implements OnInit, OnDestroy {
     if (this.activatedRoute.snapshot.data.departmentData) {
       const leftData = this.authInitService.authAdditionalConfig.menus
       _.set(leftData, 'widgetData.logo', true)
-      _.set(leftData, 'widgetData.logoPath', _.get(this.activatedRoute, 'snapshot.data.departmentData.logo'))
-      _.set(leftData, 'widgetData.name', _.get(this.activatedRoute, 'snapshot.data.departmentData.description'))
+      _.set(leftData, 'widgetData.logoPath', _.get(this.activatedRoute, 'snapshot.data.departmentData.data.logo'))
+      _.set(leftData, 'widgetData.name', _.get(this.activatedRoute, 'snapshot.data.departmentData.data.description'))
       _.set(leftData, 'widgetData.userRoles', this.myRoles)
       this.leftmenues = leftData
     } else {
@@ -223,7 +223,7 @@ export class AllContentComponent implements OnInit, OnDestroy {
       case 'rejected':
         return ['Draft']
       case 'inreview':
-        return ['InReview', 'Reviewed', 'QualityReview']
+        return ['InReview', 'QualityReview']
       case 'review':
         return ['InReview']
       case 'published':
@@ -746,6 +746,12 @@ export class AllContentComponent implements OnInit, OnDestroy {
     this.searchLanguage = lang
   }
   get isAllowed() {
-    return this.accessService.hasRole(['admin', 'super-admin', 'content-admin', 'editor', 'author', 'content-creator'])
+    return this.accessService.hasRole(['admin', 'super-admin', 'content-admin', 'editor', 'content-creator'])
+  }
+  isAllowedTab(roles: string[]) {
+    if (roles && roles.length > 0) {
+      return this.accessService.hasRole(roles)
+    }
+    return false
   }
 }

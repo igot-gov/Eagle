@@ -29,13 +29,13 @@ export class BtnPageBackNavComponent extends WidgetBaseComponent
     if (this.presentUrl === '/page/explore') {
       return {
         queryParams: undefined,
-        routeUrl: '/author',
+        routeUrl: '/author/cbp',
       }
     }
     if (this.widgetData.url === 'home') {
       return {
         queryParams: undefined,
-        routeUrl: '/author',
+        routeUrl: '/author/cbp',
       }
     }
 
@@ -60,7 +60,7 @@ export class BtnPageBackNavComponent extends WidgetBaseComponent
 
     return {
       queryParams: undefined,
-      routeUrl: this.widgetData.url ? this.widgetData.url : '/author',
+      routeUrl: this.widgetData.url ? this.widgetData.url : '/author/cbp',
     }
   }
 

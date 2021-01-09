@@ -35,7 +35,7 @@
               [matTooltip]="(element[col.key] | listPipe: col.prop).split('<br />').join(', ')">
               <div innerHTML="{{element[col.key] | listPipe: col.prop }}"></div>
             </span>
-            <img class="small-list-logo margin-xs" *ngIf="col.image && element[col.image]" [src]="element[col.image]"
+            <img class="small-list-logo margin-xs" *ngIf="col.image" [src]="element[col.image] | relativeUrlTable"
               (error)="changeToDefaultImg($event)" [alt]="element[col.key]" />
 
             <span *ngIf="!col.isList && !col.link && !col.pipe" class="textclass mat-body-2">

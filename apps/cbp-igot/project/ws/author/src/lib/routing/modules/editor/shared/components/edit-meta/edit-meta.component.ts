@@ -155,7 +155,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('jobProfileView', { static: false }) jobProfileView!: ElementRef
   @ViewChild('regionView', { static: false }) regionView!: ElementRef
   @ViewChild('accessPathsView', { static: false }) accessPathsView!: ElementRef
-  @ViewChild('keywordsSearch', { static: true }) keywordsSearch!: ElementRef<any>
+  @ViewChild('keywordsSearch', { static: false }) keywordsSearch!: ElementRef<any>
   @ViewChild('competencyView', { static: true }) competencyView!: ElementRef<any>
 
   timer: any

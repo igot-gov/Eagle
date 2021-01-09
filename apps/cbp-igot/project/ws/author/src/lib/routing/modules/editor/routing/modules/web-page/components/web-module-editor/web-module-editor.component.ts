@@ -483,13 +483,13 @@ export class WebModuleEditorComponent implements OnInit, OnDestroy {
             if (this.allContents.length) {
               this.metaContentService.changeActiveCont.next(this.allContents[0].identifier)
             } else {
-              this.router.navigateByUrl('/author')
+              this.router.navigateByUrl('/author/cbp')
             }
           }
         })
         break
       case 'close':
-        this.router.navigateByUrl('/author')
+        this.router.navigateByUrl('/author/cbp')
         break
       case 'fulls':
         this.fullScreenToggle()
@@ -513,7 +513,7 @@ export class WebModuleEditorComponent implements OnInit, OnDestroy {
             if (this.allContents.length) {
               this.metaContentService.changeActiveCont.next(this.allContents[0].identifier)
             } else {
-              this.router.navigateByUrl('/author')
+              this.router.navigateByUrl('/author/cbp')
             }
           },
           () => {
@@ -601,7 +601,7 @@ export class WebModuleEditorComponent implements OnInit, OnDestroy {
           if (this.allContents.length) {
             this.metaContentService.changeActiveCont.next(this.allContents[0].identifier)
           } else {
-            this.router.navigateByUrl('/author')
+            this.router.navigateByUrl('/author/cbp')
           }
         },
         error => {

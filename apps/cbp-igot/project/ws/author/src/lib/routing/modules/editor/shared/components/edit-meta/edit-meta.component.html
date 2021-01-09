@@ -715,8 +715,7 @@
                           class="mat-subheading-2 margin-0">Keywords</span>
                         <!-- <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('keyword')">info
                   </mat-icon> -->
-                        <mat-icon class="float-right margin-left-xs cursor-pointer" *ngIf="
-                      contentForm.controls.keywords.value &&
+                        <mat-icon class="float-right margin-left-xs cursor-pointer" *ngIf="contentForm.controls.keywords.value &&
                       contentForm.controls.keywords.value.length
                     " (click)="copyData('keyword')">
                           file_copy
@@ -746,8 +745,8 @@
                       </mat-form-field>
                       <mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption
                         (optionSelected)="optionSelected($event.option.value); keywordsView.value = ''">
-                        <mat-option *ngIf="keywordsSearch.value" [value]="keywordsSearch.value">
-                          {{ keywordsSearch.value }}
+                        <mat-option *ngIf="keywordsSearch.value" [value]="keywordsSearch.value">{{ keywordsSearch.value
+                          }}
                         </mat-option>
                         <mat-option *ngFor="let option of filteredOptions$ | async" [value]="option">{{ option }}
                         </mat-option>

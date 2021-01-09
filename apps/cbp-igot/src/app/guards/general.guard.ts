@@ -112,7 +112,7 @@ export class GeneralGuard implements CanActivate {
       )
 
       if (requiredFeaturesMissing) {
-        return this.router.parseUrl('/author/home')
+        return this.router.parseUrl('/author/cbp')
       }
     }
 

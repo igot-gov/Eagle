@@ -331,7 +331,7 @@ export class UploadComponent implements OnInit, OnDestroy {
           if (this.contents.length) {
             this.contentService.changeActiveCont.next(this.contents[0].identifier)
           } else {
-            this.router.navigateByUrl('/author')
+            this.router.navigateByUrl('/author/cbp')
           }
         },
         error => {
@@ -498,14 +498,14 @@ export class UploadComponent implements OnInit, OnDestroy {
             if (this.contents.length) {
               this.contentService.changeActiveCont.next(this.contents[0].identifier)
             } else {
-              this.router.navigateByUrl('/author')
+              this.router.navigateByUrl('/author/cbp')
             }
           }
         })
         break
 
       case 'close':
-        this.router.navigateByUrl('/author')
+        this.router.navigateByUrl('/author/cbp')
         break
 
       case 'fulls':
@@ -536,7 +536,7 @@ export class UploadComponent implements OnInit, OnDestroy {
         if (this.contents.length) {
           this.contentService.changeActiveCont.next(this.contents[0].identifier)
         } else {
-          this.router.navigateByUrl('/author')
+          this.router.navigateByUrl('/author/cbp')
         }
       },
       error => {

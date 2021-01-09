@@ -77,7 +77,7 @@ export class EditorComponent implements OnInit, OnDestroy {
             },
             duration: NOTIFICATION_TIME * 1000,
           })
-          this.route.navigateByUrl('/author')
+          this.route.navigateByUrl('/author/cbp')
           return
         }
         if (!hasAccess || contents[0].content.isMetaEditingDisabled) {
@@ -87,7 +87,7 @@ export class EditorComponent implements OnInit, OnDestroy {
             },
             duration: NOTIFICATION_TIME * 1000,
           })
-          this.route.navigateByUrl('/author')
+          this.route.navigateByUrl('/author/cbp')
           return
         }
         contents.map(v => {

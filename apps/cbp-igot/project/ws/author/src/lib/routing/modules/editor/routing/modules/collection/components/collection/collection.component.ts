@@ -317,6 +317,7 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
         userId: this._configurationsService.userProfile.userId,
         getLatestRecordEnabled: true,
       }
+      let minPassPercentage = 20
       this._qualityService.fetchresult(reqObj).subscribe((result: any) => {
         if (result && result.result && result.result.resources) {
           const rse = result.result.resources || []
@@ -325,7 +326,6 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
             if (qualityScore) {
               if (qualityScore) {
                 const score = (qualityScore.finalTotalScore / qualityScore.finalMaxScore) * 100
-                let minPassPercentage = 20
                 if (this.initService.authAdditionalConfig.contentQuality) {
                   minPassPercentage = this.initService.authAdditionalConfig.contentQuality.passPercentage
                 }
@@ -344,9 +344,14 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
                 } else {
                   this.snackBar.open(`To proceed further minimum quality score must be  ${minPassPercentage}% or greater`)
                 }
+              } else {
+                this.snackBar.open(`To proceed further minimum quality score must be  ${minPassPercentage}% or greater`)
               }
+            } else {
+              this.snackBar.open(`To proceed further minimum quality score must be  ${minPassPercentage}% or greater`)
             }
-
+          } else {
+            this.snackBar.open(`To proceed further minimum quality score is required`)
           }
         }
       })
@@ -407,7 +412,7 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
           if (this.contents.length) {
             this.contentService.changeActiveCont.next(this.contents[0].identifier)
           } else {
-            this.router.navigateByUrl('/author')
+            this.router.navigateByUrl('/author/cbp')
           }
         },
         (error: any) => {
@@ -697,7 +702,7 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
         if (this.contents.length) {
           this.contentService.changeActiveCont.next(this.contents[0].identifier)
         } else {
-          this.router.navigateByUrl('/author')
+          this.router.navigateByUrl('/author/cbp')
         }
       },
       error => {
