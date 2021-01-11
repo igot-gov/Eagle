@@ -289,31 +289,6 @@ export class MyContentComponent implements OnInit, OnDestroy {
       request: {
         query: this.queryFilter,
         filters: {
-
-          // primaryCategory: [
-          //   "Collection",
-          //   "Resource",
-          //   "Content Playlist",
-          //   "Course",
-          //   "Course Assessment",
-          //   "Digital Textbook",
-          //   "eTextbook",
-          //   "Explanation Content",
-          //   "Learning Resource",
-          //   "Lesson Plan Unit",
-          //   "Practice Question Set",
-          //   "Teacher Resource",
-          //   "Textbook Unit",
-          //   "LessonPlan",
-          //   "FocusSpot",
-          //   "Learning Outcome Definition",
-          //   "Curiosity Questions",
-          //   "MarkingSchemeRubric",
-          //   "ExplanationResource",
-          //   "ExperientialResource",
-          //   "Practice Resource",
-          //   "TVLesson"
-          // ],
           status: this.fetchStatus(),
           // creatorContacts: <string[]>[],
           // trackContacts: <string[]>[],
@@ -345,13 +320,13 @@ export class MyContentComponent implements OnInit, OnDestroy {
           "primaryCategory",
           "mimeType"
         ],
-        pageNo: loadMoreFlag ? this.pagination.offset : 0,
-        sort: [{ lastUpdatedOn: 'desc' }],
-        pageSize: this.pagination.limit,
-        uuid: this.userId,
-        rootOrg: this.accessService.rootOrg,
-        // this is for Author Only
-        isUserRecordEnabled: true,
+        // pageNo: loadMoreFlag ? this.pagination.offset : 0,
+        // sort: [{ lastUpdatedOn: 'desc' }],
+        // pageSize: this.pagination.limit,
+        // uuid: this.userId,
+        // rootOrg: this.accessService.rootOrg,
+        // // this is for Author Only
+        // isUserRecordEnabled: true,
       },
     }
     if (this.finalFilters.length) {

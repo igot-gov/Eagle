@@ -186,40 +186,16 @@ export class MyContentComponent implements OnInit, OnDestroy {
         query: this.queryFilter,
         filters: {
           status: this.fetchStatus(),
-          creatorContacts: <string[]>[],
-          trackContacts: <string[]>[],
-          publisherDetails: <string[]>[],
-          isMetaEditingDisabled: [false],
-          isContentEditingDisabled: [false],
-          primaryCategory: [
-            "Collection",
-            "Resource",
-            "Content Playlist",
-            "Course",
-            "Course Assessment",
-            "Digital Textbook",
-            "eTextbook",
-            "Explanation Content",
-            "Learning Resource",
-            "Lesson Plan Unit",
-            "Practice Question Set",
-            "Teacher Resource",
-            "Textbook Unit",
-            "LessonPlan",
-            "FocusSpot",
-            "Learning Outcome Definition",
-            "Curiosity Questions",
-            "MarkingSchemeRubric",
-            "ExplanationResource",
-            "ExperientialResource",
-            "Practice Resource",
-            "TVLesson"
-          ]
+          // creatorContacts: <string[]>[],
+          // trackContacts: <string[]>[],
+          // publisherDetails: <string[]>[],
+          // isMetaEditingDisabled: [false],
+          // isContentEditingDisabled: [false]
         },
-        pageNo: loadMoreFlag ? this.pagination.offset : 0,
-        sort_by: [{ lastUpdatedOn: 'desc' }],
-        pageSize: this.pagination.limit,
-        "fields": [
+        // pageNo: loadMoreFlag ? this.pagination.offset : 0,
+        sort_by: { lastUpdatedOn: 'desc' },
+        // pageSize: this.pagination.limit,
+        fields: [
           "name",
           "appIcon",
           "mimeType",
@@ -236,10 +212,17 @@ export class MyContentComponent implements OnInit, OnDestroy {
           "organisation",
           "trackable"
         ],
-        "facets": [
+        facets: [
           "primaryCategory",
           "mimeType"
-        ]
+        ],
+        // pageNo: loadMoreFlag ? this.pagination.offset : 0,
+        // sort: [{ lastUpdatedOn: 'desc' }],
+        // pageSize: this.pagination.limit,
+        // uuid: this.userId,
+        // rootOrg: this.accessService.rootOrg,
+        // // this is for Author Only
+        // isUserRecordEnabled: true,
       },
     }
     // if (this.finalFilters.length) {
@@ -256,26 +239,26 @@ export class MyContentComponent implements OnInit, OnDestroy {
     // if (this.queryFilter) {
     //   delete requestData.request.sort_by
     // }
-    if (
-      [
-        'draft',
-        'rejected',
-        'inreview',
-        'published',
-        'unpublished',
-        'processing',
-        'deleted',
-      ].indexOf(this.status) > -1 &&
-      !this.isAdmin
-    ) {
-      requestData.request.filters.creatorContacts.push(this.userId)
-    }
-    if (this.status === 'review' && !this.isAdmin) {
-      requestData.request.filters.trackContacts.push(this.userId)
-    }
-    if (this.status === 'publish' && !this.isAdmin) {
-      requestData.request.filters.publisherDetails.push(this.userId)
-    }
+    // if (
+    //   [
+    //     'draft',
+    //     'rejected',
+    //     'inreview',
+    //     'published',
+    //     'unpublished',
+    //     'processing',
+    //     'deleted',
+    //   ].indexOf(this.status) > -1 &&
+    //   !this.isAdmin
+    // ) {
+    //   requestData.request.filters.creatorContacts.push(this.userId)
+    // }
+    // if (this.status === 'review' && !this.isAdmin) {
+    //   requestData.request.filters.trackContacts.push(this.userId)
+    // }
+    // if (this.status === 'publish' && !this.isAdmin) {
+    //   requestData.request.filters.publisherDetails.push(this.userId)
+    // }
     this.loadService.changeLoad.next(true)
     const observable =
       this.status === 'expiry' || this.newDesign

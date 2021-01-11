@@ -283,24 +283,49 @@ export class AllContentComponent implements OnInit, OnDestroy {
       this.isAdmin,
     )
     const requestData = {
+      locale: this.searchLanguage ? [this.searchLanguage] : ["en"],
+      query: this.queryFilter,
       request: {
-        locale: this.searchLanguage ? [this.searchLanguage] : [],
         query: this.queryFilter,
         filters: {
           status: this.fetchStatus(),
-          creatorContacts: <string[]>[],
-          trackContacts: <string[]>[],
-          publisherDetails: <string[]>[],
-          isMetaEditingDisabled: [false],
-          isContentEditingDisabled: [false],
+          // creatorContacts: <string[]>[],
+          // trackContacts: <string[]>[],
+          // publisherDetails: <string[]>[],
+          // isMetaEditingDisabled: [false],
+          // isContentEditingDisabled: [false]
         },
-        pageNo: loadMoreFlag ? this.pagination.offset : 0,
-        sort: [{ lastUpdatedOn: 'desc' }],
-        pageSize: this.pagination.limit,
-        uuid: this.userId,
-        rootOrg: this.accessService.rootOrg,
-        // this is for Author/Admin Only
-        isUserRecordEnabled: !this.isAdmin,
+        // pageNo: loadMoreFlag ? this.pagination.offset : 0,
+        sort_by: { lastUpdatedOn: 'desc' },
+        // pageSize: this.pagination.limit,
+        fields: [
+          "name",
+          "appIcon",
+          "mimeType",
+          "gradeLevel",
+          "identifier",
+          "medium",
+          "pkgVersion",
+          "board",
+          "subject",
+          "resourceType",
+          "primaryCategory",
+          "contentType",
+          "channel",
+          "organisation",
+          "trackable"
+        ],
+        facets: [
+          "primaryCategory",
+          "mimeType"
+        ],
+        // pageNo: loadMoreFlag ? this.pagination.offset : 0,
+        // sort: [{ lastUpdatedOn: 'desc' }],
+        // pageSize: this.pagination.limit,
+        // uuid: this.userId,
+        // rootOrg: this.accessService.rootOrg,
+        // // this is for Author Only
+        // isUserRecordEnabled: true,
       },
     }
     if (this.finalFilters.length) {
@@ -314,31 +339,31 @@ export class AllContentComponent implements OnInit, OnDestroy {
         requestData.request.filters = { ...requestData.request.filters, [v.key]: v.value }
       })
     }
-    if (this.queryFilter) {
-      // tslint:disable
-      delete requestData.request.sort
-      // tslint:enable
-    }
-    if (
-      [
-        'draft',
-        'rejected',
-        'inreview',
-        'published',
-        'unpublished',
-        'processing',
-        'deleted',
-      ].indexOf(this.status) > -1 &&
-      !this.isAdmin
-    ) {
-      requestData.request.filters.creatorContacts.push(this.userId)
-    }
-    if (this.status === 'review' && !this.isAdmin) {
-      requestData.request.filters.trackContacts.push(this.userId)
-    }
-    if (this.status === 'publish' && !this.isAdmin) {
-      requestData.request.filters.publisherDetails.push(this.userId)
-    }
+    // if (this.queryFilter) {
+    //   // tslint:disable
+    //   delete requestData.request.sort
+    //   // tslint:enable
+    // }
+    // if (
+    //   [
+    //     'draft',
+    //     'rejected',
+    //     'inreview',
+    //     'published',
+    //     'unpublished',
+    //     'processing',
+    //     'deleted',
+    //   ].indexOf(this.status) > -1 &&
+    //   !this.isAdmin
+    // ) {
+    //   requestData.request.filters.creatorContacts.push(this.userId)
+    // }
+    // if (this.status === 'review' && !this.isAdmin) {
+    //   requestData.request.filters.trackContacts.push(this.userId)
+    // }
+    // if (this.status === 'publish' && !this.isAdmin) {
+    //   requestData.request.filters.publisherDetails.push(this.userId)
+    // }
 
     this.loadService.changeLoad.next(true)
     const observable =
@@ -359,20 +384,20 @@ export class AllContentComponent implements OnInit, OnDestroy {
         this.loadService.changeLoad.next(false)
         if (changeFilter) {
           this.filterMenuItems =
-            data && data.result && data.result.response && data.result.response.filters
-              ? data.result.response.filters
+            data && data.result && data.result.facets
+              ? data.result.facets
               : this.filterMenuItems
           this.dataSource.data = this.filterMenuItems
         }
         this.cardContent =
           loadMoreFlag && !this.queryFilter
             ? (this.cardContent || []).concat(
-              data && data.result && data.result.response ? data.result.response.result : [],
+              data && data.result ? data.result.content : [],
             )
-            : data && data.result.response
-              ? data.result.response.result
+            : data && data.result.content
+              ? data.result.content
               : []
-        this.totalContent = data && data.result.response ? data.result.response.totalHits : 0
+        this.totalContent = data && data.result ? data.result.count : 0
         // const index = _.findIndex(this.count, i => i.n === this.status)
         // if (index >= 0) {
         this.count[this.status] = this.totalContent
