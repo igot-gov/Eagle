@@ -106,7 +106,7 @@ export class EditorService {
 
   updateContentV3(meta: NSApiRequest.IContentUpdateV2, id: string): Observable<null> {
     return this.apiService.patch<null>(
-      `http://localhost:3003/authApi/content/v3/update/${id}`,
+      `/apis/authApi/content/v3/update/${id}`,
       meta,
     )
   }

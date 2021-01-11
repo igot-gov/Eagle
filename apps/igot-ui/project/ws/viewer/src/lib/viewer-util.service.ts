@@ -35,7 +35,7 @@ export class ViewerUtilService {
     return
   }
 
-  realTimeProgressUpdate(contentId: string, request: any, collectionId?: string) {
+  realTimeProgressUpdate(contentId: string, request: any, collectionId?: string, batchId?: string) {
     let req: any
     if (this.configservice.userProfile) {
       req = {
@@ -44,7 +44,7 @@ export class ViewerUtilService {
           contents: [
             {
               contentId,
-              batchId: '0131595783960084483',
+              batchId,
               status: 2,
               courseId: collectionId,
               lastAccessTime: dayjs(new Date()).format('YYYY-MM-DD HH:mm:ss:SSSZZ'),

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit, Input } from '@angular/core'
 import { ActivatedRoute, Data } from '@angular/router'
 import { Subscription } from 'rxjs'
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser'
@@ -14,6 +14,7 @@ import { NsWidgetResolver } from '@ws-widget/resolver'
   styleUrls: ['./app-toc-contents.component.scss'],
 })
 export class AppTocContentsComponent implements OnInit, OnDestroy {
+  @Input() batchId!: string
   content: NsContent.IContent | null = null
   forPreview = false
   isPlayable = false
@@ -27,7 +28,6 @@ export class AppTocContentsComponent implements OnInit, OnDestroy {
   expandPartOf = false
   contextId!: string
   contextPath!: string
-
   constructor(
     private route: ActivatedRoute,
     private sanitizer: DomSanitizer,
@@ -40,9 +40,13 @@ export class AppTocContentsComponent implements OnInit, OnDestroy {
     this.routeQuerySubscription = this.route.queryParamMap.subscribe(qParamsMap => {
       const contextId = qParamsMap.get('contextId')
       const contextPath = qParamsMap.get('contextPath')
+      const batchId = qParamsMap.get('batchId')
       if (contextId && contextPath) {
         this.contextId = contextId
         this.contextPath = contextPath
+      }
+      if (batchId) {
+        this.batchId = batchId
       }
     })
     if (this.route && this.route.parent) {

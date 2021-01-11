@@ -77,7 +77,7 @@ export class PlaylistCardComponent implements OnInit {
     dialogRef.afterClosed().subscribe(shouldDelete => {
       if (shouldDelete && this.playlist) {
         this.deletePlaylistStatus = 'fetching'
-        this.playlistSvc.deletePlaylist(this.playlist.id, this.type).subscribe(
+        this.playlistSvc.deletePlaylist(this.playlist.identifier, this.type).subscribe(
           () => {
             this.deletePlaylistStatus = 'done'
             this.snackBar.open(this.playlistDeleteSuccessMessage.nativeElement.value, 'X')
@@ -115,7 +115,7 @@ export class PlaylistCardComponent implements OnInit {
     let routeTo: string
     this.type === 'user' ? (routeTo = 'me') : (routeTo = 'shared')
     if (this.playlist) {
-      this.router.navigate([`/app/playlist/${routeTo}/${this.playlist.id}/edit`])
+      this.router.navigate([`/app/playlist/${routeTo}/${this.playlist.identifier}/edit`])
     } else {
       this.snackBar.open(this.playlistEditFailedMessage.nativeElement.value, 'X')
     }

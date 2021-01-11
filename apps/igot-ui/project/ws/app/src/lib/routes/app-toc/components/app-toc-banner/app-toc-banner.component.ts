@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core'
-import { MatDialog } from '@angular/material'
+import { MatDialog, MatSnackBar } from '@angular/material'
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser'
 import { ActivatedRoute, Event, NavigationEnd, Router } from '@angular/router'
 import {
@@ -19,6 +19,9 @@ import { NsAppToc } from '../../models/app-toc.model'
 import { AppTocService } from '../../services/app-toc.service'
 import { AppTocDialogIntroVideoComponent } from '../app-toc-dialog-intro-video/app-toc-dialog-intro-video.component'
 import { MobileAppsService } from 'src/app/services/mobile-apps.service'
+import { FormControl, Validators } from '@angular/forms'
+import * as dayjs from 'dayjs'
+import * as  lodash from 'lodash'
 
 @Component({
   selector: 'ws-app-toc-banner',
@@ -32,6 +35,8 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
   @Input() resumeData: NsContent.IContinueLearningData | null = null
   @Input() analytics: NsAnalytics.IAnalytics | null = null
   @Input() forPreview = false
+  @Input() batchData: NsContent.IBatchListResponse | null = null
+  batchControl = new FormControl('', Validators.required)
   contentProgress = 0
   bannerUrl: SafeStyle | null = null
   routePath = 'overview'
@@ -64,6 +69,7 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
   contextPath?: string
   tocConfig: any = null
   defaultSLogo = ''
+  disableEnrollBtn = false
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -76,6 +82,7 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
     private contentSvc: WidgetContentService,
     private utilitySvc: UtilityService,
     private mobileAppsSvc: MobileAppsService,
+    private snackBar: MatSnackBar,
     // private authAccessService: AccessControlService,
   ) { }
 
@@ -202,9 +209,61 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
         this.isResource ? undefined : this.content.contentType,
         this.forPreview,
         // this.content.primaryCategory
-        'Learning Resource'
+        'Learning Resource',
+        this.getBatchId()
       )
     }
+    this.batchControl.valueChanges.subscribe((batch: NsContent.IBatch) => {
+      this.disableEnrollBtn = true
+      let userId = ''
+      if (batch) {
+        if (this.configSvc.userProfile) {
+          userId = this.configSvc.userProfile.userId || ''
+        }
+        const req = {
+          request: {
+            userId,
+            courseId: batch.courseId,
+            batchId: batch.batchId,
+          },
+        }
+        this.contentSvc.enrollUserToBatch(req).then((data: any) => {
+          if (data && data.result && data.result.response === 'SUCCESS') {
+            this.batchData = {
+              content: [batch],
+              enrolled: true,
+            }
+            this.openSnackbar('Enrolled Successfully!')
+            this.disableEnrollBtn = false
+          } else {
+            this.openSnackbar('Something went wrong, please try again later!')
+            this.disableEnrollBtn = false
+          }
+        })
+      }
+    })
+  }
+
+  private getBatchId(): string {
+    let batchId = ''
+    if (this.batchData && this.batchData.content) {
+      for (const batch of this.batchData.content) {
+        batchId = batch.batchId
+      }
+    }
+    return batchId
+  }
+
+  public handleEnrollmentEndDate(batch: any) {
+    const enrollmentEndDate = dayjs(lodash.get(batch, 'enrollmentEndDate')).format('YYYY-MM-DD')
+    const systemDate = dayjs()
+    return enrollmentEndDate ? dayjs(enrollmentEndDate).isBefore(systemDate) : false
+  }
+
+  private openSnackbar(primaryMsg: string, duration: number = 5000) {
+    this.snackBar.open(primaryMsg, 'X', {
+      duration,
+    })
   }
 
   get showInstructorLedMsg() {
@@ -273,7 +332,7 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
     const lastItem = this.resumeData && this.resumeData.pop()
     return {
       identifier: lastItem.contentId,
-      mimeType: lastItem.progressDetails && lastItem.progressDetails.mimetype,
+      mimeType: lastItem.progressDetails && lastItem.progressDetails.mimeType,
 
     }
   }
@@ -318,7 +377,8 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
         this.isResource ? undefined : this.content.identifier,
         this.isResource ? undefined : this.content.contentType,
         this.forPreview,
-        this.content.primaryCategory
+        this.content.primaryCategory,
+        this.getBatchId(),
       )
     }
   }
@@ -416,6 +476,7 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
       let qParams: { [key: string]: string } = {
         ...this.firstResourceLink.queryParams,
         viewMode: type,
+        batchId: this.getBatchId(),
       }
       if (this.contextId && this.contextPath) {
         qParams = {
@@ -432,6 +493,7 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
     if (this.resumeDataLink && type === 'RESUME') {
       let qParams: { [key: string]: string } = {
         ...this.resumeDataLink.queryParams,
+        batchId: this.getBatchId(),
         viewMode: 'RESUME',
       }
       if (this.contextId && this.contextPath) {
@@ -450,6 +512,7 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
       return {}
     }
     return {
+      batchId: this.getBatchId(),
       viewMode: type,
     }
   }

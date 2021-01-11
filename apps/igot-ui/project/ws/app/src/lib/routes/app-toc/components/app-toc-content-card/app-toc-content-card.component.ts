@@ -14,6 +14,7 @@ export class AppTocContentCardComponent implements OnInit, OnChanges {
   @Input() rootId!: string
   @Input() rootContentType!: string
   @Input() forPreview = false
+  @Input() batchId!: string
   hasContentStructure = false
   enumContentTypes = NsContent.EDisplayContentTypes
   contentStructure: NsAppToc.ITocStructure = {
@@ -71,11 +72,13 @@ export class AppTocContentCardComponent implements OnInit, OnChanges {
         this.rootId,
         this.rootContentType,
         this.forPreview,
-        this.content.primaryCategory
+        this.content.primaryCategory,
+        this.batchId
       )
     }
     return { url: '', queryParams: {} }
   }
+
   private evaluateImmediateChildrenStructure() {
     if (this.content && this.content.children && this.content.children.length) {
       this.content.children.forEach((child: NsContent.IContent) => {
@@ -137,6 +140,7 @@ export class AppTocContentCardComponent implements OnInit, OnChanges {
     return {
       contextId: this.rootId,
       contextPath: this.rootContentType,
+      batchId: this.batchId,
     }
   }
 

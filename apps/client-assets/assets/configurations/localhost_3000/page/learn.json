@@ -132,6 +132,13 @@
                         }
                       }
                     },
+                    "viewMoreUrl": {
+                      "path": "/app/search/learning",
+                      "queryParams": {
+                        "q": "all",
+                        "p": "Trending"
+                      }
+                    },
                     "stripConfig": {
                       "cardSubType": "standard",
                       "postCardForSearch": true
@@ -139,32 +146,63 @@
                     "filters": [],
                     "request": {
                       "searchV6": {
-                        "locale": [
-                          "en"
-                        ],
-                        "pageSize": 12,
-                        "query": "all",
-                        "didYouMean": true,
-                        "filters": [
-                          {
-                            "andFilters": [
-                              {
-                                "lastUpdatedOn": [
-                                  "month"
-                                ]
-                              },
-                              {
-                                "contentType": [
-                                  "Course",
-                                  "Learning Path"
-                                ]
-                              }
+                        "request": {
+                          "filters": {
+                            "primaryCategory": [
+                              "Collection",
+                              "Resource",
+                              "Content Playlist",
+                              "Course",
+                              "Course Assessment",
+                              "Digital Textbook",
+                              "eTextbook",
+                              "Explanation Content",
+                              "Learning Resource",
+                              "Lesson Plan Unit",
+                              "Practice Question Set",
+                              "Teacher Resource",
+                              "Textbook Unit",
+                              "LessonPlan",
+                              "FocusSpot",
+                              "Learning Outcome Definition",
+                              "Curiosity Questions",
+                              "MarkingSchemeRubric",
+                              "ExplanationResource",
+                              "ExperientialResource",
+                              "Practice Resource",
+                              "TVLesson"
                             ]
-                          }
-                        ],
-                        "includeSourceFields": [
-                          "creatorLogo"
-                        ]
+                          },
+                          "query": "",
+                          "sort_by": {
+                            "lastUpdatedOn": "desc"
+                          },
+                          "fields": [
+                            "name",
+                            "appIcon",
+                            "mimeType",
+                            "gradeLevel",
+                            "identifier",
+                            "medium",
+                            "pkgVersion",
+                            "board",
+                            "subject",
+                            "resourceType",
+                            "primaryCategory",
+                            "contentType",
+                            "channel",
+                            "organisation",
+                            "trackable"
+                          ],
+                          "facets": [
+                            "board",
+                            "gradeLevel",
+                            "subject",
+                            "medium",
+                            "primaryCategory",
+                            "mimeType"
+                          ]
+                        }
                       }
                     }
                   }
@@ -176,56 +214,84 @@
         [
           {
             "dimensions": {},
-            "className": "new-box",
+            "className": "",
             "widget": {
               "widgetType": "contentStrip",
-              "widgetSubType": "contentStripMultiple",
+              "widgetSubType": "contentStripMultipleNew",
               "widgetData": {
                 "strips": [
                   {
                     "key": "continueLearning",
-                    "title": "Continue Learning",
-                    "viewMoreUrl": {
-                      "path": "/app/search/learning",
-                      "queryParams": {
-                        "q": "all",
-                        "p": "History"
-                      }
-                    },
-                    "noDataWidget": {
-                      "widgetType": "element",
-                      "widgetSubType": "elementHtml",
-                      "widgetData": {
-                        "html": "<p class=\"ws-mat-primary-text\">Learning activities you start will appear here.</p>"
-                      }
-                    },
-                    "info": {
-                      "mode": "below",
-                      "visibilityMode": "hidden",
-                      "icon": {
-                        "icon": "info",
-                        "scale": 0.8
-                      },
-                      "widget": {
-                        "widgetType": "element",
-                        "widgetSubType": "elementHtml",
-                        "widgetData": {
-                          "html": "<p class=\"ws-mat-primary-text\">These are the learning activities you’ve started but haven’t finished yet. Ready to keep going?</p>"
-                        }
-                      }
-                    },
+                    "logo": "school",
+                    "title": "learn",
+                    "stripBackground": "assets/instances/eagle/background/learn.svg",
+                    "titleDescription": "Continue Learning",
                     "stripConfig": {
-                      "cardSubType": "standard",
-                      "postCardForSearch": true
+                      "cardSubType": "standard"
+                    },
+                    "viewMoreUrl": {
+                      "path": "/page/learn",
+                      "viewMoreText": "Learn",
+                      "queryParams": {}
                     },
                     "filters": [],
                     "request": {
-                      "api": {
-                        "path": "/apis/protected/v8/user/history",
-                        "queryParams": {
-                          "pageSize": 12,
-                          "sourceFields": [
-                            "creatorLogo"
+                      "searchV6": {
+                        "request": {
+                          "filters": {
+                            "primaryCategory": [
+                              "Collection",
+                              "Resource",
+                              "Content Playlist",
+                              "Course",
+                              "Course Assessment",
+                              "Digital Textbook",
+                              "eTextbook",
+                              "Explanation Content",
+                              "Learning Resource",
+                              "Lesson Plan Unit",
+                              "Practice Question Set",
+                              "Teacher Resource",
+                              "Textbook Unit",
+                              "LessonPlan",
+                              "FocusSpot",
+                              "Learning Outcome Definition",
+                              "Curiosity Questions",
+                              "MarkingSchemeRubric",
+                              "ExplanationResource",
+                              "ExperientialResource",
+                              "Practice Resource",
+                              "TVLesson"
+                            ]
+                          },
+                          "query": "",
+                          "sort_by": {
+                            "lastUpdatedOn": "desc"
+                          },
+                          "fields": [
+                            "name",
+                            "appIcon",
+                            "mimeType",
+                            "gradeLevel",
+                            "identifier",
+                            "medium",
+                            "pkgVersion",
+                            "board",
+                            "subject",
+                            "resourceType",
+                            "primaryCategory",
+                            "contentType",
+                            "channel",
+                            "organisation",
+                            "trackable"
+                          ],
+                          "facets": [
+                            "board",
+                            "gradeLevel",
+                            "subject",
+                            "medium",
+                            "primaryCategory",
+                            "mimeType"
                           ]
                         }
                       }

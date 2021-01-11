@@ -8,7 +8,6 @@ import {
   IPlaylistSbExtSyncRequest,
   IPlaylistSbUpdateRequest,
   IPlaylistSyncRequest,
-  IPlayListUpdateRequest,
   IPlaylistUpdateTitleRequest,
   IPlaylistUpsertRequest,
 
@@ -92,11 +91,24 @@ export function transformToSbExtUpdateRequest(updateRequest: IPlaylistUpdateTitl
   }
 }
 
-export function transformToSbExtPatchRequest(updateRequest: IPlayListUpdateRequest): IPlaylistSbUpdateRequest {
+export function transformToSbExtPatchRequest(req: { contentIds: string[] }, playlistId: string) {
   /* for Patch request to change playlist title */
+  const id = playlistId
+  const hierarchy = {}
+
+  hierarchy[id] = {
+    children: req.contentIds,
+    contentType: 'Collection',
+    root: true,
+  }
+
   return {
-    content_ids: updateRequest.contentIds.map((content) => content.identifier),
-    playlist_title: updateRequest.playlist_title,
+    request: {
+      data: {
+        hierarchy,
+        nodesModified: {},
+      },
+    },
   }
 }
 
@@ -113,6 +125,19 @@ export function formPlaylistRequestObj(request: IPlaylistCreateRequest, userId: 
         mimeType: 'application/vnd.ekstep.content-collection',
         name: request.playlist_title,
         primaryCategory: 'Playlist',
+        sharedWith: request.shareWith,
+      },
+    },
+  }
+}
+
+export function formPlaylistupdateObj(req: { playlist_title: string, versionKey: string }) {
+  return {
+    request: {
+      content: {
+        name: req.playlist_title,
+        versionKey: req.versionKey,
+
       },
     },
   }

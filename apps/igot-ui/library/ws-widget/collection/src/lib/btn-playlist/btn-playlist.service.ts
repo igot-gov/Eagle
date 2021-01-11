@@ -140,19 +140,20 @@ export class BtnPlaylistService {
   }
 
   patchPlaylist(playlist: NsPlaylist.IPlaylist, newIDs?: string[]) {
-    const contentIds = playlist.contents.map(content => {
-      const id = { identifier: content.identifier }
+    const contentIds = playlist.children.map((content: { identifier: any }) => {
+      const id = content.identifier
       return id
     })
     if (newIDs && newIDs.length > 0) {
       newIDs.forEach(content => {
-        contentIds.push({ identifier: content })
+        contentIds.push(content)
       })
     }
 
-    return this.http.patch(`${API_END_POINTS.updatePlaylists(playlist.id)}`, {
+    return this.http.patch(`${API_END_POINTS.updatePlaylists(playlist.identifier)}`, {
       contentIds,
       playlist_title: playlist.name,
+      versionKey: playlist.versionKey,
     })
   }
 
@@ -169,7 +170,7 @@ export class BtnPlaylistService {
   deletePlaylistContent(playlist: any | undefined, contentIds: string[]) {
     if (playlist) {
       return this.deleteContent(
-        playlist[0].id,
+        playlist[0].identifier,
         {
           contentIds,
         },

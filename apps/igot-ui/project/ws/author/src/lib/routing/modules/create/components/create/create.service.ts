@@ -87,7 +87,7 @@ export class CreateService {
     }
     return this.apiService
       .post<NSApiRequest.ICreateMetaRequestV2>(
-        `http://localhost:3003/authApi/content/v3/create`,
+        `/apis/authApi/content/v3/create`,
         requestBody,
       )
       .pipe(
