@@ -1,0 +1,33 @@
+<div [matTooltip]="label" [ngSwitch]="type" appDisableRClick>
+  <button type="button" mat-raised-button color="primary" *ngSwitchCase="'Standard'" [disabled]="disabled"
+    [ngStyle]="styles" class="btn p1-btn text-white no-shadow" [ngClass]="classes"
+    (click)="onClickbutton($event)">{{label}}</button>
+
+  <button mat-raised-button color="primary" *ngSwitchCase="'submit'" [disabled]="disabled" [ngStyle]="styles"
+    class="btn p1-btn text-white no-shadow" type="submit" [ngClass]="classes"
+    (click)="onClickbutton($event)">{{label}}</button>
+
+  <button mat-raised-button color="primary" *ngSwitchCase="'Primary2'" [disabled]="disabled" [ngStyle]="styles"
+    class="btn p2-btn no-shadow" type="button" [ngClass]="classes" (click)="onClickbutton($event)">{{label}}</button>
+
+  <button mat-raised-button color="primary" *ngSwitchCase="'Primary3'" [disabled]="disabled" [ngStyle]="styles"
+    class="btn p3-btn no-shadow" [ngClass]="classes" (click)="onClickbutton($event)">{{label}}</button>
+
+  <button mat-raised-button color="primary" *ngSwitchCase="'Approve'" [disabled]="disabled" [ngStyle]="styles"
+    class="btn p1-btn no-shadow" [ngClass]="classes" (click)="onClickbutton($event)">{{label}}</button>
+
+  <button mat-raised-button color="primary" *ngSwitchCase="'Reject'" [disabled]="disabled" [ngStyle]="styles"
+    class='btn p2-btn no-shadow' [ngClass]="classes" (click)="onClickbutton($event)">{{label}}</button>
+
+  <button mat-raised-button color="primary" *ngSwitchCase="'Warning'" [disabled]="disabled" [ngStyle]="styles"
+    class='btn p2-btn no-shadow' [ngClass]="classes" (click)="onClickbutton($event)">{{label}}</button>
+
+  <button mat-icon-button color="primary" type="button" *ngSwitchCase="'link'" [disabled]="disabled" [ngStyle]="styles"
+    class='btn btn-ok' [ngClass]="classes" (click)="onClickbutton($event)">
+    <mat-icon>{{icon}}</mat-icon>
+  </button>
+
+
+  <button mat-raised-button color="primary" *ngSwitchDefault [disabled]="disabled" [ngStyle]="styles"
+    class="btn text-white no-shadow" (click)="onClickbutton($event)">{{label || 'Submit'}}</button>
+</div>

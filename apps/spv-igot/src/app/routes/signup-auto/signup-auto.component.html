@@ -1,0 +1,27 @@
+<div class="text-center signup-container">
+    <div [hidden]="!fetching" class="pr-4 flex flex-col items-center justify-center msg">
+        <mat-spinner [diameter]="50"></mat-spinner>
+        <p>Please wait while we are registering</p>
+    </div>
+    <div *ngIf="!fetching && showResonse">
+        <h3 class="msg"> {{msg}}</h3>
+     </div>
+
+</div>
+
+<input
+  type="hidden"
+  i18-value
+  i18-aria-value
+  aria-value="Signup successful"
+  value="Thanks for Signing up"
+  #toastSuccess
+/>
+<input
+  type="hidden"
+  i18-value
+  i18-aria-value
+  aria-value="unable to signup"
+  value="Something went wrong, please contact administrator!"
+  #toastError
+/>

@@ -1,0 +1,58 @@
+@import 'ws-vars';
+@import 'ws-mixins';
+
+.box {
+  box-sizing: border-box !important
+}
+
+.new-box {
+  max-width: $max-screen;
+  display: inline-block;
+  margin: 0 auto;
+}
+
+.new-box-hubs {
+  margin: 0 0 $size-s 0;
+}
+
+.new-box-left {
+  flex-direction: row-reverse;
+  display: flex;
+  margin: 0 20px 0 -20px;
+
+  @include breakpoint-s {
+    flex-direction: row;
+    flex: 1;
+    margin: auto;
+  }
+
+  @include breakpoint-xs {
+    flex-direction: row;
+    flex: 1;
+    margin: auto;
+  }
+}
+
+.new-box-right {
+  flex-direction: row;
+  display: flex;
+  margin: 0 -30px 0 30px;
+}
+
+.fix-w {
+  margin-left: auto;
+  margin-right: auto;
+  // max-width: $max-screen;
+  display: flex;
+  flex: 1;
+
+  @include breakpoint-s {
+    margin-left: $size-xs;
+    margin-right: $size-xs;
+  }
+
+  @include breakpoint-xs {
+    margin-left: $size-xs;
+    margin-right: $size-xs;
+  }
+}

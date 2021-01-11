@@ -1,0 +1,21 @@
+<mat-dialog-content *ngIf="showTable">
+  <div *ngFor="let item of dataSources">
+    <!-- <ws-auth-content-quality [dataSource]="item" (finalDataEmit)="dataHandler($event)">
+    </ws-auth-content-quality> -->
+  </div>
+</mat-dialog-content>
+<div *ngIf="!showTable" style="height: 20%">
+  <h2>Content Quality Score: <span [ngClass]="{'score-red': score <=70, 'score-green': score > 70 }">{{score}}</span>
+  </h2>
+</div>
+<div class="parent">
+  <div style="text-align:center;">
+    <!-- <mat-error *ngIf="currentSelection" class="form__error">Please select atleast one Answer</mat-error> -->
+  </div>
+</div>
+<mat-dialog-actions align="end" class="mb-0-imp">
+  <button *ngIf="showTable" i18n mat-raised-button color="primary" (click)="markAsComplete()">Submit</button>
+  <button mat-raised-button type="button" [mat-dialog-close]="true" class="ws-mat-accent-border flex-auto-display">
+    <span class="ws-mat-default-text" i18n>Close</span>
+  </button>
+</mat-dialog-actions>

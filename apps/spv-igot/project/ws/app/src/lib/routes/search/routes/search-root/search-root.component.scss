@@ -1,0 +1,16 @@
+@import 'ws-common';
+@import 'ws-vars';
+@import 'ws-mixins';
+
+.container-balanced {
+  @extend %page-center;
+  height: auto;
+  // min-height: 400px;
+}
+
+.search-box {
+  width: 100%;
+  max-width: 500px;
+  box-sizing: border-box;
+  max-height: 50px;
+}
