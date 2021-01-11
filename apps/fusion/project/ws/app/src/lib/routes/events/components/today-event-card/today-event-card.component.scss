@@ -1,0 +1,130 @@
+@import 'ws-common';
+@import 'ws-vars';
+@import 'ws-mixins';
+
+.today-event-card {  
+  flex: 1;
+  height: calc(100% - 2rem);
+  &.mat-card{
+    flex-direction: column;
+    display: flex;
+  }
+  .mat-card-footer{
+    justify-self: flex-end;
+    align-items: center;
+  }
+  &.mat-card-header{
+    &.mat-card-header-text {
+      margin-left: 0;
+    }
+  }
+}
+ 
+.bg-black {
+  background-color: rgb(0,0,0) !important;
+}
+
+.no-box-shadow {
+  box-shadow:none !important;
+}
+
+.light-font {
+  color: #fff;
+}
+
+
+
+.dot:before {
+  content: '•';
+  margin: 1rem;
+
+  @include breakpoint-xs {
+    margin: 0.65rem;
+  }
+}
+
+.mobile {
+  @include breakpoint-xs {
+    flex: 1;
+  }
+
+  @include breakpoint-s {
+    flex: 1;
+  }
+}
+
+.responsive {
+  display: flex;
+  flex-direction: row;
+
+  @include breakpoint-xs {
+    flex-direction: column;
+  }
+}
+
+.mobile2 {
+  @include breakpoint-xs {
+    margin-top: $size-s;
+  }
+
+  // @include breakpoint-s {
+  //   margin-top: $size-s;
+  // }
+}
+
+.tag {
+  display: flex;
+  margin: 0 10px;
+  padding: 3px 15px;
+  font-size: 12px;
+  min-width: 50px;
+  justify-content: center;
+  border-radius: 20px 5px 5px 20px;
+}
+
+.noocoments {
+  flex: 1;
+  text-align: right;
+  margin-right: $size-m;
+}
+
+.custom {
+  flex-direction: row;
+
+  @include breakpoint-xs {
+    flex-direction: column;
+    margin: 0 24px 0 24px;
+
+  }
+
+  // @include breakpoint-s {
+  //   flex-direction: column;
+  //   margin: 0 24px 0 24px;
+
+  // }
+}
+
+.margin-0 {
+  margin: 0;
+}
+
+.pad-4 {
+  padding: 4px;
+}
+
+.mat-subheading-1 {
+  font-size: 14px;
+  .light-font {
+    color: #fff;
+  }
+}
+
+
+
+.mat-card-header-text {
+  margin: 0;
+}
+
+::ng-deep.today-event-card .mat-card-header-text {
+  margin-left: 0 !important;
+}

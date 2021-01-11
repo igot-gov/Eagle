@@ -1,0 +1,134 @@
+@import 'ws-common';
+@import 'ws-vars';
+@import 'ws-mixins';
+
+
+.event-card-image {
+  width: 276px;
+  height: 166px;
+}
+
+.event-details-card {
+  background:none;
+  padding-left: 0;
+  height: 167px;
+}
+
+::ng-deep.event-details-card .mat-card-header-text {
+  margin: 0 !important;
+}
+
+.w-65 {
+  width: 65%;
+}
+
+.margin-l-0 {
+  margin-left: 0;
+}
+
+.flex-3 {
+  flex: 3;
+}
+
+.f-medium {
+  // font-family: "Poppins-Medium";
+}
+
+.related-discussion {
+  justify-content: space-between;
+}
+
+// .display-hide {
+//   display: none !important;
+// }
+
+.tag {
+  display: flex;
+  margin: 0 10px;
+  padding: 3px 15px;
+  font-size: 12px;
+  min-width: 50px;
+  justify-content: center;
+  border-radius: 20px 5px 5px 20px;
+}
+
+mat-icon.upvoted {
+  color: #5FAD41;
+}
+
+mat-icon.downvoted {
+  color: #F0466F
+}
+
+.noocoments {
+  flex: 1;
+  text-align: right;
+  margin-right: $size-m;
+}
+
+.margin-0 {
+  margin: 0;
+}
+
+.mb-0-imp {
+  margin-bottom: 0 !important;
+}
+
+.pad-4 {
+  padding: 4px;
+}
+
+.mat-card-header-text {
+  margin-left: 0;
+}
+
+::ng-deep.comment-section .mat-card-header-text {
+  margin: 0 !important;
+  display: none;
+}
+
+.posttime {
+  display: flex;
+  // flex: 1;
+  justify-content: flex-end;
+}
+
+.post-card {
+  box-shadow: none !important;
+  border-radius: unset;
+  padding: $size-m $size-xl $size-m $size-l;
+
+}
+
+.recent-most {
+  box-shadow: none !important;
+  border-radius: unset;
+}
+
+.remove-botton-radius {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.flex-auto-display {
+  @include breakpoint-xs {
+    flex: auto;
+    margin-left: 0 !important;
+    margin-top: 1rem;
+  }
+
+  @include breakpoint-s {
+    flex: auto;
+  }
+
+}
+
+.fit-content-height {
+  height: fit-content;
+}
+
+.hidden-imp {
+  @include breakpoint-xs {
+    display: none !important;
+  }
+}

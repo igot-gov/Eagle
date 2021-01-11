@@ -1,0 +1,100 @@
+<div class="banner w-full">
+</div>
+
+<div class="px-10 py-10">
+    <div class="flex flex-4 flex-column">
+        <div class="flex custom">
+            <div>
+                <img i18n-alt alt="today events" src="\assets\images\event\today-events.svg"/>
+            </div>
+            <div class="flex flex-3">
+                <mat-card class="flex-1 no-box-shadow">
+                  <mat-card-header class="flex items-baseline margin-fix">
+                    <mat-card-title class="margin-l-0 f-medium  flex-1">
+                      <span class="width-expand">Today's events</span>
+                    </mat-card-title>
+                    <span class="spacer"></span>
+                  </mat-card-header>
+                  <mat-card-content class="mb-0-imp flex flex-wrap" style="margin-left:16px;">
+                    <ng-container>
+                      <ws-app-today-event-card class="mr-4 mb-5"></ws-app-today-event-card>
+                    </ng-container>
+                  </mat-card-content>
+                  <mat-card-footer>
+                    <div class="flex flex-1 custom mx-8">
+                        <button mat-stroked-button color="accent" type="button" class=" mat-accent-border flex-auto-display">
+                            <span class="" i18n>See all events</span>
+                        </button>
+                    </div>
+                  </mat-card-footer>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="w-full px-10">
+    <div class="flex flex-1 flex-column margin-fix mb-2">
+        <span class="f-medium mat-title">Featured Events </span>
+    </div>
+    <div class="flex flex-wrap margin-fix">
+        <!-- *ngFor="let discuss of data.topics | orderBy: currentFilter :'desc' | pipeFilterSearch: searchInput.value; let i = index;let odd=odd; let even=even;" -->
+        <ng-container>
+            <div class="flex w-full sm:w-full md:w-1/2 mb-5" [ngClass]="{ 'justify-start  md:justify-end': odd, 'justify-start':even}">
+                <ws-app-events-card class="w-fix" [discuss]="discuss"></ws-app-events-card>
+            </div>
+        </ng-container>
+    </div>
+</div>
+
+<div class="w-full pt-10  px-10">
+    <div class="flex flex-1 flex-column margin-fix mb-2">
+        <span class="f-medium mat-title">Joined by me </span>
+    </div>
+    <div class="flex flex-wrap margin-fix">
+        <!-- *ngFor="let discuss of data.topics | orderBy: currentFilter :'desc' | pipeFilterSearch: searchInput.value; let i = index;let odd=odd; let even=even;" -->
+        <ng-container>
+            <div class="flex w-full sm:w-full md:w-1/2 mb-5" [ngClass]="{ 'justify-start  md:justify-end': odd, 'justify-start':even}">
+                <ws-app-events-card class="w-fix" [discuss]="discuss"></ws-app-events-card>
+            </div>
+        </ng-container>
+    </div>
+</div>
+
+<div class="w-full pt-10  px-10">
+    <div class="flex flex-1 flex-column margin-fix mb-2">
+        <span class="f-medium mat-title">All events </span>
+    </div>
+    <div class="flex flex-1 flex-column margin-fix search">
+        <form (submit)="updateQuery(queryControl.value)">
+            <mat-form-field appearance="outline" class="autocomplete-form mat-body-2" color="primary"
+                [floatLabel]="'never'">
+                <mat-icon matPrefix class="search-home flex items-center justify-center">search</mat-icon>
+                <input type="search" #searchInput class="ml-2" i18n-placeholder="search content"
+                    [placeholder]="'Search'" i18-aria-label aria-label="Query" matInput [formControl]="queryControl"
+                    accesskey="F" />
+            </mat-form-field>
+        </form>
+    </div>
+    <div class="flex flex-1 flex-column margin-fix mt-5">
+        <div class="flex flex-1 filter">
+            <a href="javascript:void(0)" role="button" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'timestamp',
+                            'ws-mat-accent-border font-normal':currentFilter !== 'timestamp'}" mat-button
+                (click)="filter('timestamp')">
+                All </a>
+            <a href="javascript:void(0)" role="button" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'viewcount',
+                            'ws-mat-accent-border font-normal':currentFilter !== 'viewcount'}" mat-button
+                (click)="filter('viewcount')">
+                Hosted by my MDO </a>
+        </div>
+    </div>
+    <div class="flex flex-wrap margin-fix">
+        <!-- *ngFor="let discuss of data.topics | orderBy: currentFilter :'desc' | pipeFilterSearch: searchInput.value; let i = index;let odd=odd; let even=even;" -->
+        <ng-container>
+            <div class="flex w-full sm:w-full md:w-1/2 mb-5"
+                [ngClass]="{ 'justify-start  md:justify-end': odd, 'justify-start':even}">
+                <ws-app-events-card class="w-fix" [discuss]="discuss"></ws-app-events-card>
+            </div>
+        </ng-container>
+    </div>
+</div>

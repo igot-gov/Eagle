@@ -1,0 +1,77 @@
+<div class="flex flex-4 flex-column py-10">
+  <mat-card class="flex-custom event-details-card" style="box-shadow: none;background:none;">
+      <div class="flex-1" style="height: 167px;">
+          <div class="flex flex-4" style="height: 167px;">
+            <div class="flex-1">
+              <img src="/assets/images/profile/business.jpg" class="event-card-image">
+            </div>
+            <div class="flex-3 px-10" style="margin-top: 10px;height: 167px;">
+              <mat-card-title role="link" tabindex="0" class="flex-4 mobile-margin text-capitalize mat-h2">
+                Covid Vaccine rollout - challenges
+              </mat-card-title>
+              <mat-card-content>
+                <span class="flex mat-body-2" role="link" tabindex="0" i18n-aria-label>
+                  Discussion on Covid vaccine rollout - challenges
+                </span>
+                <span class="flex mat-body-2 ws-mat-black60-text" role="link" tabindex="0" i18n-aria-label>
+                  Live
+                </span>
+              </mat-card-content>
+            </div>
+            <div class="flex flex-row-reverse">
+              <div class="ml-4 mb-2 view-more ws-mat-accent-text view-all">
+                <div class="flex-1" style="position: relative;">
+                  <div #stickyMenu [class.sticky]="sticky">
+                    <app-right-menu-card></app-right-menu-card>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+  </mat-card>
+</div>
+<div class="w-full px-2">
+  <div class="flex flex-1 flex-column margin-fix mt-5">
+      <div class="flex flex-1 filter">
+          <a href="javascript:void(0)" role="button" class="filter-option" mat-button>
+            OVERVIEW 
+          </a>
+          <a href="javascript:void(0)" role="button" class="filter-option" mat-button>
+            PARTICIPANTS
+          </a>
+      </div>
+  </div>
+  <div class="flex flex-1 flex-column margin-fix mb-2">
+      <span class="f-medium mat-title">Description </span>
+  </div>
+  <div class="flex flex-wrap margin-fix">
+      <ng-container>
+          <div class="flex w-65 mb-5">
+             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+          </div>
+      </ng-container>
+  </div>
+  <div class="flex flex-1 flex-column margin-fix mb-2">
+      <span class="f-medium mat-title">Presenters</span>
+  </div>
+  <div class="flex flex-wrap margin-fix">
+      <ng-container>
+          <div class="flex" style="width: 65%;">
+            <app-presenter-card></app-presenter-card>
+            <app-presenter-card></app-presenter-card>
+            <app-presenter-card></app-presenter-card>
+          </div>
+      </ng-container>
+  </div>
+  <div class="flex flex-1 flex-column margin-fix mb-2">
+      <span class="f-medium mat-title">Agenda</span>
+  </div>
+  <div class="flex flex-wrap margin-fix">
+      <ng-container>
+          <div class="flex w-65  mb-5">
+             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+          </div>
+      </ng-container>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<ws-widget-btn-page-back [widgetData]="{ url: 'home',titles: titles }">
+</ws-widget-btn-page-back>
+<div class="container-balanced">
+    <!-- <div *ngIf="currentRoute === 'home'" class="container-balanced-banner"> -->
+    <ng-container *ngIf="currentRoute === 'home'" [wsResolverWidget]="banner"></ng-container>
+    <!-- </div> -->
+    <div class="">
+        <router-outlet></router-outlet>
+    </div>
+</div>

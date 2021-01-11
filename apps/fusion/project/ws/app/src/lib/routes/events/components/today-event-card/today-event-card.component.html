@@ -1,0 +1,16 @@
+<mat-card class="today-event-card no-box-shadow cursor-pointer" (click)="getEvent()" [ngClass]="(isLive)?'bg-black':''">
+    <mat-card-header>
+        <mat-card-title>
+            <span role="link" i18n-aria-label tabindex="0"
+                class="cursor-pointer mat-subheading-1" [ngClass]="(isLive)?'light-font':''">Covid vaccine rollout - Challenges</span>
+        </mat-card-title>
+        <mat-card-subtitle class="responsive">
+            <span class="mat-body-2" [ngClass]="(isLive)?'light-font':''">11:00 am - 12:00 pm</span>
+        </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="flex flex-2" *ngIf="isLive">
+        <ng-container>
+            <span class="light-font"> Live </span>
+        </ng-container>
+    </mat-card-content>
+</mat-card>
