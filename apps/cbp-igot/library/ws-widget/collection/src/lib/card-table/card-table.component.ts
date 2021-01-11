@@ -169,49 +169,53 @@ export class CardTableComponent extends WidgetBaseComponent
 
   showMenuItem(menuType: string, row: any) {
     let returnValue = false
-    switch (menuType) {
-      case 'edit':
-      case 'delete':
-        if (row.status === 'Draft' || row.status === 'Live') {
-          returnValue = this.hasAccess(row)
-        }
-        if (row.authoringDisabled && menuType === 'edit') {
-          returnValue = false
-        }
-        break
-      case 'moveToDraft':
-        if (
-          row.status === 'InReview' ||
-          row.status === 'Unpublished' ||
-          row.status === 'Reviewed' ||
-          row.status === 'QualityReview'
-        ) {
+    if (row && row.contentType === 'Resource') {
+      returnValue = false
+    } else {
+      switch (menuType) {
+        case 'edit':
+        case 'delete':
+          if (row.status === 'Draft' || row.status === 'Live') {
+            returnValue = this.hasAccess(row)
+          }
+          if (row.authoringDisabled && menuType === 'edit') {
+            returnValue = false
+          }
+          break
+        case 'moveToDraft':
+          if (
+            row.status === 'InReview' ||
+            row.status === 'Unpublished' ||
+            row.status === 'Reviewed' ||
+            row.status === 'QualityReview'
+          ) {
+            returnValue = this.hasAccess({ ...row, status: 'Draft' })
+          }
+          break
+        case 'moveToInReview':
+          if (row.status === 'Reviewed' || row.status === 'QualityReview') {
+            returnValue = this.hasAccess({ ...row, status: 'InReview' })
+          }
+          break
+        case 'publish':
+          if (row.status === 'Reviewed') {
+            returnValue = this.hasAccess(row)
+          }
+          break
+        case 'unpublish':
+          if (row.status === 'Live') {
+            returnValue = this.hasAccess(row)
+          }
+          break
+        case 'review':
+          if (row.status === 'InReview' || row.status === 'QualityReview') {
+            returnValue = this.hasAccess(row)
+          }
+          break
+        case 'lang':
           returnValue = this.hasAccess({ ...row, status: 'Draft' })
-        }
-        break
-      case 'moveToInReview':
-        if (row.status === 'Reviewed' || row.status === 'QualityReview') {
-          returnValue = this.hasAccess({ ...row, status: 'InReview' })
-        }
-        break
-      case 'publish':
-        if (row.status === 'Reviewed') {
-          returnValue = this.hasAccess(row)
-        }
-        break
-      case 'unpublish':
-        if (row.status === 'Live') {
-          returnValue = this.hasAccess(row)
-        }
-        break
-      case 'review':
-        if (row.status === 'InReview' || row.status === 'QualityReview') {
-          returnValue = this.hasAccess(row)
-        }
-        break
-      case 'lang':
-        returnValue = this.hasAccess({ ...row, status: 'Draft' })
-        break
+          break
+      }
     }
     return returnValue
   }

@@ -2,7 +2,7 @@
   <div class="flex-3 flex-column">
     <div class="flex flex-1 flex-column">
       <div class="mt-10">
-        <img mat-card-image class="content-image" [src]="contentMeta?.appIcon" alt="Content Image"
+        <img mat-card-image class="content-image" [src]="contentMeta?.appIcon | relativeUrl" alt="Content Image"
           (error)="changeToDefaultImg($event)" />
       </div>
       <div class="flex flex-column margin-top-m">
@@ -31,7 +31,7 @@
               mode="determinate" [value]="contentQualityPercent">
             </mat-progress-bar>
           </div>
-          <div class="flex flex-1">
+          <div class="flex flex-1" *ngIf="contentQualityPercent && contentQualityPercent !== '0'">
             <button mat-button type="button" class="margin-top-s margin-bottom-s ws-mat-accent-border margin-left-s"
               (click)="download()">
               <mat-icon>cloud_download</mat-icon>

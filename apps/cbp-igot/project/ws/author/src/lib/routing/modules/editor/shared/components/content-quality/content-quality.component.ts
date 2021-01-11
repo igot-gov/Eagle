@@ -37,6 +37,7 @@ export class ContentQualityComponent implements OnInit, OnDestroy, AfterViewInit
   viewMode = 'meta'
   mimeTypeRoute = ''
   isResultExpend = false
+  showParentLoader = false
   selectedKey = ''
   questionData!: NSIQuality.IQuestionConfig[]
   qualityResponse!: NSIQuality.IQualityResponse
@@ -228,10 +229,14 @@ export class ContentQualityComponent implements OnInit, OnDestroy, AfterViewInit
     this._qualityService.getFile({ ...data }, `Content-Quality-Report`, true)
   }
   start() {
-    if (this.questionData && this.questionData[1] && this.questionData[1].type) {
-      this.selectedIndex = 1
-      this.selectedKey = this.questionData[1].type
-      // this.createForm()
+    if (this.contentService.getUpdatedMeta(this.currentContent).children.length > 0) {
+      if (this.questionData && this.questionData[1] && this.questionData[1].type) {
+        this.selectedIndex = 1
+        this.selectedKey = this.questionData[1].type
+        // this.createForm()
+      }
+    } else {
+      this.snackBar.open(`To start content quality check, minimum one resourse/child is required`)
     }
   }
   nextQ() {
@@ -261,7 +266,8 @@ export class ContentQualityComponent implements OnInit, OnDestroy, AfterViewInit
       if (this.selectedIndex > 0) {
         this.selectedIndex -= 1
         this.selectedKey = this.questionData[this.selectedIndex].type
-        this.selectedQIndex = 0
+        this.selectedQIndex = this.questionData[this.selectedIndex].questions ?
+          this.questionData[this.selectedIndex].questions.length - 1 : 0
         this.lastQ = false
       }
     }
@@ -299,6 +305,7 @@ export class ContentQualityComponent implements OnInit, OnDestroy, AfterViewInit
     return res
   }
   submitResult(qualityForm: any) {
+    this.showParentLoader = true
     if (qualityForm && this._configurationsService.userProfile) {
       // todo:  start loader
       /* tslint:disable */
@@ -333,6 +340,7 @@ export class ContentQualityComponent implements OnInit, OnDestroy, AfterViewInit
         if (response) {
           setTimeout(() => {
             this.fillResponseData()
+            this.showParentLoader = false
           },
             1500
           )
@@ -340,8 +348,11 @@ export class ContentQualityComponent implements OnInit, OnDestroy, AfterViewInit
         } else {
           // need to check tost
           // this.displayResult = true
+          this.showParentLoader = false
         }
       })
+    } else {
+      this.showParentLoader = false
     }
 
   }

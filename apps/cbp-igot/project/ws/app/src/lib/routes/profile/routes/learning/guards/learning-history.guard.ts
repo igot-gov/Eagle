@@ -16,7 +16,7 @@ export class LearningHistoryGuard implements CanActivate {
     if (this.configSvc.userRoles && (this.configSvc.userRoles.has('my-analytics') || this.configSvc.userRoles.has('admin'))) {
       return true
     }
-    return this.router.parseUrl('/author')
+    return this.router.parseUrl('/author/cbp')
   }
 
 }

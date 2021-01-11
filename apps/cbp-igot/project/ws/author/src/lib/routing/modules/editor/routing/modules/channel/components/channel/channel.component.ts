@@ -359,7 +359,7 @@ export class ChannelComponent implements OnInit, OnDestroy {
             },
             duration: NOTIFICATION_TIME * 1000,
           })
-          this.router.navigateByUrl('/author')
+          this.router.navigateByUrl('/author/cbp')
         },
         error => {
           if (error.status === 409) {
@@ -550,7 +550,7 @@ export class ChannelComponent implements OnInit, OnDestroy {
         break
 
       case 'close':
-        this.router.navigateByUrl('/author')
+        this.router.navigateByUrl('/author/cbp')
         break
     }
   }
@@ -571,7 +571,7 @@ export class ChannelComponent implements OnInit, OnDestroy {
         if (this.contents.length) {
           this.contentService.changeActiveCont.next(this.contents[0].identifier)
         } else {
-          this.router.navigateByUrl('/author')
+          this.router.navigateByUrl('/author/cbp')
         }
       },
       error => {

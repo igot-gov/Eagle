@@ -27,7 +27,6 @@
   </mat-sidenav>
 
   <mat-sidenav-content class="pl-6 pr-6 ml-6">
-
     <form [formGroup]="qualityForm" (ngSubmit)="submitResult(qualityForm.value)">
       <ng-container *ngIf="!displayResult" formArrayName="questionsArray">
         <ng-container *ngFor="let quesParent of qualityForm.get('questionsArray').controls; index as idx">
@@ -70,7 +69,7 @@
                 </ng-container>
               </mat-card-content>
               <mat-card-actions>
-                <div class="flex flex-start margin-top-l margin-bottom-s margin-left-s">
+                <div *ngIf="!showParentLoader" class="flex flex-start margin-top-l margin-bottom-s margin-left-s">
                   <button mat-raised-button type="button"
                     class="btn-n ws-mat-accent-text ws-mat-accent-border-active margin-left-s" (click)="previousQ()">
                     <span class="mat-subheading-2 padding-xs" style="vertical-align: unset;" i18n>Previous question
@@ -88,6 +87,9 @@
                     <span class="mat-subheading-2 padding-xs" style="vertical-align: unset;" i18n>Submit
                     </span>
                   </button>
+                </div>
+                <div *ngIf="showParentLoader" class="text-center my-2">
+                  <mat-spinner class="inline-block"></mat-spinner>
                 </div>
               </mat-card-actions>
             </mat-card>
