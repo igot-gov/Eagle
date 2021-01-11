@@ -22,7 +22,7 @@ export class CreateMDOService {
   }
   createDepartment(deptData: any): Observable<any> {
     const deptArr = []
-    deptArr.push(deptData)
+    deptArr.push(deptData.deptSubTypeId)
     const departmentData = {
       rootOrg: DEPARTMENT_NAME,
       deptName: deptData.name,
