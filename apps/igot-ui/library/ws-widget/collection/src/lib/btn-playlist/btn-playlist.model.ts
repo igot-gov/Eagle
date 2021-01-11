@@ -30,6 +30,7 @@ export namespace NsPlaylist {
   }
 
   export interface IPlaylist {
+    result: any
     versionKey: any
     children: any
     identifier: any

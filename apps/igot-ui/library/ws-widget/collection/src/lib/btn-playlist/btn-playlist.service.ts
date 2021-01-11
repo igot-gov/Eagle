@@ -197,7 +197,7 @@ export class BtnPlaylistService {
     )
   }
 
-  sharePlaylist(shareRequest: NsPlaylist.IPlaylistShareRequest, playlistId: string) {
+  sharePlaylist(shareRequest: any, playlistId: string) {
     return this.http.post(`${API_END_POINTS.sharePlaylist}/${playlistId}`, shareRequest)
   }
 

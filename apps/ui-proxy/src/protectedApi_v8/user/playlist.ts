@@ -8,7 +8,7 @@ import {
   IPlaylistCreateRequest,
   IPlaylistParams,
   IPlaylistSbExtResponse,
-  IPlaylistShareRequest,
+  // IPlaylistShareRequest,
   // IPlayListUpdateRequest,
   // IPlaylistUpsertRequest
 } from '../../models/playlist.model'
@@ -38,23 +38,33 @@ const API_END_POINTS = {
 const GENERAL_ERROR_MSG = 'Failed due to unknown reason'
 
 async function sharePlaylist(
-  userId: string,
+  _userId: string,
   playlistId: string,
-  request: IPlaylistShareRequest,
-  rootOrg: string
+  request: { playlist_title: string, versionKey: string, users: string[] },
+  // tslint:disable-next-line: no-any
+  auth: any
 ) {
   /* for sharing a playlist with another user */
-  const url = `${API_END_POINTS.playlistV1(userId)}/playlists/${playlistId}/share`
+  const url = `https://igot-sunbird.idc.tarento.com/apis/proxies/v8/action/content/v3/update/${playlistId}`
+  const body = {
+    request: {
+      content: {
+        name: request.playlist_title,
+        sharedWith: request.users,
+        versionKey: request.versionKey,
+      },
+    },
+  }
+
   return axios({
     ...axiosRequestConfig,
-    data: {
-      message: request.message,
-      users: request.users,
-    },
+    data: body,
     headers: {
-      rootOrg,
+      Authorization: auth,
+      org: 'dopt',
+      rootOrg: 'igot',
     },
-    method: 'POST',
+    method: 'PATCH',
     url,
   })
 }
@@ -302,7 +312,8 @@ playlistApi.post('/share/:playlistId', async (req, res) => {
     }
     const request = req.body
     const playlistId = req.params.playlistId
-    const response = await sharePlaylist(userId, playlistId, request, rootOrg)
+    const auth = req.header('Authorization')
+    const response = await sharePlaylist(userId, playlistId, request, auth)
     res.status(response.status).send()
   } catch (err) {
     res
@@ -484,22 +495,6 @@ playlistApi.post('/create', async (req, res) => {
       url: urll,
     })
 
-    const userResponse = await getPlaylistsAllTypes(userId, rootOrg, null)
-    if (userResponse.data) {
-      const createdPlaylistId = userResponse.data.user[0].id
-      if (createdPlaylistId && request.shareWith && request.shareWith.length) {
-        const shareResponse = await sharePlaylist(
-          userId,
-          createdPlaylistId,
-          {
-            message: request.shareMsg,
-            users: request.shareWith,
-          },
-          rootOrg
-        )
-        res.status(shareResponse.status).send()
-      }
-    }
     res.status(response1.status).send()
   } catch (err) {
     res
