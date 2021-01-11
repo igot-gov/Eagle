@@ -1,4 +1,3 @@
-
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { NSProfileDataV2 } from '../../models/profile-v2.model'
 import { MatDialog } from '@angular/material/dialog'
@@ -179,7 +178,7 @@ export class UsersViewComponent implements OnInit, OnDestroy {
         this.usersService.blockUser(user).subscribe(response => {
           if (response) {
             this.getAllUsers()
-            this.snackBar.open("Updated successfully !")
+            this.snackBar.open('Updated successfully !')
           }
         })
         break
@@ -189,7 +188,7 @@ export class UsersViewComponent implements OnInit, OnDestroy {
         this.usersService.blockUser(user).subscribe(response => {
           if (response) {
             this.getAllUsers()
-            this.snackBar.open("Updated successfully !")
+            this.snackBar.open('Updated successfully !')
           }
         })
         break
@@ -199,7 +198,7 @@ export class UsersViewComponent implements OnInit, OnDestroy {
         this.usersService.deActiveUser(user).subscribe(response => {
           if (response) {
             this.getAllUsers()
-            this.snackBar.open("Updated successfully !")
+            this.snackBar.open('Updated successfully !')
           }
         })
         break
@@ -209,7 +208,7 @@ export class UsersViewComponent implements OnInit, OnDestroy {
         this.usersService.deActiveUser(user).subscribe(response => {
           if (response) {
             this.getAllUsers()
-            this.snackBar.open("Updated successfully !")
+            this.snackBar.open('Updated successfully !')
           }
         })
         break

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs'
 
 const API_END_POINTS = {
   USERS: '/apis/protected/v8/user/roles/getUsersV2',
-  USER_BDD: '/apis/protected/v8/portal/mdo/deptAction/userrole'
+  USER_BDD: '/apis/protected/v8/portal/mdo/deptAction/userrole',
 }
 
 @Injectable({

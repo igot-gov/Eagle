@@ -3,8 +3,9 @@ import { Router } from '@angular/router'
 import { ITableData } from '../../../../../../../../../library/ws-widget/collection/src/public-api'
 import { environment } from '../../../../../../../../../src/environments/environment'
 import { UsersService } from '../../services/users.service'
+/* tslint:disable */
 import _ from 'lodash'
-
+/* tslint:enable */
 @Component({
   selector: 'ws-app-users',
   templateUrl: './users.component.html',
@@ -66,7 +67,6 @@ export class UsersComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
   menuActions($event: { action: string, row: any }) {
-    debugger
     const user = { userId: _.get($event.row, 'wid') }
     _.set(user, 'deptId', _.get(this.data2, 'id'))
     switch ($event.action) {
