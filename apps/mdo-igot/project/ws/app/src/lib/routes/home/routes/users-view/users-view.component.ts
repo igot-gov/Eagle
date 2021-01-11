@@ -9,6 +9,7 @@ import { UsersService } from '../../../users/services/users.service'
 import _ from 'lodash'
 import { environment } from 'src/environments/environment'
 import { ITableData } from '../../../../../../../../../library/ws-widget/collection/src/public-api'
+import { MatSnackBar } from '@angular/material'
 
 @Component({
   selector: 'ws-app-users-view',
@@ -22,7 +23,7 @@ export class UsersViewComponent implements OnInit, OnDestroy {
   /* tslint:disable */
   Math: any
   /* tslint:enable */
-  currentFilter = 'underreview'
+  currentFilter = 'active'
   discussionList!: any
   discussProfileData!: any
   portalProfile!: NSProfileDataV2.IProfile
@@ -40,6 +41,7 @@ export class UsersViewComponent implements OnInit, OnDestroy {
     public dialog: MatDialog,
     private route: ActivatedRoute,
     private router: Router,
+    private snackBar: MatSnackBar,
     // private discussService: DiscussService,
     private configSvc: ConfigurationsService,
     // private networkV2Service: NetworkV2Service,
@@ -84,7 +86,7 @@ export class UsersViewComponent implements OnInit, OnDestroy {
     this.getAllUsers()
   }
 
-  filter(key: string | 'timestamp' | 'best' | 'saved') {
+  filter(key: string) {
     const activeUsersData: any[] = []
     const blockedUsersData: any[] = []
     const inactiveUsersData: any[] = []
@@ -149,7 +151,7 @@ export class UsersViewComponent implements OnInit, OnDestroy {
   getAllUsers() {
     this.usersService.getAllUsers().subscribe(data => {
       this.usersData = data
-      this.filter('active')
+      this.filter(this.currentFilter)
     })
   }
 
@@ -161,16 +163,60 @@ export class UsersViewComponent implements OnInit, OnDestroy {
     this.router.navigate([`/app/users/${user.userId}/details`])
   }
   menuActions($event: { action: string, row: any }) {
+    const user = { userId: _.get($event.row, 'userId') }
+    _.set(user, 'deptId', _.get(this.usersData, 'id'))
+    _.set(user, 'isBlocked', _.get($event.row, 'blocked'))
+    _.set(user, 'isActive', _.get($event.row, 'active'))
+
     switch ($event.action) {
       case 'showOnKarma':
-        window.open(`${environment.karmYogiPath}/app/person-profile/${$event.row.userId}`)
+        window.open(`${environment.karmYogiPath}/app/person-profile/${user.userId}`)
         break
       case 'block':
+        _.set(user, 'isBlocked', true)
+        _.set(user, 'isActive', false)
+        _.set(user, 'roles', _.map(_.get($event.row, 'roleInfo'), i => i.roleName))
+        this.usersService.blockUser(user).subscribe(response => {
+          if (response) {
+            this.getAllUsers()
+            this.snackBar.open("Updated successfully !")
+          }
+        })
+        break
+      case 'unblock':
+        _.set(user, 'isBlocked', false)
+        _.set(user, 'roles', _.map(_.get($event.row, 'roleInfo'), i => i.roleName))
+        this.usersService.blockUser(user).subscribe(response => {
+          if (response) {
+            this.getAllUsers()
+            this.snackBar.open("Updated successfully !")
+          }
+        })
         break
       case 'deactive':
+        _.set(user, 'isActive', false)
+        _.set(user, 'roles', _.map(_.get($event.row, 'roleInfo'), i => i.roleName))
+        this.usersService.deActiveUser(user).subscribe(response => {
+          if (response) {
+            this.getAllUsers()
+            this.snackBar.open("Updated successfully !")
+          }
+        })
         break
-      case 'delete':
+      case 'active':
+        _.set(user, 'isActive', true)
+        _.set(user, 'roles', _.map(_.get($event.row, 'roleInfo'), i => i.roleName))
+        this.usersService.deActiveUser(user).subscribe(response => {
+          if (response) {
+            this.getAllUsers()
+            this.snackBar.open("Updated successfully !")
+          }
+        })
         break
+      //   case 'delete':
+      //     _.set(user, 'isBlocked', false)
+      //     this.usersSvc.deleteUser(user)
+      //     break
     }
   }
 }
