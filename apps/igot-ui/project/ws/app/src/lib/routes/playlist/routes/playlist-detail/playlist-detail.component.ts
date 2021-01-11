@@ -150,8 +150,8 @@ export class PlaylistDetailComponent implements OnInit, OnDestroy {
     if (formValues.title && this.playlist) {
       this.changeName = changeName
       if (!this.changeName) {
-        this.playlist.name = formValues.title
-        this.playlistSvc.patchPlaylist(this.playlist).subscribe()
+        this.playlist.result.content.name = formValues.title
+        this.playlistSvc.patchPlaylist(this.playlist.result.content).subscribe()
       }
     }
   }

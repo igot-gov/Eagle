@@ -12,12 +12,12 @@ const API_END_POINTS = {
   getAllPlaylists: `/apis/protected/v8/user/playlist`,
   deletePlaylist: `/apis/protected/v8/user/playlist`,
   playlist: (type: NsPlaylist.EPlaylistTypes) => `/apis/protected/v8/user/playlist/${type}`,
-  createPlaylist: `/apis/protected/v8/user/playlist`,
-  upsertPlaylist: (playlistId: string) => `/apis/protected/v8/user/playlist/${playlistId}`,
+  createPlaylist: `http://localhost:3003/protected/v8/user/playlist`,
+  upsertPlaylist: (playlistId: string) => `http://localhost:3003/protected/v8/user/playlist/${playlistId}`,
   acceptPlaylist: (playlistId: string) => `/apis/protected/v8/user/playlist/accept/${playlistId}`,
   rejectPlaylist: (playlistId: string) => `/apis/protected/v8/user/playlist/reject/${playlistId}`,
-  sharePlaylist: '/apis/protected/v8/user/playlist/share',
-  updatePlaylists: (playlistId: string) => `/apis/protected/v8/user/playlist/${playlistId}`,
+  sharePlaylist: 'http://localhost:3003/protected/v8/user/playlist/share',
+  updatePlaylists: (playlistId: string) => `http://localhost:3003/protected/v8/user/playlist/${playlistId}`,
   getSearchData: `/apis/proxies/v8/sunbirdigot/search`,
   getPlaylistData: (playlistId: string) => `/apis/proxies/v8/action/content/v3/hierarchy/${playlistId}?mode=edit`,
 }
@@ -197,7 +197,7 @@ export class BtnPlaylistService {
     )
   }
 
-  sharePlaylist(shareRequest: NsPlaylist.IPlaylistShareRequest, playlistId: string) {
+  sharePlaylist(shareRequest: any, playlistId: string) {
     return this.http.post(`${API_END_POINTS.sharePlaylist}/${playlistId}`, shareRequest)
   }
 
