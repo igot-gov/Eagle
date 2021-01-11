@@ -9,7 +9,7 @@ export const template1Data = {
             widgetData: {
               path: [
                 {
-                  clickUrl: '/author',
+                  clickUrl: '/author/cbp',
                   text: 'Home',
                 },
                 {
@@ -510,7 +510,7 @@ export const template2Data = {
             widgetData: {
               path: [
                 {
-                  clickUrl: '/author',
+                  clickUrl: '/author/cbp',
                   text: 'Home',
                 },
                 {

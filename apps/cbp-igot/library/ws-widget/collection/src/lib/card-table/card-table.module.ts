@@ -16,6 +16,7 @@ import {
 } from '@angular/material'
 import { RouterModule } from '@angular/router'
 import { PipeTableMetaModule } from './pipe-table-meta/pipe-table-meta.module'
+import { PipeRelativePathTableModule } from './relative-url/relative-url.module'
 @NgModule({
   declarations: [CardTableComponent],
   imports: [
@@ -35,6 +36,7 @@ import { PipeTableMetaModule } from './pipe-table-meta/pipe-table-meta.module'
     PipeDurationTransformModule,
     PipeCountTransformModule,
     PipeTableMetaModule,
+    PipeRelativePathTableModule,
   ],
   exports: [
     CardTableComponent,

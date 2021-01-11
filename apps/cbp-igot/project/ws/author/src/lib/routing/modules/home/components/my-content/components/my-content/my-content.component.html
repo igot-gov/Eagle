@@ -50,7 +50,7 @@
         </mat-tree>
       </mat-sidenav>
       <mat-sidenav-content class="sidenav-content" *ngIf="courseTaken.mandatoryCourseCompleted">
-        <span class="flex mat-h1 mt-1"> All CBPs</span>
+        <span class="flex mat-h1 mt-1"> My CBPs</span>
         <div class="flex flex-1 flex-column margin-fix">
           <div class="flex flex-1 filter max-height-60">
             <a [routerLink]="[filterPath]" [queryParams]="{ status: 'published' }"

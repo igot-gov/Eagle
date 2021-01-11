@@ -359,7 +359,7 @@ export class FileUploadComponent implements OnInit {
             duration: NOTIFICATION_TIME * 1000,
           })
           // if (this.mimeType !== 'application/pdf') {
-          this.data.emit('saveAndNext')
+          this.data.emit('save')
           // }
         },
         () => {
@@ -389,7 +389,7 @@ export class FileUploadComponent implements OnInit {
         // this.refreshData(this.currentActivePage)
 
       }
-      this.data.emit('saveAndNext')
+      this.data.emit('save')
     })
   }
   storeData() {
