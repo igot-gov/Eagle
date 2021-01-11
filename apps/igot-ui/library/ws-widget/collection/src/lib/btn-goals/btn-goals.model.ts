@@ -36,6 +36,7 @@ export namespace NsGoal {
   }
 
   export interface IGoal {
+    identifier: string
     id: string
     name: string
     description: string

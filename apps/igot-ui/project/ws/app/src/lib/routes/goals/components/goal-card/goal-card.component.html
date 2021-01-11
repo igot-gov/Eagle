@@ -1,8 +1,7 @@
 <mat-card class="relative border-radius-0 z-index-1">
   <div class="flex mb-2 cursor-pointer" (click)="
-      goal?.contentProgress?.length || goal?.contents?.length
-        ? (isGoalExpanded[goal?.id] = !isGoalExpanded[goal?.id])
-        : null
+ isGoalExpanded[goal?.id] = !isGoalExpanded[goal?.id]
+
     ">
     <div class="width-expand">
       <h2 class="mat-title margin-bottom-xs text-truncate">{{ goal?.name }}</h2>
@@ -89,7 +88,7 @@
   <ng-container *ngIf="!editCommonGoal">
     <p class="mat-body" i18n>This goal includes</p>
     <div class="ml-8">
-      <ws-widget-display-contents [contents]="goal?.contentProgress || goal?.contents"></ws-widget-display-contents>
+      <ws-widget-display-contents [contents]="goalData?.result.content.children"></ws-widget-display-contents>
     </div>
   </ng-container>
   <ng-container *ngIf="editCommonGoal">
