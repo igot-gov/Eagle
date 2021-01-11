@@ -28,7 +28,7 @@ const API_END_POINTS = {
     `/apis/protected/v8/user/goals/addContent/${goalId}/${contentId}?goal_type=${goalType}`,
   removeContentFromGoal: (goalId: string, contentId: string, goalType: string) =>
     `/apis/protected/v8/user/goals/removeContent/${goalId}/${contentId}?goal_type=${goalType}`,
-  getSearchData: `/apis/proxies/v8/sunbirdigot/search`
+  getSearchData: `/apis/proxies/v8/sunbirdigot/search`,
 }
 
 @Injectable({
@@ -77,25 +77,25 @@ export class BtnGoalsService {
 
   getUserGoals(type: NsGoal.EGoalTypes, sourceFields: string = '') {
     return this.http.post<NsGoal.IUserGoals>(`/apis/proxies/v8/sunbirdigot/search?type=${type}&sourceFields=${sourceFields}`, {
-      "request": {
-        "filters": {
-          "primaryCategory": "Playlist",
-          "visibility": "Private",
-          "status": ["Draft", "Live"]
+      request: {
+        filters: {
+          primaryCategory: 'Playlist',
+          visibility: 'Private',
+          status: ['Draft', 'Live'],
 
         },
-        "fields": [],
-        "limit": 100,
-        "facets": [
+        fields: [],
+        limit: 100,
+        facets: [
 
-        ]
-      }
+        ],
+      },
     })
 
   }
 
   getGoalContent(id: string) {
-    return this.http.get<NsGoal.IGoalsGroup>(`/apis/proxies/v8/sunbird/${id}?hierarchyType=detail&rootOrg&org`)
+    return this.http.get<NsGoal.IGoalsGroup>(`/apis/proxies/v8/action/content/v3/hierarchy/${id}?mode=edit`)
 
   }
 
