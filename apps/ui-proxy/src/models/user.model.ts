@@ -264,3 +264,10 @@ export interface IResponse {
 export interface IKeys {
   keys: string
 }
+
+export interface ISunbirdbUserResponse {
+  email: string
+  firstName: string
+  lastName: string
+  userId: string
+}

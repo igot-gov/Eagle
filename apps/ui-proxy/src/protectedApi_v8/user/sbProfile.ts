@@ -2,23 +2,30 @@ import axios from 'axios'
 import { Router } from 'express'
 import { axiosRequestConfig } from '../../configs/request.config'
 import {
-    IUpdateUserRegistry, IUserRegistry,
+    IPersonalDetails,
+    IRootObject,
+    ISBAcademic,
+    ISBPersonalDetails,
+    ISBProfessionalDetail,
+    ISBUser,
+    ISBUserProfile,
+    IUserProfile,
 } from '../../models/profile-details.model'
 import {
-    ISbUserResponse,
+    ISbUserResponse, ISunbirdbUserResponse,
 } from '../../models/user.model'
 import {
     IUserDetailsResponse,
     IUserGraphProfile,
     IUserGraphProfileResponse,
 } from '../../models/user.model'
-import { createUserRegistry, getUserRegistry, updateUserRegistry } from '../../service/registry'
+import { createUserRegistry, getUserRegistry, readUserRegistry, updateUserRegistry } from '../../service/registry'
 import { CONSTANTS } from '../../utils/env'
 import { logError } from '../../utils/logger'
 
 import {
     extractAuthorizationFromRequest,
-    extractRootOrgNameFromRequest,
+    extractRootOrgFromRequest,
     extractUserEmailFromRequest,
     extractUserIdFromRequest,
     extractUserNameFromRequest,
@@ -28,7 +35,7 @@ import {
 
 import { logInfo } from '../../utils/logger'
 import {
-    extractSbUserTokenContent,
+    extractSbUserIdFromRequest, extractSbUserTokenContent
 } from '../../utils/sbRequestExtract'
 const GENERAL_ERROR_MSG = 'Failed due to unknown reason'
 
@@ -62,16 +69,67 @@ export async function getUserDetailsFromApi(userId: string): Promise<IUserDetail
     }
 }
 
-export async function getSbUserDetailsFromApi(userId: string, auth: string, xT: string, org: string): Promise<ISbUserResponse | null> {
+export async function getSbUserDetailsFromApi(userId: string, auth: string,
+                                              xT: string, req: IAuthorizedRequest): Promise<Partial<ISBUserProfile> | null> {
     const xAuth = auth.split(' ')
     try {
-        logInfo('-------getSbUserDetailsFromApi-----')
+        logInfo('-------Enter-----')
         axios.defaults.headers.common[xAuthUser] = xAuth[1]
         const res = await axios.get<ISbUserResponse>(
             `${apiEndpoints.detailsSb}/${userId}`,
-            { headers: { Authorization: xAuth[0] + ' ' + xT, rootOrgName: org } }
+            { headers: { Authorization: xAuth[0] + ' ' + xT } }
         )
-        return res.data || {}
+        logInfo('-------res-----' + JSON.stringify(res))
+        const getUserResponse = JSON.parse(JSON.stringify(res))
+        logInfo('-------getSbUserDetailsFromApi-----' + getUserResponse.params.status)
+        let userProfileSb: Partial<ISBUserProfile> = {} as Partial<ISBUserProfile>
+        if (res.data.params.status === 'success') {
+            const responseRegistryData: IUserProfile[] = await getUserRegistry(userId)
+            let userProfileObj
+            if (responseRegistryData && responseRegistryData.length > 0) {
+                userProfileObj = responseRegistryData[0]
+                userProfileObj.id = req.body.userId
+                await updateUserRegistry(userProfileObj, req.body)
+                await delay(200)
+                const responseFromRead = await readUserRegistry(userProfileObj.osid)
+                const getupdateresponse = JSON.parse(JSON.stringify(responseFromRead))
+                const personaldetails = getupdateresponse.result.UserProfile.personalDetails
+                const countryCodeSb: string = personaldetails.countryCode
+                const domicileMediumSb: string = personaldetails.domicileMedium
+                const languageSb: string[] = personaldetails.language
+                const middlenameSb: string = personaldetails.middlename
+                const mobileSb: number = personaldetails.mobile
+                const nationalitySb: string = personaldetails.nationality
+                const officialEmailSb: string = personaldetails.officialEmail
+                const personalEmailSb: string = personaldetails.personalEmail
+                const pincodeSb: string = personaldetails.pincode
+                const postalAddressSb: string = personaldetails.postalAddress
+                const primaryEmailSb: string = personaldetails.primaryEmail
+                const telephoneSb: string = personaldetails.telephone
+                const lastNameSb: string = personaldetails.surname
+                const genderSb: string = personaldetails.gender
+                const firstNameSb: string = personaldetails.firstname
+                const dobSb: string = personaldetails.dob
+                const personalDetailsRegistry: Partial<ISBPersonalDetails> = {
+                    countryCode: countryCodeSb, dob: dobSb, domicileMedium: domicileMediumSb,
+                    firstName: firstNameSb, gender: genderSb, language: languageSb,
+                    lastName: lastNameSb, middlename: middlenameSb, mobile: mobileSb,
+                    nationality: nationalitySb, officialEmail: officialEmailSb,
+                    personalEmail: personalEmailSb, pincode: pincodeSb,
+                    postalAddress: postalAddressSb, primaryEmail: primaryEmailSb,
+                    telephone: telephoneSb,
+                }
+                const acadamicsSb: Partial<ISBAcademic[]> = getupdateresponse.result.UserProfile.academics
+                const professionalDetailSb: Partial<ISBProfessionalDetail[]> = getupdateresponse.result.UserProfile.professionalDetails
+                userProfileSb = {
+                    academics: acadamicsSb,
+                    personalDetails: personalDetailsRegistry,
+                    professionalDetails: professionalDetailSb,
+                }
+
+            }
+        }
+        return userProfileSb || {}
     } catch (err) {
         return null
     }
@@ -120,34 +178,6 @@ function manipulateResult(
     }
 }
 
-function manipulateResultV1(
-    detailsResponse: ISbUserResponse | null,
-    defaultEmail: string
-) {
-    let empNumber = (detailsResponse && detailsResponse.result.response.id) || 0
-    try {
-        if (detailsResponse != null) {
-            empNumber = detailsResponse.result.response.id
-        }
-        // tslint:disable-next-line:ban
-
-    } catch (err) {
-        logError(err)
-    }
-
-    return {
-        email:
-            (detailsResponse && detailsResponse.result.response.email) ||
-            defaultEmail,
-        miscellaneous: {
-            ...detailsResponse,
-            empNumber,
-        },
-        name:
-            (detailsResponse && detailsResponse.result.response.firstName + ' ' + detailsResponse.result.response.lastName),
-    }
-}
-
 export async function getUserProfile(userId: string, req: IAuthorizedRequest) {
     try {
         const [detailsResponse, profileResponse] = await Promise.all([
@@ -169,16 +199,12 @@ export async function getUserProfile(userId: string, req: IAuthorizedRequest) {
 export async function getSbUserProfile(userId: string, req: IAuthorizedRequest) {
     const authorization = extractAuthorizationFromRequest(req)
     const xAuthenticatedUserToken = extractUserTokenFromRequest(req)
-    const rootOrgName = extractRootOrgNameFromRequest(req)
     try {
         const [detailsResponse] = await Promise.all([
-            getSbUserDetailsFromApi(userId, authorization, xAuthenticatedUserToken, rootOrgName),
+            getSbUserDetailsFromApi(userId, authorization, xAuthenticatedUserToken, req),
         ])
 
-        return manipulateResultV1(
-            detailsResponse,
-            extractUserNameFromRequest(req)
-        )
+        return detailsResponse
     } catch (err) {
         return {}
     }
@@ -231,9 +257,43 @@ sbProfileApi.get('/graph/photo/:userEmail', async (req, res) => {
 
 sbProfileApi.get('/', async (req, res) => {
     try {
-        const userId = extractUserIdFromRequest(req)
-        const response = await getSbUserProfile(userId, req)
-        res.json(response)
+        logInfo('-------Enter-----')
+        const tokenContent = extractSbUserTokenContent(req)
+        const authorization = extractAuthorizationFromRequest(req)
+        const xAuthenticatedUserToken = extractUserTokenFromRequest(req)
+        const xAuth = authorization.split(' ')
+        if (tokenContent) {
+            const userId: string = extractSbUserIdFromRequest(req)
+            axios.defaults.headers.common[xAuthUser] = xAuth[1]
+            axios.defaults.headers.common[authorizationHeader] = xAuth[0] + ' ' + xAuthenticatedUserToken
+            const userResponse = await axios.get<ISbUserResponse>(
+                `${apiEndpoints.detailsSb}/${userId}`
+            )
+            if (userResponse.data.params.status === 'success') {
+                const responseRegistryData: IUserProfile[] = await CheckUserRegistryExists(userId)
+                let userProfileObj
+                if (responseRegistryData && responseRegistryData.length > 0) {
+                    userProfileObj = responseRegistryData[0]
+                    userProfileObj.id = req.body.userId
+                    const personaldetails = userProfileObj.personalDetails
+                    const acadamicsSb = userProfileObj.academics
+                    const interestsSb = userProfileObj.interests
+                    const skillsSb = userProfileObj.skills
+                    const employmentDetailsSb = userProfileObj.employmentDetails
+                    const professionalDetailSb = userProfileObj.professionalDetails
+                    const userProfileSb: Partial<IUserProfile> = {
+                        academics: acadamicsSb,
+                        employmentDetails: employmentDetailsSb,
+                        interests: interestsSb,
+                        personalDetails: personaldetails,
+                        professionalDetails: professionalDetailSb,
+                        skills: skillsSb,
+                    }
+                    res.status(200).send(userProfileSb)
+                }
+            }
+        }
+        return
     } catch (err) {
         res.status((err && err.response && err.response.status) || 500).send(
             (err && err.response && err.response.data) || {
@@ -255,16 +315,28 @@ sbProfileApi.post('/search', async (req, res) => {
             axios.defaults.headers.common[authorizationHeader] = xAuth[0] + ' ' + xAuthenticatedUserToken
             axios.defaults.headers.common[contentType] = contentTypeValue
             axios.defaults.headers.common[xAppId] = xAppIdVAlue
-            const getuserName: string = req.body.userName
+            const reuestJson = JSON.parse(JSON.stringify(req.body))
+            let searchresponse
 
-            const searchresponse = await axios({
-                ...axiosRequestConfig,
-                data: { request: { query: '', filters: { userName: getuserName.toLowerCase() } } },
-                method: 'POST',
-                url: apiEndpoints.searchSb,
-            })
+            if (reuestJson.hasOwnProperty('firstName')) {
+                searchresponse = await axios({
+                    ...axiosRequestConfig,
+                    data: { request: { query: '', filters: req.body } },
+                    method: 'POST',
+                    url: apiEndpoints.searchSb,
+                })
+                res.send(searchresponse.data)
+            } else if (reuestJson.hasOwnProperty('userName')) {
+                const getuserName: string = req.body.userName
+                searchresponse = await axios({
+                    ...axiosRequestConfig,
+                    data: { request: { query: '', filters: { userName: getuserName.toLowerCase() } } },
+                    method: 'POST',
+                    url: apiEndpoints.searchSb,
+                })
+                res.send(searchresponse.data)
+            }
 
-            res.send(searchresponse.data)
             return
         }
         res.status(404).send('')
@@ -279,6 +351,194 @@ sbProfileApi.post('/search', async (req, res) => {
 })
 
 sbProfileApi.post('/', async (req, res) => {
+    try {
+        const tokenContent = extractSbUserTokenContent(req)
+        const authorization = extractAuthorizationFromRequest(req)
+        const xAuthenticatedUserToken = extractUserTokenFromRequest(req)
+        const xAuth = authorization.split(' ')
+        axios.defaults.headers.common[xAuthUser] = xAuth[1]
+        axios.defaults.headers.common[authorizationHeader] = xAuth[0] + ' ' + xAuthenticatedUserToken
+        axios.defaults.headers.common[contentType] = contentTypeValue
+        axios.defaults.headers.common[xAppId] = xAppIdVAlue
+        const sbemail_ = req.body.personalDetails.email
+        const sbemailVerified_: boolean = req.body.personalDetails.emailVerified
+        const sbfirstName_ = req.body.personalDetails.firstName
+        const sblastName_ = req.body.personalDetails.lastName
+        const sbchannel_ = extractRootOrgFromRequest(req)
+        const sbuserName_ = req.body.personalDetails.email
+        const sbUserProfile: Partial<ISBUser> = {
+            channel: sbchannel_, email: sbemail_, emailVerified: sbemailVerified_, firstName: sbfirstName_,
+            lastName: sblastName_, userName: sbuserName_,
+        }
+
+        if (tokenContent) {
+            logInfo('------------' + JSON.stringify(sbUserProfile))
+            const requestJson = JSON.parse(JSON.stringify(sbUserProfile))
+            const response = await axios({
+                ...axiosRequestConfig,
+                data: { request: requestJson },
+                method: 'POST',
+                url: apiEndpoints.createSb,
+            })
+            await delay(200)
+            const responseData = response.data
+            const createSbResponseData = JSON.parse(JSON.stringify(responseData))
+            let reqresponse
+            let sbUserProfileResponse: Partial<ISunbirdbUserResponse> = {} as Partial<ISunbirdbUserResponse>
+            if (createSbResponseData.result.response === 'SUCCESS') {
+                axios.defaults.headers.common[xAuthUser] = xAuth[1]
+                axios.defaults.headers.common[authorizationHeader] = xAuth[0] + ' ' + xAuthenticatedUserToken
+                axios.defaults.headers.common[contentType] = contentTypeValue
+                axios.defaults.headers.common[xAppId] = xAppIdVAlue
+                logInfo('-------USer-----' + sbuserName_)
+                const searchresponse = await axios({
+                    ...axiosRequestConfig,
+                    data: { request: { query: '', filters: { firstName: sbfirstName_, lastName: sblastName_ } } },
+                    method: 'POST',
+                    url: apiEndpoints.searchSb,
+                })
+                await delay(300)
+                let id_ = ''
+                let firstname_ = ''
+                let surname_ = ''
+                let primaryEmail_ = ''
+                const middlename_ = ''
+                const nationality_ = ''
+                const domicileMedium_ = ''
+                const knownLanguages_: string[] = []
+                const countryCode_ = ''
+                const mobile_: number = null || 0
+                const telephone_ = ''
+                const officialEmail_ = ''
+                const personalEmail_ = ''
+                const postalAddress_ = ''
+                const pincode_ = ''
+                const osCreatedAt_ = ''
+                const osUpdatedAt_ = ''
+                const osCreatedBy_ = ''
+                const osUpdatedBy_ = ''
+                const _osroot_ = ''
+                const type_ = 'personalDetails'
+                logInfo('-------Serch result-----' + JSON.stringify(searchresponse.data))
+                if (searchresponse.data.result.response.count > 0) {
+                    id_ = searchresponse.data.result.response.content[0].id
+                    firstname_ = searchresponse.data.result.response.content[0].firstName
+                    surname_ = searchresponse.data.result.response.content[0].lastName
+                    primaryEmail_ = sbemail_
+                    const photo_ = ''
+                    const userId_ = id_
+                    const userosCreatedAt_ = ''
+                    const userosUpdatedAt_ = ''
+                    const userosCreatedBy_ = ''
+                    const userosUpdatedBy_ = ''
+                    const userType_ = 'UserProfile'
+                    logInfo('-------If AfterData for Registry-----' + id_)
+                    const personalDetailsRegistry: Partial<IPersonalDetails> = {
+                        '@type': type_, _osroot: _osroot_,
+                        countryCode: countryCode_, domicileMedium: domicileMedium_,
+                        firstname: firstname_, knownLanguages: knownLanguages_
+                        , middlename: middlename_, mobile: mobile_,
+                        nationality: nationality_, officialEmail: officialEmail_,
+                        osCreatedAt: osCreatedAt_, osCreatedBy: osCreatedBy_, osUpdatedAt: osUpdatedAt_,
+                        osUpdatedBy: osUpdatedBy_, personalEmail: personalEmail_, pincode: pincode_,
+                        postalAddress: postalAddress_,
+                        primaryEmail: primaryEmail_,
+                        surname: surname_,
+                        telephone: telephone_,
+                    }
+                    const userProfileRegistry: Partial<IUserProfile> = {
+                        '@id': userId_, '@type': userType_,
+                        id: id_,
+                        osCreatedAt: userosCreatedAt_, osCreatedBy: userosCreatedBy_, osUpdatedAt: userosUpdatedAt_,
+                        osUpdatedBy: userosUpdatedBy_,
+                        personalDetails: personalDetailsRegistry, photo: photo_,
+                        userId: id_,
+                    }
+                    logInfo('-------Before AfterData for Registry-----' + id_)
+                    reqresponse = await createUserRegistry(userProfileRegistry)
+
+                    await delay(300)
+                    if (reqresponse.params.status === 'SUCCESSFUL') {
+                        logInfo('-------After AfterData for Registry-----' + id_)
+                        sbUserProfileResponse = {
+                            email: sbemail_, firstName: firstname_, lastName: firstname_,
+                            userId: id_,
+                        }
+                    }
+
+                } else {
+
+                    const researchresponse = await axios({
+                        ...axiosRequestConfig,
+                        data: { request: { query: '', filters: { firstName: sbfirstName_, lastName: sblastName_ } } },
+                        method: 'POST',
+                        url: apiEndpoints.searchSb,
+                    })
+                    await delay(200)
+                    id_ = researchresponse.data.result.response.content[0].id
+
+                    firstname_ = researchresponse.data.result.response.content[0].firstName
+                    surname_ = researchresponse.data.result.response.content[0].lastName
+
+                    primaryEmail_ = researchresponse.data.result.response.content[0].email
+                    const photo_ = ''
+                    const userId_ = id_
+                    const userosCreatedAt_ = ''
+                    const userosUpdatedAt_ = ''
+                    const userosCreatedBy_ = ''
+                    const userosUpdatedBy_ = ''
+                    const userType_ = 'UserProfile'
+                    logInfo('-------If AfterData for Registry-----' + id_)
+                    const personalDetailsRegistry: Partial<IPersonalDetails> = {
+                        '@type': type_, _osroot: _osroot_,
+                        countryCode: countryCode_, domicileMedium: domicileMedium_,
+                        firstname: firstname_, knownLanguages: knownLanguages_
+                        , middlename: middlename_, mobile: mobile_,
+                        nationality: nationality_, officialEmail: officialEmail_,
+                        osCreatedAt: osCreatedAt_, osCreatedBy: osCreatedBy_, osUpdatedAt: osUpdatedAt_,
+                        osUpdatedBy: osUpdatedBy_, personalEmail: personalEmail_, pincode: pincode_,
+                        postalAddress: postalAddress_,
+                        primaryEmail: primaryEmail_,
+                        surname: surname_,
+                        telephone: telephone_,
+                    }
+                    const userProfileRegistry: Partial<IUserProfile> = {
+                        '@id': userId_, '@type': userType_,
+                        id: id_,
+                        osCreatedAt: userosCreatedAt_, osCreatedBy: userosCreatedBy_, osUpdatedAt: userosUpdatedAt_,
+                        osUpdatedBy: userosUpdatedBy_,
+                        personalDetails: personalDetailsRegistry, photo: photo_,
+                        userId: id_,
+                    }
+                    logInfo('-------Before AfterData for Registry-----' + id_)
+                    reqresponse = await createUserRegistry(userProfileRegistry)
+
+                    await delay(300)
+                    if (reqresponse.params.status === 'SUCCESSFUL') {
+                        logInfo('-------After AfterData for Registry-----' + id_)
+                        sbUserProfileResponse = {
+                            email: sbemail_, firstName: firstname_, lastName: firstname_,
+                            userId: id_,
+                        }
+                    }
+                }
+
+            }
+            res.send(sbUserProfileResponse)
+            return
+        }
+        res.status(404).send('')
+    } catch (err) {
+        logError('err in new user acceptance >', err)
+        res.status((err && err.response && err.response.status) || 500).send(
+            (err && err.response && err.response.data) || {
+                error: GENERAL_ERROR_MSG,
+            }
+        )
+    }
+})
+
+sbProfileApi.post('/createUser', async (req, res) => {
 
     try {
         const tokenContent = extractSbUserTokenContent(req)
@@ -291,71 +551,14 @@ sbProfileApi.post('/', async (req, res) => {
         axios.defaults.headers.common[contentType] = contentTypeValue
         axios.defaults.headers.common[xAppId] = xAppIdVAlue
         if (tokenContent) {
-            const response = await axios({
-                ...axiosRequestConfig,
-                data: { request: req.body },
-                method: 'POST',
-                url: apiEndpoints.createSb,
-            })
-            const responseData = response.data
-            const createSbResponseData = JSON.parse(JSON.stringify(responseData))
-            let reqresponse
-            if (createSbResponseData.result.response === 'SUCCESS') {
-                axios.defaults.headers.common[xAuthUser] = xAuth[1]
-                axios.defaults.headers.common[authorizationHeader] = xAuth[0] + ' ' + xAuthenticatedUserToken
-                axios.defaults.headers.common[contentType] = contentTypeValue
-                axios.defaults.headers.common[xAppId] = xAppIdVAlue
-                const getuserName: string = req.body.userName
+            logInfo('-------Registry-----' + JSON.stringify(req.body.personalDetails))
 
-                const searchresponse = await axios({
-                    ...axiosRequestConfig,
-                    data: { request: { query: '', filters: { userName: getuserName.toLowerCase() } } },
-                    method: 'POST',
-                    url: apiEndpoints.searchSb,
-                })
-                logInfo('-------Registry-----' + searchresponse.data.result.count)
-                let id = ''
-                let firstName = ''
-                let lastName = ''
-                let email = ''
-                let phone = 0
-                if (searchresponse.data.result.response.count > 0) {
-                    id = searchresponse.data.result.response.content[0].id
-                    firstName = searchresponse.data.result.response.content[0].firstName
-                    lastName = searchresponse.data.result.response.content[0].lastName
-                    email = searchresponse.data.result.response.content[0].email
-                    const sphone = req.body.phone
-                    phone = Number(sphone)
-                    logInfo('-------If AfterData for Registry-----' + id + '   ' + phone)
-                    const reqToRegistry: IUserRegistry = {
-                        firstname: firstName,
-                        mobile: phone, primaryEmail: email, surname: lastName,
-                        userId: id,
-                    }
-                    reqresponse = await Promise.all([
-                        createUserRegistry(reqToRegistry),
-                    ])
-                } else {
-                    const userId: string = null || ''
-                    logInfo('-------AfterData for Registry-----' + id)
-                    const reqToRegistry: IUserRegistry = {
-                        firstname: firstName,
-                        mobile: phone, primaryEmail: email, surname: lastName,
-                        userId,
-                    }
-                    reqresponse = await Promise.all([
-                        createUserRegistry(reqToRegistry),
-                    ])
-                }
-
-            }
-
-            res.send(reqresponse)
+            res.send(req.body.personalDetails)
             return
         }
         res.status(404).send('')
     } catch (err) {
-        logError('err in new user acceptance >', err)
+        logError('err in new user acceptance =', err)
         res.status((err && err.response && err.response.status) || 500).send(
             (err && err.response && err.response.data) || {
                 error: GENERAL_ERROR_MSG,
@@ -370,49 +573,100 @@ sbProfileApi.patch('/', async (req, res) => {
         const authorization = extractAuthorizationFromRequest(req)
         const xAuthenticatedUserToken = extractUserTokenFromRequest(req)
         const xAuth = authorization.split(' ')
-        let response
-        let updatSbResponse
-        let updateresponse
         if (tokenContent) {
-
-            response = await axios({
-                ...axiosRequestConfig,
-                data: { request: req.body },
-                headers: {
-                    Authorization: xAuth[0] + ' ' + xAuthenticatedUserToken,
-                    'Content-Type': 'application/json',
-                    'X-App-Id': 'sunbird.portal',
-                    'X-Authenticated-User-Token': xAuth[1],
-                },
-                method: 'PATCH',
-                url: apiEndpoints.updatSb,
-            })
-            updatSbResponse = JSON.parse(JSON.stringify(response.data))
-            const userId = req.body.userId
-
-            if (updatSbResponse.result.response === 'SUCCESS') {
-                const responseRegistryData: IUpdateUserRegistry[] = await CheckUserRegistryExists(userId)
+            const userId: string = extractSbUserIdFromRequest(req)
+            axios.defaults.headers.common[xAuthUser] = xAuth[1]
+            axios.defaults.headers.common[authorizationHeader] = xAuth[0] + ' ' + xAuthenticatedUserToken
+            const userResponse = await axios.get<ISbUserResponse>(
+                `${apiEndpoints.detailsSb}/${userId}`
+            )
+            const channel: string = extractRootOrgFromRequest(req)
+            const getUserchannel: string = userResponse.data.result.response.channel
+            if (channel.toLowerCase() === getUserchannel.toLowerCase()) {
+                const responseRegistryData: IUserProfile[] = await CheckUserRegistryExists(userId)
                 let userProfileObj
                 if (responseRegistryData && responseRegistryData.length > 0) {
                     userProfileObj = responseRegistryData[0]
+                    userProfileObj.id = req.body.userId
+                    const updateResponseData: IRootObject = await updateUserRepo(req, userProfileObj)
 
-                    const updatereqToRegistry = JSON.parse(JSON.stringify(req.body))
-                    logInfo('-------Data for Registry-----' + updatereqToRegistry.firstName)
+                    if (updateResponseData.params.status === 'SUCCESSFUL') {
+                        const updatedresponseRegistryData: IUserProfile[] = await CheckUserRegistryExists(userId)
+                        await delay(900)
+                        let updateduserProfileObj
+                        if (updatedresponseRegistryData && updatedresponseRegistryData.length > 0) {
+                            updateduserProfileObj = updatedresponseRegistryData[0]
+                            const personaldetailsSb = updateduserProfileObj.personalDetails
+                            const acadamicsSb = updateduserProfileObj.academics
+                            const interestsSb = updateduserProfileObj.interests
+                            const skillsSb = updateduserProfileObj.skills
+                            const employmentDetailsSb = updateduserProfileObj.employmentDetails
+                            const professionalDetailSb = updateduserProfileObj.professionalDetails
+                            const userProfileSb: Partial<IUserProfile> = {
+                                academics: acadamicsSb,
+                                employmentDetails: employmentDetailsSb,
+                                interests: interestsSb,
+                                personalDetails: personaldetailsSb,
+                                professionalDetails: professionalDetailSb,
+                                skills: skillsSb,
+                            }
+                            res.status(200).send(userProfileSb)
+                        }
+                    }
+                }
+            } else {
+                const updateUserresponse = await axios({
+                    ...axiosRequestConfig,
+                    data: { request: req.body.personalDetails },
+                    headers: {
+                        Authorization: xAuth[0] + ' ' + xAuthenticatedUserToken,
+                        'Content-Type': 'application/json',
+                        'X-App-Id': 'sunbird.portal',
+                        'X-Authenticated-User-Token': xAuth[1],
+                    },
+                    method: 'PATCH',
+                    url: apiEndpoints.updatSb,
+                })
+                const updatSbResponse = JSON.parse(JSON.stringify(updateUserresponse.data))
+                if (updatSbResponse.result.response === 'SUCCESS') {
+                    const responseRegistryData: IUserProfile[] = await CheckUserRegistryExists(userId)
+                    let userProfileObj
+                    if (responseRegistryData && responseRegistryData.length > 0) {
+                        userProfileObj = responseRegistryData[0]
+                        userProfileObj.id = req.body.userId
+                        const updateUserResponse = await updateUserRegistry(userProfileObj, req.body)
+                        await delay(300)
+                        if (updateUserResponse.params.status === 'SUCCESSFUL') {
+                            const updatedresponseRegistryData: IUserProfile[] = await CheckUserRegistryExists(userId)
+                            let updateduserProfileObj
+                            if (updatedresponseRegistryData && updatedresponseRegistryData.length > 0) {
+                                updateduserProfileObj = updatedresponseRegistryData[0]
+                                const personaldetailsSb = updateduserProfileObj.personalDetails
+                                const acadamicsSb = updateduserProfileObj.academics
+                                const interestsSb = updateduserProfileObj.interests
+                                const skillsSb = updateduserProfileObj.skills
+                                const employmentDetailsSb = updateduserProfileObj.employmentDetails
+                                const professionalDetailSb = updateduserProfileObj.professionalDetails
+                                const userProfileSb: Partial<IUserProfile> = {
+                                    academics: acadamicsSb,
+                                    employmentDetails: employmentDetailsSb,
+                                    interests: interestsSb,
+                                    personalDetails: personaldetailsSb,
+                                    professionalDetails: professionalDetailSb,
+                                    skills: skillsSb,
+                                }
+                                res.status(200).send(userProfileSb)
+                            }
+                        }
 
-                    userProfileObj.firstname = updatereqToRegistry.firstName
-                    userProfileObj.surname = updatereqToRegistry.lastName
-                    userProfileObj.gender = updatereqToRegistry.gender
-                    userProfileObj.dob = updatereqToRegistry.dob
-                    userProfileObj.language = updatereqToRegistry.language
-
-                    updateresponse = await updateUserRegistry(userProfileObj)
+                    }
                 }
             }
         }
 
-        res.status(200).send(updateresponse)
+        return
     } catch (err) {
-        logError('err in new user acceptance >', err)
+        logError('err in new user acceptance--- >', err)
         res.status((err && err.response && err.response.status) || 500).send(
             (err && err.response && err.response.data) || {
                 error: GENERAL_ERROR_MSG,
@@ -422,22 +676,44 @@ sbProfileApi.patch('/', async (req, res) => {
 })
 
 // tslint:disable-next-line: no-any
-export async function CheckUserRegistryExists(userId: string): Promise<IUpdateUserRegistry[]> {
+export function CheckUserRegistryExists(userId: string): Promise<IUserProfile[]> {
     return new Promise(async (resolve, reject) => {
         logInfo(`CheckUserRegistryExists: ${userId}`)
         const response = await getUserRegistry(userId)
-        const jsonResponse = JSON.parse(JSON.stringify(response))
+        await delay(1300)
+        logInfo('-------Response Registry-----')
         if (response && response.params.status === 'UNSUCCESSFUL') {
             logError(' CheckUserRegistryExists: Response from open saber is UNSUCCESSFUL')
             reject(response)
         } else {
-            logInfo('Reponse from open saber /serch : ', jsonResponse.result.PersonalDetails[0].firstname)
-            if (response && response.result.PersonalDetails && response.result.PersonalDetails.length) {
-                resolve(response.result.PersonalDetails)
+            if (response && response.result.UserProfile) {
+                resolve(response.result.UserProfile)
             } else {
                 logInfo(' CheckUserRegistryExists: user registry not yet present')
-                resolve(response.result.PersonalDetails)
+                resolve(response.result.UserProfile)
             }
         }
     })
+}
+
+export async function updateUserRepo(userReq: IAuthorizedRequest, userProfileObj: IUserProfile): Promise<IRootObject> {
+    return new Promise(async (resolve, reject) => {
+        const updateResponseData = await updateUserRegistry(userProfileObj, userReq.body)
+        logInfo('-------Response Registry-----')
+        if (updateResponseData && updateResponseData.params.status === 'UNSUCCESSFUL') {
+            logError(' CheckUserRegistryExists: Response from open saber is UNSUCCESSFUL')
+            reject(updateResponseData)
+        } else {
+            if (updateResponseData && updateResponseData.params) {
+                resolve(updateResponseData)
+            } else {
+                logInfo(' CheckUserRegistryExists: user registry not yet present')
+                resolve(updateResponseData)
+            }
+        }
+    })
+}
+
+function delay(ms: number) {
+    return new Promise((resolve) => setTimeout(resolve, ms))
 }

@@ -1,8 +1,7 @@
 import axios from 'axios'
 import { axiosRequestConfig, axiosRequestConfigLong } from '../configs/request.config'
 import {
-    IUpdateUserRegistry,
-    IUserRegistry,
+    IUserProfile,
     IUserRegistryReadRequest,
     IUserRegistryRequest,
     IUserRegistrySearchRequest,
@@ -20,9 +19,10 @@ const apiEndpoints = {
 
 export async function createUserRegistry(
     // tslint:disable-next-line: no-any
-    data: IUserRegistry
+    data: Partial<IUserProfile>
     // tslint:disable-next-line: no-any
 ): Promise<any> {
+    logInfo('-------Enter for Registry-----' + JSON.stringify(data))
     try {
         const requestToUserRegistry: IUserRegistryRequest = {
             ets: '11234',
@@ -34,14 +34,12 @@ export async function createUserRegistry(
                 msgid: '',
             },
             request: {
-                PersonalDetails: {
-                    ...data,
-                },
+                UserProfile: data,
             },
             ver: '1.0',
         }
         const myJSON = JSON.stringify(requestToUserRegistry)
-        logInfo('-------Data for Registry-----')
+        logInfo('-------Data for Registry-----' + myJSON)
         const res = await axios({
             ...axiosRequestConfig,
             data: myJSON,
@@ -77,13 +75,14 @@ export async function getUserRegistry(
             },
             request: {
 
-                entityType: ['PersonalDetails'],
+                entityType: ['UserProfile'],
                 filters: {
                     // tslint:disable-next-line: object-literal-key-quotes
                     userId: { 'eq': userId },
                 },
             },
         }
+
         const res = await axios({
             ...axiosRequestConfig,
             data: JSON.stringify(requestToUserRegistry),
@@ -92,9 +91,9 @@ export async function getUserRegistry(
             },
             method: 'POST',
             url: apiEndpoints.search,
+
         })
-        logInfo('-------Update for Registry-----' + res.data.result.PersonalDetails[0].firstname)
-        return res.data || {}
+        return res.data
     } catch (err) {
         logError('Request to open saber /search failed')
         throw err
@@ -102,7 +101,7 @@ export async function getUserRegistry(
 }
 
 export async function readUserRegistry(
-    osid: string
+    osid_: string
     // tslint:disable-next-line: no-any
 ): Promise<any> {
     try {
@@ -118,7 +117,7 @@ export async function readUserRegistry(
             },
             request: {
                 UserProfile: {
-                    osid,
+                    osid: osid_,
                 },
                 includeSignatures: true,
 
@@ -142,11 +141,28 @@ export async function readUserRegistry(
 
 export async function updateUserRegistry(
     // tslint:disable-next-line: no-any
-    userProfileObj: IUpdateUserRegistry
+    userProfileObj: IUserProfile, data: any
     // tslint:disable-next-line: no-any
 ): Promise<any> {
     try {
-
+        const dataWithOsid = {
+            id: userProfileObj.id,
+            osid: userProfileObj.osid,
+            photo: userProfileObj.photo,
+            // tslint:disable-next-line: object-literal-sort-keys
+            personalDetails: {
+                // tslint:disable-next-line: object-literal-sort-keys
+                osid: userProfileObj.personalDetails.osid,
+                primaryEmail: data.personalDetails.email,
+                ...data.personalDetails,
+            },
+            // tslint:disable-next-line: object-literal-sort-keys
+            academics: data.academics,
+            employmentDetails: { ...data.employmentDetails },
+            professionalDetails: data.professionalDetails,
+            skills: { ...data.skills },
+            interests: { ...data.interests },
+        }
         const requestToUserRegistry: IUserRegistryUpdateRequest = {
             id: 'open-saber.registry.update',
             ver: '1.0',
@@ -160,12 +176,11 @@ export async function updateUserRegistry(
             request: {
                 // tslint:disable-next-line: max-line-length
 
-                PersonalDetails: {
-                    ...userProfileObj,
+                UserProfile: {
+                    ...dataWithOsid,
                 },
             },
         }
-
         const res = await axios({
             ...axiosRequestConfigLong,
             data: JSON.stringify(requestToUserRegistry),

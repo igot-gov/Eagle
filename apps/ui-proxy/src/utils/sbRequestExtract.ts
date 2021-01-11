@@ -25,7 +25,7 @@ export interface ISbAuthorizedRequest extends Request {
         };
     }
 }
-export const extractSbUserIdFromRequest = (req: ISbAuthorizedRequest): string => {
+export const extractSbWidFromRequest = (req: ISbAuthorizedRequest): string => {
     const wid = req.header('wid')
     if (wid) {
         return wid
@@ -51,6 +51,13 @@ export const extractSbRootOrgNameFromRequest = (req: ISbAuthorizedRequest): stri
     const rootOrgName = req.header('rootOrgName')
 
     return rootOrgName as string
+
+}
+
+export const extractSbUserIdFromRequest = (req: ISbAuthorizedRequest): string => {
+    const userId = req.header('userId')
+
+    return userId as string
 
 }
 

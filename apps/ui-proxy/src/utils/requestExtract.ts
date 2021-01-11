@@ -47,6 +47,13 @@ export const extractRootOrgNameFromRequest = (req: IAuthorizedRequest): string =
 
 }
 
+export const extractRootOrgFromRequest = (req: IAuthorizedRequest): string => {
+  const rootOrg = req.header('rootorg')
+
+  return rootOrg as string
+
+}
+
 export const extractUserNameFromRequest = (req: IAuthorizedRequest) =>
   (req.kauth && req.kauth.grant.access_token.content.name) as string
 
