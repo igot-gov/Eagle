@@ -34,7 +34,7 @@
 
                 <mat-button-toggle [(value)]="image">
                     <img mat-card-image src={{image.downloadUrl}} alt="image">
-                    <mat-icon mat-card-avatar *ngIf="IsChecked && thumbanilSelectval == image.identifier"
+                    <mat-icon mat-card-avatar *ngIf="isChecked && thumbanilSelectval == image.identifier"
                         class="checkbox">check_circle</mat-icon>
                 </mat-button-toggle>
 
@@ -66,8 +66,8 @@
                 <button mat-button class="mr-2" [mat-dialog-close]="true">
                     <span class="noocoments"> Cancel</span>
                 </button>
-                <button mat-raised-button type="button" (click)="uploadThumbnail(toggle)"
-                    class="text-white ws-mat-primary-background flex-auto-display" [disabled]="!IsChecked">
+                <button mat-raised-button type="button" (click)="uploadThumbnail()"
+                    class="text-white ws-mat-primary-background flex-auto-display" [disabled]="!isChecked">
                     <span class="text-white" i18n>Upload</span>
                 </button>
             </div>
@@ -76,6 +76,3 @@
 </div>
 <!-- </form> -->
 
-<ng-template #top>
-    <ws-auth-options [currentContent]="contentMeta.identifier" (action)="data.emit($event)"></ws-auth-options>
-</ng-template>

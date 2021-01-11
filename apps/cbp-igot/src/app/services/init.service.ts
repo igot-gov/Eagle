@@ -329,6 +329,7 @@ export class InitService {
           isManager: false,
         }
         if (this.configSvc.userProfile) {
+          // tslint:disable-next-line: max-line-length
           this.configSvc.userProfile.departmentName = (userData[0].employmentDetails.departmentName) ? userData[0].employmentDetails.departmentName : null
         }
 

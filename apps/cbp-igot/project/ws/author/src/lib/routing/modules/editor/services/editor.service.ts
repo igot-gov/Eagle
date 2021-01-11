@@ -26,7 +26,6 @@ import { CONTENT_READ_MULTIPLE_HIERARCHY } from './../../../../constants/apiEndp
 import { ISearchContent, ISearchResult } from '../../../../interface/search'
 import { environment } from '../../../../../../../../../src/environments/environment'
 
-
 @Injectable()
 export class EditorService {
   accessPath: string[] = []
@@ -84,9 +83,9 @@ export class EditorService {
           organisation: [environment.organisation],
           isExternal: meta.mimeType === 'application/html',
           primaryCategory: meta.primaryCategory,
-          license: 'CC BY 4.0'
+          license: 'CC BY 4.0',
         },
-      }
+      },
     }
 
     return this.apiService
@@ -107,7 +106,6 @@ export class EditorService {
       `${AUTHORING_BASE}${id}${this.accessService.orgRootOrgAsQuery}`,
     )
   }
-
 
   readContentV2(id: string): Observable<NSContent.IContentMeta> {
     return this.apiService.get<NSContent.IContentMeta>(
@@ -162,14 +160,6 @@ export class EditorService {
   }
 
   updateContentV3(meta: NSApiRequest.IContentUpdateV2, id: string): Observable<null> {
-    return this.apiService.patch<null>(
-      `${AUTHORING_BASE}content/v3/update/${id}`,
-      meta,
-    )
-  }
-
-  updateThumbnailV3(meta: NSApiRequest.IThumbnailUpdateV3, id: string): Observable<null> {
-    console.log(meta,id)
     return this.apiService.patch<null>(
       `${AUTHORING_BASE}content/v3/update/${id}`,
       meta,

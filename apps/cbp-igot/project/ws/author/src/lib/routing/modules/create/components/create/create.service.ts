@@ -76,9 +76,9 @@ export class CreateService {
           organisation: [environment.organisation],
           isExternal: meta.mimeType === 'application/html',
           primaryCategory: meta.primaryCategory,
-          license: 'CC BY 4.0'
+          license: 'CC BY 4.0',
         },
-      }
+      },
     }
     // if (this.accessService.rootOrg === 'client2') {
     //   if (meta.contentType === 'Knowledge Artifact') {

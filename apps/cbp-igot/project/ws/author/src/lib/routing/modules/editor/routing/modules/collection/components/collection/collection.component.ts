@@ -540,23 +540,24 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
         metadata: {},
       }
     }
-    let requestBodyV2: NSApiRequest.IContentUpdateV3 = {
+    const requestBodyV2: NSApiRequest.IContentUpdateV3 = {
       request: {
         data: {
           nodesModified,
           hierarchy: this.storeService.changedHierarchy,
-        }
-      }
+        },
+      },
     }
     if (Object.keys(this.contentService.upDatedContent)[0] && nodesModified[Object.keys(this.contentService.upDatedContent)[0]]) {
-      let requestBody: NSApiRequest.IContentUpdateV2 = {
+      const requestBody: NSApiRequest.IContentUpdateV2 = {
         request: {
-          content: nodesModified[Object.keys(this.contentService.upDatedContent)[0]].metadata
-        }
+          content: nodesModified[Object.keys(this.contentService.upDatedContent)[0]].metadata,
+        },
       }
       requestBody.request.content = this.contentService.cleanProperties(requestBody.request.content)
       if (requestBody.request.content.duration) {
-        requestBody.request.content.duration = (isNumber(requestBody.request.content.duration) ? `${requestBody.request.content.duration}` : requestBody.request.content.duration)
+        requestBody.request.content.duration =
+        (isNumber(requestBody.request.content.duration) ? `${requestBody.request.content.duration}` : requestBody.request.content.duration)
       }
       return this.editorService.updateContentV3(requestBody, Object.keys(this.contentService.upDatedContent)[0]).pipe(
         tap(() => {
@@ -571,7 +572,7 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
         }),
       )
     }
-    else {
+
       return this.editorService.updateContentV4(requestBodyV2).pipe(
         tap(() => {
           this.storeService.changedHierarchy = {}
@@ -581,7 +582,6 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
           this.contentService.upDatedContent = {}
         }),
       )
-    }
 
     // const requestBody: NSApiRequest.IContentUpdate = {
     //   nodesModified,

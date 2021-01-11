@@ -58,7 +58,7 @@ import { CompetenceCardComponent } from './components/edit-meta/competencies-car
     ContentSummaryComponent,
     CompetenceViewComponent,
     CompetenceCardComponent,
-    AddThumbnailComponent
+    AddThumbnailComponent,
   ],
   imports: [
     CommonModule,
@@ -95,6 +95,6 @@ import { CompetenceCardComponent } from './components/edit-meta/competencies-car
     CompetenceCardComponent,
   ],
   entryComponents: [AuthPickerComponent, AddThumbnailComponent, CompetencyAddPopUpComponent, CompetenceViewComponent],
-  providers: [MyContentService,UploadService, SelfCurationService, ContentQualityService,AddThumbnailComponent],
+  providers: [MyContentService, UploadService, SelfCurationService, ContentQualityService, AddThumbnailComponent],
 })
 export class EditorSharedModule { }

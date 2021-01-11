@@ -16,7 +16,7 @@ import {
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms'
 import { MatAutocompleteSelectedEvent } from '@angular/material'
 import { MatChipInputEvent } from '@angular/material/chips'
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog'
+import { MatDialog, MatDialogConfig, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { VIEWER_ROUTE_FROM_MIME } from '@ws-widget/collection/src/public-api'
 import { ConfigurationsService, ValueService } from '@ws-widget/utils'
@@ -253,8 +253,19 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  addImage() {
-    this.dialog.open<AddThumbnailComponent>(AddThumbnailComponent)
+  openDialog() {
+
+    const dialogConfig = new MatDialogConfig()
+    const dialogRef = this.dialog.open(AddThumbnailComponent, dialogConfig)
+    const instance = dialogRef.componentInstance
+    instance.isUpdate = true
+    dialogRef.afterClosed().subscribe(data => {
+      // this.data = data
+      this.contentForm.controls.appIcon.setValue(data.appURL)
+      this.contentForm.controls.thumbnail.setValue(data.appURL)
+      this.canUpdate = true
+      this.storeData()
+    })
   }
 
   ngAfterViewInit() {
@@ -427,7 +438,6 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     ).subscribe(() => this.fetchAccessRestrictions())
 
     this.contentService.changeActiveCont.subscribe(data => {
-      console.log('--------data--------', data, this.contentMeta)
       if (this.contentMeta && this.canUpdate) {
         this.storeData()
       }

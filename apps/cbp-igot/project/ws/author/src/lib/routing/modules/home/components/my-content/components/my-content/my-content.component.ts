@@ -118,7 +118,7 @@ export class MyContentComponent implements OnInit, OnDestroy {
 
   ) {
     this.courseTaken = {
-      mandatoryCourseCompleted: true
+      mandatoryCourseCompleted: true,
     }
     if (this.configService.userRoles) {
       this.myRoles = this.configService.userRoles
@@ -284,7 +284,7 @@ export class MyContentComponent implements OnInit, OnDestroy {
       this.isAdmin,
     )
     const requestData = {
-      locale: this.searchLanguage ? [this.searchLanguage] : ["en"],
+      locale: this.searchLanguage ? [this.searchLanguage] : ['en'],
       query: this.queryFilter,
       request: {
         query: this.queryFilter,
@@ -300,25 +300,25 @@ export class MyContentComponent implements OnInit, OnDestroy {
         sort_by: { lastUpdatedOn: 'desc' },
         // pageSize: this.pagination.limit,
         fields: [
-          "name",
-          "appIcon",
-          "mimeType",
-          "gradeLevel",
-          "identifier",
-          "medium",
-          "pkgVersion",
-          "board",
-          "subject",
-          "resourceType",
-          "primaryCategory",
-          "contentType",
-          "channel",
-          "organisation",
-          "trackable"
+          'name',
+          'appIcon',
+          'mimeType',
+          'gradeLevel',
+          'identifier',
+          'medium',
+          'pkgVersion',
+          'board',
+          'subject',
+          'resourceType',
+          'primaryCategory',
+          'contentType',
+          'channel',
+          'organisation',
+          'trackable',
         ],
         facets: [
-          "primaryCategory",
-          "mimeType"
+          'primaryCategory',
+          'mimeType',
         ],
         // pageNo: loadMoreFlag ? this.pagination.offset : 0,
         // sort: [{ lastUpdatedOn: 'desc' }],
@@ -438,18 +438,15 @@ export class MyContentComponent implements OnInit, OnDestroy {
     this.pagination.offset = 0
     this.sideNavBarOpened = false
     const filterIndex = this.filters.findIndex(v => v.displayName === node.displayName)
-    console.log(filterIndex)
     const filterMenuItemsIndex = this.filterMenuItems.findIndex((obj: any) =>
-      obj.values.some((val: any) => val.name == node.type)
+      obj.values.some((val: any) => val.name === node.type)
     )
     const ind = this.finalFilters.indexOf(this.filterMenuItems[filterMenuItemsIndex].name)
-    console.log('---------------------inx -----------', ind, this.finalFilters)
     if (filterIndex === -1 && node.checked) {
       this.filters.push(node)
       this.filterMenuItems[filterMenuItemsIndex].values.find(
         (v: any) => v.name === node.displayName ,
       ).checked = true
-
 
       if (ind === -1) {
         this.finalFilters.push({
@@ -737,7 +734,6 @@ export class MyContentComponent implements OnInit, OnDestroy {
   }
 
   action(event: { data: NSContent.IContentMeta; type: string }) {
-    console.log('-------------action-------------', event.data, event.data.identifier)
     switch (event.type) {
       case 'create':
         this.createContent(event.data)
