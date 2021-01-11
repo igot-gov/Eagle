@@ -46,7 +46,7 @@
                 [ngClass]="{ 'mat-form-field-invalid': showError('depatmentType') }">
                 <mat-select formControlName="deptSubTypeId" i18n-placeholder placeholder="--Select--" [value]="3"
                   [required]="checkCondition('subTitle', 'required') ? true : null">
-                  <mat-option *ngFor="let subDepartment of subDepartments" [value]="subDepartment.id" i18n>
+                  <mat-option *ngFor="let subDepartment of subDepartments" [value]="subDepartment" i18n>
                     {{subDepartment.deptSubType}}</mat-option>
                 </mat-select>
                 <mat-error *ngIf="showError('deptSubTypeId')" i18n>Department type is mandatory

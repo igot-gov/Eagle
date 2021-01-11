@@ -569,9 +569,10 @@ export class CreateMdoComponent implements OnInit {
         && this.contentForm.value.deptSubTypeId !== null) {
         this.createMdoService.createDepartment(this.contentForm.value).subscribe(res => {
           this.departmentId = res.id
-          this.departmentRoleId = res.rolesInfo[0].deptRoleId
+          this.departmentRoleId = res.rolesInfo[0].id
           if (this.departmentId !== undefined && this.departmentRoleId) {
             this.submittedForm = false
+            this.openSnackbar('Success')
           }
         },                                                                       (err: { error: any }) => {
           this.openSnackbar(err.error.errors[0].message)
@@ -583,9 +584,10 @@ export class CreateMdoComponent implements OnInit {
         && this.contentForm.value.deptSubTypeId !== null) {
         this.createMdoService.updateDepartment(this.contentForm.value, this.updateId).subscribe(res => {
           this.departmentId = res.id
-          this.departmentRoleId = res.rolesInfo[0].deptRoleId
+          this.departmentRoleId = res.rolesInfo[0].id
           if (this.departmentId !== undefined && this.departmentRoleId) {
             this.submittedForm = false
+            this.openSnackbar('Success')
           }
         },                                                                                      (err: { error: any }) => {
           this.openSnackbar(err.error.errors[0].message)
