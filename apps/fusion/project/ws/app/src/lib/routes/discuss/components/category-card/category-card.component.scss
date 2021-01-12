@@ -7,6 +7,7 @@
   height: auto;
   max-width: 481px;
   width: max-content;
+  cursor: pointer;
 
   @include breakpoint-xs {
     width: auto;

@@ -45,6 +45,8 @@ import { LoaderService } from '@ws/author/src/lib/services/loader.service'
 import { InitResolver } from './resolvers/init-resolve.service'
 import { CKEditorService } from 'library/ws-widget/collection/src/lib/_common/ck-editor/ck-editor.service'
 import { PaginationComponent } from './components/pagination/pagination.component'
+import { CategoryAllDiscussionsComponent } from './routes/category-all-discussions/category-all-discussions.component'
+import { TagAllDiscussionsComponent } from './routes/tag-all-discussions/tag-all-discussions.component'
 
 @NgModule({
   declarations: [
@@ -66,6 +68,8 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     RelatedDiscussionComponent,
     TrendingTagsComponent,
     PaginationComponent,
+    CategoryAllDiscussionsComponent,
+    TagAllDiscussionsComponent,
   ],
   imports: [
     CommonModule,

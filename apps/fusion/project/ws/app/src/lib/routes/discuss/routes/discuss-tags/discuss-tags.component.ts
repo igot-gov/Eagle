@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core'
 import { NSDiscussData } from '../../models/discuss.model'
 /* tslint:disable */
 import _ from 'lodash'
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { DiscussUtilsService } from '../../services/discuss-utils.service'
 /* tslint:enable */
 @Component({
@@ -16,9 +16,11 @@ export class DiscussTagsComponent implements OnInit {
   tags!: NSDiscussData.ITag[]
   filteredTags!: NSDiscussData.ITag[]
   query!: string
+  queryParam: any
   constructor(
     private route: ActivatedRoute,
-    private discussUtils: DiscussUtilsService
+    private discussUtils: DiscussUtilsService,
+    private router: Router
   ) {
     this.tags = this.tag.tags
   }
@@ -35,5 +37,12 @@ export class DiscussTagsComponent implements OnInit {
     const bgColor = this.discussUtils.stringToColor(tagTitle.toLowerCase())
     const color = this.discussUtils.getContrast(bgColor)
     return { color, 'background-color': bgColor }
+  }
+
+  getAllDiscussions(tag: { value: any; }) {
+    const val: never[] = []
+    val.tagname = tag.value
+    this.queryParam = val
+    this.router.navigate([`/app/discuss/tags/tag-discussions`], { queryParams:  this.queryParam })
   }
 }

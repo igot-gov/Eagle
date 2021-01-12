@@ -11,7 +11,7 @@
   <ng-container *ngIf="tags && tags.length > 0">
     <div class="flex flex-1 flex-row flex-wrap">
       <div *ngFor="let tag of filteredTags | pipeListFilter:'score,value':query" class="tag "
-        [ngStyle]="getBgColor(tag.value)">
+        [ngStyle]="getBgColor(tag.value)" (click)="getAllDiscussions(tag)">
         <!-- Can enable random colors from below commented code -->
         <!-- <div *ngFor="let tag of filteredTags | pipeFilter:'score,value':query"
         class="tag text-capitalize" [ngStyle]="getBgColor(tag.value)"> -->

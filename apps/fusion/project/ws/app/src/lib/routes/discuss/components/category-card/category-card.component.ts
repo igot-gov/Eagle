@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core'
 import { NSDiscussData } from '../../models/discuss.model'
-// import { Router } from '@angular/router'
+import { Router } from '@angular/router'
 @Component({
   selector: 'app-dicuss-category-card',
   templateUrl: './category-card.component.html',
@@ -14,8 +14,9 @@ import { NSDiscussData } from '../../models/discuss.model'
 export class CategoryCardComponent implements OnInit {
   @Input()
   category!: NSDiscussData.ICategorie
+  queryParam: any
   constructor(
-    // private router: Router,
+    private router: Router,
     // private snackBar: MatSnackBar,
     // private discussionSvc: DiscussService,
     // private configSvc: ConfigurationsService,
@@ -23,7 +24,10 @@ export class CategoryCardComponent implements OnInit {
 
   ngOnInit() { }
 
-  getDiscussion() {
-    // this.router.navigate([`/app/discuss/home/${this.category.cid}`])
+  getAllDiscussions(category: { cid: any; }) {
+    const val: never[] = []
+    val.cid = category.cid
+    this.queryParam = val
+    this.router.navigate([`/app/discuss/categories/category-discussions`], { queryParams:  this.queryParam })
   }
 }

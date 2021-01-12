@@ -7,6 +7,7 @@ const API_ENDPOINTS = {
   getAllCategories: '/apis/protected/v8/discussionHub/categories',
   getSingleCategoryDetails: (cid: number) => `/apis/protected/v8/discussionHub/categories/${cid}`,
   getAllTags: '/apis/protected/v8/discussionHub/tags',
+  getSingleTagDetails: (tagname: string) => `/apis/protected/v8/discussionHub/tags/${tagname}`,
   createPost: '/apis/protected/v8/discussionHub/writeApi/v2/topics',
   votePost: (pid: number) => `apis/protected/v8/discussionHub/writeApi/v2/posts/${pid}/vote`,
   replyPost: (tid: number) => `apis/protected/v8/discussionHub/writeApi/v2/topics/${tid}`,
@@ -143,8 +144,23 @@ export class DiscussService {
     const url = this.appendPage(page, API_ENDPOINTS.getSingleCategoryDetails(cid))
     return this.http.get<NSDiscussData.ICategoryData>(`${url}&sort=${sort}`)
   }
+
+  fetchNextD (cid: number, page?: any) {
+    const url = this.appendPage(page, API_ENDPOINTS.getSingleCategoryDetails(cid))
+    return this.http.get<NSDiscussData.IDiscussionData>(url)
+  }
+
   fetchNetworkProfile() {
     return this.http.get<any>(API_ENDPOINTS.fetchNetworkProfile)
   }
 
+  fetchSingleTagDetails(tagname: string, page?: any) {
+    const url = this.appendPage(page, API_ENDPOINTS.getSingleTagDetails(tagname))
+    return this.http.get<NSDiscussData.IDiscussionData>(url)
+  }
+
+  fetchNextTagD (tagname: string, page?: any) {
+    const url = this.appendPage(page, API_ENDPOINTS.getSingleTagDetails(tagname))
+    return this.http.get<NSDiscussData.IDiscussionData>(url)
+  }
 }

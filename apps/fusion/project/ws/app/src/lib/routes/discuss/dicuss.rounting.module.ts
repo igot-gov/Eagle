@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core'
 import { Routes, RouterModule } from '@angular/router'
 import { DiscussComponent } from './routes/discuss-home/discuss.component'
+import { CategoryAllDiscussionsComponent } from './routes/category-all-discussions/category-all-discussions.component'
+import { TagAllDiscussionsComponent } from './routes/tag-all-discussions/tag-all-discussions.component'
 import { DiscussAllComponent } from './routes/discuss-all/discuss-all.component'
 import { DiscussCategoriesComponent } from './routes/discuss-categories/discuss-categories.component'
 import { DiscussGroupsComponent } from './routes/discuss-groups/discuss-groups.component'
@@ -76,6 +78,14 @@ const routes: Routes = [
         resolve: {
           profile: DiscussProfileResolve,
         },
+      },
+      {
+        path: 'categories/category-discussions',
+        component: CategoryAllDiscussionsComponent,
+      },
+      {
+        path: 'tags/tag-discussions',
+        component: TagAllDiscussionsComponent,
       },
     ],
   },
