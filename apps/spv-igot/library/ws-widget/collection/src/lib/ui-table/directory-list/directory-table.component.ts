@@ -40,7 +40,6 @@ export class UIDirectoryTableComponent implements OnInit, AfterViewInit, OnChang
     this.dataSource = new MatTableDataSource<any>()
     this.actionsClick = new EventEmitter()
     this.clicked = new EventEmitter()
-    this.dataSource.paginator = this.paginator
 
   }
 
@@ -52,11 +51,13 @@ export class UIDirectoryTableComponent implements OnInit, AfterViewInit, OnChang
     this.dataSource.data = this.data
     this.dataSource.paginator = this.paginator
     this.dataSource.sort = this.sort
+
   }
 
   ngOnChanges(data: SimpleChanges) {
     this.dataSource.data = _.get(data, 'data.currentValue')
     this.length = this.dataSource.data.length
+    this.paginator.firstPage()
   }
 
   ngAfterViewInit() { }

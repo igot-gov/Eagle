@@ -28,7 +28,7 @@
             <mat-form-field appearance="outline" class="margin-top-xs"
               [ngClass]="{ 'mat-form-field-invalid': showError('subTitle') }">
               <input matInput formControlName="head" #subTitle maxlength="1000" i18n-placeholder placeholder="Type here"
-                [required]="checkCondition('subTitle', 'required') ? true : null" />
+                [required]="checkCondition('subTitle', 'required') ? true : null" pattern="[a-zA-Z ]*" />
               <mat-error *ngIf="showError('subTitle')" i18n="Subtitle Error|Explains Subtitle is required">
                 Head Quaters not valid
               </mat-error>
