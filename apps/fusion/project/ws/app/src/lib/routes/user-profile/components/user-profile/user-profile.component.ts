@@ -785,7 +785,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
             fieldKey: k,
             fromValue: { [fields[i]]: oldVal || '' },
             toValue: { [fields[i]]: newVal || '' },
-            osid: _.get(this.userProfileData, `${k}[${idx}].osid}`),
+            osid: _.get(this.userProfileData, `${k}[${idx}].osid`),
           })
         }
       }
