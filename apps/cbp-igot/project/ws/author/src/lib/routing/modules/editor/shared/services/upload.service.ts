@@ -13,6 +13,7 @@ import { AccessControlService } from '@ws/author/src/lib/modules/shared/services
 import { FIXED_FILE_NAME } from '../../../../../constants/upload'
 import { HttpClient } from '@angular/common/http'
 import { ConfigurationsService } from '@ws-widget/utils'
+import { map } from 'rxjs/operators'
 
 const PROTECTED_SLAG_V8 = '/apis/protected/v8'
 
@@ -33,7 +34,7 @@ export class UploadService {
     contentData: NSApiRequest.IContentData,
     options?: any,
     isZip = false,
-  ): Observable<NSApiResponse.IFileApiResponse> {
+  ): Observable<NSApiResponse.IFileApiResponseV2> {
     if (isZip) {
       return this.zipUpload(data, contentData, options)
     }
@@ -43,10 +44,12 @@ export class UploadService {
       fileName = this.appendToFilename(fileName)
     }
     const newFormData = new FormData()
-    newFormData.append('content', file, fileName)
-    return this.apiService.post<NSApiResponse.IFileApiResponse>(
+    newFormData.append('data', file, fileName)
+    debugger
+    return this.apiService.post<NSApiResponse.IFileApiResponseV2>(
       // tslint:disable-next-line:max-line-length
-      `${CONTENT_BASE}${this.accessService.rootOrg.replace(/ /g, '_')}/${this.accessService.org.replace(/ /g, '_')}/Public/${contentData.contentId.replace('.img', '')}${contentData.contentType}`,
+      //${CONTENT_BASE}${this.accessService.rootOrg.replace(/ /g, '_')}/${this.accessService.org.replace(/ /g, '_')}/Public/${contentData.contentId.replace('.img', '')}${contentData.contentType}
+      `apis/proxies/v8/upload/action/content/v3/upload/${contentData.contentId}`,
       newFormData,
       false,
       options,
@@ -57,10 +60,11 @@ export class UploadService {
     data: FormData,
     contentData: NSApiRequest.IContentData,
     options?: any,
-  ): Observable<NSApiResponse.IFileApiResponse> {
-    return this.apiService.post<NSApiResponse.IFileApiResponse>(
+  ): Observable<NSApiResponse.IFileApiResponseV2> {
+    return this.apiService.post<NSApiResponse.IFileApiResponseV2>(
       // tslint:disable-next-line:max-line-length
-      `${CONTENT_BASE_ZIP}${this.accessService.rootOrg.replace(/ /g, '_')}/${this.accessService.org.replace(/ /g, '_')}/Public/${contentData.contentId.replace('.img', '')}${contentData.contentType}`,
+      // `${CONTENT_BASE_ZIP}${this.accessService.rootOrg.replace(/ /g, '_')}/${this.accessService.org.replace(/ /g, '_')}/Public/${contentData.contentId.replace('.img', '')}${contentData.contentType}`,
+      `apis/proxies/v8/upload/action/content/v3/upload/${contentData.contentId}`,
       data,
       false,
       options,

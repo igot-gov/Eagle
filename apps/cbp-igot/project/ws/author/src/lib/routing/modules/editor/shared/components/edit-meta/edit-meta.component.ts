@@ -427,7 +427,6 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     ).subscribe(() => this.fetchAccessRestrictions())
 
     this.contentService.changeActiveCont.subscribe(data => {
-      console.log('--------data--------', data, this.contentMeta)
       if (this.contentMeta && this.canUpdate) {
         this.storeData()
       }

@@ -51,7 +51,7 @@ export class FileUploadComponent implements OnInit {
   mimeType = ''
   currentContent = ''
   enableUpload = true
-  duration = 0
+  duration = '0'
   canUpdate = true
   profanityData: any
   fileUploadCondition = {
@@ -120,7 +120,7 @@ export class FileUploadComponent implements OnInit {
     const updatedMeta = this.contentService.getUpdatedMeta(this.currentContent)
     if (
       !this.isCollectionEditor ||
-      (this.isCollectionEditor && updatedMeta.category === 'Resource')
+      (this.isCollectionEditor && updatedMeta.contentType === 'Resource')
     ) {
       this.assignData(updatedMeta)
     }
@@ -133,11 +133,12 @@ export class FileUploadComponent implements OnInit {
     this.canUpdate = false
     this.fileUploadForm.controls.artifactUrl.setValue(meta.artifactUrl || '')
     this.fileUploadForm.controls.mimeType.setValue(meta.mimeType || 'application/pdf')
-    this.fileUploadForm.controls.isIframeSupported.setValue(meta.isIframeSupported || 'Yes')
-    this.fileUploadForm.controls.isInIntranet.setValue(meta.isInIntranet || false)
+    // this.fileUploadForm.controls.isIframeSupported.setValue(meta.isIframeSupported || 'Yes')
+    // this.fileUploadForm.controls.isInIntranet.setValue(meta.isInIntranet || false)
     this.fileUploadForm.controls.isExternal.setValue(meta.isExternal || false)
     this.fileUploadForm.controls.size.setValue(meta.size || 0)
     this.fileUploadForm.controls.duration.setValue(meta.duration || 0)
+    this.fileUploadForm.controls.versionKey.setValue(meta.versionKey || '')
     this.canUpdate = true
     this.fileUploadForm.markAsPristine()
     this.fileUploadForm.markAsUntouched()
@@ -150,13 +151,14 @@ export class FileUploadComponent implements OnInit {
     this.fileUploadForm = this.formBuilder.group({
       artifactUrl: [],
       isExternal: [],
-      isIframeSupported: [],
-      isInIntranet: [],
+      // isIframeSupported: [],
+      // isInIntranet: [],
       mimeType: [],
       size: [],
       duration: [],
       downloadUrl: [],
       transcoding: [],
+      versionKey: [],
     })
     this.fileUploadForm.valueChanges.subscribe(() => {
       if (this.canUpdate) {
@@ -321,10 +323,11 @@ export class FileUploadComponent implements OnInit {
             // tslint:disable-next-line:max-line-length
             url = `${document.location.origin}/content-store/${this.accessService.rootOrg}/${this.accessService.org}/Public/${this.currentContent}/web-hosted/${this.fileUploadCondition.url}`
           } else {
-            url = (v.authArtifactURL || v.artifactURL).replace(/%2F/g, '/')
+            // url = (v.authArtifactURL || v.artifactURL || v.result.artifactUrl).replace(/%2F/g, '/')
+            url = (v.result.artifactUrl).replace(/%2F/g, '/')
           }
           this.fileUploadForm.controls.artifactUrl.setValue(url)
-          this.fileUploadForm.controls.downloadUrl.setValue(v ? v.downloadURL : '')
+          this.fileUploadForm.controls.downloadUrl.setValue(v ? v.result.artifactUrl : '')
           this.fileUploadForm.controls.mimeType.setValue(this.mimeType)
           // if (this.mimeType === 'application/x-mpegURL') {
           //   this.fileUploadForm.controls.transcoding.setValue({
@@ -344,7 +347,7 @@ export class FileUploadComponent implements OnInit {
           //     .pipe(map(() => v))
           // }
           if (this.mimeType === 'application/pdf') {
-            this.profanityCheckAPICall(v.downloadURL)
+            this.profanityCheckAPICall(v.result.artifactUrl)
           }
           return of(v)
         }),
@@ -398,6 +401,7 @@ export class FileUploadComponent implements OnInit {
     const meta: any = {}
     Object.keys(currentMeta).map(v => {
       if (
+        v !== 'versionKey' &&
         JSON.stringify(currentMeta[v as keyof NSContent.IContentMeta]) !==
         JSON.stringify(originalMeta[v as keyof NSContent.IContentMeta])
       ) {
@@ -417,6 +421,8 @@ export class FileUploadComponent implements OnInit {
             ),
           )
         }
+      } else if (v === 'versionKey') {
+        meta[v as keyof NSContent.IContentMeta] = originalMeta[v as keyof NSContent.IContentMeta]
       }
     })
     this.contentService.setUpdatedMeta(meta, this.currentContent)

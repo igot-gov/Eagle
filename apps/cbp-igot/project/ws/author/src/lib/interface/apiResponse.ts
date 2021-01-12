@@ -11,6 +11,27 @@ export namespace NSApiResponse {
     message: string
   }
 
+  export interface IFileApiResponseV2 {
+    id: string
+    ver: string
+    ts: string
+    params: {
+      resmsgid: string
+      msgid: string
+      err: string
+      status: string
+      errmsg: string
+    }
+    responseCode: string
+    result: {
+      identifier: string
+      artifactUrl: string
+      content_url: string
+      node_id: string
+      versionKey: string
+    }
+  }
+
   export interface IContentCreateResponse {
     identifier: string
   }
