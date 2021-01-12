@@ -562,7 +562,7 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
       requestBody.request.content = this.contentService.cleanProperties(requestBody.request.content)
       if (requestBody.request.content.duration) {
         requestBody.request.content.duration =
-        (isNumber(requestBody.request.content.duration) ? `${requestBody.request.content.duration}` : requestBody.request.content.duration)
+          (isNumber(requestBody.request.content.duration) ? `${requestBody.request.content.duration}` : requestBody.request.content.duration)
       }
       return this.editorService.updateContentV3(requestBody, Object.keys(this.contentService.upDatedContent)[0]).pipe(
         tap(() => {
@@ -578,15 +578,15 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
       )
     }
 
-      return this.editorService.updateContentV4(requestBodyV2).pipe(
-        tap(() => {
-          this.storeService.changedHierarchy = {}
-          Object.keys(this.contentService.upDatedContent).forEach(async id => {
-            this.contentService.resetOriginalMeta(this.contentService.upDatedContent[id], id)
-          })
-          this.contentService.upDatedContent = {}
-        }),
-      )
+    return this.editorService.updateContentV4(requestBodyV2).pipe(
+      tap(() => {
+        this.storeService.changedHierarchy = {}
+        Object.keys(this.contentService.upDatedContent).forEach(async id => {
+          this.contentService.resetOriginalMeta(this.contentService.upDatedContent[id], id)
+        })
+        this.contentService.upDatedContent = {}
+      }),
+    )
 
     // const requestBody: NSApiRequest.IContentUpdate = {
     //   nodesModified,
