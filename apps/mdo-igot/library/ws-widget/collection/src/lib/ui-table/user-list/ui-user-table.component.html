@@ -83,7 +83,9 @@
                 </mat-row>
             </div> -->
         </mat-table>
-
+        <mat-card class="flex-1" role="none" *ngIf="dataSource.filteredData.length == 0">
+            <span class="mat-subtitle">No data found</span>
+        </mat-card>
     </div>
     <!-- <div *ngIf="dataSource.filteredData.length <= 0" class="h-600-s-20-m color-60 text-center">No result found
     </div> -->

@@ -14,6 +14,7 @@ import { BtnContentLikeModule } from '../btn-content-like/btn-content-like.modul
 import { BtnContentMailMeModule } from '../btn-content-mail-me/btn-content-mail-me.module'
 import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatButtonModule } from '@angular/material/button'
+import { MatCardModule } from '@angular/material'
 @NgModule({
   declarations: [UIUserTableComponent, AppButtonComponent],
   imports: [
@@ -32,6 +33,7 @@ import { MatButtonModule } from '@angular/material/button'
     BtnContentLikeModule,
     MatPaginatorModule,
     MatButtonModule,
+    MatCardModule,
   ],
 
   exports: [UIUserTableComponent],

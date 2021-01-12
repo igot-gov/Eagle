@@ -8,14 +8,19 @@ import { ActivatedRoute, Router, NavigationEnd, Event } from '@angular/router'
 })
 export class BasicInfoComponent implements OnInit {
   basicInfo: any
+  imagePath: any
   constructor(private activeRoute: ActivatedRoute, private router: Router) {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
         const profileData = this.activeRoute.snapshot.data.profileData.data.result.UserProfile[0] || {}
         this.basicInfo = profileData.personalDetails
+        this.imagePath = profileData.photo
       }
     })
   }
 
   ngOnInit() { }
+  changeToGlobalSymbol($event: any) {
+    $event.target.src = '/assets/images/profile/blank-profilePcture.png'
+  }
 }
