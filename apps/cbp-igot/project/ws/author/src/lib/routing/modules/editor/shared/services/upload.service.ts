@@ -1,8 +1,8 @@
 import {
-  CONTENT_BASE,
+  // CONTENT_BASE,
   CONTENT_VIDEO_ENCODE,
   CONTENT_BASE_ENCODE,
-  CONTENT_BASE_ZIP,
+  // CONTENT_BASE_ZIP,
 } from '@ws/author/src/lib/constants/apiEndpoints'
 import { NSApiRequest } from '@ws/author/src/lib/interface/apiRequest'
 import { Injectable } from '@angular/core'
@@ -13,7 +13,6 @@ import { AccessControlService } from '@ws/author/src/lib/modules/shared/services
 import { FIXED_FILE_NAME } from '../../../../../constants/upload'
 import { HttpClient } from '@angular/common/http'
 import { ConfigurationsService } from '@ws-widget/utils'
-import { map } from 'rxjs/operators'
 
 const PROTECTED_SLAG_V8 = '/apis/protected/v8'
 
@@ -45,10 +44,9 @@ export class UploadService {
     }
     const newFormData = new FormData()
     newFormData.append('data', file, fileName)
-    debugger
     return this.apiService.post<NSApiResponse.IFileApiResponseV2>(
       // tslint:disable-next-line:max-line-length
-      //${CONTENT_BASE}${this.accessService.rootOrg.replace(/ /g, '_')}/${this.accessService.org.replace(/ /g, '_')}/Public/${contentData.contentId.replace('.img', '')}${contentData.contentType}
+      // ${CONTENT_BASE}${this.accessService.rootOrg.replace(/ /g, '_')}/${this.accessService.org.replace(/ /g, '_')}/Public/${contentData.contentId.replace('.img', '')}${contentData.contentType}
       `apis/proxies/v8/upload/action/content/v3/upload/${contentData.contentId}`,
       newFormData,
       false,

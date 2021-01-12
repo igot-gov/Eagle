@@ -1000,11 +1000,11 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
             })
             .subscribe(
               data => {
-                if (data.code) {
+                if (data.result) {
                   this.loader.changeLoad.next(false)
                   this.canUpdate = false
-                  this.contentForm.controls.appIcon.setValue(data.artifactURL)
-                  this.contentForm.controls.thumbnail.setValue(data.artifactURL)
+                  this.contentForm.controls.appIcon.setValue(data.result.artifactUrl)
+                  this.contentForm.controls.thumbnail.setValue(data.result.artifactUrl)
                   // this.contentForm.controls.posterImage.setValue(data.artifactURL)
                   this.canUpdate = true
                   this.storeData()
@@ -1086,12 +1086,12 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
             })
             .subscribe(
               data => {
-                if (data.code) {
+                if (data.result) {
                   this.loader.changeLoad.next(false)
                   this.canUpdate = false
-                  this.contentForm.controls.creatorLogo.setValue(data.artifactURL)
-                  this.contentForm.controls.creatorThumbnail.setValue(data.artifactURL)
-                  this.contentForm.controls.creatorPosterImage.setValue(data.artifactURL)
+                  this.contentForm.controls.creatorLogo.setValue(data.result.artifactUrl)
+                  this.contentForm.controls.creatorThumbnail.setValue(data.result.artifactUrl)
+                  this.contentForm.controls.creatorPosterImage.setValue(data.result.artifactUrl)
                   this.canUpdate = true
                   this.storeData()
                   this.snackBar.openFromComponent(NotificationComponent, {
@@ -1493,7 +1493,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
         this.loader.changeLoad.next(false)
 
         this.contentForm.controls.subTitles.setValue([{
-          url: vtt.artifactURL,
+          url: vtt.result.artifactUrl,
         }])
 
       })

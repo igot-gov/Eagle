@@ -91,12 +91,12 @@ export class UploadAudioComponent implements OnInit {
     this.uploadService
       .upload(
         formdata, {
-          contentId: this.data.id,
-          contentType: CONTENT_BASE_WEBHOST_ASSETS,
-        })
+        contentId: this.data.id,
+        contentType: CONTENT_BASE_WEBHOST_ASSETS,
+      })
       .subscribe(
         v => {
-          if (v.code) {
+          if (v.result) {
             this.isUploading = false
             this.loaderService.changeLoad.next(false)
             this.snackBar.openFromComponent(NotificationComponent, {
@@ -105,11 +105,11 @@ export class UploadAudioComponent implements OnInit {
               },
               duration: NOTIFICATION_TIME * 1000,
             })
-            this.uploadedAudio.title = v.artifactURL.slice(v.artifactURL.lastIndexOf('/') + 1, v.artifactURL.length)
+            this.uploadedAudio.title = v.result.artifactUrl.slice(v.result.artifactUrl.lastIndexOf('/') + 1, v.result.artifactUrl.length)
             this.uploadedAudio.label = this.allLanguages.filter(e => e.srclang === this.uploadedAudio.srclang)[0].label
-            const splitUrl = (v.artifactURL || v.authArtifactUrl).split('/')
+            const splitUrl = (v.result.artifactUrl || v.result.artifactUrl).split('/')
             const hostURL = `${splitUrl[0]}//${splitUrl[2]}`
-            this.uploadedAudio.URL = (v.artifactURL || v.authArtifactUrl).replace(hostURL, '')
+            this.uploadedAudio.URL = (v.result.artifactUrl || v.result.artifactUrl).replace(hostURL, '')
             this.dialogRef.close(this.uploadedAudio)
           }
         },
@@ -123,7 +123,7 @@ export class UploadAudioComponent implements OnInit {
             duration: NOTIFICATION_TIME * 1000,
           })
         },
-    )
+      )
   }
 
 }

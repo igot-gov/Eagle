@@ -268,7 +268,7 @@ export class FileUploadComponent implements OnInit {
   clearUploadedFile() {
     this.fileUploadForm.controls.artifactUrl.setValue(null)
     this.file = null
-    this.duration = 0
+    this.duration = '0'
     this.mimeType = ''
   }
 
@@ -436,7 +436,7 @@ export class FileUploadComponent implements OnInit {
     this.enableUpload = false
     content.onloadedmetadata = () => {
       window.URL.revokeObjectURL(content.src)
-      this.duration = Math.round(content.duration)
+      this.duration = JSON.stringify(Math.round(content.duration))
       this.enableUpload = true
     }
     content.src = URL.createObjectURL(this.file)

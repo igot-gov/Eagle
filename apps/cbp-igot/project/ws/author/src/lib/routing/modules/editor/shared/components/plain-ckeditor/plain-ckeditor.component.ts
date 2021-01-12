@@ -87,7 +87,7 @@ export class PlainCKEditorComponent implements AfterViewInit, OnInit, OnDestroy 
     private accessControlSvc: AccessControlService,
     private loaderService: LoaderService,
     private cdr: ChangeDetectorRef,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.initiateConfig()
@@ -238,8 +238,8 @@ export class PlainCKEditorComponent implements AfterViewInit, OnInit, OnDestroy 
               .upload(form, { contentId: this.id, contentType: this.location })
               .subscribe(
                 data => {
-                  if (data.code) {
-                    let url = data.artifactURL
+                  if (data.result) {
+                    let url = data.result.artifactUrl
                     if (!this.doRegex) {
                       url = `/${url.split('/').slice(3).join('/')}`
                     }
@@ -315,8 +315,8 @@ export class PlainCKEditorComponent implements AfterViewInit, OnInit, OnDestroy 
               .upload(form, { contentId: this.id, contentType: this.location })
               .subscribe(
                 data => {
-                  if (data.code) {
-                    let url = data.artifactURL
+                  if (data.result) {
+                    let url = data.result.artifactUrl
                     if (this.doRegex) {
                       url = `/${url.split('/').slice(3).join('/')}`
                     }
