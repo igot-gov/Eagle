@@ -15,6 +15,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -95,14 +96,14 @@ public class ProfileRequestHandler implements IProfileRequestHandler {
         Map<String,Object> search = ((Map<String,Object>)((List)searchResult).get(0));
         //merge request and search to add osid(s)
         for(Map<String,Object> request: requests){
-
+            String osid = StringUtils.isEmpty(request.get("osid")) == true ? "" : request.get("osid").toString();
             Map<String, Object> toChange = new HashMap<>();
             Object sf = search.get(request.get("fieldKey"));
 
             if(sf instanceof ArrayList){
                 List <Map<String, Object>> searchFields = (ArrayList)search.get((String)request.get("fieldKey"));
                 for (Map<String, Object> obj :searchFields){
-                    if( obj.get("osid").toString().equalsIgnoreCase(request.get("osid").toString()))
+                    if( obj.get("osid").toString().equalsIgnoreCase(osid))
                         toChange.putAll(obj);
                 }
             }
@@ -116,7 +117,7 @@ public class ProfileRequestHandler implements IProfileRequestHandler {
             for (Map.Entry entry: objectMap.entrySet())
                 toChange.put((String) entry.getKey(), entry.getValue());
 
-            profileUtils.mergeLeaf(search, toChange, request.get("fieldKey").toString(), request.get("osid").toString());
+            profileUtils.mergeLeaf(search, toChange, request.get("fieldKey").toString(), osid);
         }
 
         RegistryRequest registryRequest = new RegistryRequest();
