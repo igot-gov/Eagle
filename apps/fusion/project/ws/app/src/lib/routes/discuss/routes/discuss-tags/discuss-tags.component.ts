@@ -39,10 +39,10 @@ export class DiscussTagsComponent implements OnInit {
     return { color, 'background-color': bgColor }
   }
 
-  getAllDiscussions(tag: { value: any; }) {
-    const val: never[] = []
-    val.tagname = tag.value
-    this.queryParam = val
-    this.router.navigate([`/app/discuss/tags/tag-discussions`], { queryParams:  this.queryParam })
+  getAllDiscussions(tag: { value: any }) {
+    // const val: never[] = []
+    // val.tagname = tag.value
+    this.queryParam = tag.value
+    this.router.navigate([`/app/discuss/tags/tag-discussions`], { queryParams: this.queryParam })
   }
 }

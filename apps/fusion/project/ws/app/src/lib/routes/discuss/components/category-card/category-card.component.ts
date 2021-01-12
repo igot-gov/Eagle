@@ -24,10 +24,10 @@ export class CategoryCardComponent implements OnInit {
 
   ngOnInit() { }
 
-  getAllDiscussions(category: { cid: any; }) {
-    const val: never[] = []
-    val.cid = category.cid
-    this.queryParam = val
-    this.router.navigate([`/app/discuss/categories/category-discussions`], { queryParams:  this.queryParam })
+  getAllDiscussions(category: { cid: any }) {
+    // const val: never[] = []
+    // val.cid = category.cid
+    this.queryParam = category.cid
+    this.router.navigate([`/app/discuss/categories/category-discussions`], { queryParams: this.queryParam })
   }
 }
