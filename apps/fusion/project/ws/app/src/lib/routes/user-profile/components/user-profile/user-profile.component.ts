@@ -782,9 +782,9 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         const newVal = _.get(dk, `${fields[i]}`)
         if ((oldVal !== newVal) && dk && _.get(dk, fields[i]) && typeof (_.get(dk, fields[i])) !== 'object') {
           lst.push({
-            fieldKey: fields[i],
-            fromValue: { [fields[i]]: fields[i] },
-            toValue: { [fields[i]]: _.get(dk, fields[i]) },
+            fieldKey: k,
+            fromValue: { [fields[i]]: oldVal || '' },
+            toValue: { [fields[i]]: newVal || '' },
             osid: _.get(this.userProfileData, `${k}[${idx}].osid}`),
           })
         }
