@@ -20,7 +20,7 @@ export class LeftMenuComponent extends WidgetBaseComponent
   }
 
   ngOnInit(): void {
-
+    console.log(this.widgetData)
   }
 
   changeToDefaultImg($event: any) {

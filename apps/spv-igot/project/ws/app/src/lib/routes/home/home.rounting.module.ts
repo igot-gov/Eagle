@@ -9,6 +9,7 @@ import { RolesAccessComponent } from './routes/roles-access/roles-access.compone
 import { DirectoryViewComponent } from './routes/directory/directroy.component'
 import { CreateMdoComponent } from './routes/create-mdo/create-mdo.component'
 import { CreateUserComponent } from './routes/create-user/create-user.component'
+import { DepartmentResolve } from './resolvers/department-resolve'
 // import { PageResolve } from '@ws-widget/utils'
 const routes: Routes = [
   {
@@ -19,6 +20,9 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
+    resolve: {
+      department: DepartmentResolve,
+    },
     children: [
       {
         path: 'users',
@@ -54,6 +58,7 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: [
     HomeResolve,
+    DepartmentResolve,
   ],
 })
 export class HomeRoutingModule { }

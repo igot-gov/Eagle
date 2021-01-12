@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   widgetData!: NsWidgetResolver.IWidgetData<ILeftMenu>
   unread = 0
   currentRoute = 'home'
+  myRoles!: Set<string>
   banner!: NsWidgetResolver.IWidgetData<any>
   private bannerSubscription: any
   public screenSizeIsLtMedium = false
@@ -33,6 +34,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('stickyMenu', { static: true }) menuElement!: ElementRef
   elementPosition: any
   sticky = false
+  department: any = {}
+  departmentName = ''
   private defaultSideNavBarOpenedSubscription: any
   @HostListener('window:scroll', ['$event'])
   handleScroll() {
@@ -49,8 +52,21 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         // Hide loading indicator
         // console.log(event.url)
         this.bindUrl(event.urlAfterRedirects.replace('/app/home/', ''))
-        this.widgetData = this.activeRoute.snapshot.data &&
-          this.activeRoute.snapshot.data.pageData.data.menus || []
+        // this.widgetData = this.activeRoute.snapshot.data &&
+        //   this.activeRoute.snapshot.data.pageData.data.menus || []
+        if (this.activeRoute.snapshot.data.department.data) {
+          const leftData = this.activeRoute.snapshot.data.pageData.data.menus
+          _.set(leftData, 'widgetData.logo', true)
+          _.set(leftData, 'widgetData.logoPath', _.get(this.activeRoute, 'snapshot.data.department.data.logo'))
+          _.set(leftData, 'widgetData.name', _.get(this.activeRoute, 'snapshot.data.department.data.description'))
+          _.set(leftData, 'widgetData.userRoles', this.myRoles)
+          this.widgetData = leftData
+        } else {
+          this.widgetData = this.activeRoute.snapshot.data.pageData.data.menus
+        }
+
+        this.department = this.activeRoute.snapshot.data.department.data
+        this.departmentName = this.department ? this.department.deptName : ''
       }
 
       if (event instanceof NavigationError) {

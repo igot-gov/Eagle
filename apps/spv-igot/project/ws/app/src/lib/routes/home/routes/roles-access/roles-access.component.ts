@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnInit, OnDestroy } from '@angular/core'
 import { Router } from '@angular/router'
-import { RolesAccessService } from '../../services/roles-access.service'
+import { ProfileV2Service } from '../../services/home.servive'
+// import { RolesAccessService } from '../../services/roles-access.service'
 @Component({
   selector: 'ws-app-roles-access',
   templateUrl: './roles-access.component.html',
@@ -10,7 +11,7 @@ export class RolesAccessComponent implements OnInit, AfterViewInit, OnDestroy {
   tabledata: any = []
   data: any = []
 
-  constructor(private router: Router, private roleSvc: RolesAccessService) { }
+  constructor(private router: Router, private homeResolver: ProfileV2Service) { }
 
   ngOnInit() {
     this.tabledata = {
@@ -38,9 +39,16 @@ export class RolesAccessComponent implements OnInit, AfterViewInit, OnDestroy {
 
   /* API call to get all roles*/
   fetchRoles() {
-    this.roleSvc.getRoles().subscribe(roles => {
-      this.data = roles.data
+    this.homeResolver.getMyDepartment().subscribe(roles => {
+      var obj = {
+        role: roles.rolesInfo[0].roleName,
+        count: roles.noOfUsers,
+      }
+      this.data.push(obj)
     })
+    // this.roleSvc.getRoles().subscribe(roles => {
+    //   this.data = roles.data
+    // })
   }
 
   ngOnDestroy() { }
