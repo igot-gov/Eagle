@@ -10,6 +10,7 @@ const API_END_POINTS = {
   ADD_USER_TO_DEPARTMENT: 'apis/protected/v8/portal/deptAction',
   WF_HISTORY_BY_APPID: 'apis/protected/v8/workflowhandler/historyByApplicationId/',
   SEARCH_USER: 'apis/protected/v8/user/autocomplete/department',
+  USER_BDD: '/apis/protected/v8/portal/mdo/deptAction/userrole',
 }
 
 @Injectable({
@@ -43,5 +44,14 @@ export class UsersService {
 
   onSearchUserByEmail(email: string, req: any): Observable<any> {
     return this.http.post<any>(`${API_END_POINTS.SEARCH_USER}/${email}`, req)
+  }
+  blockUser(user: object): Observable<any> {
+    return this.http.patch<any>(`${API_END_POINTS.USER_BDD}/`, user)
+  }
+  deActiveUser(user: object): Observable<any> {
+    return this.http.patch<any>(`${API_END_POINTS.USER_BDD}/`, user)
+  }
+  deleteUser(user: object): Observable<any> {
+    return this.http.patch<any>(`${API_END_POINTS.USER_BDD}/`, user)
   }
 }
