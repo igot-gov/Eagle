@@ -1,11 +1,14 @@
-
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { NSProfileDataV2 } from '../../models/profile-v2.model'
 import { MatDialog } from '@angular/material/dialog'
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { ConfigurationsService } from '@ws-widget/utils/src/public-api'
+import { UsersService } from '../../../users/services/users.service'
 /* tslint:disable */
 import _ from 'lodash'
+import { environment } from 'src/environments/environment'
+import { ITableData } from '../../../../../../../../../library/ws-widget/collection/src/public-api'
+import { MatSnackBar } from '@angular/material'
 
 @Component({
   selector: 'ws-app-users-view',
@@ -15,11 +18,11 @@ import _ from 'lodash'
   host: { class: 'flex flex-1 margin-top-l' },
   /* tslint:enable */
 })
-export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
+export class UsersViewComponent implements OnInit, OnDestroy {
   /* tslint:disable */
   Math: any
   /* tslint:enable */
-  currentFilter = 'underreview'
+  currentFilter = 'active'
   discussionList!: any
   discussProfileData!: any
   portalProfile!: NSProfileDataV2.IProfile
@@ -29,16 +32,20 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
   tabsData: NSProfileDataV2.IProfileTab[]
   currentUser!: string | null
   connectionRequests!: any[]
-  tabledata: any = []
+  tabledata!: ITableData
   data: any = []
+  usersData!: any
 
   constructor(
     public dialog: MatDialog,
     private route: ActivatedRoute,
+    private router: Router,
+    private snackBar: MatSnackBar,
     // private discussService: DiscussService,
     private configSvc: ConfigurationsService,
     // private networkV2Service: NetworkV2Service,
     // private profileV2Svc: ProfileV2Service
+    private usersService: UsersService
   ) {
     this.Math = Math
     this.currentUser = this.configSvc.userProfile && this.configSvc.userProfile.userId
@@ -51,6 +58,7 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
       this.decideAPICall()
     })
   }
+
   decideAPICall() {
   }
   ngOnDestroy() {
@@ -59,115 +67,155 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
   ngOnInit() {
-    // int left blank
     this.tabledata = {
-      actions: [{ name: 'Approve', label: 'Approve', icon: 'remove_red_eye', type: 'Approve' },
-      { name: 'Reject', label: 'Reject', icon: 'remove_red_eye', type: 'Reject' }],
+      actions: [],
       columns: [
         { displayName: 'Full Name', key: 'fullname' },
         { displayName: 'Email', key: 'email' },
-        { displayName: 'Type', key: 'type' },
+        { displayName: 'Position', key: 'position' },
+        { displayName: 'Role', key: 'role' },
       ],
       needCheckBox: false,
       needHash: false,
-      sortColumn: '',
+      sortColumn: 'fullName',
       sortState: 'asc',
+      needUserMenus: true,
     }
-    this.data = [{
 
-      fullname: 'Ibrahim Sha',
-      email: 'ibrahimsha@gmail.com',
-      type: 'Transfer',
-    },
-    {
-      fullname: 'Amit Sengar',
-      email: 'amitsengar@yahoo.com',
-      type: 'New User',
-    },
-    {
-      fullname: 'Thillai Rajan',
-      email: 'thillairajan@gmail.com',
-      type: 'New User',
-    }]
-  }
-  ngAfterViewInit() {
-    // this.elementPosition = this.menuElement.nativeElement.parentElement.offsetTop
-  }
-  tEIDTableTableAction() {
-
-  }
-  fetchUserDetails() {
-    // if (wid) {
-    //   this.discussService.fetchProfileInfo(wid).subscribe((response: any) => {
-    //     if (response) {
-    //       this.discussProfileData = response
-    //       this.discussionList = _.uniqBy(_.filter(this.discussProfileData.posts, p => _.get(p, 'isMainPost') === true), 'tid') || []
-    //     }
-    //   })
-    // }
-  }
-  fetchConnectionDetails() {
-    // this.networkV2Service.fetchAllConnectionEstablishedById(wid).subscribe(
-    //   (data: any) => {
-    //     this.connectionRequests = data.result.data
-    //   },
-    //   (_err: any) => {
-    //     // this.openSnackbar(err.error.message.split('|')[1] || this.defaultError)
-    //   })
+    this.getAllUsers()
   }
 
-  filter(key: string | 'timestamp' | 'best' | 'saved') {
+  filter(key: string) {
+    const activeUsersData: any[] = []
+    const blockedUsersData: any[] = []
+    const inactiveUsersData: any[] = []
+    if (this.usersData.active_users && this.usersData.active_users.length > 0) {
+      this.usersData.active_users.forEach((user: any) => {
+        activeUsersData.push({
+          fullname: user ? `${user.firstName} ${user.lastName}` : null,
+          email: user.emailId,
+          role: user.roleInfo.roleName,
+          userId: user.userId,
+          active: user.active,
+          blocked: user.blocked,
+        })
+      })
+    }
+
+    if (this.usersData.blocked_users && this.usersData.blocked_users.length > 0) {
+      this.usersData.blocked_users.forEach((user: any) => {
+        blockedUsersData.push({
+
+          fullname: user ? `${user.firstName} ${user.lastName}` : null,
+          email: user.emailId,
+          role: user.roleInfo.roleName,
+          userId: user.userId,
+          active: user.active,
+          blocked: user.blocked,
+        })
+      })
+    }
+    if (this.usersData.inActive_users && this.usersData.inActive_users.length > 0) {
+      this.usersData.inActive_users.forEach((user: any) => {
+        inactiveUsersData.push({
+          fullname: user ? `${user.firstName} ${user.lastName}` : null,
+          email: user.emailId,
+          role: user.roleInfo.roleName,
+          userId: user.userId,
+          active: user.active,
+          blocked: user.blocked,
+        })
+      })
+    }
+
     if (key) {
       this.currentFilter = key
       switch (key) {
-        case 'underreview':
-          // this.discussionList = _.uniqBy(_.filter(this.discussProfileData.posts, p => _.get(p, 'isMainPost') === true), 'tid')
-          this.data = [{
-
-            fullname: 'Ibrahim Sha',
-            email: 'ibrahimsha@gmail.com',
-            type: 'Transfer',
-          },
-          {
-            fullname: 'Amit Sengar',
-            email: 'amitsengar@yahoo.com',
-            type: 'New User',
-          },
-          {
-            fullname: 'Thillai Rajan',
-            email: 'thillairajan@gmail.com',
-            type: 'New User',
-          }]
-          break
         case 'active':
-          // this.discussionList = _.uniqBy(this.discussProfileData.bestPosts, 'tid')
-          this.data = [{
-            fullname: 'Jenifer Ramsingh',
-            email: 'jeniferramsingh@gamil.com',
-            type: 'Transfer',
-          }]
+          this.data = activeUsersData
           break
         case 'inactive':
-          this.data = [{
-            fullname: 'Siva Teju',
-            email: 'sivateajuh@gamil.com',
-            type: 'Transfer',
-          }]
+          this.data = inactiveUsersData
           break
         case 'blocked':
-          this.data = [{
-            fullname: 'Jenifer',
-            email: 'jenifer@gamil.com',
-            type: 'Transfer',
-          }]
+          this.data = blockedUsersData
           break
         default:
-          this.discussionList = _.uniqBy(this.discussProfileData.latestPosts, 'tid')
+          this.data = activeUsersData
           break
       }
     }
   }
 
-  // need to enhance
+  getAllUsers() {
+    this.usersService.getAllUsers().subscribe(data => {
+      this.usersData = data
+      this.filter(this.currentFilter)
+    })
+  }
 
+  onCreateClick() {
+    this.router.navigate([`/app/users/create-user`])
+  }
+
+  onRoleClick(user: any) {
+    this.router.navigate([`/app/users/${user.userId}/details`])
+  }
+  menuActions($event: { action: string, row: any }) {
+    const user = { userId: _.get($event.row, 'userId') }
+    _.set(user, 'deptId', _.get(this.usersData, 'id'))
+    _.set(user, 'isBlocked', _.get($event.row, 'blocked'))
+    _.set(user, 'isActive', _.get($event.row, 'active'))
+
+    switch ($event.action) {
+      case 'showOnKarma':
+        window.open(`${environment.karmYogiPath}/app/person-profile/${user.userId}`)
+        break
+      case 'block':
+        _.set(user, 'isBlocked', true)
+        _.set(user, 'isActive', false)
+        _.set(user, 'roles', _.map(_.get($event.row, 'roleInfo'), i => i.roleName))
+        this.usersService.blockUser(user).subscribe(response => {
+          if (response) {
+            this.getAllUsers()
+            this.snackBar.open('Updated successfully !')
+          }
+        })
+        break
+      case 'unblock':
+        _.set(user, 'isBlocked', false)
+        _.set(user, 'roles', _.map(_.get($event.row, 'roleInfo'), i => i.roleName))
+        this.usersService.blockUser(user).subscribe(response => {
+          if (response) {
+            this.getAllUsers()
+            this.snackBar.open('Updated successfully !')
+          }
+        })
+        break
+      case 'deactive':
+        _.set(user, 'isActive', false)
+        _.set(user, 'roles', _.map(_.get($event.row, 'roleInfo'), i => i.roleName))
+        this.usersService.deActiveUser(user).subscribe(response => {
+          if (response) {
+            this.getAllUsers()
+            this.snackBar.open('Updated successfully !')
+          }
+        })
+        break
+      case 'active':
+        _.set(user, 'isActive', true)
+        _.set(user, 'roles', _.map(_.get($event.row, 'roleInfo'), i => i.roleName))
+        this.usersService.deActiveUser(user).subscribe(response => {
+          if (response) {
+            this.getAllUsers()
+            this.snackBar.open('Updated successfully !')
+          }
+        })
+        break
+      //   case 'delete':
+      //     _.set(user, 'isBlocked', false)
+      //     this.usersSvc.deleteUser(user)
+      //     break
+    }
+  }
 }

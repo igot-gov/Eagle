@@ -18,6 +18,8 @@ import { ITableData, IColums } from '../interface/interfaces'
 export class UIUserTableComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() tableData!: ITableData | undefined
   @Input() data?: []
+  @Input() isUpload?: boolean
+  @Input() isCreate?: boolean
 
   // @Input() columns?: IColums[]
   // @Input() needCheckBox?: Boolean
@@ -26,6 +28,8 @@ export class UIUserTableComponent implements OnInit, AfterViewInit, OnChanges {
   @Output() clicked?: EventEmitter<any>
   @Output() actionsClick?: EventEmitter<any>
   @Output() eOnRowClick = new EventEmitter<any>()
+  @Output() eOnCreateClick = new EventEmitter<any>()
+
   bodyHeight = document.body.clientHeight - 125
   displayedColumns: IColums[] | undefined
   dataSource!: any
@@ -89,10 +93,10 @@ export class UIUserTableComponent implements OnInit, AfterViewInit, OnChanges {
       if (this.tableData.needHash) {
         columns.splice(0, 0, 'SR')
       }
-      if (this.tableData.actions && this.tableData.actions.length > 0) {
-        columns.push('Actions')
-      }
-      if (this.tableData.actions && this.tableData.actions.length > 0) {
+      // if (this.tableData.actions && this.tableData.actions.length > 0) {
+      //   columns.push('Actions')
+      // }
+      if (this.tableData.needUserMenus) {
         columns.push('Menu')
       }
       return columns
@@ -129,4 +133,9 @@ export class UIUserTableComponent implements OnInit, AfterViewInit, OnChanges {
   onRowClick(e: any) {
     this.eOnRowClick.emit(e)
   }
+
+  onCreateClick() {
+    this.eOnCreateClick.emit()
+  }
+
 }

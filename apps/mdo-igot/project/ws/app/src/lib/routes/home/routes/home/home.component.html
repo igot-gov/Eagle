@@ -5,9 +5,9 @@
   <ng-container [wsResolverWidget]="banner"></ng-container>
 </div> -->
 
-<mat-sidenav-container class="container-balanced sticky" autosize name="discuss-menu">
-  <mat-sidenav [mode]="mode$ | async" [(opened)]="sideNavBarOpened" class="left-nav">
-    <div class="container2" #stickyMenu>
+<mat-sidenav-container autosize name="discuss-menu" class="nav-container" name="exp">
+  <mat-sidenav [mode]="mode$ | async" [(opened)]="sideNavBarOpened" class="left-nav border-0">
+    <div class="contain">
       <ng-container [wsResolverWidget]="widgetData"></ng-container>
     </div>
   </mat-sidenav>

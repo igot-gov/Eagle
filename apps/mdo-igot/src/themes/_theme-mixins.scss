@@ -239,7 +239,6 @@
 
     .ws-mat-accent-border-active {
       border: 1px solid $colorAccent;
-
       .mat-caption {
         color: $colorText;
       }
@@ -370,6 +369,7 @@
     .ws-active-route-menu {
       background-color: $colorBlack040 !important;
       font-weight: 700;
+      font: bold 14px Lato !important;
 
       &::after {
         content: '';

@@ -1,0 +1,51 @@
+<mat-card id="skills" class="flex flex-1 flex-column margin-left-m margin-bottom-m margin-right-m ws-mat-accent-border">
+  <div class="flex-custom">
+    <mat-card-content class="margin-top-m margin-bottom-m margin-left-m margin-right-m">
+      <span class="mat-subheading-1 flex-4 mobile-margin appr-section-heading" role="link" tabindex="0">
+        Certification and skills
+      </span>
+      <div class="margin-top-xl new-mobile" *ngIf="skillDetails">
+        <div class="flex flex-wrap mobile-break">
+          <div class="w-full profile-cols-full bg-grey">
+            <ng-container>
+              <mat-grid-list cols="1" rowHeight="50px">
+                <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
+                  <label class="appr-text-label">Certification</label>
+                </mat-grid-tile>
+              </mat-grid-list>
+              <mat-grid-list cols="1" rowHeight="150px">
+                <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
+                  <label class="appr-text-label">Additional skill acquired/course completed</label>
+                  <textarea [disabled]="true" rows="4" [value]="skillDetails.additionalSkills"
+                    class="appr-text-field"></textarea>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
+                  <label class="appr-text-label">Provide certification details</label>
+                  <textarea [disabled]="true" rows="4" [value]="skillDetails.certificateDetails"
+                    class="appr-text-field"></textarea>
+                </mat-grid-tile>
+              </mat-grid-list>
+              <mat-grid-list cols="1" rowHeight="50px">
+                <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
+                  <label class="appr-text-label">Skills</label>
+                </mat-grid-tile>
+              </mat-grid-list>
+              <mat-grid-list cols="1" rowHeight="150px">
+                <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
+                  <label class="appr-text-label">Professional interests</label>
+                  <textarea [disabled]="true" rows="4" [value]="skillDetails.additionalSkills"
+                    class="appr-text-field"></textarea>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
+                  <label class="appr-text-label">Hobbies</label>
+                  <textarea [disabled]="true" rows="4" [value]="skillDetails.certificateDetails"
+                    class="appr-text-field"></textarea>
+                </mat-grid-tile>
+              </mat-grid-list>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </div>
+</mat-card>

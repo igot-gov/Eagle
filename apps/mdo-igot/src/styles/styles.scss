@@ -582,3 +582,57 @@ h3.shepherd-title {
     display: none;
   }
 }
+
+.h-700-b-14-l{
+  font: bold 14px Lato !important;
+  font-weight: 700 !important;
+}
+
+.h-400-r-14-l{
+  font: normal 14px Lato !important;
+  font-weight: 400 !important;
+}
+
+.h-600-s-20-m{
+  font: normal 20px Montserrat !important;
+   font-weight: 600 !important;
+}
+
+.h-400-r-16-l{
+  font: normal 16px Lato !important;
+    font-weight: 400 !important;
+}
+
+.color-87{
+ color: rgba(0, 0, 0, 0.87) !important;
+}
+
+.color-60{
+ color: rgba(0, 0, 0, 0.6) !important;
+}
+
+.color-40{
+  color:rgba(0, 0, 0, 0.4) !important;
+}
+
+.color-white{
+  color:rgb(255, 255, 255) !important;
+}
+
+.color-primary{
+  color:rgb(0, 116, 182) !important;
+}
+
+.border-primary{
+  border:1px solid rgb(0, 116, 182) !important;
+  border-radius: 4px !important;
+}
+
+.border-gray{
+   border:1px solid rgba(0, 0, 0, 0.16);
+   border-radius: 4px;
+}
+
+.text-center{
+  text-align: center;
+}

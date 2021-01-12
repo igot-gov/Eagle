@@ -609,7 +609,6 @@ $title-line-count: 2;
   word-break: break-word;
   margin: 5px;
   cursor: pointer;
-  // word-break: break-all;
 }
 
 .search {
@@ -624,6 +623,7 @@ $title-line-count: 2;
 
 .rsearch {
   display: flex;
+  position: relative;
   flex: 1 1 auto;
 }
 
@@ -631,9 +631,11 @@ $title-line-count: 2;
   width: 29%;
   border-radius: 4px;
   border: 1px solid #d5d0d0;
-  padding: 9px;
+  padding: 9px 9px 9px 35px;
   margin-bottom: 20px;
   margin-top: 10px;
+  font: normal 14px Lato ;
+  font-weight: 400 ;
 }
 
 .searchText {
@@ -653,4 +655,81 @@ mat-header-row{
 
 .mat-header-cell{
   background-color: #F5F5F5;
+}
+
+.container-balanced{
+  max-width: 99%;
+  margin-left: auto!important;
+  margin-right: auto!important;
+}
+
+.flex-3 {
+  flex: 3;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.flex-2 {
+  flex: 2;
+}
+
+.flex-4 {
+  flex: 4;
+}
+
+.flex-update {
+  flex-direction: row;
+
+  @include breakpoint-xs {
+    flex-direction: row;
+  }
+
+  @include breakpoint-s {
+    flex-direction: row;
+  }
+}
+
+.flex-custom {
+  display: flex;
+ flex-direction: column;
+}
+
+.flex-custom-m {
+  @include breakpoint-xs {
+    flex-direction: column;
+  }
+}
+
+.right-align{
+  text-align: right;
+}
+
+.create-btn{
+  width: 107px;
+  background: #0075B7 !important;
+  color: white !important;
+  font-family: 'Lato';
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.upload-btn{
+  width: 150px;
+  border:1px solid #DEDEDE;
+  border-radius: 4px;
+  margin: 0 15px;
+  color: #848484 !important;
+  font-family: 'Lato';
+  font-weight: 700;
+  font-size: 14px;
+}
+
+
+.search-icon{
+  position: absolute;
+  top: 19px;
+  font-size: 20px;
+  left: 10px;
 }

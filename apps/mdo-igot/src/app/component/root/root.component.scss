@@ -59,3 +59,11 @@ ws-app-nav-bar {
     padding: 0;
   }
 }
+
+.fix-ww {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  max-width: 94%;
+  /* display: flex; */
+  flex: 1;
+}

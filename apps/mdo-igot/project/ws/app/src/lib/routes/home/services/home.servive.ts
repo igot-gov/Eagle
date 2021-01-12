@@ -10,6 +10,8 @@ const API_END_POINTS = {
   PROFILE_DETAIL: `${PROTECTED_SLAG_V8}/social/post/timeline`,
   SOCIAL_VIEW_CONVERSATION: `${PROTECTED_SLAG_V8}/social/post/viewConversation`,
   getUserdetailsV2FromRegistry: '/apis/protected/v8/user/profileDetails/getUserRegistryById',
+  CHECK_ISADMIN: '/apis/protected/v8/portal/isAdmin/mdo',
+  GET_MY_DEPARTMENT: '/apis/protected/v8/portal/mdo/mydepartment?allUsers=true',
 }
 
 @Injectable({
@@ -28,4 +30,11 @@ export class ProfileV2Service {
     return this.http.post<any>(API_END_POINTS.SOCIAL_VIEW_CONVERSATION, request)
   }
 
+  checkIsUserAdmin(): Observable<any> {
+    return this.http.get<any>(`${API_END_POINTS.CHECK_ISADMIN}`)
+  }
+
+  getMyDepartment(): Observable<any> {
+    return this.http.get<any>(`${API_END_POINTS.GET_MY_DEPARTMENT}`)
+  }
 }

@@ -1,0 +1,52 @@
+.appr-section-heading{
+  font-size:20px
+}
+
+.appr-text-field{
+  width: 272px;
+  border: 1px solid #DDDDDD;
+  border-radius: 4px;
+  padding: 9px;
+  font: 400 14px Lato;
+}
+
+.appr-text-label{
+  width: 100%;
+  padding-bottom: 10px;
+  margin-bottom: 0;
+  font-size: 14px;
+  color: #000000;
+  font-weight: bold;
+  display: block;
+}
+
+::ng-deep .mat-grid-tile .mat-figure {
+  display:block !important; /* or whichever you need */
+}
+
+.radio-btn{
+  border: 2px solid #DDDDDD;
+  padding: 5px 15px;
+  border-radius: 4px;
+  margin-right: 15px;
+}
+
+textarea {
+  resize: none;
+}
+
+#profdetails{
+  background: #F5F5F5;
+}
+
+::ng-deep .mat-radio-label-content{
+  font-family: 'Lato';
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.middle-heading{
+  font-weight: 600;
+  font-family: "Montserrat";
+  font-size:16px
+}

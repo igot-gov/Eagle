@@ -14,7 +14,7 @@ export class RolesAccessComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit() {
     this.tabledata = {
-      actions: [{ name: 'Details', label: 'Details', icon: 'remove_red_eye', type: 'link' }],
+      // actions: [{ name: 'Details', label: 'Details', icon: 'remove_red_eye', type: 'link' }],
       columns: [
         { displayName: 'Role', key: 'role' },
         { displayName: 'Number of users', key: 'count' },
@@ -33,7 +33,7 @@ export class RolesAccessComponent implements OnInit, AfterViewInit, OnDestroy {
 
   /* Click event to navigate to a particular role */
   onRoleClick(role: any) {
-    this.router.navigate([`/app/roles/${role.role}/privileges`])
+    this.router.navigate([`/app/roles/${role.role}/users`])
   }
 
   /* API call to get all roles*/

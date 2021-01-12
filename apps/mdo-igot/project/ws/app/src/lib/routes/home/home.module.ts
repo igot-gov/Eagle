@@ -17,6 +17,7 @@ import {
   MatChipsModule,
   MatProgressSpinnerModule,
   MatProgressBarModule,
+  MatRadioModule,
 } from '@angular/material'
 import { MatCardModule } from '@angular/material/card'
 import { ReactiveFormsModule, FormsModule } from '@angular/forms'
@@ -25,16 +26,17 @@ import { RouterModule } from '@angular/router'
 import { HomeRoutingModule } from './home.rounting.module'
 import { HomeComponent } from './routes/home/home.component'
 import { UsersViewComponent } from './routes/users-view/users-view.component'
-import { AvatarPhotoModule, BtnPageBackModule, LeftMenuModule, UITableModule } from '@ws-widget/collection'
+import { AvatarPhotoModule, BtnPageBackModule, LeftMenuModule, UITableModule, ScrollspyLeftMenuModule } from '@ws-widget/collection'
 import { AboutComponent } from './routes/about/about.component'
 import { RolesAccessComponent } from './routes/roles-access/roles-access.component'
-
+import { ApprovalsComponent } from './routes/approvals/approvals.component'
 @NgModule({
   declarations: [
     HomeComponent,
     UsersViewComponent,
     AboutComponent,
     RolesAccessComponent,
+    ApprovalsComponent,
   ],
   imports: [
     CommonModule,
@@ -71,6 +73,8 @@ import { RolesAccessComponent } from './routes/roles-access/roles-access.compone
     PipeOrderByModule,
     BtnPageBackModule,
     WidgetResolverModule,
+    ScrollspyLeftMenuModule,
+    MatRadioModule,
   ],
   entryComponents: [
   ],

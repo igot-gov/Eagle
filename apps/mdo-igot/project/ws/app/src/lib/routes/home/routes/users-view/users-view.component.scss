@@ -281,3 +281,7 @@ a:not([href]):not([tabindex]) {
 .no-shadow {
   box-shadow: none !important;
 }
+
+.mat-card-title{
+  margin-left: -31px !important;
+}
