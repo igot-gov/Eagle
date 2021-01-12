@@ -84,14 +84,14 @@ export class CreateMdoComponent implements OnInit {
   { isActive: false, isCompleted: false, name: 'Classification', step: 1 },
   { isActive: false, isCompleded: false, name: 'Intended for', step: 2 }]
   constructor(public dialog: MatDialog,
-    private uploadService: UploadService,
-    private snackBar: MatSnackBar,
-    private contentService: EditorContentService,
-    private loader: LoaderService,
-    private authInitService: AuthInitService,
-    private createMdoService: CreateMDOService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute) {
+              private uploadService: UploadService,
+              private snackBar: MatSnackBar,
+              private contentService: EditorContentService,
+              private loader: LoaderService,
+              private authInitService: AuthInitService,
+              private createMdoService: CreateMDOService,
+              private router: Router,
+              private activatedRoute: ActivatedRoute) {
     {
 
       this.contentForm = new FormGroup({
@@ -575,7 +575,7 @@ export class CreateMdoComponent implements OnInit {
             this.submittedForm = false
             this.openSnackbar('Success')
           }
-        }, (err: { error: any }) => {
+        },                                                                       (err: { error: any }) => {
           this.openSnackbar(err.error.errors[0].message)
         })
 
@@ -590,7 +590,7 @@ export class CreateMdoComponent implements OnInit {
             this.submittedForm = false
             this.openSnackbar('Success')
           }
-        }, (err: { error: any }) => {
+        },                                                                                      (err: { error: any }) => {
           this.openSnackbar(err.error.errors[0].message)
         })
 
@@ -599,10 +599,9 @@ export class CreateMdoComponent implements OnInit {
 
   }
   getRole(rolesInfo: any[]) {
-    let adminRole = ""
+    let adminRole = ''
     rolesInfo.forEach(element => {
-      console.log(element.roleName.includes("ADMIN"))
-      if (element.roleName.includes("ADMIN")) {
+      if (element.roleName.includes('ADMIN')) {
         adminRole = element.roleName
       }
     })

@@ -45,12 +45,12 @@ export class CreateMDOService {
       headquarters: deptData.head,
       logo: deptData.fileUpload,
     }
-    return this.http.post<any>(`${API_END_POINTS.UPDATE_DEPARTMENT}`, departmentData)
+    return this.http.patch<any>(`${API_END_POINTS.UPDATE_DEPARTMENT}`, departmentData)
   }
   assignAdminToDepartment(userId: string, deptId: string, deptRole: string): Observable<any> {
     const departmentData = {
-      userId: userId,
-      deptId: deptId,
+      userId,
+      deptId,
       roles: [deptRole],
       isActive: true,
       isBlocked: false,
