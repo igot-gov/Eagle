@@ -13,7 +13,7 @@ export class ConfirmationComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.contentQualityCourse = this.configService.courseContentPath
   }
-  constructor(private configService: ConfigurationsService, ) {
+  constructor(private configService: ConfigurationsService) {
 
   }
 

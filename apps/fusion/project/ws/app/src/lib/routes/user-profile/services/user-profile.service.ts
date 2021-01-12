@@ -16,6 +16,7 @@ const API_ENDPOINTS = {
   getMasterNationlity: '/apis/protected/v8/user/profileDetails/getMasterNationalities',
   getMasterLanguages: '/apis/protected/v8/user/profileDetails/getMasterLanguages',
   getProfilePageMeta: '/apis/protected/v8/user/profileDetails/getProfilePageMeta',
+  approveRequest: '/apis/protected/v8/workflowhandler/transition',
 }
 
 @Injectable()
@@ -41,5 +42,8 @@ export class UserProfileService {
   }
   getUserdetailsFromRegistry(): Observable<[IUserProfileDetailsFromRegistry]> {
     return this.http.get<[IUserProfileDetailsFromRegistry]>(API_ENDPOINTS.getUserdetailsFromRegistry)
+  }
+  approveRequest(data: any) {
+    return this.http.post(API_ENDPOINTS.approveRequest, data)
   }
 }

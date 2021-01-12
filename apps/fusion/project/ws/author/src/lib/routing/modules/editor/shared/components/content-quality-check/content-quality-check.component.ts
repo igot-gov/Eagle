@@ -38,7 +38,7 @@ export class ContentQualityCheckComponent extends WidgetBaseComponent implements
     // this.myObject= new
   }
   ngOnInit() {
-    this.contentQualtityService.myObject= {
+    this.contentQualtityService.myObject = {
       InstructionalMethods: [0],
       AssessmentDesign: [0],
       CompetencyandSkills: [0],
@@ -48,10 +48,12 @@ export class ContentQualityCheckComponent extends WidgetBaseComponent implements
     }
   }
   getContentQualityCheckValue(event: any, element: any) {
+    /* tslint:disable */
     const type = element.type
-    this.contentQualtityService.myObject[type][element.position-1]=event.weight
+    this.contentQualtityService.myObject[type][element.position - 1] = event.weight
     this.finalDataEmit.emit(this.contentQualtityService.myObject)
-    this.contentQualtityService.myObject[type]= Array.from(this.contentQualtityService.myObject[type], item => item || 0);
+    this.contentQualtityService.myObject[type] = Array.from(this.contentQualtityService.myObject[type], item => item || 0)
+    /* tslint:enable */
   }
 
 }

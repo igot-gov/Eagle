@@ -344,8 +344,8 @@ export class FileUploadComponent implements OnInit {
           //   duration: NOTIFICATION_TIME * 1000,
           // })
           if (this.mimeType !== 'application/pdf') {
-          const profanity = { profanity: this.profanityDataForUpload, actions: 'saveAndNext' }
-          this.data.emit(profanity)
+            const profanity = { profanity: this.profanityDataForUpload, actions: 'saveAndNext' }
+            this.data.emit(profanity)
           }
         },
         () => {
@@ -430,7 +430,6 @@ export class FileUploadComponent implements OnInit {
   startgetProfanityAPI() {
     this.profanityService.getProfanity(this.profanityAPIData).subscribe(data => {
       this.profanityData = data[0]
-      console.log(data)
       if (this.profanityData !== null && this.profanityData !== undefined) {
         if (this.profanityData.completed) {
           this.loaderService.changeLoad.next(false)
