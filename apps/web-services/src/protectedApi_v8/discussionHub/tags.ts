@@ -34,11 +34,13 @@ tagsApi.get('/:tagName', async (req, res) => {
     try {
         const rootOrg = getRootOrg(req)
         const userId = extractUserIdFromRequest(req)
+        const pageNo = req.query.page || 1
+        const sort = req.query.sort || ''
         logInfo(`UserId: ${userId}, rootOrg: ${rootOrg}`)
         const tagName = req.params.tagName
         const url = API_ENDPOINTS.getTagTopics(tagName)
         const response = await axios.get(
-            url,
+            `${url}?page=${pageNo}&sort=${sort}`,
             { ...axiosRequestConfig, headers: { rootOrg } }
         )
         res.send(response.data)
