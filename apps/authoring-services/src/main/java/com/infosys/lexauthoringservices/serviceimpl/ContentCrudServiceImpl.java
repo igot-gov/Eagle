@@ -3896,7 +3896,8 @@ public class ContentCrudServiceImpl implements ContentCrudService {
 				|| contentType.equals(LexConstants.ContentType.LeadershipReport.getContentType())
 				|| contentType.equals(LexConstants.ContentType.KnowledgeBoard.getContentType())
 				|| contentType.equals(LexConstants.ContentType.Channel.getContentType())
-				|| contentType.equals(LexConstants.ContentType.LearningJourney.getContentType())) {
+				|| contentType.equals(LexConstants.ContentType.LearningJourney.getContentType())
+				|| contentType.equals(LexConstants.ContentType.Event.getContentType())) {
 			return true;
 		}
 		return false;

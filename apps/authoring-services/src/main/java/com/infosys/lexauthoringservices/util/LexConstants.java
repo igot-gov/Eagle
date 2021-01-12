@@ -70,7 +70,8 @@ public class LexConstants {
 	public static enum ContentType {
 		LearningPath("Learning Path"), Course("Course"), Collection("Collection"), Resource("Resource"),
 		KnowledgeArtifact("Knowledge Artifact"), LeadershipReport("LeadershipReport"),
-		KnowledgeBoard("Knowledge Board"), Channel("Channel"),LearningJourney("Learning Journey");
+		KnowledgeBoard("Knowledge Board"), Channel("Channel"),LearningJourney("Learning Journey"),
+		Event("Event");
 
 		private String indexName;
 
