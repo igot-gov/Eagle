@@ -61,7 +61,7 @@ export class UrlUploadComponent implements OnInit {
       mimeType: [],
       // isInIntranet: ['', Validators.required],
       isExternal: [],
-      versionKey: ''
+      versionKey: '',
     })
     this.urlUploadForm.valueChanges.subscribe(() => {
       if (this.canUpdate) {

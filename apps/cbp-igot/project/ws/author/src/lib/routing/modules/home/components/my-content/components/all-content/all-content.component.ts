@@ -117,7 +117,7 @@ export class AllContentComponent implements OnInit, OnDestroy {
     private configService: ConfigurationsService,
   ) {
     this.courseTaken = {
-      mandatoryCourseCompleted: true
+      mandatoryCourseCompleted: true,
     } // this has to be removed after sunbird integration
     if (this.configService.userRoles) {
       this.myRoles = this.configService.userRoles
@@ -283,7 +283,7 @@ export class AllContentComponent implements OnInit, OnDestroy {
       this.isAdmin,
     )
     const requestData = {
-      locale: this.searchLanguage ? [this.searchLanguage] : ["en"],
+      locale: this.searchLanguage ? [this.searchLanguage] : ['en'],
       query: this.queryFilter,
       request: {
         query: this.queryFilter,
@@ -299,25 +299,25 @@ export class AllContentComponent implements OnInit, OnDestroy {
         sort_by: { lastUpdatedOn: 'desc' },
         // pageSize: this.pagination.limit,
         fields: [
-          "name",
-          "appIcon",
-          "mimeType",
-          "gradeLevel",
-          "identifier",
-          "medium",
-          "pkgVersion",
-          "board",
-          "subject",
-          "resourceType",
-          "primaryCategory",
-          "contentType",
-          "channel",
-          "organisation",
-          "trackable"
+          'name',
+          'appIcon',
+          'mimeType',
+          'gradeLevel',
+          'identifier',
+          'medium',
+          'pkgVersion',
+          'board',
+          'subject',
+          'resourceType',
+          'primaryCategory',
+          'contentType',
+          'channel',
+          'organisation',
+          'trackable',
         ],
         facets: [
-          "primaryCategory",
-          "mimeType"
+          'primaryCategory',
+          'mimeType',
         ],
         // pageNo: loadMoreFlag ? this.pagination.offset : 0,
         // sort: [{ lastUpdatedOn: 'desc' }],

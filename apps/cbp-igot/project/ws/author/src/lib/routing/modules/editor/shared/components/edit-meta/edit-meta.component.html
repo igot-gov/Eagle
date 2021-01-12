@@ -123,11 +123,12 @@
                               [ngClass]="{
                     'image-border': showError('appIcon'),
                     'ws-mat-warn-text': showError('appIcon')
-                  }" height="150" width="100%" [src]="contentForm.controls.appIcon.value | relativeUrl" />
+                  }" height="150" width="100%" [src]="contentForm.controls.appIcon.value" />
                             <!-- (error)="changeToDefaultImg($event)" -->
                           </div>
-                          <div class="photo mat-elevation-z4 ws-mat-primary-background" (click)="addImage()">
-                            <mat-icon class="photo-icon text-white">photo_camera</mat-icon>
+                          <div class="photo mat-elevation-z4 ws-mat-primary-background" [id]="contentMeta.identifier"
+                            (click)="openDialog()">
+                            <mat-icon class=" photo-icon text-white">photo_camera</mat-icon>
                             <!-- <input type="file" #uploadThumbnail
                               (change)="uploadAppIcon($event.target.files[0]); uploadThumbnail.value = null"
                               style="display: none;" [accept]="imageTypes.toString()" /> -->

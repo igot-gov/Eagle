@@ -457,23 +457,24 @@ export class AuthTableOfContentsComponent implements OnInit, OnDestroy {
         metadata: {},
       }
     }
-    let requestBodyV2: NSApiRequest.IContentUpdateV3 = {
+    const requestBodyV2: NSApiRequest.IContentUpdateV3 = {
       request: {
         data: {
           nodesModified,
           hierarchy: this.store.changedHierarchy,
-        }
-      }
+        },
+      },
     }
     if (Object.keys(this.editorStore.upDatedContent)[0] && nodesModified[Object.keys(this.editorStore.upDatedContent)[0]]) {
-      let requestBody: NSApiRequest.IContentUpdateV2 = {
+      const requestBody: NSApiRequest.IContentUpdateV2 = {
         request: {
-          content: nodesModified[Object.keys(this.editorStore.upDatedContent)[0]].metadata
-        }
+          content: nodesModified[Object.keys(this.editorStore.upDatedContent)[0]].metadata,
+        },
       }
       requestBody.request.content = this.editorStore.cleanProperties(requestBody.request.content)
       if (requestBody.request.content.duration) {
-        requestBody.request.content.duration = (isNumber(requestBody.request.content.duration) ? `${requestBody.request.content.duration}` : requestBody.request.content.duration)
+        requestBody.request.content.duration =
+        (isNumber(requestBody.request.content.duration) ? `${requestBody.request.content.duration}` : requestBody.request.content.duration)
       }
       return this.editorService.updateContentV3(requestBody, Object.keys(this.editorStore.upDatedContent)[0]).pipe(
         tap(() => {
@@ -488,7 +489,7 @@ export class AuthTableOfContentsComponent implements OnInit, OnDestroy {
         }),
       )
     }
-    else {
+
       return this.editorService.updateContentV4(requestBodyV2).pipe(
         tap(() => {
           this.store.changedHierarchy = {}
@@ -498,7 +499,6 @@ export class AuthTableOfContentsComponent implements OnInit, OnDestroy {
           this.editorStore.upDatedContent = {}
         }),
       )
-    }
 
     // const requestBody: NSApiRequest.IContentUpdate = {
     //   nodesModified,
