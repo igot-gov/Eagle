@@ -62,6 +62,7 @@ export class UsersComponent implements OnInit, AfterViewInit, OnDestroy {
   fetchUsersWithRole() {
     this.usersSvc.getUsers(this.role).subscribe(res => {
       this.data = res.users.map((user: any) => {
+        console.log(user)
         return {
           fullName: `${user.first_name} ${user.last_name}`,
           email: user.email,

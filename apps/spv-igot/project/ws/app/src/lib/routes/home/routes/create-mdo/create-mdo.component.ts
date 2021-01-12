@@ -73,7 +73,7 @@ export class CreateMdoComponent implements OnInit {
   allLanguages: any
   userId!: string
   departmentId!: string
-  departmentRoleId!: string
+  departmentRole!: string
   data1: any
   updateId !: number
   department!: string
@@ -84,14 +84,14 @@ export class CreateMdoComponent implements OnInit {
   { isActive: false, isCompleted: false, name: 'Classification', step: 1 },
   { isActive: false, isCompleded: false, name: 'Intended for', step: 2 }]
   constructor(public dialog: MatDialog,
-              private uploadService: UploadService,
-              private snackBar: MatSnackBar,
-              private contentService: EditorContentService,
-              private loader: LoaderService,
-              private authInitService: AuthInitService,
-              private createMdoService: CreateMDOService,
-              private router: Router,
-              private activatedRoute: ActivatedRoute) {
+    private uploadService: UploadService,
+    private snackBar: MatSnackBar,
+    private contentService: EditorContentService,
+    private loader: LoaderService,
+    private authInitService: AuthInitService,
+    private createMdoService: CreateMDOService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute) {
     {
 
       this.contentForm = new FormGroup({
@@ -536,9 +536,9 @@ export class CreateMdoComponent implements OnInit {
     dialogRef.afterClosed().subscribe((response: any) => {
       this.data = this.getAllResponse(response)
       this.data.forEach((element: { userId: string }) => {
-        this.createMdoService.assignAdminToDepartment(element.userId, this.departmentId, this.departmentRoleId).subscribe(res => {
+        this.createMdoService.assignAdminToDepartment(element.userId, this.departmentId, this.departmentRole).subscribe(res => {
           this.departmentId = res.id
-          this.departmentRoleId = res.rolesInfo[0].deptRoleId
+          // this.departmentRole = res.rolesInfo[0].deptRoleId
 
         })
       })
@@ -565,16 +565,17 @@ export class CreateMdoComponent implements OnInit {
   }
   onSubmit() {
     if (!this.isUpdate) {
+
       if (this.contentForm.value.name !== null && this.contentForm.value.head !== null
         && this.contentForm.value.deptSubTypeId !== null) {
         this.createMdoService.createDepartment(this.contentForm.value).subscribe(res => {
           this.departmentId = res.id
-          this.departmentRoleId = res.rolesInfo[0].id
-          if (this.departmentId !== undefined && this.departmentRoleId) {
+          this.departmentRole = this.getRole(res.rolesInfo)
+          if (this.departmentId !== undefined && this.departmentRole !== undefined) {
             this.submittedForm = false
             this.openSnackbar('Success')
           }
-        },                                                                       (err: { error: any }) => {
+        }, (err: { error: any }) => {
           this.openSnackbar(err.error.errors[0].message)
         })
 
@@ -584,18 +585,28 @@ export class CreateMdoComponent implements OnInit {
         && this.contentForm.value.deptSubTypeId !== null) {
         this.createMdoService.updateDepartment(this.contentForm.value, this.updateId).subscribe(res => {
           this.departmentId = res.id
-          this.departmentRoleId = res.rolesInfo[0].id
-          if (this.departmentId !== undefined && this.departmentRoleId) {
+          this.departmentRole = this.getRole(res.rolesInfo)
+          if (this.departmentId !== undefined && this.departmentRole !== undefined) {
             this.submittedForm = false
             this.openSnackbar('Success')
           }
-        },                                                                                      (err: { error: any }) => {
+        }, (err: { error: any }) => {
           this.openSnackbar(err.error.errors[0].message)
         })
 
       }
     }
 
+  }
+  getRole(rolesInfo: any[]) {
+    let adminRole = ""
+    rolesInfo.forEach(element => {
+      console.log(element.roleName.includes("ADMIN"))
+      if (element.roleName.includes("ADMIN")) {
+        adminRole = element.roleName
+      }
+    })
+    return adminRole
   }
   private openSnackbar(primaryMsg: string, duration: number = 5000) {
     this.snackBar.open(primaryMsg, 'X', {
