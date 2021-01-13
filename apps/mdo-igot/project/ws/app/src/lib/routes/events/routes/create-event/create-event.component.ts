@@ -212,7 +212,7 @@ export class CreateEventComponent implements OnInit {
           isContentEditingDisabled: false,
           isMetaEditingDisabled: false,
           isExternal: false,
-       }
+       },
     }
 
     const formJson = this.encodeToBase64(form)
@@ -251,7 +251,7 @@ export class CreateEventComponent implements OnInit {
     const formJson = this.encodeToBase64(formBody)
     this.eventsSvc.updateEvent(formJson).subscribe(
       res => {
-        console.log(res);
+        this.openSnackbar(res)
       },
       (err: any) => {
         this.openSnackbar(err.error.split(':')[1])
@@ -272,8 +272,8 @@ export class CreateEventComponent implements OnInit {
     })
   }
 
-  add_minutes (dt:any, minutes:any) {
-    return new Date(dt.getTime() + minutes*60000);
+  add_minutes (dt: any, minutes: any) {
+    return new Date(dt.getTime() + minutes * 60000)
   }
 
 }
