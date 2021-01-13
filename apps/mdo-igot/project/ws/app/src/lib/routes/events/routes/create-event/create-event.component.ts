@@ -199,38 +199,20 @@ export class CreateEventComponent implements OnInit {
 
   onSubmit() {
 
-    // let formBody = {
-    //   content:{
-    //     ContentType:"Event",
-    //     //createdBy:"b5e7a871-37d1-469b-a9d6-25353961637e",
-    //     Name: this.createEventForm.controls['eventTitle'].value,
-    //     Description: this.createEventForm.controls['summary'].value,
-    //     //Description: this.createEventForm.controls['description'].value,
-    //     LearningObjectives: this.createEventForm.controls['agenda'].value,
-    //     ResourceType: this.createEventForm.controls['eventType'].value,
-    //     ExpiryDate: this.createEventForm.controls['eventDate'].value,
-    //     //eventTime: this.createEventForm.controls['eventTime'].value,
-    //     Duration: this.createEventForm.controls['eventDuration'].value,
-    //     ArtifactUrl: this.createEventForm.controls['conferenceLink'].value,
-    //     CreatorDetails:this.createEventForm.controls['presenters'].value,
-    //     Thumbnail: this.createEventForm.controls['eventPicture'].value
-    //   }
-    // };
-
     const form = {
        content: {
           contentType: 'Event',
           mimeType: 'application/vnd.ekstep.content-collection',
           locale: 'en',
-          name: 'Test Event',
-          description: '',
+          name: this.createEventForm.controls['eventTitle'].value,
+          description: this.createEventForm.controls['summary'].value,
           category: 'Event',
           createdBy: 'b5e7a871-37d1-469b-a9d6-25353961637e',
           authoringDisabled: false,
           isContentEditingDisabled: false,
           isMetaEditingDisabled: false,
           isExternal: false,
-       },
+       }
     }
 
     const formJson = this.encodeToBase64(form)
@@ -247,13 +229,6 @@ export class CreateEventComponent implements OnInit {
 
   updateEventData(identifier: any) {
 
-    // lex_auth_013174922651705344298:{
-    //   isNew:false,
-    //   root:true,
-    //   metadata:{
-    //     name:"Sample Course From Karthik"
-    //   }
-    // }
     const identifierKey = identifier
     const formBody = {
       nodesModified: {
@@ -261,15 +236,12 @@ export class CreateEventComponent implements OnInit {
           isNew: false,
           root: true,
           metadata: {
-            Name: this.createEventForm.controls['eventTitle'].value,
-            Description: this.createEventForm.controls['summary'].value,
             LearningObjectives: this.createEventForm.controls['agenda'].value,
             ResourceType: this.createEventForm.controls['eventType'].value,
             ExpiryDate: this.createEventForm.controls['eventDate'].value,
-            // eventTime: this.createEventForm.controls['eventTime'].value,
             Duration: this.createEventForm.controls['eventDuration'].value,
             ArtifactUrl: this.createEventForm.controls['conferenceLink'].value,
-            CreatorDetails: this.createEventForm.controls['presenters'].value,
+            Contacts: this.createEventForm.controls['presenters'].value,
             Thumbnail: this.createEventForm.controls['eventPicture'].value,
           },
         },
@@ -279,8 +251,7 @@ export class CreateEventComponent implements OnInit {
     const formJson = this.encodeToBase64(formBody)
     this.eventsSvc.updateEvent(formJson).subscribe(
       res => {
-        const identifierVal = res.identifier
-        this.updateEventData(identifierVal)
+        console.log(res);
       },
       (err: any) => {
         this.openSnackbar(err.error.split(':')[1])
@@ -299,6 +270,10 @@ export class CreateEventComponent implements OnInit {
     this.snackBar.open(primaryMsg, 'X', {
       duration,
     })
+  }
+
+  add_minutes (dt:any, minutes:any) {
+    return new Date(dt.getTime() + minutes*60000);
   }
 
 }
