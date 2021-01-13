@@ -2889,7 +2889,9 @@ public class ContentCrudServiceImpl implements ContentCrudService {
 		// validateChildrenStatus(contentMeta, currentStatus);
 		
 		//calculating hasAssessment
+		System.out.println(mapper.writeValueAsString(contentMeta));
 		calculateHasAssessment(contentMeta);
+		System.out.println("Passed the calculate Has Assessment Call");
 
 		// all content-ids corresponding to the given author
 		Set<String> contentIds = getIdsFromHierarchyMap(contentMeta);
