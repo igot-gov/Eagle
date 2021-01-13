@@ -593,7 +593,7 @@ public class ContentPublisherImpl {
     }
   
       private boolean isFileMovementDisable(String rootOrg, String identifier, Transaction transaction){
-       Map<String, Object> topLevelContentNode = neo4JQueryHelpers.getNodeByIdentifier(rootOrg,identifier,Sets.newHashSet("identifier","duration","size"),transaction);
+       Map<String, Object> topLevelContentNode = neo4JQueryHelpers.getNodeByIdentifier(rootOrg,identifier,Sets.newHashSet("contentType"),transaction);
        logger.info("Content type : {}", topLevelContentNode.get("contentType"));
        if(StringUtils.isEmpty(topLevelContentNode.getOrDefault("contentType", null)))
            return false;
