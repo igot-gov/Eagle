@@ -35,7 +35,7 @@
           <button mat-stroked-button color="accent" type="button" class="mat-accent-border flex-auto-display">
               <span i18n>Cancel</span>
           </button>
-          <button mat-stroked-button color="accent" type="button" class="mat-accent-border flex-auto-display" (click)="onSubmit(createEventForm)">
+          <button mat-stroked-button color="accent" type="button" class="mat-accent-border flex-auto-display" (click)="onSubmit()">
               <span i18n>Save and Publish</span>
           </button>
       </div>
@@ -44,7 +44,7 @@
       <div class="flex flex-4 flex-column">
         <div class="flex flex-1 custom">
           <div class="flex-1" style="position: relative;">
-            <div #stickyMenu [class.sticky]="sticky">
+            <div #stickyMenu>
               <ws-widget-scrollspy-left-menu [currentTab]="currentTab" [tabsData]="tabsData" class="flex flex-1"
                 (eSideNavClick)="onSideNavTabClick($event)">
               </ws-widget-scrollspy-left-menu>
@@ -52,17 +52,7 @@
           </div>
           <div class="flex-3">
             <div class="flex flex-1 flex-column">
-              <!-- Basic Info card -->
-              <!-- -->
-
-              <!-- Academic card -->
-              <!-- -->
-
-              <!-- Professional details card -->
-              <!-- -->
-
-              <!-- Skills card -->
-              <!-- --> 
+              
               <div class="profile-container container-balanced">
           <div class="profile-box">
             <form class="create-event-form" [formGroup]="createEventForm">
