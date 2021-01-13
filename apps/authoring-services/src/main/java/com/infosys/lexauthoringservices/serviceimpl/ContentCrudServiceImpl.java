@@ -3189,6 +3189,13 @@ public class ContentCrudServiceImpl implements ContentCrudService {
 			
 			Map<String,Object> parent = parentObjs.poll();
 			
+			ObjectMapper mapper = new ObjectMapper();
+			try {
+				System.out.println(mapper.writeValueAsString(parent));
+			} catch (JsonProcessingException e) {
+				e.printStackTrace();
+			}
+			
 			String categoryType = (String) parent.get(LexConstants.CATEGORY_TYPE);
 			String resourceType = (String) parent.get(LexConstants.RESOURCE_TYPE);
 			
