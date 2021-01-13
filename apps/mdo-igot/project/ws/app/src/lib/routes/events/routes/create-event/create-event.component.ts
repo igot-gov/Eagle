@@ -147,7 +147,8 @@ export class CreateEventComponent implements OnInit {
           Object.keys(response.data).forEach((index: any) => {
           const obj = response.data[index]
             const setSelectedPresentersObj = {
-              fullname: obj.fullname,
+              firstname: obj.firstname,
+              lastname: obj.lastname,
               email: obj.email,
               type: 'Karmayogi User',
             }
