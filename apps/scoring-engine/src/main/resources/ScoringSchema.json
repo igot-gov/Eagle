@@ -94,11 +94,681 @@
       "min_acceptable_score": 0,
       "criteria": [
         {
+          "criteria": "Mandatory Requirement",
+          "description": "Mandatory Requirement Description",
+          "weightage": 0,
+          "max_score": 0,
+          "min_acceptable_score": 0,
+          "qualifiers": [
+            {
+              "qualifier": "Mandatory_Requirement_001",
+              "description": "Content does not contain hate speech, abuse, violence and profanity.",
+              "weightage": 0,
+              "max_score": 0,
+              "min_acceptable_score": 0,
+              "fixed_score": {
+                "Yes": 0,
+                "Not Applicable": 0
+              },
+              "range_score": {
+                "10-20": {
+                  "min": 0,
+                  "max": 0,
+                  "assignedValue": 0
+                }
+              },
+              "options": [
+                {
+                  "name": "Yes"
+                },
+                {
+                  "name": "Not Applicable"
+                }
+              ]
+            },
+            {
+              "qualifier": "Mandatory_Requirement_002",
+              "description": "There is no sexual content, nudity or vulgarity in the course being developed.",
+              "weightage": 0,
+              "max_score": 0,
+              "min_acceptable_score": 0,
+              "fixed_score": {
+                "Yes": 0,
+                "Not Applicable": 0
+              },
+              "range_score": {
+                "10-20": {
+                  "min": 0,
+                  "max": 0,
+                  "assignedValue": 0
+                }
+              },
+              "options": [
+                {
+                  "name": "Yes"
+                },
+                {
+                  "name": "Not Applicable"
+                }
+              ]
+            },
+            {
+              "qualifier": "Mandatory_Requirement_003",
+              "description": "There is no defamation of any institution or individual as part of the course.",
+              "weightage": 0,
+              "max_score": 0,
+              "min_acceptable_score": 0,
+              "fixed_score": {
+                "Yes": 0,
+                "Not Applicable": 0
+              },
+              "range_score": {
+                "10-20": {
+                  "min": 0,
+                  "max": 0,
+                  "assignedValue": 0
+                }
+              },
+              "options": [
+                {
+                  "name": "Yes"
+                },
+                {
+                  "name": "Not Applicable"
+                }
+              ]
+            },
+            {
+              "qualifier": "Mandatory_Requirement_004",
+              "description": "Content is appropriate for all users on the platform and do not hurt sentiments of any race, caste, religion or gender.",
+              "weightage": 0,
+              "max_score": 0,
+              "min_acceptable_score": 0,
+              "fixed_score": {
+                "Yes": 0,
+                "Not Applicable": 0
+              },
+              "range_score": {
+                "10-20": {
+                  "min": 0,
+                  "max": 0,
+                  "assignedValue": 0
+                }
+              },
+              "options": [
+                {
+                  "name": "Yes"
+                },
+                {
+                  "name": "Not Applicable"
+                }
+              ]
+            },
+            {
+              "qualifier": "Mandatory_Requirement_005",
+              "description": "All maps, borders and historical figures have been appropriately and accurately represented.",
+              "weightage": 0,
+              "max_score": 0,
+              "min_acceptable_score": 0,
+              "fixed_score": {
+                "Yes": 0,
+                "Not Applicable": 0
+              },
+              "range_score": {
+                "10-20": {
+                  "min": 0,
+                  "max": 0,
+                  "assignedValue": 0
+                }
+              },
+              "options": [
+                {
+                  "name": "Yes"
+                },
+                {
+                  "name": "Not Applicable"
+                }
+              ]
+            },
+            {
+              "qualifier": "Mandatory_Requirement_006",
+              "description": "Content does not contain any copyright violation.",
+              "weightage": 0,
+              "max_score": 0,
+              "min_acceptable_score": 0,
+              "fixed_score": {
+                "Yes": 0,
+                "Not Applicable": 0
+              },
+              "range_score": {
+                "10-20": {
+                  "min": 0,
+                  "max": 0,
+                  "assignedValue": 0
+                }
+              },
+              "options": [
+                {
+                  "name": "Yes"
+                },
+                {
+                  "name": "Not Applicable"
+                }
+              ]
+            },
+            {
+              "qualifier": "Mandatory_Requirement_007",
+              "description": "Content is devoid of plagiarism and a plagiarism certificate is attached with this documentatio.",
+              "weightage": 0,
+              "max_score": 0,
+              "min_acceptable_score": 0,
+              "fixed_score": {
+                "Yes": 0,
+                "Not Applicable": 0
+              },
+              "range_score": {
+                "10-20": {
+                  "min": 0,
+                  "max": 0,
+                  "assignedValue": 0
+                }
+              },
+              "options": [
+                {
+                  "name": "Yes"
+                },
+                {
+                  "name": "Not Applicable"
+                }
+              ]
+            },
+            {
+              "qualifier": "Mandatory_Requirement_008",
+              "description": "All sources – online or printed materials – have been duly credited. A list of references is maintained at the end of each module.",
+              "weightage": 0,
+              "max_score": 0,
+              "min_acceptable_score": 0,
+              "fixed_score": {
+                "Yes": 0,
+                "Not Applicable": 0
+              },
+              "range_score": {
+                "10-20": {
+                  "min": 0,
+                  "max": 0,
+                  "assignedValue": 0
+                }
+              },
+              "options": [
+                {
+                  "name": "Yes"
+                },
+                {
+                  "name": "Not Applicable"
+                }
+              ]
+            },
+            {
+              "qualifier": "Mandatory_Requirement_009",
+              "description": "The course is tagged to one or more competencies that it addresses.",
+              "weightage": 0,
+              "max_score": 0,
+              "min_acceptable_score": 0,
+              "fixed_score": {
+                "Yes": 0,
+                "Not Applicable": 0
+              },
+              "range_score": {
+                "10-20": {
+                  "min": 0,
+                  "max": 0,
+                  "assignedValue": 0
+                }
+              },
+              "options": [
+                {
+                  "name": "Yes"
+                },
+                {
+                  "name": "Not Applicable"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "criteria": "Sustainable Development",
+          "description": "Sustainable Development Description",
+          "weightage": 0,
+          "max_score": 0,
+          "min_acceptable_score": 0,
+          "qualifiers": [
+            {
+              "qualifier": "Sustainable_Development_001",
+              "description": "The course/content conserve the integrity of ecosystems and biodiversity , promote sustainable management and use of natural resources.",
+              "weightage": 0,
+              "max_score": 0,
+              "min_acceptable_score": 0,
+              "fixed_score": {
+                "Yes": 0,
+                "Not Applicable": 0
+              },
+              "range_score": {
+                "10-20": {
+                  "min": 0,
+                  "max": 0,
+                  "assignedValue": 0
+                }
+              },
+              "options": [
+                {
+                  "name": "Yes"
+                },
+                {
+                  "name": "Not Applicable"
+                }
+              ]
+            },
+            {
+              "qualifier": "Sustainable_Development_002",
+              "description": "The course/content addresses risk of climate change impact and disasters, integrates climate change adaptation considerations and does not exacerbate vulnerability of communities to climate change impacts or disaster risks.",
+              "weightage": 0,
+              "max_score": 0,
+              "min_acceptable_score": 0,
+              "fixed_score": {
+                "Yes": 0,
+                "Not Applicable": 0
+              },
+              "range_score": {
+                "10-20": {
+                  "min": 0,
+                  "max": 0,
+                  "assignedValue": 0
+                }
+              },
+              "options": [
+                {
+                  "name": "Yes"
+                },
+                {
+                  "name": "Not Applicable"
+                }
+              ]
+            },
+            {
+              "qualifier": "Sustainable_Development_003",
+              "description": "The course/content does not promote practices related to increased pollution, unsound chemicals & waste management, especially with respect to plastic waste, hazardous wastes, organic & ozone depleting pollutants.",
+              "weightage": 0,
+              "max_score": 0,
+              "min_acceptable_score": 0,
+              "fixed_score": {
+                "Yes": 0,
+                "Not Applicable": 0
+              },
+              "range_score": {
+                "10-20": {
+                  "min": 0,
+                  "max": 0,
+                  "assignedValue": 0
+                }
+              },
+              "options": [
+                {
+                  "name": "Yes"
+                },
+                {
+                  "name": "Not Applicable"
+                }
+              ]
+            },
+            {
+              "qualifier": "Sustainable_Development_004",
+              "description": "The course promotes sustainable and efficient use of resources (energy, land and water).",
+              "weightage": 0,
+              "max_score": 0,
+              "min_acceptable_score": 0,
+              "fixed_score": {
+                "Yes": 0,
+                "Not Applicable": 0
+              },
+              "range_score": {
+                "10-20": {
+                  "min": 0,
+                  "max": 0,
+                  "assignedValue": 0
+                }
+              },
+              "options": [
+                {
+                  "name": "Yes"
+                },
+                {
+                  "name": "Not Applicable"
+                }
+              ]
+            },
+            {
+              "qualifier": "Sustainable_Development_005",
+              "description": "The course advocates responsible and sustainable lifestyles, including Green Economy and Green Jobs.",
+              "weightage": 0,
+              "max_score": 0,
+              "min_acceptable_score": 0,
+              "fixed_score": {
+                "Yes": 0,
+                "Not Applicable": 0
+              },
+              "range_score": {
+                "10-20": {
+                  "min": 0,
+                  "max": 0,
+                  "assignedValue": 0
+                }
+              },
+              "options": [
+                {
+                  "name": "Yes"
+                },
+                {
+                  "name": "Not Applicable"
+                }
+              ]
+            },
+            {
+              "qualifier": "Sustainable_Development_006",
+              "description": "The course does not portray harming living beings (humans, animals or plants) with the intent to benefit from such practices.",
+              "weightage": 0,
+              "max_score": 0,
+              "min_acceptable_score": 0,
+              "fixed_score": {
+                "Yes": 0,
+                "Not Applicable": 0
+              },
+              "range_score": {
+                "10-20": {
+                  "min": 0,
+                  "max": 0,
+                  "assignedValue": 0
+                }
+              },
+              "options": [
+                {
+                  "name": "Yes"
+                },
+                {
+                  "name": "Not Applicable"
+                }
+              ]
+            },
+            {
+              "qualifier": "Sustainable_Development_007",
+              "description": "The course does not promote forced labour, armed conflicts, delocalization and migration, displacement and involuntary settlement.",
+              "weightage": 0,
+              "max_score": 0,
+              "min_acceptable_score": 0,
+              "fixed_score": {
+                "Yes": 0,
+                "Not Applicable": 0
+              },
+              "range_score": {
+                "10-20": {
+                  "min": 0,
+                  "max": 0,
+                  "assignedValue": 0
+                }
+              },
+              "options": [
+                {
+                  "name": "Yes"
+                },
+                {
+                  "name": "Not Applicable"
+                }
+              ]
+            },
+            {
+              "qualifier": "Sustainable_Development_008",
+              "description": "The course promotes friendly relations among nations, peaceful solutions, living together.",
+              "weightage": 0,
+              "max_score": 0,
+              "min_acceptable_score": 0,
+              "fixed_score": {
+                "Yes": 0,
+                "Not Applicable": 0
+              },
+              "range_score": {
+                "10-20": {
+                  "min": 0,
+                  "max": 0,
+                  "assignedValue": 0
+                }
+              },
+              "options": [
+                {
+                  "name": "Yes"
+                },
+                {
+                  "name": "Not Applicable"
+                }
+              ]
+            },
+            {
+              "qualifier": "Sustainable_Development_009",
+              "description": "The course does not promote/advance forms of violence including bullying, verbal abuse, gender-based violence and extremism.",
+              "weightage": 0,
+              "max_score": 0,
+              "min_acceptable_score": 0,
+              "fixed_score": {
+                "Yes": 0,
+                "Not Applicable": 0
+              },
+              "range_score": {
+                "10-20": {
+                  "min": 0,
+                  "max": 0,
+                  "assignedValue": 0
+                }
+              },
+              "options": [
+                {
+                  "name": "Yes"
+                },
+                {
+                  "name": "Not Applicable"
+                }
+              ]
+            },
+            {
+              "qualifier": "Sustainable_Development_010",
+              "description": "The course promotes/advances equality, inclusion and non-discrimination, for example by gender, caste, race, class, disability.",
+              "weightage": 0,
+              "max_score": 0,
+              "min_acceptable_score": 0,
+              "fixed_score": {
+                "Yes": 0,
+                "Not Applicable": 0
+              },
+              "range_score": {
+                "10-20": {
+                  "min": 0,
+                  "max": 0,
+                  "assignedValue": 0
+                }
+              },
+              "options": [
+                {
+                  "name": "Yes"
+                },
+                {
+                  "name": "Not Applicable"
+                }
+              ]
+            },
+            {
+              "qualifier": "Sustainable_Development_011",
+              "description": "The course does not include working children under the legal age of 18 years.",
+              "weightage": 0,
+              "max_score": 0,
+              "min_acceptable_score": 0,
+              "fixed_score": {
+                "Yes": 0,
+                "Not Applicable": 0
+              },
+              "range_score": {
+                "10-20": {
+                  "min": 0,
+                  "max": 0,
+                  "assignedValue": 0
+                }
+              },
+              "options": [
+                {
+                  "name": "Yes"
+                },
+                {
+                  "name": "Not Applicable"
+                }
+              ]
+            },
+            {
+              "qualifier": "Sustainable_Development_012",
+              "description": "The course does not breach any provisions with respect to national employment, labour laws and international commitments.",
+              "weightage": 0,
+              "max_score": 0,
+              "min_acceptable_score": 0,
+              "fixed_score": {
+                "Yes": 0,
+                "Not Applicable": 0
+              },
+              "range_score": {
+                "10-20": {
+                  "min": 0,
+                  "max": 0,
+                  "assignedValue": 0
+                }
+              },
+              "options": [
+                {
+                  "name": "Yes"
+                },
+                {
+                  "name": "Not Applicable"
+                }
+              ]
+            },
+            {
+              "qualifier": "Sustainable_Development_013",
+              "description": "The course promotes occupation health and safety standards with special focus on women workers, young workers, migrant workers and workers with disabilities.",
+              "weightage": 0,
+              "max_score": 0,
+              "min_acceptable_score": 0,
+              "fixed_score": {
+                "Yes": 0,
+                "Not Applicable": 0
+              },
+              "range_score": {
+                "10-20": {
+                  "min": 0,
+                  "max": 0,
+                  "assignedValue": 0
+                }
+              },
+              "options": [
+                {
+                  "name": "Yes"
+                },
+                {
+                  "name": "Not Applicable"
+                }
+              ]
+            },
+            {
+              "qualifier": "Sustainable_Development_014",
+              "description": "The course advocates sustainable cities, communities and health of the planet for future generations.",
+              "weightage": 0,
+              "max_score": 0,
+              "min_acceptable_score": 0,
+              "fixed_score": {
+                "Yes": 0,
+                "Not Applicable": 0
+              },
+              "range_score": {
+                "10-20": {
+                  "min": 0,
+                  "max": 0,
+                  "assignedValue": 0
+                }
+              },
+              "options": [
+                {
+                  "name": "Yes"
+                },
+                {
+                  "name": "Not Applicable"
+                }
+              ]
+            },
+            {
+              "qualifier": "Sustainable_Development_015",
+              "description": "The course does not adversely affect International or intercultural understanding, solidarity and cooperation.",
+              "weightage": 0,
+              "max_score": 0,
+              "min_acceptable_score": 0,
+              "fixed_score": {
+                "Yes": 0,
+                "Not Applicable": 0
+              },
+              "range_score": {
+                "10-20": {
+                  "min": 0,
+                  "max": 0,
+                  "assignedValue": 0
+                }
+              },
+              "options": [
+                {
+                  "name": "Yes"
+                },
+                {
+                  "name": "Not Applicable"
+                }
+              ]
+            },
+            {
+              "qualifier": "Sustainable_Development_016",
+              "description": "The course recognizes, respects, protects and preserve indigenous people's culture, knowledge and practices.",
+              "weightage": 0,
+              "max_score": 0,
+              "min_acceptable_score": 0,
+              "fixed_score": {
+                "Yes": 0,
+                "Not Applicable": 0
+              },
+              "range_score": {
+                "10-20": {
+                  "min": 0,
+                  "max": 0,
+                  "assignedValue": 0
+                }
+              },
+              "options": [
+                {
+                  "name": "Yes"
+                },
+                {
+                  "name": "Not Applicable"
+                }
+              ]
+            }
+          ]
+        },
+        {
           "criteria": "Instructional Methods",
-          "description" : "Instructional methods determine how effectively the stated competencies and skills are acquired",
+          "description": "Instructional methods determine how effectively the stated competencies and skills are acquired",
           "weightage": 0.25,
           "max_score": 65,
-          "min_acceptable_score": 33.75,
+          "min_acceptable_score": 0,
+          "min_score_weightage_enable": true,
+          "min_score_weightage": 0.5,
           "qualifiers": [
             {
               "qualifier": "Instructional_Methods_001",
@@ -676,10 +1346,12 @@
         },
         {
           "criteria": "Assessment Design",
-          "description" : "Assessment Design Description",
+          "description": "Assessment Design Description",
           "weightage": 0.2,
           "max_score": 45,
-          "min_acceptable_score": 22.5,
+          "min_acceptable_score": 0,
+          "min_score_weightage_enable": true,
+          "min_score_weightage": 0.5,
           "qualifiers": [
             {
               "qualifier": "Assessment_Design_001",
@@ -1081,10 +1753,12 @@
         },
         {
           "criteria": "Competency and Skills",
-          "description" : "Competency and Skills Description",
+          "description": "Competency and Skills Description",
           "weightage": 0.2,
           "max_score": 15,
-          "min_acceptable_score": 7.5,
+          "min_acceptable_score": 0,
+          "min_score_weightage_enable": true,
+          "min_score_weightage": 0.5,
           "qualifiers": [
             {
               "qualifier": "Competency-And_Skills_001",
@@ -1222,10 +1896,12 @@
         },
         {
           "criteria": "Learner Engagement",
-          "description" : "Learner Engagement Description",
+          "description": "Learner Engagement Description",
           "weightage": 0.15,
           "max_score": 30,
-          "min_acceptable_score": 15,
+          "min_acceptable_score": 0,
+          "min_score_weightage_enable": true,
+          "min_score_weightage": 0.5,
           "qualifiers": [
             {
               "qualifier": "Learner_Engagement_001",
@@ -1495,10 +2171,12 @@
         },
         {
           "criteria": "Diversity & Inclusion",
-          "description" : "Diversity & Inclusion Description",
+          "description": "Diversity & Inclusion Description",
           "weightage": 0.15,
           "max_score": 100,
-          "min_acceptable_score": 50,
+          "min_acceptable_score": 0,
+          "min_score_weightage_enable": true,
+          "min_score_weightage": 0.6,
           "qualifiers": [
             {
               "qualifier": "Diversity_Inclusion_001",
@@ -2384,10 +3062,12 @@
         },
         {
           "criteria": "Learner Support",
-          "description" : "Learner Support Description",
+          "description": "Learner Support Description",
           "weightage": 0.05,
           "max_score": 25,
-          "min_acceptable_score": 12.5,
+          "min_acceptable_score": 0,
+          "min_score_weightage_enable": true,
+          "min_score_weightage": 0.5,
           "qualifiers": [
             {
               "qualifier": "Learner_Support_001",
@@ -2615,5 +3295,3 @@
     }
   ]
 }
-
-

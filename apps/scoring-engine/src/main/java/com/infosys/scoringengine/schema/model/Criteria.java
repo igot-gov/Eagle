@@ -20,6 +20,10 @@ public class Criteria {
     private String description;
     private List<Qualifier> qualifiers = new ArrayList<>();
 
+    private Boolean min_score_weightage_enable;
+
+    private Double min_score_weightage;
+
     public String getCriteria() {
         return criteria;
     }
@@ -66,5 +70,21 @@ public class Criteria {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Boolean getMin_score_weightage_enable() {
+        return min_score_weightage_enable;
+    }
+
+    public void setMin_score_weightage_enable(Boolean min_score_weightage_enable) {
+        this.min_score_weightage_enable = min_score_weightage_enable;
+    }
+
+    public Double getMin_score_weightage() {
+        return min_score_weightage;
+    }
+
+    public void setMin_score_weightage(Double min_score_weightage) {
+        this.min_score_weightage = min_score_weightage;
     }
 }

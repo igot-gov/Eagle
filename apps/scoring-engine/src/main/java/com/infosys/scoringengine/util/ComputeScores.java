@@ -89,11 +89,11 @@ public class ComputeScores {
             int maxScoreExcludedValue = 0;
             for (QualifierModel qm : cm.getQualifiers()) {
                 if (qm.getEvaluated() != null) {
-
                     int score = qualifierFixedScores.get(qm.getName()).get(qm.getEvaluated());
                     qm.setScoreValue(score);
                     qm.setScoringType("fixed");
-                } else {
+                }
+                else {
                     Range range = qualifierRangeScores.get(qm.getName()).get(qm.getScoreRange());
                     qm.setScoreValue(range.getAssignedValue());
                     qm.setScoringType("ranged");
@@ -107,12 +107,16 @@ public class ComputeScores {
                 qm.setDescription(qualifierMap.get(qm.getName()).getDescription());
             }
             cm.setMaxScore(cm.getMaxScore() - maxScoreExcludedValue);
+            if (Boolean.TRUE == criteria.getMin_score_weightage_enable()) {
+                cm.setMinScore(cm.getMaxScore() * criteria.getMin_score_weightage());
+            }
             List<Double> scoreVals = cm.getQualifiers().stream().map(q -> q.getScoreValue()).collect(Collectors.toList());
             cm.setTotalScore(MathFunction.sum(scoreVals));
             cm.setWeightedAvg(MathFunction.weightedAvg(scoreVals, weightage));
             cm.setMaxWeightedAvg(MathFunction.maxWeightedAvg(cm.getMaxScore(), weightage));
             cm.setMinWeightedAvg(MathFunction.minWeightedAvg(minScore, weightage));
             cm.setWeightedScore(MathFunction.weightedScore(cm.getTotalScore(), cm.getMaxScore(), weightage));
+
 
         }
 
