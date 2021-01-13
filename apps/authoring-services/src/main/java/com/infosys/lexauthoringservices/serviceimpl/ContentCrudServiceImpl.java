@@ -3194,7 +3194,7 @@ public class ContentCrudServiceImpl implements ContentCrudService {
 			ObjectMapper mapper = new ObjectMapper();
 			try {
 				System.out.println(mapper.writeValueAsString(parent));
-			} catch (JsonProcessingException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			
