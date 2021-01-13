@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute, NavigationEnd, Router, Event, NavigationError } from '@angular/router'
 import { NsWidgetResolver } from 'library/ws-widget/resolver/src/public-api'
+import { EventsService } from '../../services/events.service'
 
 @Component({
   selector: 'ws-app-events-home',
@@ -12,7 +13,11 @@ export class EventsHomeComponent implements OnInit, OnDestroy {
   banner!: NsWidgetResolver.IWidgetData<any>
   currentRoute = 'home'
   private bannerSubscription: any
-  constructor(private route: ActivatedRoute, private router: Router) {
+  constructor(
+    private route: ActivatedRoute, 
+    private router: Router,
+    private eventSrvc: EventsService
+    ) {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
         // Hide loading indicator
@@ -36,7 +41,39 @@ export class EventsHomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    let reqObj = {
+        "locale": [
+          "en"
+        ],
+        "pageSize": 12,
+        "query": "all",
+        "didYouMean": true,
+        "filters": [
+            {
+                "andFilters": [
+                    {
+                        "lastUpdatedOn": [
+                            "month"
+                        ]
+                    },
+                    {
+                        "contentType": [
+                            "Event",
+                         ]
+                    }
+                ]
+            }
+        ],
+        "includeSourceFields": [
+            "creatorLogo"
+        ]
+    }
+
+    this.eventSrvc.getEvents(reqObj).subscribe((res: any) => {
+      console.log(res);
+    })
   }
+
   bindUrl(path: string) {
     if (path) {
       this.currentRoute = path
