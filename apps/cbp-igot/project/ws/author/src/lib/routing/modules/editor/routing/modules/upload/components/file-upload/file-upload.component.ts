@@ -33,6 +33,7 @@ import { IFormMeta } from './../../../../../../../../interface/form'
 import { AuthInitService } from './../../../../../../../../services/init.service'
 import { ProfanityPopUpComponent } from '../profanity-popup/profanity-popup'
 import { ProfanityService } from '../../services/profanity.service'
+import { environment } from '../../../../../../../../../../../../../src/environments/environment'
 // import { ProfanityService } from '../../services/profanity.service'
 
 @Component({
@@ -164,9 +165,9 @@ export class FileUploadComponent implements OnInit {
       }
     })
     // this is commented as new UI is not comptable
-    // this.fileUploadForm.controls.artifactUrl.valueChanges.subscribe(() => {
-    //   this.iprAccepted = false
-    // })
+    this.fileUploadForm.controls.artifactUrl.valueChanges.subscribe(() => {
+      this.iprAccepted = false
+    })
   }
 
   onDrop(file: File) {
@@ -319,7 +320,8 @@ export class FileUploadComponent implements OnInit {
           let url = ''
           if (this.mimeType === 'application/html') {
             // tslint:disable-next-line:max-line-length
-            url = `${document.location.origin}/content-store/${this.accessService.rootOrg}/${this.accessService.org}/Public/${this.currentContent}/web-hosted/${this.fileUploadCondition.url}`
+            url = `${environment.karmYogi}content-store/${this.accessService.rootOrg}/${this.accessService.org}/Public/${this.currentContent}/web-hosted/${this.fileUploadCondition.url}`
+            // document.location.origin
           } else {
             url = (v.authArtifactURL || v.artifactURL).replace(/%2F/g, '/')
           }
@@ -359,7 +361,7 @@ export class FileUploadComponent implements OnInit {
             duration: NOTIFICATION_TIME * 1000,
           })
           // if (this.mimeType !== 'application/pdf') {
-          this.data.emit('save')
+          this.data.emit('saveAndNext')
           // }
         },
         () => {

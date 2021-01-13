@@ -229,7 +229,7 @@ export class ContentQualityComponent implements OnInit, OnDestroy, AfterViewInit
     this._qualityService.getFile({ ...data }, `Content-Quality-Report`, true)
   }
   start() {
-    if (this.contentService.getUpdatedMeta(this.currentContent).children.length > 0) {
+    if (Object.keys(this.contentService.originalContent).length > 1) {
       if (this.questionData && this.questionData[1] && this.questionData[1].type) {
         this.selectedIndex = 1
         this.selectedKey = this.questionData[1].type

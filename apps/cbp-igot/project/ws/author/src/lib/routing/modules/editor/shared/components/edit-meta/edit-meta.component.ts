@@ -785,19 +785,19 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
           }
         })
         // Quick FIX
-        if (this.stage >= 1 && !this.type) {
-          delete meta.artifactUrl
-          //   delete meta.size
-          //   if (meta.creatorDetails && meta.creatorDetails.length === 0)
-          //     delete meta.creatorDetails
-          //   if (meta.trackContacts && meta.trackContacts.length === 0)
-          //     delete meta.trackContacts
-          //   if (meta.creatorContacts && meta.creatorContacts.length === 0)
-          //     delete meta.creatorContacts
-          //   if (meta.publisherDetails && meta.publisherDetails.length === 0)
-          //     delete meta.publisherDetails
-          // delete meta.duration
-        }
+        // if (this.stage >= 1 && !this.type) {
+        // delete meta.artifactUrl
+        //   delete meta.size
+        //   if (meta.creatorDetails && meta.creatorDetails.length === 0)
+        //     delete meta.creatorDetails
+        //   if (meta.trackContacts && meta.trackContacts.length === 0)
+        //     delete meta.trackContacts
+        //   if (meta.creatorContacts && meta.creatorContacts.length === 0)
+        //     delete meta.creatorContacts
+        //   if (meta.publisherDetails && meta.publisherDetails.length === 0)
+        //     delete meta.publisherDetails
+        // delete meta.duration
+        // }
         // if (this.stage >= 2) {
         //   delete meta.name
         //   delete meta.body

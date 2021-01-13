@@ -14,7 +14,13 @@
   margin-top: 2rem !important;
 }
 
+.m-auto {
+  margin: auto;
+}
 
+.searchinput {
+  padding: $size-xs;
+}
 
 .text-white {
   color: white !important;
@@ -179,6 +185,7 @@
 
   .mat-form-field-infix {
     border-top-width: 2px !important;
+    margin: auto;
   }
 }
 

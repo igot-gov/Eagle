@@ -15,6 +15,9 @@ import { CollectionStoreService } from '../../services/store.service'
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout'
 import { map } from 'rxjs/operators'
 import { PickNameComponent } from './pick-name/pick-name.component'
+/* tslint:disable */
+import _ from 'lodash'
+/* tslint:enable */
 @Component({
   selector: 'ws-auth-table-of-contents',
   templateUrl: './auth-table-of-contents.component.html',
@@ -142,14 +145,42 @@ export class AuthTableOfContentsComponent implements OnInit, OnDestroy {
 
   onNodeSelect(node: IContentTreeNode) {
     if (node.id !== this.selectedNode) {
-      this.selectedNode = node.id
-      this.editorStore.currentContent = node.identifier
-      this.store.currentSelectedNode = node.id
-      this.editorStore.changeActiveCont.next(node.identifier)
-      this.action.emit({ type: 'editContent', identifier: node.identifier })
-      this.store.selectedNodeChange.next(node.id)
-      // this.store.selectedNode
-      this.preserveExpandedNodes()
+      _.forOwn(this.editorStore.upDatedContent, (v, k) => {
+        if (k === this.editorStore.currentContent) {
+          // can do anything
+          // const updatedData = this.editorStore.getUpdatedMeta(k)
+          if (v.body === '') {
+            // _.set(v, 'body', undefined)
+            delete v.body
+          }
+          if (v.description === '') {
+            // _.set(v, 'description', undefined)
+            delete v.description
+          }
+        } else if (Object.keys(v).length) {
+          _.set(this.editorStore, `upDatedContent[${k}]`, {})
+        }
+      })
+      const updatedContent = this.editorStore.upDatedContent || {}
+      let needToSave = false
+      _.forOwn(updatedContent, i => {
+        if (Object.keys(i).length > 0) {
+          needToSave = true
+        }
+      })
+
+      if (needToSave) {
+        this.snackBar.open('Please save your changes first!!')
+      } else {
+        this.selectedNode = node.id
+        this.editorStore.currentContent = node.identifier
+        this.store.currentSelectedNode = node.id
+        this.editorStore.changeActiveCont.next(node.identifier)
+        this.action.emit({ type: 'editContent', identifier: node.identifier })
+        this.store.selectedNodeChange.next(node.id)
+        // this.store.selectedNode
+        this.preserveExpandedNodes()
+      }
     }
   }
 
