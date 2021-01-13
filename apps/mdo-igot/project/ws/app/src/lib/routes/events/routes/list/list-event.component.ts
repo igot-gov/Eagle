@@ -20,7 +20,7 @@ export class ListEventComponent implements OnInit, AfterViewInit, OnDestroy {
         { displayName: 'Date and time', key: 'event_date' },
         { displayName: 'Updated at', key: 'updated_at' },
         { displayName: 'Duration', key: 'duration' },
-        { displayName: 'Joined', key: 'joined' }
+        { displayName: 'Joined', key: 'joined' },
       ],
       needCheckBox: false,
       needHash: false,
@@ -48,4 +48,3 @@ export class ListEventComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy() { }
 }
-

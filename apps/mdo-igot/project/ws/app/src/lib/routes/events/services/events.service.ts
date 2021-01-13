@@ -18,7 +18,7 @@ const API_END_POINTS = {
   PUBLISH_EVENT: '/apis/authApi/action/content/status/change',
   SEARCH_EVENT: '/apis/protected/v8/content/searchV6',
   GET_PARTICIPANTS: '/apis/protected/v8/portal/mdo/mydepartment?allUsers=true',
-  IMAGE_UPLOAD: '/apis/authContent/upload/igot/dopt/Public/lex_auth_01319267541061632039/artifacts'
+  IMAGE_UPLOAD: '/apis/authContent/upload/igot/dopt/Public/lex_auth_01319267541061632039/artifacts',
 }
 
 @Injectable({
@@ -26,7 +26,7 @@ const API_END_POINTS = {
 })
 export class EventsService {
   constructor(private http: HttpClient) { }
-  
+
   createEvent(req: any): Observable<any> {
     return this.http.post<any>(API_END_POINTS.CREATE_EVENT, req)
   }
@@ -39,7 +39,7 @@ export class EventsService {
     return this.http.post<any>(`${API_END_POINTS.PUBLISH_EVENT}/${eventId}`, req)
   }
 
-  onSearchEvent(req:any): Observable<any> {
+  onSearchEvent(req: any): Observable<any> {
     return this.http.post<any>(`${API_END_POINTS.SEARCH_EVENT}`, req)
   }
 

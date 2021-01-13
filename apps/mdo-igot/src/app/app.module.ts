@@ -24,7 +24,7 @@ import {
   MatDatepickerModule,
   MatCheckboxModule,
   MatNativeDateModule,
-  MatSortModule
+  MatSortModule,
 
 } from '@angular/material'
 import { BrowserModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser'
@@ -182,7 +182,7 @@ const getBaseHref = (platformLocation: PlatformLocation): string => {
     { provide: OverlayContainer, useClass: FullscreenOverlayContainer },
     { provide: HAMMER_GESTURE_CONFIG, useClass: HammerConfig },
     { provide: ErrorHandler, useClass: GlobalErrorHandlingService },
-    MatDatepickerModule, MatNativeDateModule
+    MatDatepickerModule, MatNativeDateModule,
   ],
 })
 export class AppModule { }

@@ -8,7 +8,7 @@ import { MatPaginator } from '@angular/material'
 import { MatSort } from '@angular/material/sort'
 import * as _ from 'lodash'
 
-//import { ITableData, IColums } from '../interface/interfaces'
+// import { ITableData, IColums } from '../interface/interfaces'
 
 @Component({
   selector: 'ws-event-list-view',
@@ -16,7 +16,7 @@ import * as _ from 'lodash'
   styleUrls: ['./event-list-view.component.scss'],
 })
 export class EventListViewComponent implements OnInit, AfterViewInit, OnChanges {
-  //@Input() tableData!: ITableData | undefined
+  // @Input() tableData!: ITableData | undefined
   @Input() data?: []
   @Input() isUpload?: boolean
   @Input() isCreate?: boolean
@@ -31,7 +31,7 @@ export class EventListViewComponent implements OnInit, AfterViewInit, OnChanges 
   @Output() eOnCreateClick = new EventEmitter<any>()
 
   bodyHeight = document.body.clientHeight - 125
-  displayedColumns: any = [];
+  displayedColumns: any = []
   dataSource!: any
   widgetData: any
   length!: number
