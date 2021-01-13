@@ -161,6 +161,7 @@ export class UrlUploadComponent implements OnInit {
         }
       }
     })
+    debugger
     this.contentService.setUpdatedMeta(meta, this.currentContent)
   }
 
