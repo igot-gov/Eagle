@@ -927,7 +927,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
             action: 'INITIATE',
             userId: this.userProfileData.userId,
             applicationId: this.userProfileData.userId,
-            actorUserId: this.userProfileData.userId,
+            actorUserId: '',
             serviceName: 'profile',
             comment: '',
             wfId: '',
