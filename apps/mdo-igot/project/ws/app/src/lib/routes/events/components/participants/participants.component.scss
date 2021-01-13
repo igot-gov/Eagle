@@ -1,0 +1,24 @@
+@import 'ws-common';
+@import 'ws-vars';
+
+table {
+  width: 100%;
+}
+
+.button-row {
+  display: table-cell;
+  justify-content: flex-end;
+}
+
+.button-row .mat-button-base {
+  margin: 8px 16px 8px 0;
+}
+
+.mat-cell {
+	font-size: 14px;
+}
+
+th.mat-header-cell {
+	font-size:16px;
+	font-weight: bold;
+}

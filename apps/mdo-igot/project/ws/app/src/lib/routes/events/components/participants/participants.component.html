@@ -1,0 +1,67 @@
+<div class="dialog-container m-2">
+  <div mat-dialog-content>
+    <p i18n class="mat-title margin-xs margin-remove-bottom">
+      Add presenter (Karmayogi users)
+    </p>
+  </div>
+  <div class="dialog-btn-items">
+    <table mat-table [dataSource] = "participants">
+
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox (change)="$event ? masterToggle() : null"
+                        [checked]="selection.hasValue() && isAllSelected()"
+                        [indeterminate]="selection.hasValue() && !isAllSelected()">
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()"
+                        (change)="$event ? selection.toggle(row) : null"
+                        [checked]="selection.isSelected(row)">
+          </mat-checkbox>
+        </td>
+      </ng-container>
+
+      <!-- Company Column -->
+       <!-- <ng-container matColumnDef="fullname">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Full name </mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.fullname}} </mat-cell>
+       </ng-container>
+
+       Company Column
+       <ng-container matColumnDef="email">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.email}} </mat-cell>
+       </ng-container> -->
+
+       <ng-container matColumnDef="fullname">
+          <th mat-header-cell *matHeaderCellDef> Full name </th>
+          <td mat-cell *matCellDef="let element"> {{element.fullname}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef> Email </th>
+          <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+        </ng-container>
+
+        <!-- Contact Column -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+          (click)="selection.toggle(row)">
+        </tr>
+   </table> 
+  </div>
+  <!-- <div class="skip-btn mt-10">
+    <button color="primary" mat-stroked-button (click)="dialogRef.close()" i18n>Cancel</button>
+    <button color="primary" mat-stroked-button (click)="addUsers()" i18n>Add</button>
+  </div> -->
+    <div class="flex flex-1 custom button-row" align="end">
+        <button mat-stroked-button color="accent" type="button" class="mat-accent-border flex-auto-display" (click)="dialogRef.close()">
+            <span i18n>Cancel</span>
+        </button>
+        <button mat-stroked-button color="accent" type="button" class="ml-10 mat-accent-border flex-auto-display" (click)="confirm()">
+            <span i18n>Add</span>
+        </button>
+    </div>
+</div>
