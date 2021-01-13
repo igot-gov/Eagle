@@ -33,7 +33,7 @@ export class AddThumbnailComponent implements OnInit, OnDestroy {
   public pagination!: IAuthoringPagination
   isAdmin = false
   newDesign = true
-  public imageList!: any[]
+  public imageList!: []
   public fetchError = false
   showLoadMore!: boolean
   totalContent!: number
@@ -47,13 +47,14 @@ export class AddThumbnailComponent implements OnInit, OnDestroy {
 
   canUpdate = true
   @Input() isUpdate = false
+  showMainContent: Boolean = true;
 
   constructor(private loadService: LoaderService,
-              public dialogRef: MatDialogRef<AddThumbnailComponent>,
-              private myContSvc: MyContentService,
-              private accessService: AccessControlService,
-              private formBuilder: FormBuilder,
-              @Inject(MAT_DIALOG_DATA) public data: any
+    public dialogRef: MatDialogRef<AddThumbnailComponent>,
+    private myContSvc: MyContentService,
+    private accessService: AccessControlService,
+    private formBuilder: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.userId = this.accessService.userId
     this.isChecked = false
@@ -67,12 +68,20 @@ export class AddThumbnailComponent implements OnInit, OnDestroy {
     this.startForm = this.formBuilder.group({
       thumbnail: [],
     })
+    this.filter('myimages');
     this.imageList = []
+
   }
 
   ngOnDestroy() {
 
     this.loadService.changeLoad.next(false)
+  }
+
+
+
+  ShowHideButton() {
+    this.showMainContent = this.showMainContent ? false : true;
   }
 
   onValChange(val: NsContent.IContent | null = null) {
@@ -93,7 +102,7 @@ export class AddThumbnailComponent implements OnInit, OnDestroy {
           break
 
         default:
-          this.imageList = []
+          this.fetchContent(false, this.userId)
           break
       }
     }
@@ -151,8 +160,7 @@ export class AddThumbnailComponent implements OnInit, OnDestroy {
   }
 
   public uploadThumbnail() {
-    // this.addAppIcon.emit(this.toggle ? this.toggle.downloadUrl : '');
-    this.dialogRef.close({ appURL: this.toggle ? this.toggle.downloadUrl : '' })
+    this.dialogRef.close({ appURL: this.toggle ? this.toggle.artifactUrl : '' })
   }
 
 }

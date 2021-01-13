@@ -18,7 +18,12 @@
   position: absolute;
   right: 5px;
   top: 5px;
-  color: #4177F6 !important;
+  color: #4177f6 !important;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
 }
 
 .card {
@@ -37,13 +42,12 @@
   // align-content: space-evenly;
 }
 
-.imageCard{
+.imageCard {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 10px;
   // height: 100px;
-
 }
 
 .home-card-content {
@@ -124,4 +128,33 @@
   box-shadow: none !important;
   border-radius: unset;
   background: inherit !important;
+}
+
+.myform-wrapper {
+  margin: 50px;
+  width: 350px;
+
+  .mat-form-field {
+      width: 100%;
+  }
+
+  .mat-toolbar-single-row {
+      height: auto !important;
+      background: transparent;
+
+      button {
+          width: 30%;
+      }
+  }
+}
+
+#fileUpload {
+  position: absolute;
+  z-index: 9;
+  opacity: 0;
+  height: 100%;
+  width: 100%;
+  left: 0px;
+  top: 0px;
+  cursor: pointer;
 }
