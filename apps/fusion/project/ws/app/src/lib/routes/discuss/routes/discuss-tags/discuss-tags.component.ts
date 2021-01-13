@@ -40,9 +40,12 @@ export class DiscussTagsComponent implements OnInit {
   }
 
   getAllDiscussions(tag: { value: any }) {
-    // const val: never[] = []
-    // val.tagname = tag.value
     this.queryParam = tag.value
+    const tagdata = {
+      tagname: '',
+    }
+    tagdata.tagname = tag.value
+    this.queryParam = tagdata
     this.router.navigate([`/app/discuss/tags/tag-discussions`], { queryParams: this.queryParam })
   }
 }
