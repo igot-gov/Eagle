@@ -116,7 +116,7 @@ export class DirectoryViewComponent implements OnInit, AfterViewInit, OnDestroy 
   fetchConnectionDetails() {
   }
   onRoleClick(role: any) {
-    this.router.navigate([`/app/roles/${role.id}/users`])
+    this.router.navigate([`/app/roles/${role.id}/users`, { currentDept: this.currentFilter }])
   }
   filter(key: string | 'timestamp' | 'best' | 'saved') {
     this.getDepartDataByKey(key)
@@ -132,13 +132,14 @@ export class DirectoryViewComponent implements OnInit, AfterViewInit, OnDestroy 
         }
       })
       this.data = filteredData.map((dept: any) => {
+
         return {
           id: dept.id,
           mdo: dept.deptName,
           type: dept.deptTypeInfos[0].deptSubType,
           user: dept.noOfUsers,
           head: dept.headquarters,
-          typeid: dept.deptTypeInfos.id,
+          typeid: dept.deptTypeInfos[0].id,
         }
       })
 

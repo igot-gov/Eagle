@@ -649,7 +649,10 @@ $title-line-count: 2;
     outline: none !important;
   }
 }
-
+.no-information-found{
+  text-align: center;
+  padding: 10px;
+}
 .titleclass{
   text-align: center;
 }

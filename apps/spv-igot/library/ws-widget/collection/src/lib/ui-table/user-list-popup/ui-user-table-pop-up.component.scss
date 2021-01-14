@@ -41,7 +41,10 @@
   pointer-events: auto;
   cursor: pointer;
 }
-
+.no-information-found{
+  text-align: center;
+  padding: 10px;
+}
 .status-danger {
   @extend %content-status;
   background: #ce3939;

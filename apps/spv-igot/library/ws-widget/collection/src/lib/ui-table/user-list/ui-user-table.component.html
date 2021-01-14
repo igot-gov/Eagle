@@ -24,9 +24,7 @@
 
 
         <!-- </mat-form-field> -->
-        <div *ngIf="dataSource.data.length <= 0  &&  !isFromDirectory" class="titleclass">
-            <h3>No Information Available</h3>
-        </div>
+
         <mat-table #table matSort [ngStyle]="{'height': bodyHeight}" [matSortActive]="tableData!.sortColumn"
             [matSortDirection]="tableData!.sortState" [dataSource]="dataSource" *ngIf="dataSource.data.length > 0"
             class=" example-table table1 responsiveTable">
@@ -38,7 +36,7 @@
                         [matTooltip]="(element[col.key]).split('<br />').join(', ')">
                         <div innerHTML="{{element[col.key]}}"></div>
                     </span>
-                    <span *ngIf="!col.isList" class="textclass">
+                    <span *ngIf="!col.isList" class="textclass mat-body-2">
                         {{element[col.key]}} {{col.isList}}
                     </span>
                 </mat-cell>
@@ -77,6 +75,8 @@
             <mat-row *matRowDef="let row; columns: getFinalColumns();" (click)="selection.toggle(row); onRowClick(row)">
             </mat-row>
         </mat-table>
+        <div class="no-information-found" *ngIf="dataSource.filteredData.length===0">No User inforamtion found
+        </div>
     </div>
 
     <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"

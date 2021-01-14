@@ -75,39 +75,39 @@
             </mat-row> -->
             <mat-row *matRowDef="let row; columns: getFinalColumns();">
             </mat-row>
+
         </mat-table>
-        <div *ngIf="dataSource.length === 0">No records found</div>
+        <div class="no-information-found" *ngIf="dataSource.filteredData.length===0">No directories found
+        </div>
+        <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions">
+        </mat-paginator>
     </div>
 
-    <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions">
-    </mat-paginator>
-</div>
-
-<mat-menu #cardMenu="matMenu">
-    <ng-template matMenuContent>
-        <div mat-menu-item>
-            <button name="channel-analytics-button" class="ws-mat-primary-text" mat-icon-button i18n-aria-label
-                aria-label="Analytics">
-                <mat-icon>input</mat-icon> <span>Show on Karmayogi</span>
-            </button>
-        </div>
-        <div mat-menu-item>
-            <button name="channel-analytics-button" class="ws-mat-primary-text" mat-icon-button i18n-aria-label
-                aria-label="Analytics">
-                <mat-icon>block</mat-icon><span>Block user</span>
-            </button>
-        </div>
-        <div mat-menu-item>
-            <button name="channel-analytics-button" class="ws-mat-primary-text" mat-icon-button i18n-aria-label
-                aria-label="Analytics">
-                <mat-icon>edit_attributes</mat-icon><span>Deactivate User</span>
-            </button>
-        </div>
-        <div mat-menu-item>
-            <button name="channel-analytics-button" class="ws-mat-primary-text" mat-icon-button i18n-aria-label
-                aria-label="Analytics">
-                <mat-icon>delete</mat-icon><span>Delete User</span>
-            </button>
-        </div>
-    </ng-template>
-</mat-menu>
+    <mat-menu #cardMenu="matMenu">
+        <ng-template matMenuContent>
+            <div mat-menu-item>
+                <button name="channel-analytics-button" class="ws-mat-primary-text" mat-icon-button i18n-aria-label
+                    aria-label="Analytics">
+                    <mat-icon>input</mat-icon> <span>Show on Karmayogi</span>
+                </button>
+            </div>
+            <div mat-menu-item>
+                <button name="channel-analytics-button" class="ws-mat-primary-text" mat-icon-button i18n-aria-label
+                    aria-label="Analytics">
+                    <mat-icon>block</mat-icon><span>Block user</span>
+                </button>
+            </div>
+            <div mat-menu-item>
+                <button name="channel-analytics-button" class="ws-mat-primary-text" mat-icon-button i18n-aria-label
+                    aria-label="Analytics">
+                    <mat-icon>edit_attributes</mat-icon><span>Deactivate User</span>
+                </button>
+            </div>
+            <div mat-menu-item>
+                <button name="channel-analytics-button" class="ws-mat-primary-text" mat-icon-button i18n-aria-label
+                    aria-label="Analytics">
+                    <mat-icon>delete</mat-icon><span>Delete User</span>
+                </button>
+            </div>
+        </ng-template>
+    </mat-menu>

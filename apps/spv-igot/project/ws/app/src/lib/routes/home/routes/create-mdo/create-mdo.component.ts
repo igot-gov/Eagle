@@ -80,18 +80,19 @@ export class CreateMdoComponent implements OnInit {
   isFromDirectory = false
   subDepartments!: any
   isUpdate = false
+  isAddAdmin = false
   workFlow = [{ isActive: true, isCompleted: false, name: 'Basic Details', step: 0 },
   { isActive: false, isCompleted: false, name: 'Classification', step: 1 },
   { isActive: false, isCompleded: false, name: 'Intended for', step: 2 }]
   constructor(public dialog: MatDialog,
-              private uploadService: UploadService,
-              private snackBar: MatSnackBar,
-              private contentService: EditorContentService,
-              private loader: LoaderService,
-              private authInitService: AuthInitService,
-              private createMdoService: CreateMDOService,
-              private router: Router,
-              private activatedRoute: ActivatedRoute) {
+    private uploadService: UploadService,
+    private snackBar: MatSnackBar,
+    private contentService: EditorContentService,
+    private loader: LoaderService,
+    private authInitService: AuthInitService,
+    private createMdoService: CreateMDOService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute) {
     {
 
       this.contentForm = new FormGroup({
@@ -104,6 +105,13 @@ export class CreateMdoComponent implements OnInit {
         let data = params['data']
         this.department = params['department']
         this.isFromDirectory = params['isFromDirectory']
+        this.isAddAdmin = params['addAdmin']
+        if (this.isAddAdmin) {
+          this.submittedForm = false
+          this.isUpdate = true
+          this.departmentId = params['department']
+          this.departmentRole = params['currentDept'] + " " + "ADMIN"
+        }
         data = JSON.parse(data)
         if (this.data !== undefined || this.data !== null) {
           this.isUpdate = true
@@ -568,14 +576,15 @@ export class CreateMdoComponent implements OnInit {
 
       if (this.contentForm.value.name !== null && this.contentForm.value.head !== null
         && this.contentForm.value.deptSubTypeId !== null) {
-        this.createMdoService.createDepartment(this.contentForm.value).subscribe(res => {
+        var subdepartment = this.getSubDepartmennt(this.contentForm.value.deptSubTypeId)
+        this.createMdoService.createDepartment(this.contentForm.value, subdepartment).subscribe(res => {
           this.departmentId = res.id
           this.departmentRole = this.getRole(res.rolesInfo)
           if (this.departmentId !== undefined && this.departmentRole !== undefined) {
             this.submittedForm = false
             this.openSnackbar('Success')
           }
-        },                                                                       (err: { error: any }) => {
+        }, (err: { error: any }) => {
           this.openSnackbar(err.error.errors[0].message)
         })
 
@@ -583,20 +592,30 @@ export class CreateMdoComponent implements OnInit {
     } else {
       if (this.contentForm.value.name !== null && this.contentForm.value.head !== null
         && this.contentForm.value.deptSubTypeId !== null) {
-        this.createMdoService.updateDepartment(this.contentForm.value, this.updateId).subscribe(res => {
+        var subdepartment = this.getSubDepartmennt(this.contentForm.value.deptSubTypeId)
+        this.createMdoService.updateDepartment(this.contentForm.value, this.updateId, subdepartment).subscribe(res => {
           this.departmentId = res.id
           this.departmentRole = this.getRole(res.rolesInfo)
           if (this.departmentId !== undefined && this.departmentRole !== undefined) {
             this.submittedForm = false
             this.openSnackbar('Success')
           }
-        },                                                                                      (err: { error: any }) => {
+        }, (err: { error: any }) => {
           this.openSnackbar(err.error.errors[0].message)
         })
 
       }
     }
 
+  }
+  getSubDepartmennt(id: number) {
+    var obj
+    this.subDepartments.forEach((element: any) => {
+      if (element.id === id) {
+        obj = element
+      }
+    })
+    return obj
   }
   getRole(rolesInfo: any[]) {
     let adminRole = ''

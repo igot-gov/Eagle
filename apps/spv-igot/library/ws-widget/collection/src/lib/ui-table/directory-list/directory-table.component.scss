@@ -626,6 +626,10 @@ $title-line-count: 2;
   display: flex;
   flex: 1 1 auto;
 }
+.no-information-found{
+  text-align: center;
+  padding: 10px;
+}
 
 .sinput {
   width: 24%;

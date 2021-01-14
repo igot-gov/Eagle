@@ -20,9 +20,9 @@ export class CreateMDOService {
   getAllSubDepartments(deptName: string): Observable<any> {
     return this.http.get<any>(`${API_END_POINTS.GET_ALL_DEPARTMENTS}${deptName}`)
   }
-  createDepartment(deptData: any): Observable<any> {
+  createDepartment(deptData: any, subDept: any): Observable<any> {
     const deptArr = []
-    deptArr.push(deptData.deptSubTypeId)
+    deptArr.push(subDept)
     const departmentData = {
       rootOrg: DEPARTMENT_NAME,
       deptName: deptData.name,
@@ -33,9 +33,9 @@ export class CreateMDOService {
     }
     return this.http.post<any>(`${API_END_POINTS.CREATE_DEPARTMENT}`, departmentData)
   }
-  updateDepartment(deptData: any, updateId: number): Observable<any> {
+  updateDepartment(deptData: any, updateId: number, subDept: any): Observable<any> {
     const deptArr: number[] = []
-    deptArr.push(deptData.deptSubTypeId.id)
+    deptArr.push(subDept.id)
     const departmentData = {
       id: updateId,
       rootOrg: DEPARTMENT_NAME,

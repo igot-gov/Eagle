@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnInit, OnDestroy } from '@angular/core'
 import { Router, ActivatedRoute } from '@angular/router'
+import { ProfileV2Service } from '../../../home/services/home.servive'
 import { UsersService } from '../../services/users.service'
 
 @Component({
@@ -13,16 +14,24 @@ export class UsersComponent implements OnInit, AfterViewInit, OnDestroy {
   data: any = []
   role: any
   id!: string
+  currentDept!: string
   private defaultSideNavBarOpenedSubscription: any
 
-  constructor(private usersSvc: UsersService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private usersSvc: UsersService, private router: Router, private route: ActivatedRoute, private profile: ProfileV2Service) { }
   ngOnInit() {
     const url = this.router.url.split('/')
     this.role = url[url.length - 2]
-    this.fetchUsersWithRole()
+
     this.route.params.subscribe(params => {
       this.id = params['id']
-      this.getAllActiveUsersByDepartmentId(this.id)
+      this.currentDept = params['currentDept']
+      if (this.id === 'SPV ADMIN') {
+        this.getAllActiveUsers()
+      } else {
+        this.getAllActiveUsersByDepartmentId(this.id)
+        // this.fetchUsersWithRole()
+      }
+
     })
     // int left blank
     this.tabledata = {
@@ -59,6 +68,21 @@ export class UsersComponent implements OnInit, AfterViewInit, OnDestroy {
     })
 
   }
+  /* API call to get all roles*/
+  getAllActiveUsers() {
+
+    this.profile.getMyDepartment().subscribe(res => {
+
+      this.data = res.active_users.map((user: any) => {
+        return {
+          fullName: `${user.firstName} ${user.lastName}`,
+          email: user.emailId,
+          position: user.roleInfo.descritpion,
+          role: user.roleInfo.roleName,
+        }
+      })
+    })
+  }
   fetchUsersWithRole() {
     this.usersSvc.getUsers(this.role).subscribe(res => {
       this.data = res.users.map((user: any) => {
@@ -71,7 +95,9 @@ export class UsersComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     })
   }
-
+  gotoAddAdmin() {
+    this.router.navigate([`/app/roles/${this.id}/basicinfo`, { addAdmin: true, currentDept: this.currentDept }])
+  }
   ngOnDestroy() {
     if (this.defaultSideNavBarOpenedSubscription) {
       this.defaultSideNavBarOpenedSubscription.unsubscribe()

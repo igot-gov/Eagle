@@ -44,10 +44,10 @@
             <div class="margin-top-s">
               <mat-form-field appearance="outline" class="margin-top-xs"
                 [ngClass]="{ 'mat-form-field-invalid': showError('depatmentType') }">
-                <mat-select formControlName="deptSubTypeId" i18n-placeholder placeholder="--Select--" [value]="3"
+                <mat-select formControlName="deptSubTypeId" i18n-placeholder placeholder="--Select--"
                   [required]="checkCondition('subTitle', 'required') ? true : null">
-                  <mat-option *ngFor="let subDepartment of subDepartments" [value]="subDepartment" i18n>
-                    {{subDepartment.deptSubType}}</mat-option>
+                  <mat-option *ngFor="let subDepartment of subDepartments" [value]="subDepartment.id" i18n>
+                    {{subDepartment.deptSubType}} {{subDepartment.id}}</mat-option>
                 </mat-select>
                 <mat-error *ngIf="showError('deptSubTypeId')" i18n>Department type is mandatory
                 </mat-error>
@@ -87,8 +87,11 @@
 
 <ng-container class="cb-group-warpper" *ngIf="!submittedForm">
   <mat-card class="checkbox-card">
-    <h2 class="cb-title">{{department}} admin</h2>
-    <p>Admins will be able to add users and assign roles inside the {{department}}. Add Minimum one user as Admin</p>
+    <h2 *ngIf="!isAddAdmin" class="cb-title">{{department}} admin</h2>
+    <p *ngIf="!isAddAdmin" class="para-font-color">Admins will be able to add users and assign roles inside the
+      {{department}}. Add Minimum
+      one user
+      as Admin</p>
     <button mat-raised-button type="button" class="text-white ws-mat-primary-background text-white margin-right-m"
       (click)="openPopup()">
       <b class="text-white" i18n>Add User</b>

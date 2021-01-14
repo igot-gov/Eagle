@@ -16,9 +16,6 @@
         </div>
 
         <!-- </mat-form-field> -->
-        <div class="titleclass" *ngIf="this.dataSource.data.length===0">
-            <h3>No Information Available</h3>
-        </div>
         <mat-table #table matSort [ngStyle]="{'height': bodyHeight}" [matSortActive]="tableData!.sortColumn"
             [matSortDirection]="tableData!.sortState" [dataSource]="dataSource"
             class=" example-table table1 responsiveTable" *ngIf="this.dataSource.data.length>0">
@@ -60,6 +57,8 @@
             <mat-row *matRowDef="let row; columns: getFinalColumns();" (click)="selection.toggle(row); onRowClick(row)">
             </mat-row>
         </mat-table>
+        <div class="no-information-found" *ngIf="dataSource.filteredData.length===0">No User information found
+        </div>
     </div>
 
     <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
