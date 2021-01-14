@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { SelectionModel } from '@angular/cdk/collections'
 import { MatTableDataSource } from '@angular/material'
-import { debounceTime, tap, switchMap, finalize } from 'rxjs/operators'
+import { debounceTime, tap, switchMap } from 'rxjs/operators'
 import { EventsService } from '../../services/events.service'
 import { HttpClient } from '@angular/common/http'
 
