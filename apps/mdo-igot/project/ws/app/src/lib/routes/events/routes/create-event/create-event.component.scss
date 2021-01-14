@@ -2,6 +2,71 @@
 @import 'ws-vars';
 @import 'ws-mixins';
 
+.page_title_flex {
+  display:flex; 
+  justify-content: right;
+}
+
+textarea.mat-input-element {
+  padding-top: 5px !important;
+}
+
+.sub_title {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.7);
+  line-height: 18px;
+}
+
+mat-card.highlight {
+  border: 1px solid rgb(0, 116, 182);
+  background: rgba(0, 116, 182, 0.05) !important;
+}
+
+.event_container {
+  box-shadow: none !important;
+  width: 980px;
+  display: inline-flex;
+}
+
+.mat-card-header-text {
+   margin-left: 5px !important;
+}
+
+mat-card.event_types {
+  width:230px;
+  box-shadow: none; 
+  margin-right:20px;
+}
+
+::ng-deep .mat-select-content{
+    width:150px;
+}
+
+.mat-form-field-subscript-wrapper {
+  margin-left: -10px;
+}
+
+.mat-card-actions, .mat-card-content, .mat-card-subtitle {
+  margin-bottom: 0px !important;
+}
+
+label.event_types {
+  vertical-align: text-bottom; 
+  line-height: 20px;
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.87);
+}
+.event_type_desc {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 14px;
+  margin-left: 36px;
+}
+
+mat-card.dull {
+  border: 1px solid #ededed;
+}
+
 .mat-drawer-inner-container {
   width: 250px !important;
 }
@@ -15,6 +80,12 @@
 }
 
 .button-row .mat-button-base {
+  margin: 8px 16px 8px 38px;
+}
+.button-row-inline .mat-button-base {
+  margin: 8px 16px 8px 21px;
+}
+.button-row-add-user .mat-button-base {
   margin: 8px 16px 8px 0;
 }
 

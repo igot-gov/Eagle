@@ -16,6 +16,7 @@ export class CreateEventComponent implements OnInit {
 
   artifactURL: any
   participantsArr: any = []
+  presentersArr: any = []
   displayedColumns: string[] = ['fullname', 'email', 'type']
   @Input() tableData!: ITableData | undefined
   @Input() data?: []
@@ -33,12 +34,13 @@ export class CreateEventComponent implements OnInit {
   departmentName = ''
   toastSuccess: any
   pictureObj: any
+  myreg = /(^|\s)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/gi
 
   eventTypes = [
-    { title: 'Webinar', desc: 'General discussion involving' },
-    { title: 'Ask me anything', desc: 'Session targeted at answering questions from attendees' },
-    { title: 'Workshop', desc: 'Live learning session' },
-    { title: 'Interview', desc: 'Interview session involving one or more guests' },
+    { title: 'Webinar', desc: 'General discussion involving', border: 'rgb(0, 116, 182)', disabled: false },
+    // { title: 'Ask me anything', desc: 'Session targeted at answering questions from attendees', border: '', disabled: true },
+    // { title: 'Workshop', desc: 'Live learning session', border: '', disabled: true },
+    // { title: 'Interview', desc: 'Interview session involving one or more guests', border: '', disabled: true },
   ]
 
   timeArr = [
@@ -48,6 +50,12 @@ export class CreateEventComponent implements OnInit {
     { value: '06:00' }, { value: '06:30' }, { value: '07:00' }, { value: '07:30' },
     { value: '08:00' }, { value: '08:30' }, { value: '09:00' }, { value: '09:30' },
     { value: '10:00' }, { value: '10:30' }, { value: '11:00' }, { value: '11:30' },
+    { value: '12:00' }, { value: '12:30' }, { value: '13:00' }, { value: '13:30' },
+    { value: '14:00' }, { value: '14:30' }, { value: '15:00' }, { value: '15:30' },
+    { value: '16:00' }, { value: '16:30' }, { value: '17:00' }, { value: '17:30' },
+    { value: '18:00' }, { value: '18:30' }, { value: '19:00' }, { value: '19:30' },
+    { value: '20:00' }, { value: '20:30' }, { value: '21:00' }, { value: '21:30' },
+    { value: '22:00' }, { value: '22:30' }, { value: '23:00' }, { value: '23:30' },
   ]
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator
@@ -67,11 +75,8 @@ export class CreateEventComponent implements OnInit {
 
   constructor(private snackBar: MatSnackBar,
               private eventsSvc: EventsService,
-              private matDialog: MatDialog
+              private matDialog: MatDialog,
               ) {
-
-    this.getParticipantsData()
-
     this.createEventForm = new FormGroup({
       eventPicture: new FormControl('', [Validators.required]),
       eventTitle: new FormControl('', [Validators.required]),
@@ -81,10 +86,14 @@ export class CreateEventComponent implements OnInit {
       eventType: new FormControl('', [Validators.required]),
       eventDate: new FormControl('', [Validators.required]),
       eventTime: new FormControl('', [Validators.required]),
-      eventDuration: new FormControl('', [Validators.required]),
-      conferenceLink: new FormControl('', [Validators.required]),
+      eventDurationHours: new FormControl('', [Validators.required]),
+      eventDurationMinutes: new FormControl('', [Validators.required]),
+      conferenceLink: new FormControl('', [Validators.required, Validators.pattern(this.myreg)]),
       presenters: new FormControl(''),
     })
+
+    this.createEventForm.controls['eventDurationHours'].setValue(0)
+    this.createEventForm.controls['eventDurationMinutes'].setValue(30)
   }
 
   ngOnInit() {
@@ -124,26 +133,24 @@ export class CreateEventComponent implements OnInit {
     }
   }
 
-  getParticipantsData() {
-    this.eventsSvc.getParticipants().subscribe(
-      res => {
-        this.activeUsers = res.active_users
-      },
-      (err: any) => {
-        this.openSnackbar(err.error.split(':')[1])
-      }
-    )
-  }
+  // getParticipantsData() {
+  //   this.eventsSvc.getParticipants().subscribe(
+  //     res => {
+  //       this.activeUsers = res.active_users
+  //     },
+  //     (err: any) => {
+  //       this.openSnackbar(err.error.split(':')[1])
+  //     }
+  //   )
+  // }
 
   openDialog() {
     this.dialogRef = this.matDialog.open(ParticipantsComponent, {
       width: '850px',
       height: '600px',
-      data: this.activeUsers,
     })
     this.dialogRef.afterClosed().subscribe((response: any) => {
         if (response) {
-
           Object.keys(response.data).forEach((index: any) => {
           const obj = response.data[index]
             const setSelectedPresentersObj = {
@@ -152,9 +159,14 @@ export class CreateEventComponent implements OnInit {
               email: obj.email,
               type: 'Karmayogi User',
             }
+            const contactsObj = {
+              id: obj.id,
+              name: `${obj.firstname} {obj.lastname}`,
+            }
+            this.presentersArr.push(contactsObj)
             this.participantsArr.push(setSelectedPresentersObj)
           })
-          this.createEventForm.controls['presenters'].setValue(this.participantsArr)
+          this.createEventForm.controls['presenters'].setValue(this.presentersArr)
         }
     })
   }
@@ -230,19 +242,23 @@ export class CreateEventComponent implements OnInit {
   updateEventData(identifier: any) {
 
     const identifierKey = identifier
+    const eventDurationMinutes = this.addMinutes(
+      this.createEventForm.controls['eventDurationHours'].value,
+      this.createEventForm.controls['eventDurationMinutes'].value
+    )
     const formBody = {
       nodesModified: {
         [identifierKey]: {
           isNew: false,
           root: true,
           metadata: {
-            LearningObjectives: this.createEventForm.controls['agenda'].value,
-            ResourceType: this.createEventForm.controls['eventType'].value,
-            ExpiryDate: this.createEventForm.controls['eventDate'].value,
-            Duration: this.createEventForm.controls['eventDuration'].value,
-            ArtifactUrl: this.createEventForm.controls['conferenceLink'].value,
-            Contacts: this.createEventForm.controls['presenters'].value,
-            Thumbnail: this.createEventForm.controls['eventPicture'].value,
+            learningObjective: this.createEventForm.controls['agenda'].value,
+            resourceType: this.createEventForm.controls['eventType'].value,
+            expiryDate: this.createEventForm.controls['eventDate'].value,
+            duration: eventDurationMinutes,
+            artifactUrl: this.createEventForm.controls['conferenceLink'].value,
+            contacts: this.createEventForm.controls['presenters'].value,
+            thumbnail: this.createEventForm.controls['eventPicture'].value,
           },
         },
       }, hierarchy: {},
@@ -272,8 +288,9 @@ export class CreateEventComponent implements OnInit {
     })
   }
 
-  add_minutes (dt: any, minutes: any) {
-    return new Date(dt.getTime() + minutes * 60000)
+  addMinutes(hrs: number, mins: number) {
+    const minutes = (hrs * 60) + mins
+    return minutes
   }
 
 }

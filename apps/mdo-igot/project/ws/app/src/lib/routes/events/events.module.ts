@@ -11,11 +11,9 @@ import { BtnPageBackModule, ScrollspyLeftMenuModule } from '@ws-widget/collectio
 import {
   MatSidenavModule, MatGridListModule, MatListModule, MatCardModule, MatFormFieldModule, MatInputModule,
   MatIconModule, MatButtonModule, MatRadioModule, MatDialogModule, MatSelectModule, MatDatepickerModule,
-  MatTableModule, MatCheckboxModule, MatNativeDateModule, MatSortModule,
+  MatTableModule, MatCheckboxModule, MatNativeDateModule, MatSortModule, MatAutocompleteModule,
 } from '@angular/material'
-
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
 @NgModule({
@@ -25,7 +23,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
     MatSidenavModule, MatListModule, ScrollspyLeftMenuModule, MatCardModule, FormsModule,
     MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatGridListModule,
     MatRadioModule, MatDialogModule, MatSelectModule, MatDatepickerModule, ReactiveFormsModule,
-    MatTableModule, MatCheckboxModule, MatNativeDateModule, MatSortModule,
+    MatTableModule, MatCheckboxModule, MatNativeDateModule, MatSortModule, MatAutocompleteModule,
   ],
   entryComponents: [ParticipantsComponent],
   providers: [
