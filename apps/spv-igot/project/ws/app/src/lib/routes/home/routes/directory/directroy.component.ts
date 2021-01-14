@@ -53,9 +53,12 @@ export class DirectoryViewComponent implements OnInit, AfterViewInit, OnDestroy 
         && data.profile.data[0]
       this.decideAPICall()
     })
-    // this.route.params.subscribe(params => {
-    //   const currentDepartment = params['department']
-    // })
+    this.route.params.subscribe(params => {
+      const currentDepartment = params['department']
+      if (currentDepartment !== 'undefined') {
+        this.currentFilter = currentDepartment
+      }
+    })
   }
   decideAPICall() {
   }

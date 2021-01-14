@@ -70,7 +70,6 @@ export class UIDirectoryTableComponent implements OnInit, AfterViewInit, OnChang
     } else {
       this.dataSource.filter = ''
     }
-    console.log(this.dataSource.filter.length)
   }
 
   buttonClick(action: string, row: any) {

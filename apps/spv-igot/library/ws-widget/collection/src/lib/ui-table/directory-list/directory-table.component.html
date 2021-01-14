@@ -35,7 +35,7 @@
                         [matTooltip]="(element[col.key]).split('<br />').join(', ')">
                         <div innerHTML="{{element[col.key]}}"></div>
                     </span>
-                    <span *ngIf="!col.isList" class="textclass">
+                    <span *ngIf="!col.isList" class="textclass mat-body-2">
                         {{element[col.key]}} {{col.isList}}
                     </span>
                 </mat-cell>
