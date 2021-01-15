@@ -1,19 +1,13 @@
 package com.infosys.lex.portal.department.service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONArray;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -66,6 +60,12 @@ public class PortalServiceImpl implements PortalService {
 
 	@Autowired
 	LexServerProperties serverConfig;
+
+	private static final String ROOT_ORG_CONST = "rootOrg";
+	private static final String ORG_CONST = "org";
+
+	private static final String WORKFLOW_DEFAULT_ROOT_ORG = "igot";
+	private static final String WORKFLOW_DEFAULT_ORG = "dopt";
 
 	@Override
 	public List<DepartmentInfo> getAllDepartments() {
@@ -235,14 +235,14 @@ public class PortalServiceImpl implements PortalService {
 		UserDepartmentInfo userDeptInfo = enrichUserDepartment(userDepartmentRoleRepo.save(existingRecord));
 
 		// Update the WF history and OpenSaber profile for department details
-		JSONObject request = new JSONObject();
+		HashMap<String, Object> request = new HashMap<>();
 		request.put("userId", userDeptInfo.getUserId());
 		request.put("applicationId", userDeptInfo.getUserId());
 		request.put("actorUserId", wid);
 		request.put("serviceName", "profile");
 		request.put("comment", "Updating Department Details.");
-		JSONArray fieldValues = new JSONArray();
-		JSONObject fieldValue = new JSONObject();
+		ArrayList<HashMap<String, Object>> fieldValues = new ArrayList<>();
+		HashMap<String, Object> fieldValue= new HashMap<>();
 		fieldValue.put("fieldKey", "employmentDetails");
 
 		// Try to get existing dept if available
@@ -253,18 +253,20 @@ public class PortalServiceImpl implements PortalService {
 				prevDeptName = prevDept.getDeptName();
 			}
 		}
-		JSONObject fromValue = new JSONObject();
+		HashMap<String, Object> fromValue = new HashMap<>();
 		fromValue.put("departmentName", prevDeptName);
 		fieldValue.put("fromValue", fromValue);
-		JSONObject toValue = new JSONObject();
+		HashMap<String, Object> toValue = new HashMap<>();
 		toValue.put("departmentName", userDeptInfo.getDeptInfo().getDeptName());
 		fieldValue.put("toValue", toValue);
-		fieldValues.put(fieldValue);
+		fieldValues.add(fieldValue);
 		request.put("updateFieldValues", fieldValues);
 
-//		restTemplate.postForObject(serverConfig.getWfServiceHost() + serverConfig.getWfServicePath(), request,
-//				List.class);
-
+		HttpHeaders headers = new HttpHeaders();
+		headers.set(ROOT_ORG_CONST, WORKFLOW_DEFAULT_ROOT_ORG);
+		headers.set(ORG_CONST, WORKFLOW_DEFAULT_ORG);
+		HttpEntity<Object> entity = new HttpEntity<>(request, headers);
+		restTemplate.postForObject(serverConfig.getWfServiceHost() + serverConfig.getWfServicePath(), entity, Map.class);
 		return userDeptInfo;
 	}
 
@@ -298,14 +300,14 @@ public class PortalServiceImpl implements PortalService {
 		UserDepartmentInfo userDeptInfo = enrichUserDepartment(userDepartmentRoleRepo.save(existingRecord));
 
 		// Update the WF history and OpenSaber profile for department details
-		JSONObject request = new JSONObject();
+		HashMap<String, Object> request = new HashMap<>();
 		request.put("userId", userDeptInfo.getUserId());
 		request.put("applicationId", userDeptInfo.getUserId());
 		request.put("actorUserId", wid);
 		request.put("serviceName", "profile");
 		request.put("comment", "Updating Department Details.");
-		JSONArray fieldValues = new JSONArray();
-		JSONObject fieldValue = new JSONObject();
+		ArrayList<HashMap<String, Object>> fieldValues = new ArrayList<>();
+		HashMap<String, Object> fieldValue= new HashMap<>();
 		fieldValue.put("fieldKey", "employmentDetails");
 
 		// Try to get existing dept if available
@@ -316,18 +318,20 @@ public class PortalServiceImpl implements PortalService {
 				prevDeptName = prevDept.getDeptName();
 			}
 		}
-		JSONObject fromValue = new JSONObject();
+		HashMap<String, Object> fromValue = new HashMap<>();
 		fromValue.put("departmentName", prevDeptName);
 		fieldValue.put("fromValue", fromValue);
-		JSONObject toValue = new JSONObject();
+		HashMap<String, Object> toValue = new HashMap<>();
 		toValue.put("departmentName", userDeptInfo.getDeptInfo().getDeptName());
 		fieldValue.put("toValue", toValue);
-		fieldValues.put(fieldValue);
+		fieldValues.add(fieldValue);
 		request.put("updateFieldValues", fieldValues);
 
-//		restTemplate.postForObject(serverConfig.getWfServiceHost() + serverConfig.getWfServicePath(), request,
-//				List.class);
-
+		HttpHeaders headers = new HttpHeaders();
+		headers.set(ROOT_ORG_CONST, WORKFLOW_DEFAULT_ROOT_ORG);
+		headers.set(ORG_CONST, WORKFLOW_DEFAULT_ORG);
+		HttpEntity<Object> entity = new HttpEntity<>(request, headers);
+		restTemplate.postForObject(serverConfig.getWfServiceHost() + serverConfig.getWfServicePath(), entity, Map.class);
 		return userDeptInfo;
 	}
 
