@@ -41,7 +41,6 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
   usersData!: any
   fullUserData: any = []
 
-
   constructor(
     public dialog: MatDialog,
     private route: ActivatedRoute,
@@ -111,7 +110,7 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
     this.router.navigate([`/app/users/create-user`])
   }
 
-  onRoleClick(user: any) {
+  onRoleClick() {
     // this.router.navigate([`/app/users/${user.userId}/details`])
   }
   menuActions($event: { action: string, row: any }) {
