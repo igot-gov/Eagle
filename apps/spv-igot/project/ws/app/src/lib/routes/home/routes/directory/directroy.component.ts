@@ -89,7 +89,10 @@ export class DirectoryViewComponent implements OnInit, AfterViewInit, OnDestroy 
     } else {
       this.getDepartDataByKey(this.departmentHearders[0])
     }
-
+    this.createTableHeader()
+  }
+  createTableHeader() {
+    console.log(this.currentFilter)
     this.tabledata = {
       actions: [{ name: 'Edit', label: 'Edit info', icon: 'remove_red_eye', type: 'button' }],
       columns: [
@@ -134,6 +137,7 @@ export class DirectoryViewComponent implements OnInit, AfterViewInit, OnDestroy 
           filteredData.push(dept)
         }
       })
+      this.createTableHeader()
       this.data = filteredData.map((dept: any) => {
 
         return {

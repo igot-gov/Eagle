@@ -10,6 +10,7 @@ import * as _ from 'lodash'
 
 import { ITableData, IColums } from '../interface/interfaces'
 import { Router } from '@angular/router'
+import { cloneDeep } from 'lodash'
 
 @Component({
   selector: 'ws-widget-directory-table',
@@ -55,11 +56,11 @@ export class UIDirectoryTableComponent implements OnInit, AfterViewInit, OnChang
   }
 
   ngOnChanges(data: SimpleChanges) {
+    this.tableData!.columns = cloneDeep(data.tableData.currentValue.columns)
     this.dataSource.data = _.get(data, 'data.currentValue')
     this.length = this.dataSource.data.length
     this.paginator.firstPage()
   }
-
   ngAfterViewInit() { }
 
   applyFilter(filterValue: any) {

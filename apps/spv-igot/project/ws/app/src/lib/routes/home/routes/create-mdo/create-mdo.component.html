@@ -2,7 +2,7 @@
   <h2 class="cb-title">Basic Information</h2>
   <div class="flex-container">
     <div class="flex-container-div">
-      <form [formGroup]="contentForm" (ngSubmit)="onSubmit()">
+      <form [formGroup]="contentForm" (ngSubmit)="onSubmit() && contentForm.valid">
         <div class="mobile-break mat-app-background">
           <div class="margin-top-s">
             <div class="margin-top-xs">
@@ -23,7 +23,7 @@
           </div>
           <div class="margin-top-s">
             <p class="margin-remove-bottom" [ngClass]="{ required: checkCondition('subTitle', 'required') }">
-              Head Quaters
+              Head Quarters
             </p>
             <mat-form-field appearance="outline" class="margin-top-xs"
               [ngClass]="{ 'mat-form-field-invalid': showError('subTitle') }">
@@ -47,7 +47,7 @@
                 <mat-select formControlName="deptSubTypeId" i18n-placeholder placeholder="--Select--"
                   [required]="checkCondition('subTitle', 'required') ? true : null">
                   <mat-option *ngFor="let subDepartment of subDepartments" [value]="subDepartment.id" i18n>
-                    {{subDepartment.deptSubType}} {{subDepartment.id}}</mat-option>
+                    {{subDepartment.deptSubType}}</mat-option>
                 </mat-select>
                 <mat-error *ngIf="showError('deptSubTypeId')" i18n>Department type is mandatory
                 </mat-error>
@@ -71,13 +71,17 @@
             </div>
           </div>
         </div>
-        <button *ngIf="!isUpdate" mat-raised-button type="submit"
+        <button *ngIf="!isUpdate" [disabled]="!contentForm.valid" mat-raised-button type="submit"
           class="text-white ws-mat-primary-background text-white margin-right-m">
-          <b class="text-white" i18n>Create Department</b>
+          <b class="text-white" i18n>Create</b>
         </button>
-        <button *ngIf="isUpdate" mat-raised-button type="submit"
+        <button *ngIf="isUpdate" mat-raised-button type="submit" [disabled]="!contentForm.valid"
           class="text-white ws-mat-primary-background text-white margin-right-m">
-          <b class="text-white" i18n>Update Department</b>
+          <b class="text-white" i18n>Update</b>
+        </button>
+        <button mat-raised-button class="ws-mat-primary-background text-white margin-left-l" type="button"
+          (click)="onCancel()">
+          <b i18n>Cancel</b>
         </button>
       </form>
     </div>
