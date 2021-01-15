@@ -33,6 +33,7 @@ import { ContentSummaryComponent } from './components/content-summary/content-su
 import { ContentQualityService } from './services/content-quality.service'
 import { CompetenceViewComponent } from './components/edit-meta/competencies-view/competencies-view.component'
 import { CompetenceCardComponent } from './components/edit-meta/competencies-card/competencies-card.component'
+import { CurationDetailComponent } from './components/content-self-curation/curation-detail/curation-detail.component'
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { CompetenceCardComponent } from './components/edit-meta/competencies-car
     ContentSummaryComponent,
     CompetenceViewComponent,
     CompetenceCardComponent,
+    CurationDetailComponent,
   ],
   imports: [
     CommonModule,
@@ -89,8 +91,9 @@ import { CompetenceCardComponent } from './components/edit-meta/competencies-car
     ContentSelfCurationComponent,
     ContentSummaryComponent,
     CompetenceCardComponent,
+    CurationDetailComponent,
   ],
-  entryComponents: [AuthPickerComponent, CompetencyAddPopUpComponent, CompetenceViewComponent],
+  entryComponents: [AuthPickerComponent, CompetencyAddPopUpComponent, CompetenceViewComponent, CurationDetailComponent],
   providers: [UploadService, SelfCurationService, ContentQualityService],
 })
 export class EditorSharedModule { }

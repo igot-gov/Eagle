@@ -138,9 +138,9 @@ export class QuizQusetionsComponent implements OnInit, OnDestroy {
               } else if (newData[0] && newData[0].data && newData[0].data.questions) {
                 this.quizStoreSvc.collectiveQuiz[id] = newData[0].data.questions
               } else {
-                this.quizResolverSvc.getUpdatedData(id).subscribe(UpdatedData => {
-                  if (UpdatedData && UpdatedData[0]) {
-                    this.quizStoreSvc.collectiveQuiz[id] = UpdatedData[0].data.questions
+                this.quizResolverSvc.getUpdatedData(id).subscribe(updatedData => {
+                  if (updatedData && updatedData[0]) {
+                    this.quizStoreSvc.collectiveQuiz[id] = updatedData[0].data.questions
                     // need to arrange
                     this.canEditJson = this.quizResolverSvc.canEdit(quizContent)
                     this.resourceType = quizContent.categoryType || 'Quiz'

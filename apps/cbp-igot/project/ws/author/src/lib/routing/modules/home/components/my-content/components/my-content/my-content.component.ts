@@ -298,7 +298,8 @@ export class MyContentComponent implements OnInit, OnDestroy {
         uuid: this.userId,
         rootOrg: this.accessService.rootOrg,
         // this is for Author Only
-        isUserRecordEnabled: !this.accessService.hasRole(['admin', 'super-admin', 'content-admin', 'editor', 'reviewer', 'publisher']),
+        isUserRecordEnabled: true,
+        // !this.accessService.hasRole(['admin', 'super-admin', 'content-admin', 'editor', 'reviewer', 'publisher']),
       },
     }
     if (this.finalFilters.length) {

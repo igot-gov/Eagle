@@ -26,10 +26,8 @@ export class UserContentRatingComponent implements OnInit {
     if (!this.forPreview) {
       this.contentSvc.fetchContentRatingsV2(this.contentId).subscribe(
         result => {
-          debugger
           this.isRequesting = false
           this.userRating = result
-
         },
         _err => {
           this.isRequesting = false

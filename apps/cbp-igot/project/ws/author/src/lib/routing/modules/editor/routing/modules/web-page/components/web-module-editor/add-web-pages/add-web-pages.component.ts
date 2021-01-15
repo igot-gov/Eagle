@@ -35,7 +35,9 @@ import { NOTIFICATION_TIME, WEB_MODULE_JSON_FILE_NAME } from '../../../constant/
 import { IAudioObj } from '../../../interface/page-interface'
 import { WebStoreService } from '../../../services/store.service'
 import { WebPagesResolverService } from '../../../services/resolver.service'
+/* tslint:disable */
 import _ from 'lodash'
+/* tslint:enable */
 @Component({
   selector: 'ws-auth-add-web-pages',
   templateUrl: './add-web-pages.component.html',
@@ -126,7 +128,7 @@ export class AddWebPagesComponent implements OnInit, OnDestroy {
       this.activateRoute.parent.parent.data.subscribe(v => {
         if (v.contents && v.contents.length) {
           this.allContents.push(v.contents[0].content)
-          let currentContent = _.first(_.filter(_.get(v, 'contents[0].content.children'), id => id.identifier === this.currentId))
+          const currentContent = _.first(_.filter(_.get(v, 'contents[0].content.children'), id => id.identifier === this.currentId))
           let newData
           if (this.currentId) {
             newData = this.webStoreSvc.getCurrentWeb(this.currentId)

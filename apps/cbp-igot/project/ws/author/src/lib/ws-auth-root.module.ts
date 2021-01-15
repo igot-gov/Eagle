@@ -68,6 +68,7 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
     LoaderService,
     InitResolver,
     NotificationService,
+    EditorContentService,
     WorkFlowService,
     { provide: ErrorHandler, useClass: AuthoringErrorHandler },
     {

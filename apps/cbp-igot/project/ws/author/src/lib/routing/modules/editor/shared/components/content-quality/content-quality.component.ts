@@ -103,21 +103,22 @@ export class ContentQualityComponent implements OnInit, OnDestroy, AfterViewInit
     })
   }
   romanize(num: number) {
-    var numeralCodes = [["", "i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix"],         // Ones
-    ["", "x", "xx", "xxx", "xl", "l", "lx", "lxx", "lxxx", "xc"],   // Tens
-    ["", "c", "cc", "ccc", "cd", "d", "dc", "dcc", "dccc", "cm"]]        // Hundreds
-    var numeral = ""
-    var digits = num.toString().split('').reverse()
-    for (var i = 0; i < digits.length; i++) {
+    const numeralCodes = [['', 'i', 'ii', 'iii', 'iv', 'v', 'vi', 'vii', 'viii', 'ix'],         // Ones
+    ['', 'x', 'xx', 'xxx', 'xl', 'l', 'lx', 'lxx', 'lxxx', 'xc'],   // Tens
+    ['', 'c', 'cc', 'ccc', 'cd', 'd', 'dc', 'dcc', 'dccc', 'cm']]        // Hundreds
+    let numeral = ''
+    const digits = num.toString().split('').reverse()
+    for (let i = 0; i < digits.length; i += 1) {
+      // tslint:disable-next-line
       numeral = numeralCodes[i][parseInt(digits[i])] + numeral
     }
     return numeral
-
   }
   getJSON() {
     if (this.activateRoute.parent && this.activateRoute.parent.parent
       && this.activateRoute.parent.parent.snapshot && this.activateRoute.parent.parent.snapshot.data) {
       this.fieldsToDisplay = _.map(this.activateRoute.parent.parent.snapshot.data.qualityJSON.criteria, (cr, idx) => {
+        // tslint:disable-next-line
         return ` ${this.romanize(parseInt(idx + 1))}) ${cr.criteria} `
       }).join(',')
 

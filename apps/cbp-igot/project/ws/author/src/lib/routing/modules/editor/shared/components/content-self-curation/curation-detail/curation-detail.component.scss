@@ -1,0 +1,164 @@
+@import 'ws-vars';
+@import 'ws-mixins';
+
+.mat-sidenav-container {
+  min-height: 650px;
+  overflow: unset;
+}
+
+.flex-075 {
+  width: 55%;
+}
+
+.mat-sidenav {
+  overflow: unset;
+}
+
+.flex3 {
+  flex: 3;
+}
+
+.margin-left-auto {
+  margin-left: auto;
+}
+
+.bor {
+  // border-top: 0 !important;
+  border-right: 0 !important;
+  border-left: 0 !important;
+}
+
+.no-border {
+  border: none !important;
+  width: 100%;
+}
+
+.margin-left-auto {
+  margin-left: auto;
+}
+
+.no-border-sidenev {
+  border: none !important;
+}
+
+.critical {
+  color: #D13924 !important;
+}
+
+.warn {
+  color: #FF8268 !important;
+}
+
+.clean-div {
+  background: #CEE4F0;
+  border-radius: 4px;
+}
+
+.left-issue-div {
+  border-radius: 4px;
+}
+
+.status-div {
+  min-width: 184px;
+  min-height: 48px;
+  border-radius: 4px;
+
+  span {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+}
+
+.width-100 {
+  width: 100%;
+}
+
+.ui {
+  border: 1px solid #1a1919;
+  border-top-left-radius: 0px;
+  border-left-color: white;
+  border-bottom-left-radius: 0px;
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+  box-shadow: 0.1px 2px 8px grey;
+  width: 42px;
+}
+
+.mar-b-0 {
+  margin-bottom: 0 !important;
+}
+
+.mat-drawer-content {
+  padding-left: 3px;
+}
+
+.completed-page {
+  display: flex;
+  margin: auto;
+}
+
+.mat-progress-bar-buffer {
+  background: rgba(0, 0, 0, 0.08) !important;
+}
+
+.mat-progress-bar-fill::after {
+  background: #1D8923 !important;
+  border-radius: 6px;
+}
+
+.quality-progress {
+  height: $size-s;
+  border-radius: 6px;
+}
+
+.see-repo {
+  margin: 0 !important;
+  padding: $size-s;
+}
+
+.itm-center {
+  align-items: center;
+  padding: $size-m;
+  margin: $size-s 0;
+  min-width: fit-content;
+  width: fit-content;
+}
+
+.active-page {
+  background: black;
+  color: #fff;
+}
+
+.pag {
+  margin: 0 $size-xs;
+  width: 48px;
+  height: 48px;
+}
+
+.tgl-group {
+  flex-direction: column;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.sticky {
+  position: sticky;
+  top: 50px;
+}
+
+.new-color {
+  background-color: #FDECDE;
+}
+
+.text-white {
+  color: #fff !important;
+}
+
+.sticky1 {
+  margin-right: $size-m;
+}
+
+.fill-red {
+  color: #CB5641 !important;
+
+}
