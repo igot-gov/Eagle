@@ -31,7 +31,7 @@
 
             <ng-container matColumnDef="{{col.key}}" *ngFor="let col of tableData!.columns">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> {{col.displayName}} </mat-header-cell>
-                <mat-cell *matCellDef="let element">
+                <mat-cell *matCellDef="let element" (click)="onRowClick(element)">
                     <span *ngIf="col.isList" class="textclass"
                         [matTooltip]="(element[col.key]).split('<br />').join(', ')">
                         <div innerHTML="{{element[col.key]}}"></div>
@@ -65,7 +65,7 @@
                 </mat-header-cell>
                 <mat-cell *matCellDef="let row" class="action-cell">
                     <button type="button" mat-icon-button i18n-aria-label aria-label="action items"
-                        [matMenuTriggerFor]="cardMenu" class="action-btn">
+                        [matMenuTriggerFor]="cardMenu" [matMenuTriggerData]="{'data':row}" class="action-btn">
                         <mat-icon>more_horiz</mat-icon>
                     </button>
                 </mat-cell>
@@ -85,30 +85,33 @@
 </div>
 
 <mat-menu #cardMenu="matMenu">
-    <ng-template matMenuContent>
-        <div mat-menu-item>
-            <button name="channel-analytics-button" class="ws-mat-primary-text" mat-icon-button i18n-aria-label
-                aria-label="Analytics">
-                <mat-icon>input</mat-icon> <span>Show on Karmayogi</span>
-            </button>
-        </div>
-        <div mat-menu-item>
-            <button name="channel-analytics-button" class="ws-mat-primary-text" mat-icon-button i18n-aria-label
-                aria-label="Analytics">
-                <mat-icon>block</mat-icon><span>Block user</span>
-            </button>
-        </div>
-        <div mat-menu-item>
-            <button name="channel-analytics-button" class="ws-mat-primary-text" mat-icon-button i18n-aria-label
-                aria-label="Analytics">
-                <mat-icon>edit_attributes</mat-icon><span>Deactivate User</span>
-            </button>
-        </div>
-        <div mat-menu-item>
-            <button name="channel-analytics-button" class="ws-mat-primary-text" mat-icon-button i18n-aria-label
-                aria-label="Analytics">
-                <mat-icon>delete</mat-icon><span>Delete User</span>
-            </button>
-        </div>
+    <ng-template matMenuContent let-rowData="data">
+        <!-- <div > -->
+        <button (click)="buttonClick('showOnKarma',rowData)" mat-menu-item name="channel-analytics-button"
+            class="ws-mat-primary-text" i18n-aria-label aria-label="Analytics">
+            <mat-icon>input</mat-icon> <span>Show on Karmayogi</span>
+        </button>
+        <!-- </div> -->
+        <!-- <div mat-menu-item> -->
+        <button (click)="rowData && rowData.blocked ? buttonClick('unblock',rowData): buttonClick('block',rowData)"
+            mat-menu-item name="channel-analytics-button" class="ws-mat-primary-text" i18n-aria-label
+            aria-label="Analytics">
+            <mat-icon>block</mat-icon><span>{{rowData && rowData.blocked ? 'Unblock user':'Block user' }}</span>
+        </button>
+        <!-- </div> -->
+        <!-- <div mat-menu-item> -->
+        <button (click)="rowData && rowData.active ? buttonClick('deactive',rowData): buttonClick('active',rowData)"
+            mat-menu-item name="channel-analytics-button" class="ws-mat-primary-text" i18n-aria-label
+            aria-label="Analytics">
+            <mat-icon>edit_attributes</mat-icon>
+            <span>{{rowData && rowData.active? 'Deactivate User':'Activate User'}}</span>
+        </button>
+        <!-- </div> -->
+        <!-- <div mat-menu-item> -->
+        <!-- <button (click)="buttonClick('delete',rowData)" mat-menu-item name="channel-analytics-button"
+            class="ws-mat-primary-text" i18n-aria-label aria-label="Analytics">
+            <mat-icon>delete</mat-icon><span>Delete User</span>
+        </button> -->
+        <!-- </div> -->
     </ng-template>
 </mat-menu>

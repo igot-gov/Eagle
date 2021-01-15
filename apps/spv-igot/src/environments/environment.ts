@@ -5,10 +5,12 @@
 export const environment: IEnvironment = {
   production: false,
   sitePath: 'spv_3000',
+  karmYogiPath: 'https://d136953gtttd92.cloudfront.net',
 }
 interface IEnvironment {
   production: boolean
   sitePath: null | string
+  karmYogiPath: string
 }
 
 /*

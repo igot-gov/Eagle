@@ -22,4 +22,5 @@ export interface ITableData {
   needCheckBox: boolean,
   sortState?: string,
   sortColumn?: string
+  needUserMenus: boolean
 }

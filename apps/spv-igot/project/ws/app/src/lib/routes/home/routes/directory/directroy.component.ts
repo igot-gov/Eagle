@@ -54,11 +54,12 @@ export class DirectoryViewComponent implements OnInit, AfterViewInit, OnDestroy 
       this.decideAPICall()
     })
     this.route.params.subscribe(params => {
-      const currentDepartment = params['department']
-      if (currentDepartment !== 'undefined') {
-        this.currentFilter = currentDepartment
+      this.currentFilter = params['department']
+      if (this.currentFilter === null || this.currentFilter === undefined) {
+        this.currentFilter = 'MDO'
       }
     })
+
   }
   decideAPICall() {
   }
@@ -92,7 +93,6 @@ export class DirectoryViewComponent implements OnInit, AfterViewInit, OnDestroy 
     this.createTableHeader()
   }
   createTableHeader() {
-    console.log(this.currentFilter)
     this.tabledata = {
       actions: [{ name: 'Edit', label: 'Edit info', icon: 'remove_red_eye', type: 'button' }],
       columns: [

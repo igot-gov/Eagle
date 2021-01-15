@@ -3,13 +3,14 @@ import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs'
 
 const API_END_POINTS = {
-  GET_ALL_USERS: '/apis/protected/v8/portal/mydepartment?allUsers=true',
-  GET_MY_DEPARTMENT: '/apis/protected/v8/portal/mydepartment?allUsers=true',
+  GET_ALL_USERS: '/apis/protected/v8/portal/spv/mydepartment?allUsers=true',
+  GET_MY_DEPARTMENT: '/apis/protected/v8/portal/spv/mydepartment?allUsers=true',
   CREATE_USER: 'apis/protected/v8/admin/userRegistration/create-user',
   PROFILE_REGISTRY: 'apis/protected/v8/user/profileRegistry/getUserRegistryByUser/',
   ADD_USER_TO_DEPARTMENT: 'apis/protected/v8/portal/deptAction',
   WF_HISTORY_BY_APPID: 'apis/protected/v8/workflowhandler/historyByApplicationId/',
   SEARCH_USER: 'apis/protected/v8/user/autocomplete/department',
+  USER_BDD: '/apis/protected/v8/portal/spv/deptAction/userrole',
 }
 
 @Injectable({
@@ -43,5 +44,14 @@ export class UsersService {
 
   onSearchUserByEmail(email: string, req: any): Observable<any> {
     return this.http.post<any>(`${API_END_POINTS.SEARCH_USER}/${email}`, req)
+  }
+  blockUser(user: object): Observable<any> {
+    return this.http.patch<any>(`${API_END_POINTS.USER_BDD}/`, user)
+  }
+  deActiveUser(user: object): Observable<any> {
+    return this.http.patch<any>(`${API_END_POINTS.USER_BDD}/`, user)
+  }
+  deleteUser(user: object): Observable<any> {
+    return this.http.patch<any>(`${API_END_POINTS.USER_BDD}/`, user)
   }
 }

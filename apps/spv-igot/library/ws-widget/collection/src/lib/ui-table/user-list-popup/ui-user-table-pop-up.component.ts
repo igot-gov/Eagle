@@ -61,6 +61,7 @@ export class UIUserTablePopUpComponent implements OnInit, AfterViewInit, OnChang
       needHash: false,
       sortColumn: '',
       sortState: 'asc',
+      needUserMenus: false,
     }
   }
 

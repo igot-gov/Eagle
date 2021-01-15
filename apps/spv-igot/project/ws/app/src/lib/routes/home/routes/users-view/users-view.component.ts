@@ -2,11 +2,14 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core'
 import { NSProfileDataV2 } from '../../models/profile-v2.model'
 import { MatDialog } from '@angular/material/dialog'
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { ConfigurationsService } from '@ws-widget/utils/src/public-api'
 /* tslint:disable */
 import _ from 'lodash'
 import { UserViewService } from '../../services/user-view.services'
+import { UsersService } from '../../services/users.service'
+import { MatSnackBar } from '@angular/material/snack-bar'
+import { environment } from 'src/environments/environment'
 interface IUser { userid: string, fullname: string; email: string; type: string }
 
 @Component({
@@ -35,14 +38,19 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
   connectionRequests!: any[]
   tabledata: any = []
   data: any = []
+  usersData!: any
   fullUserData: any = []
+
 
   constructor(
     public dialog: MatDialog,
     private route: ActivatedRoute,
     // private discussService: DiscussService,
+    private router: Router,
+    private usersService: UsersService,
     private configSvc: ConfigurationsService,
     private userViewServcie: UserViewService,
+    private snackBar: MatSnackBar,
   ) {
     this.Math = Math
     this.currentUser = this.configSvc.userProfile && this.configSvc.userProfile.userId
@@ -63,20 +71,22 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
   ngOnInit() {
-    // int left blank
     this.tabledata = {
+      actions: [],
       columns: [
         { displayName: 'Full Name', key: 'fullname' },
         { displayName: 'Email', key: 'email' },
-        { displayName: 'Type', key: 'type' },
+        { displayName: 'Position', key: 'position' },
+        { displayName: 'Role', key: 'role' },
       ],
       needCheckBox: false,
       needHash: false,
-      sortColumn: '',
+      sortColumn: 'fullName',
       sortState: 'asc',
+      needUserMenus: true,
     }
-    this.getAllActiveUsersAPI()
 
+    this.getAllUsers()
   }
 
   getAllActiveUsersAPI() {
@@ -97,26 +107,138 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
   fetchConnectionDetails() {
 
   }
+  onCreateClick() {
+    this.router.navigate([`/app/users/create-user`])
+  }
 
-  filter(key: string | 'timestamp' | 'best' | 'saved') {
+  onRoleClick(user: any) {
+    // this.router.navigate([`/app/users/${user.userId}/details`])
+  }
+  menuActions($event: { action: string, row: any }) {
+    const user = { userId: _.get($event.row, 'userId') }
+    _.set(user, 'deptId', _.get(this.usersData, 'id'))
+    _.set(user, 'isBlocked', _.get($event.row, 'blocked'))
+    _.set(user, 'isActive', _.get($event.row, 'active'))
+
+    switch ($event.action) {
+      case 'showOnKarma':
+        window.open(`${environment.karmYogiPath}/app/person-profile/${user.userId}`)
+        break
+      case 'block':
+        _.set(user, 'isBlocked', true)
+        _.set(user, 'isActive', false)
+        _.set(user, 'roles', _.map(_.get($event.row, 'roleInfo'), i => i.roleName))
+        this.usersService.blockUser(user).subscribe(response => {
+          if (response) {
+            this.getAllUsers()
+            this.snackBar.open('Updated successfully !')
+          }
+        })
+        break
+      case 'unblock':
+        _.set(user, 'isBlocked', false)
+        _.set(user, 'roles', _.map(_.get($event.row, 'roleInfo'), i => i.roleName))
+        this.usersService.blockUser(user).subscribe(response => {
+          if (response) {
+            this.getAllUsers()
+            this.snackBar.open('Updated successfully !')
+          }
+        })
+        break
+      case 'deactive':
+        _.set(user, 'isActive', false)
+        _.set(user, 'roles', _.map(_.get($event.row, 'roleInfo'), i => i.roleName))
+        this.usersService.deActiveUser(user).subscribe(response => {
+          if (response) {
+            this.getAllUsers()
+            this.snackBar.open('Updated successfully !')
+          }
+        })
+        break
+      case 'active':
+        _.set(user, 'isActive', true)
+        _.set(user, 'roles', _.map(_.get($event.row, 'roleInfo'), i => i.roleName))
+        this.usersService.deActiveUser(user).subscribe(response => {
+          if (response) {
+            this.getAllUsers()
+            this.snackBar.open('Updated successfully !')
+          }
+        })
+        break
+      //   case 'delete':
+      //     _.set(user, 'isBlocked', false)
+      //     this.usersSvc.deleteUser(user)
+      //     break
+    }
+  }
+  getAllUsers() {
+    this.usersService.getAllUsers().subscribe(data => {
+      this.usersData = data
+      this.filter(this.currentFilter)
+    })
+  }
+  filter(key: string) {
+    const activeUsersData: any[] = []
+    const blockedUsersData: any[] = []
+    const inactiveUsersData: any[] = []
+    if (this.usersData.active_users && this.usersData.active_users.length > 0) {
+      this.usersData.active_users.forEach((user: any) => {
+        activeUsersData.push({
+          fullname: user ? `${user.firstName} ${user.lastName}` : null,
+          email: user.emailId,
+          role: user.roleInfo.roleName,
+          userId: user.userId,
+          active: user.active,
+          blocked: user.blocked,
+        })
+      })
+    }
+
+    if (this.usersData.blocked_users && this.usersData.blocked_users.length > 0) {
+      this.usersData.blocked_users.forEach((user: any) => {
+        blockedUsersData.push({
+
+          fullname: user ? `${user.firstName} ${user.lastName}` : null,
+          email: user.emailId,
+          role: user.roleInfo.roleName,
+          userId: user.userId,
+          active: user.active,
+          blocked: user.blocked,
+        })
+      })
+    }
+    if (this.usersData.inActive_users && this.usersData.inActive_users.length > 0) {
+      this.usersData.inActive_users.forEach((user: any) => {
+        inactiveUsersData.push({
+          fullname: user ? `${user.firstName} ${user.lastName}` : null,
+          email: user.emailId,
+          role: user.roleInfo.roleName,
+          userId: user.userId,
+          active: user.active,
+          blocked: user.blocked,
+        })
+      })
+    }
+
     if (key) {
       this.currentFilter = key
       switch (key) {
         case 'active':
-          this.data = this.getAllUserByKey(this.fullUserData.active_users)
+          this.data = activeUsersData
           break
         case 'inactive':
-          this.data = this.getAllUserByKey(this.fullUserData.inActive_users)
+          this.data = inactiveUsersData
           break
         case 'blocked':
-          this.data = this.getAllUserByKey(this.fullUserData.blocked_users)
+          this.data = blockedUsersData
           break
         default:
-          this.getAllActiveUsersAPI()
+          this.data = activeUsersData
           break
       }
     }
   }
+
   getAllUserByKey(userObj: any) {
     if (userObj && userObj !== null && userObj !== undefined) {
       const tempArray: IUser[] = []

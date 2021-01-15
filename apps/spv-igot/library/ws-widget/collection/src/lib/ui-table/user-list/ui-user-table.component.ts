@@ -20,6 +20,8 @@ export class UIUserTableComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() tableData!: ITableData | undefined
   @Input() data?: []
   @Input() isFromDirectory?: boolean
+  @Input() isUpload?: boolean
+  @Input() isCreate?: boolean
   @Output() clicked?: EventEmitter<any>
   @Output() actionsClick?: EventEmitter<any>
   @Output() eOnRowClick = new EventEmitter<any>()
@@ -92,7 +94,7 @@ export class UIUserTableComponent implements OnInit, AfterViewInit, OnChanges {
       if (this.tableData.actions && this.tableData.actions.length > 0) {
         columns.push('Actions')
       }
-      if (this.tableData.actions && this.tableData.actions.length > 0) {
+      if (this.tableData.needUserMenus) {
         columns.push('Menu')
       }
       return columns
