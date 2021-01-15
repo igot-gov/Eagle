@@ -43,6 +43,10 @@ export class BtnGoalsService {
     return this.http.post<NsGoal.IGoalUpsertResponse>(API_END_POINTS.createGoal, upsertRequest)
   }
 
+  updateGoal(id: any, upsertRequest: any) {
+    return this.http.patch<NsGoal.IGoalUpsertResponse>(`/apis/protected/v8/user/goals/${id}`, upsertRequest)
+  }
+
   createGoals(upsertRequests: NsGoal.IGoalUpsertRequest[]) {
     return forkJoin(
       upsertRequests.map(request => {
@@ -92,6 +96,10 @@ export class BtnGoalsService {
       },
     })
 
+  }
+
+  getUserGoal(id: string) {
+    return this.http.get<NsGoal.IUserGoals>(`/apis/proxies/v8/action/content/v3/hierarchy/${id}?mode=edit`)
   }
 
   getGoalContent(id: string) {

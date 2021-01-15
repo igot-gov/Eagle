@@ -35,7 +35,7 @@ export class GoalCreateCustomComponent implements OnInit {
   chipNamesHash: { [id: string]: string } = {}
 
   mode: 'create' | 'edit' = 'create'
-  editGoal: NsGoal.IGoal | null = null
+  editGoal: any | null = null
   fetchEditGoalStatus: TFetchStatus = 'none'
   isShareEnabled = false
   constructor(
@@ -75,9 +75,8 @@ export class GoalCreateCustomComponent implements OnInit {
       const type = this.route.snapshot.params.goalType
       const id = this.route.snapshot.params.goalId
       if (type === 'me') {
-        this.goalsSvc.getUserGoals(NsGoal.EGoalTypes.USER, 'isInIntranet').subscribe(goals => {
-          this.editGoal =
-            goals.goalsInProgress.concat(goals.completedGoals).find(goal => goal.id === id) || null
+        this.goalsSvc.getUserGoal(id).subscribe((goals: any) => {
+          this.editGoal = goals.result.content
           this.populateCurrentGoalValues()
         })
       } else {
@@ -97,15 +96,15 @@ export class GoalCreateCustomComponent implements OnInit {
 
   populateCurrentGoalValues() {
     if (this.editGoal) {
-      this.selectedContentIds = new Set<string>(this.editGoal.contentIds)
+      this.selectedContentIds = new Set<string>(this.editGoal.childNodes)
         ; (this.editGoal.contentProgress || this.editGoal.contents || []).forEach((content: any) => {
           this.chipNamesHash[content.identifier] = content.name
         })
       this.createGoalForm.setValue({
         name: this.editGoal.name,
-        description: this.editGoal.description,
+        description: this.editGoal.description || '',
         duration: this.editGoal.duration || 1,
-        type: this.editGoal.type,
+        type: this.editGoal.type || 'user',
       })
       this.fetchEditGoalStatus = 'done'
     } else {
@@ -146,36 +145,39 @@ export class GoalCreateCustomComponent implements OnInit {
     const rawValues = this.createGoalForm.getRawValue()
     this.createGoalStatus = 'fetching'
     this.raiseTelemetry(rawValues.type)
-    this.goalsSvc
-      .createGoal({
-        id: (this.editGoal && this.editGoal.id) || undefined,
-        name: rawValues.name,
-        contentIds: Array.from(this.selectedContentIds),
-        description: rawValues.description,
-        duration: rawValues.duration,
-        type: rawValues.type,
-      })
-      .subscribe(
-        () => {
-          this.createGoalStatus = 'done'
+    if (this.editGoal) {
+      this.goalsSvc
+        .updateGoal(this.editGoal.identifier, {
+          id: (this.editGoal && this.editGoal.identifier) || undefined,
+          name: rawValues.name,
+          contentIds: Array.from(this.selectedContentIds),
+          description: rawValues.description,
+          duration: rawValues.duration,
+          type: rawValues.type,
+          versionKey: this.editGoal.versionKey,
+        })
+        .subscribe(
+          () => {
+            this.createGoalStatus = 'done'
 
-          this.mode === 'create'
-            ? this.snackbar.open(this.createGoalSuccessMessage.nativeElement.value)
-            : this.snackbar.open(this.editGoalSuccessMessage.nativeElement.value)
+            this.mode === 'create'
+              ? this.snackbar.open(this.createGoalSuccessMessage.nativeElement.value)
+              : this.snackbar.open(this.editGoalSuccessMessage.nativeElement.value)
 
-          if (rawValues.type === NsGoal.EGoalTypes.USER) {
-            this.router.navigate(['/app/goals/me'])
-          } else {
-            this.router.navigate(['/app/goals/others'])
-          }
-        },
-        () => {
-          this.createGoalStatus = 'error'
-          this.mode === 'create'
-            ? this.snackbar.open(this.createGoalErrorMessage.nativeElement.value)
-            : this.snackbar.open(this.editGoalErrorMessage.nativeElement.value)
-        },
-      )
+            if (rawValues.type === NsGoal.EGoalTypes.USER) {
+              this.router.navigate(['/app/goals/me'])
+            } else {
+              this.router.navigate(['/app/goals/others'])
+            }
+          },
+          () => {
+            this.createGoalStatus = 'error'
+            this.mode === 'create'
+              ? this.snackbar.open(this.createGoalErrorMessage.nativeElement.value)
+              : this.snackbar.open(this.editGoalErrorMessage.nativeElement.value)
+          },
+        )
+    }
   }
 
   raiseTelemetry(goalType: NsGoal.EGoalTypes) {
