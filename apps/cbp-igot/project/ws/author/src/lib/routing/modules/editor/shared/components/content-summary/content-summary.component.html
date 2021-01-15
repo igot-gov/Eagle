@@ -45,7 +45,7 @@
     </mat-card>
 
 
-    <mat-card class="ws-mat-accent-border margin-top-l">
+    <mat-card class="ws-mat-accent-border margin-top-l" *ngIf="progressData?.length>0">
       <mat-card-title class="m-auto">
         <span class="mat-title">{{'Self curation results'}}</span>
       </mat-card-title>

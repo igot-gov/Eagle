@@ -9,7 +9,7 @@
 <mat-sidenav-container autosize="true" id="content-quality-side-nav" class="margin-top-m">
   <mat-sidenav #sidenav [mode]="mode$ | async" [(opened)]="sideBarOpened" class="no-border-sidenev"
     (closedStart)="sidenavClose()">
-    <div class="sticky1">
+    <div class="sticky1" *ngIf="pdfCount > 0">
       <div class="contain">
         <div class="pad-l-4r flex-column">
           <div *ngIf="getProgressPercent === 100"
@@ -46,7 +46,7 @@
   </mat-sidenav>
 
   <mat-sidenav-content class="pl-6 pr-6 ml-6">
-    <div class="flex flex-1 flex-column">
+    <div class="flex flex-1 flex-column" *ngIf="pdfCount > 0">
       <div class="flex flex-1 flex-column">
         <span class="flex flex-1 mat-subheading-1">Curation in progress ({{getProgressPercent}}%)</span>
         <mat-progress-bar class="margin-bottom-m quality-progress" aria-labelledby="content-result" mode="determinate"
@@ -63,7 +63,23 @@
         </ng-container>
       </div>
     </div>
-
+    <div class="flex flex-1 flex-column" *ngIf="pdfCount === 0">
+      <div class="flex flex-1 flex-column">
+        <span class="flex flex-1 mat-subheading-1 m-auto">Please move to next tab</span>
+      </div>
+      <div class="flex flex-1 flex-row m-auto margin-top-l">
+        <button mat-raised-button (click)="data.emit('back')"
+          class="btn-n text-white ws-mat-primary-background margin-left-s">
+          <span class="mat-subheading-2 padding-xs" style="vertical-align: unset;" i18n>Back: Content quality
+          </span>
+        </button>
+        <button mat-raised-button (click)="data.emit('next')"
+          class="btn-n text-white ws-mat-primary-background margin-left-s">
+          <span class="mat-subheading-2 padding-xs" style="vertical-align: unset;" i18n>Next: Summary
+          </span>
+        </button>
+      </div>
+    </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
 

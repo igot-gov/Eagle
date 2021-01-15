@@ -15,7 +15,7 @@
         <mat-sidenav-container autosize="true" class="nav-container">
           <mat-sidenav #sideNavBar class="h-full custom-scroll-small" [mode]="mode$ | async"
             [(opened)]="sideNavBarOpened">
-            <div class="mat-app-background z-50 sticky top-0">
+            <div class="mat-app-background z-50 top-0">
               <div class="w-full flex flex-row-reverse" *ngIf="!mediumScreenSize">
                 <button *ngIf="showContent" mat-icon-button (click)="showContent = !showContent"
                   aria-label="Minimize the side panel" i18n-aria-label>
