@@ -40,8 +40,8 @@ public class SpvPortalServiceImpl implements SpvPortalService {
 	}
 
 	@Override
-	public DepartmentInfo addDepartment(DepartmentInfo deptInfo) throws Exception {
-		return portalService.addDepartment(PortalConstants.SPV_ROLE_NAME, deptInfo);
+	public DepartmentInfo addDepartment(String userId, DepartmentInfo deptInfo) throws Exception {
+		return portalService.addDepartment(userId, PortalConstants.SPV_ROLE_NAME, deptInfo);
 	}
 
 	@Override

@@ -43,6 +43,12 @@ public class Department {
 
 	@Column(name = "logo")
 	private byte[] logo;
+	
+	@Column(name="creation_date")
+	private long creationDate;
+	
+	@Column(name="created_by")
+	private String createdBy;
 
 	public Department() {
 	}
@@ -109,6 +115,22 @@ public class Department {
 
 	public void setLogo(byte[] logo) {
 		this.logo = logo;
+	}
+	
+	public long getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(long created) {
+		this.creationDate = created;
+	}
+
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
 	}
 
 	public static Department clone(DepartmentInfo deptInfo) {

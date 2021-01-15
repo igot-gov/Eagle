@@ -54,7 +54,7 @@ public class PortalController {
 	public ResponseEntity<DepartmentInfo> addDepartment(@RequestHeader("wid") String wid,
 			@RequestBody DepartmentInfo deptInfo) throws Exception {
 		validateUserAccess(PortalConstants.SPV_DEPT_TYPE, PortalConstants.SPV_ROLE_NAME, wid);
-		return new ResponseEntity<DepartmentInfo>(spvPortalService.addDepartment(deptInfo), HttpStatus.OK);
+		return new ResponseEntity<DepartmentInfo>(spvPortalService.addDepartment(wid, deptInfo), HttpStatus.OK);
 	}
 
 	@PatchMapping("/portal/spv/department")
@@ -81,18 +81,25 @@ public class PortalController {
 
 	@PostMapping("/portal/spv/userrole")
 	public ResponseEntity<UserDepartmentInfo> addUserRoleInDepartmentBySPV(@RequestBody UserDepartmentRole userDeptRole,
+			@RequestHeader("rootOrg") String rootOrg, @RequestHeader("org") String org,
 			@RequestHeader("wid") String wid) throws Exception {
 		validateUserAccess(PortalConstants.SPV_DEPT_TYPE, PortalConstants.SPV_ROLE_NAME, wid);
-		return new ResponseEntity<UserDepartmentInfo>(portalService.addUserRoleInDepartment(userDeptRole, wid),
-				HttpStatus.OK);
+		return new ResponseEntity<UserDepartmentInfo>(
+				portalService.addUserRoleInDepartment(userDeptRole, wid, rootOrg, org), HttpStatus.OK);
 	}
 
 	@PatchMapping("/portal/spv/userrole")
 	public ResponseEntity<UserDepartmentInfo> updateUserRoleInDepartmentBySPV(
-			@RequestBody UserDepartmentRole userDeptRole, @RequestHeader("wid") String wid) throws Exception {
+			@RequestBody UserDepartmentRole userDeptRole, @RequestHeader("rootOrg") String rootOrg,
+			@RequestHeader("org") String org, @RequestHeader("wid") String wid) throws Exception {
 		validateUserAccess(PortalConstants.SPV_DEPT_TYPE, PortalConstants.SPV_ROLE_NAME, wid);
-		return new ResponseEntity<UserDepartmentInfo>(portalService.updateUserRoleInDepartment(userDeptRole, wid),
-				HttpStatus.OK);
+		return new ResponseEntity<UserDepartmentInfo>(
+				portalService.updateUserRoleInDepartment(userDeptRole, wid, rootOrg, org), HttpStatus.OK);
+	}
+
+	@GetMapping("/portal/spv/role")
+	public ResponseEntity<?> getSpvRoles() {
+		return new ResponseEntity<>(portalService.getAllDepartments(), HttpStatus.OK);
 	}
 	// ----------------- SPV APIs -----------------------
 
@@ -120,18 +127,20 @@ public class PortalController {
 
 	@PostMapping("/portal/mdo/userrole")
 	public ResponseEntity<UserDepartmentInfo> addUserRoleInDepartmentByMDO(@RequestBody UserDepartmentRole userDeptRole,
+			@RequestHeader("rootOrg") String rootOrg, @RequestHeader("org") String org,
 			@RequestHeader("wid") String wid) throws Exception {
 		validateUserAccess(PortalConstants.MDO_DEPT_TYPE, PortalConstants.MDO_ROLE_NAME, wid, userDeptRole.getDeptId());
-		return new ResponseEntity<UserDepartmentInfo>(portalService.addUserRoleInDepartment(userDeptRole, wid),
-				HttpStatus.OK);
+		return new ResponseEntity<UserDepartmentInfo>(
+				portalService.addUserRoleInDepartment(userDeptRole, wid, rootOrg, org), HttpStatus.OK);
 	}
 
 	@PatchMapping("/portal/mdo/userrole")
 	public ResponseEntity<UserDepartmentInfo> updateUserRoleInDepartmentByMDO(
-			@RequestBody UserDepartmentRole userDeptRole, @RequestHeader("wid") String wid) throws Exception {
+			@RequestBody UserDepartmentRole userDeptRole, @RequestHeader("rootOrg") String rootOrg,
+			@RequestHeader("org") String org, @RequestHeader("wid") String wid) throws Exception {
 		validateUserAccess(PortalConstants.MDO_DEPT_TYPE, PortalConstants.MDO_ROLE_NAME, wid, userDeptRole.getDeptId());
-		return new ResponseEntity<UserDepartmentInfo>(portalService.updateUserRoleInDepartment(userDeptRole, wid),
-				HttpStatus.OK);
+		return new ResponseEntity<UserDepartmentInfo>(
+				portalService.updateUserRoleInDepartment(userDeptRole, wid, rootOrg, org), HttpStatus.OK);
 	}
 
 	// ----------------- MDO APIs -----------------------
@@ -159,18 +168,20 @@ public class PortalController {
 
 	@PostMapping("/portal/cbp/userrole")
 	public ResponseEntity<UserDepartmentInfo> addUserRoleInDepartmentByCBP(@RequestBody UserDepartmentRole userDeptRole,
+			@RequestHeader("rootOrg") String rootOrg, @RequestHeader("org") String org,
 			@RequestHeader("wid") String wid) throws Exception {
 		validateUserAccess(PortalConstants.CBP_DEPT_TYPE, PortalConstants.CBP_ROLE_NAME, wid, userDeptRole.getDeptId());
-		return new ResponseEntity<UserDepartmentInfo>(portalService.addUserRoleInDepartment(userDeptRole, wid),
-				HttpStatus.OK);
+		return new ResponseEntity<UserDepartmentInfo>(
+				portalService.addUserRoleInDepartment(userDeptRole, wid, rootOrg, org), HttpStatus.OK);
 	}
 
 	@PatchMapping("/portal/cbp/userrole")
 	public ResponseEntity<UserDepartmentInfo> updateUserRoleInDepartmentByCBP(
-			@RequestBody UserDepartmentRole userDeptRole, @RequestHeader("wid") String wid) throws Exception {
+			@RequestBody UserDepartmentRole userDeptRole, @RequestHeader("rootOrg") String rootOrg,
+			@RequestHeader("org") String org, @RequestHeader("wid") String wid) throws Exception {
 		validateUserAccess(PortalConstants.CBP_DEPT_TYPE, PortalConstants.CBP_ROLE_NAME, wid, userDeptRole.getDeptId());
-		return new ResponseEntity<UserDepartmentInfo>(portalService.updateUserRoleInDepartment(userDeptRole, wid),
-				HttpStatus.OK);
+		return new ResponseEntity<UserDepartmentInfo>(
+				portalService.updateUserRoleInDepartment(userDeptRole, wid, rootOrg, org), HttpStatus.OK);
 	}
 	// ----------------- END OF CBP APIs -----------------------
 
@@ -195,9 +206,10 @@ public class PortalController {
 
 	@PostMapping("/portal/userrole")
 	public ResponseEntity<UserDepartmentInfo> updateUserRoleInDepartment(
-			@Valid @RequestBody UserDepartmentRole userDeptRole, @RequestHeader("wid") String wid) throws Exception {
-		return new ResponseEntity<UserDepartmentInfo>(portalService.addUserRoleInDepartment(userDeptRole, wid),
-				HttpStatus.OK);
+			@Valid @RequestBody UserDepartmentRole userDeptRole, @RequestHeader("rootOrg") String rootOrg,
+			@RequestHeader("org") String org, @RequestHeader("wid") String wid) throws Exception {
+		return new ResponseEntity<UserDepartmentInfo>(
+				portalService.addUserRoleInDepartment(userDeptRole, wid, rootOrg, org), HttpStatus.OK);
 	}
 
 //	@GetMapping("/portal/user/{user_id}/departmentRoles")

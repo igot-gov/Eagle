@@ -6,7 +6,7 @@ import java.util.List;
 import com.infosys.lex.portal.department.dto.Role;
 import com.infosys.lex.portal.department.dto.UserDepartmentRole;
 
-public class DepartmentInfo {
+public class DepartmentInfo implements Comparable<DepartmentInfo> {
 	private Integer id;
 	private String rootOrg;
 	private String deptName;
@@ -17,12 +17,14 @@ public class DepartmentInfo {
 	private long noOfUsers;
 	private String headquarters;
 	private byte[] logo;
+	private long creationDate;
+	private String createdBy;
 	private List<UserDepartmentRole> adminUserList;
 	private List<PortalUserInfo> active_users;
 	private List<PortalUserInfo> inActive_users;
 	private List<PortalUserInfo> blocked_users;
 	private List<String> currentUserRoles;
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -178,6 +180,22 @@ public class DepartmentInfo {
 		this.currentUserRoles = currentUserRoles;
 	}
 
+	public long getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(long created) {
+		this.creationDate = created;
+	}
+
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
 	public String toString() {
 		StringBuilder str = new StringBuilder("DepartmentInfo:");
 		str.append(" Id:").append(id);
@@ -188,8 +206,14 @@ public class DepartmentInfo {
 		str.append(", Description: ").append(description);
 		str.append(", headquarters: ").append(headquarters);
 		str.append(", noOfUsers: ").append(noOfUsers);
+		str.append(", creationDate: ").append(creationDate);
+		str.append(", createdBy: ").append(createdBy);
 		str.append("]");
 
 		return str.toString();
+	}
+
+	public int compareTo(DepartmentInfo o) {
+		return Long.compare(this.getCreationDate(), o.getCreationDate());
 	}
 }

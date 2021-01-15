@@ -14,11 +14,9 @@ public interface PortalService {
 
 	List<Department> getDepartmentsByUserId(String userId);
 
-	DepartmentInfo addDepartment(DepartmentInfo deptInfo) throws Exception;
-
-	UserDepartmentInfo addUserRoleInDepartment(UserDepartmentRole userDeptRole, String wid) throws Exception;
+	UserDepartmentInfo addUserRoleInDepartment(UserDepartmentRole userDeptRole, String wid, String rootOrg, String org) throws Exception;
 	
-	UserDepartmentInfo updateUserRoleInDepartment(UserDepartmentRole userDeptRole, String wid) throws Exception;
+	UserDepartmentInfo updateUserRoleInDepartment(UserDepartmentRole userDeptRole, String wid, String rootOrg, String org) throws Exception;
 
 	Boolean checkAdminPrivilage(Integer deptId, String userId) throws Exception;
 
@@ -33,7 +31,7 @@ public interface PortalService {
 
 	boolean validateCBPUserLogin(String userId);
 
-	DepartmentInfo addDepartment(String userRoleName, DepartmentInfo deptInfo) throws Exception;
+	DepartmentInfo addDepartment(String userId, String userRoleName, DepartmentInfo deptInfo) throws Exception;
 
 	DepartmentInfo getMyDepartment(String userId) throws Exception;
 

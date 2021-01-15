@@ -1,11 +1,18 @@
 package com.infosys.lex.portal.department.service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.configurationprocessor.json.JSONArray;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
@@ -60,9 +67,6 @@ public class PortalServiceImpl implements PortalService {
 
 	@Autowired
 	LexServerProperties serverConfig;
-
-	private static final String ROOT_ORG_CONST = "rootOrg";
-	private static final String ORG_CONST = "org";
 
 	private static final String WORKFLOW_DEFAULT_ROOT_ORG = "igot";
 	private static final String WORKFLOW_DEFAULT_ORG = "dopt";
@@ -119,12 +123,7 @@ public class PortalServiceImpl implements PortalService {
 	}
 
 	@Override
-	public DepartmentInfo addDepartment(DepartmentInfo deptInfo) throws Exception {
-		return addDepartment("MDO ADMIN", deptInfo);
-	}
-
-	@Override
-	public DepartmentInfo addDepartment(String userRoleName, DepartmentInfo deptInfo) throws Exception {
+	public DepartmentInfo addDepartment(String userId, String userRoleName, DepartmentInfo deptInfo) throws Exception {
 		validateDepartmentInfo(deptInfo);
 
 		if (deptInfo.getDeptTypeIds() == null) {
@@ -154,7 +153,10 @@ public class PortalServiceImpl implements PortalService {
 		}
 
 		// Department is Valid -- add this Department
-		Department dept = deptRepo.save(Department.clone(deptInfo));
+		Department dept = Department.clone(deptInfo);
+		dept.setCreationDate(java.time.Instant.now().toEpochMilli());
+		dept.setCreatedBy(userId);
+		dept = deptRepo.save(dept);
 
 		Iterator<Role> roles = roleRepo.findAll().iterator();
 		List<Integer> roleIds = new ArrayList<Integer>();
@@ -179,7 +181,6 @@ public class PortalServiceImpl implements PortalService {
 			}
 		}
 		return enrichDepartmentInfo(dept, false, true);
-
 	}
 
 	@Override
@@ -202,7 +203,7 @@ public class PortalServiceImpl implements PortalService {
 	}
 
 	@Override
-	public UserDepartmentInfo addUserRoleInDepartment(UserDepartmentRole userDeptRole, String wid) throws Exception {
+	public UserDepartmentInfo addUserRoleInDepartment(UserDepartmentRole userDeptRole, String wid, String rootOrg, String org) throws Exception {
 		validateUserDepartmentRole(userDeptRole);
 		UserDepartmentRole existingRecord = userDepartmentRoleRepo.findByUserIdAndDeptId(userDeptRole.getUserId(),
 				userDeptRole.getDeptId());
@@ -242,7 +243,7 @@ public class PortalServiceImpl implements PortalService {
 		request.put("serviceName", "profile");
 		request.put("comment", "Updating Department Details.");
 		ArrayList<HashMap<String, Object>> fieldValues = new ArrayList<>();
-		HashMap<String, Object> fieldValue= new HashMap<>();
+		HashMap<String, Object> fieldValue = new HashMap<>();
 		fieldValue.put("fieldKey", "employmentDetails");
 
 		// Try to get existing dept if available
@@ -263,14 +264,15 @@ public class PortalServiceImpl implements PortalService {
 		request.put("updateFieldValues", fieldValues);
 
 		HttpHeaders headers = new HttpHeaders();
-		headers.set(ROOT_ORG_CONST, WORKFLOW_DEFAULT_ROOT_ORG);
-		headers.set(ORG_CONST, WORKFLOW_DEFAULT_ORG);
+		headers.set(rootOrg, WORKFLOW_DEFAULT_ROOT_ORG);
+		headers.set(org, WORKFLOW_DEFAULT_ORG);
 		HttpEntity<Object> entity = new HttpEntity<>(request, headers);
-		restTemplate.postForObject(serverConfig.getWfServiceHost() + serverConfig.getWfServicePath(), entity, Map.class);
+		restTemplate.postForObject(serverConfig.getWfServiceHost() + serverConfig.getWfServicePath(), entity,
+				Map.class);
 		return userDeptInfo;
 	}
 
-	public UserDepartmentInfo updateUserRoleInDepartment(UserDepartmentRole userDeptRole, String wid) throws Exception {
+	public UserDepartmentInfo updateUserRoleInDepartment(UserDepartmentRole userDeptRole, String wid, String rootOrg, String org) throws Exception {
 		validateUserDepartmentRole(userDeptRole);
 		UserDepartmentRole existingRecord = userDepartmentRoleRepo.findByUserIdAndDeptId(userDeptRole.getUserId(),
 				userDeptRole.getDeptId());
@@ -307,7 +309,7 @@ public class PortalServiceImpl implements PortalService {
 		request.put("serviceName", "profile");
 		request.put("comment", "Updating Department Details.");
 		ArrayList<HashMap<String, Object>> fieldValues = new ArrayList<>();
-		HashMap<String, Object> fieldValue= new HashMap<>();
+		HashMap<String, Object> fieldValue = new HashMap<>();
 		fieldValue.put("fieldKey", "employmentDetails");
 
 		// Try to get existing dept if available
@@ -328,10 +330,11 @@ public class PortalServiceImpl implements PortalService {
 		request.put("updateFieldValues", fieldValues);
 
 		HttpHeaders headers = new HttpHeaders();
-		headers.set(ROOT_ORG_CONST, WORKFLOW_DEFAULT_ROOT_ORG);
-		headers.set(ORG_CONST, WORKFLOW_DEFAULT_ORG);
+		headers.set(rootOrg, WORKFLOW_DEFAULT_ROOT_ORG);
+		headers.set(org, WORKFLOW_DEFAULT_ORG);
 		HttpEntity<Object> entity = new HttpEntity<>(request, headers);
-		restTemplate.postForObject(serverConfig.getWfServiceHost() + serverConfig.getWfServicePath(), entity, Map.class);
+		restTemplate.postForObject(serverConfig.getWfServiceHost() + serverConfig.getWfServicePath(), entity,
+				Map.class);
 		return userDeptInfo;
 	}
 
@@ -458,6 +461,8 @@ public class PortalServiceImpl implements PortalService {
 			deptInfo.setDeptTypeIds(dept.getDeptTypeIds());
 			deptInfo.setHeadquarters(dept.getHeadquarters());
 			deptInfo.setLogo(dept.getLogo());
+			deptInfo.setCreationDate(dept.getCreationDate());
+			deptInfo.setCreatedBy(dept.getCreatedBy());
 
 			// Get Dept Type Information
 			deptInfo.setDeptTypeInfos(enrichDepartmentTypeInfo(dept.getDeptTypeIds()));
@@ -470,8 +475,8 @@ public class PortalServiceImpl implements PortalService {
 				// Get Role Informations
 				List<Role> roleList = getDepartmentRoles(Arrays.asList(deptInfo.getDeptTypeIds()));
 				deptInfo.setRolesInfo(roleList);
-				
-				//TODO Current User Roles
+
+				// TODO Current User Roles
 
 				Map<Integer, Role> deptRoleMap = deptInfo.getRolesInfo().stream()
 						.collect(Collectors.toMap(Role::getId, roleInfo -> roleInfo));
@@ -536,6 +541,7 @@ public class PortalServiceImpl implements PortalService {
 		if (deptInfoList.isEmpty()) {
 			return Collections.emptyList();
 		} else {
+			Collections.reverse(deptInfoList);
 			return deptInfoList;
 		}
 	}
@@ -624,12 +630,13 @@ public class PortalServiceImpl implements PortalService {
 			if (DataValidator.isCollectionEmpty(roles) || roles.size() != userDeptRole.getRoles().size()) {
 				throw new Exception("Invalid Role Names Provided");
 			}
-			
+
 			List<Role> rolesAvailableInDept = getDepartmentRoles(Arrays.asList(dept.getDeptTypeIds()));
-			
-			Set<String> availableRoleNames = rolesAvailableInDept.stream().map(i -> i.getRoleName()).collect(Collectors.toSet());
-			for(String roleName : userDeptRole.getRoles()) {
-				if(!availableRoleNames.contains(roleName)) {
+
+			Set<String> availableRoleNames = rolesAvailableInDept.stream().map(i -> i.getRoleName())
+					.collect(Collectors.toSet());
+			for (String roleName : userDeptRole.getRoles()) {
+				if (!availableRoleNames.contains(roleName)) {
 					throw new Exception("Invalid Role Name provided for the Department");
 				}
 			}

@@ -7,7 +7,7 @@ import com.infosys.lex.portal.department.model.DepartmentInfo;
 public interface SpvPortalService {
 	public List<DepartmentInfo> getAllDepartments() throws Exception;
 
-	public DepartmentInfo addDepartment(DepartmentInfo deptInfo) throws Exception;
+	public DepartmentInfo addDepartment(String userId, DepartmentInfo deptInfo) throws Exception;
 
 	DepartmentInfo updateDepartment(DepartmentInfo deptInfo) throws Exception;
 
