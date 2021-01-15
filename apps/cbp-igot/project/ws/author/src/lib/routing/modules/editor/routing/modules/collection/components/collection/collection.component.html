@@ -61,7 +61,7 @@
             <!-- <ws-auth-quiz-questions *ngIf="viewMode === 'quiz'"  (data)="action($event)">
         </ws-auth-quiz-questions> -->
             <ng-container *ngIf="viewMode === 'quiz'">
-              <ws-auth-quiz (data)="action($event)"></ws-auth-quiz>
+              <ws-auth-quiz-questions (data)="action($event)"></ws-auth-quiz-questions>
             </ng-container>
             <!-- <div *ngIf="viewMode === 'quiz'">
               Please go to drafts to edit Web Pages or Click

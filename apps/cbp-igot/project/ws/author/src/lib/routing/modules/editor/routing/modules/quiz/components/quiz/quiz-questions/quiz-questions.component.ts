@@ -137,8 +137,24 @@ export class QuizQusetionsComponent implements OnInit, OnDestroy {
                 this.quizStoreSvc.collectiveQuiz[id] = v.contents[0].data.questions
               } else if (newData[0] && newData[0].data && newData[0].data.questions) {
                 this.quizStoreSvc.collectiveQuiz[id] = newData[0].data.questions
-
               } else {
+                this.quizResolverSvc.getUpdatedData(id).subscribe(UpdatedData => {
+                  if (UpdatedData && UpdatedData[0]) {
+                    this.quizStoreSvc.collectiveQuiz[id] = UpdatedData[0].data.questions
+                    // need to arrange
+                    this.canEditJson = this.quizResolverSvc.canEdit(quizContent)
+                    this.resourceType = quizContent.categoryType || 'Quiz'
+                    this.quizDuration = quizContent.duration || 300
+                    this.questionsArr =
+                      this.quizStoreSvc.collectiveQuiz[id] || []
+                    this.contentLoaded = true
+                    this.questionsArr = this.quizStoreSvc.collectiveQuiz[id]
+                    this.currentId = id
+                    this.quizStoreSvc.currentId = id
+                    this.quizStoreSvc.changeQuiz(0)
+                    // need to re-arrange
+                  }
+                })
                 this.quizStoreSvc.collectiveQuiz[id] = []
               }
               // this.quizStoreSvc.collectiveQuiz[id] = v.contents[0].data

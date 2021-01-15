@@ -1,7 +1,7 @@
 <ng-container *ngIf="enableFeature && contentId">
   <!-- <mat-card> -->
   <div class="flex flex-column width-custom">
-    <span class="mat-body-1 mt-4 mb-10" id="total rating" i18n>{{'163 ratings'}}</span>
+    <span class="mat-body-1 mt-4 mb-10" id="total rating" i18n>{{userRating?.ratingCount}}{{' ratings'}}</span>
     <div class="flex flex-column">
       <!-- <button i18n-aria-label aria-label="Rating" aria-labelledby="rate-heading" name="user-content-rating-star-{{i+1}}"
         [disabled]="isRequesting || isDisabled" class="rating-button" mat-icon-button
@@ -9,10 +9,10 @@
         <mat-icon class="rating-icon orange">
           {{ (userRating || -1) > i ? 'star' : 'star_border' }}</mat-icon>
       </button> -->
-      <ng-container *ngFor="let _ of [5, 4, 3, 2, 1]; let i = index">
+      <ng-container *ngFor="let _ of userRating?.ratingInfo; let i = index">
         <div class="flex flex-1">
-          <span class="star-text mat-subheading-2">{{_}} star</span>
-          <mat-progress-bar class="progress" [value]="_*10" aria-label="Rating" color="warn" mode="determinate">
+          <span class="star-text mat-subheading-2">{{_.rating}} star</span>
+          <mat-progress-bar class="progress" [value]="_.count" aria-label="Rating" color="warn" mode="determinate">
           </mat-progress-bar>
         </div>
       </ng-container>

@@ -5,12 +5,13 @@
     <div class="flex">
       <button i18n-aria-label aria-label="Rating" aria-labelledby="rate-heading" name="user-content-rating-star-{{i+1}}"
         [disabled]="isRequesting || isDisabled" class="rating-button" mat-icon-button
-        *ngFor="let _ of [1, 2, 3, 4, 5]; let i = index" (click)="addRating(i)" color="primary">
+        *ngFor="let _ of userRating?.ratingInfo; let i = index" color="primary">
         <mat-icon class="rating-icon orange">
           {{ (userRating || -1) > i ? 'star' : 'star_border' }}</mat-icon>
       </button>
     </div>
-    <span class="mat-body-1" tabindex="0" i18n-aria-label aria-label="Rating">5 of {{userRating || '0'}}</span>
+    <span class="mat-body-1" tabindex="0" i18n-aria-label aria-label="Rating">
+      {{userRating?.averageRating || '0'}} of 5</span>
   </div>
   <!-- </mat-card> -->
 </ng-container>
