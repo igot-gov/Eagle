@@ -25,6 +25,7 @@ export class RolesAccessComponent implements OnInit, AfterViewInit, OnDestroy {
       sortState: 'asc',
     }
     this.fetchRoles()
+    // this.fetchRolesNew()
   }
 
   ngAfterViewInit() {
@@ -42,6 +43,17 @@ export class RolesAccessComponent implements OnInit, AfterViewInit, OnDestroy {
       this.data = roles.data
     })
   }
+  /* API call to get all roles*/
+  // fetchRolesNew() {
+  //   this.profile.getMyDepartment().subscribe(user => {
+  //     // this.data = roles.data
+  //     user.rolesInfo.forEach((element: { roleName: any, active_users: any }) => {
+  //       console.log(element.roleName)
+  //       console.log(element.active_users)
+
+  //     })
+  //   })
+  // }
 
   ngOnDestroy() { }
 }
