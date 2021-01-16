@@ -14,8 +14,7 @@
         },
         "enabled": true,
         "paramaterName": "role",
-        "routerLink": "/app/roles/users",
-        "customRouting": true
+        "routerLink": "/app/roles/<param>/users"
       },
       {
         "name": "Roles and Access",
