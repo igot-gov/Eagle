@@ -68,7 +68,7 @@
                     'ws-mat-accent-border font-medium':status !== 'inreview'}" mat-button role="button">
               Under Review {{ this.count && this.count['inreview']? '('+this.count['inreview']+')': null }}
             </a>
-            <a *ngIf="!isAdmin" [routerLink]="[filterPath]" [queryParams]="{ status: 'review' }"
+            <a *ngIf="(!isAdmin && isReviewer)" [routerLink]="[filterPath]" [queryParams]="{ status: 'review' }"
               routerLinkActive="router-link-active" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : status === 'review',
                                 'ws-mat-accent-border font-medium':status !== 'inreview'}" mat-button role="button">
               For Review {{ this.count && this.count['review']? '('+this.count['review']+')': null }}

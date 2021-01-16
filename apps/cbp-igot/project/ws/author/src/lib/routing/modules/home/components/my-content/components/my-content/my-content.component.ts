@@ -74,6 +74,8 @@ export class MyContentComponent implements OnInit, OnDestroy {
   queryFilter = ''
   ordinals: any
   isAdmin = false
+  isReviewer = false
+  isPublisher = false
   departmentData: any
   currentAction: 'author' | 'reviewer' | 'expiry' | 'deleted' = 'author'
   count: any = {}
@@ -118,6 +120,9 @@ export class MyContentComponent implements OnInit, OnDestroy {
     private configService: ConfigurationsService,
 
   ) {
+    this.isAdmin = this.accessService.hasRole(['admin', 'super-admin', 'content-admin', 'editor', 'content-creator'])
+    this.isReviewer = this.accessService.hasRole(['reviewer'])
+    this.isPublisher = this.accessService.hasRole(['publisher'])
     if (this.configService.userRoles) {
       this.myRoles = this.configService.userRoles
     }
@@ -151,7 +156,7 @@ export class MyContentComponent implements OnInit, OnDestroy {
     } else {
       this.leftmenues = this.authInitService.authAdditionalConfig.menus
     }
-    this.isAdmin = this.accessService.hasRole(['admin', 'super-admin', 'content-admin', 'editor'])
+
     if (this.courseTaken.mandatoryCourseCompleted) {
       this.initCardTable()
     } else {
@@ -303,7 +308,7 @@ export class MyContentComponent implements OnInit, OnDestroy {
         uuid: this.userId,
         rootOrg: this.accessService.rootOrg,
         // this is for Author Only
-        isUserRecordEnabled: true,
+        isUserRecordEnabled: !this.accessService.hasRole(['reviewer', 'publisher']),
         // !this.accessService.hasRole(['admin', 'super-admin', 'content-admin', 'editor', 'reviewer', 'publisher']),
       },
     }
