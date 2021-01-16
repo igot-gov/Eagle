@@ -43,7 +43,7 @@ export class RolesAccessComponent implements OnInit, AfterViewInit, OnDestroy {
       user.rolesInfo.forEach((element: { roleName: any, noOfUsers: any }) => {
         totalUsers.push({
           role: element.roleName,
-          count: element.noOfUsers
+          count: element.noOfUsers,
         })
 
       })

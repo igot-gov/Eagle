@@ -116,7 +116,7 @@ export class ApprovalsComponent implements OnInit, OnDestroy {
         })
       })
     } else {
-      this.snackbar.open("Please connect to your SPV admin, to update MDO name.")
+      this.snackbar.open('Please connect to your SPV admin, to update MDO name.')
     }
   }
 

@@ -90,7 +90,7 @@ export class UsersViewComponent implements OnInit, OnDestroy {
     const inactiveUsersData: any[] = []
     if (this.usersData.active_users && this.usersData.active_users.length > 0) {
       this.usersData.active_users.forEach((user: any) => {
-        let currentRole = []
+        const currentRole = []
         user.roleInfo.forEach((element: { roleName: any }) => {
           currentRole.push(element.roleName)
         })
