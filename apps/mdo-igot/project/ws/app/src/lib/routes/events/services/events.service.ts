@@ -30,8 +30,8 @@ export class EventsService {
     return this.http.post<any>(`${API_END_POINTS.PUBLISH_EVENT}/${eventId}`, req)
   }
 
-  onSearchEvent(req: any): Observable<any> {
-    return this.http.post<any>(`${API_END_POINTS.SEARCH_EVENT}`, req)
+  searchEvent(req: any) {
+    return this.http.post<any>(API_END_POINTS.SEARCH_EVENT, req)
   }
 
   getParticipants(): Observable<any> {

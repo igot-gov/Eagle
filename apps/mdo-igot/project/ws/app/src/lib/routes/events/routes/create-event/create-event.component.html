@@ -9,7 +9,7 @@
                 </div>
                 <span class="spacer"></span>
                 <div class="flex flex-3 custom button-row-inline">
-                <button mat-stroked-button color="accent" type="button" class="mat-accent-border flex-auto-display">
+                <button mat-stroked-button color="accent" type="button" class="mat-accent-border flex-auto-display" (click)="goToList()">
                     <span i18n>Cancel</span>
                 </button>
                 <button mat-stroked-button color="accent" type="button" class="mat-accent-border flex-auto-display" 
@@ -266,9 +266,6 @@
                                                 <div class="flex flex-1 custom button-row-add-user">
                                                     <button mat-stroked-button color="accent" type="button" class="mat-accent-border flex-auto-display" (click)="openDialog()">
                                                         <span i18n>Add karmayogi user</span>
-                                                    </button>
-                                                    <button mat-stroked-button color="accent" type="button" class="mat-accent-border flex-auto-display">
-                                                        <span i18n>Add external user</span>
                                                     </button>
                                                 </div>
                                                 <div class="example-table-container" *ngIf="participantsArr.length > 0">

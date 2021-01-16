@@ -6,6 +6,8 @@ import { MatSort } from '@angular/material/sort'
 import { ITableData } from '../../interfaces/interfaces'
 import { MatDialog } from '@angular/material/dialog'
 import { ParticipantsComponent } from '../../components/participants/participants.component'
+import { Router } from '@angular/router'
+import { ConfigurationsService } from '@ws-widget/utils'
 
 @Component({
   selector: 'ws-app-create-event',
@@ -72,11 +74,20 @@ export class CreateEventComponent implements OnInit {
   imageSrcURL: any
   tabsData!: any[]
   currentTab = 'eventInfo'
+  userId: any
+  username: any
 
   constructor(private snackBar: MatSnackBar,
               private eventsSvc: EventsService,
               private matDialog: MatDialog,
+              private router: Router,
+              private configSvc: ConfigurationsService
               ) {
+
+    if (this.configSvc.userProfile) {
+      this.userId = this.configSvc.userProfile.userId
+      this.username = this.configSvc.userProfile.userName
+    }
     this.createEventForm = new FormGroup({
       eventPicture: new FormControl('', [Validators.required]),
       eventTitle: new FormControl('', [Validators.required]),
@@ -133,17 +144,6 @@ export class CreateEventComponent implements OnInit {
     }
   }
 
-  // getParticipantsData() {
-  //   this.eventsSvc.getParticipants().subscribe(
-  //     res => {
-  //       this.activeUsers = res.active_users
-  //     },
-  //     (err: any) => {
-  //       this.openSnackbar(err.error.split(':')[1])
-  //     }
-  //   )
-  // }
-
   openDialog() {
     this.dialogRef = this.matDialog.open(ParticipantsComponent, {
       width: '850px',
@@ -161,7 +161,7 @@ export class CreateEventComponent implements OnInit {
             }
             const contactsObj = {
               id: obj.id,
-              name: `${obj.firstname} {obj.lastname}`,
+              name: `${obj.firstname} ${obj.lastname}`,
             }
             this.presentersArr.push(contactsObj)
             this.participantsArr.push(setSelectedPresentersObj)
@@ -211,63 +211,38 @@ export class CreateEventComponent implements OnInit {
 
   onSubmit() {
 
+    const eventDurationMinutes = this.addMinutes(
+       this.createEventForm.controls['eventDurationHours'].value,
+       this.createEventForm.controls['eventDurationMinutes'].value
+    )
     const form = {
-       content: {
-          contentType: 'Event',
-          mimeType: 'application/vnd.ekstep.content-collection',
-          locale: 'en',
-          name: this.createEventForm.controls['eventTitle'].value,
-          description: this.createEventForm.controls['summary'].value,
-          category: 'Event',
-          createdBy: 'b5e7a871-37d1-469b-a9d6-25353961637e',
-          authoringDisabled: false,
-          isContentEditingDisabled: false,
-          isMetaEditingDisabled: false,
-          isExternal: false,
-       },
+      content: {
+        contentType: 'Event',
+        mimeType: 'application/html',
+        locale: 'en',
+        isExternal: true,
+        name: this.createEventForm.controls['eventTitle'].value,
+        description: this.createEventForm.controls['summary'].value,
+        category: 'Event',
+        createdBy: this.userId,
+        authoringDisabled: false,
+        isContentEditingDisabled: false,
+        isMetaEditingDisabled: false,
+        learningObjective: this.createEventForm.controls['agenda'].value,
+        expiryDate: this.createEventForm.controls['eventDate'].value.toISOString(),
+        duration: eventDurationMinutes,
+        artifactUrl: this.createEventForm.controls['conferenceLink'].value,
+        resourceType: this.createEventForm.controls['eventType'].value,
+        categoryType: 'Article',
+        creatorDetails: this.createEventForm.controls['presenters'].value,
+        thumbnail: this.createEventForm.controls['eventPicture'].value,
+      },
     }
-
     const formJson = this.encodeToBase64(form)
     this.eventsSvc.createEvent(formJson).subscribe(
       res => {
         const identifier = res.identifier
-        this.updateEventData(identifier)
-      },
-      (err: any) => {
-        this.openSnackbar(err.error.split(':')[1])
-      }
-    )
-  }
-
-  updateEventData(identifier: any) {
-
-    const identifierKey = identifier
-    const eventDurationMinutes = this.addMinutes(
-      this.createEventForm.controls['eventDurationHours'].value,
-      this.createEventForm.controls['eventDurationMinutes'].value
-    )
-    const formBody = {
-      nodesModified: {
-        [identifierKey]: {
-          isNew: false,
-          root: true,
-          metadata: {
-            learningObjective: this.createEventForm.controls['agenda'].value,
-            resourceType: this.createEventForm.controls['eventType'].value,
-            expiryDate: this.createEventForm.controls['eventDate'].value,
-            duration: eventDurationMinutes,
-            artifactUrl: this.createEventForm.controls['conferenceLink'].value,
-            contacts: this.createEventForm.controls['presenters'].value,
-            thumbnail: this.createEventForm.controls['eventPicture'].value,
-          },
-        },
-      }, hierarchy: {},
-    }
-
-    const formJson = this.encodeToBase64(formBody)
-    this.eventsSvc.updateEvent(formJson).subscribe(
-      res => {
-        this.openSnackbar(res)
+        this.publishEvent(identifier)
       },
       (err: any) => {
         this.openSnackbar(err.error.split(':')[1])
@@ -291,6 +266,33 @@ export class CreateEventComponent implements OnInit {
   addMinutes(hrs: number, mins: number) {
     const minutes = (hrs * 60) + mins
     return minutes
+  }
+
+  publishEvent(identifierkey: any) {
+      const requestObj = {
+        actor: this.userId,
+        comment: 'done',
+        operation: 1,
+        org: 'dopt',
+        rootOrg: 'igot',
+        appName: 'iGoT',
+        appUrl: 'https://d136953gtttd92.cloudfront.net',
+        actorName: this.username,
+        action: 'publisherApproved',
+      }
+      const formJson = this.encodeToBase64(requestObj)
+      this.eventsSvc.publishEvent(formJson, identifierkey).subscribe(
+        res => {
+          this.openSnackbar(res)
+        },
+        (err: any) => {
+          this.openSnackbar(err.error.split(':')[1])
+        }
+      )
+    }
+
+  goToList() {
+    this.router.navigate([`/app/events`])
   }
 
 }

@@ -7,8 +7,8 @@ import { MatTableDataSource } from '@angular/material/table'
 import { MatPaginator } from '@angular/material'
 import { MatSort } from '@angular/material/sort'
 import * as _ from 'lodash'
-
-// import { ITableData, IColums } from '../interface/interfaces'
+import { ITableData, IColums, IAction } from '../../interfaces/interfaces'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'ws-event-list-view',
@@ -16,15 +16,16 @@ import * as _ from 'lodash'
   styleUrls: ['./event-list-view.component.scss'],
 })
 export class EventListViewComponent implements OnInit, AfterViewInit, OnChanges {
-  // @Input() tableData!: ITableData | undefined
+
+  @Input() tableData!: ITableData | undefined
   @Input() data?: []
   @Input() isUpload?: boolean
   @Input() isCreate?: boolean
 
-  // @Input() columns?: IColums[]
-  // @Input() needCheckBox?: Boolean
-  // @Input() needHash?: boolean
-  // @Input() actions: IAction[]
+  @Input() columns?: IColums[]
+  @Input() needCheckBox?: Boolean
+  @Input() needHash?: boolean
+  @Input() actions?: IAction[]
   @Output() clicked?: EventEmitter<any>
   @Output() actionsClick?: EventEmitter<any>
   @Output() eOnRowClick = new EventEmitter<any>()
@@ -41,7 +42,9 @@ export class EventListViewComponent implements OnInit, AfterViewInit, OnChanges 
   @ViewChild(MatSort, { static: true }) sort?: MatSort
   selection = new SelectionModel<any>(true, [])
 
-  constructor() {
+  constructor(
+    private router: Router
+    ) {
     this.dataSource = new MatTableDataSource<any>()
     this.actionsClick = new EventEmitter()
     this.clicked = new EventEmitter()
@@ -93,9 +96,9 @@ export class EventListViewComponent implements OnInit, AfterViewInit, OnChanges 
       if (this.tableData.needHash) {
         columns.splice(0, 0, 'SR')
       }
-      // if (this.tableData.actions && this.tableData.actions.length > 0) {
-      //   columns.push('Actions')
-      // }
+      if (this.tableData.actions && this.tableData.actions.length > 0) {
+        columns.push('Actions')
+      }
       if (this.tableData.needUserMenus) {
         columns.push('Menu')
       }
@@ -135,7 +138,7 @@ export class EventListViewComponent implements OnInit, AfterViewInit, OnChanges 
   }
 
   onCreateClick() {
-    this.eOnCreateClick.emit()
+    this.router.navigate([`/app/events/create-event`])
   }
 
 }
