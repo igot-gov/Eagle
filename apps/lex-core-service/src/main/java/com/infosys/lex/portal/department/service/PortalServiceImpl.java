@@ -541,7 +541,7 @@ public class PortalServiceImpl implements PortalService {
 		if (deptInfoList.isEmpty()) {
 			return Collections.emptyList();
 		} else {
-			Collections.reverse(deptInfoList);
+			Collections.sort(deptInfoList);
 			return deptInfoList;
 		}
 	}

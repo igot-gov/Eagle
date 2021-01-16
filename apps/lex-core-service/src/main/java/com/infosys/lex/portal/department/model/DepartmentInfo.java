@@ -214,6 +214,6 @@ public class DepartmentInfo implements Comparable<DepartmentInfo> {
 	}
 
 	public int compareTo(DepartmentInfo o) {
-		return Long.compare(this.getCreationDate(), o.getCreationDate());
+		return Long.compare(o.getCreationDate(), this.getCreationDate());
 	}
 }
