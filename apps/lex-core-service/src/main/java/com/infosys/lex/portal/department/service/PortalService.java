@@ -5,6 +5,7 @@ import java.util.List;
 import com.infosys.lex.portal.department.dto.Department;
 import com.infosys.lex.portal.department.dto.UserDepartmentRole;
 import com.infosys.lex.portal.department.model.DepartmentInfo;
+import com.infosys.lex.portal.department.model.SearchUserInfo;
 import com.infosys.lex.portal.department.model.UserDepartmentInfo;
 
 public interface PortalService {
@@ -36,4 +37,6 @@ public interface PortalService {
 	DepartmentInfo getMyDepartment(String userId) throws Exception;
 
 	DepartmentInfo getMyDepartment(String deptType, String userId, boolean isUserInfoRequired) throws Exception;
+	
+	List<SearchUserInfo> searchUserForRole(Integer deptId, String roleName, String userName) throws Exception;
 }

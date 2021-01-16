@@ -32,6 +32,7 @@ import com.infosys.lex.portal.department.dto.UserDepartmentRole;
 import com.infosys.lex.portal.department.model.DepartmentInfo;
 import com.infosys.lex.portal.department.model.DeptTypeInfo;
 import com.infosys.lex.portal.department.model.PortalUserInfo;
+import com.infosys.lex.portal.department.model.SearchUserInfo;
 import com.infosys.lex.portal.department.model.UserDepartmentInfo;
 import com.infosys.lex.portal.department.repo.DepartmentRepository;
 import com.infosys.lex.portal.department.repo.DepartmentRoleRepository;
@@ -442,6 +443,11 @@ public class PortalServiceImpl implements PortalService {
 		}
 		return false;
 	}
+	
+	@Override
+	public List<SearchUserInfo> searchUserForRole(Integer deptId, String roleName, String userName) {
+		return null;
+	}
 
 	private DepartmentInfo enrichDepartmentInfo(Integer deptId, boolean isUserInfoRequired, boolean enrichData) {
 		Optional<Department> dept = deptRepo.findById(deptId);
@@ -509,6 +515,7 @@ public class PortalServiceImpl implements PortalService {
 						for (Integer roleId : userDeptRole.getRoleIds()) {
 							Role r = deptRoleMap.get(roleId);
 							userRoleInfo.add(r);
+							r.incrementUserCount();
 						}
 						pUserInfo.setRoleInfo(userRoleInfo);
 

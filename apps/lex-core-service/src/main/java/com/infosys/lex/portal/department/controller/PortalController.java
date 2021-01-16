@@ -183,6 +183,12 @@ public class PortalController {
 		return new ResponseEntity<UserDepartmentInfo>(
 				portalService.updateUserRoleInDepartment(userDeptRole, wid, rootOrg, org), HttpStatus.OK);
 	}
+
+	@GetMapping("/portal/cbp/searchUser/deptId/{dept_id}/role/{role_name}/userlike/{username}")
+	public ResponseEntity<?> searchUserForRole(@PathVariable("dept_id") Integer deptId,
+			@PathVariable("role_name") String roleName, @PathVariable("username") String userName) throws Exception {
+		return new ResponseEntity<>(portalService.searchUserForRole(deptId, roleName, userName), HttpStatus.OK);
+	}
 	// ----------------- END OF CBP APIs -----------------------
 
 	@GetMapping("/portal/department/{dept_id}")

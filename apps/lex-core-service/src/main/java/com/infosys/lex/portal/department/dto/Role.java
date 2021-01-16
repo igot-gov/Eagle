@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -23,7 +24,10 @@ public class Role {
 	@Column(name = "description")
 	@NotNull
 	private String description;
-
+	
+	@Transient
+	private int noOfUsers;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -46,5 +50,17 @@ public class Role {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public int getNoOfUsers() {
+		return noOfUsers;
+	}
+
+	public void setNoOfUsers(int noOfUsers) {
+		this.noOfUsers = noOfUsers;
+	}
+	
+	public void incrementUserCount() {
+		noOfUsers++;
 	}
 }
