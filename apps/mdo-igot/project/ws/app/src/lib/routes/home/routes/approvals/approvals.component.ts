@@ -1,9 +1,13 @@
 
 import { Component, OnDestroy, OnInit } from '@angular/core'
-import { Router } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { ApprovalsService } from '../../services/approvals.service'
 import moment from 'moment'
 import { ITableData } from '@ws-widget/collection'
+import { MatSnackBar } from '@angular/material'
+/* tslint:disable */
+import _ from 'lodash'
+/* tslint:enable */
 @Component({
   selector: 'ws-app-approvals',
   templateUrl: './approvals.component.html',
@@ -14,7 +18,7 @@ export class ApprovalsComponent implements OnInit, OnDestroy {
   currentFilter = 'toapprove'
   discussionList!: any
   discussProfileData!: any
-
+  departName = ''
   tabledata: ITableData = {
     // actions: [{ name: 'Approve', label: 'Approve', icon: 'remove_red_eye', type: 'Approve' },
     // { name: 'Reject', label: 'Reject', icon: 'remove_red_eye', type: 'Reject' }],
@@ -31,7 +35,15 @@ export class ApprovalsComponent implements OnInit, OnDestroy {
     needUserMenus: false,
   }
 
-  constructor(private router: Router, private apprService: ApprovalsService) {
+  constructor(
+    private router: Router,
+    private apprService: ApprovalsService,
+    private activeRouter: ActivatedRoute,
+    private snackbar: MatSnackBar) {
+    if (this.activeRouter.parent && this.activeRouter.parent.snapshot.data.department.data.deptName
+    ) {
+      this.departName = _.get(this.activeRouter, 'parent.snapshot.data.department.data.deptName')
+    }
     this.fetchApprovals()
   }
 
@@ -66,41 +78,46 @@ export class ApprovalsComponent implements OnInit, OnDestroy {
   }
 
   fetchApprovals() {
-    const req = {
-      serviceName: 'profile',
-      applicationStatus: 'SEND_FOR_APPROVAL',
-      offset: 0,
-      limit: 100,
-    }
-    this.apprService.getApprovals(req).subscribe(res => {
-      let currentdate: Date
-      res.result.data.forEach((approval: any) => {
-        let keys = ''
-        approval.wfInfo.forEach((wf: any) => {
-          currentdate = new Date(wf.createdOn)
-          if (typeof wf.updateFieldValues === 'string') {
-            const fields = JSON.parse(wf.updateFieldValues)
-            if (fields.length > 0) {
-              fields.forEach((field: any) => {
-                keys += `${field.fieldKey}, `
-              })
+    if (this.departName) {
+      const req = {
+        serviceName: 'profile',
+        applicationStatus: 'SEND_FOR_APPROVAL',
+        deptName: this.departName,
+        offset: 0,
+        limit: 100,
+      }
+      this.apprService.getApprovals(req).subscribe(res => {
+        let currentdate: Date
+        res.result.data.forEach((approval: any) => {
+          let keys = ''
+          approval.wfInfo.forEach((wf: any) => {
+            currentdate = new Date(wf.createdOn)
+            if (typeof wf.updateFieldValues === 'string') {
+              const fields = JSON.parse(wf.updateFieldValues)
+              if (fields.length > 0) {
+                fields.forEach((field: any) => {
+                  keys += `${_.first(Object.keys(field.fromValue))}, `
+                })
+              }
             }
-          }
-        })
+          })
 
-        this.data.push({
-          fullname: approval.userInfo ? `${approval.userInfo.first_name} ${approval.userInfo.last_name}` : null,
-          requestedon: `${currentdate.getDate()}
+          this.data.push({
+            fullname: approval.userInfo ? `${approval.userInfo.first_name} ${approval.userInfo.last_name}` : null,
+            requestedon: `${currentdate.getDate()}
           ${moment(currentdate.getMonth() + 1, 'MM').format('MMM')}
           ${currentdate.getFullYear()}
           ${currentdate.getHours()} :
           ${currentdate.getMinutes()} :
           ${currentdate.getSeconds()}`,
-          fields: keys.slice(0, -1),
-          userWorkflow: approval,
+            fields: keys.slice(0, -1),
+            userWorkflow: approval,
+          })
         })
       })
-    })
+    } else {
+      this.snackbar.open("Please connect to your SPV admin, to update MDO name.")
+    }
   }
 
   get getTableData() {
