@@ -25,7 +25,7 @@ export class UsersComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
     const url = this.router.url.split('/')
     this.role = url[url.length - 2]
-    this.roleName = this.role.replace("%20", " ")
+    this.roleName = this.role.replace('%20', ' ')
     this.getMyDepartment()
     // int left blank
     this.tabledata = {
