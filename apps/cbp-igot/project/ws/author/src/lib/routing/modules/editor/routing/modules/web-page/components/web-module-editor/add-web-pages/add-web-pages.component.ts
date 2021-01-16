@@ -157,6 +157,7 @@ export class AddWebPagesComponent implements OnInit, OnDestroy {
   bindData(newData: any, v: any) {
     const url = v.content.artifactUrl.substring(0, v.content.artifactUrl.lastIndexOf('/'))
     this.imagesUrlbase = `${url}/assets/`
+    const audioUrlbase = `${url}`
     let formattedObj: any
     if (v.data && !!newData) {
       if (JSON.stringify(v.data) !== JSON.stringify(newData)) {
@@ -182,7 +183,7 @@ export class AddWebPagesComponent implements OnInit, OnDestroy {
           // audioObj.URL = JSON.parse(JSON.stringify(
           //   audioBaseURL + audioObj.URL
           // ).replace(this.downloadRegex, this.regexDownloadReplace))
-          audioObj.URL = this.imagesUrlbase + audioObj.URL
+          audioObj.URL = audioUrlbase + audioObj.URL
           const splitUrl = audioObj.URL.split('/')
           const hostURL = `${splitUrl[0]}//${splitUrl[2]}`
           audioObj.URL = audioObj.URL.replace(hostURL, '')
