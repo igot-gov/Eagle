@@ -922,9 +922,9 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     this.userProfileSvc.updateProfileDetails(profileRequest.profileReq).subscribe(
       () => {
         if (profileRequest.approvalData) {
-          let deptNameValue = '';
-          if(this.userProfileData.professionalDetails && this.userProfileData.professionalDetails.length > 0) {
-            deptNameValue = this.userProfileData.professionalDetails[0].name
+          let deptNameValue = ''
+          if (this.userProfileData.professionalDetails && this.userProfileData.professionalDetails.length > 0) {
+            deptNameValue = this.userProfileData.professionalDetails[0].name || form.value.orgName || form.value.orgNameOther || ''
           }
           const profDetails = {
             state: 'INITIATE',
