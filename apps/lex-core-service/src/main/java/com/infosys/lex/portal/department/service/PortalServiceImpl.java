@@ -67,9 +67,9 @@ public class PortalServiceImpl implements PortalService {
 
 	@Autowired
 	LexServerProperties serverConfig;
-
-	private static final String WORKFLOW_DEFAULT_ROOT_ORG = "igot";
-	private static final String WORKFLOW_DEFAULT_ORG = "dopt";
+	
+	private static final String ROOT_ORG_CONST = "rootOrg";
+	private static final String ORG_CONST = "org";
 
 	@Override
 	public List<DepartmentInfo> getAllDepartments() {
@@ -254,6 +254,7 @@ public class PortalServiceImpl implements PortalService {
 				prevDeptName = prevDept.getDeptName();
 			}
 		}
+		
 		HashMap<String, Object> fromValue = new HashMap<>();
 		fromValue.put("departmentName", prevDeptName);
 		fieldValue.put("fromValue", fromValue);
@@ -264,8 +265,8 @@ public class PortalServiceImpl implements PortalService {
 		request.put("updateFieldValues", fieldValues);
 
 		HttpHeaders headers = new HttpHeaders();
-		headers.set(rootOrg, WORKFLOW_DEFAULT_ROOT_ORG);
-		headers.set(org, WORKFLOW_DEFAULT_ORG);
+		headers.set(ROOT_ORG_CONST, rootOrg);
+		headers.set(ORG_CONST, org);
 		HttpEntity<Object> entity = new HttpEntity<>(request, headers);
 		restTemplate.postForObject(serverConfig.getWfServiceHost() + serverConfig.getWfServicePath(), entity,
 				Map.class);
@@ -330,8 +331,8 @@ public class PortalServiceImpl implements PortalService {
 		request.put("updateFieldValues", fieldValues);
 
 		HttpHeaders headers = new HttpHeaders();
-		headers.set(rootOrg, WORKFLOW_DEFAULT_ROOT_ORG);
-		headers.set(org, WORKFLOW_DEFAULT_ORG);
+		headers.set(ROOT_ORG_CONST, rootOrg);
+		headers.set(ORG_CONST, org);
 		HttpEntity<Object> entity = new HttpEntity<>(request, headers);
 		restTemplate.postForObject(serverConfig.getWfServiceHost() + serverConfig.getWfServicePath(), entity,
 				Map.class);
