@@ -922,6 +922,10 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     this.userProfileSvc.updateProfileDetails(profileRequest.profileReq).subscribe(
       () => {
         if (profileRequest.approvalData) {
+          const deptNameValue = '';
+          if(this.userProfileData.professionalDetails && this.userProfileData.professionalDetails.length > 0) {
+            deptNameValue = this.userProfileData.professionalDetails[0].name
+          }
           const profDetails = {
             state: 'INITIATE',
             action: 'INITIATE',
@@ -931,6 +935,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
             serviceName: 'profile',
             comment: '',
             wfId: '',
+            deptName: deptNameValue,
             updateFieldValues: profileRequest.approvalData,
           }
           this.userProfileSvc.approveRequest(profDetails).subscribe(() => {
