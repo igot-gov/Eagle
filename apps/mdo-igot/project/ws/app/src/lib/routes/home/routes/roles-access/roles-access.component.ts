@@ -1,6 +1,6 @@
+import { ProfileV2Service } from './../../services/home.servive'
 import { AfterViewInit, Component, OnInit, OnDestroy } from '@angular/core'
 import { Router } from '@angular/router'
-import { RolesAccessService } from '../../services/roles-access.service'
 @Component({
   selector: 'ws-app-roles-access',
   templateUrl: './roles-access.component.html',
@@ -10,7 +10,7 @@ export class RolesAccessComponent implements OnInit, AfterViewInit, OnDestroy {
   tabledata: any = []
   data: any = []
 
-  constructor(private router: Router, private roleSvc: RolesAccessService) { }
+  constructor(private router: Router, private profile: ProfileV2Service) { }
 
   ngOnInit() {
     this.tabledata = {
@@ -24,8 +24,7 @@ export class RolesAccessComponent implements OnInit, AfterViewInit, OnDestroy {
       sortColumn: '',
       sortState: 'asc',
     }
-    this.fetchRoles()
-    // this.fetchRolesNew()
+    this.fetchRolesNew()
   }
 
   ngAfterViewInit() {
@@ -38,22 +37,20 @@ export class RolesAccessComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   /* API call to get all roles*/
-  fetchRoles() {
-    this.roleSvc.getRoles().subscribe(roles => {
-      this.data = roles.data
+  fetchRolesNew() {
+    const totalUsers: any[] = []
+    this.profile.getMyDepartment().subscribe(user => {
+      user.rolesInfo.forEach((element: { roleName: any, noOfUsers: any }) => {
+        totalUsers.push({
+          role: element.roleName,
+          count: element.noOfUsers
+        })
+
+      })
+      this.data = totalUsers
+
     })
   }
-  /* API call to get all roles*/
-  // fetchRolesNew() {
-  //   this.profile.getMyDepartment().subscribe(user => {
-  //     // this.data = roles.data
-  //     user.rolesInfo.forEach((element: { roleName: any, active_users: any }) => {
-  //       console.log(element.roleName)
-  //       console.log(element.active_users)
-
-  //     })
-  //   })
-  // }
 
   ngOnDestroy() { }
 }

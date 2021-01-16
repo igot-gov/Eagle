@@ -1,3 +1,4 @@
+import { ProfileV2Service } from './../../../home/services/home.servive'
 import { AfterViewInit, Component, OnInit, OnDestroy } from '@angular/core'
 import { Router } from '@angular/router'
 import { ITableData } from '../../../../../../../../../library/ws-widget/collection/src/public-api'
@@ -17,13 +18,15 @@ export class UsersComponent implements OnInit, AfterViewInit, OnDestroy {
   data: any = []
   data2: any
   role: any
+  roleName: string | undefined
   private defaultSideNavBarOpenedSubscription: any
 
-  constructor(private usersSvc: UsersService, private router: Router) { }
+  constructor(private usersSvc: UsersService, private router: Router, private profile: ProfileV2Service) { }
   ngOnInit() {
     const url = this.router.url.split('/')
     this.role = url[url.length - 2]
-    this.fetchUsersWithRole()
+    this.roleName = this.role.replace("%20", " ")
+    this.getMyDepartment()
     // int left blank
     this.tabledata = {
       actions: [{ name: 'Details', label: 'Details', icon: 'remove_red_eye', type: 'link' }],
@@ -59,6 +62,26 @@ export class UsersComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       })
     })
+  }
+  getMyDepartment() {
+    const users: any[] = []
+    this.profile.getMyDepartment().subscribe(res => {
+      res.active_users.map((user: any) => {
+        if (user.roleInfo.length > 0) {
+          if (user.roleInfo[0].roleName === this.roleName) {
+            users.push({
+              fullName: `${user.firstName} ${user.lastName}`,
+              email: user.emailId,
+              position: user.department_name,
+              role: this.roleName,
+              wid: user.wid,
+            })
+          }
+        }
+        this.data = users
+      })
+    })
+
   }
 
   ngOnDestroy() {
