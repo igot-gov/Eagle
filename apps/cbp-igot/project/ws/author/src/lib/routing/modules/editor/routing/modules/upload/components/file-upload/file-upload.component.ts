@@ -136,7 +136,8 @@ export class FileUploadComponent implements OnInit {
     this.fileUploadForm.controls.mimeType.setValue(meta.mimeType || 'application/pdf')
     this.fileUploadForm.controls.isIframeSupported.setValue(meta.isIframeSupported || 'Yes')
     this.fileUploadForm.controls.isInIntranet.setValue(meta.isInIntranet || false)
-    this.fileUploadForm.controls.isExternal.setValue(meta.isExternal || false)
+
+    this.fileUploadForm.controls.isExternal.setValue(false)
     this.fileUploadForm.controls.size.setValue(meta.size || 0)
     this.fileUploadForm.controls.duration.setValue(meta.duration || 0)
     this.canUpdate = true
@@ -328,6 +329,9 @@ export class FileUploadComponent implements OnInit {
           this.fileUploadForm.controls.artifactUrl.setValue(url)
           this.fileUploadForm.controls.downloadUrl.setValue(v ? v.downloadURL : '')
           this.fileUploadForm.controls.mimeType.setValue(this.mimeType)
+          if (this.mimeType === 'application/html' && this.file && this.file.name.toLowerCase().endsWith('.zip')) {
+            this.fileUploadForm.controls.isExternal.setValue(false)
+          }
           // if (this.mimeType === 'application/x-mpegURL') {
           //   this.fileUploadForm.controls.transcoding.setValue({
           //     lastTranscodedOn: null,

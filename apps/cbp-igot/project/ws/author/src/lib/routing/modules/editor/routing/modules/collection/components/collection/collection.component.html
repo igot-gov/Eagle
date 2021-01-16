@@ -39,14 +39,13 @@
               </ws-auth-table-of-contents>
             </div>
           </mat-sidenav>
-
           <mat-sidenav-content class="pl-6 pr-6 ml-6">
-            <ng-container *ngIf="viewMode==='upload'">
+            <ng-container *ngIf="viewMode==='upload' && !currentContents.isExternal">
               <ws-auth-file-upload [isCollectionEditor]="true" [isSubmitPressed]="isSubmitPressed"
                 (data)="action($event)">
               </ws-auth-file-upload>
             </ng-container>
-            <ng-container *ngIf="viewMode==='curate'">
+            <ng-container *ngIf="viewMode==='curate' && currentContents.isExternal">
               <ws-auth-url-upload [isCollectionEditor]="true" [isSubmitPressed]="isSubmitPressed"
                 (data)="action($event)"></ws-auth-url-upload>
             </ng-container>

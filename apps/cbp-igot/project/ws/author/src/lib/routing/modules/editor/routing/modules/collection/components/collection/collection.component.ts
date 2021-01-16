@@ -68,7 +68,7 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
   previewIdentifier: string | null = null
   viewMode = 'meta'
   mimeTypeRoute = ''
-
+  currentContents: any
   mediumScreen = false
   sideBarOpened = false
   mediumSizeBreakpoint$ = this.breakpointObserver
@@ -95,16 +95,18 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
     private _configurationsService: ConfigurationsService,
   ) {
     this.selectedIndex = 0
-  }
-
-  ngOnInit() {
     this.contentService.changeActiveCont.subscribe(data => {
       this.currentContent = data
-      this.setVeiwMetaByType(this.contentService.getUpdatedMeta(data))
+      this.viewMode = 'meta'
+      this.currentContents = this.contentService.getUpdatedMeta(data)
+      this.setVeiwMetaByType(this.currentContents)
       // if (this.contentService.getUpdatedMeta(data).contentType !== 'Resource') {
       //   this.viewMode = 'meta'
       // }
     })
+  }
+
+  ngOnInit() {
     if (this.activateRoute.parent && this.activateRoute.parent.parent) {
       this.routerSubscription = this.activateRoute.parent.parent.data.subscribe(data => {
         if (data && data.contents) {
@@ -598,7 +600,8 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
   setVeiwMetaByType(content: NSContent.IContentMeta) {
     if (['application/pdf', 'application/x-mpegURL'].includes(content.mimeType)) {
       this.viewMode = 'upload'
-    } else if ((content.mimeType === 'application/html' && !content.isExternal) || content.mimeType === 'audio/mpeg') {
+    } else if ((content.mimeType === 'application/html' && !content.isExternal)
+      || content.mimeType === 'audio/mpeg') {
       this.viewMode = 'upload'
     } else if (content.mimeType === 'application/html') {
       this.viewMode = 'curate'

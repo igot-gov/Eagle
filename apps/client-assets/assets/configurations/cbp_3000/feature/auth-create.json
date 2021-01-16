@@ -30,6 +30,9 @@
     "enabled": true,
     "contentType": "Resource",
     "mimeType": "application/pdf",
+    "additionalMeta": {
+      "isExternal": false
+    },
     "hasRole": [
       "content-creator",
       "editor",
