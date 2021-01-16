@@ -15,6 +15,8 @@ export class CreateUserComponent implements OnInit {
   department: any = {}
   departmentName = ''
   toastSuccess: any
+  rolesList: any = []
+  public userRoles: Set<string> = new Set()
 
   constructor(private router: Router, private activeRoute: ActivatedRoute,
               private snackBar: MatSnackBar,
@@ -23,6 +25,7 @@ export class CreateUserComponent implements OnInit {
       if (event instanceof NavigationEnd) {
         this.department = this.activeRoute.snapshot.data.department.data
         this.departmentName = this.department ? this.department.deptName : ''
+        this.rolesList = this.department.rolesInfo
       }
     })
     this.createUserForm = new FormGroup({
@@ -30,6 +33,7 @@ export class CreateUserComponent implements OnInit {
       lname: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
       department: new FormControl(''),
+      roles: new FormControl('', [Validators.required]),
     })
   }
 
@@ -40,7 +44,7 @@ export class CreateUserComponent implements OnInit {
 
     this.usersSvc.createUser(form.value).subscribe(res => {
       let user
-      const deptRole = this.department.rolesInfo.filter((role: { roleName: string }) => role.roleName === 'MEMBER')[0]
+      // const deptRole = this.department.rolesInfo.filter((role: { roleName: string }) => role.roleName === 'MEMBER')[0]
       this.openSnackbar(res.data)
       if (res) {
         const req = {
@@ -54,19 +58,24 @@ export class CreateUserComponent implements OnInit {
             'ISTM',
           ],
         }
+        if (req.departments.indexOf(this.department.deptName) === -1) {
+          req.departments.push(this.department.deptName)
+        }
+
         this.usersSvc.onSearchUserByEmail(form.value.email, req).subscribe(data => {
           user = data[0]
-
           const dreq = {
             userId: user ? user.wid : null,
             deptId: this.department ? this.department.id : null,
-            deptRoleId: deptRole ? deptRole.deptRoleId : null,
+            // deptRoleId: deptRole ? deptRole.deptRoleId : null,
+            roles: form.value.roles,
             isActive: true,
             isBlocked: false,
           }
           this.usersSvc.addUserToDepartment(dreq).subscribe(dres => {
             if (dres) {
-              this.createUserForm.reset({ fname: '', lname: '', email: '', department: this.departmentName })
+              this.createUserForm.reset({ fname: '', lname: '', email: '', department: this.departmentName, roles: '' })
+              this.router.navigate(['/app/home/users'])
             }
           })
         })
@@ -80,5 +89,13 @@ export class CreateUserComponent implements OnInit {
     this.snackBar.open(primaryMsg, 'X', {
       duration,
     })
+  }
+
+  modifyUserRoles(role: string) {
+    if (this.userRoles.has(role)) {
+      this.userRoles.delete(role)
+    } else {
+      this.userRoles.add(role)
+    }
   }
 }

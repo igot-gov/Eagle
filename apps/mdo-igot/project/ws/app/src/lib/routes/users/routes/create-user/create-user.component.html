@@ -17,7 +17,7 @@
             </label>
             <mat-form-field appearance="outline" class="margin-top-xs">
               <input id="fname" matInput #fname formControlName="fname" i18n-placeholder placeholder="Type here"
-                i18n-aria-label aria-label="First name input" class="form-input" />
+                i18n-aria-label aria-label="First name input" class="form-input" autocomplete="off" />
               <mat-error [hidden]="false" i18n="First name Error|Explains name is required" i18n-aria-label
                 aria-label="First name Error|Explains name is required "
                 *ngIf="createUserForm?.controls['fname']?.touched && createUserForm?.controls['fname'].errors?.required">
@@ -36,7 +36,7 @@
             </label>
             <mat-form-field appearance="outline" class="margin-top-xs">
               <input id="lname" matInput #lname formControlName="lname" i18n-placeholder placeholder="Type here"
-                i18n-aria-label aria-label="Last name input" class="form-input" />
+                i18n-aria-label aria-label="Last name input" class="form-input" autocomplete="off" />
               <mat-error [hidden]="false" i18n="Last name Error|Explains name is required" i18n-aria-label
                 aria-label="Last name Error|Explains name is required "
                 *ngIf="createUserForm?.controls['lname']?.touched && createUserForm?.controls['lname'].errors?.required">
@@ -54,7 +54,7 @@
             </label>
             <mat-form-field appearance="outline" class="margin-top-xs">
               <input id="email" matInput #email formControlName="email" i18n-placeholder placeholder="Type here"
-                i18n-aria-label aria-label="Email input" class="form-input" />
+                i18n-aria-label aria-label="Email input" class="form-input" autocomplete="off" />
               <mat-error [hidden]="false" i18n="Email Error|Explains name is required" i18n-aria-label
                 aria-label="Email Error|Explains name is required "
                 *ngIf="createUserForm?.controls['email']?.touched && createUserForm?.controls['email'].errors?.required">
@@ -78,6 +78,17 @@
               </mat-form-field>
             </div>
 
+            <div class="input-wrapper margin-top-s">
+              <label for="roles" class=" margin-remove-bottom form-label" i18n-aria-label
+                aria-label="Roles label" i18n="Role label|Label which explains the user to select the roles">
+                Role
+              </label>
+              <mat-selection-list id="roles" formControlName="roles" #roles>
+                <mat-list-option *ngFor="let role of rolesList" (click)="modifyUserRoles(role)" [selected]="userRoles.has(role.roleName)" [value]="role.roleName">
+                  {{role.roleName}}
+                </mat-list-option>
+              </mat-selection-list>
+            </div>
           </div>
         </div>
         <button mat-raised-button type="submit" (click)="onSubmit(createUserForm)"
