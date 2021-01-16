@@ -40,12 +40,12 @@
             </div>
           </mat-sidenav>
           <mat-sidenav-content class="pl-6 pr-6 ml-6">
-            <ng-container *ngIf="viewMode==='upload' && !currentContents.isExternal">
+            <ng-container *ngIf="viewMode==='upload'">
               <ws-auth-file-upload [isCollectionEditor]="true" [isSubmitPressed]="isSubmitPressed"
                 (data)="action($event)">
               </ws-auth-file-upload>
             </ng-container>
-            <ng-container *ngIf="viewMode==='curate' && currentContents.isExternal">
+            <ng-container *ngIf="viewMode==='curate'">
               <ws-auth-url-upload [isCollectionEditor]="true" [isSubmitPressed]="isSubmitPressed"
                 (data)="action($event)"></ws-auth-url-upload>
             </ng-container>

@@ -175,9 +175,10 @@ export class AuthTableOfContentsComponent implements OnInit, OnDestroy {
         this.selectedNode = node.id
         this.editorStore.currentContent = node.identifier
         this.store.currentSelectedNode = node.id
+        this.store.selectedNodeChange.next(node.id)
         this.editorStore.changeActiveCont.next(node.identifier)
         this.action.emit({ type: 'editContent', identifier: node.identifier })
-        this.store.selectedNodeChange.next(node.id)
+
         // this.store.selectedNode
         this.preserveExpandedNodes()
       }
