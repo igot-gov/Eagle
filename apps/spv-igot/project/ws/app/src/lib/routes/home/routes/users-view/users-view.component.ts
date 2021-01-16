@@ -75,8 +75,7 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
       columns: [
         { displayName: 'Full Name', key: 'fullname' },
         { displayName: 'Email', key: 'email' },
-        { displayName: 'Position', key: 'position' },
-        { displayName: 'Role', key: 'role' },
+        { displayName: 'Position', key: 'position' }
       ],
       needCheckBox: false,
       needHash: false,
@@ -126,7 +125,7 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
       case 'block':
         _.set(user, 'isBlocked', true)
         _.set(user, 'isActive', false)
-        _.set(user, 'roles', _.map(_.get($event.row, 'roleInfo'), i => i.roleName))
+        _.set(user, 'roles', _.map(_.get($event.row, 'role'), i => i.roleName))
         this.usersService.blockUser(user).subscribe(response => {
           if (response) {
             this.getAllUsers()
@@ -136,7 +135,7 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
         break
       case 'unblock':
         _.set(user, 'isBlocked', false)
-        _.set(user, 'roles', _.map(_.get($event.row, 'roleInfo'), i => i.roleName))
+        _.set(user, 'roles', _.map(_.get($event.row, 'role'), i => i.roleName))
         this.usersService.blockUser(user).subscribe(response => {
           if (response) {
             this.getAllUsers()
@@ -146,7 +145,7 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
         break
       case 'deactive':
         _.set(user, 'isActive', false)
-        _.set(user, 'roles', _.map(_.get($event.row, 'roleInfo'), i => i.roleName))
+        _.set(user, 'roles', _.map(_.get($event.row, 'role'), i => i.roleName))
         this.usersService.deActiveUser(user).subscribe(response => {
           if (response) {
             this.getAllUsers()
@@ -156,7 +155,7 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
         break
       case 'active':
         _.set(user, 'isActive', true)
-        _.set(user, 'roles', _.map(_.get($event.row, 'roleInfo'), i => i.roleName))
+        _.set(user, 'roles', _.map(_.get($event.row, 'role'), i => i.roleName))
         this.usersService.deActiveUser(user).subscribe(response => {
           if (response) {
             this.getAllUsers()
@@ -185,7 +184,7 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
         activeUsersData.push({
           fullname: user ? `${user.firstName} ${user.lastName}` : null,
           email: user.emailId,
-          role: user.roleInfo.roleName,
+          role: user.roleInfo,
           userId: user.userId,
           active: user.active,
           blocked: user.blocked,
@@ -199,7 +198,7 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
 
           fullname: user ? `${user.firstName} ${user.lastName}` : null,
           email: user.emailId,
-          role: user.roleInfo.roleName,
+          role: user.roleInfo,
           userId: user.userId,
           active: user.active,
           blocked: user.blocked,
@@ -211,7 +210,7 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
         inactiveUsersData.push({
           fullname: user ? `${user.firstName} ${user.lastName}` : null,
           email: user.emailId,
-          role: user.roleInfo.roleName,
+          role: user.roleInfo,
           userId: user.userId,
           active: user.active,
           blocked: user.blocked,
