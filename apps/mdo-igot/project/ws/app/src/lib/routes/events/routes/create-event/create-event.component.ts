@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog'
 import { ParticipantsComponent } from '../../components/participants/participants.component'
 import { Router } from '@angular/router'
 import { ConfigurationsService } from '@ws-widget/utils'
+import * as moment from 'moment'
 
 @Component({
   selector: 'ws-app-create-event',
@@ -76,12 +77,14 @@ export class CreateEventComponent implements OnInit {
   currentTab = 'eventInfo'
   userId: any
   username: any
+  minDate: any
+  maxDate: any
 
   constructor(private snackBar: MatSnackBar,
               private eventsSvc: EventsService,
               private matDialog: MatDialog,
               private router: Router,
-              private configSvc: ConfigurationsService
+              private configSvc: ConfigurationsService,
               ) {
 
     if (this.configSvc.userProfile) {
@@ -105,6 +108,10 @@ export class CreateEventComponent implements OnInit {
 
     this.createEventForm.controls['eventDurationHours'].setValue(0)
     this.createEventForm.controls['eventDurationMinutes'].setValue(30)
+    this.createEventForm.controls['eventType'].setValue('Webinar')
+    const currentYear = moment().year()
+    this.minDate = moment([currentYear - 1, 0, 1])
+    this.maxDate = moment([currentYear + 1, 11, 31])
   }
 
   ngOnInit() {
@@ -210,7 +217,6 @@ export class CreateEventComponent implements OnInit {
   }
 
   onSubmit() {
-
     const eventDurationMinutes = this.addMinutes(
        this.createEventForm.controls['eventDurationHours'].value,
        this.createEventForm.controls['eventDurationMinutes'].value

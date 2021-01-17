@@ -9,6 +9,8 @@ import { MatSort } from '@angular/material/sort'
 import * as _ from 'lodash'
 import { ITableData, IColums, IAction } from '../../interfaces/interfaces'
 import { Router } from '@angular/router'
+import { MatDialog } from '@angular/material/dialog'
+import { EventThumbnailComponent } from '../event-thumbnail/event-thumbnail.component'
 
 @Component({
   selector: 'ws-event-list-view',
@@ -41,9 +43,11 @@ export class EventListViewComponent implements OnInit, AfterViewInit, OnChanges 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator
   @ViewChild(MatSort, { static: true }) sort?: MatSort
   selection = new SelectionModel<any>(true, [])
+  dialogRef: any
 
   constructor(
-    private router: Router
+    private router: Router,
+    private matDialog: MatDialog,
     ) {
     this.dataSource = new MatTableDataSource<any>()
     this.actionsClick = new EventEmitter()
@@ -139,6 +143,14 @@ export class EventListViewComponent implements OnInit, AfterViewInit, OnChanges 
 
   onCreateClick() {
     this.router.navigate([`/app/events/create-event`])
+  }
+
+  showImageDialog(img: any) {
+    this.dialogRef = this.matDialog.open(EventThumbnailComponent, {
+      width: img.width,
+      height: img.height,
+      data: img,
+    })
   }
 
 }

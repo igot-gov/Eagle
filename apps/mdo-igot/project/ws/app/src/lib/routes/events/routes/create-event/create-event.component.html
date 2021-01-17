@@ -13,7 +13,7 @@
                     <span i18n>Cancel</span>
                 </button>
                 <button mat-stroked-button color="accent" type="button" class="mat-accent-border flex-auto-display" 
-                    (click)="onSubmit()">
+                    (click)="onSubmit()" [disabled]="createEventForm?.invalid">
                     <!-- [disabled]="createEventForm?.invalid" -->
                     <span i18n>Save and Publish</span>
                 </button>
@@ -157,7 +157,7 @@
                                                     Date
                                                 </label>
                                                 <mat-form-field color="accent" appearance="outline">
-                                                    <input matInput [matDatepicker]="eventDate" formControlName="eventDate">
+                                                    <input matInput [matDatepicker]="eventDate" formControlName="eventDate" [min]="minDate" [max]="maxDate">
                                                     <mat-datepicker-toggle matSuffix [for]="eventDate"></mat-datepicker-toggle>
                                                     <mat-datepicker #eventDate></mat-datepicker>
                                                     <mat-error [hidden]="false" i18n="eventDate Error|Explains eventDate is required" i18n-aria-label

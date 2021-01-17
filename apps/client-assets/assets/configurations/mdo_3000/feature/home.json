@@ -51,7 +51,7 @@
                         "uri": ""
                     },
                     "enabled": true,
-                    "routerLink": "/app/events/create-event"
+                    "routerLink": "/app/events"
                 }
             ]
         }
