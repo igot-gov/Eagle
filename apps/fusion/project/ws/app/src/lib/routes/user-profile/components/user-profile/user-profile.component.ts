@@ -536,8 +536,8 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       }
       if (organisation.organisationType === 'Government') {
         org.isGovtOrg = true
-      } else {
-        org.isGovtOrg = false
+      } else if (organisation.organisationType === 'Non-Government') {
+        org.isGovtOrg = true
       }
     }
 
@@ -833,9 +833,9 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       completePostalAddress: '',
       additionalAttributes: {},
     }
-    if (form.value.isGovtOrg) {
+    if (form.value.isGovtOrg === 'govt') {
       org.organisationType = 'Government'
-    } else {
+    } else if (form.value.isGovtOrg === 'non-govt') {
       org.organisationType = 'Non-Government'
     }
     organisations.push(org)
@@ -922,49 +922,80 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     this.userProfileSvc.updateProfileDetails(profileRequest.profileReq).subscribe(
       () => {
         if (profileRequest.approvalData) {
-          let deptNameValue = ''
-          if (this.userProfileData.professionalDetails && this.userProfileData.professionalDetails.length > 0) {
-            deptNameValue = this.userProfileData.professionalDetails[0].name || form.value.orgName || form.value.orgNameOther || ''
+          if (this.configSvc.userProfile) {
+            this.userProfileSvc.getUserdetailsFromRegistry().subscribe(
+              data => {
+                if (data && data.length) {
+                  const academics = this.populateAcademics(data[0])
+                  this.setDegreeValuesArray(academics)
+                  this.setPostDegreeValuesArray(academics)
+                  const organisations = this.populateOrganisationDetails(data[0])
+                  this.constructFormFromRegistry(data[0], academics, organisations)
+                  this.populateChips(data[0])
+                  this.userProfileData = data[0]
+                  let deptNameValue = ''
+                  if (this.userProfileData && this.userProfileData.professionalDetails
+                    && this.userProfileData.professionalDetails.length > 0) {
+                    deptNameValue = this.userProfileData.professionalDetails[0].name || form.value.orgName || form.value.orgNameOther || ''
+                  }
+                  const profDetails = {
+                    state: 'INITIATE',
+                    action: 'INITIATE',
+                    userId: this.userProfileData.userId,
+                    applicationId: this.userProfileData.userId,
+                    actorUserId: this.userProfileData.userId,
+                    serviceName: 'profile',
+                    comment: '',
+                    wfId: '',
+                    deptName: deptNameValue,
+                    updateFieldValues: profileRequest.approvalData,
+                  }
+                  if (deptNameValue) {
+                    this.userProfileSvc.approveRequest(profDetails).subscribe(() => {
+                      form.reset()
+                      this.uploadSaveData = false
+                      this.configSvc.profileDetailsStatus = true
+                      this.openSnackbar(this.toastSuccess.nativeElement.value)
+                      if (!this.isForcedUpdate && this.userProfileData) {
+                        this.router.navigate(['/app/person-profile', (this.userProfileData.userId || this.userProfileData.id)])
+                      } else {
+                        this.router.navigate(['page', 'home'])
+                      }
+                    }
+                      ,
+                      /* tslint:disable */
+                      () => {
+                        this.openSnackbar(this.toastError.nativeElement.value)
+                        this.uploadSaveData = false
+                      })
+                  } else {
+                    this.uploadSaveData = false
+                    this.configSvc.profileDetailsStatus = true
+                    this.openSnackbar(this.toastSuccess.nativeElement.value)
+                    if (!this.isForcedUpdate && this.userProfileData) {
+                      this.router.navigate(['/app/person-profile', (this.userProfileData.userId || this.userProfileData.id)])
+                    } else {
+                      this.router.navigate(['page', 'home'])
+                    }
+                  }
+
+                } else {
+                  form.reset()
+                  this.uploadSaveData = false
+                  this.configSvc.profileDetailsStatus = true
+                  this.openSnackbar(this.toastSuccess.nativeElement.value)
+                  if (!this.isForcedUpdate && this.userProfileData) {
+                    this.router.navigate(['/app/person-profile', (this.userProfileData.userId || this.userProfileData.id)])
+                  } else {
+                    this.router.navigate(['page', 'home'])
+                  }
+                }
+                // this.handleFormData(data[0])
+              },
+              (_err: any) => {
+              })
           }
-          const profDetails = {
-            state: 'INITIATE',
-            action: 'INITIATE',
-            userId: this.userProfileData.userId,
-            applicationId: this.userProfileData.userId,
-            actorUserId: this.userProfileData.userId,
-            serviceName: 'profile',
-            comment: '',
-            wfId: '',
-            deptName: deptNameValue,
-            updateFieldValues: profileRequest.approvalData,
-          }
-          this.userProfileSvc.approveRequest(profDetails).subscribe(() => {
-            form.reset()
-            this.uploadSaveData = false
-            this.configSvc.profileDetailsStatus = true
-            this.openSnackbar(this.toastSuccess.nativeElement.value)
-            if (!this.isForcedUpdate && this.userProfileData) {
-              this.router.navigate(['/app/person-profile', (this.userProfileData.userId || this.userProfileData.id)])
-            } else {
-              this.router.navigate(['page', 'home'])
-            }
-          }
-            ,
-            /* tslint:disable */
-            () => {
-              this.openSnackbar(this.toastError.nativeElement.value)
-              this.uploadSaveData = false
-            })
-        } else {
-          form.reset()
-          this.uploadSaveData = false
-          this.configSvc.profileDetailsStatus = true
-          this.openSnackbar(this.toastSuccess.nativeElement.value)
-          if (!this.isForcedUpdate && this.userProfileData) {
-            this.router.navigate(['/app/person-profile', (this.userProfileData.userId || this.userProfileData.id)])
-          } else {
-            this.router.navigate(['page', 'home'])
-          }
+
         }
 
         /* tslint:enable */
