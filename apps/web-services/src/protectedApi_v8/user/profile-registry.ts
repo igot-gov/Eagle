@@ -7,13 +7,12 @@ import { extractUserIdFromRequest } from '../../utils/requestExtract'
 const fs = require('fs')
 
 const API_END_POINTS = {
-  createUserRegistry: (userId: string) => `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND_V2}/v1/user/create/profile?userId=${userId}`,
-  getUserRegistry: `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND_V2}/v1/user/get/profile`,
-  getUserRegistryById: (userId: string) => `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND_V2}/v1/user/search/profile?userId=${userId}`,
-  updateUserRegistry: (userId: string) => `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND_V2}/v1/user/update/profile?userId=${userId}`,
+  createUserRegistry: (userId: string) => `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/v1/user/create/profile?userId=${userId}`,
+  getUserRegistry: `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/v1/user/get/profile`,
+  getUserRegistryById: (userId: string) => `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/v1/user/search/profile?userId=${userId}`,
+  updateUserRegistry: (userId: string) => `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/v1/user/update/profile?userId=${userId}`,
   updateUserWorkflowRegistry: (userId: string) =>
-    `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND_V2}/v1/user/update/workflow/profile?userId=${userId}`,
-
+    `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/v1/user/update/workflow/profile?userId=${userId}`,
 }
 
 export const profileRegistryApi = Router()
