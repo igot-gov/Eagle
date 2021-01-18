@@ -75,7 +75,8 @@
         <ng-container matColumnDef="ActionsMenu" *ngIf="widgetData.actionsMenu">
           <mat-header-cell *matHeaderCellDef class="clr-darkish-blue action-header mat-body-2 flex-row-reverse">
             <mat-icon *ngIf="widgetData.actionsMenu.headIcon" class="cursor-pointer" (click)="updatedisplay()">
-              {{widgetData.actionsMenu.headIcon}}</mat-icon>
+              {{display==='table' ? widgetData.actionsMenu.headIcon: 'list'}}
+            </mat-icon>
             <span *ngIf="!widgetData.actionsMenu.headIcon">Actions</span>
           </mat-header-cell>
           <mat-cell *matCellDef="let row" class="action-cell flex-row-reverse">
@@ -106,7 +107,7 @@
       <span class="mat-body-2 ws-mat-black60-text">Course name</span>
       <span class="flex flex-1"></span>
       <mat-icon *ngIf="widgetData.actionsMenu.headIcon" class="cursor-pointer" (click)="updatedisplay()">
-        {{widgetData.actionsMenu.headIcon}}</mat-icon>
+        {{display==='table' ? widgetData.actionsMenu.headIcon: 'list'}}</mat-icon>
     </div>
     <mat-card-content>
       <div class="flex flex-wrap margin-xs">
