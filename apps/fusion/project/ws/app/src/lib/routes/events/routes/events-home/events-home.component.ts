@@ -16,7 +16,7 @@ export class EventsHomeComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute, 
     private router: Router,
-    private eventSrvc: EventsService
+    
     ) {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
@@ -41,37 +41,7 @@ export class EventsHomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    let reqObj = {
-        "locale": [
-          "en"
-        ],
-        "pageSize": 12,
-        "query": "all",
-        "didYouMean": true,
-        "filters": [
-            {
-                "andFilters": [
-                    {
-                        "lastUpdatedOn": [
-                            "month"
-                        ]
-                    },
-                    {
-                        "contentType": [
-                            "Event",
-                         ]
-                    }
-                ]
-            }
-        ],
-        "includeSourceFields": [
-            "creatorLogo"
-        ]
-    }
-
-    this.eventSrvc.getEvents(reqObj).subscribe((res: any) => {
-      console.log(res);
-    })
+    
   }
 
   bindUrl(path: string) {
