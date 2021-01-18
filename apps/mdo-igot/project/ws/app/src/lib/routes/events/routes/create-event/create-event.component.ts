@@ -221,6 +221,9 @@ export class CreateEventComponent implements OnInit {
        this.createEventForm.controls['eventDurationHours'].value,
        this.createEventForm.controls['eventDurationMinutes'].value
     )
+    const timeArr = this.createEventForm.controls['eventTime'].value.split(":")
+    const expiryDateTime = moment(this.createEventForm.controls['eventDate'].value).set("hour", timeArr[0]).set("minute", 
+      timeArr[1]).format('YYYYMMDDTHHmmss+000')
     const form = {
       content: {
         contentType: 'Event',
@@ -235,7 +238,7 @@ export class CreateEventComponent implements OnInit {
         isContentEditingDisabled: false,
         isMetaEditingDisabled: false,
         learningObjective: this.createEventForm.controls['agenda'].value,
-        expiryDate: this.createEventForm.controls['eventDate'].value.toISOString(),
+        expiryDate: expiryDateTime,
         duration: eventDurationMinutes,
         artifactUrl: this.createEventForm.controls['conferenceLink'].value,
         resourceType: this.createEventForm.controls['eventType'].value,
@@ -244,6 +247,7 @@ export class CreateEventComponent implements OnInit {
         thumbnail: this.createEventForm.controls['eventPicture'].value,
       },
     }
+    console.log(form);
     const formJson = this.encodeToBase64(form)
     this.eventsSvc.createEvent(formJson).subscribe(
       res => {
