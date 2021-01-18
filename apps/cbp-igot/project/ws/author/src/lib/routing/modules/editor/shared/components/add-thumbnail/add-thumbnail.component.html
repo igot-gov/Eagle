@@ -1,68 +1,78 @@
 <!-- <form [formGroup]="startForm"> -->
 
-<div class="card">
-    <mat-card>
+<div class="card" *ngIf="showMainContent">
+    <mat-card class="mt-5">
         <mat-card-header>
             <mat-icon mat-card-avatar>photo</mat-icon>
             <mat-card-title>Select Image</mat-card-title>
         </mat-card-header>
     </mat-card>
+    <mat-card class="mt-5">
+        <mat-dialog-content>
 
-
-    <ng-container>
-        <mat-card class="recent-tabs">
-            <div class="flex flex-1 flex-column">
-                <div class="flex flex-1 filter flex-wrap">
-                    <a href="javascript:void(0)" role="button" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'myimages',
+            <ng-container>
+                <mat-card class="recent-tabs">
+                    <div class="flex flex-1 flex-column">
+                        <div class="flex flex-1 filter flex-wrap">
+                            <a href="javascript:void(0)" role="button" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'myimages',
                               'ws-mat-accent-border font-medium':currentFilter !== 'myimages'}" mat-button
-                        (click)="filter('myimages')">
-                        My Images </a>
-                    <a href="javascript:void(0)" role="button" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'all',
+                                (click)="filter('myimages')">
+                                My Images </a>
+                            <a href="javascript:void(0)" role="button" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'all',
                               'ws-mat-accent-border font-medium':currentFilter !== 'all'}" mat-button
-                        (click)="filter('all')">
-                        All Images </a>
+                                (click)="filter('all')">
+                                All Images </a>
+                        </div>
+                    </div>
+                </mat-card>
+            </ng-container>
+
+
+            <ng-container *ngIf="imageList && imageList.length > 0">
+                <div class="imageCard">
+                    <mat-button-toggle-group class="category-card" #group="matButtonToggleGroup"
+                        (change)="onValChange(group.value)" *ngFor="let image of imageList" [value]="toggle">
+
+                        <mat-button-toggle [(value)]="image">
+                            <img mat-card-image src={{image.artifactUrl}} alt="image">
+                            <mat-icon mat-card-avatar *ngIf="isChecked && thumbanilSelectval == image.identifier"
+                                class="checkbox">check_circle</mat-icon>
+                        </mat-button-toggle>
+
+                    </mat-button-toggle-group>
                 </div>
-            </div>
-        </mat-card>
-    </ng-container>
+
+            </ng-container>
 
 
-    <ng-container *ngIf="imageList && imageList.length > 0">
-        <div class="imageCard">
-            <mat-button-toggle-group class="category-card" #group="matButtonToggleGroup"
-                (change)="onValChange(group.value)" *ngFor="let image of imageList" [value]="toggle">
-
-                <mat-button-toggle [(value)]="image">
-                    <img mat-card-image src={{image.downloadUrl}} alt="image">
-                    <mat-icon mat-card-avatar *ngIf="isChecked && thumbanilSelectval == image.identifier"
-                        class="checkbox">check_circle</mat-icon>
-                </mat-button-toggle>
-
-            </mat-button-toggle-group>
-        </div>
-
-    </ng-container>
-
-
-    <ng-container *ngIf="!(imageList && imageList.length > 0)">
-        <mat-card class="mat-card margin-bottom-l">
-            <mat-card-header>
-                <mat-card-title>No result found.<a href="javascript:void(0)" role="button" class="filter-option"
-                        [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'all',
+            <ng-container *ngIf="!(imageList && imageList.length > 0)">
+                <mat-card class="mat-card margin-bottom-l">
+                    <mat-card-header>
+                        <mat-card-title>No result found.<a href="javascript:void(0)" role="button" class="filter-option"
+                                [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'all',
                     'ws-mat-accent-border font-medium':currentFilter !== 'all'}" mat-button (click)="filter('all')">
-                        Click here </a> to search in All images
-                </mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-                <span>&nbsp;</span>
-            </mat-card-content>
-        </mat-card>
-    </ng-container>
+                                Click here </a> to search in All images
+                        </mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <span>&nbsp;</span>
+                    </mat-card-content>
+                </mat-card>
+            </ng-container>
+        </mat-dialog-content>
+    </mat-card>
+    <!-- <mat-card> -->
+    <!-- <ng-container> -->
+    <mat-card class="mt-5">
 
-    <mat-card>
-        <ng-container>
-
-            <div mat-dialog-actions class="flex flex-1 justify-end">
+        <div mat-card-actions class="footer">
+            <span class="itemleft">
+                <button mat-raised-button type="button" (click)="ShowHideButton()"
+                    class="text-white ws-mat-primary-background flex-auto-display">
+                    <span class="text-white" i18n>Upload and use</span>
+                </button>
+            </span>
+            <span class="itemright">
                 <button mat-button class="mr-2" [mat-dialog-close]="true">
                     <span class="noocoments"> Cancel</span>
                 </button>
@@ -70,9 +80,51 @@
                     class="text-white ws-mat-primary-background flex-auto-display" [disabled]="!isChecked">
                     <span class="text-white" i18n>Upload</span>
                 </button>
-            </div>
-        </ng-container>
+            </span>
+        </div>
+    </mat-card>
+
+    <!-- </ng-container> -->
+    <!-- </mat-card> -->
+</div>
+
+<div class="card" *ngIf="!showMainContent">
+    <mat-card class="mt-5">
+        <mat-card-header>
+            <mat-icon mat-card-avatar>save_alt</mat-icon>
+            <mat-card-title>Upload and use</mat-card-title>
+        </mat-card-header>
+    </mat-card>
+    <mat-card class="mt-5">
+        <mat-dialog-content>
+            <mat-file-upload></mat-file-upload>
+
+            <button (click)="fileInput.click()">
+                <span>Select</span>
+                <input #fileInput type="file" (change)="onFileInput($event)" style="display:none;" />
+              </button>
+
+        </mat-dialog-content>
+    </mat-card>
+
+    <mat-card class="mt-5">
+
+        <div mat-card-actions class="footer">
+            <span class="itemleft">
+                <button mat-raised-button type="button" (click)="ShowHideButton()"
+                    class="text-white ws-mat-primary-background flex-auto-display">
+                    <span class="text-white" i18n>Back</span>
+                </button>
+            </span>
+            <span class="itemright">
+                <button mat-button class="mr-2" [mat-dialog-close]="true">
+                    <span class="noocoments"> Cancel</span>
+                </button>
+                <button mat-raised-button type="button" (click)="uploadThumbnail()"
+                    class="text-white ws-mat-primary-background flex-auto-display" [disabled]="!isChecked">
+                    <span class="text-white" i18n>Upload</span>
+                </button>
+            </span>
+        </div>
     </mat-card>
 </div>
-<!-- </form> -->
-
