@@ -3701,20 +3701,21 @@ public class ContentCrudServiceImpl implements ContentCrudService {
 			dataSource = config.getValue();
 		}
 		
-		if(dataSource==null || dataSource.equalsIgnoreCase("0")) {
-			contentMeta.put(LexConstants.EXPIRY_DATE, "99991231T235959+0000");
-		}
-		else {
-			
-			Integer months = Integer.parseInt(dataSource);
-			Calendar dueDate = Calendar.getInstance();
-			dueDate.add(Calendar.DAY_OF_MONTH, months);
-			contentMeta.put(LexConstants.EXPIRY_DATE,inputFormatterDateTime.format(dueDate.getTime()));
-			
-//			Integer months = Integer.parseInt(dataSource);
-//			Calendar dueDate = Calendar.getInstance();
-//			dueDate.add(Calendar.MONTH, months);
-//			contentMeta.put(LexConstants.EXPIRY_DATE,inputFormatterDateTime.format(dueDate.getTime()));
+		if(!LexConstants.ContentType.Event.toString().equalsIgnoreCase(contentType)) {
+			if(dataSource==null || dataSource.equalsIgnoreCase("0")) {
+				contentMeta.put(LexConstants.EXPIRY_DATE, "99991231T235959+0000");
+			}
+			else {
+				Integer months = Integer.parseInt(dataSource);
+				Calendar dueDate = Calendar.getInstance();
+				dueDate.add(Calendar.DAY_OF_MONTH, months);
+				contentMeta.put(LexConstants.EXPIRY_DATE,inputFormatterDateTime.format(dueDate.getTime()));
+				
+	//			Integer months = Integer.parseInt(dataSource);
+	//			Calendar dueDate = Calendar.getInstance();
+	//			dueDate.add(Calendar.MONTH, months);
+	//			contentMeta.put(LexConstants.EXPIRY_DATE,inputFormatterDateTime.format(dueDate.getTime()));
+			}
 		}
 
 		Map<String, Object> creatorContact = new HashMap<>();
