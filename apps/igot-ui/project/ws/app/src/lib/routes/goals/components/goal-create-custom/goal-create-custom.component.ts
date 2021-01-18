@@ -177,6 +177,38 @@ export class GoalCreateCustomComponent implements OnInit {
               : this.snackbar.open(this.editGoalErrorMessage.nativeElement.value)
           },
         )
+    } else {
+      this.goalsSvc
+        .createGoal({
+          id: (this.editGoal && this.editGoal.identifier) || undefined,
+          name: rawValues.name,
+          contentIds: Array.from(this.selectedContentIds),
+          description: rawValues.description,
+          duration: rawValues.duration,
+          type: rawValues.type,
+        })
+        .subscribe(
+          () => {
+            this.createGoalStatus = 'done'
+
+            this.mode === 'create'
+              ? this.snackbar.open(this.createGoalSuccessMessage.nativeElement.value)
+              : this.snackbar.open(this.editGoalSuccessMessage.nativeElement.value)
+
+            if (rawValues.type === NsGoal.EGoalTypes.USER) {
+              this.router.navigate(['/app/goals/me'])
+            } else {
+              this.router.navigate(['/app/goals/others'])
+            }
+          },
+          () => {
+            this.createGoalStatus = 'error'
+            this.mode === 'create'
+              ? this.snackbar.open(this.createGoalErrorMessage.nativeElement.value)
+              : this.snackbar.open(this.editGoalErrorMessage.nativeElement.value)
+          },
+        )
+
     }
   }
 
