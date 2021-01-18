@@ -1019,7 +1019,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
                 mimeType: 'image/jpeg',
                 mediaType: 'image',
                 name: fileName,
-                language: ["English"],
+                language: ['English'],
                 license: 'CC BY 4.0',
               },
             },
@@ -1031,12 +1031,12 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
               requestBody,
             )
             .subscribe(
-              (data: NSApiResponse.IContentCreateResponseV2) => {
+              (meta: NSApiResponse.IContentCreateResponseV2) => {
                 // return data.result.identifier
 
                 this.uploadService
                   .upload(formdata, {
-                    contentId: data.result.identifier,
+                    contentId: meta.result.identifier,
                     contentType: CONTENT_BASE_STATIC,
                   })
                   .subscribe(

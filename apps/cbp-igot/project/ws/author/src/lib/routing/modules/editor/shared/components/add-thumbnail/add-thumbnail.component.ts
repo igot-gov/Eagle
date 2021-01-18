@@ -47,18 +47,18 @@ export class AddThumbnailComponent implements OnInit, OnDestroy {
 
   canUpdate = true
   @Input() isUpdate = false
-  showMainContent: Boolean = true;
+  showMainContent: Boolean = true
   srcResult: any
   public imagePath: any
   imgURL: any
   public message: string | undefined
 
   constructor(private loadService: LoaderService,
-    public dialogRef: MatDialogRef<AddThumbnailComponent>,
-    private myContSvc: MyContentService,
-    private accessService: AccessControlService,
-    private formBuilder: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: any
+              public dialogRef: MatDialogRef<AddThumbnailComponent>,
+              private myContSvc: MyContentService,
+              private accessService: AccessControlService,
+              private formBuilder: FormBuilder,
+              @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.userId = this.accessService.userId
     this.isChecked = false
@@ -83,27 +83,26 @@ export class AddThumbnailComponent implements OnInit, OnDestroy {
   }
 
   onFileSelected(files: any) {
-    if (files.length === 0)
-      return
-
-    var mimeType = files[0].type
-    if (mimeType.match(/image\/*/) == null) {
-      this.message = "Only images are supported."
+    if (files.length === 0) {
       return
     }
 
-    var reader = new FileReader()
+    const mimeType = files[0].type
+    if (mimeType.match(/image\/*/) == null) {
+      this.message = 'Only images are supported.'
+      return
+    }
+
+    const reader = new FileReader()
     this.imagePath = files[0]
     this.isChecked = true
     reader.readAsDataURL(files[0])
-    reader.onload = (_event) => {
+    reader.onload = _event => {
       this.imgURL = reader.result
     }
   }
 
-
-
-  ShowHideButton() {
+  showHideButton() {
     this.showMainContent = this.showMainContent ? false : true
   }
 
