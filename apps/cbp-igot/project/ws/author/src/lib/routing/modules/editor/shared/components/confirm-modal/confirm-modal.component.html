@@ -1,0 +1,10 @@
+<h1 mat-dialog-title i18n>Save Data</h1>
+<div mat-dialog-content class="text-base hide-overflow" i18n>
+  Do you want to leave without saving data?
+</div>
+<div mat-dialog-actions class="flex-row-reverse">
+  <button mat-button [disabled]="disabled" (click)="confirmed()" i18n>
+    Yes
+  </button>
+  <button mat-button color="warn" class="margin-right-xs" (click)="rejected()" cdkFocusInitial i18n>No</button>
+</div>

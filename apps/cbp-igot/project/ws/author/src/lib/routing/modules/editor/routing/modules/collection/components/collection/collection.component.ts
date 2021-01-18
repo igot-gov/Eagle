@@ -553,18 +553,19 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
         },
       },
     }
-    if (Object.keys(this.contentService.upDatedContent)[0] && nodesModified[Object.keys(this.contentService.upDatedContent)[0]]) {
+    if (Object.keys(this.contentService.upDatedContent).length > 0 && nodesModified[this.contentService.currentContent]) {
       const requestBody: NSApiRequest.IContentUpdateV2 = {
         request: {
-          content: nodesModified[Object.keys(this.contentService.upDatedContent)[0]].metadata,
+          content: nodesModified[this.contentService.currentContent].metadata,
         },
       }
       requestBody.request.content = this.contentService.cleanProperties(requestBody.request.content)
       if (requestBody.request.content.duration) {
         requestBody.request.content.duration =
-          (isNumber(requestBody.request.content.duration) ? `${requestBody.request.content.duration}` : requestBody.request.content.duration)
+          (isNumber(requestBody.request.content.duration)
+            ? `${requestBody.request.content.duration}` : requestBody.request.content.duration)
       }
-      return this.editorService.updateContentV3(requestBody, Object.keys(this.contentService.upDatedContent)[0]).pipe(
+      return this.editorService.updateContentV3(requestBody, this.contentService.currentContent).pipe(
         tap(() => {
           this.storeService.changedHierarchy = {}
           Object.keys(this.contentService.upDatedContent).forEach(id => {
