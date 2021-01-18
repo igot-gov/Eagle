@@ -10,6 +10,8 @@ import com.infosys.lex.portal.department.model.UserDepartmentInfo;
 
 public interface PortalService {
 	List<DepartmentInfo> getAllDepartments();
+	
+	List<String> getDeptNameList();
 
 	DepartmentInfo getDepartmentById(Integer deptId, boolean isUserInfoRequired);
 

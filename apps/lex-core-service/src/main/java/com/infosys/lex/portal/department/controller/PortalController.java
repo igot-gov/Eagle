@@ -34,7 +34,13 @@ public class PortalController {
 
 	@Autowired
 	MdoPortalService mdoPortalService;
-
+	
+	// ----------------- Public APIs --------------------
+	@GetMapping("/portal/listDeptNames")
+	public ResponseEntity<?> getDeptNameList() throws Exception {
+		return new ResponseEntity<>(portalService.getDeptNameList(), HttpStatus.OK);
+	}
+	// ----------------- END of Public APIs --------------------
 	// ----------------- SPV APIs -----------------------
 	@GetMapping("/portal/spv/isAdmin")
 	public ResponseEntity<Boolean> isSpvAdmin(@RequestHeader("wid") String wid) throws Exception {

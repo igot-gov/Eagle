@@ -68,9 +68,37 @@ public class PortalServiceImpl implements PortalService {
 
 	@Autowired
 	LexServerProperties serverConfig;
-	
+
 	private static final String ROOT_ORG_CONST = "rootOrg";
 	private static final String ORG_CONST = "org";
+
+	@Override
+	public List<String> getDeptNameList() {
+		Iterable<Department> deptList = deptRepo.findAll();
+		if (!DataValidator.isCollectionEmpty(deptList)) {
+			List<String> deptNameList = new ArrayList<String>();
+			for (Department dept : deptList) {
+				List<Integer> deptTypeIdList = Arrays.asList(dept.getDeptTypeIds());
+				Iterable<DepartmentType> deptTypeList = deptTypeRepo.findAllById(deptTypeIdList);
+				boolean isSpvTypeExist = false;
+				for (DepartmentType deptType : deptTypeList) {
+					if (PortalConstants.SPV_DEPT_TYPE.equalsIgnoreCase(deptType.getDeptType())) {
+						isSpvTypeExist = true;
+						break;
+					}
+				}
+				if (!isSpvTypeExist) {
+					deptNameList.add(dept.getDeptName());
+				}
+			}
+			if (!DataValidator.isCollectionEmpty(deptNameList)) {
+				Collections.sort(deptNameList);
+			}
+			return deptNameList;
+		}
+
+		return Collections.emptyList();
+	}
 
 	@Override
 	public List<DepartmentInfo> getAllDepartments() {
@@ -204,7 +232,8 @@ public class PortalServiceImpl implements PortalService {
 	}
 
 	@Override
-	public UserDepartmentInfo addUserRoleInDepartment(UserDepartmentRole userDeptRole, String wid, String rootOrg, String org) throws Exception {
+	public UserDepartmentInfo addUserRoleInDepartment(UserDepartmentRole userDeptRole, String wid, String rootOrg,
+			String org) throws Exception {
 		validateUserDepartmentRole(userDeptRole);
 		UserDepartmentRole existingRecord = userDepartmentRoleRepo.findByUserIdAndDeptId(userDeptRole.getUserId(),
 				userDeptRole.getDeptId());
@@ -255,7 +284,7 @@ public class PortalServiceImpl implements PortalService {
 				prevDeptName = prevDept.getDeptName();
 			}
 		}
-		
+
 		HashMap<String, Object> fromValue = new HashMap<>();
 		fromValue.put("departmentName", prevDeptName);
 		fieldValue.put("fromValue", fromValue);
@@ -274,7 +303,8 @@ public class PortalServiceImpl implements PortalService {
 		return userDeptInfo;
 	}
 
-	public UserDepartmentInfo updateUserRoleInDepartment(UserDepartmentRole userDeptRole, String wid, String rootOrg, String org) throws Exception {
+	public UserDepartmentInfo updateUserRoleInDepartment(UserDepartmentRole userDeptRole, String wid, String rootOrg,
+			String org) throws Exception {
 		validateUserDepartmentRole(userDeptRole);
 		UserDepartmentRole existingRecord = userDepartmentRoleRepo.findByUserIdAndDeptId(userDeptRole.getUserId(),
 				userDeptRole.getDeptId());
@@ -443,7 +473,7 @@ public class PortalServiceImpl implements PortalService {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public List<SearchUserInfo> searchUserForRole(Integer deptId, String roleName, String userName) {
 		return null;
