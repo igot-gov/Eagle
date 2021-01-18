@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute, NavigationEnd, Router, Event, NavigationError } from '@angular/router'
 import { NsWidgetResolver } from 'library/ws-widget/resolver/src/public-api'
-import { EventsService } from '../../services/events.service'
 
 @Component({
   selector: 'ws-app-events-home',

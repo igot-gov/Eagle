@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core'
-import { NSDiscussData } from '../../../discuss/models/discuss.model'
 import { Router } from '@angular/router'
 
 @Component({
@@ -8,16 +7,17 @@ import { Router } from '@angular/router'
   styleUrls: ['./events-card.component.scss'],
 })
 export class EventsCardComponent implements OnInit {
-  @Input()
-  discuss!: NSDiscussData.IDiscussionData
+  
+  @Input('data') data: any = [];
 
   constructor(private router: Router) { }
 
   ngOnInit() {
+    console.log(this.data);
   }
 
   getCareer() {
-    this.router.navigate([`/app/event-hub/home/${this.discuss.tid}`])
+    this.router.navigate([`/app/event-hub/home/123`])
   }
 
 }
