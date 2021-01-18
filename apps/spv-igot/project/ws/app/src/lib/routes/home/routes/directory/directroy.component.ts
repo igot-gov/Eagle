@@ -139,7 +139,7 @@ export class DirectoryViewComponent implements OnInit, AfterViewInit, OnDestroy 
       this.wholeData.map((dept: any) => {
         dept.deptTypeInfos.forEach((deptsub: { deptType: any, deptSubType: string, id: string }) => {
           if (deptsub.deptType === this.currentFilter) {
-            let obj = {
+            const obj = {
               id: dept.id,
               mdo: dept.deptName,
               type: deptsub.deptSubType,
@@ -153,7 +153,6 @@ export class DirectoryViewComponent implements OnInit, AfterViewInit, OnDestroy 
       })
       this.createTableHeader()
       this.data = filteredData.map((dept: any) => {
-        console.log(dept)
         return {
           id: dept.id,
           mdo: dept.mdo,

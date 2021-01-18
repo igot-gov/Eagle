@@ -50,7 +50,6 @@ export class RolesAccessComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       })
 
-
     })
     // this.roleSvc.getRoles().subscribe(roles => {
     //   this.data = roles.data
