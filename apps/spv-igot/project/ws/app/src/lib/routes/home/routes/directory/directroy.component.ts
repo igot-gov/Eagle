@@ -75,10 +75,13 @@ export class DirectoryViewComponent implements OnInit, AfterViewInit, OnDestroy 
   }
   getDepartmentHeader() {
     this.wholeData.forEach((head: { deptTypeInfos: [{ deptType: void }] }) => {
-      if (this.departmentHearders.indexOf(head.deptTypeInfos[0].deptType) === -1) {
+      head.deptTypeInfos.forEach(dept => {
+        if (this.departmentHearders.indexOf(dept.deptType) === -1) {
 
-        this.departmentHearders.push(head.deptTypeInfos[0].deptType)
-      }
+          this.departmentHearders.push(dept.deptType)
+        }
+      })
+
     })
     const index = this.departmentHearders.indexOf('SPV')
     if (index > -1) {
@@ -132,21 +135,32 @@ export class DirectoryViewComponent implements OnInit, AfterViewInit, OnDestroy 
       this.currentFilter = key
       this.currentDepartment = key
       const filteredData: any[] = []
+
       this.wholeData.map((dept: any) => {
-        if (dept.deptTypeInfos[0].deptType === this.currentFilter) {
-          filteredData.push(dept)
-        }
+        dept.deptTypeInfos.forEach((deptsub: { deptType: any, deptSubType: string, id: string }) => {
+          if (deptsub.deptType === this.currentFilter) {
+            let obj = {
+              id: dept.id,
+              mdo: dept.deptName,
+              type: deptsub.deptSubType,
+              user: dept.noOfUsers,
+              head: dept.headquarters,
+              typeid: deptsub.id,
+            }
+            filteredData.push(obj)
+          }
+        })
       })
       this.createTableHeader()
       this.data = filteredData.map((dept: any) => {
-
+        console.log(dept)
         return {
           id: dept.id,
-          mdo: dept.deptName,
-          type: dept.deptTypeInfos[0].deptSubType,
-          user: dept.noOfUsers,
-          head: dept.headquarters,
-          typeid: dept.deptTypeInfos[0].id,
+          mdo: dept.mdo,
+          type: dept.type,
+          user: dept.user,
+          head: dept.head,
+          typeid: dept.typeid,
         }
       })
 

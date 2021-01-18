@@ -40,11 +40,17 @@ export class RolesAccessComponent implements OnInit, AfterViewInit, OnDestroy {
   /* API call to get all roles*/
   fetchRoles() {
     this.homeResolver.getMyDepartment().subscribe(roles => {
-      const obj = {
-        role: roles.rolesInfo[0].roleName,
-        count: roles.noOfUsers,
-      }
-      this.data.push(obj)
+      roles.rolesInfo.forEach((role: { roleName: string }) => {
+        if (role.roleName === 'SPV ADMIN') {
+          const obj = {
+            role: role.roleName,
+            count: roles.noOfUsers,
+          }
+          this.data.push(obj)
+        }
+      })
+
+
     })
     // this.roleSvc.getRoles().subscribe(roles => {
     //   this.data = roles.data
