@@ -369,9 +369,7 @@ export class FileUploadComponent implements OnInit {
         contentId: this.currentContent,
         fileName: finalFileName,
       }
-      this.profanityService.startProfanity(this.currentContent, url, finalFileName).subscribe(data => {
-        // tslint:disable-next-line:no-console
-        console.log(data)
+      this.profanityService.startProfanity(this.currentContent, url, finalFileName).subscribe(() => {
         this.profanityAPIData = {
           pdfDownloadUrl: url,
           contentId: this.currentContent,
@@ -429,8 +427,8 @@ export class FileUploadComponent implements OnInit {
 
   startgetProfanityAPI() {
     this.profanityService.getProfanity(this.profanityAPIData).subscribe(data => {
-      this.profanityData = data[0]
-      if (this.profanityData !== null && this.profanityData !== undefined) {
+      this.profanityData = data
+      if (this.profanityData) {
         if (this.profanityData.completed) {
           this.loaderService.changeLoad.next(false)
           this.startProfanityPopup()
@@ -442,7 +440,13 @@ export class FileUploadComponent implements OnInit {
             duration: NOTIFICATION_TIME * 1000,
           })
         } else {
-          this.startgetProfanityAPI()
+          setTimeout(
+            () => {
+              this.startgetProfanityAPI()
+            },
+            2000
+          )
+
         }
       }
     })

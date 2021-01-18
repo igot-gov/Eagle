@@ -47,8 +47,8 @@ export class DiscussStartComponent implements OnInit {
   private initializeData() {
     this.discussService.fetchAllCategories().then((data: any) => {
       this.allCategories = data.categories
-      if (this.startForm.get('category')) {}
-      this.startForm.controls['category'].setValue(this.allCategories[1].cid)
+      if (this.startForm.get('category')) { }
+      this.startForm.controls['category'].setValue(this.allCategories[0].cid)
     })
 
     this.discussService.fetchAllTags().then((data: any) => {
