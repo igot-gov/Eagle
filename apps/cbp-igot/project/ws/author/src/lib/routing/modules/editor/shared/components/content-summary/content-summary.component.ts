@@ -122,6 +122,16 @@ export class ContentSummaryComponent implements OnInit, OnDestroy {
     }
   }
   getGlanceData(): IAtGlanceComponentData.IData | null {
+    let needToCall = true
+    _.forOwn(this.tocStructure, (k, v) => {
+      if (k > 0) {
+        false
+      }
+    })
+    if (needToCall) {
+      this.resetAndFetchTocStructure()
+      setTimeout(() => { }, 1000)
+    }
     if (this.currentContent && this.contentMeta && this.tocStructure) {
       return {
         displayName: 'At a glance', // now not using JSON

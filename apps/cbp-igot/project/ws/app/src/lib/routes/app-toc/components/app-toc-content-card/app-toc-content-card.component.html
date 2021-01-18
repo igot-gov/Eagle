@@ -2,8 +2,8 @@
   <ng-container *ngIf="isCollection">
     <div class="flex flex-col">
       <div class="card-collection w-auto sm:w-100">
-        <img class="card-thumbnail ws-mat-primary-lite-background" [src]="content?.appIcon" alt="Thumbnail"
-          (click)="viewChildren = !viewChildren" [wsUtilsDefaultThumbnail]="defaultThumbnail" />
+        <img class="card-thumbnail ws-mat-primary-lite-background" [src]="content?.appIcon | relativeUrl"
+          alt="Thumbnail" (click)="viewChildren = !viewChildren" [wsUtilsDefaultThumbnail]="defaultThumbnail" />
         <div class="flex flex-col flex-wrap flex-between width-expand pr-0 w-100 sm:pr-4 sm:w-auto">
           <div class="text-truncate cursor-pointer" (click)="viewChildren = !viewChildren">
             <div class="flex flex-col sm:flex-row flex-wrap">
