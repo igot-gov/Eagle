@@ -28,6 +28,7 @@ import { AccessControlService } from '@ws/author/src/lib/modules/shared/services
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout'
 import { ContentQualityService } from '../../../../../shared/services/content-quality.service'
 import { ConfigurationsService } from '../../../../../../../../../../../../../library/ws-widget/utils/src/public-api'
+import _ from 'lodash'
 
 /**
  * @description
@@ -196,7 +197,26 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   save(nextAction?: string) {
+    _.forOwn(this.contentService.upDatedContent, (v, k) => {
+      if (k === this.contentService.currentContent) {
+        // can do anything
+        // const updatedData = this.contentService.getUpdatedMeta(k)
+        // if (v.body === '') {
+        //   // _.set(v, 'body', undefined)
+        //   delete v.body
+        // }
+        // if (v.description === '') {
+        //   // _.set(v, 'description', undefined)
+        //   delete v.description
+        // }
+      } else if (Object.keys(v).length) {
+        // _.set(this.contentService, `upDatedContent[${k}]`, {})
+        _.unset(_.get(this.contentService, 'upDatedContent'), k)
+
+      }
+    })
     const updatedContent = this.contentService.upDatedContent || {}
+    // const updatedContent = this.contentService.upDatedContent || {}
     if (
       Object.keys(updatedContent).length ||
       Object.keys(this.storeService.changedHierarchy).length

@@ -105,7 +105,7 @@ export class KnowledgeArtifactDetailsComponent implements OnInit, OnDestroy {
       this.editorSvc.deleteContent(this.content.identifier).subscribe(
         () => {
           this.deletingContent = false
-          this.router.navigate(['/page/home'])
+          this.router.navigate(['/author/cbp/me'])
         },
         _ => {
           this.deletingContent = false
