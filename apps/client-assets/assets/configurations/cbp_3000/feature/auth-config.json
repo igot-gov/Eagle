@@ -234,8 +234,11 @@
           "routerLink": "/author/cbp/all",
           "queryParams": "draft",
           "requiredRoles": [
+            "admin",
+            "super-admin",
+            "content-admin",
             "editor",
-            "admin"
+            "content-creator"
           ]
         },
         {

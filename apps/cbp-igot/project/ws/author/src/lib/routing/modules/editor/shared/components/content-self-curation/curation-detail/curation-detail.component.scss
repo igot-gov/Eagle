@@ -14,13 +14,27 @@
   overflow: unset;
 }
 
+.flex3 {
+  flex: 3;
+}
+
+.margin-left-auto {
+  margin-left: auto;
+}
+
+.bor {
+  // border-top: 0 !important;
+  border-right: 0 !important;
+  border-left: 0 !important;
+}
+
 .no-border {
   border: none !important;
   width: 100%;
 }
 
-.m-auto {
-  margin: auto;
+.margin-left-auto {
+  margin-left: auto;
 }
 
 .no-border-sidenev {
@@ -45,17 +59,6 @@
 }
 
 .status-div {
-  min-width: 184px;
-  min-height: 48px;
-  border-radius: 4px;
-
-  span {
-    margin-top: auto;
-    margin-bottom: auto;
-  }
-}
-
-.status-div-done {
   min-width: 184px;
   min-height: 48px;
   border-radius: 4px;
@@ -119,7 +122,6 @@
   margin: $size-s 0;
   min-width: fit-content;
   width: fit-content;
-  // min-width: 200px !important;
 }
 
 .active-page {

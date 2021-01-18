@@ -72,6 +72,7 @@ export class AllContentComponent implements OnInit, OnDestroy {
   showLoadMore!: boolean
   routerSubscription = <Subscription>{}
   queryFilter = ''
+  departmentData: any
   ordinals: any
   isAdmin = false
   currentAction: 'author' | 'reviewer' | 'expiry' | 'deleted' = 'author'
@@ -122,6 +123,9 @@ export class AllContentComponent implements OnInit, OnDestroy {
     if (this.configService.userRoles) {
       this.myRoles = this.configService.userRoles
     }
+    if (this.activatedRoute.snapshot.data.departmentData) {
+      this.departmentData = this.activatedRoute.snapshot.data.departmentData
+    }
     this.filterMenuTreeControl = new FlatTreeControl<IMenuFlatNode>(
       node => node.levels,
       node => node.expandable,
@@ -139,7 +143,7 @@ export class AllContentComponent implements OnInit, OnDestroy {
     this.dataSource.data = this.filterMenuItems
     this.userId = this.accessService.userId
 
-    if (this.activatedRoute.snapshot.data.departmentData) {
+    if (this.departmentData) {
       const leftData = this.authInitService.authAdditionalConfig.menus
       _.set(leftData, 'widgetData.logo', true)
       _.set(leftData, 'widgetData.logoPath', _.get(this.activatedRoute, 'snapshot.data.departmentData.data.logo'))
@@ -289,11 +293,12 @@ export class AllContentComponent implements OnInit, OnDestroy {
         query: this.queryFilter,
         filters: {
           status: this.fetchStatus(),
-          // creatorContacts: <string[]>[],
-          // trackContacts: <string[]>[],
-          // publisherDetails: <string[]>[],
-          // isMetaEditingDisabled: [false],
-          // isContentEditingDisabled: [false]
+          creatorContacts: <string[]>[],
+          trackContacts: <string[]>[],
+          publisherDetails: <string[]>[],
+          isMetaEditingDisabled: [false],
+          isContentEditingDisabled: [false],
+          sourceName: [_.get(this.departmentData, 'data.deptName')],
         },
         // pageNo: loadMoreFlag ? this.pagination.offset : 0,
         sort_by: { lastUpdatedOn: 'desc' },

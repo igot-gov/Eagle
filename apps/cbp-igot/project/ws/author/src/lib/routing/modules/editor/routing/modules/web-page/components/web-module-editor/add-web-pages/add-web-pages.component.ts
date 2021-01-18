@@ -34,6 +34,10 @@ import { VIEWER_ROUTE_FROM_MIME } from '@ws-widget/collection/src/public-api'
 import { NOTIFICATION_TIME, WEB_MODULE_JSON_FILE_NAME } from '../../../constant/web-module.constants'
 import { IAudioObj } from '../../../interface/page-interface'
 import { WebStoreService } from '../../../services/store.service'
+import { WebPagesResolverService } from '../../../services/resolver.service'
+/* tslint:disable */
+import _ from 'lodash'
+/* tslint:enable */
 @Component({
   selector: 'ws-auth-add-web-pages',
   templateUrl: './add-web-pages.component.html',
@@ -82,6 +86,7 @@ export class AddWebPagesComponent implements OnInit, OnDestroy {
     private accessService: AccessControlService,
     private notificationSvc: NotificationService,
     private webStoreSvc: WebStoreService,
+    private webPagesResolverService: WebPagesResolverService,
 
   ) {
     this.activeContentSubscription = this.metaContentService.changeActiveCont.subscribe(id => {
@@ -108,6 +113,7 @@ export class AddWebPagesComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.showSettingButtons = this.accessService.rootOrg === 'client1'
+
     this.mediumSizeBreakpoint$.subscribe(isLtMedium => {
       this.sideNavBarOpened = !isLtMedium
       this.mediumScreenSize = isLtMedium
@@ -122,6 +128,7 @@ export class AddWebPagesComponent implements OnInit, OnDestroy {
       this.activateRoute.parent.parent.data.subscribe(v => {
         if (v.contents && v.contents.length) {
           this.allContents.push(v.contents[0].content)
+          const currentContent = _.first(_.filter(_.get(v, 'contents[0].content.children'), id => id.identifier === this.currentId))
           let newData
           if (this.currentId) {
             newData = this.webStoreSvc.getCurrentWeb(this.currentId)
@@ -129,66 +136,15 @@ export class AddWebPagesComponent implements OnInit, OnDestroy {
             newData = this.webStoreSvc.getWeb()
           }
           if (v.contents[0].data || newData) {
-            const url = v.contents[0].content.artifactUrl.substring(0, v.contents[0].content.artifactUrl.lastIndexOf('/'))
-            this.imagesUrlbase = `${url}/assets/`
-            let formattedObj: any
-            if (v.contents[0].data && !!newData) {
-              if (JSON.stringify(v.contents[0].data) !== JSON.stringify(newData)) {
-                formattedObj = JSON.parse(JSON.stringify(newData))
-              } else {
-                formattedObj = JSON.parse(JSON.stringify(v.contents[0].data))
-              }
-            } else if (v.contents[0].data && !!!newData) {
-              formattedObj = JSON.parse(JSON.stringify(v.contents[0].data))
-
-            } else if (!v.contents[0].data && !!newData) {
-              formattedObj = JSON.parse(JSON.stringify(newData))
-
-            } else if (!v.contents[0].data && !!!newData) {
-              formattedObj = {
-                pages: [],
-                pageJson: [],
-              }
-            }
-            formattedObj.pageJson.map((obj: ModuleObj) => {
-              if (obj.audio && obj.audio.length) {
-                obj.audio.map(audioObj => {
-                  // audioObj.URL = JSON.parse(JSON.stringify(
-                  //   audioBaseURL + audioObj.URL
-                  // ).replace(this.downloadRegex, this.regexDownloadReplace))
-                  audioObj.URL = this.imagesUrlbase + audioObj.URL
-                  const splitUrl = audioObj.URL.split('/')
-                  const hostURL = `${splitUrl[0]}//${splitUrl[2]}`
-                  audioObj.URL = audioObj.URL.replace(hostURL, '')
-                })
-              }
-            })
-            const getBodyReg = /\<body[^>]*\>([^]*)\<\/body/m
-            // const reg1 = RegExp(`src\=\s*['"](.*?)`, 'gm')
-            // const reg2 = RegExp(`href\=\s*['"](.*?)['"]`, 'gm')
-            formattedObj.pages = formattedObj.pages.map((p: any, index: number) => {
-              let q
-              if (typeof (p) === 'object') {
-                // p = `<html><head></head><body>${p.body}</body></html>`
-                q = p.body
-              } else {
-                q = p
-              }
-              let pageBody = q
-              if (q.match(getBodyReg)) {
-                pageBody = q.match(getBodyReg)[1]
-                  .replace('src="', ` src="${this.imagesUrlbase}`)
-                // .replace(reg2, ` href="${this.imagesUrlbase}"`)
-              }
-              const fileInd = parseInt(formattedObj.pageJson[index].URL.replace('/assets/index', ''), 10)
-              return new Page({ body: pageBody, fileIndex: fileInd })
-            })
-            this.userData[v.contents[0].content.identifier] = formattedObj
-            this.webStoreSvc.collectiveWeb[v.contents[0].content.identifier] = formattedObj
-
+            this.bindData(newData, currentContent)
           } else if (v.contents[0] && v.contents[0].content && v.contents[0].content.children) {
-
             // need to work on
+
+            this.webPagesResolverService.getUpdatedData(this.currentId).subscribe(data => {
+              if (data && data[0]) {
+                this.bindData(null, data[0])
+              }
+            })
           }
           this.contentLoaded = true
         }
@@ -197,9 +153,67 @@ export class AddWebPagesComponent implements OnInit, OnDestroy {
     this.allLanguages = this.authInitService.ordinals.subTitles
     this.loaderService.changeLoadState(true)
     // active lex id
+  }
+  bindData(newData: any, v: any) {
+    const url = v.content.artifactUrl.substring(0, v.content.artifactUrl.lastIndexOf('/'))
+    this.imagesUrlbase = `${url}/assets/`
+    const audioUrlbase = `${url}`
+    let formattedObj: any
+    if (v.data && !!newData) {
+      if (JSON.stringify(v.data) !== JSON.stringify(newData)) {
+        formattedObj = JSON.parse(JSON.stringify(newData))
+      } else {
+        formattedObj = JSON.parse(JSON.stringify(v.data))
+      }
+    } else if (v.data && !!!newData) {
+      formattedObj = JSON.parse(JSON.stringify(v.data))
+
+    } else if (!v.data && !!newData) {
+      formattedObj = JSON.parse(JSON.stringify(newData))
+
+    } else if (!v.data && !!!newData) {
+      formattedObj = {
+        pages: [],
+        pageJson: [],
+      }
+    }
+    formattedObj.pageJson.map((obj: ModuleObj) => {
+      if (obj.audio && obj.audio.length) {
+        obj.audio.map(audioObj => {
+          // audioObj.URL = JSON.parse(JSON.stringify(
+          //   audioBaseURL + audioObj.URL
+          // ).replace(this.downloadRegex, this.regexDownloadReplace))
+          audioObj.URL = audioUrlbase + audioObj.URL
+          const splitUrl = audioObj.URL.split('/')
+          const hostURL = `${splitUrl[0]}//${splitUrl[2]}`
+          audioObj.URL = audioObj.URL.replace(hostURL, '')
+        })
+      }
+    })
+    const getBodyReg = /\<body[^>]*\>([^]*)\<\/body/m
+    // const reg1 = RegExp(`src\=\s*['"](.*?)`, 'gm')
+    // const reg2 = RegExp(`href\=\s*['"](.*?)['"]`, 'gm')
+    formattedObj.pages = formattedObj.pages.map((p: any, index: number) => {
+      let q
+      if (typeof (p) === 'object') {
+        // p = `<html><head></head><body>${p.body}</body></html>`
+        q = p.body
+      } else {
+        q = p
+      }
+      let pageBody = q
+      if (q.match(getBodyReg)) {
+        pageBody = q.match(getBodyReg)[1]
+          .replace('src="', ` src="${this.imagesUrlbase}`)
+        // .replace(reg2, ` href="${this.imagesUrlbase}"`)
+      }
+      const fileInd = parseInt(formattedObj.pageJson[index].URL.replace('/assets/index', ''), 10)
+      return new Page({ body: pageBody, fileIndex: fileInd })
+    })
+    this.userData[v.content.identifier] = formattedObj
+    this.webStoreSvc.collectiveWeb[v.content.identifier] = formattedObj
 
   }
-
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.userData[this.currentId].pages, event.previousIndex, event.currentIndex)
     if (this.selectedPage === event.previousIndex) {

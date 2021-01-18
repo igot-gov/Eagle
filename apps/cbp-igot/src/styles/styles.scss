@@ -563,6 +563,13 @@ h3.shepherd-title {
   }
 }
 
+.add-border {
+  .mat-dialog-container {
+    padding: 0;
+    border: 0.7rem solid gray;
+  }
+}
+
 @media only screen and(max-width: 585px) {
   #bannerColors {
     flex-direction: column;

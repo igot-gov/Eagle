@@ -35,6 +35,7 @@ export class ContentQualityComponent implements OnInit, OnDestroy, AfterViewInit
   qualityForm!: FormGroup
   currentContent!: string
   viewMode = 'meta'
+  fieldsToDisplay = ''
   mimeTypeRoute = ''
   isResultExpend = false
   showParentLoader = false
@@ -42,6 +43,7 @@ export class ContentQualityComponent implements OnInit, OnDestroy, AfterViewInit
   questionData!: NSIQuality.IQuestionConfig[]
   qualityResponse!: NSIQuality.IQualityResponse
   selectedIndex = 0
+  startQ = false
   lastQ = false
   displayResult = false
   selectedQIndex = 0
@@ -100,9 +102,26 @@ export class ContentQualityComponent implements OnInit, OnDestroy, AfterViewInit
       this.sideBarOpened = !isLtMedium
     })
   }
+  romanize(num: number) {
+    const numeralCodes = [['', 'i', 'ii', 'iii', 'iv', 'v', 'vi', 'vii', 'viii', 'ix'],         // Ones
+    ['', 'x', 'xx', 'xxx', 'xl', 'l', 'lx', 'lxx', 'lxxx', 'xc'],   // Tens
+    ['', 'c', 'cc', 'ccc', 'cd', 'd', 'dc', 'dcc', 'dccc', 'cm']]        // Hundreds
+    let numeral = ''
+    const digits = num.toString().split('').reverse()
+    for (let i = 0; i < digits.length; i += 1) {
+      // tslint:disable-next-line
+      numeral = numeralCodes[i][parseInt(digits[i])] + numeral
+    }
+    return numeral
+  }
   getJSON() {
     if (this.activateRoute.parent && this.activateRoute.parent.parent
       && this.activateRoute.parent.parent.snapshot && this.activateRoute.parent.parent.snapshot.data) {
+      this.fieldsToDisplay = _.map(this.activateRoute.parent.parent.snapshot.data.qualityJSON.criteria, (cr, idx) => {
+        // tslint:disable-next-line
+        return ` ${this.romanize(parseInt(idx + 1))}) ${cr.criteria} `
+      }).join(',')
+
       const qData = _.map(this.activateRoute.parent.parent.snapshot.data.qualityJSON.criteria, cr => {
         return {
           type: (cr.criteria || '').replace(' ', ''),
@@ -229,10 +248,11 @@ export class ContentQualityComponent implements OnInit, OnDestroy, AfterViewInit
     this._qualityService.getFile({ ...data }, `Content-Quality-Report`, true)
   }
   start() {
-    if (this.contentService.getUpdatedMeta(this.currentContent).children.length > 0) {
+    if (Object.keys(this.contentService.originalContent).length > 1) {
       if (this.questionData && this.questionData[1] && this.questionData[1].type) {
         this.selectedIndex = 1
         this.selectedKey = this.questionData[1].type
+        this.startQ = true
         // this.createForm()
       }
     } else {
@@ -306,6 +326,7 @@ export class ContentQualityComponent implements OnInit, OnDestroy, AfterViewInit
   }
   submitResult(qualityForm: any) {
     this.showParentLoader = true
+
     if (qualityForm && this._configurationsService.userProfile) {
       // todo:  start loader
       /* tslint:disable */
@@ -344,7 +365,7 @@ export class ContentQualityComponent implements OnInit, OnDestroy, AfterViewInit
           },
             1500
           )
-
+          this.startQ = false
         } else {
           // need to check tost
           // this.displayResult = true
@@ -371,9 +392,11 @@ export class ContentQualityComponent implements OnInit, OnDestroy, AfterViewInit
   }
 
   selectMenu(key: string, index: number) {
-    this.selectedKey = key
-    this.selectedIndex = index
-    this.selectedQIndex = 0
+    if (this.startQ) {
+      this.selectedKey = key
+      this.selectedIndex = index
+      this.selectedQIndex = 0
+    }
   }
 
   isLinkActive(key: string, index: number) {

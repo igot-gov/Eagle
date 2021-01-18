@@ -29,7 +29,9 @@ import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/l
 import { isNumber } from 'lodash'
 import { ContentQualityService } from '../../../../../shared/services/content-quality.service'
 import { ConfigurationsService } from '../../../../../../../../../../../../../library/ws-widget/utils/src/public-api'
-
+/* tslint:disable */
+import _ from 'lodash'
+/* tslint:enable */
 /**
  * @description
  * Parent component for the Collection editor. All the child component are loaded here. It decides the flow and the logic and
@@ -69,7 +71,7 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
   previewIdentifier: string | null = null
   viewMode = 'meta'
   mimeTypeRoute = ''
-
+  currentContents: any
   mediumScreen = false
   sideBarOpened = false
   mediumSizeBreakpoint$ = this.breakpointObserver
@@ -96,16 +98,18 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
     private _configurationsService: ConfigurationsService,
   ) {
     this.selectedIndex = 0
-  }
-
-  ngOnInit() {
     this.contentService.changeActiveCont.subscribe(data => {
       this.currentContent = data
-      this.setVeiwMetaByType(this.contentService.getUpdatedMeta(data))
+      this.viewMode = 'meta'
+      this.currentContents = this.contentService.getUpdatedMeta(data)
+      this.setVeiwMetaByType(this.currentContents)
       // if (this.contentService.getUpdatedMeta(data).contentType !== 'Resource') {
       //   this.viewMode = 'meta'
       // }
     })
+  }
+
+  ngOnInit() {
     if (this.activateRoute.parent && this.activateRoute.parent.parent) {
       this.routerSubscription = this.activateRoute.parent.parent.data.subscribe(data => {
         if (data && data.contents) {
@@ -195,7 +199,26 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   save(nextAction?: string) {
+    _.forOwn(this.contentService.upDatedContent, (v, k) => {
+      if (k === this.contentService.currentContent) {
+        // can do anything
+        // const updatedData = this.contentService.getUpdatedMeta(k)
+        // if (v.body === '') {
+        //   // _.set(v, 'body', undefined)
+        //   delete v.body
+        // }
+        // if (v.description === '') {
+        //   // _.set(v, 'description', undefined)
+        //   delete v.description
+        // }
+      } else if (Object.keys(v).length) {
+        // _.set(this.contentService, `upDatedContent[${k}]`, {})
+        _.unset(_.get(this.contentService, 'upDatedContent'), k)
+
+      }
+    })
     const updatedContent = this.contentService.upDatedContent || {}
+    // const updatedContent = this.contentService.upDatedContent || {}
     if (
       (Object.keys(updatedContent).length &&
         (Object.values(updatedContent).length && JSON.stringify(Object.values(updatedContent)[0]) !== '{}')) ||
@@ -650,7 +673,8 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
   setVeiwMetaByType(content: NSContent.IContentMeta) {
     if (['application/pdf', 'application/x-mpegURL'].includes(content.mimeType)) {
       this.viewMode = 'upload'
-    } else if ((content.mimeType === 'application/html' && !content.isExternal) || content.mimeType === 'audio/mpeg') {
+    } else if ((content.mimeType === 'application/html' && !content.isExternal)
+      || content.mimeType === 'audio/mpeg') {
       this.viewMode = 'upload'
     } else if (content.mimeType === 'application/html') {
       this.viewMode = 'curate'

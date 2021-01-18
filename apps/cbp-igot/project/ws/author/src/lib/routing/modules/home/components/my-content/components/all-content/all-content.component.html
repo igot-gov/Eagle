@@ -127,9 +127,9 @@
             </div>
             <div class="width-3-4 pl-2">
               <mat-form-field class="w-full" appearance="none" [floatLabel]="'never'">
+                <mat-icon matPrefix class="m-auto searchinput flex">search</mat-icon>
                 <input type="text" (keyup.enter)="search()" matInput #searchInput name="searchBox"
                   placeholder="Search for content" />
-                <mat-icon matPrefix>search</mat-icon>
               </mat-form-field>
             </div>
           </div>
@@ -156,7 +156,7 @@
           <div class="flex flex-1 flex-row-reverse margin-right-xs">
             <div class="block">
               <button mat-button class="text-white ws-mat-primary-background" *ngIf="isAllowed"
-                (click)="createNewComponent()">Create</button>
+                (click)="createNewComponent()">Create new</button>
             </div>
           </div>
         </div>

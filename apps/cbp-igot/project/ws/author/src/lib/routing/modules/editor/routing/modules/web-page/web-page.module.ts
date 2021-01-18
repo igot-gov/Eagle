@@ -11,6 +11,7 @@ import { UploadAudioComponent } from './components/upload-audio/upload-audio.com
 import { AudioStripsComponent } from './shared/component/audio-strips/audio-strips.component'
 import { AddWebPagesComponent } from './components/web-module-editor/add-web-pages/add-web-pages.component'
 import { WebStoreService } from './services/store.service'
+import { WebPagesResolverService } from './services/resolver.service'
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { WebStoreService } from './services/store.service'
     WebPageRoutingModule,
     HorizontalScrollerModule,
   ],
-  providers: [WebStoreService],
+  providers: [WebStoreService, WebPagesResolverService],
   entryComponents: [UploadAudioComponent],
   exports: [AddWebPagesComponent, WebModuleEditorComponent],
 

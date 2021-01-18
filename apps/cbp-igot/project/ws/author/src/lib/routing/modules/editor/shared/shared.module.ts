@@ -36,6 +36,7 @@ import { ContentQualityService } from './services/content-quality.service'
 import { CompetenceViewComponent } from './components/edit-meta/competencies-view/competencies-view.component'
 import { CompetenceCardComponent } from './components/edit-meta/competencies-card/competencies-card.component'
 import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component'
+import { CurationDetailComponent } from './components/content-self-curation/curation-detail/curation-detail.component'
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.
     CompetenceCardComponent,
     AddThumbnailComponent,
     ConfirmModalComponent,
+    CurationDetailComponent,
   ],
   imports: [
     CommonModule,
@@ -96,9 +98,10 @@ import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.
     ContentSummaryComponent,
     CompetenceCardComponent,
     ConfirmModalComponent,
+    CurationDetailComponent,
   ],
   entryComponents: [AuthPickerComponent, AddThumbnailComponent, CompetencyAddPopUpComponent,
-    CompetenceViewComponent, ConfirmModalComponent],
+    CompetenceViewComponent, ConfirmModalComponent, CurationDetailComponent],
   providers: [MyContentService, UploadService, SelfCurationService, ContentQualityService, AddThumbnailComponent],
 })
 export class EditorSharedModule { }

@@ -1,7 +1,9 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core'
+import { MatDialog } from '@angular/material'
 /* tslint:disable */
 import _ from 'lodash'
 import { NSISelfCuration } from '../../../../../../../interface/self-curation'
+import { CurationDetailComponent } from '../curation-detail/curation-detail.component'
 // import { SelfCurationService } from '../../../services/self-curation.service'
 /* tslint:enable */
 @Component({
@@ -16,7 +18,7 @@ export class CurationProgressCardComponent implements OnInit, OnDestroy {
   @Input() progressData!: NSISelfCuration.ISelfCurationData
   constructor(
     // private curationService: SelfCurationService
-
+    public dialog: MatDialog,
   ) {
   }
   ngOnInit(): void {
@@ -48,5 +50,24 @@ export class CurationProgressCardComponent implements OnInit, OnDestroy {
     }
     return ''
   }
+  displayResult() {
+    const dialogRef = this.dialog.open(CurationDetailComponent, {
+      // minHeight: 'auto',
+      width: '80%',
+      maxHeight: '90vh',
+      panelClass: 'add-border',
+      data: {
+        parentName: this.parentName,
+        parentId: this.parentId,
+        resourseName: this.resourseName,
+        progressData: { ...this.progressData },
+      },
+    })
+    dialogRef.afterClosed().subscribe((response: any) => {
+      if (response === 'postCreated') {
+        // this.refreshData(this.currentActivePage)
+      }
+    })
 
+  }
 }

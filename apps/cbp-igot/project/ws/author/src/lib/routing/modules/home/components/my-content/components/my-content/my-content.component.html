@@ -68,6 +68,11 @@
                     'ws-mat-accent-border font-medium':status !== 'inreview'}" mat-button role="button">
               Under Review {{ this.count && this.count['inreview']? '('+this.count['inreview']+')': null }}
             </a>
+            <a *ngIf="(!isAdmin && isReviewer)" [routerLink]="[filterPath]" [queryParams]="{ status: 'review' }"
+              routerLinkActive="router-link-active" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : status === 'review',
+                                'ws-mat-accent-border font-medium':status !== 'inreview'}" mat-button role="button">
+              For Review {{ this.count && this.count['review']? '('+this.count['review']+')': null }}
+            </a>
             <a [routerLink]="[filterPath]" [queryParams]="{ status: 'draft' }" routerLinkActive="router-link-active"
               class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : status === 'draft',
 'ws-mat-accent-border font-medium':status !== 'draft'}" mat-button role="button">
@@ -124,7 +129,7 @@
               <mat-form-field class="w-full" appearance="none" [floatLabel]="'never'">
                 <input type="text" (keyup.enter)="search()" matInput #searchInput name="searchBox"
                   placeholder="Search for content" />
-                <mat-icon matPrefix>search</mat-icon>
+                <mat-icon matPrefix class="m-auto searchinput flex">search</mat-icon>
               </mat-form-field>
             </div>
           </div>
@@ -150,8 +155,8 @@
           </div>
           <div class="flex flex-1 flex-row-reverse margin-right-xs">
             <div class="block">
-              <button mat-button class="text-white ws-mat-primary-background"
-                (click)="createNewComponent()">Create</button>
+              <button mat-button class="text-white ws-mat-primary-background" (click)="createNewComponent()">Create
+                new</button>
             </div>
           </div>
         </div>

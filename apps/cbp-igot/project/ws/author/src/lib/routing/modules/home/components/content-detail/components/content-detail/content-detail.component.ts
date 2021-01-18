@@ -93,22 +93,6 @@ export class ContentDetailComponent implements OnInit, OnDestroy {
     private dataService: LocalDataService,
     private myTocService: MyTocService
   ) {
-    // this.filterMenuTreeControl = new FlatTreeControl<IMenuFlatNode>(
-    //   node => node.levels,
-    //   node => node.expandable,
-    // )
-    // this.filterMenuTreeFlattener = new MatTreeFlattener(
-    //   this._transformer,
-    //   node => node.levels,
-    //   node => node.expandable,
-    //   node => node.content,
-    // )
-    // this.dataSource = new MatTreeFlatDataSource(
-    //   this.filterMenuTreeControl,
-    //   this.filterMenuTreeFlattener,
-    // )
-    // this.dataSource.data = this.filterMenuItems
-    // this.userId = this.accessService.userId
     this.isAdmin = this.accessService.hasRole(['admin', 'super-admin', 'content-admin', 'editor'])
   }
 

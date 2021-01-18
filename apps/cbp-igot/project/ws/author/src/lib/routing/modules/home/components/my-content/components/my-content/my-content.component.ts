@@ -74,6 +74,9 @@ export class MyContentComponent implements OnInit, OnDestroy {
   queryFilter = ''
   ordinals: any
   isAdmin = false
+  isReviewer = false
+  isPublisher = false
+  departmentData: any
   currentAction: 'author' | 'reviewer' | 'expiry' | 'deleted' = 'author'
   count: any = {}
   @ViewChild('searchInput', { static: false }) searchInputElem: ElementRef<any> = {} as ElementRef<
@@ -120,8 +123,14 @@ export class MyContentComponent implements OnInit, OnDestroy {
     this.courseTaken = {
       mandatoryCourseCompleted: true,
     }
+    this.isAdmin = this.accessService.hasRole(['admin', 'super-admin', 'content-admin', 'editor', 'content-creator'])
+    this.isReviewer = this.accessService.hasRole(['reviewer'])
+    this.isPublisher = this.accessService.hasRole(['publisher'])
     if (this.configService.userRoles) {
       this.myRoles = this.configService.userRoles
+    }
+    if (this.activatedRoute.snapshot.data.departmentData) {
+      this.departmentData = this.activatedRoute.snapshot.data.departmentData
     }
     this.filterMenuTreeControl = new FlatTreeControl<IMenuFlatNode>(
       node => node.levels,
@@ -140,7 +149,7 @@ export class MyContentComponent implements OnInit, OnDestroy {
     this.dataSource.data = this.filterMenuItems
     this.userId = this.accessService.userId
 
-    if (this.activatedRoute.snapshot.data.departmentData) {
+    if (this.departmentData) {
       const leftData = this.authInitService.authAdditionalConfig.menus
       _.set(leftData, 'widgetData.logo', true)
       _.set(leftData, 'widgetData.logoPath', _.get(this.activatedRoute, 'snapshot.data.departmentData.data.logo'))
@@ -290,43 +299,21 @@ export class MyContentComponent implements OnInit, OnDestroy {
         query: this.queryFilter,
         filters: {
           status: this.fetchStatus(),
-          // creatorContacts: <string[]>[],
-          // trackContacts: <string[]>[],
-          // publisherDetails: <string[]>[],
-          // isMetaEditingDisabled: [false],
-          // isContentEditingDisabled: [false]
+          creatorContacts: <string[]>[],
+          trackContacts: <string[]>[],
+          publisherDetails: <string[]>[],
+          isMetaEditingDisabled: [false],
+          isContentEditingDisabled: [false],
+          // source: this.departmentData,
         },
-        // pageNo: loadMoreFlag ? this.pagination.offset : 0,
-        sort_by: { lastUpdatedOn: 'desc' },
-        // pageSize: this.pagination.limit,
-        fields: [
-          'name',
-          'appIcon',
-          'mimeType',
-          'gradeLevel',
-          'identifier',
-          'medium',
-          'pkgVersion',
-          'board',
-          'subject',
-          'resourceType',
-          'primaryCategory',
-          'contentType',
-          'channel',
-          'organisation',
-          'trackable',
-        ],
-        facets: [
-          'primaryCategory',
-          'mimeType',
-        ],
-        // pageNo: loadMoreFlag ? this.pagination.offset : 0,
-        // sort: [{ lastUpdatedOn: 'desc' }],
-        // pageSize: this.pagination.limit,
-        // uuid: this.userId,
-        // rootOrg: this.accessService.rootOrg,
-        // // this is for Author Only
-        // isUserRecordEnabled: true,
+        pageNo: loadMoreFlag ? this.pagination.offset : 0,
+        sort: [{ lastUpdatedOn: 'desc' }],
+        pageSize: this.pagination.limit,
+        uuid: this.userId,
+        rootOrg: this.accessService.rootOrg,
+        // this is for Author Only
+        isUserRecordEnabled: !this.accessService.hasRole(['reviewer', 'publisher']),
+        // !this.accessService.hasRole(['admin', 'super-admin', 'content-admin', 'editor', 'reviewer', 'publisher']),
       },
     }
     if (this.finalFilters.length) {

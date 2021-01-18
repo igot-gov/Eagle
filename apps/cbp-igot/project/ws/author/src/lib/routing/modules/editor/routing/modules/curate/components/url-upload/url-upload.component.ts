@@ -85,7 +85,7 @@ export class UrlUploadComponent implements OnInit {
     this.urlUploadForm.controls.mimeType.setValue(meta.mimeType || 'application/html')
     this.urlUploadForm.controls.isIframeSupported.setValue(meta.isIframeSupported || 'No')
     // this.urlUploadForm.controls.isInIntranet.setValue(meta.isInIntranet || false)
-    this.urlUploadForm.controls.isExternal.setValue(true)
+    this.urlUploadForm.controls.isExternal.setValue(meta.isExternal ? true : false)
     this.urlUploadForm.controls.versionKey.setValue(meta.versionKey)
     this.canUpdate = true
     if (meta.artifactUrl) {

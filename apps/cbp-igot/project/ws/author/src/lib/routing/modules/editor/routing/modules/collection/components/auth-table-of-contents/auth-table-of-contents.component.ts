@@ -19,6 +19,9 @@ import { NSApiRequest } from '../../../../../../../../interface/apiRequest'
 import { EditorService } from '@ws/author/src/lib/routing/modules/editor/services/editor.service'
 import { isNumber } from 'lodash'
 import { ConfirmModalComponent } from '../../../../../shared/components/confirm-modal/confirm-modal.component'
+/* tslint:disable */
+import _ from 'lodash'
+/* tslint:enable */
 @Component({
   selector: 'ws-auth-table-of-contents',
   templateUrl: './auth-table-of-contents.component.html',

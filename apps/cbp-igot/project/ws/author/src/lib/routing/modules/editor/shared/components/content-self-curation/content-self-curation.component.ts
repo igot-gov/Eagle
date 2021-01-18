@@ -38,6 +38,7 @@ export class ContentSelfCurationComponent implements OnInit, OnDestroy, AfterVie
   displayResult = false
   selectedQIndex = 0
   leftmenudata!: any[]
+  pdfCount = 0
   /**for side nav */
   mediumScreen = false
   sideBarOpened = false
@@ -100,18 +101,9 @@ export class ContentSelfCurationComponent implements OnInit, OnDestroy, AfterVie
     // })
   }
   getProgress() {
-    // this.leftmenudata = []
-    // const response: NSISelfCuration.ISelfCurationData[] = []
-    // if (this.contentMeta && this.contentMeta) {
-    //   _.each(this.contentMeta, (element: NSContent.IContentMeta) => {
-    //     if (element.artifactUrl && element.mimeType.indexOf('application/pdf') >= 0) {
-    // response.push()
     this.curationService.fetchresult(this.contentService.parentContent).subscribe(data => {
       this.qualityData = data
-
-      // }
-      // })
-      // }
+      this.pdfCount = this.qualityData ? this.qualityData.length : 0
       if (this.qualityData.length > 0) {
         this.leftmenudata = [{
           count: this.getCriticalIssues,

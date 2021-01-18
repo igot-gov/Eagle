@@ -22,7 +22,6 @@ import {
   MatCheckboxModule,
   MatFormFieldModule,
   MatInputModule,
-
 } from '@angular/material'
 
 // comps
@@ -94,7 +93,7 @@ import { AppTocAnalyticsTilesComponent } from './components/app-toc-analytics-ti
 import { KnowledgeArtifactDetailsComponent } from './components/knowledge-artifact-details/knowledge-artifact-details.component'
 import { ProfileImageModule } from '../../../../../../../library/ws-widget/collection/src/lib/_common/profile-image/profile-image.module'
 import { EditorService } from '../../../../../author/src/lib/routing/modules/editor/services/editor.service'
-import { ApiService, AccessControlService } from '../../../../../author/src/public-api'
+import { ApiService, AccessControlService, SharedModule } from '../../../../../author/src/public-api'
 import { AppTocSinglePageComponent } from './components/app-toc-single-page/app-toc-single-page.component'
 import { AppTocSinglePageComponent as AppTocSinglePageRootComponent } from './routes/app-toc-single-page/app-toc-single-page.component'
 import { AppTocSinglePageDirective } from './routes/app-toc-single-page/app-toc-single-page.directive'
@@ -123,6 +122,7 @@ import { AppTocSinglePageDirective } from './routes/app-toc-single-page/app-toc-
   ],
   imports: [
     CommonModule,
+    SharedModule,
     RouterModule,
     AppTocRoutingModule,
     MatToolbarModule,

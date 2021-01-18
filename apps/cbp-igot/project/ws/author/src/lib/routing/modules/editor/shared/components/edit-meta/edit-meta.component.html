@@ -653,8 +653,7 @@
                             <span class="mat-body-2">{{license}}</span>
                           </mat-radio-button>
                         </mat-radio-group>
-                        <mat-error *ngIf="showError('license')" i18n>License is mandatory
-                        </mat-error>
+
                       </ng-container>
                       <!-- <mat-select formControlName="license" i18n-placeholder placeholder="--Select--">
                           <mat-option *ngIf="!checkCondition('license', 'required')" i18n [value]="null">None
@@ -664,6 +663,8 @@
                         </mat-select> -->
 
                     </div>
+                    <mat-error *ngIf="showError('license')" i18n>License is mandatory
+                    </mat-error>
                   </div>
                 </div>
                 <div class="flex new-mobile">

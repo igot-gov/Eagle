@@ -6244,7 +6244,11 @@
     },
     "showFor": {
       "Channel": [],
+      "Collection": [],
+      "Course": [],
+      "Knowledge Artifact": [],
       "Knowledge Board": [],
+      "Learning Path": [],
       "Resource": []
     },
     "type": "array"

@@ -75,7 +75,8 @@
         <ng-container matColumnDef="ActionsMenu" *ngIf="widgetData.actionsMenu">
           <mat-header-cell *matHeaderCellDef class="clr-darkish-blue action-header mat-body-2 flex-row-reverse">
             <mat-icon *ngIf="widgetData.actionsMenu.headIcon" class="cursor-pointer" (click)="updatedisplay()">
-              {{widgetData.actionsMenu.headIcon}}</mat-icon>
+              {{display==='table' ? widgetData.actionsMenu.headIcon: 'list'}}
+            </mat-icon>
             <span *ngIf="!widgetData.actionsMenu.headIcon">Actions</span>
           </mat-header-cell>
           <mat-cell *matCellDef="let row" class="action-cell flex-row-reverse">
@@ -106,17 +107,19 @@
       <span class="mat-body-2 ws-mat-black60-text">Course name</span>
       <span class="flex flex-1"></span>
       <mat-icon *ngIf="widgetData.actionsMenu.headIcon" class="cursor-pointer" (click)="updatedisplay()">
-        {{widgetData.actionsMenu.headIcon}}</mat-icon>
+        {{display==='table' ? widgetData.actionsMenu.headIcon: 'list'}}</mat-icon>
     </div>
     <mat-card-content>
       <div class="flex flex-wrap margin-xs">
         <div class="card-container" *ngFor="let cardData of data">
           <mat-card class="no-box-shadow custom-border">
             <div style="position: relative; z-index: 1;">
-              <img mat-card-image class="card-img mat-lite-background" role="link" [src]="cardData.appIcon "
-                (error)="changeToDefaultImg($event)" [alt]="cardData.name" class="card-img" />
+              <img mat-card-image class="card-img mat-lite-background" role="link"
+                [src]="cardData.appIcon | relativeUrlTable" (error)="changeToDefaultImg($event)" [alt]="cardData.name"
+                class="card-img" />
               <div class="source-div">
-                <img [src]="cardData.creatorLogo" class="source-icon" (error)="changeToDefaultSourceImg($event)"
+                <img [src]="cardData.creatorLogo | relativeUrlTable" class="source-icon"
+                  (error)="changeToDefaultSourceImg($event)"
                   [alt]="(cardData.sourceName + '_' + cardData.identifier)" />
               </div>
             </div>
@@ -125,38 +128,49 @@
                 pointer: cardData.contentType === 'Resource',
                 cursor: cardData.contentType !== 'Resource'
               }">
-              <a [ngClass]="{
-                              pointer: cardData.contentType === 'Resource',
-                              cursor: cardData.contentType !== 'Resource'
-                            }" [routerLink]="['/author/editor/' + cardData.identifier]" [title]="cardData.name"
-                aria-label="Content" i18n-aria-label="Content | Click to view">
-                <div class="flex flex-1 flex-column">
-                  <span class="mat-subheading-1 text-truncate mb-0 margin-top-s">
-                    {{ cardData.name || 'Untitled Content' }}
-                  </span>
-                  <span class="mat-body-2 ws-mat-black60-text">{{cardData.resourceType}}</span>
-                  <!-- <div class="flex">TAG</div> -->
-                  <div class="flex flex-1 flex-row">
-                    <!-- rating -->
-                    <div *ngIf="cardData?.averageRating" class="flex items-center my-1 rating mt-5">
-                      <span class="mr-2 rating-number">{{ cardData?.averageRating }}&nbsp;</span>
-                      <mat-icon class="mr-2 star" *ngFor="let rating of [1, 2, 3, 4, 5]">
-                        {{ getRatingIcon(cardData,rating) }}
-                      </mat-icon>
-                    </div>
-                    <div *ngIf="!content?.averageRating" class="flex items-center my-1 rating mt-5">
-                      <span class="mr-2 rating-number"> 0.0 &nbsp;</span>
-                      <mat-icon class="mr-2 star" *ngFor="let rating of [1, 2, 3, 4, 5]">
-                        {{ getRatingIcon(cardData,rating) }}
-                      </mat-icon>
-                    </div>
-                    <span class="flex-1"></span>
-                    <span class="flex items-center my-1 rating mat-subheading-2 ws-mat-black60-text mb-0 margin-top-xs">
-                      {{cardData.duration | pipeDurationTransform: 'hms'}}
-                    </span>
+
+              <div class="flex flex-1 flex-column">
+                <div class="flex flex-1">
+                  <div class="flex flex-1">
+                    <a class="flex flex-1" [ngClass]="{pointer: cardData.contentType === 'Resource',
+                                                  cursor: cardData.contentType !== 'Resource'
+                                                }" [routerLink]="['/author/content-detail/' + cardData.identifier]"
+                      [title]="cardData.name" aria-label="Content" i18n-aria-label="Content | Click to view">
+                      <span class="mat-subheading-1 text-truncate mb-0 margin-top-s">
+                        {{ cardData.name || 'Untitled Content' }}
+                      </span>
+                    </a>
+                  </div>
+                  <div class="flex flex-end">
+                    <button mat-icon-button [matMenuTriggerFor]="moreMenu" [matMenuTriggerData]="{'data':cardData}">
+                      <mat-icon>{{widgetData.actionsMenu.rowIcon}}</mat-icon>
+                    </button>
                   </div>
                 </div>
-              </a>
+
+                <span class="mat-body-2 ws-mat-black60-text">{{cardData.resourceType}}</span>
+                <!-- <div class="flex">TAG</div> -->
+                <div class="flex flex-1 flex-row">
+                  <!-- rating -->
+                  <div *ngIf="cardData?.averageRating" class="flex items-center my-1 rating mt-5">
+                    <span class="mr-2 rating-number">{{ cardData?.averageRating }}&nbsp;</span>
+                    <mat-icon class="mr-2 star" *ngFor="let rating of [1, 2, 3, 4, 5]">
+                      {{ getRatingIcon(cardData,rating) }}
+                    </mat-icon>
+                  </div>
+                  <div *ngIf="!content?.averageRating" class="flex items-center my-1 rating mt-5">
+                    <span class="mr-2 rating-number"> 0.0 &nbsp;</span>
+                    <mat-icon class="mr-2 star" *ngFor="let rating of [1, 2, 3, 4, 5]">
+                      {{ getRatingIcon(cardData,rating) }}
+                    </mat-icon>
+                  </div>
+                  <span class="flex-1"></span>
+                  <span class="flex items-center my-1 rating mat-subheading-2 ws-mat-black60-text mb-0 margin-top-xs">
+                    {{cardData.duration | pipeDurationTransform: 'hms'}}
+                  </span>
+                </div>
+              </div>
+
               <!-- <span class="background-color">Last updated on {{ cardData.lastPublishedOn }}</span> -->
             </mat-card-content>
           </mat-card>
