@@ -14,6 +14,7 @@ const API_END_POINTS = {
     deptType: `${CONSTANTS.SB_EXT_API_BASE_2}/portal/departmentType`,
     deptTypeByName: (deptType: string) => `${CONSTANTS.SB_EXT_API_BASE_2}/portal/departmentType/${deptType}`,
     deptTypeByTypeId: (deptTypeId: string) => `${CONSTANTS.SB_EXT_API_BASE_2}/portal/departmentTypeById/${deptTypeId}`,
+    getDeptNameList: `${CONSTANTS.SB_EXT_API_BASE_2}/portal/listDeptNames`,
     getDeptTypeName: `${CONSTANTS.SB_EXT_API_BASE_2}/portal/departmentTypeName`,
     isDeptAdmin: (userId: string, deptId: string) =>
         `${CONSTANTS.SB_EXT_API_BASE_2}/portal/department/${deptId}/user/${userId}/isAdmin`,
@@ -39,6 +40,23 @@ const cbpPortal = 'cbp'
 const spvDeptPath = '/spv/department'
 const spvDeptPathAction = '/spv/deptAction/userrole'
 const departmentType = '/departmentType'
+
+portalApi.get('/listDeptNames', async (req, res) => {
+    try {
+        const response = await axios.get(API_END_POINTS.getDeptNameList, {
+            ...axiosRequestConfig,
+            headers: req.headers,
+        })
+        res.status(response.status).send(response.data)
+    } catch (err) {
+        logError(failedToProcess + req.originalUrl + err)
+        res.status((err && err.response && err.response.status) || 500).send(
+            (err && err.response && err.response.data) || {
+                error: unknownError,
+            }
+        )
+    }
+})
 
 portalApi.get('/spv/mydepartment', async (req, res) => {
     try {
