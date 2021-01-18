@@ -34,7 +34,7 @@
         </div>
         <div class="flex flex-1">
           <mat-form-field appearance="outline" class="flex-1">
-            <mat-label class="mat-body-2">Please elabourate your question or idea here</mat-label>
+            <mat-label class="mat-body-2">Please elaborate your question or idea here</mat-label>
             <textarea matInput formControlName="description" #description cdkTextareaAutosize
               #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="10" cdkAutosizeMaxRows="30"
               [required]="true"></textarea>
@@ -62,7 +62,7 @@
                 <mat-icon matChipRemove>cancel</mat-icon>
               </mat-chip>
             </mat-chip-list>
-            <mat-label class="mat-body-2">Please elabourate your question or idea here</mat-label>
+            <mat-label class="mat-body-2">Please type the tags and press enter</mat-label>
             <input matInput formControlName="tags" i18n-aria-label aria-label="Enter tags" [matChipInputFor]="postTags"
               [matChipInputSeparatorKeyCodes]="separatorKeysCodes" maxlength="24"
               (matChipInputTokenEnd)="addPersonalInterests($event)" class="w-full-imp" [required]="false" />
