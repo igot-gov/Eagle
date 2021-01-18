@@ -97,12 +97,12 @@
     </mat-card>
     <mat-card class="mt-5">
         <mat-dialog-content>
-            <mat-file-upload></mat-file-upload>
 
-            <button (click)="fileInput.click()">
-                <span>Select</span>
-                <input #fileInput type="file" (change)="onFileInput($event)" style="display:none;" />
-              </button>
+            <span style="color:red;" *ngIf="message">{{message}}</span>
+            <!-- <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button> -->
+            <!-- <input hidden (change)="onFileSelected(file.files)" #fileInput type="file" id="file"> -->
+            <input #file type="file" (change)="onFileSelected(file.files)" />
+
 
         </mat-dialog-content>
     </mat-card>
@@ -120,7 +120,7 @@
                 <button mat-button class="mr-2" [mat-dialog-close]="true">
                     <span class="noocoments"> Cancel</span>
                 </button>
-                <button mat-raised-button type="button" (click)="uploadThumbnail()"
+                <button mat-raised-button type="button" (click)="uploadSelectedThumbnail()"
                     class="text-white ws-mat-primary-background flex-auto-display" [disabled]="!isChecked">
                     <span class="text-white" i18n>Upload</span>
                 </button>

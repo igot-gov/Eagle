@@ -21,7 +21,7 @@ import { MatSnackBar } from '@angular/material/snack-bar'
 import { VIEWER_ROUTE_FROM_MIME } from '@ws-widget/collection/src/public-api'
 import { ConfigurationsService, ValueService } from '@ws-widget/utils'
 import { ImageCropComponent } from '@ws-widget/utils/src/public-api'
-import { CONTENT_BASE_STATIC, CONTENT_BASE_STREAM } from '@ws/author/src/lib/constants/apiEndpoints'
+import { AUTHORING_BASE, CONTENT_BASE_STATIC, CONTENT_BASE_STREAM } from '@ws/author/src/lib/constants/apiEndpoints'
 import { NOTIFICATION_TIME } from '@ws/author/src/lib/constants/constant'
 import { Notify } from '@ws/author/src/lib/constants/notificationMessage'
 import { IMAGE_MAX_SIZE, IMAGE_SUPPORT_TYPES } from '@ws/author/src/lib/constants/upload'
@@ -38,6 +38,7 @@ import { AccessControlService } from './../../../../../../modules/shared/service
 import { AuthInitService } from './../../../../../../services/init.service'
 import { LoaderService } from './../../../../../../services/loader.service'
 import { CompetencyAddPopUpComponent } from '../competency-add-popup/competency-add-popup'
+import { ApiService } from '@ws/author/src/lib/modules/shared/services/api.service'
 import {
   debounceTime,
   distinctUntilChanged,
@@ -56,6 +57,8 @@ import { AddThumbnailComponent } from '../../../shared/components/add-thumbnail/
 // import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper'
 /* tslint:disable */
 import _ from 'lodash'
+import { NSApiRequest } from '../../../../../../interface/apiRequest'
+import { NSApiResponse } from '../../../../../../interface/apiResponse'
 /* tslint:enable */
 export interface IUsersData {
   name?: string
@@ -191,6 +194,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     private loader: LoaderService,
     private authInitService: AuthInitService,
     private accessService: AccessControlService,
+    private apiService: ApiService,
     @Inject(MAT_DIALOG_DATA) public data1: IUsersData,
   ) {
     // console.log("Parent component", this.parentContent)
@@ -261,10 +265,13 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     instance.isUpdate = true
     dialogRef.afterClosed().subscribe(data => {
       // this.data = data
-      this.contentForm.controls.appIcon.setValue(data.appURL)
-      this.contentForm.controls.thumbnail.setValue(data.appURL)
-      this.canUpdate = true
-      this.storeData()
+      if (data.appURL) {
+        this.contentForm.controls.appIcon.setValue(data.appURL)
+        this.contentForm.controls.thumbnail.setValue(data.appURL)
+        this.canUpdate = true
+        this.storeData()
+      }
+      this.uploadAppIcon(data.file)
     })
   }
 
@@ -993,39 +1000,73 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
         if (result) {
           formdata.append('content', result, fileName)
           this.loader.changeLoad.next(true)
-          this.uploadService
-            .upload(formdata, {
-              contentId: this.contentMeta.identifier,
-              contentType: CONTENT_BASE_STATIC,
-            })
-            .subscribe(
-              data => {
-                if (data.result) {
-                  this.loader.changeLoad.next(false)
-                  this.canUpdate = false
-                  this.contentForm.controls.appIcon.setValue(data.result.artifactUrl)
-                  this.contentForm.controls.thumbnail.setValue(data.result.artifactUrl)
-                  // this.contentForm.controls.posterImage.setValue(data.artifactURL)
-                  this.canUpdate = true
-                  this.storeData()
-                  this.snackBar.openFromComponent(NotificationComponent, {
-                    data: {
-                      type: Notify.UPLOAD_SUCCESS,
-                    },
-                    duration: NOTIFICATION_TIME * 1000,
-                  })
-                }
+
+          let randomNumber = ''
+          // tslint:disable-next-line: no-increment-decrement
+          for (let i = 0; i < 16; i++) {
+            randomNumber += Math.floor(Math.random() * 10)
+          }
+          const requestBody: NSApiRequest.ICreateImageMetaRequestV2 = {
+            request: {
+              content: {
+                code: randomNumber,
+                contentType: 'Asset',
+                createdBy: this.accessService.userId,
+                creator: this.accessService.userName,
+                mimeType: 'image/jpeg',
+                mediaType: 'image',
+                name: fileName,
+                language: ["English"],
+                license: 'CC BY 4.0',
               },
-              () => {
-                this.loader.changeLoad.next(false)
-                this.snackBar.openFromComponent(NotificationComponent, {
-                  data: {
-                    type: Notify.UPLOAD_FAIL,
-                  },
-                  duration: NOTIFICATION_TIME * 1000,
-                })
+            },
+          }
+
+          this.apiService
+            .post<NSApiRequest.ICreateMetaRequest>(
+              `${AUTHORING_BASE}content/v3/create`,
+              requestBody,
+            )
+            .subscribe(
+              (data: NSApiResponse.IContentCreateResponseV2) => {
+                // return data.result.identifier
+
+                this.uploadService
+                  .upload(formdata, {
+                    contentId: data.result.identifier,
+                    contentType: CONTENT_BASE_STATIC,
+                  })
+                  .subscribe(
+                    data => {
+                      if (data.result) {
+                        this.loader.changeLoad.next(false)
+                        this.canUpdate = false
+                        this.contentForm.controls.appIcon.setValue(data.result.artifactUrl)
+                        this.contentForm.controls.thumbnail.setValue(data.result.artifactUrl)
+                        // this.contentForm.controls.posterImage.setValue(data.artifactURL)
+                        this.canUpdate = true
+                        this.storeData()
+                        this.snackBar.openFromComponent(NotificationComponent, {
+                          data: {
+                            type: Notify.UPLOAD_SUCCESS,
+                          },
+                          duration: NOTIFICATION_TIME * 1000,
+                        })
+                      }
+                    },
+                    () => {
+                      this.loader.changeLoad.next(false)
+                      this.snackBar.openFromComponent(NotificationComponent, {
+                        data: {
+                          type: Notify.UPLOAD_FAIL,
+                        },
+                        duration: NOTIFICATION_TIME * 1000,
+                      })
+                    },
+                  )
               },
             )
+
         }
       },
     })

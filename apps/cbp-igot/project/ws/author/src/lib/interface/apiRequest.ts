@@ -69,6 +69,22 @@ export namespace NSApiRequest {
     }
   }
 
+  export interface ICreateImageMetaRequestV2 {
+    request: {
+      content: {
+        name: string
+        code: string
+        createdBy: string
+        contentType: string
+        mimeType: string
+        mediaType: string
+        creator?: string
+        license: string
+        language: [string]
+      }
+    }
+  }
+
   export interface IForwardBackwardActionGeneral {
     comment: string
     operation: 1 | 0 | -1 | 100000

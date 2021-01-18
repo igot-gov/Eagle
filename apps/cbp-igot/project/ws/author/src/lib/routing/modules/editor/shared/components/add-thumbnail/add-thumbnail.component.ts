@@ -48,6 +48,10 @@ export class AddThumbnailComponent implements OnInit, OnDestroy {
   canUpdate = true
   @Input() isUpdate = false
   showMainContent: Boolean = true;
+  srcResult: any
+  public imagePath: any
+  imgURL: any
+  public message: string | undefined
 
   constructor(private loadService: LoaderService,
     public dialogRef: MatDialogRef<AddThumbnailComponent>,
@@ -68,7 +72,7 @@ export class AddThumbnailComponent implements OnInit, OnDestroy {
     this.startForm = this.formBuilder.group({
       thumbnail: [],
     })
-    this.filter('myimages');
+    this.filter('myimages')
     this.imageList = []
 
   }
@@ -78,10 +82,29 @@ export class AddThumbnailComponent implements OnInit, OnDestroy {
     this.loadService.changeLoad.next(false)
   }
 
+  onFileSelected(files: any) {
+    if (files.length === 0)
+      return
+
+    var mimeType = files[0].type
+    if (mimeType.match(/image\/*/) == null) {
+      this.message = "Only images are supported."
+      return
+    }
+
+    var reader = new FileReader()
+    this.imagePath = files[0]
+    this.isChecked = true
+    reader.readAsDataURL(files[0])
+    reader.onload = (_event) => {
+      this.imgURL = reader.result
+    }
+  }
+
 
 
   ShowHideButton() {
-    this.showMainContent = this.showMainContent ? false : true;
+    this.showMainContent = this.showMainContent ? false : true
   }
 
   onValChange(val: NsContent.IContent | null = null) {
@@ -161,6 +184,10 @@ export class AddThumbnailComponent implements OnInit, OnDestroy {
 
   public uploadThumbnail() {
     this.dialogRef.close({ appURL: this.toggle ? this.toggle.artifactUrl : '' })
+  }
+
+  public uploadSelectedThumbnail() {
+    this.dialogRef.close({ file: this.imagePath })
   }
 
 }
