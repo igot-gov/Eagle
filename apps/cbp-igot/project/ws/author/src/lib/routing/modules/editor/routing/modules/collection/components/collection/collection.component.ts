@@ -28,8 +28,9 @@ import { AccessControlService } from '@ws/author/src/lib/modules/shared/services
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout'
 import { ContentQualityService } from '../../../../../shared/services/content-quality.service'
 import { ConfigurationsService } from '../../../../../../../../../../../../../library/ws-widget/utils/src/public-api'
+/* tslint:disable */
 import _ from 'lodash'
-
+/* tslint:enable */
 /**
  * @description
  * Parent component for the Collection editor. All the child component are loaded here. It decides the flow and the logic and
