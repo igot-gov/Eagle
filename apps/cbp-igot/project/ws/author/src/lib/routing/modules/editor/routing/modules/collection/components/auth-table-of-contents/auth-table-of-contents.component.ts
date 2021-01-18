@@ -18,8 +18,7 @@ import { PickNameComponent } from './pick-name/pick-name.component'
 import { NSApiRequest } from '../../../../../../../../interface/apiRequest'
 import { EditorService } from '@ws/author/src/lib/routing/modules/editor/services/editor.service'
 import { isNumber } from 'lodash'
-import { NSContent } from '../../../../../../../../interface/content'
-import { IFormMeta } from '../../../../../../../../interface/form'
+import { ConfirmModalComponent } from '../../../../../shared/components/confirm-modal/confirm-modal.component'
 @Component({
   selector: 'ws-auth-table-of-contents',
   templateUrl: './auth-table-of-contents.component.html',
@@ -151,21 +150,48 @@ export class AuthTableOfContentsComponent implements OnInit, OnDestroy {
   }
 
   onNodeSelect(node: IContentTreeNode) {
-    // let demoData = this.editorStore.getOriginalMeta(node.identifier)
-    this.storeData(node.identifier)
-    debugger
+    let flag = false
     if (node.id !== this.selectedNode) {
-      this.selectedNode = node.id
-      this.editorStore.currentContent = node.identifier
-      this.store.currentSelectedNode = node.id
-      this.editorStore.changeActiveCont.next(node.identifier)
-      this.action.emit({ type: 'editContent', identifier: node.identifier })
-      this.store.selectedNodeChange.next(node.id)
-      // this.store.selectedNode
-      this.preserveExpandedNodes()
-      // this.triggerSave().subscribe(() => {
-
-      // })
+      const updatedContent = this.editorStore.upDatedContent || {}
+      if (Object.keys(updatedContent).length > 0) {
+        let tempUpdateContent = this.editorStore.upDatedContent[this.editorStore.currentContent]
+        if (tempUpdateContent) {
+          tempUpdateContent = this.editorStore.cleanProperties(tempUpdateContent)
+          if (
+            (Object.keys(tempUpdateContent).length === 1 && tempUpdateContent.versionKey)
+            || Object.keys(tempUpdateContent).length === 0) {
+            flag = false
+          } else {
+            flag = true
+          }
+        }
+      }
+      if (flag) {
+        this.dialog.open<ConfirmModalComponent>(ConfirmModalComponent)
+          .afterClosed()
+          .subscribe((res: any) => {
+            if (res.result) {
+              this.selectedNode = node.id
+              this.editorStore.currentContent = node.identifier
+              this.store.currentSelectedNode = node.id
+              this.editorStore.changeActiveCont.next(node.identifier)
+              this.action.emit({ type: 'editContent', identifier: node.identifier })
+              this.store.selectedNodeChange.next(node.id)
+              this.editorStore.upDatedContent = {}
+              // this.store.selectedNode
+              this.preserveExpandedNodes()
+            }
+          })
+      } else {
+        this.selectedNode = node.id
+        this.editorStore.currentContent = node.identifier
+        this.store.currentSelectedNode = node.id
+        this.editorStore.changeActiveCont.next(node.identifier)
+        this.action.emit({ type: 'editContent', identifier: node.identifier })
+        this.store.selectedNodeChange.next(node.id)
+        // this.store.selectedNode
+        this.preserveExpandedNodes()
+      }
     }
   }
 
@@ -473,7 +499,6 @@ export class AuthTableOfContentsComponent implements OnInit, OnDestroy {
         },
       },
     }
-    debugger
     if (Object.keys(this.editorStore.upDatedContent)[0] && nodesModified[Object.keys(this.editorStore.upDatedContent)[0]]) {
       const requestBody: NSApiRequest.IContentUpdateV2 = {
         request: {
@@ -482,8 +507,8 @@ export class AuthTableOfContentsComponent implements OnInit, OnDestroy {
       }
       requestBody.request.content = this.editorStore.cleanProperties(requestBody.request.content)
       if (requestBody.request.content.duration) {
-        requestBody.request.content.duration =
-          (isNumber(requestBody.request.content.duration) ? `${requestBody.request.content.duration}` : requestBody.request.content.duration)
+        // tslint:disable-next-line:max-line-length
+        requestBody.request.content.duration = (isNumber(requestBody.request.content.duration) ? `${requestBody.request.content.duration}` : requestBody.request.content.duration)
       }
       return this.editorService.updateContentV3(requestBody, Object.keys(this.editorStore.upDatedContent)[0]).pipe(
         tap(() => {
@@ -522,59 +547,5 @@ export class AuthTableOfContentsComponent implements OnInit, OnDestroy {
     //     this.editorStore.upDatedContent = {}
     //   }),
     // )
-  }
-
-  storeData(identifier: string) {
-    try {
-      const originalMeta = this.editorStore.getOriginalMeta(identifier)
-      if (originalMeta) {
-        // const expiryDate = this.contentForm.value.expiryDate
-        console.info(Object.keys(this.editorStore.upDatedContent).filter(v => v === identifier))
-        debugger
-        const currentMeta: NSContent.IContentMeta = Object.keys(this.editorStore.upDatedContent).filter(v => v === identifier)
-        if (originalMeta.mimeType) {
-          currentMeta.mimeType = originalMeta.mimeType
-        }
-        const meta = <any>{}
-        // if (this.canExpiry) {
-        //   currentMeta.expiryDate = `${expiryDate
-        //     .toISOString()
-        //     .replace(/-/g, '')
-        //     .replace(/:/g, '')
-        //     .split('.')[0]
-        //     }+0000`
-        // }
-        Object.keys(currentMeta).map(v => {
-          if (
-            v !== 'versionKey' &&
-            JSON.stringify(currentMeta[v as keyof NSContent.IContentMeta]) !==
-            JSON.stringify(originalMeta[v as keyof NSContent.IContentMeta])
-          ) {
-            if (
-              currentMeta[v as keyof NSContent.IContentMeta] ||
-              (this.authInitService.authConfig[v as keyof IFormMeta].type === 'boolean' &&
-                currentMeta[v as keyof NSContent.IContentMeta] === false)
-            ) {
-              meta[v as keyof NSContent.IContentMeta] = currentMeta[v as keyof NSContent.IContentMeta]
-            } else {
-              meta[v as keyof NSContent.IContentMeta] = JSON.parse(
-                JSON.stringify(
-                  this.authInitService.authConfig[v as keyof IFormMeta].defaultValue[
-                    originalMeta.contentType
-                    // tslint:disable-next-line: ter-computed-property-spacing
-                  ][0].value,
-                ),
-              )
-            }
-          } else if (v === 'versionKey') {
-            meta[v as keyof NSContent.IContentMeta] = originalMeta[v as keyof NSContent.IContentMeta]
-          }
-        })
-        debugger
-        this.editorStore.setUpdatedMeta(meta, identifier)
-      }
-    } catch (ex) {
-      this.snackBar.open('Please Save Parent first and refresh page.')
-    }
   }
 }

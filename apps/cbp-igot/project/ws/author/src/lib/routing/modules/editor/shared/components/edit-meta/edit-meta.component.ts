@@ -771,6 +771,9 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
         if (originalMeta.mimeType) {
           currentMeta.mimeType = originalMeta.mimeType
         }
+        if (currentMeta) {
+          currentMeta.duration = (currentMeta.duration === '0') ? '0' : currentMeta.duration
+        }
         const meta = <any>{}
         // if (this.canExpiry) {
         //   currentMeta.expiryDate = `${expiryDate
