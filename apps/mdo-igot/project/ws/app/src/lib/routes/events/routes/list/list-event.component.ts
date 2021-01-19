@@ -64,7 +64,7 @@ export class ListEventComponent implements OnInit, AfterViewInit, OnDestroy {
   fetchEvents() {
     const requestObj = {
         locale: ['en'],
-        pageSize: 12,
+        pageSize: 25,
         query: 'all',
         didYouMean: true,
         filters: [
