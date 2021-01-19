@@ -40,5 +40,9 @@ public interface PortalService {
 
 	DepartmentInfo getMyDepartment(String deptType, String userId, boolean isUserInfoRequired) throws Exception;
 	
+    DepartmentInfo getMyCbpDepartment(String userId) throws Exception;
+	
+	DepartmentInfo getMyDepartmentForRole(String roleName, String userId, boolean isUserInfoRequired) throws Exception;
+	
 	List<SearchUserInfo> searchUserForRole(Integer deptId, String roleName, String userName) throws Exception;
 }

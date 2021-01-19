@@ -18,6 +18,6 @@ public class MdoPortalServiceImpl implements MdoPortalService {
 
 	@Override
 	public DepartmentInfo getMyDepartment(String userId, boolean isUserInfoRequired) throws Exception {
-		return portalService.getMyDepartment(PortalConstants.MDO_DEPT_TYPE, userId, isUserInfoRequired);
+		return portalService.getMyDepartmentForRole(PortalConstants.MDO_ROLE_NAME, userId, isUserInfoRequired);
 	}
 }

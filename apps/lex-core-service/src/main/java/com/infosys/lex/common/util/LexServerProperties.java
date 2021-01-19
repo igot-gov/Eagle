@@ -155,6 +155,9 @@ public class LexServerProperties {
 	
 	@Value("${wf.service.updateUserProfilePath}")
 	private String wfServicePath;
+	
+	@Value("${user.enable.multidept.mapping}")
+	private boolean isUserMultiMapDeptEnabled;
 
 	public Integer getCertificationRetryGapInDays() {
 		return certificationRetryGapInDays;
@@ -581,6 +584,14 @@ public class LexServerProperties {
 	public void setWfServicePath(String wfServicePath) {
 		this.wfServicePath = wfServicePath;
 	}
+	
+	public boolean isUserMultiMapDeptEnabled() {
+		return isUserMultiMapDeptEnabled;
+	}
+
+	public void setUserMultiMapDeptEnabled(boolean isUserMultiMapDeptEnabled) {
+		this.isUserMultiMapDeptEnabled = isUserMultiMapDeptEnabled;
+	}
 
 	@Override
 	public String toString() {
@@ -595,7 +606,7 @@ public class LexServerProperties {
 				+ ", lhubCertificationUrl=" + lhubCertificationUrl + ", iapSubmissonsUrl=" + iapSubmissonsUrl
 				+ ", iapSubmissonsClientId=" + iapSubmissonsClientId + ", iapSubmissonsClientSecret="
 				+ iapSubmissonsClientSecret + ", enableRealTime=" + enableRealTime + ", wfServiceHost=" + wfServiceHost 
-				+", wfServicePath="+ wfServicePath + "]";
+				+", wfServicePath="+ wfServicePath + ", isUserMultiMapDeptEnabled=" + isUserMultiMapDeptEnabled + "]";
 	}
 
 

@@ -115,6 +115,98 @@ public class PortalServiceImpl implements PortalService {
 		return enrichDepartmentInfo(getMyActiveDepartment(deptType, userId), isUserInfoRequired, true);
 	}
 
+	@Override
+	public DepartmentInfo getMyDepartmentForRole(String roleName, String userId, boolean isUserInfoRequired)
+			throws Exception {
+		return enrichDepartmentInfo(getMyCurrentDepartment(roleName, userId), isUserInfoRequired, true);
+	}
+
+	@Override
+	public DepartmentInfo getMyCbpDepartment(String userId) throws Exception {
+		Department myDept = null;
+		List<UserDepartmentRole> userList = userDepartmentRoleRepo.findAllByUserIdAndIsActiveAndIsBlocked(userId, true,
+				false);
+		if (DataValidator.isCollectionEmpty(userList)) {
+			throw new Exception("No records exist for UserId: " + userId);
+		}
+		List<Integer> deptIds = userList.stream().map(i -> i.getDeptId()).collect(Collectors.toList());
+//		Map<Integer, Integer[]> userDeptRoles = userList.stream()
+//				.collect(Collectors.toMap(UserDepartmentRole::getDeptId, UserDepartmentRole::getRoleIds));
+
+//		Iterable<Role> cbpRoles = roleRepo.findAllById(
+//				Arrays.asList(deptRoleRepo.findByDeptTypeIgnoreCase(PortalConstants.CBP_DEPT_TYPE).getRoleIds()));
+		logger.info("List of User Records -> " + userList.size() + ", DeptIds: " + deptIds.toString());
+
+		Iterable<Department> deptList = deptRepo.findAllById(deptIds);
+
+		for (Department dept : deptList) {
+			Iterable<DepartmentType> deptTypeList = deptTypeRepo.findAllById(Arrays.asList(dept.getDeptTypeIds()));
+			for (DepartmentType deptType : deptTypeList) {
+				if (deptType.getDeptType().equalsIgnoreCase(PortalConstants.CBP_DEPT_TYPE)) {
+					// We found a CBP Type department which user is mapped... Now need to check user
+					// has any roles related CBP Portal in this department
+					if (hasCBPRole(dept, userList)) {
+						if (myDept != null) {
+							throw new Exception("More than one CBP Department is available for the User. ");
+						} else {
+							myDept = dept;
+						}
+					}
+				}
+			}
+		}
+
+		return enrichDepartmentInfo(myDept, false, false);
+	}
+
+	private Department getMyCurrentDepartment(String roleName, String userId) throws Exception {
+		List<UserDepartmentRole> userList = userDepartmentRoleRepo.findAllByUserIdAndIsActiveAndIsBlocked(userId, true,
+				false);
+		if (DataValidator.isCollectionEmpty(userList)) {
+			throw new Exception("No records exist for UserId: " + userId);
+		}
+		List<Integer> deptIds = userList.stream().map(i -> i.getDeptId()).collect(Collectors.toList());
+		logger.info("List of User Records -> " + userList.size() + ", DeptIds: " + deptIds.toString());
+
+		Iterable<Department> deptList = deptRepo.findAllById(deptIds);
+		Department myDept = null;
+		Map<Integer, Department> deptMap = new HashMap<Integer, Department>();
+		if (!DataValidator.isCollectionEmpty(deptList)) {
+			for (Department dept : deptList) {
+				deptMap.put(dept.getDeptId(), dept);
+			}
+		}
+
+		for (UserDepartmentRole user : userList) {
+			Iterable<Role> roles = roleRepo.findAllById(Arrays.asList(user.getRoleIds()));
+			for (Role r : roles) {
+				if (r.getRoleName().equals(roleName)) {
+					if (myDept != null) {
+						throw new Exception("More than one Department is available with Role: " + roleName);
+					} else {
+						myDept = deptMap.get(user.getDeptId());
+					}
+				}
+			}
+		}
+		return myDept;
+	}
+
+	private boolean hasCBPRole(Department dept, List<UserDepartmentRole> userDeptRoleList) {
+		for (UserDepartmentRole userDeptRole : userDeptRoleList) {
+			if (userDeptRole.getDeptId() == dept.getDeptId()) {
+				Iterable<Role> userRoles = roleRepo.findAllById(Arrays.asList(userDeptRole.getRoleIds()));
+				for (Role r : userRoles) {
+					if (PortalConstants.CBP_ROLES.contains(r.getRoleName())) {
+						return true;
+					}
+				}
+			}
+		}
+
+		return false;
+	}
+
 	private Department getMyActiveDepartment(String strDeptType, String userId) throws Exception {
 		List<UserDepartmentRole> userList = userDepartmentRoleRepo.findAllByUserIdAndIsActiveAndIsBlocked(userId, true,
 				false);
@@ -124,8 +216,9 @@ public class PortalServiceImpl implements PortalService {
 		List<Integer> deptIds = userList.stream().map(i -> i.getDeptId()).collect(Collectors.toList());
 		logger.info("List of User Records -> " + userList.size() + ", DeptIds: " + deptIds.toString());
 
-		Department myDept = null;
 		Iterable<Department> deptList = deptRepo.findAllById(deptIds);
+		Department myDept = null;
+
 		for (Department dept : deptList) {
 			Iterable<DepartmentType> deptTypeList = deptTypeRepo.findAllById(Arrays.asList(dept.getDeptTypeIds()));
 			for (DepartmentType deptType : deptTypeList) {
@@ -664,7 +757,16 @@ public class PortalServiceImpl implements PortalService {
 
 		// Check Role exist
 		if (!DataValidator.isCollectionEmpty(userDeptRole.getRoles())) {
+			boolean isCbpRoleGiven = false;
 			List<Role> roles = roleRepo.findAllByRoleNameIn(userDeptRole.getRoles());
+			for (Role r : roles) {
+				if (PortalConstants.CBP_ROLES.contains(r.getRoleName())) {
+					isCbpRoleGiven = true;
+					break;
+				}
+			}
+			Map<Integer, Role> givenRoleMap = roles.stream()
+					.collect(Collectors.toMap(Role::getId, roleInfo -> roleInfo));
 			if (DataValidator.isCollectionEmpty(roles) || roles.size() != userDeptRole.getRoles().size()) {
 				throw new Exception("Invalid Role Names Provided");
 			}
@@ -678,6 +780,34 @@ public class PortalServiceImpl implements PortalService {
 					throw new Exception("Invalid Role Name provided for the Department");
 				}
 			}
+
+			if (!serverConfig.isUserMultiMapDeptEnabled()) {
+				// Check this user has the same Role in another department.
+				List<UserDepartmentRole> existingUserDepts = userDepartmentRoleRepo
+						.findAllByUserIdAndIsActiveAndIsBlocked(userDeptRole.getUserId(), true, false);
+				if (!DataValidator.isCollectionEmpty(existingUserDepts)) {
+					for (UserDepartmentRole uDeptRole : existingUserDepts) {
+						if (isCbpRoleGiven) {
+							// Just check any CBP role is already assigned
+							Iterable<Role> existingUserDeptRoles = roleRepo
+									.findAllById(Arrays.asList(uDeptRole.getRoleIds()));
+							for(Role r : existingUserDeptRoles) {
+								if(PortalConstants.CBP_ROLES.contains(r.getRoleName())) {
+									throw new Exception("User is already assigned with a CBP Role in another Department.");
+								}
+							}
+						}
+						for (Integer i : uDeptRole.getRoleIds()) {
+							Role r = givenRoleMap.get(i);
+							if (r != null && !r.getRoleName().equalsIgnoreCase("MEMBER")) {
+								throw new Exception("User is already assigned with given Role in another Department.");
+							}
+						}
+					}
+				}
+			}
+		} else {
+			throw new Exception("Roles cannot be empty.");
 		}
 	}
 

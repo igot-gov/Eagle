@@ -158,11 +158,10 @@ public class PortalController {
 	}
 
 	@GetMapping("/portal/cbp/mydepartment")
-	public ResponseEntity<?> getMyCbpDepartment(@RequestHeader("wid") String wid,
-			@RequestParam(name = "allUsers", required = false) boolean isUserInfoRequired) throws Exception {
+	public ResponseEntity<?> getMyCbpDepartment(@RequestHeader("wid") String wid) throws Exception {
 		validateCBPUserAccess(wid);
 		return new ResponseEntity<>(
-				portalService.getMyDepartment(PortalConstants.CBP_DEPT_TYPE, wid, isUserInfoRequired), HttpStatus.OK);
+				portalService.getMyCbpDepartment(wid), HttpStatus.OK);
 	}
 
 	@PatchMapping("/portal/cbp/department")
