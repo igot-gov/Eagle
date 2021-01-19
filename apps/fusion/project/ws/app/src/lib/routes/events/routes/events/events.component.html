@@ -98,7 +98,7 @@
         </ng-container>
     </div> -->
 
-    <div fxLayout="row" fxFlex.md="70" fxLayoutWrap class="card-deck-container mat-elevation-z4" *ngIf="eventData['allEvents'] != undefined">
+    <div style="display: flex; flex-wrap: wrap;" fxLayout="row" fxLayoutWrap class="card-deck-container mat-elevation-z4" *ngIf="eventData['allEvents'] != undefined">
        <div fxFlex *ngFor="let event of eventData['allEvents']" class="card-item" fxLayout="row wrap">
         <ws-app-events-card [ngStyle]="{'width':'300' + 'px'}" class="w-fix mr-10" [data]="event"></ws-app-events-card>
        </div>

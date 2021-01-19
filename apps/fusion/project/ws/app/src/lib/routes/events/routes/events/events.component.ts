@@ -116,25 +116,26 @@ export class EventsComponent implements OnInit {
   setEventData(responseObj: any) {
     if(responseObj.result != undefined) {
       let eventList = responseObj.result;
+      console.log(eventList);
       this.eventData['todayEvents'] = []
       this.eventData['allEvents'] = []
       Object.keys(eventList).forEach((index: any) => {
         let eventObj = eventList[index];
         const expiryDateFormat = this.customDateFormat(eventObj.lastUpdatedOn)
         const eventUpdateDate = this.customDateFormat(eventObj.publishedOn)
-        const floor = Math.floor
-        const hours = floor(eventObj.duration / 60)
-        const minutes = eventObj.duration % 60
-        const duration = (hours === 0) ? ((minutes === 0) ? '---' : `${minutes} minutes`) : (minutes === 0) ? (hours === 1) ?
-        `${hours} hour` : `${hours} hours` :  (hours === 1) ? `${hours} hour ${minutes} minutes` : `${hours} hours ${minutes} minutes`
+        
         const eventDataObj = {
-          eventName: eventObj.name.substring(0, 30),
+          eventName: eventObj.name,
           eventDate: expiryDateFormat,
           eventUpdatedOn: eventUpdateDate,
-          eventDuration: duration,
+          eventDuration: eventObj.duration,
           eventjoined: (eventObj.creatorDetails !== undefined && eventObj.creatorDetails.length > 0) ?  ((eventObj.creatorDetails.length === 1) ?
             '1 person' :  `${eventObj.creatorDetails.length} people`) : ' --- ',
           eventThumbnail: (eventObj.thumbnail !== null || eventObj.thumbnail !== undefined) ? eventObj.thumbnail : '---',
+          eventDescription: eventObj.description,
+          eventStatus: eventObj.status,
+          eventObjective: eventObj.learningObjective,
+          eventPresenters: (eventObj.creatorDetails !== undefined && eventObj.creatorDetails.length > 0) ? eventObj.creatorDetails : ''
         }
 
         if (this.isToday(expiryDateFormat)) {

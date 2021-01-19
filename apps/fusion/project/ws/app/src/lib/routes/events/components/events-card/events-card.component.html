@@ -18,9 +18,10 @@
     <mat-card-content class="flex flex-1">
         <div class="mat-body-2">
             <span class="event_date" style="margin-left: 16px;color:#0074B6;">
-                January 24, 10:00 am - 12:00 pm
+                {{ eventDate }}
+                <!-- January 24, 10:00 am - 12:00 pm -->
             </span>
-            <p style="margin: 16px;">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+            <p style="margin: 16px; width: 320px;">{{ description }}</p>
         </div>
     </mat-card-content>
     <mat-card-footer class="flex flex-1 custom margin-0">
@@ -32,7 +33,7 @@
             </span>
         </div>
         <div class="flex flex-1" class="cursor-pointer text-right mobile2">
-            <span class="noocoments ws-mat-default-text mat-subheading-2">+ 67</span>
+            <span class="noocoments ws-mat-default-text mat-subheading-2">{{ presentersCount }}</span>
         </div>
     </mat-card-footer>
 </mat-card>

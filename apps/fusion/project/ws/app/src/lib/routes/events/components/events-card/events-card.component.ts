@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core'
 import { Router } from '@angular/router'
 
-
 @Component({
   selector: 'ws-app-events-card',
   templateUrl: './events-card.component.html',
@@ -10,13 +9,17 @@ import { Router } from '@angular/router'
 export class EventsCardComponent implements OnInit, OnChanges {
   
   @Input() data?: []
-  eventDetails:any
-  title: string;
-  description: string;
-  date: any;
-  presenters: any;
+  eventDetails: any
+  eventTitle: any;
+  description: any;
+  eventDate: any;
+  presentersCount: any;
   duration: any;
-   
+
+  monthNames = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+
   constructor(private router: Router) { }
 
   ngOnInit() {
@@ -29,13 +32,12 @@ export class EventsCardComponent implements OnInit, OnChanges {
   ngOnChanges() {
    if(this.data != undefined) {
       this.eventDetails = this.data
-      console.log(this.eventDetails)
-      console.log(this.eventDetails.eventName)
-      this.title = this.eventDetails.eventName;
-      this.description = this.eventDetails.eventName;
-      this.date = this.eventDetails.eventDate;
-      this.duration = this.eventDetails.eventDuration;
-      this.presenters = this.eventDetails.eventjoined;
+      this.eventTitle = this.eventDetails.eventName;
+      this.description = this.eventDetails.eventName.replace(/(?:https?|ftp):\/\/[\n\S]+/g, '');
+      // console.log(this.eventDetails.eventDuration)
+      this.eventDate = this.eventDateFormat(this.eventDetails.eventDate, this.eventDetails.eventDuration)
+      this.presentersCount = (this.eventDetails.eventjoined.includes("---")) ? '' :  this.eventDetails.eventjoined.substr(0,2);
+      // console.log(this.eventDetails.eventPresenters);
     }
   }
 
@@ -47,6 +49,26 @@ export class EventsCardComponent implements OnInit, OnChanges {
  
   getCareer() {
     this.router.navigate([`/app/event-hub/home/123`])
+  }
+
+  eventDateFormat(date: any, duration: any) {
+    let dateArr = date.split('-');
+    let timeArr = date.split(" ");
+    let mediumArr = timeArr[1].split(":")
+    let mediumStart = (mediumArr[0] >= 12) ? 'pm' : 'am'
+    
+    const floor = Math.floor
+    const hours = floor(duration / 60)
+    const minutes = duration % 60
+    const hoursEnd = parseInt(mediumArr[0]) + hours
+    const toHours = (hoursEnd < 10) ? '0'+hoursEnd : hoursEnd
+    const minutesEnd = parseInt(mediumArr[1]) + minutes
+    let mediumEnd = (toHours >= 12) ? 'pm' : 'am'
+    
+
+    const monthName = this.monthNames[parseInt(dateArr[1])-1]
+    return `${monthName} ${dateArr[0]}, ${timeArr[1]} ${mediumStart} - ${toHours}:${minutesEnd} ${mediumEnd}`
+
   }
 
 }
