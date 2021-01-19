@@ -23,10 +23,11 @@
                 <mat-header-cell *matHeaderCellDef class="clr-darkish-blue action-header"> Mark as Admin
                 </mat-header-cell>
                 <mat-cell *matCellDef="let row" class="action-cell">
-                    <div *ngFor="let ac of tableData.actions">
-                        <mat-checkbox [color]="green" (click)="buttonClick(ac.name,row)">
-                        </mat-checkbox>
-                    </div>
+                    <!-- <mat-radio-group aria-label="Select an Admin"> -->
+                    <mat-radio-button *ngFor="let ac of tableData.actions" [value]="ac.name"
+                        (click)="buttonClick(ac.name,row)">
+                    </mat-radio-button>
+                    <!-- </mat-radio-group> -->
                 </mat-cell>
             </ng-container>
             <ng-container matColumnDef="{{col.key}}" *ngFor="let col of tableData!.columns">

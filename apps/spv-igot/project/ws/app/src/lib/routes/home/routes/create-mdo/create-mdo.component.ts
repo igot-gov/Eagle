@@ -551,8 +551,12 @@ export class CreateMdoComponent implements OnInit {
 
         })
       })
-      this.snackBar.open('Admin assigned Successfully')
-      this.router.navigate(['/app/home/directory', { department: this.department }])
+      if (this.departmentId) {
+        this.snackBar.open('Admin assigned Successfully')
+        this.router.navigate(['/app/home/directory', { department: this.department }])
+      }
+    },                                (err: { error: string }) => {
+      this.openSnackbar(err.error.split(':')[1])
     })
 
   }

@@ -18,6 +18,7 @@ import { MatPaginatorModule } from '@angular/material/paginator'
 import { UserPopupComponent } from './user-popup/user-popup'
 import { MatDialogModule, MatButtonModule, MatCheckboxModule } from '@angular/material'
 import { FormsModule } from '@angular/forms'
+import { MatRadioModule } from '@angular/material/radio'
 @NgModule({
   declarations: [UIUserTableComponent, AppButtonComponent, UIDirectoryTableComponent, UserPopupComponent, UIUserTablePopUpComponent],
   imports: [
@@ -38,6 +39,7 @@ import { FormsModule } from '@angular/forms'
     MatDialogModule, MatButtonModule,
     MatCheckboxModule,
     FormsModule,
+    MatRadioModule,
 
   ],
   entryComponents: [UserPopupComponent],

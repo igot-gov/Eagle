@@ -42,22 +42,10 @@ export class UserPopupComponent implements OnInit {
 
   }
   selectedUserFrom(user: any) {
-    const userId = user.row.userId
-    let index
-    let isUserFound = false
-    if (this.selectedUser.length > 0) {
-      this.selectedUser.forEach((element: any) => {
-        if (element.userId === userId) {
-          index = this.selectedUser.indexOf(element)
-          isUserFound = true
-        }
-      })
-      if (isUserFound) {
-        this.selectedUser.splice(index, 1)
-      } else {
-        this.selectedUser.push(user.row)
-      }
+    if (this.selectedUser.lenght === 0) {
+      this.selectedUser.push(user.row)
     } else {
+      this.selectedUser.splice(0, this.selectedUser.length)
       this.selectedUser.push(user.row)
     }
   }

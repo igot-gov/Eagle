@@ -9,6 +9,7 @@ import { MatSort } from '@angular/material/sort'
 import * as _ from 'lodash'
 import { ITableData, IColums } from '../interface/interfaces'
 import { UserViewPopUpService } from './ui-user-table-pop-up.services'
+
 interface IUser { fullname: string; email: string, userId: string }
 
 @Component({
