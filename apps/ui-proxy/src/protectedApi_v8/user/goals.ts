@@ -2,8 +2,9 @@ import axios from 'axios'
 import { Router } from 'express'
 import { axiosRequestConfig } from '../../configs/request.config'
 import { ITrackStatus } from '../../models/goal.model'
-import { transformGoalUpsertRequest, transformGoalUpsertResponse, transformToCommonGoalGroup, transformToGoalForOthers, transformToTrackStatus, transformToUserGoals } from '../../service/goals'
+import { formContentRequestObj, formGoalRequestObj, formPlaylistupdateObj, transformGoalUpsertResponse, transformToCommonGoalGroup, transformToGoalForOthers, transformToSbExtPatchRequest, transformToTrackStatus, transformToUserGoals } from '../../service/goals'
 import { CONSTANTS } from '../../utils/env'
+import { logError } from '../../utils/logger'
 import { ERROR } from '../../utils/message'
 import { extractUserIdFromRequest } from '../../utils/requestExtract'
 
@@ -76,13 +77,35 @@ goalsApi.post('/', async (req, res) => {
       res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
       return
     }
-    const requestSbExt = transformGoalUpsertRequest(req.body)
-    const response = await axios.post(API_END_POINTS.createUpdateGoal(userId), requestSbExt, {
+    const auth = req.header('Authorization')
+    const url = `https://igot-sunbird.idc.tarento.com/apis/proxies/v8/action/content/v3/create`
+    const response = await axios({
       ...axiosRequestConfig,
-      headers: { rootOrg },
+      data: formGoalRequestObj(req.body, userId),
+      headers: {
+        Authorization: auth,
+        org: 'dopt',
+        rootOrg: 'igot',
+      },
+      method: 'POST',
+      url,
     })
 
-    res.status(response.status).send(response.data)
+    const urll = `https://igot-sunbird.idc.tarento.com/apis/proxies/v8/action/content/v3/hierarchy/update`
+
+    const response1 = await axios({
+      ...axiosRequestConfig,
+      data: formContentRequestObj(req.body, response.data, userId),
+      headers: {
+        Authorization: auth,
+        org: 'dopt',
+        rootOrg: 'igot',
+      },
+      method: 'PATCH',
+      url: urll,
+    })
+
+    res.status(response1.status).send(response1.data)
   } catch (err) {
     res
       .status((err && err.response && err.response.status) || 500)
@@ -92,6 +115,54 @@ goalsApi.post('/', async (req, res) => {
   }
 })
 
+goalsApi.patch('/:goalId', async (req, res) => {
+  /* Patch request to update the title of a playlist */
+  try {
+    const request = req.body
+    const rootOrg = req.header('rootOrg')
+    const auth = req.header('Authorization')
+    if (!rootOrg) {
+      res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
+      return
+    }
+    const goalId = req.params.goalId
+    const url = `https://igot-sunbird.idc.tarento.com/apis/proxies/v8/action/content/v3/update/${goalId}`
+    const response = await axios({
+      ...axiosRequestConfig,
+      data: formPlaylistupdateObj(request),
+      headers: {
+        Authorization: auth,
+        org: 'dopt',
+        rootOrg: 'igot',
+      },
+      method: 'PATCH',
+      url,
+    })
+
+    const urll = `https://igot-sunbird.idc.tarento.com/apis/proxies/v8/action/content/v3/hierarchy/update`
+
+    const response1 = await axios({
+      ...axiosRequestConfig,
+      data: transformToSbExtPatchRequest(request, goalId),
+      headers: {
+        Authorization: auth,
+        org: 'dopt',
+        rootOrg: 'igot',
+      },
+      method: 'PATCH',
+      url: urll,
+    })
+    res.status(response.status || response1.status).send()
+  } catch (err) {
+    logError(err)
+    res
+      .status((err && err.response && err.response.status) || 500)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      })
+  }
+
+})
 goalsApi.post('/share/:goalType/:goalId', async (req, res) => {
   const { goalType, goalId } = req.params
   const userId = extractUserIdFromRequest(req)

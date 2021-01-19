@@ -48,7 +48,7 @@
           {{ (mode === 'edit' ? 'Edit' : 'Add') + ' Content to your Goal' }}
         </h3>
         <div class="mb-8">
-          <ws-widget-picker-content [removeSubset]="true" [widgetData]="{
+          <ws-widget-picker-content [removeSubset]="false" [widgetData]="{
               availableFilters: 'contentType',
               preselected: selectedContentIds,
               enablePreselected: true,

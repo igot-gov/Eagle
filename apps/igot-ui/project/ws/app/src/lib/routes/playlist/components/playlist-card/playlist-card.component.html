@@ -60,8 +60,8 @@
       </div>
 
       <div class="flex flex1 share-by">
-        <h3 *ngIf="playlist?.contents?.length>0" class="ws-mat-accent-text mat-body-strong">
-          Topics Included({{playlist?.contents?.length}})
+        <h3 *ngIf="playlist" class="ws-mat-accent-text mat-body-strong">
+          Topics Included({{playlist?.childNodes?.length}})
         </h3>
         <span class="flex flex-1"></span>
         <span *ngIf="playlist?.sharedByDisplayName" class="flex ws-mat-accent-text">
@@ -70,11 +70,12 @@
           <span>{{ playlist?.sharedByDisplayName }}</span>
         </span>
         <!-- playlist?.contentProgress?.length || -->
-        <ng-container *ngIf="playlist?.contents?.length">
+        <ng-container *ngIf="playlist">
           <div class="expand-play-list-btn">
-            <button mat-icon-button (click)="isListExpanded[playlist.id] = !isListExpanded[playlist.id]">
-              <mat-icon *ngIf="!isListExpanded[playlist.id]">keyboard_arrow_down</mat-icon>
-              <mat-icon *ngIf="isListExpanded[playlist.id]">keyboard_arrow_up</mat-icon>
+            <button mat-icon-button
+              (click)="isListExpanded[playlist.identifier] = !isListExpanded[playlist.identifier]">
+              <mat-icon *ngIf="!isListExpanded[playlist.identifier]">keyboard_arrow_down</mat-icon>
+              <mat-icon *ngIf="isListExpanded[playlist.identifier]">keyboard_arrow_up</mat-icon>
             </button>
           </div>
 
@@ -82,13 +83,13 @@
       </div>
     </div>
   </div>
-  <mat-card *ngIf="playlist && playlist.id && isListExpanded && !!isListExpanded[playlist.id] || false"
+  <mat-card *ngIf="playlist && playlist.identifier && isListExpanded && !!isListExpanded[playlist.identifier] || false"
     class="border-radius-0 mt-1">
     <ng-container>
       <h2 i18n>This playlist includes</h2>
       <hr />
       <div class=" padding-top-s padding-bottom-s margin-bottom-xl">
-        <div *ngFor="let content of playlist?.contents">
+        <div *ngFor="let content of playlist?.childNodes">
           <ng-container *ngTemplateOutlet="contentView; context: { $implicit: content }">
           </ng-container>
         </div>
@@ -107,14 +108,14 @@
       *ngIf="content.status === 'Deleted' || content.status === 'Expired'"></div>
     <div class="width-expand md:mx-4 flex" [ngClass]="{ greyOut: greyOut(content) }">
       <a [routerLink]="'/app/toc/' + content?.identifier + '/overview'"
-      [queryParams]="{primaryCategory: content?.primaryCategory}">
+        [queryParams]="{primaryCategory: content?.primaryCategory}">
         <img (load)="isDeletedOrExpired(content)" class="image-section" [src]="content?.appIcon"
           [wsUtilsDefaultThumbnail]="defaultThumbnail" alt="Content Icon" i18n-alt />
       </a>
       <div class="width-expand mx-2 md:mx-4">
         <div class="flex flex-middle text-truncate">
           <a [routerLink]="'/app/toc/' + content?.identifier + '/overview'"
-          [queryParams]="{primaryCategory: content?.primaryCategory}">
+            [queryParams]="{primaryCategory: content?.primaryCategory}">
             <h2 class="mat-h2 playlist-name margin-left-xxs margin-remove-bottom">
               {{ content?.name }}
             </h2>

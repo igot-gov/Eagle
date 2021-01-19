@@ -91,8 +91,7 @@ export class GoalCardComponent implements OnInit {
     if (this.goal) {
       this.goalSvc
         .getGoalContent(this.goal.identifier)
-        .subscribe(
-          (data) => {
+        .subscribe(data => {
             this.goalData = data
           },
 
@@ -102,12 +101,12 @@ export class GoalCardComponent implements OnInit {
 
   editGoal() {
     if (this.goal) {
-      if (this.goal.type.includes('common')) {
-        this.editCommonGoal = true
-        this.isGoalExpanded[this.goal.id] = true
-      } else {
-        this.router.navigate([`/app/goals/edit/${this.type}/${this.goal.id}`])
-      }
+      // if (this.goal.type.includes('common')) {
+      //   this.editCommonGoal = true
+      //   this.isGoalExpanded[this.goal.id] = true
+      // } else {
+      this.router.navigate([`/app/goals/edit/${this.type}/${this.goal.identifier}`])
+      // }
     } else {
       this.snackbar.open(this.editErrorMessage.nativeElement.value)
     }

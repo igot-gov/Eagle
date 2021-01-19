@@ -140,6 +140,80 @@ export function transformToTrackStatus(trackStatusSbExt: ITrackStatusSbExt) {
   }
 }
 
+export function formPlaylistupdateObj(req: { name: string, versionKey: string }) {
+  return {
+    request: {
+      content: {
+        name: req.name,
+        versionKey: req.versionKey,
+
+      },
+    },
+  }
+}
+
+export function transformToSbExtPatchRequest(req: { contentIds: string[] }, goalId: string) {
+  /* for Patch request to change playlist title */
+  const id = goalId
+  const hierarchy = {}
+
+  hierarchy[id] = {
+    children: req.contentIds,
+    contentType: 'Collection',
+    root: true,
+  }
+
+  return {
+    request: {
+      data: {
+        hierarchy,
+        nodesModified: {},
+      },
+    },
+  }
+}
+
+export function formGoalRequestObj(request: { createdBy: string; name: string; description: string }, userId: string) {
+  /* for Patch request to change playlist title */
+  return {
+    request: {
+      content: {
+        code: 'org.ekstep0.29884945860157064123',
+        contentType: 'Collection',
+        createdBy: userId,
+        creator: request.createdBy,
+        description: request.description,
+        license: 'CC BY 4.0',
+        mimeType: 'application/vnd.ekstep.content-collection',
+        name: request.name,
+        primaryCategory: 'Playlist',
+      },
+    },
+  }
+}
+
+export function formContentRequestObj(req: { contentIds: string[] }, res: { result: { identifier: string } }, _userId: string) {
+  /* for Patch request to change playlist title */
+  const id = res.result.identifier
+  const hierarchy = {}
+
+  hierarchy[id] = {
+    children: req.contentIds,
+    contentType: 'Collection',
+    root: true,
+  }
+
+  return {
+    request: {
+      data: {
+        hierarchy,
+        nodesModified: {},
+      },
+    },
+  }
+
+}
+
 function goalFor(goalType: string) {
   return goalType === 'user' || goalType === 'common' ? 'me' : 'others'
 }
