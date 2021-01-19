@@ -7,6 +7,7 @@ import {
   INationalityApiData,
   IUserProfileDetailsFromRegistry,
   IProfileMetaApiData,
+  INameField,
 } from '../models/user-profile.model'
 
 const API_ENDPOINTS = {
@@ -17,6 +18,7 @@ const API_ENDPOINTS = {
   getMasterLanguages: '/apis/protected/v8/user/profileDetails/getMasterLanguages',
   getProfilePageMeta: '/apis/protected/v8/user/profileDetails/getProfilePageMeta',
   approveRequest: '/apis/protected/v8/workflowhandler/transition',
+  getNewDepartments: '/apis/protected/v8/portal/listDeptNames',
 }
 
 @Injectable()
@@ -39,6 +41,9 @@ export class UserProfileService {
   }
   getProfilePageMeta(): Observable<IProfileMetaApiData> {
     return this.http.get<IProfileMetaApiData>(API_ENDPOINTS.getProfilePageMeta)
+  }
+  getNewDepartments(): Observable<INameField[]> {
+    return this.http.get<INameField[]>(API_ENDPOINTS.getNewDepartments)
   }
   getUserdetailsFromRegistry(): Observable<[IUserProfileDetailsFromRegistry]> {
     return this.http.get<[IUserProfileDetailsFromRegistry]>(API_ENDPOINTS.getUserdetailsFromRegistry)

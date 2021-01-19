@@ -211,10 +211,24 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       })
     this.userProfileSvc.getProfilePageMeta().subscribe(
       data => {
-        this.govtOrgMeta = data.govtOrg
+        this.govtOrgMeta = {
+          cadre: data.govtOrg.cadre,
+          ministries: [],
+          service: data.govtOrg.service,
+        }
         this.industriesMeta = data.industries
         this.degreesMeta = data.degrees
         this.designationsMeta = data.designations
+      },
+      (_err: any) => {
+      })
+    this.userProfileSvc.getNewDepartments().subscribe(
+      data => {
+        if (data && data.length > 0) {
+          _.set(this.govtOrgMeta, 'ministries', _.map(data, i => {
+            return { name: i }
+          }))
+        }
       },
       (_err: any) => {
       })
@@ -282,7 +296,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
           debounceTime(500),
           distinctUntilChanged(),
           startWith(''),
-          map(value => typeof value === 'string' ? value : value.name),
+          map(value => typeof value === 'string' ? value : (value && value.name ? value.name : '')),
           map(name => name ? this.filterNationality(name) : this.masterNationalities.slice())
         )
       const newLocal = 'nationality'
@@ -302,7 +316,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         debounceTime(500),
         distinctUntilChanged(),
         startWith(''),
-        map(value => typeof value === 'string' ? value : value.name),
+        map(value => typeof (value) === 'string' ? value : (value && value.name ? value.name : '')),
         map(name => name ? this.filterLanguage(name) : this.masterLanguagesEntries.slice())
       )
   }
