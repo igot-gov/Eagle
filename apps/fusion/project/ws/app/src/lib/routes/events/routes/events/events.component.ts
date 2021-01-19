@@ -18,7 +18,6 @@ export class EventsComponent implements OnInit {
   pager = {}
   paginationData!: any
   currentActivePage!: any
-  categoryId!: any
   fetchNewData = false
   eventData: any = []
 
@@ -28,53 +27,55 @@ export class EventsComponent implements OnInit {
     private discussService: DiscussService,
     private eventSrvc: EventsService
   ) {
+    this.getEventData();
     console.log('here in app / events')
-    this.data = this.route.snapshot.data.topics.data
-    this.paginationData = this.data.pagination
-    this.categoryId = this.route.snapshot.data['eventsCategoryId'] || 1
+    //this.data = this.route.snapshot.data.topics.data
+    //this.paginationData = this.data.pagination
+    //this.categoryId = this.route.snapshot.data['eventsCategoryId'] || 1
   }
 
   ngOnInit() {
-    this.route.queryParams.subscribe(x => {
-      this.currentActivePage = x.page || 1
-      this.refreshData(this.currentActivePage)
-    })
-    this.getEventData();
+
+    // this.route.queryParams.subscribe(x => {
+    //   this.currentActivePage = x.page || 1
+    //   this.refreshData(this.currentActivePage)
+    // })
+    
   }
 
-  filter(key: string | 'timestamp' | 'viewcount') {
-    if (key) {
-      this.currentFilter = key
-      this.refreshData(this.currentActivePage)
-    }
-  }
-  updateQuery(key: string) {
-    if (key) {
+  // filter(key: string | 'timestamp' | 'viewcount') {
+  //   if (key) {
+  //     this.currentFilter = key
+  //     this.refreshData(this.currentActivePage)
+  //   }
+  // }
+  // updateQuery(key: string) {
+  //   if (key) {
 
-    }
-  }
+  //   }
+  // }
 
-  refreshData(page: any) {
-    if (this.fetchNewData) {
-      if (this.currentFilter === 'timestamp') {
-        this.discussService.fetchSingleCategoryDetails(this.categoryId, page).subscribe(
-          (data: any) => {
-            this.data = data
-            this.paginationData = data.pagination
-          },
-          (_err: any) => {
-          })
-      } else {
-        this.discussService.fetchSingleCategoryDetailsSort(this.categoryId, 'voted', page).subscribe(
-          (data: any) => {
-            this.data = data
-            this.paginationData = data.pagination
-          },
-          (_err: any) => {
-          })
-      }
-    }
-  }
+  // refreshData(page: any) {
+  //   if (this.fetchNewData) {
+  //     if (this.currentFilter === 'timestamp') {
+  //       this.discussService.fetchSingleCategoryDetails(this.categoryId, page).subscribe(
+  //         (data: any) => {
+  //           this.data = data
+  //           this.paginationData = data.pagination
+  //         },
+  //         (_err: any) => {
+  //         })
+  //     } else {
+  //       this.discussService.fetchSingleCategoryDetailsSort(this.categoryId, 'voted', page).subscribe(
+  //         (data: any) => {
+  //           this.data = data
+  //           this.paginationData = data.pagination
+  //         },
+  //         (_err: any) => {
+  //         })
+  //     }
+  //   }
+  // }
 
   navigateWithPage(page: any) {
     if (page !== this.currentActivePage) {
@@ -88,17 +89,12 @@ export class EventsComponent implements OnInit {
         "locale": [
           "en"
         ],
-        "pageSize": 12,
+        "pageSize": 25,
         "query": "all",
         "didYouMean": true,
         "filters": [
             {
                 "andFilters": [
-                    {
-                        "lastUpdatedOn": [
-                            "month"
-                        ]
-                    },
                     {
                         "contentType": [
                             "Event",
@@ -118,35 +114,36 @@ export class EventsComponent implements OnInit {
   }
 
   setEventData(responseObj: any) {
-    console.log(responseObj.result);
-    let eventList = responseObj.result;
-    this.eventData['todayEvents'] = []
-    this.eventData['allEvents'] = []
-    Object.keys(eventList).forEach((index: any) => {
-      let eventObj = eventList[index];
-      const expiryDateFormat = this.customDateFormat(eventObj.lastUpdatedOn)
-      const eventUpdateDate = this.customDateFormat(eventObj.publishedOn)
-      const floor = Math.floor
-      const hours = floor(eventObj.duration / 60)
-      const minutes = eventObj.duration % 60
-      const duration = (hours === 0) ? ((minutes === 0) ? '---' : `${minutes} minutes`) : (minutes === 0) ? (hours === 1) ?
-      `${hours} hour` : `${hours} hours` :  (hours === 1) ? `${hours} hour ${minutes} minutes` : `${hours} hours ${minutes} minutes`
-      const eventDataObj = {
-        eventName: eventObj.name.substring(0, 30),
-        eventDate: expiryDateFormat,
-        eventUpdatedOn: eventUpdateDate,
-        eventDuration: duration,
-        eventjoined: (eventObj.creatorDetails !== undefined && eventObj.creatorDetails.length > 0) ?  ((eventObj.creatorDetails.length === 1) ?
-          '1 person' :  `${eventObj.creatorDetails.length} people`) : ' --- ',
-        eventThumbnail: (eventObj.thumbnail !== null || eventObj.thumbnail !== undefined) ? eventObj.thumbnail : '---',
-      }
+    if(responseObj.result != undefined) {
+      let eventList = responseObj.result;
+      this.eventData['todayEvents'] = []
+      this.eventData['allEvents'] = []
+      Object.keys(eventList).forEach((index: any) => {
+        let eventObj = eventList[index];
+        const expiryDateFormat = this.customDateFormat(eventObj.lastUpdatedOn)
+        const eventUpdateDate = this.customDateFormat(eventObj.publishedOn)
+        const floor = Math.floor
+        const hours = floor(eventObj.duration / 60)
+        const minutes = eventObj.duration % 60
+        const duration = (hours === 0) ? ((minutes === 0) ? '---' : `${minutes} minutes`) : (minutes === 0) ? (hours === 1) ?
+        `${hours} hour` : `${hours} hours` :  (hours === 1) ? `${hours} hour ${minutes} minutes` : `${hours} hours ${minutes} minutes`
+        const eventDataObj = {
+          eventName: eventObj.name.substring(0, 30),
+          eventDate: expiryDateFormat,
+          eventUpdatedOn: eventUpdateDate,
+          eventDuration: duration,
+          eventjoined: (eventObj.creatorDetails !== undefined && eventObj.creatorDetails.length > 0) ?  ((eventObj.creatorDetails.length === 1) ?
+            '1 person' :  `${eventObj.creatorDetails.length} people`) : ' --- ',
+          eventThumbnail: (eventObj.thumbnail !== null || eventObj.thumbnail !== undefined) ? eventObj.thumbnail : '---',
+        }
 
-      if (this.isToday(expiryDateFormat)) {
-        this.eventData['todayEvents'].push(eventDataObj)
-      } 
-      this.eventData['allEvents'].push(eventDataObj)
-    })
-    console.log(this.eventData);
+        if (this.isToday(expiryDateFormat)) {
+          this.eventData['todayEvents'].push(eventDataObj)
+        } 
+        this.eventData['allEvents'].push(eventDataObj)
+      })
+      console.log(this.eventData);
+    }
   }
 
   customDateFormat(date: any) {

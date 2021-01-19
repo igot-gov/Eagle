@@ -41,7 +41,7 @@
         <!-- *ngFor="let discuss of data.topics | orderBy: currentFilter :'desc' | pipeFilterSearch: searchInput.value; let i = index;let odd=odd; let even=even;" -->
         <ng-container>
             <div class="flex w-full sm:w-full md:w-1/2 mb-5" [ngClass]="{ 'justify-start  md:justify-end': odd, 'justify-start':even}">
-                <ws-app-events-card class="w-fix" [discuss]="discuss"></ws-app-events-card>
+                <ws-app-events-card class="w-fix"></ws-app-events-card>
             </div>
         </ng-container>
     </div>
@@ -55,7 +55,7 @@
         <!-- *ngFor="let discuss of data.topics | orderBy: currentFilter :'desc' | pipeFilterSearch: searchInput.value; let i = index;let odd=odd; let even=even;" -->
         <ng-container>
             <div class="flex w-full sm:w-full md:w-1/2 mb-5" [ngClass]="{ 'justify-start  md:justify-end': odd, 'justify-start':even}">
-                <ws-app-events-card class="w-fix" [discuss]="discuss"></ws-app-events-card>
+                <ws-app-events-card class="w-fix"></ws-app-events-card>
             </div>
         </ng-container>
     </div>
@@ -88,13 +88,27 @@
                 Hosted by my MDO </a>
         </div>
     </div>
-    <div class="flex flex-wrap margin-fix">
-        <!-- *ngFor="let discuss of data.topics | orderBy: currentFilter :'desc' | pipeFilterSearch: searchInput.value; let i = index;let odd=odd; let even=even;" -->
-        <ng-container>
-            <div class="flex w-full sm:w-full md:w-1/2 mb-5"
-                [ngClass]="{ 'justify-start  md:justify-end': odd, 'justify-start':even}">
-                <ws-app-events-card class="w-fix" [data]="eventData['allEvents']"></ws-app-events-card>
+    <!-- <div fxLayout="row" fxFlex.md="70" fxLayoutWrap class="card-deck-container mat-elevation-z4">
+        <ng-container *ngIf="eventData['allEvents'] != undefined">
+            <div class="flex" [ngClass]="{ 'justify-start  md:justify-end': odd, 'justify-start':even}">
+                <ng-container *ngFor="let event of eventData['allEvents']">
+                    <ws-app-events-card class="w-fix mr-10" [data]="event"></ws-app-events-card>
+                </ng-container>
             </div>
         </ng-container>
-    </div>
+    </div> -->
+
+    <div fxLayout="row" fxFlex.md="70" fxLayoutWrap class="card-deck-container mat-elevation-z4" *ngIf="eventData['allEvents'] != undefined">
+       <div fxFlex *ngFor="let event of eventData['allEvents']" class="card-item" fxLayout="row wrap">
+        <ws-app-events-card [ngStyle]="{'width':'300' + 'px'}" class="w-fix mr-10" [data]="event"></ws-app-events-card>
+       </div>
+      <!-- <div class="paginator mat-elevation-z4" *ngIf="productsDisplayed.length !== 0">
+        <md-paginator
+          [length]="paginatorSize"
+          [pageSize]="numberOfProductsDisplayedInPage"
+          [pageSizeOptions]="[12, 24]"
+          (page)="updateProductsDisplayedInPage($event)">
+        </md-paginator>
+      </div> -->
+  </div> 
 </div>

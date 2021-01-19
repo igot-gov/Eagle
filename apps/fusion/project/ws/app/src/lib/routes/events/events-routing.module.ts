@@ -19,9 +19,6 @@ const routes: Routes = [
       {
         path: 'home',
         component: EventsComponent,
-        resolve: {
-          topics: EventRecentResolve,
-        },
       },
       {
         path: 'home/:eventId',
