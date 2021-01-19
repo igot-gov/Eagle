@@ -428,7 +428,7 @@ export class AuthTableOfContentsComponent implements OnInit, OnDestroy {
           v.name
         )
         if (isDone) {
-          this.triggerSave().subscribe()
+          this.triggerSave(parentNode).subscribe()
         }
         this.snackBar.openFromComponent(NotificationComponent, {
           data: {
@@ -474,9 +474,9 @@ export class AuthTableOfContentsComponent implements OnInit, OnDestroy {
     }
   }
 
-  triggerSave() {
+  triggerSave(parentNode: IContentTreeNode) {
     const nodesModified: any = {}
-    let isRootPresent = false
+    let isRootPresent = (parentNode && parentNode.identifier) ? true : false
     Object.keys(this.editorStore.upDatedContent).forEach(v => {
       if (!isRootPresent) {
         isRootPresent = this.store.parentNode.includes(v)
