@@ -132,6 +132,6 @@ export class UIDirectoryTableComponent implements OnInit, AfterViewInit, OnChang
     this.eOnRowClick.emit(e)
   }
   gotoCreateNew() {
-    this.router.navigate([`/app/roles/${this.selectedDepartment}/basicinfo`, { isFromDirectory: true }])
+    this.router.navigate([`/app/roles/${this.selectedDepartment}/basicinfo`, { needAddAdmin: true }])
   }
 }

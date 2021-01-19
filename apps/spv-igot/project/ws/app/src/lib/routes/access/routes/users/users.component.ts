@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit, OnDestroy } from '@angular/core'
+import { MatDialog } from '@angular/material/dialog'
 import { Router } from '@angular/router'
 import { UsersService } from '../../services/users.service'
-
 @Component({
   selector: 'ws-app-users',
   templateUrl: './users.component.html',
@@ -12,14 +12,20 @@ export class UsersComponent implements OnInit, AfterViewInit, OnDestroy {
   tabledata: any = []
   data: any = []
   role: any
+  departmentId!: string
+  departmentRole!: string
+  department!: string
   private defaultSideNavBarOpenedSubscription: any
 
-  constructor(private usersSvc: UsersService, private router: Router) { }
+  constructor(private usersSvc: UsersService, private router: Router
+    ,         public dialog: MatDialog) { }
   ngOnInit() {
     const url = this.router.url.split('/')
     this.role = url[url.length - 2]
+
     this.fetchUsersWithRole()
     // int left blank
+
     this.tabledata = {
       actions: [{ name: 'Details', label: 'Details', icon: 'remove_red_eye', type: 'link' }],
       columns: [
@@ -50,7 +56,6 @@ export class UsersComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     })
   }
-
   ngOnDestroy() {
     if (this.defaultSideNavBarOpenedSubscription) {
       this.defaultSideNavBarOpenedSubscription.unsubscribe()

@@ -1,13 +1,13 @@
 <div class="flex flex-4 flex-column">
 
   <mat-card class="flex-custom">
-    <button mat-raised-button type="button" *ngIf="id!=='undefined' && data.length===0 "
+    <!-- <button mat-raised-button type="button" *ngIf="id!=='undefined' && data.length===0 "
       class="text-white ws-mat-primary-background text-white margin-right-m custom-btn" (click)="gotoAddAdmin()">
       <b class="text-white" i18n>Add Admin</b>
-    </button>
+    </button> -->
     <mat-card-content>
       <ng-container>
-        <ws-widget-ui-user-table [tableData]="tabledata" [data]="data">
+        <ws-widget-ui-user-table [tableData]="tabledata" [data]="data" [needAddAdmin]="false" [needCreateUser]="true">
         </ws-widget-ui-user-table>
       </ng-container>
     </mat-card-content>

@@ -15,11 +15,17 @@
                     <input type="Standard" label="" (input)="applyFilter($event.target.value)" placeholder="Search">
                 </div>
             </div>
-            <button mat-raised-button type="button" *ngIf="dataSource.data.length > 0 && !isFromDirectory"
+            <button mat-raised-button type="button" *ngIf="dataSource.data.length > 0 && needCreateUser"
                 class="text-white ws-mat-primary-background text-white margin-right-m custom-btn"
                 (click)="gotoCreateUser()">
                 <b class="text-white" i18n>Create User</b>
             </button>
+            <button mat-raised-button type="button" *ngIf="needAddAdmin"
+                class="text-white ws-mat-primary-background text-white margin-right-m custom-btn" (click)="openPopup()">
+                <b class="text-white" i18n>Add Admin</b>
+            </button>
+
+
         </div>
 
 

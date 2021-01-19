@@ -4,12 +4,14 @@ import {
 } from '@angular/core'
 import { SelectionModel } from '@angular/cdk/collections'
 import { MatTableDataSource } from '@angular/material/table'
-import { MatPaginator } from '@angular/material'
+import { MatDialog, MatPaginator, MatSnackBar } from '@angular/material'
 import { MatSort } from '@angular/material/sort'
 import * as _ from 'lodash'
 
 import { ITableData, IColums } from '../interface/interfaces'
-import { Router } from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router'
+import { UserPopupComponent } from '../../../../../../../project/ws/app/src/lib/routes/home/routes/user-popup/user-popup'
+import { CreateMDOService } from '../../../../../../../project/ws/app/src/lib/routes/home/routes/create-mdo/create-mdo.services'
 
 @Component({
   selector: 'ws-widget-ui-user-table',
@@ -19,7 +21,8 @@ import { Router } from '@angular/router'
 export class UIUserTableComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() tableData!: ITableData | undefined
   @Input() data?: []
-  @Input() isFromDirectory?: boolean
+  @Input() needCreateUser?: boolean
+  @Input() needAddAdmin?: boolean
   @Input() isUpload?: boolean
   @Input() isCreate?: boolean
   @Output() clicked?: EventEmitter<any>
@@ -31,17 +34,21 @@ export class UIUserTableComponent implements OnInit, AfterViewInit, OnChanges {
   dataSource!: any
   widgetData: any
   length!: number
+  departmentRole!: string
+  departmentId!: string
   pageSize = 5
   pageSizeOptions = [5, 10, 20]
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator
   @ViewChild(MatSort, { static: true }) sort?: MatSort
   selection = new SelectionModel<any>(true, [])
 
-  constructor(private router: Router) {
+  constructor(private router: Router, public dialog: MatDialog, private activatedRoute: ActivatedRoute,
+              private createMDOService: CreateMDOService, private snackNar: MatSnackBar) {
     this.dataSource = new MatTableDataSource<any>()
     this.actionsClick = new EventEmitter()
     this.clicked = new EventEmitter()
     this.dataSource.paginator = this.paginator
+
   }
 
   ngOnInit() {
@@ -52,6 +59,15 @@ export class UIUserTableComponent implements OnInit, AfterViewInit, OnChanges {
     this.dataSource.paginator = this.paginator
     this.dataSource.sort = this.sort
     this.viewPaginator = true
+    this.activatedRoute.params.subscribe(params => {
+      this.departmentRole = params['currentDept']
+      this.departmentId = params['roleId']
+      if (this.departmentRole && this.departmentId) {
+        this.needAddAdmin = true
+        this.needCreateUser = false
+      }
+
+    })
   }
 
   ngOnChanges(data: SimpleChanges) {
@@ -101,8 +117,28 @@ export class UIUserTableComponent implements OnInit, AfterViewInit, OnChanges {
     }
     return ''
   }
+  openPopup() {
+    const dialogRef = this.dialog.open(UserPopupComponent, {
+      maxHeight: 'auto',
+      height: '65%',
+      width: '80%',
+      panelClass: 'remove-pad',
+    })
+    dialogRef.afterClosed().subscribe((response: any) => {
+      response.data.forEach((user: { userId: string }) => {
+        const role = `${this.departmentRole} ADMIN`
+        this.createMDOService.assignAdminToDepartment(user.userId, this.departmentId, role).subscribe(res => {
+          this.departmentId = res.id
+        })
+      })
+      if (this.departmentId) {
+        this.snackNar.open('Admin assigned Successfully')
+        this.router.navigate(['/app/home/directory', { department: this.departmentRole }])
+      }
 
-  /** Whether the number of selected elements matches the total number of rows. */
+    })
+
+  }
   isAllSelected() {
     const numSelected = this.selection.selected.length
     const numRows = this.dataSource.data.length

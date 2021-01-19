@@ -12,7 +12,7 @@
     <mat-card-content>
       <ng-container>
         <ws-widget-ui-user-table [tableData]="tabledata" [data]="data" (eOnRowClick)="onRoleClick($event)"
-          [isFromDirectory]="true">
+          [needAddAdmin]="false" [needCreateUser]="false">
         </ws-widget-ui-user-table>
       </ng-container>
     </mat-card-content>
