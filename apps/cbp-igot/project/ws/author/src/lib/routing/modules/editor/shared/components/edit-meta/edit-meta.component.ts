@@ -771,7 +771,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
 
   storeData() {
     try {
-      const originalMeta = this.contentService.getOriginalMeta(this.contentMeta.identifier)
+      const originalMeta = this.contentService.getUpdatedMeta(this.contentMeta.identifier)
       if (originalMeta && this.isEditEnabled) {
         // const expiryDate = this.contentForm.value.expiryDate
         const currentMeta: NSContent.IContentMeta = JSON.parse(JSON.stringify(this.contentForm.value))
@@ -852,7 +852,6 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
         //   delete meta.keywords
         //   delete meta.catalogPaths
         // }
-
         this.contentService.setUpdatedMeta(meta, this.contentMeta.identifier)
       }
     } catch (ex) {
