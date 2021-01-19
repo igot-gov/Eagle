@@ -1,0 +1,93 @@
+@import 'ws-common';
+@import 'ws-vars';
+@import 'ws-mixins';
+
+.container-balanced {
+  @extend %page-center;
+  height: auto;
+  min-height: 75vh;
+  padding: 15px;
+}
+
+.container2 {
+  position: relative;
+}
+
+.container-balanced-banner {
+  @extend %page-center;
+  height: auto;
+}
+
+.left-nav {
+  min-width: 240px;
+  // max-width: 240px;
+
+  // ::ng-deep.mat-drawer-inner-container {
+  //   overflow: visible;
+  // }
+
+  @include breakpoint-xs {
+    min-width: 100%;
+    max-width: none;
+  }
+}
+
+.flex-3 {
+  flex: 3;
+}
+
+.flex-5 {
+  flex: 5;
+}
+
+.flex-update {
+  flex-direction: row;
+
+  @include breakpoint-xs {
+    flex-direction: column;
+  }
+
+  @include breakpoint-s {
+    flex-direction: column;
+  }
+}
+
+.border-0 {
+  border: 0;
+}
+
+.sidenav-content {
+  margin: 0;
+  padding: 0 $size-m $size-l;
+  box-sizing: border-box;
+  min-height: calc(100vh);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 0.3fr;
+  grid-auto-columns: minmax(auto, 300px);
+  width: 90%;
+}
+
+.sidenav {
+  width: 20%;
+  min-width: 250px;
+  // padding-left: $size-m;
+  background: inherit;
+  box-shadow: none;
+  // margin-bottom: 32px;
+}
+
+.mat-drawer-content {
+  overflow: hidden !important;
+}
+
+.nav-container {
+  position: relative;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  min-height: calc(100vh - 164px);
+}

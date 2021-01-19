@@ -20,6 +20,12 @@ import {
   MAT_SNACK_BAR_DEFAULT_OPTIONS,
   MatInputModule,
   MatFormFieldModule,
+  MatSelectModule,
+  MatDatepickerModule,
+  MatCheckboxModule,
+  MatNativeDateModule,
+  MatSortModule,
+
 } from '@angular/material'
 import { BrowserModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
@@ -121,6 +127,11 @@ const getBaseHref = (platformLocation: PlatformLocation): string => {
     MatInputModule,
     MatFormFieldModule,
     MatTooltipModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatCheckboxModule,
+    MatNativeDateModule,
+    MatSortModule,
     SearchModule,
     BtnFeatureModule,
     PublicAboutModule,
@@ -171,6 +182,7 @@ const getBaseHref = (platformLocation: PlatformLocation): string => {
     { provide: OverlayContainer, useClass: FullscreenOverlayContainer },
     { provide: HAMMER_GESTURE_CONFIG, useClass: HammerConfig },
     { provide: ErrorHandler, useClass: GlobalErrorHandlingService },
+    MatDatepickerModule, MatNativeDateModule,
   ],
 })
 export class AppModule { }

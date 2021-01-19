@@ -87,6 +87,18 @@ const routes: Routes = [
     },
   },
   {
+    path: 'app/events',
+    loadChildren: () => import('./routes/route-events.module').then(u => u.RouteEventsAppModule),
+    canActivate: [GeneralGuard],
+    data: {
+      pageType: 'feature',
+      pageKey: 'events',
+    },
+    resolve: {
+      pageData: PageResolve,
+    },
+  },
+  {
     path: 'app/frac',
     loadChildren: () => import('./routes/route-frac.module').then(u => u.RouteFracModule),
     canActivate: [GeneralGuard],
