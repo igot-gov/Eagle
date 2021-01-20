@@ -14,7 +14,7 @@ public interface IProfileRequestHandler {
 
     public RegistryRequest createRequest(String uuid, Map<String, Object> request);
     public RegistryRequest updateRequest(String uuid, Map<String, Object> request);
-    public RegistryRequest updateRequestWithWF(String uuid, List<Map<String, Object>> requests);
+    public RegistryRequest updateRequestWithWF(String uuid, List<Map<String, Object>> requests) throws Exception;
 
 
     public RegistryRequest searchRequest(String uuid);

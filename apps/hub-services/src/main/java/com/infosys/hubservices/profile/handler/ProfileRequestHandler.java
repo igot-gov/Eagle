@@ -76,7 +76,7 @@ public class ProfileRequestHandler implements IProfileRequestHandler {
     }
 
     @Override
-	public RegistryRequest updateRequestWithWF(String uuid, List<Map<String, Object>> requests) {
+	public RegistryRequest updateRequestWithWF(String uuid, List<Map<String, Object>> requests) throws Exception {
 //        HttpHeaders requestHeaders = new HttpHeaders();
 //        requestHeaders.add("Accept", MediaType.APPLICATION_JSON_VALUE);
 //
@@ -102,6 +102,10 @@ public class ProfileRequestHandler implements IProfileRequestHandler {
 		Object searchResult = ((Map<String, Object>) ((Map<String, Object>) responseEntity.getBody()).get("result"))
 				.get(ProfileUtils.Profile.USER_PROFILE);
 
+		List<Object> searchResultList = (List) searchResult;
+		if(searchResultList.size() == 0) {
+			throw new Exception("Failed to process WF update request. User Registry not available for USER_ID: " + uuid);
+		}
 		Map<String, Object> existingUserProfile = ((Map<String, Object>) ((List) searchResult).get(0));
 		// merge request and search to add osid(s)
 		for (Map<String, Object> request : requests) {
@@ -125,7 +129,7 @@ public class ProfileRequestHandler implements IProfileRequestHandler {
                             Map<String, Object> eagleObjectToUpdate = new HashMap<>();
                             eagleObjectToUpdate.put("userId", uuid);
                             eagleObjectToUpdate.put("departmentName", objectToUpdate.get("name"));
-                            profileUtils.getResponseEntity(eagleBaseUrl, eagleUpdateEndPoint,eagleObjectToUpdate, HttpMethod.PATCH );
+                            profileUtils.getResponseEntity(eagleBaseUrl, eagleUpdateEndPoint,eagleObjectToUpdate, HttpMethod.POST );
                         }
 
 					} else {
