@@ -23,6 +23,7 @@ export class ListEventComponent implements OnInit, AfterViewInit, OnDestroy {
   currentUser!: string | null
   connectionRequests!: any[]
   usersData!: any
+  department: any
 
   constructor(
     private router: Router,
@@ -30,7 +31,9 @@ export class ListEventComponent implements OnInit, AfterViewInit, OnDestroy {
     private configSvc: ConfigurationsService,
     ) {
     this.math = Math
+
     this.currentUser = this.configSvc.userProfile && this.configSvc.userProfile.userId
+    this.department = this.configSvc.userProfile && this.configSvc.userProfile.departmentName
   }
 
   ngOnInit() {
@@ -64,7 +67,7 @@ export class ListEventComponent implements OnInit, AfterViewInit, OnDestroy {
   fetchEvents() {
     const requestObj = {
         locale: ['en'],
-        pageSize: 12,
+        pageSize: 25,
         query: 'all',
         didYouMean: true,
         filters: [
@@ -72,6 +75,7 @@ export class ListEventComponent implements OnInit, AfterViewInit, OnDestroy {
             andFilters: [
               { lastUpdatedOn: ['month'] },
               { contentType: ['Event'] },
+              { sourceName: [this.department] },
             ],
           },
         ],
@@ -89,7 +93,7 @@ export class ListEventComponent implements OnInit, AfterViewInit, OnDestroy {
       this.eventData['upcomingEvents'] = []
       Object.keys(data).forEach((index: any) => {
         const obj = data[index]
-        const expiryDateFormat = this.customDateFormat(obj.lastUpdatedOn)
+        const expiryDateFormat = this.customDateFormat(obj.expiryDate)
         const eventUpdateDate = this.customDateFormat(obj.publishedOn)
         const floor = Math.floor
         const hours = floor(obj.duration / 60)

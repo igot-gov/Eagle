@@ -4,6 +4,7 @@ import { CreateEventComponent } from './routes/create-event/create-event.compone
 import { ViewEventComponent } from './routes/view-event/view-event.component'
 import { ListEventComponent } from './routes/list/list-event.component'
 import { ParticipantsComponent } from './components/participants/participants.component'
+import { SuccessComponent } from './components/success/success.component'
 import { EventListViewComponent } from './components/event-list-view/event-list-view.component'
 import { EventsHomeComponent } from './routes/events-home/events-home.component'
 import { EventThumbnailComponent } from './components/event-thumbnail/event-thumbnail.component'
@@ -32,6 +33,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
     EventListViewComponent,
     EventsHomeComponent,
     EventThumbnailComponent,
+    SuccessComponent,
   ],
   imports:
   [
@@ -75,6 +77,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
   entryComponents: [
     ParticipantsComponent,
     EventThumbnailComponent,
+    SuccessComponent,
   ],
   providers: [
     { provide: MAT_DIALOG_DATA, useValue: {} },
