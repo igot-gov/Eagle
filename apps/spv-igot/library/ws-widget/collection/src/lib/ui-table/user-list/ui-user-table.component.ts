@@ -126,10 +126,9 @@ export class UIUserTableComponent implements OnInit, AfterViewInit, OnChanges {
     })
     dialogRef.afterClosed().subscribe((response: any) => {
       response.data.forEach((user: { userId: string }) => {
-        const role = `${this.departmentRole} ADMIN`
+        const role = `MDO ADMIN`
         this.createMDOService.assignAdminToDepartment(user.userId, this.departmentId, role).subscribe(res => {
-          this.departmentId = res.id
-          if (this.departmentId) {
+          if (res) {
             this.snackBar.open('Admin assigned Successfully')
             this.router.navigate(['/app/home/directory', { department: this.departmentRole }])
           }

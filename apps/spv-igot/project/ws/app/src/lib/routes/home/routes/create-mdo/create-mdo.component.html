@@ -37,7 +37,7 @@
           <div class="margin-top-s">
             <label>
               <div class="margin-top-s flex flex-middle">
-                <span [ngClass]="{ required: checkCondition('deptSubTypeId', 'required') }" i18n>Department
+                <span [ngClass]="{ required: checkCondition('deptSubTypeId', 'required') }" i18n>Sub Department
                   Type</span>
               </div>
             </label>
@@ -53,6 +53,27 @@
                 </mat-error>
               </mat-form-field>
             </div>
+          </div>
+          <div class="margin-top-s" *ngIf="(isUpdate && department!=='MDO') || (!isUpdate && department==='CBP') ">
+            <label>
+              <div class="margin-top-s flex flex-middle">
+                <span [ngClass]="{ required: checkCondition('deptSubTypeId', 'required') }" i18n>Sub MDO Department
+                  Type</span>
+              </div>
+            </label>
+            <div class="margin-top-s">
+              <mat-form-field appearance="outline" class="margin-top-xs"
+                [ngClass]="{ 'mat-form-field-invalid': showError('mdoDepatmentType') }">
+                <mat-select formControlName="deptMdoSubTypeId" i18n-placeholder placeholder="--Select--"
+                  [required]="checkCondition('subTitle', 'required') ? true : null">
+                  <mat-option *ngFor="let subDepartment of subMDODepartments" [value]="subDepartment.id" i18n>
+                    {{subDepartment.deptSubType}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="showError('mdoDepatmentType')" i18n>MDO department type is mandatory
+                </mat-error>
+              </mat-form-field>
+            </div>
+
           </div>
         </div>
         <!-- <div class="margin-top-s">
