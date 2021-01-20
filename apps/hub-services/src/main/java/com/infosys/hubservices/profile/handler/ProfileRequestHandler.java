@@ -107,17 +107,12 @@ public class ProfileRequestHandler implements IProfileRequestHandler {
 				if ("professionalDetails".equalsIgnoreCase((String) request.get("fieldKey"))) {
 					// We may not have osid value when the update request called from Lex-Core (i.e.
 					// SPV / MDO Portal)
-					if(osid.equalsIgnoreCase("")) {
-						// we are going to directly update the request
+					if (osid.equalsIgnoreCase("")) {
+						// we are going to get the existing object details in this case
 						Map<String, Object> objectToUpdate = searchFields.get(0);
-						if(objectToUpdate != null) {
-							//Get the given Parameter name;
-							Map<String, Object> paramRequest = (Map<String, Object>) request.get("toValue");
-							//1st key in paramRequest
-							String paramKey = paramRequest.keySet().iterator().next();
-							String paramValue = (String) paramRequest.get(paramKey);
-							objectToUpdate.put(paramKey, paramValue);
-						}
+						osid = (String) objectToUpdate.get("osid");
+						toChange.putAll(objectToUpdate);
+						logger.info("OSID is empty... using Object's OSID: " + osid);
 					} else {
 						for (Map<String, Object> obj : searchFields) {
 							if (obj.get("osid").toString().equalsIgnoreCase(osid))
