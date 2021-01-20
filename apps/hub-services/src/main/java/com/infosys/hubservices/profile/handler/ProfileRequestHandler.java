@@ -35,7 +35,7 @@ public class ProfileRequestHandler implements IProfileRequestHandler {
 
     @Value(value = "${eagle.user.service.ip}")
     String eagleBaseUrl;
-    @Value(value = "${/user/department/update}")
+    @Value(value = "${eagle.user.service.update.endpoint}")
     String eagleUpdateEndPoint;
 
     @Override
