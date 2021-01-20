@@ -23,9 +23,6 @@ const routes: Routes = [
       {
         path: 'home/:eventId',
         component: EventDetailComponent,
-        resolve: {
-          topic: EventDetailResolve,
-        },
       },
     ],
   },

@@ -7,14 +7,14 @@
             </div>
             <div class="flex-3 px-10" style="margin-top: 10px;height: 167px;">
               <mat-card-title role="link" tabindex="0" class="flex-4 mobile-margin text-capitalize mat-h2">
-                Covid Vaccine rollout - challenges
+                {{ eventDetails[0].eventName }}
               </mat-card-title>
               <mat-card-content>
                 <span class="flex mat-body-2" role="link" tabindex="0" i18n-aria-label>
                   Discussion on Covid vaccine rollout - challenges
                 </span>
                 <span class="flex mat-body-2 ws-mat-black60-text" role="link" tabindex="0" i18n-aria-label>
-                  Live
+                  {{ eventDetails[0].eventStatus }}
                 </span>
               </mat-card-content>
             </div>
@@ -48,7 +48,7 @@
   <div class="flex flex-wrap margin-fix">
       <ng-container>
           <div class="flex w-65 mb-5">
-             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+             <p>{{ eventDetails[0].eventDescription }}</p>
           </div>
       </ng-container>
   </div>
@@ -58,9 +58,9 @@
   <div class="flex flex-wrap margin-fix">
       <ng-container>
           <div class="flex" style="width: 65%;">
-            <app-presenter-card></app-presenter-card>
-            <app-presenter-card></app-presenter-card>
-            <app-presenter-card></app-presenter-card>
+            <ng-container *ngFor="let presenter of eventDetails[0].eventPresenters">
+              <!-- <app-presenter-card [data]="presenter"></app-presenter-card> -->
+            </ng-container>
           </div>
       </ng-container>
   </div>
@@ -70,7 +70,7 @@
   <div class="flex flex-wrap margin-fix">
       <ng-container>
           <div class="flex w-65  mb-5">
-             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+             <p></p>
           </div>
       </ng-container>
   </div>

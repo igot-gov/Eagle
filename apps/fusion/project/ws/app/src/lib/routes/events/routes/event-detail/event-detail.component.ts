@@ -23,6 +23,7 @@ export class EventDetailComponent implements OnInit {
   eventId!: number
   fetchSingleCategoryLoader = false
   // fetchNewData = false
+  eventDetails: any = []
 
   constructor(
     public dialog: MatDialog,
@@ -83,23 +84,21 @@ export class EventDetailComponent implements OnInit {
   setEventData(responseObj: any) {
     if(responseObj.result != undefined) {
         let eventObj = responseObj.result;
-        console.log(eventObj[0])
-        //const expiryDateFormat = this.customDateFormat(eventObj[0].lastUpdatedOn)
-        //const eventUpdateDate = this.customDateFormat(eventObj[0].publishedOn)
         const eventDataObj = {
-          eventName: eventObj.name,
-          eventDate: expiryDateFormat,
-          eventUpdatedOn: eventUpdateDate,
-          eventDuration: eventObj.duration,
-          eventjoined: (eventObj.creatorDetails !== undefined && eventObj.creatorDetails.length > 0) ?  ((eventObj.creatorDetails.length === 1) ?
-            '1 person' :  `${eventObj.creatorDetails.length} people`) : ' --- ',
-          eventThumbnail: (eventObj.thumbnail !== null || eventObj.thumbnail !== undefined) ? eventObj.thumbnail : '---',
-          eventDescription: eventObj.description,
-          eventStatus: eventObj.status,
-          eventObjective: eventObj.learningObjective,
-          eventPresenters: (eventObj.creatorDetails !== undefined && eventObj.creatorDetails.length > 0) ? eventObj.creatorDetails : '',
-          identifier: eventObj.identifier,
+          eventName: eventObj[0].name,
+          eventDate: eventObj[0].expiryDate,
+          eventUpdatedOn: eventObj[0].lastUpdatedOn,
+          eventDuration: eventObj[0].duration,
+          eventjoined: eventObj[0].creatorContacts,
+          eventThumbnail: (eventObj[0].thumbnail !== null || eventObj[0].thumbnail !== undefined) ? eventObj[0].thumbnail : '---',
+          eventDescription: eventObj[0].description,
+          eventStatus: eventObj[0].status,
+          eventObjective: eventObj[0].learningObjective,
+          eventPresenters: eventObj[0].creatorDetails,
+          identifier: eventObj[0].identifier,
         }
+        this.eventDetails.push(eventDataObj)
+        console.log(this.eventDetails);
     }
   }
 
