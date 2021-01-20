@@ -7,21 +7,27 @@
 
 package com.infosys.hubservices.profile.handler;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.infosys.hubservices.model.EagleUserProfileRequest;
 
 @Service
 public class ProfileRequestHandler implements IProfileRequestHandler {
@@ -129,13 +135,13 @@ public class ProfileRequestHandler implements IProfileRequestHandler {
 						logger.info("OSID is empty... using Object's OSID: " + osid);
 						String deptNameValue = (String) ((Map<String, Object>) request.get("toValue")).get("name");
 						if (deptNameValue != null) {
-							Map<String, Object> eagleObjectToUpdate = new HashMap<>();
-							eagleObjectToUpdate.put("userId", uuid);
-							eagleObjectToUpdate.put("departmentName", deptNameValue);
+							EagleUserProfileRequest profileRequest = new EagleUserProfileRequest();
+							profileRequest.setDepartmentName(deptNameValue);
+							profileRequest.setUserId(uuid);
 //                          profileUtils.getResponseEntity(eagleBaseUrl, eagleUpdateEndPoint,eagleObjectToUpdate, HttpMethod.POST );
 							StringBuilder strBuilder = new StringBuilder(eagleBaseUrl);
 							strBuilder.append(eagleUpdateEndPoint);
-							profileUtils.fetchResult(strBuilder, eagleObjectToUpdate, Map.class);
+							profileUtils.fetchResult(strBuilder, profileRequest, EagleUserProfileRequest.class);
 						}
 					} else {
 						for (Map<String, Object> obj : searchFields) {
