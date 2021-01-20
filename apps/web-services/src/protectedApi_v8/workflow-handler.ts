@@ -16,6 +16,7 @@ const API_END_POINTS = {
     nextActionSearch: (serviceName: string, state: string) =>
         `${CONSTANTS.WORKFLOW_HANDLER_SERVICE_API_BASE}/v1/workflow/nextAction/${serviceName}/${state}`,
     userProfileUpdate: `${CONSTANTS.WORKFLOW_HANDLER_SERVICE_API_BASE}/v1/workflow/updateUserProfileWF`,
+    userWfSearch: `${CONSTANTS.WORKFLOW_HANDLER_SERVICE_API_BASE}/v1/workflow/getUserWF`,
     workflowProcess: (wfId: string) => `${CONSTANTS.WORKFLOW_HANDLER_SERVICE_API_BASE}/v1/workflow/workflowProcess/${wfId}`,
 }
 
@@ -193,6 +194,38 @@ workflowHandlerApi.post('/updateUserProfileWf', async (req, res) => {
                 headers: {
                     org: orgValue,
                     rootOrg: rootOrgValue,
+                },
+            }
+        )
+        res.status(response.status).send(response.data)
+    } catch (err) {
+        logError(failedToProcess + err)
+        res.status((err && err.response && err.response.status) || 500).send(
+            (err && err.response && err.response.data) || {
+                error: unknownError,
+            }
+        )
+    }
+})
+
+workflowHandlerApi.post('/userWfSearch', async (req, res) => {
+    try {
+        const rootOrgValue = req.headers.rootorg
+        const orgValue = req.headers.org
+        const wid = req.headers.wid
+        if (!rootOrgValue || !orgValue) {
+            res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
+            return
+        }
+        const response = await axios.post(
+            API_END_POINTS.userWfSearch,
+            req.body,
+            {
+                ...axiosRequestConfig,
+                headers: {
+                    org: orgValue,
+                    rootOrg: rootOrgValue,
+                    wid,
                 },
             }
         )
