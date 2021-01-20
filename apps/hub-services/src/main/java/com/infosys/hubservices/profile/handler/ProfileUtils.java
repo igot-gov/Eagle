@@ -35,7 +35,7 @@ public class ProfileUtils {
 
 	@Autowired
 	private ObjectMapper mapper;
-	
+
 	private Logger logger = LoggerFactory.getLogger(ProfileRequestHandler.class);
 
 	@Value(value = "${user.registry.ip}")
@@ -166,16 +166,18 @@ public class ProfileUtils {
 	}
 
 	public void fetchResult(StringBuilder uri, Object request, Class<?> classType) {
-        mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
-        StringBuilder str = new StringBuilder(this.getClass().getCanonicalName()).append(".fetchResult:")
-                .append(System.lineSeparator());
-        str.append("URI: ").append(uri.toString()).append(System.lineSeparator());
-        try {
-            str.append("Request: ").append(mapper.writeValueAsString(request)).append(System.lineSeparator());
-            logger.info(str.toString());
-        } catch (JsonProcessingException e) {
-            logger.error("Json processing exception occured: ", e);
-        }
-        restTemplate.postForObject(uri.toString(), request, classType);
-    }
+		mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+		if (logger.isDebugEnabled()) {
+			try {
+				StringBuilder str = new StringBuilder(this.getClass().getCanonicalName()).append(".fetchResult:")
+						.append(System.lineSeparator());
+				str.append("URI: ").append(uri.toString()).append(System.lineSeparator());
+				str.append("Request: ").append(mapper.writeValueAsString(request)).append(System.lineSeparator());
+				logger.debug(str.toString());
+			} catch (JsonProcessingException e) {
+				logger.error("Json processing exception occured: ", e);
+			}
+		}
+		restTemplate.postForObject(uri.toString(), request, classType);
+	}
 }

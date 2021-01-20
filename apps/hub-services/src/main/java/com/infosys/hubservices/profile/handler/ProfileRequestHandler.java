@@ -138,7 +138,6 @@ public class ProfileRequestHandler implements IProfileRequestHandler {
 							EagleUserProfileRequest profileRequest = new EagleUserProfileRequest();
 							profileRequest.setDepartmentName(deptNameValue);
 							profileRequest.setUserId(uuid);
-//                          profileUtils.getResponseEntity(eagleBaseUrl, eagleUpdateEndPoint,eagleObjectToUpdate, HttpMethod.POST );
 							StringBuilder strBuilder = new StringBuilder(eagleBaseUrl);
 							strBuilder.append(eagleUpdateEndPoint);
 							profileUtils.fetchResult(strBuilder, profileRequest, List.class);
@@ -147,12 +146,14 @@ public class ProfileRequestHandler implements IProfileRequestHandler {
 						for (Map<String, Object> obj : searchFields) {
 							if (obj.get("osid").toString().equalsIgnoreCase(osid))
 								toChange.putAll(obj);
-							if (obj.get("name") != null) {
-								Map<String, Object> eagleObjectToUpdate = new HashMap<>();
-								eagleObjectToUpdate.put("userId", uuid);
-								eagleObjectToUpdate.put("departmentName", obj.get("name"));
-								// profileUtils.getResponseEntity(eagleBaseUrl,
-								// eagleUpdateEndPoint,eagleObjectToUpdate, HttpMethod.PATCH );
+							String deptNameValue = (String) ((Map<String, Object>) request.get("toValue")).get("name");
+							if (deptNameValue != null) {
+								EagleUserProfileRequest profileRequest = new EagleUserProfileRequest();
+								profileRequest.setDepartmentName(deptNameValue);
+								profileRequest.setUserId(uuid);
+								StringBuilder strBuilder = new StringBuilder(eagleBaseUrl);
+								strBuilder.append(eagleUpdateEndPoint);
+								profileUtils.fetchResult(strBuilder, profileRequest, List.class);
 							}
 						}
 
