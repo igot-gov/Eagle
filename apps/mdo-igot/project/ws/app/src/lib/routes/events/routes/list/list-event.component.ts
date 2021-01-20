@@ -23,6 +23,7 @@ export class ListEventComponent implements OnInit, AfterViewInit, OnDestroy {
   currentUser!: string | null
   connectionRequests!: any[]
   usersData!: any
+  department: any
 
   constructor(
     private router: Router,
@@ -30,7 +31,9 @@ export class ListEventComponent implements OnInit, AfterViewInit, OnDestroy {
     private configSvc: ConfigurationsService,
     ) {
     this.math = Math
+
     this.currentUser = this.configSvc.userProfile && this.configSvc.userProfile.userId
+    this.department = this.configSvc.userProfile && this.configSvc.userProfile.departmentName
   }
 
   ngOnInit() {
@@ -72,6 +75,7 @@ export class ListEventComponent implements OnInit, AfterViewInit, OnDestroy {
             andFilters: [
               { lastUpdatedOn: ['month'] },
               { contentType: ['Event'] },
+              { sourceName: [this.department] },
             ],
           },
         ],

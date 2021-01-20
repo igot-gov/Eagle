@@ -6,6 +6,7 @@ import { MatSort } from '@angular/material/sort'
 import { ITableData } from '../../interfaces/interfaces'
 import { MatDialog } from '@angular/material/dialog'
 import { ParticipantsComponent } from '../../components/participants/participants.component'
+import { SuccessComponent } from '../../components/success/success.component'
 import { Router } from '@angular/router'
 import { ConfigurationsService } from '@ws-widget/utils'
 import * as moment from 'moment'
@@ -86,10 +87,10 @@ export class CreateEventComponent implements OnInit {
               private router: Router,
               private configSvc: ConfigurationsService,
               ) {
-
     if (this.configSvc.userProfile) {
       this.userId = this.configSvc.userProfile.userId
       this.username = this.configSvc.userProfile.userName
+      this.department = this.configSvc.userProfile.departmentName
     }
     this.createEventForm = new FormGroup({
       eventPicture: new FormControl('', [Validators.required]),
@@ -246,6 +247,7 @@ export class CreateEventComponent implements OnInit {
         categoryType: 'Article',
         creatorDetails: this.createEventForm.controls['presenters'].value,
         thumbnail: this.createEventForm.controls['eventPicture'].value,
+        sourceName: this.department,
       },
     }
     const formJson = this.encodeToBase64(form)
@@ -293,7 +295,7 @@ export class CreateEventComponent implements OnInit {
       const formJson = this.encodeToBase64(requestObj)
       this.eventsSvc.publishEvent(formJson, identifierkey).subscribe(
         res => {
-          this.openSnackbar(res)
+          this.showSuccess(res)
         },
         (err: any) => {
           this.openSnackbar(err.error.split(':')[1])
@@ -305,4 +307,14 @@ export class CreateEventComponent implements OnInit {
     this.router.navigate([`/app/events`])
   }
 
+  showSuccess(res: any) {
+    this.dialogRef = this.matDialog.open(SuccessComponent, {
+      width: '630px',
+      height: '340px',
+      data: res,
+    })
+    this.dialogRef.afterClosed().subscribe(() => {
+      this.router.navigate([`/app/events`])
+    })
+  }
 }
