@@ -943,14 +943,14 @@ export class UserProfileComponent implements OnInit, OnDestroy {
                   const academics = this.populateAcademics(data[0])
                   this.setDegreeValuesArray(academics)
                   this.setPostDegreeValuesArray(academics)
-                  const organisations = this.populateOrganisationDetails(data[0])
-                  this.constructFormFromRegistry(data[0], academics, organisations)
+                  // const organisations = this.populateOrganisationDetails(data[0])
+                  // this.constructFormFromRegistry(data[0], academics, organisations)
                   this.populateChips(data[0])
                   this.userProfileData = data[0]
                   let deptNameValue = ''
                   if (this.userProfileData && this.userProfileData.professionalDetails
                     && this.userProfileData.professionalDetails.length > 0) {
-                    deptNameValue = this.userProfileData.professionalDetails[0].name || form.value.orgName || form.value.orgNameOther || ''
+                    deptNameValue = form.value.orgName || form.value.orgNameOther || ''
                   }
                   const profDetails = {
                     state: 'INITIATE',
@@ -987,6 +987,9 @@ export class UserProfileComponent implements OnInit, OnDestroy {
                     this.configSvc.profileDetailsStatus = true
                     this.openSnackbar(this.toastSuccess.nativeElement.value)
                     if (!this.isForcedUpdate && this.userProfileData) {
+                      // const organisations = this.populateOrganisationDetails(data[0])
+                      // this.constructFormFromRegistry(data[0], academics, organisations)
+
                       this.router.navigate(['/app/person-profile', (this.userProfileData.userId || this.userProfileData.id)])
                     } else {
                       this.router.navigate(['page', 'home'])
