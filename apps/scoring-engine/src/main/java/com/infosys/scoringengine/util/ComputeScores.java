@@ -322,6 +322,6 @@ public class ComputeScores {
             logger.error("Error occurred while setting the score status!");
             logger.error(ex.toString());
         }
-ki    }
+  }
 
 }
