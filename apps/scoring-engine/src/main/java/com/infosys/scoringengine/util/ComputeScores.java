@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -40,6 +41,10 @@ public class ComputeScores {
 
     private ScoreQualifierRepository scoreQualifierRepository;
     private ScoringTemplate scoringTemplate;
+
+    private static final String  MIN_SCORE_PASS_CONST = "pass";
+
+    private static final String  MIN_SCORE_FAIL_CONST = "fail";
 
     public ComputeScores(ScoreCriteriaRepository scoreCriteriaRepository, ScoreQualifierRepository scoreQualifierRepository){
 
@@ -116,8 +121,6 @@ public class ComputeScores {
             cm.setMaxWeightedAvg(MathFunction.maxWeightedAvg(cm.getMaxScore(), weightage));
             cm.setMinWeightedAvg(MathFunction.minWeightedAvg(minScore, weightage));
             cm.setWeightedScore(MathFunction.weightedScore(cm.getTotalScore(), cm.getMaxScore(), weightage));
-
-
         }
 
         List<Double> criteriaScoreValues = evaluatorModel.getCriteriaModels().stream().map(c -> c.getTotalScore()).collect(Collectors.toList());
@@ -142,6 +145,7 @@ public class ComputeScores {
         List<Double> criteriaWeightsVals = evaluatorModel.getCriteriaModels().stream().map(CriteriaModel::getWeightedScore).collect(Collectors.toList());
         evaluatorModel.setFinalWeightedScore(MathFunction.sum(criteriaWeightsVals));
 
+        setScoringStatus(evaluatorModel, scoringTemplate);
 
         String timeStamp = formatterDateTime.format(Calendar.getInstance().getTime());
         evaluatorModel.setTimeStamp(timeStamp);
@@ -287,5 +291,37 @@ public class ComputeScores {
 
     }*/
 
+    /**
+     *
+     * @param evaluatorModel Evaluator Model
+     * @param scoringTemplate Scoring Template
+     */
+    private void setScoringStatus(EvaluatorModel evaluatorModel, ScoringTemplate scoringTemplate) {
+        try {
+                evaluatorModel.getCriteriaModels().forEach(criteriaModel -> {
+                    if (criteriaModel.getTotalScore() < criteriaModel.getMinScore()) {
+                        criteriaModel.setQualifiedMinCriteria(false);
+                        evaluatorModel.setQualifiedMinCriteria(false);
+                        if (!scoringTemplate.getStatus_on_min_criteria().isEmpty())
+                        evaluatorModel.setStatusOnMinCriteria(scoringTemplate.getStatus_on_min_criteria().getOrDefault(MIN_SCORE_FAIL_CONST, ""));
+                    }
+                });
+            if (!scoringTemplate.getScore_grades().isEmpty()) {
+                for (HashMap<String, String> hm : scoringTemplate.getScore_grades()) {
+                    Map.Entry<String, String> entry = hm.entrySet().iterator().next();
+                    double min = Double.parseDouble(entry.getKey().split("-")[0]);
+                    double max = Double.parseDouble(entry.getKey().split("-")[1]);
+                    if (min < evaluatorModel.getFinalWeightedScore() && max > evaluatorModel.getFinalWeightedScore()) {
+                        evaluatorModel.setScoreGrade(entry.getValue());
+                        break;
+                    }
+                }
+            }
+        }
+        catch (Exception ex){
+            logger.error("Error occurred while setting the score status!");
+            logger.error(ex.toString());
+        }
+ki    }
 
 }

@@ -33,13 +33,11 @@
                   "min": 10,
                   "max": 20,
                   "assignedValue": 3
-
                 },
                 "20-30": {
                   "min": 20,
                   "max": 30,
                   "assignedValue": 4
-
                 },
                 "30-40": {
                   "min": 30,
@@ -64,13 +62,11 @@
                   "min": 10,
                   "max": 20,
                   "assignedValue": 4
-
                 },
                 "20-30": {
                   "min": 20,
                   "max": 30,
                   "assignedValue": 5
-
                 },
                 "30-40": {
                   "min": 30,
@@ -3291,7 +3287,22 @@
             }
           ]
         }
-      ]
+      ],
+      "score_grades": [
+        {
+          "0-60": "iGOT Toddler"
+        },
+        {
+          "60-70": "iGOT Friendly"
+        },
+        {
+          "70-100": "iGOT Qualified"
+        }
+      ],
+      "status_on_min_criteria": {
+        "pass": "",
+        "fail": "iGOT Toddler"
+      }
     }
   ]
 }

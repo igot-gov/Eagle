@@ -38,6 +38,8 @@ public class CriteriaModel {
     @Size(min =1)
     private List<QualifierModel> qualifiers = new ArrayList<>();
 
+    private  boolean isQualifiedMinCriteria = true;
+
     public String getCriteria() {
         return criteria;
     }
@@ -124,5 +126,13 @@ public class CriteriaModel {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public boolean isQualifiedMinCriteria() {
+        return isQualifiedMinCriteria;
+    }
+
+    public void setQualifiedMinCriteria(boolean qualifiedMinCriteria) {
+        isQualifiedMinCriteria = qualifiedMinCriteria;
     }
 }

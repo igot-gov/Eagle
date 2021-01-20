@@ -8,6 +8,7 @@
 package com.infosys.scoringengine.schema.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class ScoringTemplate {
@@ -21,7 +22,8 @@ public class ScoringTemplate {
     private double max_score;
     private double min_acceptable_score;
     private List<Criteria> criteria = new ArrayList<>();
-
+    private List<HashMap<String, String>> score_grades = new ArrayList<>();
+    private HashMap<String, String> status_on_min_criteria = new HashMap<>();
 
     public String getRootOrg() {
         return rootOrg;
@@ -93,5 +95,21 @@ public class ScoringTemplate {
 
     public void setCriteria(List<Criteria> criteria) {
         this.criteria = criteria;
+    }
+
+    public List<HashMap<String, String>> getScore_grades() {
+        return score_grades;
+    }
+
+    public void setScore_grades(List<HashMap<String, String>> score_grades) {
+        this.score_grades = score_grades;
+    }
+
+    public HashMap<String, String> getStatus_on_min_criteria() {
+        return status_on_min_criteria;
+    }
+
+    public void setStatus_on_min_criteria(HashMap<String, String> status_on_min_criteria) {
+        this.status_on_min_criteria = status_on_min_criteria;
     }
 }

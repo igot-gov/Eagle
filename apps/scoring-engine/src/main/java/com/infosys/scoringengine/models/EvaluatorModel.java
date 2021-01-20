@@ -43,6 +43,12 @@ public class EvaluatorModel {
 
     private boolean getLatestRecordEnabled;
 
+    private String statusOnMinCriteria;
+
+    private String scoreGrade;
+
+    private boolean isQualifiedMinCriteria = true;
+
     @Size(min = 1)
     private List<CriteriaModel> criteriaModels = new ArrayList<>();
 
@@ -206,5 +212,29 @@ public class EvaluatorModel {
 
     public void setGetLatestRecordEnabled(boolean getLatestRecordEnabled) {
         this.getLatestRecordEnabled = getLatestRecordEnabled;
+    }
+
+    public String getStatusOnMinCriteria() {
+        return statusOnMinCriteria;
+    }
+
+    public void setStatusOnMinCriteria(String statusOnMinCriteria) {
+        this.statusOnMinCriteria = statusOnMinCriteria;
+    }
+
+    public String getScoreGrade() {
+        return scoreGrade;
+    }
+
+    public void setScoreGrade(String scoreGrade) {
+        this.scoreGrade = scoreGrade;
+    }
+
+    public boolean isQualifiedMinCriteria() {
+        return isQualifiedMinCriteria;
+    }
+
+    public void setQualifiedMinCriteria(boolean qualifiedMinCriteria) {
+        isQualifiedMinCriteria = qualifiedMinCriteria;
     }
 }
