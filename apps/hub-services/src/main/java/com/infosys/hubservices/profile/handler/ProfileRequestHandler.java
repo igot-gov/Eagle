@@ -141,7 +141,7 @@ public class ProfileRequestHandler implements IProfileRequestHandler {
 //                          profileUtils.getResponseEntity(eagleBaseUrl, eagleUpdateEndPoint,eagleObjectToUpdate, HttpMethod.POST );
 							StringBuilder strBuilder = new StringBuilder(eagleBaseUrl);
 							strBuilder.append(eagleUpdateEndPoint);
-							profileUtils.fetchResult(strBuilder, profileRequest, EagleUserProfileRequest.class);
+							profileUtils.fetchResult(strBuilder, profileRequest, List.class);
 						}
 					} else {
 						for (Map<String, Object> obj : searchFields) {
