@@ -21,8 +21,7 @@
         </div>
       </div>
       <ng-container>
-        <ws-event-list-view *ngIf="data.length > 0" [tableData]='tabledata' [data]='data' isCreate=true></ws-event-list-view>
-        <div *ngIf="data.length <= 0"  class="h-600-s-20-m color-60 text-center"> No result found </div>
+        <ws-event-list-view [tableData]='tabledata' [data]='data' isCreate=true></ws-event-list-view>
       </ng-container>
     </mat-card-content>
   </mat-card>
