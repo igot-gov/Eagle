@@ -23,26 +23,14 @@ export class EventsComponent implements OnInit {
   eventData: any = []
 
   constructor(
-    // private route: ActivatedRoute,
     private router: Router,
-    // private discussService: DiscussService,
     private eventSrvc: EventsService,
     private configSvc: ConfigurationsService,
   ) {
     this.getEventData();
-    //console.log('here in app / events')
-    //this.data = this.route.snapshot.data.topics.data
-    //this.paginationData = this.data.pagination
-    //this.categoryId = this.route.snapshot.data['eventsCategoryId'] || 1
   }
 
   ngOnInit() {
-
-    // this.route.queryParams.subscribe(x => {
-    //   this.currentActivePage = x.page || 1
-    //   this.refreshData(this.currentActivePage)
-    // })
-    
   }
 
   // filter(key: string | 'timestamp' | 'viewcount') {
@@ -54,28 +42,6 @@ export class EventsComponent implements OnInit {
   // updateQuery(key: string) {
   //   if (key) {
 
-  //   }
-  // }
-
-  // refreshData(page: any) {
-  //   if (this.fetchNewData) {
-  //     if (this.currentFilter === 'timestamp') {
-  //       this.discussService.fetchSingleCategoryDetails(this.categoryId, page).subscribe(
-  //         (data: any) => {
-  //           this.data = data
-  //           this.paginationData = data.pagination
-  //         },
-  //         (_err: any) => {
-  //         })
-  //     } else {
-  //       this.discussService.fetchSingleCategoryDetailsSort(this.categoryId, 'voted', page).subscribe(
-  //         (data: any) => {
-  //           this.data = data
-  //           this.paginationData = data.pagination
-  //         },
-  //         (_err: any) => {
-  //         })
-  //     }
   //   }
   // }
 
@@ -118,20 +84,17 @@ export class EventsComponent implements OnInit {
   setEventData(responseObj: any) {
     if(responseObj.result != undefined) {
       let eventList = responseObj.result;
-      //console.log(eventList);
       this.eventData['todayEvents'] = []
       this.eventData['allEvents'] = []
       this.eventData['joinedByMe'] = [];
       Object.keys(eventList).forEach((index: any) => {
         let eventObj = eventList[index];
-        console.log(eventObj.expiryDate);
-        const expiryDateFormat = this.customDateFormat(eventObj.expiryDate)
-        const eventUpdateDate = this.customDateFormat(eventObj.publishedOn)
-        //console.log(expiryDateFormat);
+         const expiryDateFormat = this.customDateFormat(eventObj.expiryDate)
+        // const eventUpdateDate = this.customDateFormat(eventObj.last)
         const eventDataObj = {
           eventName: eventObj.name,
           eventDate: expiryDateFormat,
-          eventUpdatedOn: eventUpdateDate,
+          eventUpdatedOn: eventObj.lastUpdatedOn,
           eventDuration: eventObj.duration,
           eventjoined: (eventObj.creatorDetails !== undefined && eventObj.creatorDetails.length > 0) ?  ((eventObj.creatorDetails.length === 1) ?
             '1 person' :  `${eventObj.creatorDetails.length} people`) : ' --- ',
@@ -141,25 +104,28 @@ export class EventsComponent implements OnInit {
           eventObjective: eventObj.learningObjective,
           eventPresenters: (eventObj.creatorContacts !== undefined && eventObj.creatorContacts.length > 0) ? eventObj.creatorContacts : '',
           identifier: eventObj.identifier,
+          presenters: eventObj.creatorDetails,
         }
 
         // Today's events
-        if (this.isToday(expiryDateFormat)) {
+        if (this.isToday(eventObj.expiryDate)) {
           this.eventData['todayEvents'].push(eventDataObj)
-        } 
-        
-        // Joined by me
-        if (eventObj.creatorDetails != undefined && eventObj.creatorDetails.length > 0) {
-          if (this.isJoinedByme(eventObj.creatorDetails))
-            this.eventData['joinedByMe'].push(eventDataObj)
+          this.eventData['todayEvents'].sort((a: any, b:any) => { return a.eventDate - b.eventDate });
         }
 
-        // Featured Events
+        // Joined by me  
+        if(eventObj.creatorDetails) {
+          const myUserId = this.configSvc.userProfile && this.configSvc.userProfile.userId
+          Object.keys(eventObj.creatorDetails).forEach((index: any) => {
+            if(eventObj.creatorDetails[index].id ===  myUserId) {
+              this.eventData['joinedByMe'].push(eventDataObj)
+            }
+          })
+        }
 
         // All events
         this.eventData['allEvents'].push(eventDataObj)
       })
-      console.log(this.eventData);
     }
   }
 
@@ -179,15 +145,16 @@ export class EventsComponent implements OnInit {
   }
 
   isToday(eventDate: any) {
-    eventDate = new Date(eventDate)
+    const year  = eventDate.split('T')[0].substring(0, 4)
+    const month = eventDate.split('T')[0].substring(4, 6)
+    const dDate  = eventDate.split('T')[0].substring(6, 8)
     const today = new Date()
-    return eventDate.getDate() == today.getDate() &&
-       eventDate.getMonth() == today.getMonth() &&
-       eventDate.getFullYear() == today.getFullYear()
+    return dDate == today.getDate() &&
+       month == ("0" + (today.getMonth() + 1)).slice(-2) &&
+       year == today.getFullYear()
   }
 
   isJoinedByme(userDetails: any) {
-    //console.log(userDetails);
     const myUserId = this.configSvc.userProfile && this.configSvc.userProfile.userId
     Object.keys(userDetails).forEach( (index: any) => {
       return (userDetails[index].id === myUserId) ? true : false

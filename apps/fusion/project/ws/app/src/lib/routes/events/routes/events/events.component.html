@@ -16,8 +16,9 @@
                     <span class="spacer"></span>
                   </mat-card-header>
                   <mat-card-content class="mb-0-imp flex flex-wrap" style="margin-left:16px;">
-                    <ng-container>
-                      <ws-app-today-event-card class="mr-4"></ws-app-today-event-card>
+                    <!-- <div fxFlex *ngFor="let event of eventData['allEvents']" class="card-item" fxLayout="row wrap"> -->
+                    <ng-container *ngFor="let event of eventData['todayEvents']">
+                        <ws-app-today-event-card class="mr-4" [data]="event"></ws-app-today-event-card>
                     </ng-container>
                   </mat-card-content>
                   <mat-card-footer>
@@ -33,19 +34,18 @@
     </div>
 </div>
 
-<div class="w-full px-10">
+<!-- <div class="w-full px-10">
     <div class="flex flex-1 flex-column margin-fix mb-2">
         <span class="f-medium mat-title">Featured Events </span>
     </div>
     <div class="flex flex-wrap margin-fix">
-        <!-- *ngFor="let discuss of data.topics | orderBy: currentFilter :'desc' | pipeFilterSearch: searchInput.value; let i = index;let odd=odd; let even=even;" -->
         <ng-container>
             <div class="flex w-full sm:w-full md:w-1/2 mb-5" [ngClass]="{ 'justify-start  md:justify-end': odd, 'justify-start':even}">
                 <ws-app-events-card class="w-fix"></ws-app-events-card>
             </div>
         </ng-container>
     </div>
-</div>
+</div> -->
 
 <div class="w-full pt-10  px-10">
     <div class="flex flex-1 flex-column margin-fix mb-2">
@@ -55,7 +55,9 @@
         <!-- *ngFor="let discuss of data.topics | orderBy: currentFilter :'desc' | pipeFilterSearch: searchInput.value; let i = index;let odd=odd; let even=even;" -->
         <ng-container>
             <div class="flex w-full sm:w-full md:w-1/2 mb-5" [ngClass]="{ 'justify-start  md:justify-end': odd, 'justify-start':even}">
-                <ws-app-events-card class="w-fix"></ws-app-events-card>
+                <ng-container *ngFor="let event of eventData['joinedByMe']">
+                    <ws-app-events-card class="w-fix" [data]="event"></ws-app-events-card>
+                </ng-container>
             </div>
         </ng-container>
     </div>

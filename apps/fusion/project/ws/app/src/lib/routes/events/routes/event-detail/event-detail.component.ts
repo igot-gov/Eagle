@@ -1,13 +1,8 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core'
-// import { NSDiscussData } from '../../../discuss/models/discuss.model'
+import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
-// import { MatSnackBar } from '@angular/material'
 import { MatDialog } from '@angular/material/dialog'
-// import { DiscussService } from '../../../discuss/services/discuss.service'
-/* tslint:disable */
 import _ from 'lodash'
 import { EventsService } from '../../services/events.service'
-/* tslint:enable */
 
 @Component({
   selector: 'ws-app-event-detail',
@@ -15,22 +10,18 @@ import { EventsService } from '../../services/events.service'
   styleUrls: ['./event-detail.component.scss'],
 })
 export class EventDetailComponent implements OnInit {
-  @ViewChild('toastSuccess', { static: true }) toastSuccess!: ElementRef<any>
-  @ViewChild('toastError', { static: true }) toastError!: ElementRef<any>
-  // data!: NSDiscussData.IDiscussionData
-  similarPosts!: any
-  defaultError = 'Something went wrong, Please try again after sometime!'
+  
+  
   eventId!: number
-  fetchSingleCategoryLoader = false
-  // fetchNewData = false
-  eventDetails: any = []
+  eventDataObj: any
+  currentFilter = 'overview'
+  overviewData: any = []
+  participantsData: any = []
 
   constructor(
     public dialog: MatDialog,
     private route: ActivatedRoute,
     private eventSrvc: EventsService
-    // private discussService: DiscussService,
-    // private snackBar: MatSnackBar,
   ) { }
 
   ngOnInit() {
@@ -39,12 +30,7 @@ export class EventDetailComponent implements OnInit {
       if(this.eventId) {
         this.getEventDetails(this.eventId)
       }
-      // if (this.fetchNewData) {
-      //   this.getTIDData()
-      // }
-      // this.data = this.route.snapshot.data.topic.data
     })
-    // this.fetchSingleCategoryDetails(this.data.cid)
   }
 
   getEventDetails(eventIdentifier: any) {
@@ -83,42 +69,48 @@ export class EventDetailComponent implements OnInit {
 
   setEventData(responseObj: any) {
     if(responseObj.result != undefined) {
-        let eventObj = responseObj.result;
-        const eventDataObj = {
-          eventName: eventObj[0].name,
-          eventDate: eventObj[0].expiryDate,
-          eventUpdatedOn: eventObj[0].lastUpdatedOn,
-          eventDuration: eventObj[0].duration,
-          eventjoined: eventObj[0].creatorContacts,
-          eventThumbnail: (eventObj[0].thumbnail !== null || eventObj[0].thumbnail !== undefined) ? eventObj[0].thumbnail : '---',
-          eventDescription: eventObj[0].description,
-          eventStatus: eventObj[0].status,
-          eventObjective: eventObj[0].learningObjective,
-          eventPresenters: eventObj[0].creatorDetails,
-          identifier: eventObj[0].identifier,
-        }
-        this.eventDetails.push(eventDataObj)
-        console.log(this.eventDetails);
+        this.eventDataObj = responseObj.result[0];
+        console.log(this.eventDataObj);
+        this.overviewData.push(responseObj.result[0]);
+        Object.keys(responseObj.result[0].creatorDetails).forEach( (index: any) => {
+          let obj = {
+            name: responseObj.result[0].creatorDetails[index].name,
+            id: responseObj.result[0].creatorDetails[index].id,
+          }
+          this.participantsData.push(obj)
+        })
     }
   }
 
-  // fetchSingleCategoryDetails(cid: number) {
-    // this.fetchSingleCategoryLoader = true
-    // this.discussService.fetchSingleCategoryDetails(cid).subscribe(
-    //   (data: NSDiscussData.ICategoryData) => {
-    //     this.similarPosts = data.topics
-    //     this.fetchSingleCategoryLoader = false
-    //   },
-    //   (err: any) => {
-    //     this.openSnackbar(err.error.message.split('|')[1] || this.defaultError)
-    //     this.fetchSingleCategoryLoader = false
-    //   })
-  // }
+   filter(key: string | 'timestamp' | 'best' | 'saved') {
+      //const overviewData: any[] = []
+      //const participantsData: any[] = []
+      // if (this.eventData['pastEvents'] && this.eventData['pastEvents'].length > 0) {
+      //   this.eventData['pastEvents'].forEach((event: any) => {
+      //     pastEventsData.push(event)
+      //   })
+      // }
 
-  // private openSnackbar(primaryMsg: string, duration: number = 5000) {
-  //   this.snackBar.open(primaryMsg, 'X', {
-  //     duration,
-  //   })
-  // }
+      // if (this.eventData['upcomingEvents'] && this.eventData['upcomingEvents'].length > 0) {
+      //    this.eventData['upcomingEvents'].forEach((event: any) => {
+      //      upcomingEventsData.push(event)
+      //   })
+      // }
+
+      if (key) {
+        this.currentFilter = key
+        switch (key) {
+          case 'overview':
+            this.eventDataObj = this.overviewData
+            break
+          case 'participants':
+            this.eventDataObj = this.participantsData
+            break
+          default:
+            this.eventDataObj = this.overviewData
+            break
+        }
+      }
+    }
 
 }

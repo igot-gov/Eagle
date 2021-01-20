@@ -132,3 +132,27 @@ mat-icon.downvoted {
     display: none !important;
   }
 }
+
+.filter {
+  .filter-option {
+    margin: $size-xs $size-m;
+    /* border-bottom: darkslateblue; */
+    border-radius: 0;
+    border-bottom-width: 2px;
+    border-top-width: 0;
+    border-left-width: 0;
+    border-right-width: 0;
+  }
+}
+
+.max-height-60 {
+  max-height: 60px;
+}
+
+.height-48 {
+  max-height: 48px;
+}
+
+
+
+

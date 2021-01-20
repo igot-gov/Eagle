@@ -1,5 +1,5 @@
 
-  <mat-card class="right-menu-card">
+  <mat-card class="right-menu-card" *ngIf="joiningInfo != undefined">
     <mat-card-content role="link" tabindex="0">
       <ng-container>
         <div class="ml-4 mr-6 mb-2 view-more ws-mat-accent-text view-all ws-mat-accent-background">
@@ -12,7 +12,7 @@
     </mat-card-content>
     <mat-card-content>
       <div style="background:rgba(0, 0, 0, 0.04); padding:15px;">
-        <span class="mat-subheading-2" role="link" tabindex="0">January 5, 2021</span>
+        <span class="mat-subheading-2" role="link" tabindex="0">{{ joiningInfo[0].lastUpdatedOn | date: 'longDate' }}</span>
         <div class="flex flex-wrap" role="link" tabindex="0">
             <span class="flex-wrap" role="link" tabindex="0" style="color:rgba(0, 0, 0, 0.6); font-size:14px;">
               11:00 am - 12:00 pm
@@ -23,7 +23,7 @@
         <span class="mat-subheading-2" role="link" tabindex="0" style="color:rgb(0, 116, 182);">Event Type</span>
         <div class="flex flex-wrap" role="link" tabindex="0">
             <span class="flex-wrap" role="link" tabindex="0" style="font-size:14px;">
-              Webinar
+              {{ joiningInfo[0].resourceType }}
             </span>
         </div>
       </div>
@@ -31,13 +31,13 @@
         <span class="mat-subheading-2" role="link" tabindex="0" style="color:rgb(0, 116, 182);">Hosted By</span>
         <div class="flex flex-wrap" role="link" tabindex="0">
             <span class="flex-wrap" role="link" tabindex="0" style="font-size:14px;">
-              Department of health research
+              {{ joiningInfo[0].sourceName }}
             </span>
         </div>
       </div>
       <div style="margin-top:20px;">
         <span class="mat-subheading-2" role="link" tabindex="0" style="color:rgba(0, 0, 0, 0.6); font-size:14px;">
-        Last updated on Jan 01, 2021
+        Last updated on {{ joiningInfo[0].lastUpdatedOn | date: 'mediumDate' }}
         </span>
       </div>
     </mat-card-content>
