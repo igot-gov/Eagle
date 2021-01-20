@@ -329,13 +329,8 @@ input.mat-input-element {
   // font-family: Poppins-regular;
 
   &:hover {
-
     filter: brightness(90%);
-
   }
-
-
-
   .mat-chip-remove {
     opacity: 1 !important;
     color: #0074b6 !important;
@@ -515,15 +510,13 @@ input.mat-input-element {
       }
     }
   }
-
 }
 
 .create-user-form{
   border-radius: 4px;
-  margin: 0 114px;
+  margin: 0 10em 4em;
   padding: 15px;
   box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12)
-
 }
 
 .heading{
@@ -532,4 +525,13 @@ input.mat-input-element {
   font-size: 20px;
   display: block;
   padding: 15px 0;
+}
+
+::ng-deep.mat-list-base {
+  max-width: 340px !important;
+  margin-bottom: 20px;
+
+  .mat-list-item, .mat-list-option {
+    max-width: 340px !important;
+  }
 }

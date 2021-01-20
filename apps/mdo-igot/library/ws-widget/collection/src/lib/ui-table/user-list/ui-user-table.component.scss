@@ -633,7 +633,7 @@ $title-line-count: 2;
   border: 1px solid #d5d0d0;
   padding: 9px 9px 9px 35px;
   margin-bottom: 20px;
-  margin-top: 10px;
+  margin-top: 0;
   font: normal 14px Lato ;
   font-weight: 400 ;
 }
@@ -719,17 +719,16 @@ mat-header-row{
   width: 150px;
   border:1px solid #DEDEDE;
   border-radius: 4px;
-  margin: 0 15px;
+  margin: 0 12px;
   color: #848484 !important;
   font-family: 'Lato';
   font-weight: 700;
   font-size: 14px;
 }
 
-
 .search-icon{
   position: absolute;
-  top: 19px;
+  top: 9px;
   font-size: 20px;
   left: 10px;
 }

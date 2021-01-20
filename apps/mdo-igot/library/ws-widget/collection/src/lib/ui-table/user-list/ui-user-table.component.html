@@ -1,4 +1,4 @@
-<div class="example-container">
+<div class="example-container margin-top-m">
     <div class="example-loading-shade"></div>
 
     <div class="example-table-container">
@@ -87,9 +87,9 @@
             <span class="mat-subtitle">No data found</span>
         </mat-card>
     </div>
-    <div *ngIf="dataSource.filteredData.length <= 0" class="h-600-s-20-m color-60 text-center">No result found
-    </div>
-    <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions">
+    <!-- <div *ngIf="dataSource.filteredData.length <= 0" class="h-600-s-20-m color-60 text-center">No result found
+    </div> -->
+    <mat-paginator *ngIf="dataSource.filteredData.length > 0" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions">
     </mat-paginator>
 </div>
 
