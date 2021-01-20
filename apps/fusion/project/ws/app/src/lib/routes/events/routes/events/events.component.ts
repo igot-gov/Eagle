@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core'
 import { NSDiscussData } from '../../../discuss/models/discuss.model'
-import { ActivatedRoute, Router } from '@angular/router'
+import { Router } from '@angular/router'
 import { FormControl } from '@angular/forms'
-import { DiscussService } from '../../../discuss/services/discuss.service'
+// import { DiscussService } from '../../../discuss/services/discuss.service'
 import { EventsService } from '../../services/events.service'
 import * as moment from 'moment'
 
@@ -22,9 +22,9 @@ export class EventsComponent implements OnInit {
   eventData: any = []
 
   constructor(
-    private route: ActivatedRoute,
+    // private route: ActivatedRoute,
     private router: Router,
-    private discussService: DiscussService,
+    // private discussService: DiscussService,
     private eventSrvc: EventsService
   ) {
     this.getEventData();
@@ -135,7 +135,8 @@ export class EventsComponent implements OnInit {
           eventDescription: eventObj.description,
           eventStatus: eventObj.status,
           eventObjective: eventObj.learningObjective,
-          eventPresenters: (eventObj.creatorDetails !== undefined && eventObj.creatorDetails.length > 0) ? eventObj.creatorDetails : ''
+          eventPresenters: (eventObj.creatorDetails !== undefined && eventObj.creatorDetails.length > 0) ? eventObj.creatorDetails : '',
+          identifier: eventObj.identifier,
         }
 
         if (this.isToday(expiryDateFormat)) {

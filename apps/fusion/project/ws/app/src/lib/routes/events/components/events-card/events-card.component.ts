@@ -15,6 +15,7 @@ export class EventsCardComponent implements OnInit, OnChanges {
   eventDate: any;
   presentersCount: any;
   duration: any;
+  identifier: any;
 
   monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
@@ -38,6 +39,7 @@ export class EventsCardComponent implements OnInit, OnChanges {
       this.eventDate = this.eventDateFormat(this.eventDetails.eventDate, this.eventDetails.eventDuration)
       this.presentersCount = (this.eventDetails.eventjoined.includes("---")) ? '' :  this.eventDetails.eventjoined.substr(0,2);
       // console.log(this.eventDetails.eventPresenters);
+      this.identifier = this.eventDetails.identifier
     }
   }
 

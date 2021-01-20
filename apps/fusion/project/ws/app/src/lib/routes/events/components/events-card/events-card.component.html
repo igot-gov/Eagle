@@ -1,13 +1,15 @@
-<mat-card class="events-card cursor-pointer" (click)="getCareer()">
+<mat-card class="events-card cursor-pointer">
     <div>
-        <img class="event-card-image image-border" src="/assets/images/profile/business.jpg" alt="Karmayogi Bharat" />
+        <a [routerLink]= "['/app/event-hub/home/' + identifier]">
+            <img class="event-card-image image-border" src="/assets/images/profile/business.jpg" alt="Karmayogi Bharat" />
+        </a>
     </div>
     <mat-card-header>
         <mat-card-subtitle class="responsive">
             <span class="mat-body-2">Karmayogi Bharat</span>
         </mat-card-subtitle>
         <mat-card-title>
-            <a href="javascript:void(0)" class="" i18n-aria-label role="link">
+            <a class="" i18n-aria-label role="link" [routerLink]="['/app/event-hub/home/' + identifier]">
                 <span role="link" i18n-aria-label tabindex="0" 
                       class="cursor-pointer mat-subheading-1">
                     {{ title }}
