@@ -5,6 +5,7 @@ import { FormControl } from '@angular/forms'
 // import { DiscussService } from '../../../discuss/services/discuss.service'
 import { EventsService } from '../../services/events.service'
 import * as moment from 'moment'
+import { ConfigurationsService } from '@ws-widget/utils/src/public-api'
 
 @Component({
   selector: 'ws-app-events',
@@ -25,10 +26,11 @@ export class EventsComponent implements OnInit {
     // private route: ActivatedRoute,
     private router: Router,
     // private discussService: DiscussService,
-    private eventSrvc: EventsService
+    private eventSrvc: EventsService,
+    private configSvc: ConfigurationsService,
   ) {
     this.getEventData();
-    console.log('here in app / events')
+    //console.log('here in app / events')
     //this.data = this.route.snapshot.data.topics.data
     //this.paginationData = this.data.pagination
     //this.categoryId = this.route.snapshot.data['eventsCategoryId'] || 1
@@ -116,14 +118,16 @@ export class EventsComponent implements OnInit {
   setEventData(responseObj: any) {
     if(responseObj.result != undefined) {
       let eventList = responseObj.result;
-      console.log(eventList);
+      //console.log(eventList);
       this.eventData['todayEvents'] = []
       this.eventData['allEvents'] = []
+      this.eventData['joinedByMe'] = [];
       Object.keys(eventList).forEach((index: any) => {
         let eventObj = eventList[index];
-        const expiryDateFormat = this.customDateFormat(eventObj.lastUpdatedOn)
+        console.log(eventObj.expiryDate);
+        const expiryDateFormat = this.customDateFormat(eventObj.expiryDate)
         const eventUpdateDate = this.customDateFormat(eventObj.publishedOn)
-        
+        //console.log(expiryDateFormat);
         const eventDataObj = {
           eventName: eventObj.name,
           eventDate: expiryDateFormat,
@@ -135,13 +139,24 @@ export class EventsComponent implements OnInit {
           eventDescription: eventObj.description,
           eventStatus: eventObj.status,
           eventObjective: eventObj.learningObjective,
-          eventPresenters: (eventObj.creatorDetails !== undefined && eventObj.creatorDetails.length > 0) ? eventObj.creatorDetails : '',
+          eventPresenters: (eventObj.creatorContacts !== undefined && eventObj.creatorContacts.length > 0) ? eventObj.creatorContacts : '',
           identifier: eventObj.identifier,
         }
 
+        // Today's events
         if (this.isToday(expiryDateFormat)) {
           this.eventData['todayEvents'].push(eventDataObj)
         } 
+        
+        // Joined by me
+        if (eventObj.creatorDetails != undefined && eventObj.creatorDetails.length > 0) {
+          if (this.isJoinedByme(eventObj.creatorDetails))
+            this.eventData['joinedByMe'].push(eventDataObj)
+        }
+
+        // Featured Events
+
+        // All events
         this.eventData['allEvents'].push(eventDataObj)
       })
       console.log(this.eventData);
@@ -171,5 +186,12 @@ export class EventsComponent implements OnInit {
        eventDate.getFullYear() == today.getFullYear()
   }
 
+  isJoinedByme(userDetails: any) {
+    //console.log(userDetails);
+    const myUserId = this.configSvc.userProfile && this.configSvc.userProfile.userId
+    Object.keys(userDetails).forEach( (index: any) => {
+      return (userDetails[index].id === myUserId) ? true : false
+    })
+  }
 
 }
