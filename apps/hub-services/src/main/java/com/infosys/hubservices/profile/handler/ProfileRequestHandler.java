@@ -117,6 +117,7 @@ public class ProfileRequestHandler implements IProfileRequestHandler {
 					if (osid.equalsIgnoreCase("")) {
 						// we are going to get the existing object details in this case
 						Map<String, Object> objectToUpdate = searchFields.get(0);
+						logger.info("objectToUpdate:; "+objectToUpdate);
 						osid = (String) objectToUpdate.get("osid");
 						toChange.putAll(objectToUpdate);
 						logger.info("OSID is empty... using Object's OSID: " + osid);
