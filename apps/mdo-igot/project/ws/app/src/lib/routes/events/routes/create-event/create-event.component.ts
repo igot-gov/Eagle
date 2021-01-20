@@ -225,7 +225,7 @@ export class CreateEventComponent implements OnInit {
     const timeArr = this.createEventForm.controls['eventTime'].value.split(':')
     const expiryDateTime = moment(this.createEventForm.controls['eventDate'].value)
       .set('hour', timeArr[0])
-      .set('minute', timeArr[1]).format('YYYYMMDDTHHmmss+000')
+      .set('minute', timeArr[1]).format('YYYYMMDDTHHmmss+0000')
     const form = {
       content: {
         contentType: 'Event',
@@ -310,7 +310,7 @@ export class CreateEventComponent implements OnInit {
   showSuccess(res: any) {
     this.dialogRef = this.matDialog.open(SuccessComponent, {
       width: '630px',
-      height: '340px',
+      height: '520px',
       data: res,
     })
     this.dialogRef.afterClosed().subscribe(() => {

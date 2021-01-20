@@ -1,6 +1,10 @@
 @import 'ws-common';
 @import 'ws-vars';
 
+.mat-card-avatar {
+  width: 150px !important;
+  height: 144px !important;
+}
 
 mat-card-header {
   text-align: center !important;

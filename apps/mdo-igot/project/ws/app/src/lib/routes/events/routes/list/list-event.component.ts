@@ -93,7 +93,7 @@ export class ListEventComponent implements OnInit, AfterViewInit, OnDestroy {
       this.eventData['upcomingEvents'] = []
       Object.keys(data).forEach((index: any) => {
         const obj = data[index]
-        const expiryDateFormat = this.customDateFormat(obj.lastUpdatedOn)
+        const expiryDateFormat = this.customDateFormat(obj.expiryDate)
         const eventUpdateDate = this.customDateFormat(obj.publishedOn)
         const floor = Math.floor
         const hours = floor(obj.duration / 60)
