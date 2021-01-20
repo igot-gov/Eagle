@@ -13,12 +13,13 @@ import {
   MatIconModule,
 } from '@angular/material'
 import { MatCardModule } from '@angular/material/card'
+import { RolesAccessComponent } from './routes/roles-access/roles-access.component'
 
 @NgModule({
-  declarations: [HomeComponent, UsersComponent],
+  declarations: [HomeComponent, UsersComponent, RolesAccessComponent],
   imports: [CommonModule, CreateMDORoutingModule, BtnPageBackModule, LeftMenuModule, WidgetResolverModule,
     MatSidenavModule, MatIconModule, GroupCheckboxModule, HomeModule, RouterModule, UITableModule, MatCardModule],
-  exports: [UsersComponent],
+  exports: [UsersComponent, RolesAccessComponent],
   providers: [UsersService],
 })
 export class CreateMDOModule { }

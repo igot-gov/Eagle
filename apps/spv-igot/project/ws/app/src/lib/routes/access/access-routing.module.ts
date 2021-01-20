@@ -1,17 +1,16 @@
 import { NgModule } from '@angular/core'
 import { Routes, RouterModule } from '@angular/router'
-import { HomeComponent } from './routes/home/home.component'
-import { PrivilegesComponent } from './routes/privileges/privileges.component'
+import { RolesAccessComponent } from './routes/roles-access/roles-access.component'
 import { UsersComponent } from './routes/users/users.component'
 
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent,
+    component: UsersComponent,
     children: [
       {
-        path: ':role/privileges',
-        component: PrivilegesComponent,
+        path: ':role/roles-access',
+        component: RolesAccessComponent,
       },
       {
         path: ':role/users',

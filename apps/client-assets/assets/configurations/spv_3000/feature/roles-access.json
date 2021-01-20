@@ -14,11 +14,11 @@
         },
         "enabled": true,
         "paramaterName": "role",
-        "routerLink": "/app/roles/<param>/users"
+        "routerLink": "/app/roles/<params>/users"
       },
       {
         "name": "Roles and Access",
-        "key": "basicinfo",
+        "key": "rolesaccess",
         "fragment": false,
         "render": true,
         "badges": {
@@ -27,7 +27,7 @@
         },
         "enabled": true,
         "paramaterName": "role",
-        "routerLink": "/app/home/roles-access",
+        "routerLink": "/app/roles/<params>/roles-access",
         "customRouting": true
       }
       

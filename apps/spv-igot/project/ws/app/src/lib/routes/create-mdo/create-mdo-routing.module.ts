@@ -1,3 +1,4 @@
+import { RolesAccessComponent } from './../home/routes/roles-access/roles-access.component'
 import { NgModule } from '@angular/core'
 import { Routes, RouterModule } from '@angular/router'
 import { HomeComponent } from './routes/home/home.component'
@@ -16,6 +17,10 @@ const routes: Routes = [
       {
         path: ':department/basicinfo',
         component: CreateMdoComponent,
+      },
+      {
+        path: ':department/roles-access',
+        component: RolesAccessComponent,
       },
     ],
   },
