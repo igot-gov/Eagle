@@ -533,3 +533,23 @@ input.mat-input-element {
   display: block;
   padding: 15px 0;
 }
+
+
+// multiselect-dropdown
+::ng-deep.multiselect-dropdown {
+  margin-bottom: 20px;
+  max-width: 340px !important;
+
+  .dropdown-btn {
+    border: 1px solid #ccc !important;
+    width: 92% !important;
+  }
+}
+
+::ng-deep.mat-list-base {
+  max-width: 340px !important;
+
+  .mat-list-item, .mat-list-option {
+    max-width: 340px !important;
+  }
+}

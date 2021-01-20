@@ -10,14 +10,14 @@
           <label class="heading">User Details</label>
 
           <div class="input-wrapper margin-top-s">
-            <label for="fname" class=" margin-remove-bottom form-label required"
+            <label for="fname" class="margin-remove-bottom form-label required"
               i18n="First Name label|Label which explains the user to enter first name" i18n-aria-label
               aria-label="First name label">
               First name
             </label>
             <mat-form-field appearance="outline" class="margin-top-xs">
               <input id="fname" matInput #fname formControlName="fname" i18n-placeholder placeholder="Type here"
-                i18n-aria-label aria-label="First name input" class="form-input" />
+                i18n-aria-label aria-label="First name input" class="form-input" autocomplete="off" />
               <mat-error [hidden]="false" i18n="First name Error|Explains name is required" i18n-aria-label
                 aria-label="First name Error|Explains name is required "
                 *ngIf="createUserForm?.controls['fname']?.touched && createUserForm?.controls['fname'].errors?.required">
@@ -29,14 +29,14 @@
               </mat-error>
             </mat-form-field>
 
-            <label for="lname" class=" margin-remove-bottom margin-top-xs form-label required"
+            <label for="lname" class="margin-remove-bottom margin-top-xs form-label required"
               i18n="Last name label|Label which explains the user to enter last name" i18n-aria-label
               aria-label="Last name label">
               Last name
             </label>
             <mat-form-field appearance="outline" class="margin-top-xs">
               <input id="lname" matInput #lname formControlName="lname" i18n-placeholder placeholder="Type here"
-                i18n-aria-label aria-label="Last name input" class="form-input" />
+                i18n-aria-label aria-label="Last name input" class="form-input" autocomplete="off" />
               <mat-error [hidden]="false" i18n="Last name Error|Explains name is required" i18n-aria-label
                 aria-label="Last name Error|Explains name is required "
                 *ngIf="createUserForm?.controls['lname']?.touched && createUserForm?.controls['lname'].errors?.required">
@@ -48,13 +48,13 @@
               </mat-error>
             </mat-form-field>
 
-            <label for="email" class=" margin-remove-bottom margin-top-xs form-label required"
+            <label for="email" class="margin-remove-bottom margin-top-xs form-label required"
               i18n="Email label|Label which explains the user to enter email" i18n-aria-label aria-label="Email label">
               Email
             </label>
             <mat-form-field appearance="outline" class="margin-top-xs">
               <input id="email" matInput #email formControlName="email" i18n-placeholder placeholder="Type here"
-                i18n-aria-label aria-label="Email input" class="form-input" />
+                i18n-aria-label aria-label="Email input" class="form-input" autocomplete="off" />
               <mat-error [hidden]="false" i18n="Email Error|Explains name is required" i18n-aria-label
                 aria-label="Email Error|Explains name is required "
                 *ngIf="createUserForm?.controls['email']?.touched && createUserForm?.controls['email'].errors?.required">
@@ -67,15 +67,30 @@
             </mat-form-field>
 
             <div class="input-wrapper margin-top-s">
-              <label for="department" class=" margin-remove-bottom form-label" i18n-aria-label
+              <label for="department" class="margin-remove-bottom form-label required" i18n-aria-label
                 aria-label="Department label" i18n="Department label|Label which explains the user to enter department">
                 Department
               </label>
-              <mat-form-field appearance="outline" class="w-full margin-top-xs">
+              <!-- <mat-form-field appearance="outline" class="w-full margin-top-xs">
                 <input id="department" class="form-input" [(ngModel)]="departmentName" type="text" matInput
                   placeholder="Type here" formControlName="department" i18n-aria-label
                   aria-label="Department input filed" readonly>
-              </mat-form-field>
+              </mat-form-field> -->
+              <ng-multiselect-dropdown id="department" [data]="departmentoptions" [settings]="dropdownSettings"
+                  (onSelect)="onItemSelect($event)" (onDeSelect)="onItemDeSelect()" formControlName="department">
+              </ng-multiselect-dropdown>
+            </div>
+
+            <div class="input-wrapper margin-top-s margin-bottom-m" *ngIf="createUserForm.value.department">
+              <label for="roles" class="margin-remove-bottom form-label required" i18n-aria-label
+                aria-label="Roles label" i18n="Role label|Label which explains the user to select the roles">
+                Role
+              </label>
+              <mat-selection-list id="roles" formControlName="roles" #roles>
+                <mat-list-option *ngFor="let role of rolesList" (click)="modifyUserRoles(role)" [selected]="userRoles.has(role.roleName)" [value]="role.roleName">
+                  {{role.roleName}}
+                </mat-list-option>
+              </mat-selection-list>
             </div>
 
           </div>
