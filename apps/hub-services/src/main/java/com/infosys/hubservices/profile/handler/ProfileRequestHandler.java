@@ -125,7 +125,7 @@ public class ProfileRequestHandler implements IProfileRequestHandler {
                             Map<String, Object> eagleObjectToUpdate = new HashMap<>();
                             eagleObjectToUpdate.put("userId", uuid);
                             eagleObjectToUpdate.put("departmentName", objectToUpdate.get("name"));
-                            //profileUtils.getResponseEntity(eagleBaseUrl, eagleUpdateEndPoint,eagleObjectToUpdate, HttpMethod.PATCH );
+                            profileUtils.getResponseEntity(eagleBaseUrl, eagleUpdateEndPoint,eagleObjectToUpdate, HttpMethod.PATCH );
                         }
 
 					} else {
