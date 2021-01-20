@@ -36,6 +36,7 @@ import { UsersComponent } from './routes/users/users.component'
 import { OpenRolesDialogComponent } from './routes/users/components/open-roles-dialog/open-roles-dialog.component'
 import { EditDepartmentDialogComponent } from './routes/users/components/edit-department-dialog/edit-department-dialog.component'
 import { CreateUserComponent } from './routes/create-user/create-user.component'
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown'
 
 @NgModule({
   declarations: [
@@ -88,8 +89,8 @@ import { CreateUserComponent } from './routes/create-user/create-user.component'
     BtnPageBackModule,
     WidgetResolverModule,
     UserAutocompleteModule,
-    MatCheckboxModule,
     ImageCropModule,
+    NgMultiSelectDropDownModule.forRoot(),
   ],
   entryComponents: [UserPopupComponent, OpenRolesDialogComponent, EditDepartmentDialogComponent],
   providers: [

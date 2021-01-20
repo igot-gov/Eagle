@@ -4,6 +4,7 @@ import { Observable } from 'rxjs'
 
 const API_END_POINTS = {
   GET_ALL_USERS: '/apis/protected/v8/portal/spv/mydepartment?allUsers=true',
+  GET_ALL_DEPARTMENTS: '/apis/protected/v8/portal/spv/department',
   GET_MY_DEPARTMENT: '/apis/protected/v8/portal/spv/mydepartment?allUsers=true',
   CREATE_USER: 'apis/protected/v8/admin/userRegistration/create-user',
   PROFILE_REGISTRY: 'apis/protected/v8/user/profileRegistry/getUserRegistryByUser/',
@@ -22,6 +23,10 @@ export class UsersService {
     return this.http.get<any>(`${API_END_POINTS.GET_ALL_USERS}`)
   }
 
+  getAllDepartments(): Observable<any> {
+    return this.http.get<any>(`${API_END_POINTS.GET_ALL_DEPARTMENTS}`)
+  }
+
   getMyDepartment(): Observable<any> {
     return this.http.get<any>(`${API_END_POINTS.GET_MY_DEPARTMENT}`)
   }
@@ -35,7 +40,7 @@ export class UsersService {
   }
 
   addUserToDepartment(req: any): Observable<any> {
-    return this.http.post<any>(`${API_END_POINTS.ADD_USER_TO_DEPARTMENT}/${req.deptId}/userrole`, req)
+    return this.http.post<any>(`${API_END_POINTS.USER_BDD}`, req)
   }
 
   getWfHistoryByAppId(appid: string): Observable<any> {
