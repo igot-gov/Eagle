@@ -964,7 +964,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
                     deptName: deptNameValue,
                     updateFieldValues: profileRequest.approvalData,
                   }
-                  if (deptNameValue) {
+                  if (deptNameValue && (profDetails.updateFieldValues || []).length > 0) {
                     this.userProfileSvc.approveRequest(profDetails).subscribe(() => {
                       form.reset()
                       this.uploadSaveData = false
