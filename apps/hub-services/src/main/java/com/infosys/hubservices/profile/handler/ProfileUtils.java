@@ -132,5 +132,21 @@ public class ProfileUtils {
         return new ResponseEntity<>(responseEntity.getBody(), responseEntity.getStatusCode());
     }
 
+    public ResponseEntity getResponseEntity( String baseUrl, String endPoint, Map request, HttpMethod method){
+        HttpHeaders requestHeaders = new HttpHeaders();
+        requestHeaders.add("Accept", MediaType.APPLICATION_JSON_VALUE);
+
+        HttpEntity<Map> requestEntity = new HttpEntity<>(request, requestHeaders);
+
+        ResponseEntity responseEntity = restTemplate.exchange(
+                baseUrl + endPoint,
+                method,
+                requestEntity,
+                Map.class
+        );
+
+        return new ResponseEntity<>(responseEntity.getBody(), responseEntity.getStatusCode());
+    }
+
 
 }

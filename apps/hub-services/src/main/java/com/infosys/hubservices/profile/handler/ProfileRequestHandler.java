@@ -11,7 +11,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -30,6 +32,11 @@ public class ProfileRequestHandler implements IProfileRequestHandler {
     private ProfileUtils profileUtils;
     @Autowired
     private ObjectMapper objectMapper;
+
+    @Value(value = "${eagle.user.service.ip}")
+    String eagleBaseUrl;
+    @Value(value = "${/user/department/update}")
+    String eagleUpdateEndPoint;
 
     @Override
     public RegistryRequest createRequest(String uuid, Map<String, Object> request) {
@@ -113,11 +120,25 @@ public class ProfileRequestHandler implements IProfileRequestHandler {
 						osid = (String) objectToUpdate.get("osid");
 						toChange.putAll(objectToUpdate);
 						logger.info("OSID is empty... using Object's OSID: " + osid);
+						if(objectToUpdate.get("name")!=null){
+                            Map<String, Object> eagleObjectToUpdate = new HashMap<>();
+                            eagleObjectToUpdate.put("userId", uuid);
+                            eagleObjectToUpdate.put("departmentName", objectToUpdate.get("name"));
+                            profileUtils.getResponseEntity(eagleBaseUrl, eagleUpdateEndPoint,eagleObjectToUpdate, HttpMethod.PATCH );
+                        }
+
 					} else {
 						for (Map<String, Object> obj : searchFields) {
 							if (obj.get("osid").toString().equalsIgnoreCase(osid))
 								toChange.putAll(obj);
+                            if(obj.get("name")!=null){
+                                Map<String, Object> eagleObjectToUpdate = new HashMap<>();
+                                eagleObjectToUpdate.put("userId", uuid);
+                                eagleObjectToUpdate.put("departmentName", obj.get("name"));
+                                profileUtils.getResponseEntity(eagleBaseUrl, eagleUpdateEndPoint,eagleObjectToUpdate, HttpMethod.PATCH );
+                            }
 						}
+
 					}
 				} else {
 					for (Map<String, Object> obj : searchFields) {
