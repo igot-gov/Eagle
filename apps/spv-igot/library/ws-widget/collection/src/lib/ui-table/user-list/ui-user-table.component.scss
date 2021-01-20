@@ -676,3 +676,7 @@ $title-line-count: 2;
   background-color: #F5F5F5;
   font-size: 14px;
 }
+
+::ng-deep.custom-btn {
+  margin-right: 10px !important;
+}

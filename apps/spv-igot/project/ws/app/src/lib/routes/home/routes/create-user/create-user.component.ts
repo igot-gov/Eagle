@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { UsersService } from '../../services/users.service'
 import { MatSnackBar } from '@angular/material'
-import { Router } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 
 @Component({
   selector: 'ws-app-create-user',
@@ -17,12 +17,22 @@ export class CreateUserComponent implements OnInit {
   toastSuccess: any
   departmentoptions:  any = []
   dropdownSettings = {}
+  receivedDept: any
   selectedDept: any
   public userRoles: Set<string> = new Set()
+  queryParam: any
+  currentDept: any
 
   constructor(private router: Router,
+              private route: ActivatedRoute,
               private snackBar: MatSnackBar,
               private usersSvc: UsersService) {
+                this.route.queryParams.subscribe(params => {
+                  this.queryParam = params['id']
+                  this.currentDept = params['currentDept']
+                  // tslint:disable-next-line:radix
+                  this.queryParam = parseInt(this.queryParam)
+                })
     this.createUserForm = new FormGroup({
       fname: new FormControl('', [Validators.required]),
       lname: new FormControl('', [Validators.required]),
@@ -48,6 +58,20 @@ export class CreateUserComponent implements OnInit {
   getAllDept() {
     this.usersSvc.getAllDepartments().subscribe(res => {
       this.departmentoptions = res
+
+      if (this.queryParam) {
+        this.departmentoptions.forEach((dept: any) => {
+          if (dept.id === this.queryParam) {
+            this.rolesList = dept.rolesInfo
+            const item = {
+              deptName: dept.deptName,
+              id: dept.id,
+            }
+            this.receivedDept = item
+            this.departmentName = this.receivedDept.deptName
+          }
+        })
+      }
     })
   }
 
@@ -87,19 +111,19 @@ export class CreateUserComponent implements OnInit {
     }
   }
   onSubmit(form: any) {
-    form.value.department = this.selectedDept.deptName
+    form.value.department = this.selectedDept ? this.selectedDept.deptName : this.receivedDept.deptName
 
     this.usersSvc.createUser(form.value).subscribe(res => {
       let user
       this.openSnackbar(res.data)
       if (res) {
         const req = { departments: [] }
-        req.departments = this.selectedDept.deptName
+        req.departments = this.selectedDept ? this.selectedDept.deptName : this.receivedDept.deptName
         this.usersSvc.onSearchUserByEmail(form.value.email, req).subscribe(data => {
           user = data[0]
           const dreq = {
             userId: user ? user.wid : null,
-            deptId: this.selectedDept ? this.selectedDept.id : null,
+            deptId: this.selectedDept ? this.selectedDept.id : this.receivedDept.id,
             roles: form.value.roles,
             isActive: true,
             isBlocked: false,
@@ -107,7 +131,12 @@ export class CreateUserComponent implements OnInit {
           this.usersSvc.addUserToDepartment(dreq).subscribe(dres => {
             if (dres) {
               this.createUserForm.reset({ fname: '', lname: '', email: '', department: '', roles: '' })
-              this.router.navigate(['/app/home/users'])
+              if (this.selectedDept) {
+                this.router.navigate(['/app/home/users'])
+              } else {
+                this.router.navigate([`/app/roles/${this.receivedDept.id}/users`,
+                { currentDept: this.currentDept, roleId: this.receivedDept.id }])
+              }
             }
           })
         })

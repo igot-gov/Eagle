@@ -71,17 +71,17 @@
                 aria-label="Department label" i18n="Department label|Label which explains the user to enter department">
                 Department
               </label>
-              <!-- <mat-form-field appearance="outline" class="w-full margin-top-xs">
+              <mat-form-field appearance="outline" class="w-full margin-top-xs" *ngIf="receivedDept">
                 <input id="department" class="form-input" [(ngModel)]="departmentName" type="text" matInput
                   placeholder="Type here" formControlName="department" i18n-aria-label
                   aria-label="Department input filed" readonly>
-              </mat-form-field> -->
-              <ng-multiselect-dropdown id="department" [data]="departmentoptions" [settings]="dropdownSettings"
+              </mat-form-field>
+              <ng-multiselect-dropdown id="department" *ngIf="!receivedDept" [data]="departmentoptions" [settings]="dropdownSettings"
                   (onSelect)="onItemSelect($event)" (onDeSelect)="onItemDeSelect()" formControlName="department">
               </ng-multiselect-dropdown>
             </div>
 
-            <div class="input-wrapper margin-top-s margin-bottom-m" *ngIf="createUserForm.value.department">
+            <div class="input-wrapper margin-top-s margin-bottom-m" *ngIf="receivedDept || createUserForm.value.department">
               <label for="roles" class="margin-remove-bottom form-label required" i18n-aria-label
                 aria-label="Roles label" i18n="Role label|Label which explains the user to select the roles">
                 Role

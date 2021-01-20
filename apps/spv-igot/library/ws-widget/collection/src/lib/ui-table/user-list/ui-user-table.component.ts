@@ -64,7 +64,7 @@ export class UIUserTableComponent implements OnInit, AfterViewInit, OnChanges {
       this.departmentId = params['roleId']
       if (this.departmentRole && this.departmentId) {
         this.needAddAdmin = true
-        this.needCreateUser = false
+        this.needCreateUser = true
       }
 
     })
@@ -176,6 +176,6 @@ export class UIUserTableComponent implements OnInit, AfterViewInit, OnChanges {
 
   }
   gotoCreateUser() {
-    this.router.navigate([`/app/home/create-user`])
+    this.router.navigate([`/app/home/create-user`], { queryParams: { id: this.departmentId, currentDept: this.departmentRole } })
   }
 }
