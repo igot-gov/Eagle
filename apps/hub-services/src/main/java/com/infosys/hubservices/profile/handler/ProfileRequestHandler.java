@@ -26,56 +26,57 @@ import java.util.stream.Stream;
 @Service
 public class ProfileRequestHandler implements IProfileRequestHandler {
 
-    private Logger logger = LoggerFactory.getLogger(ProfileRequestHandler.class);
+	private Logger logger = LoggerFactory.getLogger(ProfileRequestHandler.class);
 
-    @Autowired
-    private ProfileUtils profileUtils;
-    @Autowired
-    private ObjectMapper objectMapper;
+	@Autowired
+	private ProfileUtils profileUtils;
+	@Autowired
+	private ObjectMapper objectMapper;
 
-    @Value(value = "${eagle.user.service.ip}")
-    String eagleBaseUrl;
-    @Value(value = "${eagle.user.service.update.endpoint}")
-    String eagleUpdateEndPoint;
+	@Value(value = "${eagle.user.service.ip}")
+	String eagleBaseUrl;
+	@Value(value = "${eagle.user.service.update.endpoint}")
+	String eagleUpdateEndPoint;
 
-    @Override
-    public RegistryRequest createRequest(String uuid, Map<String, Object> request) {
-        HttpHeaders requestHeaders = new HttpHeaders();
-        requestHeaders.add("Accept", MediaType.APPLICATION_JSON_VALUE);
+	@Override
+	public RegistryRequest createRequest(String uuid, Map<String, Object> request) {
+		HttpHeaders requestHeaders = new HttpHeaders();
+		requestHeaders.add("Accept", MediaType.APPLICATION_JSON_VALUE);
 
-        request.put(ProfileUtils.Profile.USER_ID, uuid);
-        request.put(ProfileUtils.Profile.ID, uuid);
-        request.put(ProfileUtils.Profile.AT_ID, uuid);
+		request.put(ProfileUtils.Profile.USER_ID, uuid);
+		request.put(ProfileUtils.Profile.ID, uuid);
+		request.put(ProfileUtils.Profile.AT_ID, uuid);
 
+		RegistryRequest registryRequest = new RegistryRequest();
+		registryRequest.setId(ProfileUtils.API.CREATE.getValue());
+		registryRequest.getRequest().put(ProfileUtils.Profile.USER_PROFILE, request);
+		return registryRequest;
+	}
 
-        RegistryRequest registryRequest = new RegistryRequest();
-        registryRequest.setId(ProfileUtils.API.CREATE.getValue());
-        registryRequest.getRequest().put(ProfileUtils.Profile.USER_PROFILE, request);
-        return registryRequest;
-    }
+	@Override
+	public RegistryRequest updateRequest(String uuid, Map<String, Object> request) {
+		HttpHeaders requestHeaders = new HttpHeaders();
+		requestHeaders.add("Accept", MediaType.APPLICATION_JSON_VALUE);
 
-    @Override
-    public RegistryRequest updateRequest(String uuid, Map<String, Object> request) {
-        HttpHeaders requestHeaders = new HttpHeaders();
-        requestHeaders.add("Accept", MediaType.APPLICATION_JSON_VALUE);
+		// search with user id
+		ResponseEntity responseEntity = profileUtils.getResponseEntity(ProfileUtils.URL.SEARCH.getValue(),
+				searchRequest(uuid));
 
-        //search with user id
-        ResponseEntity responseEntity = profileUtils.getResponseEntity(ProfileUtils.URL.SEARCH.getValue(), searchRequest(uuid));
+		Object searchResult = ((Map<String, Object>) ((Map<String, Object>) responseEntity.getBody()).get("result"))
+				.get(ProfileUtils.Profile.USER_PROFILE);
 
-        Object searchResult = ((Map<String,Object>)((Map<String,Object>)responseEntity.getBody()).get("result")).get(ProfileUtils.Profile.USER_PROFILE);
+		Map<String, Object> search = ((Map<String, Object>) ((List) searchResult).get(0));
+		// merge request and search to add osid(s)
+		profileUtils.merge(search, request);
 
-        Map<String,Object> search = ((Map<String,Object>)((List)searchResult).get(0));
-        //merge request and search to add osid(s)
-        profileUtils.merge(search, request);
+		RegistryRequest registryRequest = new RegistryRequest();
+		registryRequest.setId(ProfileUtils.API.UPDATE.getValue());
+		registryRequest.getRequest().put(ProfileUtils.Profile.USER_PROFILE, search);
 
-        RegistryRequest registryRequest = new RegistryRequest();
-        registryRequest.setId(ProfileUtils.API.UPDATE.getValue());
-        registryRequest.getRequest().put(ProfileUtils.Profile.USER_PROFILE, search);
+		return registryRequest;
+	}
 
-        return registryRequest;
-    }
-
-    @Override
+	@Override
 	public RegistryRequest updateRequestWithWF(String uuid, List<Map<String, Object>> requests) throws Exception {
 //        HttpHeaders requestHeaders = new HttpHeaders();
 //        requestHeaders.add("Accept", MediaType.APPLICATION_JSON_VALUE);
@@ -103,15 +104,16 @@ public class ProfileRequestHandler implements IProfileRequestHandler {
 				.get(ProfileUtils.Profile.USER_PROFILE);
 
 		List<Object> searchResultList = (List) searchResult;
-		if(searchResultList.size() == 0) {
-			throw new Exception("Failed to process WF update request. User Registry not available for USER_ID: " + uuid);
+		if (searchResultList.size() == 0) {
+			throw new Exception(
+					"Failed to process WF update request. User Registry not available for USER_ID: " + uuid);
 		}
 		Map<String, Object> existingUserProfile = ((Map<String, Object>) ((List) searchResult).get(0));
 		// merge request and search to add osid(s)
 		for (Map<String, Object> request : requests) {
 			String osid = StringUtils.isEmpty(request.get("osid")) == true ? "" : request.get("osid").toString();
 			Map<String, Object> toChange = new HashMap<>();
-			
+
 			Object profileObject = existingUserProfile.get(request.get("fieldKey"));
 			if (profileObject instanceof ArrayList) {
 				List<Map<String, Object>> searchFields = (ArrayList) profileObject;
@@ -121,27 +123,31 @@ public class ProfileRequestHandler implements IProfileRequestHandler {
 					if (osid.equalsIgnoreCase("")) {
 						// we are going to get the existing object details in this case
 						Map<String, Object> objectToUpdate = searchFields.get(0);
-						logger.info("objectToUpdate:; "+objectToUpdate);
+						logger.info("objectToUpdate:; " + objectToUpdate);
 						osid = (String) objectToUpdate.get("osid");
 						toChange.putAll(objectToUpdate);
 						logger.info("OSID is empty... using Object's OSID: " + osid);
-						if(objectToUpdate.get("name")!=null){
-                            Map<String, Object> eagleObjectToUpdate = new HashMap<>();
-                            eagleObjectToUpdate.put("userId", uuid);
-                            eagleObjectToUpdate.put("departmentName", objectToUpdate.get("name"));
-                            profileUtils.getResponseEntity(eagleBaseUrl, eagleUpdateEndPoint,eagleObjectToUpdate, HttpMethod.POST );
-                        }
-
+						String deptNameValue = (String) ((Map<String, Object>) request.get("toValue")).get("name");
+						if (deptNameValue != null) {
+							Map<String, Object> eagleObjectToUpdate = new HashMap<>();
+							eagleObjectToUpdate.put("userId", uuid);
+							eagleObjectToUpdate.put("departmentName", deptNameValue);
+//                          profileUtils.getResponseEntity(eagleBaseUrl, eagleUpdateEndPoint,eagleObjectToUpdate, HttpMethod.POST );
+							StringBuilder strBuilder = new StringBuilder(eagleBaseUrl);
+							strBuilder.append(eagleUpdateEndPoint);
+							profileUtils.fetchResult(strBuilder, eagleObjectToUpdate, Map.class);
+						}
 					} else {
 						for (Map<String, Object> obj : searchFields) {
 							if (obj.get("osid").toString().equalsIgnoreCase(osid))
 								toChange.putAll(obj);
-                            if(obj.get("name")!=null){
-                                Map<String, Object> eagleObjectToUpdate = new HashMap<>();
-                                eagleObjectToUpdate.put("userId", uuid);
-                                eagleObjectToUpdate.put("departmentName", obj.get("name"));
-                                //profileUtils.getResponseEntity(eagleBaseUrl, eagleUpdateEndPoint,eagleObjectToUpdate, HttpMethod.PATCH );
-                            }
+							if (obj.get("name") != null) {
+								Map<String, Object> eagleObjectToUpdate = new HashMap<>();
+								eagleObjectToUpdate.put("userId", uuid);
+								eagleObjectToUpdate.put("departmentName", obj.get("name"));
+								// profileUtils.getResponseEntity(eagleBaseUrl,
+								// eagleUpdateEndPoint,eagleObjectToUpdate, HttpMethod.PATCH );
+							}
 						}
 
 					}
@@ -153,7 +159,8 @@ public class ProfileRequestHandler implements IProfileRequestHandler {
 				}
 			}
 			if (profileObject instanceof HashMap) {
-				Map<String, Object> searchFields = (Map<String, Object>) existingUserProfile.get((String) request.get("fieldKey"));
+				Map<String, Object> searchFields = (Map<String, Object>) existingUserProfile
+						.get((String) request.get("fieldKey"));
 				toChange.putAll(searchFields);
 			}
 
@@ -171,46 +178,48 @@ public class ProfileRequestHandler implements IProfileRequestHandler {
 		return registryRequest;
 	}
 
-    @Override
-    public RegistryRequest searchRequest(String uuid) {
-        List types = Arrays.asList(ProfileUtils.Profile.USER_PROFILE);
-        Map<String, Map<String, Object>> filters = new HashMap<>();
-        filters.put(ProfileUtils.Profile.ID, Stream.of(new AbstractMap.SimpleEntry<>("eq", uuid)).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
+	@Override
+	public RegistryRequest searchRequest(String uuid) {
+		List types = Arrays.asList(ProfileUtils.Profile.USER_PROFILE);
+		Map<String, Map<String, Object>> filters = new HashMap<>();
+		filters.put(ProfileUtils.Profile.ID, Stream.of(new AbstractMap.SimpleEntry<>("eq", uuid))
+				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
 
+		RegistryRequest registryRequest = new RegistryRequest();
+		registryRequest.setId(ProfileUtils.API.SEARCH.getValue());
+		registryRequest.getRequest().put(ProfileUtils.Profile.ENTITY_TYPE, types);
+		registryRequest.getRequest().put(ProfileUtils.Profile.FILTERs, filters);
+		return registryRequest;
+	}
 
-        RegistryRequest registryRequest = new RegistryRequest();
-        registryRequest.setId(ProfileUtils.API.SEARCH.getValue());
-        registryRequest.getRequest().put(ProfileUtils.Profile.ENTITY_TYPE, types);
-        registryRequest.getRequest().put(ProfileUtils.Profile.FILTERs, filters);
-        return registryRequest;
-    }
+	@Override
+	public RegistryRequest searchRequest(Map params) {
+		List types = Arrays.asList(ProfileUtils.Profile.USER_PROFILE);
+		logger.info("search params -> {}", params);
 
-    @Override
-    public RegistryRequest searchRequest(Map params) {
-        List types = Arrays.asList(ProfileUtils.Profile.USER_PROFILE);
-        logger.info("search params -> {}", params);
+		RegistryRequest registryRequest = new RegistryRequest();
+		registryRequest.setId(ProfileUtils.API.SEARCH.getValue());
+		registryRequest.getRequest().put(ProfileUtils.Profile.ENTITY_TYPE, types);
+		if (null != params.get("offset") && null != params.get("limit")) {
+			registryRequest.getRequest().put("offset", params.get("offset"));
+			registryRequest.getRequest().put("limit", params.get("limit"));
+		}
 
-        RegistryRequest registryRequest = new RegistryRequest();
-        registryRequest.setId(ProfileUtils.API.SEARCH.getValue());
-        registryRequest.getRequest().put(ProfileUtils.Profile.ENTITY_TYPE, types);
-        if(null!=params.get("offset") && null!=params.get("limit")){
-            registryRequest.getRequest().put("offset", params.get("offset"));
-            registryRequest.getRequest().put("limit", params.get("limit"));
-        }
+		Map<String, Map<String, Object>> filters = (Map<String, Map<String, Object>>) params
+				.get(ProfileUtils.Profile.FILTERs);
+		registryRequest.getRequest().put(ProfileUtils.Profile.FILTERs, filters);
+		return registryRequest;
+	}
 
-        Map<String, Map<String, Object>> filters = (Map<String, Map<String, Object>>)params.get(ProfileUtils.Profile.FILTERs);
-        registryRequest.getRequest().put(ProfileUtils.Profile.FILTERs, filters);
-        return registryRequest;
-    }
+	@Override
+	public RegistryRequest readRequest(String id) {
 
-    @Override
-    public RegistryRequest readRequest(String id) {
+		Map<String, Object> params = Stream.of(new AbstractMap.SimpleEntry<>(ProfileUtils.Profile.OSID, id))
+				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
-        Map<String, Object> params = Stream.of(new AbstractMap.SimpleEntry<>(ProfileUtils.Profile.OSID, id)).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-
-        RegistryRequest registryRequest = new RegistryRequest();
-        registryRequest.setId(ProfileUtils.API.READ.getValue());
-        registryRequest.getRequest().put(ProfileUtils.Profile.USER_PROFILE, params);
-        return registryRequest;
-    }
+		RegistryRequest registryRequest = new RegistryRequest();
+		registryRequest.setId(ProfileUtils.API.READ.getValue());
+		registryRequest.getRequest().put(ProfileUtils.Profile.USER_PROFILE, params);
+		return registryRequest;
+	}
 }
