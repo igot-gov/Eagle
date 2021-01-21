@@ -327,7 +327,7 @@ public class PortalServiceImpl implements PortalService {
 	@Override
 	public UserDepartmentInfo addUserRoleInDepartment(UserDepartmentRole userDeptRole, String wid, String rootOrg,
 			String org) throws Exception {
-		validateUserDepartmentRole(userDeptRole);
+		validateUserDepartmentRole(userDeptRole, true);
 		UserDepartmentRole existingRecord = userDepartmentRoleRepo.findByUserIdAndDeptId(userDeptRole.getUserId(),
 				userDeptRole.getDeptId());
 		if (existingRecord != null) {
@@ -398,7 +398,7 @@ public class PortalServiceImpl implements PortalService {
 
 	public UserDepartmentInfo updateUserRoleInDepartment(UserDepartmentRole userDeptRole, String wid, String rootOrg,
 			String org) throws Exception {
-		validateUserDepartmentRole(userDeptRole);
+		validateUserDepartmentRole(userDeptRole, false);
 		UserDepartmentRole existingRecord = userDepartmentRoleRepo.findByUserIdAndDeptId(userDeptRole.getUserId(),
 				userDeptRole.getDeptId());
 		if (existingRecord == null) {
@@ -743,7 +743,7 @@ public class PortalServiceImpl implements PortalService {
 		}
 	}
 
-	private void validateUserDepartmentRole(UserDepartmentRole userDeptRole) throws Exception {
+	private void validateUserDepartmentRole(UserDepartmentRole userDeptRole, boolean isAddReq) throws Exception {
 		// Check User exists
 		if (!userUtilService.validateUser("igot", userDeptRole.getUserId())) {
 			throw new Exception("Invalid UserId.");
@@ -781,7 +781,7 @@ public class PortalServiceImpl implements PortalService {
 				}
 			}
 
-			if (!serverConfig.isUserMultiMapDeptEnabled()) {
+			if (isAddReq && !serverConfig.isUserMultiMapDeptEnabled()) {
 				// Check this user has the same Role in another department.
 				List<UserDepartmentRole> existingUserDepts = userDepartmentRoleRepo
 						.findAllByUserIdAndIsActiveAndIsBlocked(userDeptRole.getUserId(), true, false);
@@ -791,9 +791,10 @@ public class PortalServiceImpl implements PortalService {
 							// Just check any CBP role is already assigned
 							Iterable<Role> existingUserDeptRoles = roleRepo
 									.findAllById(Arrays.asList(uDeptRole.getRoleIds()));
-							for(Role r : existingUserDeptRoles) {
-								if(PortalConstants.CBP_ROLES.contains(r.getRoleName())) {
-									throw new Exception("User is already assigned with a CBP Role in another Department.");
+							for (Role r : existingUserDeptRoles) {
+								if (PortalConstants.CBP_ROLES.contains(r.getRoleName())) {
+									throw new Exception(
+											"User is already assigned with a CBP Role in another Department.");
 								}
 							}
 						}
