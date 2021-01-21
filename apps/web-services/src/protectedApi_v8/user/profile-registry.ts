@@ -291,7 +291,7 @@ export async function designationMeta() {
   })
 }
 
-profileRegistryApi.post('/createUserRegistryV2:userId', async (req, res) => {
+profileRegistryApi.post('/createUserRegistryV2/:userId', async (req, res) => {
   try {
     const userId = req.params.userId
     logInfo('Create user registry for', userId)
