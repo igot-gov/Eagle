@@ -298,15 +298,17 @@ public class ComputeScores {
      */
     private void setScoringStatus(EvaluatorModel evaluatorModel, ScoringTemplate scoringTemplate) {
         try {
-                evaluatorModel.getCriteriaModels().forEach(criteriaModel -> {
-                    if (criteriaModel.getTotalScore() < criteriaModel.getMinScore()) {
-                        criteriaModel.setQualifiedMinCriteria(false);
-                        evaluatorModel.setQualifiedMinCriteria(false);
-                        if (!scoringTemplate.getStatus_on_min_criteria().isEmpty())
-                        evaluatorModel.setStatusOnMinCriteria(scoringTemplate.getStatus_on_min_criteria().getOrDefault(MIN_SCORE_FAIL_CONST, ""));
-                    }
-                });
-            if (!scoringTemplate.getScore_grades().isEmpty()) {
+            boolean isMinimumCriteriaPassed = true;
+            for (CriteriaModel criteriaModel : evaluatorModel.getCriteriaModels()) {
+                if (criteriaModel.getTotalScore() < criteriaModel.getMinScore()) {
+                    isMinimumCriteriaPassed = false;
+                    criteriaModel.setQualifiedMinCriteria(false);
+                    evaluatorModel.setQualifiedMinCriteria(false);
+                    if (!scoringTemplate.getStatus_on_min_criteria().isEmpty())
+                        evaluatorModel.setScoreGrade(scoringTemplate.getStatus_on_min_criteria().getOrDefault(MIN_SCORE_FAIL_CONST, ""));
+                }
+            }
+            if (isMinimumCriteriaPassed && !scoringTemplate.getScore_grades().isEmpty()) {
                 for (HashMap<String, String> hm : scoringTemplate.getScore_grades()) {
                     Map.Entry<String, String> entry = hm.entrySet().iterator().next();
                     double min = Double.parseDouble(entry.getKey().split("-")[0]);
@@ -317,11 +319,10 @@ public class ComputeScores {
                     }
                 }
             }
-        }
-        catch (Exception ex){
+        } catch (Exception ex) {
             logger.error("Error occurred while setting the score status!");
             logger.error(ex.toString());
         }
-  }
+    }
 
 }

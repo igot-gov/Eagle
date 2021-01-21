@@ -43,7 +43,6 @@ public class EvaluatorModel {
 
     private boolean getLatestRecordEnabled;
 
-    private String statusOnMinCriteria;
 
     private String scoreGrade;
 
@@ -212,14 +211,6 @@ public class EvaluatorModel {
 
     public void setGetLatestRecordEnabled(boolean getLatestRecordEnabled) {
         this.getLatestRecordEnabled = getLatestRecordEnabled;
-    }
-
-    public String getStatusOnMinCriteria() {
-        return statusOnMinCriteria;
-    }
-
-    public void setStatusOnMinCriteria(String statusOnMinCriteria) {
-        this.statusOnMinCriteria = statusOnMinCriteria;
     }
 
     public String getScoreGrade() {
