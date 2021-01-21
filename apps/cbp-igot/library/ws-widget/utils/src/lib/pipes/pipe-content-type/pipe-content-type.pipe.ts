@@ -15,7 +15,7 @@ export class PipeContentTypePipe implements PipeTransform {
           return 'Course'
         case 'collection':
         case 'Collection':
-          return 'Collection'
+          return 'Module'
         case 'resource':
         case 'Resource':
           return 'Resource'

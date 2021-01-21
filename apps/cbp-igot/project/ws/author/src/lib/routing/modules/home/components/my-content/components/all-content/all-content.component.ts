@@ -170,7 +170,7 @@ export class AllContentComponent implements OnInit, OnDestroy {
           image: 'appIcon',
         },
         { displayName: 'Kind', key: 'contentType', isList: false, prop: '', defaultValue: 'NA', pipe: PipeContentTypePipe },
-        { displayName: 'Active users', key: 'uniqueUsersCount', isList: false, prop: '', defaultValue: 0 },
+        // { displayName: 'Active users', key: 'uniqueUsersCount', isList: false, prop: '', defaultValue: 0 },
         { displayName: 'Duration', key: 'duration', defaultValue: 0, pipe: PipeDurationTransformPipe },
       ], //  :> this will load from json
       actions: [], // :> this will load from json
