@@ -19,6 +19,44 @@
   justify-content: flex-start;
 }
 
+.disable {
+  pointer-events: none !important;
+  cursor: text !important;
+  // background: gainsboro;
+
+  .txt {
+
+    animation-duration: 3000ms;
+    animation-name: blink;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    -webkit-animation: blink 3000ms infinite;
+    /* Safari and Chrome */
+
+
+    @keyframes blink {
+      from {
+        color: red;
+      }
+
+      to {
+        color: blueviolet;
+      }
+    }
+
+    @-webkit-keyframes blink {
+      from {
+        color: red;
+      }
+
+      to {
+        color: blueviolet;
+      }
+    }
+
+  }
+}
+
 ::ng-deep mat-form-field .mat-form-field-infix .mat-form-field-label,
 ::ng-deep mat-form-field .mat-form-field-infix .mat-select-value {
   line-height: normal !important;

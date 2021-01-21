@@ -73,6 +73,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   eMaritalStatus = NsUserProfileDetails.EMaritalStatus
   eCategory = NsUserProfileDetails.ECategory
   userProfileFields!: NsUserProfileDetails.IUserProfileFields
+  inReview = 'In Review!'
   imageTypes = IMAGE_SUPPORT_TYPES
   today = new Date()
   phoneNumberPattern = '^((\\+91-?)|0)?[0-9]{10}$'
@@ -102,7 +103,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   isForcedUpdate = false
   userProfileData!: any
   approvalConfig!: NsUserProfileDetails.IApprovals
-
+  unApprovedField!: any[]
   constructor(
     private snackBar: MatSnackBar,
     private userProfileSvc: UserProfileService,
@@ -116,6 +117,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   ) {
     this.approvalConfig = this.route.snapshot.data.pageData.data
     this.isForcedUpdate = !!this.route.snapshot.paramMap.get('isForcedUpdate')
+    this.fetchPendingFields()
     this.createUserForm = new FormGroup({
       firstname: new FormControl('', [Validators.required, Validators.pattern(this.namePatern)]),
       middlename: new FormControl('', [Validators.pattern(this.namePatern)]),
@@ -185,6 +187,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     this.fetchMeta()
     this.assignPrimaryEmailType(this.isOfficialEmail)
   }
+
   fetchMeta() {
     this.userProfileSvc.getMasterNationlity().subscribe(
       data => {
@@ -233,6 +236,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       (_err: any) => {
       })
   }
+
   createDegree(): FormGroup {
     return this.fb.group({
       degree: new FormControl('', []),
@@ -241,6 +245,17 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     })
   }
 
+  fetchPendingFields() {
+    this.userProfileSvc.listApprovalPendingFields().subscribe(res => {
+      if (res && res.result && res.result.data)
+        this.unApprovedField = _.get(res, 'result.data')
+    })
+  }
+  isAllowed(name: string) {
+    if (name) {
+      return !(this.unApprovedField && this.unApprovedField.indexOf(name) >= 0)
+    } return true
+  }
   createDegreeWithValues(degree: any): FormGroup {
     return this.fb.group({
       degree: new FormControl(degree.degree, []),

@@ -19,7 +19,7 @@ const API_ENDPOINTS = {
   getProfilePageMeta: '/apis/protected/v8/user/profileDetails/getProfilePageMeta',
   approveRequest: '/apis/protected/v8/workflowhandler/transition',
   getNewDepartments: '/apis/protected/v8/portal/listDeptNames',
-  getPendingFields: '/apis/protected/v8/workflowhandler/userWfSearch',
+  getPendingFields: '/apis/protected/v8/workflowhandler/userWFApplicationFieldsSearch',
 }
 
 @Injectable()
@@ -52,7 +52,10 @@ export class UserProfileService {
   approveRequest(data: any) {
     return this.http.post(API_ENDPOINTS.approveRequest, data)
   }
-  listApprovalPendingFields(data: any) {
-    return this.http.post(API_ENDPOINTS.approveRequest, data)
+  listApprovalPendingFields() {
+    return this.http.post<any>(API_ENDPOINTS.getPendingFields, {
+      'serviceName': 'profile',
+      'applicationStatus': 'SEND_FOR_APPROVAL'
+    })
   }
 }
