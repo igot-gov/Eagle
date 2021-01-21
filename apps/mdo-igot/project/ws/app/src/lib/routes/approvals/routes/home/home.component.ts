@@ -1,6 +1,8 @@
 import { AfterViewInit, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { ActivatedRoute, Router, Event, NavigationEnd } from '@angular/router'
 import moment from 'moment'
+import { ConfigurationsService } from '../../../../../../../../../library/ws-widget/utils/src/public-api'
+import { NeedApprovalsService } from '../../services/need-approvals.service'
 
 @Component({
   selector: 'ws-app-home',
@@ -28,7 +30,13 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       this.sticky = false
     }
   }
-  constructor(private activeRoute: ActivatedRoute, private router: Router) {
+  constructor(
+    private configSvc: ConfigurationsService,
+    private activeRoute: ActivatedRoute,
+    private router: Router,
+    private needApprService: NeedApprovalsService
+  ) {
+    this.getDepartment()
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
         const workflowData = this.activeRoute.snapshot.data.workflowData.data.result.data[0] || {}
@@ -79,7 +87,13 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     })
   }
-
+  getDepartment() {
+    this.needApprService.getMyDepartment().subscribe(res => {
+      if (res && res.deptName) {
+        this.configSvc.departName = res.deptName
+      }
+    })
+  }
   ngOnInit() {
     this.tabsData = [{
       name: 'Needs approval',

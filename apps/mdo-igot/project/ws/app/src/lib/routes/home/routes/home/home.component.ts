@@ -73,6 +73,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
         this.department = this.activeRoute.snapshot.data.department.data
         this.departmentName = this.department ? this.department.deptName : ''
+        this.configService.departName = this.departmentName
       }
     })
 

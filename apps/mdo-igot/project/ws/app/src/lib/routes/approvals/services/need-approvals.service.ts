@@ -7,6 +7,7 @@ const API_END_POINTS = {
   PROFILE_REGISTRY: 'apis/protected/v8/user/profileRegistry/getUserRegistryByUser/',
   WORKFLOW_HANDLER: 'apis/protected/v8/workflowhandler/transition',
   WF_HISTORY_BY_APPID: 'apis/protected/v8/workflowhandler/historyByApplicationId/',
+  GET_MY_DEPARTMENT: '/apis/protected/v8/portal/mdo/mydepartment?allUsers=false',
 }
 
 @Injectable({
@@ -28,5 +29,8 @@ export class NeedApprovalsService {
 
   getWfHistoryByAppId(appid: string): Observable<any> {
     return this.http.get<any>(API_END_POINTS.WF_HISTORY_BY_APPID + appid)
+  }
+  getMyDepartment(): Observable<any> {
+    return this.http.get<any>(`${API_END_POINTS.GET_MY_DEPARTMENT}`)
   }
 }
