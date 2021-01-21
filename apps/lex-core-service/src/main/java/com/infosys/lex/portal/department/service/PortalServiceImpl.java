@@ -529,6 +529,10 @@ public class PortalServiceImpl implements PortalService {
 
 	@Override
 	public boolean isAdmin(String strDeptType, String roleName, String userId, Integer deptId) {
+		boolean retValue = false;
+		StringBuilder str= new StringBuilder("isAdmin");
+		str.append("strDeptType: ").append(strDeptType).append(", roleName: ").append(roleName);
+		str.append(", userId: ").append(userId).append(", roleName: ").append(roleName).append(System.lineSeparator());
 		List<UserDepartmentRole> userDeptRoleList = userDepartmentRoleRepo
 				.findAllByUserIdAndIsActiveAndIsBlocked(userId, true, false);
 		if (!DataValidator.isCollectionEmpty(userDeptRoleList)) {
@@ -536,6 +540,7 @@ public class PortalServiceImpl implements PortalService {
 				if (!userDeptRole.getIsActive() || userDeptRole.getIsBlocked()) {
 					continue;
 				}
+				str.append("Found userDepartmentRole entry id= ").append(userDeptRole.getId()).append(System.lineSeparator());
 				// Get Roles
 				Iterable<Role> roles = roleRepo.findAllById(Arrays.asList(userDeptRole.getRoleIds()));
 				if (!DataValidator.isCollectionEmpty(roles)) {
@@ -548,23 +553,31 @@ public class PortalServiceImpl implements PortalService {
 									// If the department Id didn't match, simply continue.
 									continue;
 								}
+								str.append("Found Department with Id: ").append(dept.getDeptId()).append(System.lineSeparator());
 								Iterable<DepartmentType> deptTypeList = deptTypeRepo
 										.findAllById(Arrays.asList(dept.getDeptTypeIds()));
 								if (!DataValidator.isCollectionEmpty(deptTypeList)) {
 									for (DepartmentType deptType : deptTypeList) {
 										if (deptType.getDeptType().equalsIgnoreCase(strDeptType)) {
 											// We have found the expected Department.
-											return true;
+											retValue = true;
+											str.append("Found that department has Type: ").append(strDeptType);
+											break;
 										}
 									}
 								}
 							}
 						}
+						if(retValue) {
+							break;
+						}
 					}
 				}
 			}
 		}
-		return false;
+		str.append("Return value: ").append(retValue);
+		logger.info(str.toString());
+		return retValue;
 	}
 
 	@Override
