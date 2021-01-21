@@ -524,11 +524,6 @@ public class PortalServiceImpl implements PortalService {
 
 	@Override
 	public boolean isAdmin(String strDeptType, String roleName, String userId) {
-		return isAdmin(strDeptType, roleName, userId, -1);
-	}
-
-	@Override
-	public boolean isAdmin(String strDeptType, String roleName, String userId, Integer deptId) {
 		boolean retValue = false;
 		StringBuilder str= new StringBuilder("isAdmin");
 		str.append("strDeptType: ").append(strDeptType).append(", roleName: ").append(roleName);
@@ -549,10 +544,6 @@ public class PortalServiceImpl implements PortalService {
 							// Just check this department type is equal to given roleName
 							Department dept = deptRepo.findById(userDeptRole.getDeptId()).get();
 							if (dept != null) {
-								if (deptId != -1 && deptId != dept.getDeptId()) {
-									// If the department Id didn't match, simply continue.
-									continue;
-								}
 								str.append("Found Department with Id: ").append(dept.getDeptId()).append(System.lineSeparator());
 								Iterable<DepartmentType> deptTypeList = deptTypeRepo
 										.findAllById(Arrays.asList(dept.getDeptTypeIds()));

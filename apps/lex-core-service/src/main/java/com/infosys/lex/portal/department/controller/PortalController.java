@@ -245,7 +245,7 @@ public class PortalController {
 	}
 
 	private void validateUserAccess(String deptType, String roleName, String wid, Integer deptId) throws Exception {
-		if (!portalService.isAdmin(deptType, roleName, wid, deptId)) {
+		if (!portalService.isAdmin(deptType, roleName, wid)) {
 			throw new Exception("User is not assigned with Role: '" + roleName + "'.");
 		}
 	}

@@ -30,7 +30,6 @@ public interface PortalService {
 	DepartmentInfo updateDepartment(DepartmentInfo deptInfo) throws Exception;
 
 	boolean isAdmin(String strDeptType, String roleName, String userId);
-	boolean isAdmin(String strDeptType, String roleName, String userId, Integer deptId);
 
 	boolean validateCBPUserLogin(String userId);
 
