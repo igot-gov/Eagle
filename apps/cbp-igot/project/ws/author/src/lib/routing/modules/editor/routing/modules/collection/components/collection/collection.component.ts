@@ -367,13 +367,16 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
                   })
                   /** final call */
                 } else {
-                  this.snackBar.open(`To proceed further minimum quality score must be  ${minPassPercentage}% or greater, and need to qualify in all the sections`)
+                  this.snackBar.open(`To proceed further minimum quality score must be
+                  ${minPassPercentage}% or greater, and need to qualify in all the sections`)
                 }
               } else {
-                this.snackBar.open(`To proceed further minimum quality score must be  ${minPassPercentage}% or greater, and need to qualify in all the sections`)
+                this.snackBar.open(`To proceed further minimum quality score must be
+                ${minPassPercentage}% or greater, and need to qualify in all the sections`)
               }
             } else {
-              this.snackBar.open(`To proceed further minimum quality score must be  ${minPassPercentage}% or greater, and need to qualify in all the sections`)
+              this.snackBar.open(`To proceed further minimum quality score must be
+               ${minPassPercentage}% or greater, and need to qualify in all the sections`)
             }
           } else {
             this.snackBar.open(`To proceed further minimum quality score is required, and need to qualify in all the sections`)

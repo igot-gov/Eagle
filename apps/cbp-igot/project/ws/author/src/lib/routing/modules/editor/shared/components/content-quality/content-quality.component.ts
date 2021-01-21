@@ -241,7 +241,7 @@ export class ContentQualityComponent implements OnInit, OnDestroy, AfterViewInit
   }
 
   checkUnQualidied(idx: number): boolean {
-    let obj = this.qualityResponse.criteriaModels[idx]
+    const obj = this.qualityResponse.criteriaModels[idx]
     return obj && obj.qualifiedMinCriteria
   }
 
