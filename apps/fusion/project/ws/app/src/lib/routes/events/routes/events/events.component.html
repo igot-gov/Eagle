@@ -16,9 +16,8 @@
                     <span class="spacer"></span>
                   </mat-card-header>
                   <mat-card-content class="mb-0-imp flex flex-wrap" style="margin-left:16px;">
-                    <!-- <div fxFlex *ngFor="let event of eventData['allEvents']" class="card-item" fxLayout="row wrap"> -->
-                    <ng-container *ngFor="let event of eventData['todayEvents']">
-                        <ws-app-today-event-card class="mr-4" [data]="event"></ws-app-today-event-card>
+                    <ng-container *ngIf="eventData['todayEvents']">
+                        <ws-app-today-event-card *ngFor="let event of eventData['todayEvents']" class="mr-4" [data]="event"></ws-app-today-event-card>
                     </ng-container>
                   </mat-card-content>
                   <mat-card-footer>

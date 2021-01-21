@@ -4,7 +4,7 @@
       <ng-container>
         <div class="ml-4 mr-6 mb-2 view-more ws-mat-accent-text view-all ws-mat-accent-background">
           <!-- [routerLink]="'/app/user-profile/details'" -->
-          <a mat-button class="flex-1">
+          <a href="javascript:void(0);" mat-button class="flex-1" (click)="startMeeting(joiningInfo[0].artifactUrl)">
             <span class="text-white" i18n >Attend Live Event</span>
           </a>
         </div>

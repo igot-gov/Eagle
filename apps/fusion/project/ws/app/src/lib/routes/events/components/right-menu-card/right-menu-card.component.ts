@@ -1,39 +1,29 @@
-import { Component, OnDestroy, OnInit, OnChanges, Input } from '@angular/core'
-// import { ActivatedRoute } from '@angular/router'
-// import { ConfigurationsService } from '@ws-widget/utils'
-// import { NSProfileDataV2 } from '../../models/profile-v2.model'
+import { Component, OnInit, OnChanges, Input } from '@angular/core'
 
 @Component({
-  selector: 'app-right-menu-card',
-  templateUrl: './right-menu-card.component.html',
-  styleUrls: ['./right-menu-card.component.scss'],
-  /* tslint:disable */
-  host: { class: 'flex flex-1' },
-  /* tslint:enable */
+    selector: 'app-right-menu-card',
+    templateUrl: './right-menu-card.component.html',
+    styleUrls: ['./right-menu-card.component.scss'],
 })
-export class RightMenuCardComponent implements OnInit, OnChanges, OnDestroy {
-  
-  @Input() data?: []
-  joiningInfo: any = []
+export class RightMenuCardComponent implements OnInit, OnChanges {
 
-  constructor(
-  
-  ) {
-  
-  }
-  ngOnInit(): void {
-  
-  }
+    @Input() data?: []
+    joiningInfo: any = []
 
-  ngOnChanges() {
-    if(this.data != undefined) {
-      this.joiningInfo.push(this.data)
-      console.log(this.joiningInfo)
+    constructor() {
     }
-  }
-  
 
-  ngOnDestroy() {
+    ngOnInit() {
+    }
 
-  }
+    ngOnChanges() {
+        if (this.data !== undefined) {
+            this.joiningInfo.push(this.data)
+        }
+    }
+
+    startMeeting(meetingURL: any) {
+        window.open(meetingURL, '_blank')
+    }
+
 }
