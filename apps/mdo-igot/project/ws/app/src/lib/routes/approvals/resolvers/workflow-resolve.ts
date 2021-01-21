@@ -6,7 +6,6 @@ import { } from '@ws-widget/collection'
 import { ConfigurationsService, IResolveResponse } from '@ws-widget/utils'
 import { NeedApprovalsService } from '../services/need-approvals.service'
 import { NSProfileDataV2 } from '../models/profile-v2.model'
-import _ from 'lodash'
 
 @Injectable()
 export class WorkflowResolve
@@ -46,6 +45,7 @@ export class WorkflowResolve
         map(data => ({ data, error: null })),
         catchError(error => of({ error, data: null })),
       )
-    } else return EMPTY
+    }
+    return EMPTY
   }
 }
