@@ -170,8 +170,15 @@
     <!-- {{qualityResponse | json}} -->
     <mat-card-title class="m-auto">
       <span class="mat-title" id="content-result">{{'Content quality report'}}</span>
+
     </mat-card-title>
     <mat-card-content class="margin-top-xs mobile-break mat-app-background">
+      <span class="mat-subtitle" id="content-result" *ngIf="!qualityResponse.qualifiedMinCriteria">
+        {{qualityResponse.statusOnMinCriteria}}
+      </span>
+      <span class="mat-subtitle" id="content-result" *ngIf="qualityResponse.qualifiedMinCriteria">
+        {{qualityResponse.scoreGrade}}
+      </span>
       <div class="flex flex-1 flex-column">
         <div class="flex flex-1">
           <span class="mat-title">{{getQualityPercent}}%</span>
@@ -215,7 +222,7 @@
       </span>
     </button>
     <button mat-raised-button type="button"
-      (click)="minPassPercentage<=getQualityPercent? data.emit('next'): showMinDialogue()"
+      (click)="minPassPercentage<=getQualityPercent && qualityResponse.qualifiedMinCriteria ? data.emit('next'): showMinDialogue()"
       class="text-white ws-mat-primary-background margin-left-s">
       <span class="mat-subheading-2 padding-xs" style="vertical-align: unset;" i18n>Self curation
       </span>
@@ -262,4 +269,13 @@
     <mat-header-row *matHeaderRowDef="displayedColumns" class="ws-mat-background-04"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
+  <div class="flex flex-1 flex-end margin-bottom-l">
+    <span class="mat-subheading-1">Result : </span>
+    <span *ngIf="checkUnQualidied(idx)" class="mat-subheading-1 green">
+      {{checkUnQualidied(idx)? ' Qualified': ' Not Qualified'}}
+    </span>
+    <span *ngIf="!checkUnQualidied(idx)" class="mat-subheading-1 warn">
+      {{checkUnQualidied(idx)? ' Qualified': ' Not Qualified'}}
+    </span>
+  </div>
 </ng-template>
