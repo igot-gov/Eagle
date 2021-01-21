@@ -192,7 +192,8 @@
                       "path": "/app/search/learning",
                       "queryParams": {
                         "q": "all",
-                        "p": "Trending"
+                        "p": "Trending",
+                        "f": "{\"contentType\":[\"Course\"]}"
                       }
                     },
                     "stripConfig": {

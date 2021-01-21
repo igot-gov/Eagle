@@ -269,6 +269,66 @@
       "shortName": "Author",
       "url": "/author/home"
     },
+    "feature_cbp": {
+      "accessKey": "",
+      "icon": "menu_book",
+      "iconType": "mat-icon",
+      "id": "feature_cbp",
+      "keywords": [
+        "author",
+        "authoring tool"
+      ],
+      "isExternal": "true",
+      "name": "CBP",
+      "permission": [
+        "editor",
+        "author",
+        "publisher"
+      ],
+      "show": true,
+      "status": "live",
+      "toolTip": "Author",
+      "shortName": "Author",
+      "url": "http://cbp-igot-dev.idc.tarento.com/"
+    },
+    "feature_mdo": {
+      "accessKey": "",
+      "icon": "supervisor_account",
+      "iconType": "mat-icon",
+      "id": "feature_mdo",
+      "keywords": [
+        "mdo"
+      ],
+      "isExternal": "true",
+      "name": "MDO",
+      "permission": [
+        "admin"
+      ],
+      "show": true,
+      "status": "live",
+      "toolTip": "MDO",
+      "shortName": "MDP",
+      "url": "https://mdo-igot-dev.idc.tarento.com/"
+    },
+    "feature_spv": {
+      "accessKey": "",
+      "icon": "supervised_user_circle",
+      "iconType": "mat-icon",
+      "id": "feature_spv",
+      "keywords": [
+        "spv"
+      ],
+      "isExternal": "true",
+      "name": "SPV",
+      "permission": [
+        "superAdmin"
+      ],
+      "show": true,
+      "status": "live",
+      "toolTip": "SPV",
+      "shortName": "SPV",
+      "url": "https://spv-igot-dev.idc.tarento.com/"
+    },
     "feature_create": {
       "accessKey": "",
       "icon": "create",
@@ -600,7 +660,9 @@
     },
     {
       "featureIds": [
-        "feature_admin"
+        "feature_mdo",
+        "feature_cbp",
+        "feature_spv"
       ],
       "icon": "",
       "iconType": "none",
@@ -608,8 +670,8 @@
       "keywords": [
         "admin"
       ],
-      "name": "Admin",
-      "toolTip": "Admin",
+      "name": "Portals",
+      "toolTip": "Portals",
       "hasRole": [
         "admin"
       ]
