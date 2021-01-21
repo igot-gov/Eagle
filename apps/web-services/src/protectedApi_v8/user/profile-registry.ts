@@ -14,6 +14,7 @@ const API_END_POINTS = {
   updateUserWorkflowRegistry: (userId: string) =>
     `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/v1/user/update/workflow/profile?userId=${userId}`,
 }
+const ERROR_MESSAGE_CREATE_REGISTRY = 'ERROR CREATING USER REGISTRY >'
 
 export const profileRegistryApi = Router()
 
@@ -41,7 +42,7 @@ profileRegistryApi.post('/createUserRegistry', async (req, res) => {
       res.status(response.status).json(response.data)
     }
   } catch (err) {
-    logError('ERROR CREATING USER REGISTRY >', err)
+    logError(ERROR_MESSAGE_CREATE_REGISTRY, err)
     res.status((err && err.response && err.response.status) || 500).send(err)
   }
 })
@@ -55,7 +56,7 @@ profileRegistryApi.post('/updateUserRegistry', async (req, res) => {
     })
     res.status(response.status).json(response.data)
   } catch (err) {
-    logError('ERROR CREATING USER REGISTRY >', err)
+    logError(ERROR_MESSAGE_CREATE_REGISTRY, err)
     res.status((err && err.response && err.response.status) || 500).send(err)
   }
 })
@@ -289,3 +290,32 @@ export async function designationMeta() {
     }
   })
 }
+
+profileRegistryApi.post('/createUserRegistryV2:userId', async (req, res) => {
+  try {
+    const userId = req.params.userId
+    logInfo('Create user registry for', userId)
+    const getUserIdExistresponse = await axios.get(API_END_POINTS.getUserRegistryById(userId), {
+      ...axiosRequestConfig,
+    })
+    if (getUserIdExistresponse.data && getUserIdExistresponse.data.result &&
+      getUserIdExistresponse.data.result.UserProfile
+      && getUserIdExistresponse.data.result.UserProfile.length) {
+
+      const response = await axios.post(API_END_POINTS.updateUserRegistry(userId), { ...req.body, userId }, {
+        ...axiosRequestConfigLong,
+      })
+      res.status(response.status).json(response.data)
+    } else {
+      // const data = req.body;
+      // const deptName = req.body.
+      const response = await axios.post(API_END_POINTS.createUserRegistry(userId), { ...req.body, userId }, {
+        ...axiosRequestConfigLong,
+      })
+      res.status(response.status).json(response.data)
+    }
+  } catch (err) {
+    logError(ERROR_MESSAGE_CREATE_REGISTRY, err)
+    res.status((err && err.response && err.response.status) || 500).send(err)
+  }
+})
