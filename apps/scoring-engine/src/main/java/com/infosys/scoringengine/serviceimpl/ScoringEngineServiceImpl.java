@@ -70,7 +70,7 @@ public class ScoringEngineServiceImpl implements ScoringEngineService {
 	public static SimpleDateFormat formatterDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private Logger logger = LoggerFactory.getLogger(ScoringEngineServiceImpl.class);
 
-	private static final String[] ignorableFields = {"rootOrg", "org", "version", "weightage", "max_score", "min_acceptable_score", "fixed_score", "range_score", "modify_max_score", "10-20", "20-30", "30-40", "modify_max_score", "max_score_modify_value", "min_score_weightage_enable", "min_score_weightage", "score_grades", "isQualifiedMinCriteria"};
+	private static final String[] ignorableFields = {"rootOrg", "org", "version", "weightage", "max_score", "min_acceptable_score", "fixed_score", "range_score", "modify_max_score", "10-20", "20-30", "30-40", "modify_max_score", "max_score_modify_value", "min_score_weightage_enable", "min_score_weightage", "score_grades", "isQualifiedMinCriteria", "status_on_min_criteria"};
 
 	@Override
 	public Response addV2(EvaluatorModel evaluatorModel) throws Exception{
