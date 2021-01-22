@@ -39,7 +39,6 @@ export function changeformat(date?: Date): string {
     const year = date.getFullYear()
     // return `${year}-${month}-${day}`
     return `${day}-${month}-${year}`
-  } else {
-    return '01-01-1900'
   }
+  return '01-01-1900'
 }

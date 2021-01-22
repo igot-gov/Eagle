@@ -55,7 +55,7 @@ export class UserProfileService {
   listApprovalPendingFields() {
     return this.http.post<any>(API_ENDPOINTS.getPendingFields, {
       serviceName: 'profile',
-      applicationStatus: 'SEND_FOR_APPROVAL'
+      applicationStatus: 'SEND_FOR_APPROVAL',
     })
   }
 }

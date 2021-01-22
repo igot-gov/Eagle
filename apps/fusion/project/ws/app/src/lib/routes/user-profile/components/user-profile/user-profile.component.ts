@@ -766,6 +766,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
           officialEmail: officeEmail,
           postalAddress: form.value.residenceAddress,
           pincode: form.value.pincode,
+          osid: _.get(this.userProfileData, 'personalDetails.osid') || undefined,
         }
       case 'academics':
         return this.getAcademics(form)
@@ -781,6 +782,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
           officialPostalAddress: form.value.otherDetailsOfficeAddress,
           pinCode: form.value.otherDetailsOfficePinCode,
           departmentName: form.value.departmentName || undefined,
+          osid: _.get(this.userProfileData, 'employmentDetails.osid') || undefined,
         }
       case 'professionalDetails':
         return [
@@ -823,7 +825,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     return lst
   }
   private constructReq(form: any) {
-    let profileReq = {}
+    const profileReq = {}
     if (form.value.photo) {
       _.set(profileReq, 'photo', form.value.photo)
     }
@@ -833,6 +835,11 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     if (form.value.certificationDesc) {
       _.set(profileReq, 'skills.certificateDetails', form.value.certificationDesc)
     }
+    if (_.get(profileReq, 'skills')) {
+      _.set(profileReq, 'skills.osid', _.get(this.userProfileData, 'skills.osid'))
+    }
+    // _.set(profileReq, 'interests', {})
+
     if (form.value.interests) {
       _.set(profileReq, 'interests.professional', form.value.interests)
     }
@@ -876,6 +883,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       description: form.value.orgDesc,
       completePostalAddress: '',
       additionalAttributes: {},
+      osid: _.get(this.userProfileData, 'professionalDetails[0].osid') || undefined,
     }
     if (form.value.isGovtOrg === 'govt') {
       org.organisationType = 'Government'
@@ -892,6 +900,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     academics.push(this.getClass12(form))
     academics.push(...this.getDegree(form, 'GRADUATE'))
     academics.push(...this.getPostDegree(form, 'POSTGRADUATE'))
+
     return academics
   }
 
@@ -901,6 +910,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       type: 'X_STANDARD',
       nameOfInstitute: form.value.schoolName10,
       yearOfPassing: `${form.value.yop10}`,
+      // osid: _.get(this.userProfileData, `${k}[${idx}].osid`),
     })
   }
 
