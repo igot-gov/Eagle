@@ -247,14 +247,15 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
   fetchPendingFields() {
     this.userProfileSvc.listApprovalPendingFields().subscribe(res => {
-      if (res && res.result && res.result.data)
+      if (res && res.result && res.result.data) {
         this.unApprovedField = _.get(res, 'result.data')
+      }
     })
   }
   isAllowed(name: string) {
     if (name && !!this.unApprovedField && this.unApprovedField.length > 0) {
       return !!!(this.unApprovedField.indexOf(name) >= 0)
-    } return false
+    } return true
   }
   createDegreeWithValues(degree: any): FormGroup {
     return this.fb.group({
