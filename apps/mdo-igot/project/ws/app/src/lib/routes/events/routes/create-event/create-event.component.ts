@@ -195,13 +195,10 @@ export class CreateEventComponent implements OnInit {
       reader.onload = () => this.imageSrcURL = reader.result
       reader.readAsDataURL(file)
       this.imageSrc = file
-      console.log(this.imageSrc);
-      console.log(this.imageSrcURL);
     }
   }
 
   removeSelectedFile() {
-    //this.createEventForm.controls['eventPicture'].reset()
     this.imageSrcURL = ''
   }
 
@@ -227,22 +224,22 @@ export class CreateEventComponent implements OnInit {
 
     updateContent(identifier: any) {
       const contentObj = {
-        "nodesModified": {
+        nodesModified: {
           [identifier]: {
-              isNew:false,
-              root:true,
+              isNew: false,
+              root: true,
               metadata: {
                 thumbnail: this.artifactURL,
               },
           },
         },
-        hierarchy:{
+        hierarchy: {
         },
       }
       const formJson = this.encodeToBase64(contentObj)
       this.eventsSvc.updateEvent(formJson).subscribe(
         res => {
-          if(res || !res) {
+          if (res || !res) {
             this.publishEvent(identifier)
           }
         },
