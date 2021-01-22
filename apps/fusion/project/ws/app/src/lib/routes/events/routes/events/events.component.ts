@@ -20,7 +20,7 @@ export class EventsComponent implements OnInit {
     eventData: any = []
     todayEventsCount: any
     joinedByMeEventsCount: any
-    allEventsCount: any;
+    allEventsCount: any
     department: any
     data: any = []
     subData: any = []
@@ -81,13 +81,13 @@ export class EventsComponent implements OnInit {
             this.eventData['todayEvents'] = []
             this.eventData['allEvents'] = []
             this.eventData['joinedByMe'] = []
-            this.eventData['myMDOEvents'] = [];
+            this.eventData['myMDOEvents'] = []
             Object.keys(eventList).forEach((index: any) => {
                 const eventObj = eventList[index]
                 const expiryDateFormat = this.customDateFormat(eventObj.expiryDate)
                 // const eventUpdateDate = this.customDateFormat(eventObj.last)
                 const eventDataObj = {
-                    eventName: eventObj.name.replace(/http?.*?(?= |$)/g, ""),
+                    eventName: eventObj.name.replace(/http?.*?(?= |$)/g, ''),
                     eventDate: expiryDateFormat,
                     eventUpdatedOn: eventObj.lastUpdatedOn,
                     eventDuration: eventObj.duration,
@@ -124,28 +124,26 @@ export class EventsComponent implements OnInit {
                         }
                     })
                 }
-                
 
                 // My MDO
-                if(eventObj.sourceName !== undefined) {
-                    if(this.department == eventObj.sourceName) {
-                        this.eventData['myMDOEvents'].push(eventDataObj)                        
+                if (eventObj.sourceName !== undefined) {
+                    if (this.department === eventObj.sourceName) {
+                        this.eventData['myMDOEvents'].push(eventDataObj)
                     }
                 }
 
-                this.allEventsCount = this.eventData['allEvents'].length;
-                this.todayEventsCount = this.eventData['todayEvents'].length;
-                this.joinedByMeEventsCount = this.eventData['joinedByMe'].length;
-                // All events
+                this.allEventsCount = this.eventData['allEvents'].length
+                this.todayEventsCount = this.eventData['todayEvents'].length
+                this.joinedByMeEventsCount = this.eventData['joinedByMe'].length
+
                 this.eventData['allEvents'].push(eventDataObj)
             })
-            console.log(this.eventData);
             this.filter('all')
         }
     }
 
     scroll(el: HTMLElement) {
-      el.scrollIntoView();
+      el.scrollIntoView()
     }
 
     customDateFormat(date: any) {
@@ -210,20 +208,14 @@ export class EventsComponent implements OnInit {
                 break
             }
         }
-        // this.data.sort((a: any, b: any) => {
-        //     return Date.parse(b.eventDate) - Date.parse(a.eventDate)
-        // })
-
-       
-
         this.setEventSubFilter('upcoming')
     }
 
     applyFilter(filterValue: any) {
-        if (filterValue != '') {
-            let data = this.data.filter((tag:any) => {
+        if (filterValue !== '') {
+            const data = this.data.filter((tag: any) => {
                 return tag.eventName.includes(filterValue)
-            }); 
+            })
             this.data = data
         } else {
             this.data = this.eventData['allEvents']
@@ -231,17 +223,20 @@ export class EventsComponent implements OnInit {
     }
 
      setEventSubFilter(eventValue: any) {
-        console.log(eventValue);
+
         const upcomingEvents: any[] = []
         const pastEvents: any[] = []
-        
+
         if (this.data && this.data.length > 0) {
             this.data.forEach((event: any) => {
-                const isPast = this.compareDate(event.eventDate);
-                (isPast) ? pastEvents.push(event) : upcomingEvents.push(event)
+                const isPast = this.compareDate(event.eventDate)
+                if (isPast) {
+                    pastEvents.push(event)
+                } else {
+                    upcomingEvents.push(event)
+                }
             })
         }
-        
         if (eventValue) {
             this.currentSubFilter = eventValue
             switch (eventValue) {
@@ -256,13 +251,8 @@ export class EventsComponent implements OnInit {
                 break
             }
         }
-        console.log(this.subData);
-
-        this.subData.sort((a: any, b:any) => {
-            return new Date(a.eventDate).getTime() - new Date(b.eventDate).getTime() 
-        });
-
+        this.subData.sort((a: any, b: any) => {
+            return new Date(a.eventDate).getTime() - new Date(b.eventDate).getTime()
+        })
     }
-
-
 }

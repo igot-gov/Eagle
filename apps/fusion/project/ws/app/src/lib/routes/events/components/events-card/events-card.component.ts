@@ -44,9 +44,9 @@ export class EventsCardComponent implements OnInit, OnChanges {
       this.presentersCount = (this.eventDetails.eventjoined.includes('---')) ? '' :  this.eventDetails.eventjoined.substr(0, 2)
       this.identifier = this.eventDetails.identifier
       this.joinUrl = this.eventDetails.eventJoinURL
-      if(this.eventDetails.presenters && this.eventDetails.presenters.length > 0) {
+      if (this.eventDetails.presenters && this.eventDetails.presenters.length > 0) {
         this.presenters = this.eventDetails.presenters
-        this.userCountArray()
+        // this.userCountArray()
       }
 
     }
@@ -61,50 +61,48 @@ export class EventsCardComponent implements OnInit, OnChanges {
   }
 
   eventDateFormat(datetime: any, duration: any) {
-
-   const dateTimeArr = datetime.split('T');
-    const date = dateTimeArr[0];
-    const year = date.substr(0,4);
-    const month = date.substr(4,2);
-    const day = date.substr(6,2);
-    const time = dateTimeArr[1];
-    const hours = time.substr(0,2);
-    const minutes = time.substr(2,2);
-    const seconds = time.substr(4,2);
-    const formatedDate = new Date(year, month-1, day, hours, minutes, seconds, 0)
-    const getTime = formatedDate.getTime();
-    const futureDate = new Date(getTime + duration*60000);
-    const formatedHoursMin = this.formatTimeAmPm(futureDate);
-    const readableDateMonth = moment(formatedDate).format('MMMM DD, hh:mm a'); 
-    const finalDateTimeValue = readableDateMonth + ' - '+formatedHoursMin;
-    // console.log('finalDateTimeValue', finalDateTimeValue)
+   const dateTimeArr = datetime.split('T')
+    const date = dateTimeArr[0]
+    const year = date.substr(0, 4)
+    const month = date.substr(4, 2)
+    const day = date.substr(6, 2)
+    const time = dateTimeArr[1]
+    const hours = time.substr(0, 2)
+    const minutes = time.substr(2, 2)
+    const seconds = time.substr(4, 2)
+    const formatedDate = new Date(year, month - 1, day, hours, minutes, seconds, 0)
+    const getTime = formatedDate.getTime()
+    const futureDate = new Date(getTime + duration * 60000)
+    const formatedHoursMin = this.formatTimeAmPm(futureDate)
+    const readableDateMonth = moment(formatedDate).format('MMMM DD, hh:mm a')
+    const finalDateTimeValue = `${readableDateMonth} ${formatedHoursMin}`
     return finalDateTimeValue
   }
 
   formatTimeAmPm(futureDate: any) {
-      var hours = futureDate.getHours();
-      var minutes = futureDate.getMinutes();
-      var ampm = hours >= 12 ? 'pm' : 'am';
-      hours = hours % 12;
-      hours = hours ? hours : 12;
-      minutes = minutes < 10 ? '0'+minutes : minutes;
-      var strTime = hours + ':' + minutes + ' ' + ampm;
-      return strTime;
+      let hours = futureDate.getHours()
+      let minutes = futureDate.getMinutes()
+      const ampm = hours >= 12 ? 'pm' : 'am'
+      hours = hours % 12
+      hours = hours ? hours : 12
+      minutes = minutes < 10 ? `0${minutes}` : minutes
+      const strTime = `${hours}:${minutes} ${ampm}`
+      return strTime
   }
 
-  userCountArray(){
-      for (let i = 0; i < this.presenters.length; i++) {
-          const firstname = this.presenters[i].name.charAt(0)
-          const lastname = this.presenters[i].name.split('')[1];
-          const userObj = {
-              name: `${firstname} ${lastname}`
-          }
-          if(i <= 2){
-              this.avatarArr.push(userObj)
-          }else{
-              this.splitArr.push(userObj)
-          }
-      }
-  }
+  // userCountArray(){
+  //     for (let i = 0; i < this.presenters.length; i++) {
+  //         const firstname = this.presenters[i].name.charAt(0)
+  //         const lastname = this.presenters[i].name.split('')[1]
+  //         const userObj = {
+  //             name: `${firstname} ${lastname}`
+  //         }
+  //         if(i <= 2){
+  //             this.avatarArr.push(userObj)
+  //         }else{
+  //             this.splitArr.push(userObj)
+  //         }
+  //     }
+  // }
 
 }
