@@ -17,12 +17,18 @@ export class UsersComponent implements OnInit, AfterViewInit, OnDestroy {
   currentDept!: string
   private defaultSideNavBarOpenedSubscription: any
 
-  constructor(private usersSvc: UsersService, private router: Router, private route: ActivatedRoute, private profile: ProfileV2Service) { }
+  constructor(private usersSvc: UsersService, private router: Router, private route: ActivatedRoute, private profile: ProfileV2Service) {
+    this.route.params.subscribe(params => {
+      console.log(params)
+
+    })
+  }
   ngOnInit() {
     const url = this.router.url.split('/')
     this.role = url[url.length - 2]
     this.route.params.subscribe(params => {
       this.id = params['id']
+      this.id = params['roleId']
       this.currentDept = params['currentDept']
       if (this.id === 'SPV ADMIN') {
         this.getAllActiveUsers()

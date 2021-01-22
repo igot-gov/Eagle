@@ -13,7 +13,7 @@ import {
   MatIconModule,
 } from '@angular/material'
 import { MatCardModule } from '@angular/material/card'
-import { RolesAccessComponent } from './routes/roles-access/roles-access.component'
+import { RolesAccessComponent } from '../access/routes/roles-access/roles-access.component'
 
 @NgModule({
   declarations: [HomeComponent, UsersComponent, RolesAccessComponent],

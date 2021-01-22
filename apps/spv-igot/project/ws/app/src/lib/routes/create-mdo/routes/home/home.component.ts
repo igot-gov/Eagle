@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   public screenSizeIsLtMedium = false
   sideNavBarOpened = true
   role: any
+  dept!: string
   constructor(private valueSvc: ValueService, private router: Router, private activeRoute: ActivatedRoute) {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
@@ -40,6 +41,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     })
 
     const url = this.router.url.split('/')
+    let dept = this.router.url.split('=')
+    let nxt = dept[1].split(";")
+    this.dept = nxt[0]
     this.role = url[url.length - 2]
   }
 

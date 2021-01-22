@@ -3,7 +3,7 @@
     <div class="flex flex-1 flex-column">
 
       <div class="flex flex-1 flex-column">
-        <div class="flex flex-1 flex-wrap margin-bottom-xs margin-top-xs" role="menubar">
+        <div class="flex flex-1 flex-wrap margin-bottom-xs margin-top-xs margin-lft" role="menubar">
           <!-- <a class="flex cursor-pointer simple-hubs-link margin-left-0" [routerLink]="['/app/home/users']"
             href=" javascript:void(0)" role="menuitem" accesskey="H" i18n-aria-label i18n-aria-label>
             <mat-icon class="margin-right-xs ws-mat-default-text">home</mat-icon>
@@ -12,7 +12,6 @@
 
           <ng-container *ngIf="widgetData.titles && widgetData.titles.length>0">
             <div class="flex" *ngFor="let title of widgetData.titles">
-
               <span *ngIf="title.title && title.url && title.url === 'none'" i18n-aria-label i18n-aria-title
                 i18n="page title: {{title.title}}" class="flex margin-left-xs m-auto">
                 <mat-icon class="ws-mat-default-text icon-margin m-t-b" *ngIf="title.icon">{{title.icon}}</mat-icon>

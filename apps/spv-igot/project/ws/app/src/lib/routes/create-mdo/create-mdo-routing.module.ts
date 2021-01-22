@@ -1,4 +1,4 @@
-import { RolesAccessComponent } from './../home/routes/roles-access/roles-access.component'
+import { RolesAccessComponent } from '../access/routes/roles-access/roles-access.component'
 import { NgModule } from '@angular/core'
 import { Routes, RouterModule } from '@angular/router'
 import { HomeComponent } from './routes/home/home.component'
@@ -11,7 +11,7 @@ const routes: Routes = [
     component: HomeComponent,
     children: [
       {
-        path: ':id/users',
+        path: ':department/users',
         component: UsersComponent,
       },
       {

@@ -6,8 +6,11 @@
   @extend %page-center;
   height: auto;
   // min-height: 400px;
+  margin-left: 30px;
 }
-
+.margin-lft{
+  margin-left: 56px;
+}
 .show {
   display: flex !important;
   visibility: visible;

@@ -19,6 +19,7 @@ import { UserPopupComponent } from './user-popup/user-popup'
 import { MatDialogModule, MatButtonModule, MatCheckboxModule } from '@angular/material'
 import { FormsModule } from '@angular/forms'
 import { MatRadioModule } from '@angular/material/radio'
+import { BtnPageBackModule } from '@ws-widget/collection'
 @NgModule({
   declarations: [UIUserTableComponent, AppButtonComponent, UIDirectoryTableComponent, UserPopupComponent, UIUserTablePopUpComponent],
   imports: [
@@ -40,6 +41,7 @@ import { MatRadioModule } from '@angular/material/radio'
     MatCheckboxModule,
     FormsModule,
     MatRadioModule,
+    BtnPageBackModule,
 
   ],
   entryComponents: [UserPopupComponent],

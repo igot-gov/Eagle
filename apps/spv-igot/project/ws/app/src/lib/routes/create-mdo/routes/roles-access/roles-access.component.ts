@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit, OnDestroy } from '@angular/core'
-import { Router } from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router'
 import { ProfileV2Service } from '../../../home/services/home.servive'
 // import { RolesAccessService } from '../../services/roles-access.service'
 @Component({
@@ -10,9 +10,13 @@ import { ProfileV2Service } from '../../../home/services/home.servive'
 export class RolesAccessComponent implements OnInit, AfterViewInit, OnDestroy {
   tabledata: any = []
   data: any = []
+  roleId!: number
 
-  constructor(private router: Router, private homeResolver: ProfileV2Service) {
-
+  constructor(private router: Router, private homeResolver: ProfileV2Service, private activatedRoute: ActivatedRoute) {
+    this.activatedRoute.params.subscribe(params => {
+      this.roleId = params['roleId']
+      console.log(this.roleId)
+    })
   }
 
   ngOnInit() {
@@ -31,18 +35,19 @@ export class RolesAccessComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    // this.elementPosition = this.menuElement.nativeElement.parentElement.offsetTop
   }
 
   /* Click event to navigate to a particular role */
-  onRoleClick(role: any) {
-    this.router.navigate([`/app/roles/${role.role}/users`])
+  onRoleClick() {
+    this.router.navigate([`/app/roles/${this.roleId}/users`])
   }
 
   /* API call to get all roles*/
   fetchRoles() {
     this.homeResolver.getMyDepartment().subscribe(roles => {
+
       roles.rolesInfo.forEach((role: { roleName: string }) => {
+
         if (role.roleName === 'SPV ADMIN') {
           const obj = {
             role: role.roleName,
@@ -53,9 +58,6 @@ export class RolesAccessComponent implements OnInit, AfterViewInit, OnDestroy {
       })
 
     })
-    // this.roleSvc.getRoles().subscribe(roles => {
-    //   this.data = roles.data
-    // })
   }
 
   ngOnDestroy() { }

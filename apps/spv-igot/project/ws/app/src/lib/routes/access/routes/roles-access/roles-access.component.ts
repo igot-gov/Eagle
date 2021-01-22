@@ -1,6 +1,6 @@
+import { DirectoryService } from './../../../home/routes/directory/directory.services'
 import { AfterViewInit, Component, OnInit, OnDestroy } from '@angular/core'
 import { Router } from '@angular/router'
-import { ProfileV2Service } from '../../../home/services/home.servive'
 // import { RolesAccessService } from '../../services/roles-access.service'
 @Component({
   selector: 'ws-app-roles-access',
@@ -10,8 +10,10 @@ import { ProfileV2Service } from '../../../home/services/home.servive'
 export class RolesAccessComponent implements OnInit, AfterViewInit, OnDestroy {
   tabledata: any = []
   data: any = []
+  deparmentId!: string
 
-  constructor(private router: Router, private homeResolver: ProfileV2Service) { }
+  constructor(private router: Router, private directoryService: DirectoryService) {
+  }
 
   ngOnInit() {
     this.tabledata = {
@@ -39,22 +41,23 @@ export class RolesAccessComponent implements OnInit, AfterViewInit, OnDestroy {
 
   /* API call to get all roles*/
   fetchRoles() {
-    this.homeResolver.getMyDepartment().subscribe(roles => {
-      roles.rolesInfo.forEach((role: { roleName: string }) => {
-        if (role.roleName === 'SPV ADMIN') {
-          const obj = {
-            role: role.roleName,
-            count: roles.noOfUsers,
-          }
-          this.data.push(obj)
+
+    this.directoryService.getAllDepartments().subscribe(res => {
+      res.forEach((dept: { id: number, rolesInfo: any }) => {
+        if (dept.id === parseInt(this.deparmentId)) {
+          dept.rolesInfo.forEach((role: { roleName: string, noOfUsers: string }) => {
+            const obj = {
+              role: role.roleName,
+              count: role.noOfUsers,
+            }
+            this.data.push(obj)
+          })
         }
       })
-
     })
-    // this.roleSvc.getRoles().subscribe(roles => {
-    //   this.data = roles.data
-    // })
   }
 
-  ngOnDestroy() { }
+  ngOnDestroy() {
+    console.log("destroing")
+  }
 }
