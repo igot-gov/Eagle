@@ -347,8 +347,8 @@ public class PortalServiceImpl implements PortalService {
 		logger.info("roles record end");
 
 		while (roles.hasNext()) {
+			Role role = roles.next();
 		for (String r : userDeptRole.getRoles()) {
-				Role role = roles.next();
 				if (role.getRoleName().equalsIgnoreCase(r)) {
 					roleIds.add(role.getId());
 					continue;
