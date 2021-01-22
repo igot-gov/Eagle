@@ -195,17 +195,23 @@ export class CreateEventComponent implements OnInit {
       reader.onload = () => this.imageSrcURL = reader.result
       reader.readAsDataURL(file)
       this.imageSrc = file
-      this.fileSubmit()
     }
   }
 
-    fileSubmit() {
+  removeSelectedFile() {
+    this.createEventForm.controls['eventPicture'].reset()
+    this.imageSrc = ''
+    this.imageSrcURL = ''
+  }
+
+    fileSubmit(identifier: string) {
       const formData = new FormData()
       formData.append('file', this.imageSrc)
-      this.eventsSvc.uploadCoverImage(formData).subscribe(
+      this.eventsSvc.uploadCoverImage(formData, identifier).subscribe(
         res => {
           this.artifactURL = res.artifactURL
           this.createEventForm.controls['eventPicture'].setValue(this.artifactURL)
+          this.publishEvent(identifier)
         },
         (err: any) => {
           this.openSnackbar(err.error.split(':')[1])
@@ -254,7 +260,7 @@ export class CreateEventComponent implements OnInit {
     this.eventsSvc.createEvent(formJson).subscribe(
       res => {
         const identifier = res.identifier
-        this.publishEvent(identifier)
+        this.fileSubmit(identifier)
       },
       (err: any) => {
         this.openSnackbar(err.error.split(':')[1])

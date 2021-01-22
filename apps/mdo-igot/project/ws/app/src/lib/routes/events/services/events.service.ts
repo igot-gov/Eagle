@@ -8,7 +8,7 @@ const API_END_POINTS = {
   PUBLISH_EVENT: '/apis/authApi/action/content/status/change',
   SEARCH_EVENT: '/apis/protected/v8/content/searchV6',
   GET_PARTICIPANTS: '/apis/protected/v8/portal/mdo/mydepartment?allUsers=true',
-  IMAGE_UPLOAD: '/apis/authContent/upload/igot/dopt/Public/lex_auth_01319267541061632039/artifacts',
+  IMAGE_UPLOAD: '/apis/authContent/upload/igot/dopt/Public/',
   SEARCH_USERS: '/apis/protected/v8/user/autocomplete/department',
 }
 
@@ -38,8 +38,8 @@ export class EventsService {
     return this.http.get<any>(API_END_POINTS.GET_PARTICIPANTS)
   }
 
-  uploadCoverImage(req: any): Observable<any> {
-    return this.http.post<any>(API_END_POINTS.IMAGE_UPLOAD, req)
+  uploadCoverImage(req: any, eventId: string): Observable<any> {
+    return this.http.post<any>(`${API_END_POINTS.IMAGE_UPLOAD}/${eventId}/artifacts`, req)
   }
 
   getEvents(): Observable<any> {

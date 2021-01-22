@@ -12,11 +12,12 @@
                 <button mat-stroked-button color="accent" type="button" class="mat-accent-border flex-auto-display" (click)="goToList()">
                     <span i18n>Cancel</span>
                 </button>
-                <button mat-stroked-button color="accent" type="button" class="mat-accent-border flex-auto-display" 
-                    (click)="onSubmit()" [disabled]="createEventForm?.invalid">
-                    <!-- [disabled]="createEventForm?.invalid" -->
+                <button mat-button class="create-btn"  type="button" (click)="onSubmit()"  [disabled]="createEventForm?.invalid">
                     <span i18n>Save and Publish</span>
                 </button>
+                <!-- <button type="button" mat-button class="create-btn" *ngIf="isCreate" (click)="onCreateClick()">
+                    Create new
+                </button> -->
                 </div>
             </div>
             <div class="flex flex-4 flex-column">
@@ -40,10 +41,15 @@
                                                     <mat-card class="mb-10" [ngClass]="imageSrcURL ? 'button-row' : 'button-row-inline'" style="width: 200px;box-shadow: none;border:1px solid #ededed; margin-right:20px; text-align: center;">
                                                         <div class="item">
                                                             <img src="/assets/icons/jpg.svg" style="width: 35px;">
-                                                            <input type="file" id="coverPicture" (change)="onFileSelect($event);" />
+                                                            <div id="thumbnail" class="deleteIcon" *ngIf="imageSrcURL">
+                                                                <a href="javascript:void(0);" (click)="removeSelectedFile()">
+                                                                    <span id="btnDelete" >X</span>
+                                                                </a>
+                                                            </div>
+                                                            <input type="file" id="coverPicture" (change)="onFileSelect($event);" accept="image/x-png,image/gif,image/jpeg" />
                                                             <img *ngIf="imageSrcURL" id="blah" [src]="imageSrcURL" alt="your image" style="width:200px;" />
-                                                            <button mat-stroked-button color="accent" type="button" class="caption mat-accent-border flex-auto-display" (click)="selectCover()">Cover Picture</button>
-                                                            <mat-card-content class="caption" style="color:rgba(0, 0, 0, 0.6); font-size: 14px; justify-content: center;">
+                                                            <button  *ngIf="!imageSrcURL" mat-stroked-button color="accent" type="button" class="caption mat-accent-border flex-auto-display" (click)="selectCover()">Cover Picture</button>
+                                                            <mat-card-content *ngIf="!imageSrcURL" class="caption" style="color:rgba(0, 0, 0, 0.6); font-size: 14px; justify-content: center;">
                                                                 Upload cover picture here
                                                             </mat-card-content>
                                                         </div>
