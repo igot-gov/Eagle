@@ -252,9 +252,9 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     })
   }
   isAllowed(name: string) {
-    if (name) {
-      return !(this.unApprovedField && this.unApprovedField.indexOf(name) >= 0)
-    } return true
+    if (name && !!this.unApprovedField && this.unApprovedField.length > 0) {
+      return !!!(this.unApprovedField.indexOf(name) >= 0)
+    } return false
   }
   createDegreeWithValues(degree: any): FormGroup {
     return this.fb.group({
