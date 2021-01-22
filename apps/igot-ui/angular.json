@@ -28,6 +28,9 @@
               ]
             },
             "styles": [
+              "./node_modules/@project-sunbird/sb-styles/assets/_styles.scss",
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./node_modules/katex/dist/katex.min.css",
               {
                 "input": "src/styles/libraries.scss",
                 "bundleName": "libraries"
@@ -36,6 +39,7 @@
               "src/styles/mat-typography.scss",
               "src/styles/styles.scss",
               "node_modules/shepherd.js/dist/css/shepherd.css",
+              
               {
                 "input": "src/themes/theme-deep-purple.scss",
                 "bundleName": "theme-deep-purple",
@@ -81,6 +85,7 @@
                 "bundleName": "theme-igot",
                 "lazy": true
               },
+              
               "node_modules/pdfjs-dist/web/pdf_viewer.css",
               "src/fusion-assets/fonts/lato/stylesheet.css",
               "src/fusion-assets/fonts/montserrat/stylesheet.css"
@@ -88,7 +93,9 @@
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "src/fusion-assets/telemetry.min.js",
-              "node_modules/shepherd.js/dist/js/shepherd.min.js"
+              "node_modules/shepherd.js/dist/js/shepherd.min.js",
+              "node_modules/@project-sunbird/telemetry-sdk/index.js",
+              "./node_modules/katex/dist/katex.min.js"
             ]
           },
           "configurations": {
