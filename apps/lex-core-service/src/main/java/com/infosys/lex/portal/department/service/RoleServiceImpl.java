@@ -1,21 +1,20 @@
 package com.infosys.lex.portal.department.service;
 
-import java.util.*;
-import java.util.stream.Collectors;
-
-import javax.transaction.NotSupportedException;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.infosys.lex.common.util.DataValidator;
+import com.infosys.lex.core.logger.LexLogger;
+import com.infosys.lex.portal.department.dto.DepartmentRole;
+import com.infosys.lex.portal.department.dto.Role;
 import com.infosys.lex.portal.department.dto.UserDepartmentRole;
+import com.infosys.lex.portal.department.repo.DepartmentRoleRepository;
+import com.infosys.lex.portal.department.repo.RoleRepository;
 import com.infosys.lex.portal.department.repo.UserDepartmentRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.infosys.lex.common.util.DataValidator;
-import com.infosys.lex.portal.department.dto.DepartmentRole;
-import com.infosys.lex.portal.department.dto.Role;
-import com.infosys.lex.portal.department.repo.DepartmentRoleRepository;
-import com.infosys.lex.portal.department.repo.RoleRepository;
 import org.springframework.util.CollectionUtils;
+
+import javax.transaction.NotSupportedException;
+import java.util.*;
 
 @Service
 public class RoleServiceImpl implements RoleService {
@@ -38,6 +37,8 @@ public class RoleServiceImpl implements RoleService {
 	public Role getRoleById(Integer roleId) {
 		return roleRepo.findById(roleId).get();
 	}
+
+	private LexLogger logger = new LexLogger(RoleServiceImpl.class.getName());
 
 	@Override
 	public Role addRole(Role role) throws Exception {
@@ -119,21 +120,27 @@ public class RoleServiceImpl implements RoleService {
 	 * @return return role list for department user
 	 */
 	public List<String> getUserDepartMentRoles(String userId) {
+		ObjectMapper mapper = new ObjectMapper();
 		List<String> returnedRoleList = new ArrayList<>();
 		try {
 			List<UserDepartmentRole> userDepartmentRoles = userDepartmentRoleRepository.findByUserId(userId);
+			logger.info("Getting role started !");
+			logger.info(mapper.writeValueAsString(userDepartmentRoles));
 			if (CollectionUtils.isEmpty(userDepartmentRoles))
 				return Collections.emptyList();
 			List<Integer> roleIds = new ArrayList<>();
 			userDepartmentRoles.forEach(userDepartmentRole -> {
 				roleIds.addAll(Arrays.asList(userDepartmentRole.getRoleIds()));
 			});
+			logger.info(mapper.writeValueAsString(roleIds));
 			if (roleIds.isEmpty())
 				return Collections.emptyList();
 			Iterator<Role> iterableRole = roleRepo.findAllById(roleIds).iterator();
 			while (iterableRole.hasNext()) {
 				returnedRoleList.add(iterableRole.next().getRoleName());
 			}
+			logger.info(mapper.writeValueAsString(returnedRoleList));
+			logger.info("Getting roles completed !");
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
