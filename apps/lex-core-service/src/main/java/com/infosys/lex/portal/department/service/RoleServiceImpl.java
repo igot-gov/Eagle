@@ -120,27 +120,23 @@ public class RoleServiceImpl implements RoleService {
 	 * @return return role list for department user
 	 */
 	public List<String> getUserDepartMentRoles(String userId) {
-		ObjectMapper mapper = new ObjectMapper();
+
 		List<String> returnedRoleList = new ArrayList<>();
 		try {
 			List<UserDepartmentRole> userDepartmentRoles = userDepartmentRoleRepository.findByUserId(userId);
-			logger.info("Getting role started !");
-			logger.info(mapper.writeValueAsString(userDepartmentRoles));
 			if (CollectionUtils.isEmpty(userDepartmentRoles))
 				return Collections.emptyList();
 			List<Integer> roleIds = new ArrayList<>();
 			userDepartmentRoles.forEach(userDepartmentRole -> {
 				roleIds.addAll(Arrays.asList(userDepartmentRole.getRoleIds()));
 			});
-			logger.info(mapper.writeValueAsString(roleIds));
+
 			if (roleIds.isEmpty())
 				return Collections.emptyList();
 			Iterator<Role> iterableRole = roleRepo.findAllById(roleIds).iterator();
 			while (iterableRole.hasNext()) {
 				returnedRoleList.add(iterableRole.next().getRoleName());
 			}
-			logger.info(mapper.writeValueAsString(returnedRoleList));
-			logger.info("Getting roles completed !");
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
