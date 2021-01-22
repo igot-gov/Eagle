@@ -175,7 +175,7 @@ export class KnowledgeArtifactDetailsComponent implements OnInit, OnDestroy {
     if (
       this.trainingLHubEnabled &&
       this.content
-      //&&  this.trainingSvc.isValidTrainingContent(this.content)
+      // &&  this.trainingSvc.isValidTrainingContent(this.content)
     ) {
       // this.trainingLHubCount$ = this.trainingApi
       //   .getTrainingCount(this.content.identifier)

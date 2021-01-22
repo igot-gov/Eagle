@@ -113,7 +113,7 @@ export class BtnGoalsService {
         this.goalsHash = goals.reduce((hash: { [id: string]: NsGoal.IGoal }, obj: NsGoal.IGoal) => {
           hash[obj.id] = obj
           return hash
-        }, {})
+        },                            {})
       }),
     )
   }
