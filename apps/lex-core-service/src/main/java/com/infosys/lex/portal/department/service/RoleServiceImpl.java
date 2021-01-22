@@ -1,10 +1,12 @@
 package com.infosys.lex.portal.department.service;
 
-import java.util.Arrays;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import javax.transaction.NotSupportedException;
 
+import com.infosys.lex.portal.department.dto.UserDepartmentRole;
+import com.infosys.lex.portal.department.repo.UserDepartmentRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,7 @@ import com.infosys.lex.portal.department.dto.DepartmentRole;
 import com.infosys.lex.portal.department.dto.Role;
 import com.infosys.lex.portal.department.repo.DepartmentRoleRepository;
 import com.infosys.lex.portal.department.repo.RoleRepository;
+import org.springframework.util.CollectionUtils;
 
 @Service
 public class RoleServiceImpl implements RoleService {
@@ -22,6 +25,9 @@ public class RoleServiceImpl implements RoleService {
 
 	@Autowired
 	DepartmentRoleRepository deptRoleRepo;
+
+	@Autowired
+	UserDepartmentRoleRepository userDepartmentRoleRepository;
 
 	@Override
 	public Iterable<Role> getAllRoles() {
@@ -99,12 +105,39 @@ public class RoleServiceImpl implements RoleService {
 		}
 		return deptRoleList;
 	}
-	
+
 	private DepartmentRole enrichDepartmentRoleInfo(DepartmentRole deptRole) {
-		if(deptRole != null) {
+		if (deptRole != null) {
 			Iterable<Role> rList = roleRepo.findAllById(Arrays.asList(deptRole.getRoleIds()));
 			deptRole.setRoles(rList);
 		}
 		return deptRole;
+	}
+
+	/**
+	 * @param userId wid of the user
+	 * @return return role list for department user
+	 */
+	public List<String> getUserDepartMentRoles(String userId) {
+		List<String> returnedRoleList = new ArrayList<>();
+		try {
+			List<UserDepartmentRole> userDepartmentRoles = userDepartmentRoleRepository.findByUserId(userId);
+			if (CollectionUtils.isEmpty(userDepartmentRoles))
+				return Collections.emptyList();
+			List<Integer> roleIds = new ArrayList<>();
+			userDepartmentRoles.forEach(userDepartmentRole -> {
+				roleIds.addAll(Arrays.asList(userDepartmentRole.getRoleIds()));
+			});
+			if (roleIds.isEmpty())
+				return Collections.emptyList();
+			Iterator<Role> iterableRole = roleRepo.findAllById(roleIds).iterator();
+			while (iterableRole.hasNext()) {
+				returnedRoleList.add(iterableRole.next().getRoleName());
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return returnedRoleList;
+
 	}
 }

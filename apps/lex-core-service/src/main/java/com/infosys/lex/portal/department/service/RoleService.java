@@ -3,6 +3,8 @@ package com.infosys.lex.portal.department.service;
 import com.infosys.lex.portal.department.dto.DepartmentRole;
 import com.infosys.lex.portal.department.dto.Role;
 
+import java.util.List;
+
 public interface RoleService {
 
 	Role addRole(Role role) throws Exception;
@@ -20,4 +22,6 @@ public interface RoleService {
 	boolean removeDepartmentRole(Integer deptRoleId) throws Exception;
 
 	Iterable<DepartmentRole> getAllDepartmentRoles();
+
+	public List<String> getUserDepartMentRoles(String userId);
 }

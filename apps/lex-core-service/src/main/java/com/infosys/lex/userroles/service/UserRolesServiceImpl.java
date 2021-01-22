@@ -12,6 +12,7 @@ import java.util.Set;
 
 import javax.transaction.Transactional;
 
+import com.infosys.lex.portal.department.service.RoleService;
 import com.infosys.lex.userroles.models.RoleCountInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -49,6 +50,9 @@ public class UserRolesServiceImpl implements UserRolesService {
 
 	@Autowired
 	UserRolesRepo userRolesRepo;
+
+	@Autowired
+	RoleService roleService;
 
 	public static final String DEFAULT_USER = "defaultuser";
 
@@ -223,9 +227,14 @@ public class UserRolesServiceImpl implements UserRolesService {
 			}
 		}
 
+		List<String> departMentRoles = roleService.getUserDepartMentRoles(userId);
+		departMentRoles.forEach(role -> {
+			if (!defaultRolesList.contains(role) && !userRolesList.contains(role)) {
+				userRolesList.add(role);
+			}
+		});
 		returnMap.put("default_roles", defaultRolesList);
 		returnMap.put("user_roles", userRolesList);
-
 		return returnMap;
 	}
 
