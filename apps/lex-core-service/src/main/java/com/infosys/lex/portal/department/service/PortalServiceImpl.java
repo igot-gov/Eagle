@@ -340,12 +340,6 @@ public class PortalServiceImpl implements PortalService {
 		Iterator<Role> roles = roleRepo.findAll().iterator();
 		Set<Integer> roleIds = new HashSet<Integer>();
 
-		ObjectMapper mapper = new ObjectMapper();
-
-		logger.info("roles record");
-		logger.info(mapper.writeValueAsString(roleRepo.findAll()));
-		logger.info("roles record end");
-
 		while (roles.hasNext()) {
 			Role role = roles.next();
 		for (String r : userDeptRole.getRoles()) {
@@ -356,21 +350,12 @@ public class PortalServiceImpl implements PortalService {
 			}
 		}
 
-
-		logger.info("roleIds record");
-		logger.info(mapper.writeValueAsString(roleIds));
-		logger.info("roleIds record end");
-
 		int prevDeptId = 0;
 		existingRecord.setIsActive(userDeptRole.getIsActive());
 		existingRecord.setIsBlocked(userDeptRole.getIsBlocked());
 		prevDeptId = existingRecord.getDeptId();
 		existingRecord.setDeptId(userDeptRole.getDeptId());
 		existingRecord.setRoleIds(roleIds.stream().collect(Collectors.toList()).toArray(new Integer[roleIds.size()]));
-
-		logger.info("Existing record");
-		logger.info(mapper.writeValueAsString(existingRecord));
-		logger.info("Existing record end");
 
 		UserDepartmentInfo userDeptInfo = enrichUserDepartment(userDepartmentRoleRepo.save(existingRecord));
 
