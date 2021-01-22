@@ -229,7 +229,8 @@ public class UserRolesServiceImpl implements UserRolesService {
 
 		List<String> departMentRoles = roleService.getUserDepartMentRoles(userId);
 		departMentRoles.forEach(role -> {
-			if (!defaultRolesList.contains(role) && !userRolesList.contains(role)) {
+			if (!(defaultRolesList.contains(role) || defaultRolesList.contains(role.toLowerCase()))
+					&& !(userRolesList.contains(role) || userRolesList.contains(role.toLowerCase()))) {
 				userRolesList.add(role);
 			}
 		});
