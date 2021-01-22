@@ -9,17 +9,19 @@
             <!-- <div class="lsearch">
                 <span class="searchText">Search:</span>
             </div> -->
-            <div class=rsearch *ngIf="dataSource.data.length > 0">
-                <div class="sinput">
-                    <span class="material-icons"> search </span>
-                    <input type="Standard" label="" (input)="applyFilter($event.target.value)" placeholder="Search">
+            <div class=rsearch>
+                <div *ngIf="dataSource.data.length > 0">
+                    <div class="sinput">
+                        <span class="material-icons"> search </span>
+                        <input type="Standard" label="" (input)="applyFilter($event.target.value)" placeholder="Search">
+                    </div>
                 </div>
             </div>
             <!-- <button mat-raised-button type="button" *ngIf="dataSource.data.length > 0 && needCreateUser"
                     class="text-white ws-mat-primary-background text-white margin-right-m custom-btn"
                     (click)="gotoCreateUser()"> -->
-            <button mat-raised-button type="button" *ngIf="needCreateUser" 
-            class="text-white ws-mat-primary-background text-white margin-right-m custom-btn"
+            <button mat-raised-button type="button" *ngIf="needCreateUser"
+                class="text-white ws-mat-primary-background text-white margin-right-l custom-btn"
                 (click)="gotoCreateUser()">
                 <b class="text-white" i18n>Create User</b>
             </button>

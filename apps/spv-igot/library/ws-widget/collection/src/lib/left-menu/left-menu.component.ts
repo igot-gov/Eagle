@@ -9,15 +9,14 @@ import { ILeftMenu } from './left-menu.model'
   styleUrls: ['./left-menu.component.scss'],
 })
 export class LeftMenuComponent extends WidgetBaseComponent
-  implements OnInit, OnDestroy, NsWidgetResolver.IWidgetData<ILeftMenu[]>  {
-  @Input() widgetData!: ILeftMenu[]
+  implements OnInit, OnDestroy, NsWidgetResolver.IWidgetData<ILeftMenu>  {
+  @Input() widgetData!: ILeftMenu
   param: any
   constructor(private activatedRoute: ActivatedRoute) {
     super()
   }
 
   ngOnInit(): void {
-
   }
 
   public isLinkActive(url: string): boolean {

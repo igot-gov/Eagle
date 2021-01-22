@@ -47,7 +47,7 @@
                 <mat-select formControlName="deptSubTypeId" i18n-placeholder placeholder="--Select--"
                   [required]="checkCondition('subTitle', 'required') ? true : null">
                   <mat-option *ngFor="let subDepartment of subDepartments" [value]="subDepartment.id" i18n>
-                    {{subDepartment.deptSubType}}</mat-option>
+                    {{capitalizeFirstLetter(subDepartment.deptSubType)}}</mat-option>
                 </mat-select>
                 <mat-error *ngIf="showError('deptSubTypeId')" i18n>Department type is mandatory
                 </mat-error>
@@ -67,7 +67,7 @@
                 <mat-select formControlName="deptMdoSubTypeId" i18n-placeholder placeholder="--Select--"
                   [required]="checkCondition('subTitle', 'required') ? true : null">
                   <mat-option *ngFor="let subDepartment of subMDODepartments" [value]="subDepartment.id" i18n>
-                    {{subDepartment.deptSubType}}</mat-option>
+                    {{capitalizeFirstLetter(subDepartment.deptSubType)}}</mat-option>
                 </mat-select>
                 <mat-error *ngIf="showError('mdoDepatmentType')" i18n>MDO department type is mandatory
                 </mat-error>

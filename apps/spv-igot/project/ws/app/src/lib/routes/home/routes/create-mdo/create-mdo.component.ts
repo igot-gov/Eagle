@@ -279,4 +279,8 @@ export class CreateMdoComponent implements OnInit {
     })
   }
 
+  capitalizeFirstLetter(uppercaseString: string) {
+    return uppercaseString.charAt(0).toUpperCase() + uppercaseString.slice(1)
+  }
+
 }

@@ -11,4 +11,5 @@ export interface ILeftMenu {
   routerLink: string
   paramaterName?: string
   customRouting: boolean
+  first?: boolean
 }

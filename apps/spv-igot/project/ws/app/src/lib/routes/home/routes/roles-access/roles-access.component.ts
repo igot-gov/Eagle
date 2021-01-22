@@ -11,7 +11,13 @@ export class RolesAccessComponent implements OnInit, AfterViewInit, OnDestroy {
   tabledata: any = []
   data: any = []
 
-  constructor(private router: Router, private homeResolver: ProfileV2Service) { }
+  constructor(private router: Router, private homeResolver: ProfileV2Service) {
+    // private activatedRoute: ActivatedRoute
+    // this.activatedRoute.params.subscribe(params => {
+    //   const departmentID = params['department']
+
+    // })
+  }
 
   ngOnInit() {
     this.tabledata = {

@@ -12,9 +12,11 @@
           "enabled": false,
           "uri": ""
         },
+        "first":true,
         "enabled": true,
-        "paramaterName": "role",
-        "routerLink": "/app/roles/<params>/users"
+        "paramaterName": "roleId",
+        "routerLink": "/app/roles/<param>/users",
+        "customRouting": true
       },
       {
         "name": "Roles and Access",
@@ -26,8 +28,8 @@
           "uri": ""
         },
         "enabled": true,
-        "paramaterName": "role",
-        "routerLink": "/app/roles/<params>/roles-access",
+        "paramaterName": "roleId",
+        "routerLink": "/app/roles/<param>/roles-access",
         "customRouting": true
       }
       

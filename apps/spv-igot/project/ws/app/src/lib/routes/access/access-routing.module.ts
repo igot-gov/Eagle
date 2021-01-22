@@ -9,11 +9,11 @@ const routes: Routes = [
     component: UsersComponent,
     children: [
       {
-        path: ':role/roles-access',
+        path: ':roleId/roles-access',
         component: RolesAccessComponent,
       },
       {
-        path: ':role/users',
+        path: ':roleId/users',
         component: UsersComponent,
       },
     ],
