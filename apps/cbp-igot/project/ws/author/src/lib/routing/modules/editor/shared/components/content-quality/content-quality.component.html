@@ -173,6 +173,7 @@
 
     </mat-card-title>
     <mat-card-content class="margin-top-xs mobile-break mat-app-background">
+      <!-- {{qualityResponse | json}} -->
       <span class="mat-subtitle" id="content-result" *ngIf="!qualityResponse.qualifiedMinCriteria">
         {{qualityResponse.statusOnMinCriteria}}
       </span>
