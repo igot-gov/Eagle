@@ -14,10 +14,9 @@ import {
   MatIconModule,
 } from '@angular/material'
 import { MatCardModule } from '@angular/material/card'
-import { RolesAccessComponent } from './routes/roles-access/roles-access.component'
 
 @NgModule({
-  declarations: [HomeComponent, RolesAccessComponent, UsersComponent],
+  declarations: [HomeComponent, UsersComponent],
   imports: [CommonModule, AccessRoutingModule, BtnPageBackModule, LeftMenuModule, WidgetResolverModule,
     MatSidenavModule, MatIconModule, GroupCheckboxModule, HomeModule, RouterModule, UITableModule, MatCardModule],
   exports: [UsersComponent],

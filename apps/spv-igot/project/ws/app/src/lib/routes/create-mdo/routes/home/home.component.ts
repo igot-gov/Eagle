@@ -41,8 +41,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     })
 
     const url = this.router.url.split('/')
-    let dept = this.router.url.split('=')
-    let nxt = dept[1].split(";")
+    const dept = this.router.url.split('=')
+    const nxt = dept[1].split(';')
     this.dept = nxt[0]
     this.role = url[url.length - 2]
   }

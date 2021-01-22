@@ -20,6 +20,7 @@ export class LeftMenuComponent extends WidgetBaseComponent
   }
 
   public isLinkActive(url: string): boolean {
+
     return (this.activatedRoute.snapshot.fragment === url)
   }
   ngOnDestroy() {

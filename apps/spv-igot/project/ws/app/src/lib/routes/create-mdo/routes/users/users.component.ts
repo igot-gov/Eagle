@@ -18,10 +18,6 @@ export class UsersComponent implements OnInit, AfterViewInit, OnDestroy {
   private defaultSideNavBarOpenedSubscription: any
 
   constructor(private usersSvc: UsersService, private router: Router, private route: ActivatedRoute, private profile: ProfileV2Service) {
-    this.route.params.subscribe(params => {
-      console.log(params)
-
-    })
   }
   ngOnInit() {
     const url = this.router.url.split('/')
