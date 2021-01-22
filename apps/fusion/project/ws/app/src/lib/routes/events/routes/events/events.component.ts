@@ -22,6 +22,7 @@ export class EventsComponent implements OnInit {
     eventData: any = []
     todayEventsCount: any
     joinedByMeEventsCount: any
+    allEventsCount: any;
 
     constructor(
         private router: Router,
@@ -108,14 +109,14 @@ export class EventsComponent implements OnInit {
                 }
 
                 // Joined by me
-                // if (eventObj.creatorDetails) {
-                //     const myUserId = this.configSvc.userProfile && this.configSvc.userProfile.userId
-                //     Object.keys(eventObj.creatorDetails).forEach((key: any) => {
-                //         if (eventObj.creatorDetails[key].id ===  myUserId) {
-                //             this.eventData['joinedByMe'].push(eventDataObj)
-                //         }
-                //     })
-                // }
+                if (eventObj.creatorDetails) {
+                    const myUserId = this.configSvc.userProfile && this.configSvc.userProfile.userId
+                    Object.keys(eventObj.creatorDetails).forEach((key: any) => {
+                        if (eventObj.creatorDetails[key].id ===  myUserId) {
+                            this.eventData['joinedByMe'].push(eventDataObj)
+                        }
+                    })
+                }
 
                 
                 this.todayEventsCount = this.eventData['todayEvents'].length;
@@ -123,6 +124,7 @@ export class EventsComponent implements OnInit {
                 
                 // All events
                 this.eventData['allEvents'].push(eventDataObj)
+                this.allEventsCount = this.eventData['allEvents'].length;
             })
         }
     }
