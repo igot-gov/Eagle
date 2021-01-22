@@ -54,7 +54,7 @@
                   {
                     "url": "/page/events",
                     "title": "Events",
-                    "icon": "calendar"
+                    "icon": "today"
                   }
                 ]
               }

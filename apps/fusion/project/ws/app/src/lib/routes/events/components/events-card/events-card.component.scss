@@ -20,7 +20,7 @@
 .events-card {
   flex: 1;
   height: 447px;
-  width: 347px;
+  width: 370px;
   &.mat-card{
     flex-direction: column;
     display: flex;
@@ -34,9 +34,26 @@
     align-items: center;
   }
   .event-card-image {
-    width: 347px;
+    width: 370px;
     height:186px;
   }
+}
+
+.avatar-img{
+    border: 1px solid white;
+    border-radius: 50%;
+    text-align: center;
+    background-color: #9e53a7;
+    color: white !important;
+    margin-left: -10px;
+    font-size: 19px !important;
+}
+.split-count{
+    text-align: left;
+    margin-left: 19px;
+    width: 28px;
+    font-weight: 500;
+    color:  #9e53a7;
 }
 
 .dot:before {

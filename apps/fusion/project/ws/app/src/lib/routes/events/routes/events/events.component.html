@@ -72,35 +72,38 @@
         <span class="f-medium mat-title">All events </span>
     </div>
     <div class="flex flex-1 flex-column margin-fix search" *ngIf="allEventsCount > 0">
-        <form >
             <mat-form-field appearance="outline" class="autocomplete-form mat-body-2" color="primary"
                 [floatLabel]="'never'">
                 <mat-icon matPrefix class="search-home flex items-center justify-center">search</mat-icon>
                 <input type="search" #searchInput class="ml-2" i18n-placeholder="search content"
-                    [placeholder]="'Search'" i18-aria-label aria-label="Query" matInput [formControl]="queryControl"
-                    accesskey="F" />
+                    [placeholder]="'Search'" i18-aria-label aria-label="Query" matInput
+                    accesskey="F" [(ngModel)] = "searchTerm" (input)="applyFilter($event.target.value)"  />
             </mat-form-field>
-        </form>
     </div>
-    <div class="flex flex-1 flex-column margin-fix mt-5" *ngIf="allEventsCount > 0">
-        <div class="flex flex-1 filter">
-            <a href="javascript:void(0)" role="button" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'timestamp',
-                            'ws-mat-accent-border font-normal':currentFilter !== 'timestamp'}" mat-button>
-                All </a>
-            <a href="javascript:void(0)" role="button" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'viewcount',
-                            'ws-mat-accent-border font-normal':currentFilter !== 'viewcount'}" mat-button>
-                Hosted by my MDO </a>
+    <div class="flex flex-1 margin-fix mt-5" *ngIf="allEventsCount > 0">
+        <div class="flex flex-1 filter custom">
+            <a href="javascript:void(0)" role="button" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'all',
+            'ws-mat-accent-border font-normal':currentFilter !== 'all'}" mat-button (click)="filter('all')">
+                All 
+            </a>
+            <a href="javascript:void(0)" role="button" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'myMDO', 
+            'ws-mat-accent-border font-normal':currentFilter !== 'myMDO'}" mat-button (click)="filter('myMDO')">
+                Hosted by my MDO
+            </a>
         </div>
-        <!-- <span class="spacer"></span> -->
-        <div class="flex flex-1 custom mx-8">
-            <button mat-stroked-button color="accent" type="button" class=" mat-accent-border flex-auto-display" (click)="scroll(allevents)">
-                <span i18n>See all events</span>
-            </button>
+        <span class="spacer"></span>
+        <div class="flex-1 flex-auto-display" style="text-align: right;">
+            <mat-form-field appearance="outline">
+                <mat-select (selectionChange)="setEventSubFilter($event.value)" [(value)]="currentSubFilter" style="width: 150px; line-height: 10px;">
+                    <mat-option value="upcoming">Live and upcoming</mat-option>
+                    <mat-option value="past">Past events</mat-option>
+                </mat-select>
+            </mat-form-field>
         </div>
     </div>
     <div *ngIf="allEventsCount > 0" style="display: flex; flex-wrap: wrap;" fxLayout="row" fxLayoutWrap class="card-deck-container mat-elevation-z4">
-       <div fxFlex *ngFor="let event of eventData['allEvents']" class="card-item" fxLayout="row wrap">
-            <ws-app-events-card [ngStyle]="{'width':'300' + 'px'}" class="w-fix mr-10" [data]="event"></ws-app-events-card>
+       <div fxFlex *ngFor="let event of subData" class="card-item" fxLayout="row wrap">
+            <ws-app-events-card [ngStyle]="{'width':'360' + 'px'}" class="w-fix mr-10" [data]="event"></ws-app-events-card>
        </div>
     </div> 
     <div class="flex flex-1 flex-column margin-fix mt-5 mb-20" *ngIf="allEventsCount == 0">

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core'
-import { NSDiscussData } from '../../../discuss/models/discuss.model'
 import { Router } from '@angular/router'
 import { FormControl } from '@angular/forms'
 import { EventsService } from '../../services/events.service'
@@ -12,7 +11,6 @@ import { ConfigurationsService } from '@ws-widget/utils/src/public-api'
     styleUrls: ['./events.component.scss'],
 })
 export class EventsComponent implements OnInit {
-    data!: NSDiscussData.IDiscussionData
     queryControl = new FormControl('')
     currentFilter = 'timestamp'
     pager = {}
@@ -23,6 +21,10 @@ export class EventsComponent implements OnInit {
     todayEventsCount: any
     joinedByMeEventsCount: any
     allEventsCount: any;
+    department: any
+    data: any = []
+    subData: any = []
+    currentSubFilter = 'upcoming'
 
     constructor(
         private router: Router,
@@ -30,6 +32,7 @@ export class EventsComponent implements OnInit {
         private configSvc: ConfigurationsService,
         ) {
         this.getEventData()
+        this.department = this.configSvc.userProfile && this.configSvc.userProfile.departmentName
     }
 
     ngOnInit() {
@@ -78,12 +81,13 @@ export class EventsComponent implements OnInit {
             this.eventData['todayEvents'] = []
             this.eventData['allEvents'] = []
             this.eventData['joinedByMe'] = []
+            this.eventData['myMDOEvents'] = [];
             Object.keys(eventList).forEach((index: any) => {
                 const eventObj = eventList[index]
                 const expiryDateFormat = this.customDateFormat(eventObj.expiryDate)
                 // const eventUpdateDate = this.customDateFormat(eventObj.last)
                 const eventDataObj = {
-                    eventName: eventObj.name,
+                    eventName: eventObj.name.replace(/http?.*?(?= |$)/g, ""),
                     eventDate: expiryDateFormat,
                     eventUpdatedOn: eventObj.lastUpdatedOn,
                     eventDuration: eventObj.duration,
@@ -98,6 +102,9 @@ export class EventsComponent implements OnInit {
                     identifier: eventObj.identifier,
                     presenters: eventObj.creatorDetails,
                     eventJoinURL: eventObj.artifactUrl,
+                    eventSource: eventObj.sourceName,
+                    expirtyDate: eventObj.expiryDate,
+                    participants: eventObj.creatorContacts,
                 }
 
                 // Today's events
@@ -117,15 +124,23 @@ export class EventsComponent implements OnInit {
                         }
                     })
                 }
-
                 
+
+                // My MDO
+                if(eventObj.sourceName !== undefined) {
+                    if(this.department == eventObj.sourceName) {
+                        this.eventData['myMDOEvents'].push(eventDataObj)                        
+                    }
+                }
+
+                this.allEventsCount = this.eventData['allEvents'].length;
                 this.todayEventsCount = this.eventData['todayEvents'].length;
                 this.joinedByMeEventsCount = this.eventData['joinedByMe'].length;
-                
                 // All events
                 this.eventData['allEvents'].push(eventDataObj)
-                this.allEventsCount = this.eventData['allEvents'].length;
             })
+            console.log(this.eventData);
+            this.filter('all')
         }
     }
 
@@ -165,5 +180,89 @@ export class EventsComponent implements OnInit {
             return (userDetails[index].id === myUserId) ? true : false
         })
     }
+
+    filter(key: string | 'timestamp' | 'best' | 'saved') {
+        const allData: any[] = []
+        const mdoData: any[] = []
+        if (this.eventData['allEvents'] && this.eventData['allEvents'].length > 0) {
+          this.eventData['allEvents'].forEach((event: any) => {
+            allData.push(event)
+          })
+        }
+
+        if (this.eventData['myMDOEvents'] && this.eventData['myMDOEvents'].length > 0) {
+           this.eventData['myMDOEvents'].forEach((event: any) => {
+             mdoData.push(event)
+          })
+        }
+
+        if (key) {
+            this.currentFilter = key
+            switch (key) {
+                case 'all':
+                    this.data = allData
+                break
+                case 'myMDO':
+                    this.data = mdoData
+                break
+                default:
+                    this.data = allData
+                break
+            }
+        }
+        // this.data.sort((a: any, b: any) => {
+        //     return Date.parse(b.eventDate) - Date.parse(a.eventDate)
+        // })
+
+       
+
+        this.setEventSubFilter('upcoming')
+    }
+
+    applyFilter(filterValue: any) {
+        if (filterValue != '') {
+            let data = this.data.filter((tag:any) => {
+                return tag.eventName.includes(filterValue)
+            }); 
+            this.data = data
+        } else {
+            this.data = this.eventData['allEvents']
+        }
+    }
+
+     setEventSubFilter(eventValue: any) {
+        console.log(eventValue);
+        const upcomingEvents: any[] = []
+        const pastEvents: any[] = []
+        
+        if (this.data && this.data.length > 0) {
+            this.data.forEach((event: any) => {
+                const isPast = this.compareDate(event.eventDate);
+                (isPast) ? pastEvents.push(event) : upcomingEvents.push(event)
+            })
+        }
+        
+        if (eventValue) {
+            this.currentSubFilter = eventValue
+            switch (eventValue) {
+                case 'upcoming':
+                    this.subData = upcomingEvents
+                break
+                case 'past':
+                    this.subData = pastEvents
+                break
+                default:
+                    this.subData = upcomingEvents
+                break
+            }
+        }
+        console.log(this.subData);
+
+        this.subData.sort((a: any, b:any) => {
+            return new Date(a.eventDate).getTime() - new Date(b.eventDate).getTime() 
+        });
+
+    }
+
 
 }

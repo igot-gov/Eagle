@@ -39,7 +39,7 @@ export class EventDetailComponent implements OnInit {
             locale: [
                 'en',
             ],
-            pageSize: 25,
+            pageSize: 1,
             query: 'all',
             didYouMean: true,
             filters: [

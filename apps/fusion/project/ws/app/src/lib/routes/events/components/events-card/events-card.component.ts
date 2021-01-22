@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core'
 import { Router } from '@angular/router'
+import * as moment from 'moment'
 
 @Component({
   selector: 'ws-app-events-card',
@@ -17,6 +18,9 @@ export class EventsCardComponent implements OnInit, OnChanges {
   duration: any
   identifier: any
   joinUrl: any
+  presenters: any = []
+  avatarArr: any = []
+  splitArr: any = []
 
   monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December',
@@ -36,10 +40,15 @@ export class EventsCardComponent implements OnInit, OnChanges {
       this.eventDetails = this.data
       this.eventTitle = this.eventDetails.eventName
       this.description = this.eventDetails.eventName.replace(/(?:https?|ftp):\/\/[\n\S]+/g, '')
-      this.eventDate = this.eventDateFormat(this.eventDetails.eventDate, this.eventDetails.eventDuration)
+      this.eventDate = this.eventDateFormat(this.eventDetails.expirtyDate, this.eventDetails.eventDuration)
       this.presentersCount = (this.eventDetails.eventjoined.includes('---')) ? '' :  this.eventDetails.eventjoined.substr(0, 2)
       this.identifier = this.eventDetails.identifier
       this.joinUrl = this.eventDetails.eventJoinURL
+      if(this.eventDetails.presenters && this.eventDetails.presenters.length > 0) {
+        this.presenters = this.eventDetails.presenters
+        this.userCountArray()
+      }
+
     }
   }
 
@@ -47,24 +56,55 @@ export class EventsCardComponent implements OnInit, OnChanges {
     this.router.navigate([`/app/event-hub/home/123`])
   }
 
-  eventDateFormat(date: any, duration: any) {
-    const dateArr = date.split('-')
-    const timeArr = date.split(' ')
-    const mediumArr = timeArr[1].split(':')
-    const floor = Math.floor
-    const hours = floor(duration / 60)
-    const minutes = duration % 60
-    const hoursEnd = parseInt(mediumArr[0], 10) + hours
-    const toHours = (hoursEnd < 10) ? `0${hoursEnd}` : hoursEnd
-    const minutesEnd = parseInt(mediumArr[1], 10) + minutes
-    const monthName = this.monthNames[parseInt(dateArr[1], 10) - 1]
-
-    return `${monthName} ${dateArr[0]}, ${timeArr[1]} - ${toHours}:${minutesEnd}`
-
-  }
-
   joinEvent(meetingURL: any) {
     window.open(meetingURL, '_blank')
+  }
+
+  eventDateFormat(datetime: any, duration: any) {
+
+   const dateTimeArr = datetime.split('T');
+    const date = dateTimeArr[0];
+    const year = date.substr(0,4);
+    const month = date.substr(4,2);
+    const day = date.substr(6,2);
+    const time = dateTimeArr[1];
+    const hours = time.substr(0,2);
+    const minutes = time.substr(2,2);
+    const seconds = time.substr(4,2);
+    const formatedDate = new Date(year, month-1, day, hours, minutes, seconds, 0)
+    const getTime = formatedDate.getTime();
+    const futureDate = new Date(getTime + duration*60000);
+    const formatedHoursMin = this.formatTimeAmPm(futureDate);
+    const readableDateMonth = moment(formatedDate).format('MMMM DD, hh:mm a'); 
+    const finalDateTimeValue = readableDateMonth + ' - '+formatedHoursMin;
+    // console.log('finalDateTimeValue', finalDateTimeValue)
+    return finalDateTimeValue
+  }
+
+  formatTimeAmPm(futureDate: any) {
+      var hours = futureDate.getHours();
+      var minutes = futureDate.getMinutes();
+      var ampm = hours >= 12 ? 'pm' : 'am';
+      hours = hours % 12;
+      hours = hours ? hours : 12;
+      minutes = minutes < 10 ? '0'+minutes : minutes;
+      var strTime = hours + ':' + minutes + ' ' + ampm;
+      return strTime;
+  }
+
+  userCountArray(){
+      for (let i = 0; i < this.presenters.length; i++) {
+          const firstname = this.presenters[i].name.charAt(0)
+          const lastname = this.presenters[i].name.split('')[1];
+          const userObj = {
+              name: `${firstname} ${lastname}`
+          }
+          if(i <= 2){
+              this.avatarArr.push(userObj)
+          }else{
+              this.splitArr.push(userObj)
+          }
+      }
   }
 
 }
