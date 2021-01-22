@@ -133,6 +133,14 @@ const routes: Routes = [
       import('./routes/quiz/quiz.module').then(u => u.QuizModule),
   },
   {
+    path: 'assessment',
+    data: {
+      resourceType: 'assessment',
+    },
+    loadChildren: () =>
+      import('./routes/assessment/assessment.module').then(u => u.AssessmentModule),
+  },
+  {
     path: 'rdbms-hands-on',
     data: {
       resourceType: 'rdbms-hands-on',

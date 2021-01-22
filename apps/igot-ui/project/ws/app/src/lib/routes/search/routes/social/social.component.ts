@@ -9,7 +9,6 @@ import {
   ISocialSearchResult,
   ISearchSocialSearchPartialRequest,
 } from '../../models/search.model'
-import { IKhubFetchStatus } from '../../../infy/routes/knowledge-hub/models/knowledgeHub.model'
 import { NsContent, NsError, ROOT_WIDGET_CONFIG } from '@ws-widget/collection'
 import { ValueService } from '@ws-widget/utils'
 import { NsWidgetResolver } from '@ws-widget/resolver'
@@ -24,7 +23,7 @@ export class SocialComponent implements OnInit, OnDestroy {
   isLtMedium$ = this.valueSvc.isLtMedium$
   screenSizeIsLtMedium = false
   sideNavBarOpened = true
-  searchRequestStatus: IKhubFetchStatus = 'none'
+  searchRequestStatus: any = 'none'
   filtersResponse: IFilterUnitResponse[] = []
   searchResults: ISocialSearchResult = {} as ISocialSearchResult
   searchRequestObject: ISearchSocialSearchPartialRequest = {

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 import { PageResolve } from '@ws-widget/utils'
 import { ProfileComponent } from './profile.component'
-import { FeatureUsageComponent } from './routes/analytics/routes/feature-usage/feature-usage.component'
 import { LearningComponent } from './routes/analytics/routes/learning/learning.component'
 import { PlansComponent } from './routes/analytics/routes/plans/plans.component'
 import { AchievementsComponent } from './routes/competency/components/achievements/achievements.component'
@@ -135,10 +134,6 @@ const routes: Routes = [
   {
     path: 'collaborators',
     component: LearningComponent,
-  },
-  {
-    path: 'feature-usage',
-    component: FeatureUsageComponent,
   },
   {
     path: 'settings',

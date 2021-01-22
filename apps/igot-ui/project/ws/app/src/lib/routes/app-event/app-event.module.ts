@@ -16,7 +16,6 @@ import { EventService } from './services/event.service'
 import { IframeLoaderComponent } from './components/iframe-loader/iframe-loader.component'
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { BtnPageBackModule, BtnFullscreenModule } from '@ws-widget/collection'
-import { MeetupComponent } from './components/meetup/meetup.component'
 import { CardDetailsModule } from './components/card-details/card-details.module'
 
 @NgModule({
@@ -26,7 +25,6 @@ import { CardDetailsModule } from './components/card-details/card-details.module
     EventBannerComponent,
     IframeLoaderComponent,
     AppGalleryComponent,
-    MeetupComponent,
   ],
   imports: [
     CommonModule,

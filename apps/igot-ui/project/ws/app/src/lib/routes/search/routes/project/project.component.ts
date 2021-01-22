@@ -1,9 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
-import {
-  IKhubFetchStatus,
-  IKhubViewResultProject,
-  IKhubItemTile,
-} from '../../../infy/routes/knowledge-hub/models/knowledgeHub.model'
 import { IFilterUnitResponse } from '../../models/search.model'
 import { Router, ActivatedRoute } from '@angular/router'
 import { SearchServService } from '../../services/search-serv.service'
@@ -22,7 +17,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
   isLtMedium$ = this.valueSvc.isLtMedium$
   screenSizeIsLtMedium = false
   sideNavBarOpened = true
-  searchRequestStatus: IKhubFetchStatus = 'none'
+  searchRequestStatus: any = 'none'
   searchResultsSubscription: Subscription | undefined
   filtersResetAble = false
   selectedFilterSet: Set<string> = new Set()
@@ -48,8 +43,8 @@ export class ProjectComponent implements OnInit, OnDestroy {
     load: false,
     message: '',
   }
-  khubResult: IKhubViewResultProject = {} as IKhubViewResultProject
-  knowledgeViewProj: IKhubItemTile[] = []
+  khubResult: any = {} as any
+  knowledgeViewProj: any = []
   noContent = false
   routeComp = 'project'
   errorWidget: NsWidgetResolver.IRenderConfigWithTypedData<NsError.IWidgetErrorResolver> = {

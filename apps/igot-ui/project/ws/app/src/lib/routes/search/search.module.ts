@@ -39,8 +39,6 @@ import {
   DefaultThumbnailModule,
   HorizontalScrollerModule, PipeDurationTransformModule, PipeLimitToModule, PipePartialContentModule,
 } from '@ws-widget/utils/src/public-api'
-import { TrainingApiService } from '../infy/routes/training/apis/training-api.service'
-import { TrainingService } from '../infy/routes/training/services/training.service'
 import { BlogsCardComponent } from './components/blogs-card/blogs-card.component'
 import { FilterDisplayComponent } from './components/filter-display/filter-display.component'
 import { ItemTileComponent } from './components/item-tile/item-tile.component'
@@ -119,6 +117,6 @@ import { SearchInputHomeComponent } from './components/search-input-home/search-
     UserAutocompleteModule,
   ],
   exports: [ItemTileComponent, SearchInputComponent, SearchInputHomeComponent],
-  providers: [TrainingApiService, TrainingService],
+  providers: [],
 })
 export class SearchModule { }

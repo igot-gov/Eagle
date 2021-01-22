@@ -1,4 +1,3 @@
-import { IGroup } from '../../infy/routes/navigator/models/navigator.model'
 
 export namespace NSDiscussData {
   export interface IDiscussJsonData {
@@ -298,7 +297,7 @@ export namespace NSDiscussData {
     blocksCount: number
     canEdit: true
     canBan: true
-    groups: IGroup[]
+    groups: any
     posts: IPosts[]
     latestPosts: IPosts[]
     bestPosts: IPosts[]

@@ -72,7 +72,7 @@ export class AccessControlService {
   get appName(): string {
     return this.configService.instanceConfig
       ? this.configService.instanceConfig.details.appName
-      : 'Wingspan'
+      : 'iGot'
   }
 
   get activePrimary(): string {

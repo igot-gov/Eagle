@@ -50,7 +50,6 @@ import { TncRendererComponent } from './component/tnc-renderer/tnc-renderer.comp
 import { MobileAppModule } from './routes/public/mobile-app/mobile-app.module'
 import { PublicAboutModule } from './routes/public/public-about/public-about.module'
 import { PublicContactModule } from './routes/public/public-contact/public-contact.module'
-import { PublicFaqModule } from './routes/public/public-faq/public-faq.module'
 import { TncComponent } from './routes/tnc/tnc.component'
 import { AppInterceptorService } from './services/app-interceptor.service'
 import { AppRetryInterceptorService } from './services/app-retry-interceptor.service'
@@ -125,7 +124,6 @@ const getBaseHref = (platformLocation: PlatformLocation): string => {
     BtnFeatureModule,
     PublicAboutModule,
     PublicContactModule,
-    PublicFaqModule,
     MobileAppModule,
     PipeSafeSanitizerModule,
     TourModule,

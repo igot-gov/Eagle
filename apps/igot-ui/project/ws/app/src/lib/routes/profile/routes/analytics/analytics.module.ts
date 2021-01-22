@@ -32,14 +32,12 @@ import {
   PipeLimitToModule,
 } from '@ws-widget/utils'
 import { TileComponent } from './components/tile/tile.component'
-import { FeatureUsageComponent } from './routes/feature-usage/feature-usage.component'
 import { ProgressSpinnerComponent } from './components/progress-spinner/progress-spinner.component'
 import { PlansComponent } from './routes/plans/plans.component'
 @NgModule({
   declarations: [
     LearningComponent,
     TileComponent,
-    FeatureUsageComponent,
     ProgressSpinnerComponent,
     PlansComponent],
   imports: [

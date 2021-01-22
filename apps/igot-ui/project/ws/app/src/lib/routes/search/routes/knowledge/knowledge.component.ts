@@ -1,11 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { SearchServService } from '../../services/search-serv.service'
 import { Router, ActivatedRoute } from '@angular/router'
-import {
-  IKhubItemTile,
-  IKhubViewResultDocs,
-  IKhubFetchStatus,
-} from '../../../infy/routes/knowledge-hub/models/knowledgeHub.model'
 import { IFilterUnitResponse } from '../../models/search.model'
 import { Subscription } from 'rxjs'
 import { ValueService } from '@ws-widget/utils'
@@ -22,7 +17,7 @@ export class KnowledgeComponent implements OnInit, OnDestroy {
   isLtMedium$ = this.valueSvc.isLtMedium$
   screenSizeIsLtMedium = false
   sideNavBarOpened = true
-  searchRequestStatus: IKhubFetchStatus = 'none'
+  searchRequestStatus: any = 'none'
   searchResultsSubscription: Subscription | undefined
   routeComp = 'knowledge'
   filtersResetAble = false
@@ -44,12 +39,12 @@ export class KnowledgeComponent implements OnInit, OnDestroy {
     filters: {},
     sort: '',
   }
-  khubResult: IKhubViewResultDocs = {
+  khubResult: any = {
     count: 0,
     filters: {},
     hits: [],
   }
-  knowledgeData: IKhubItemTile[] = []
+  knowledgeData: any = []
   noContent = false
   error = {
     load: false,

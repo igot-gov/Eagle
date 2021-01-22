@@ -221,7 +221,7 @@ export class AppTocService {
     this.analyticsFetchStatus = 'fetching'
     // tslint:disable-next-line: max-line-length
     const url = `${PROXY_SLAG_V8}/LA/LA/api/Users?refinementfilter=${encodeURIComponent(
-      '"source":["Wingspan","Learning Hub"]',
+      '"source":["iGot","Learning Hub"]',
     )}$${encodeURIComponent(`"courseCode": ["${contentId}"]`)}`
     this.http.get(url).subscribe(
       result => {

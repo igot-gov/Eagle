@@ -364,7 +364,7 @@ export class AppTocAnalyticsComponent implements OnInit, OnDestroy {
     if (this.analyticsData) {
       // unique users count
       this.analyticsData.uniqueParticipants.forEach((count: NsAnalytics.IActivityObj) => {
-        if (count.key === 'Wingspan') {
+        if (count.key === 'iGot') {
           this.uniqueUsers = count.uniqueCount
         }
       })

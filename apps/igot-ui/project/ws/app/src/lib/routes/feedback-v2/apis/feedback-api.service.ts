@@ -8,7 +8,7 @@ export class FeedbackApiService {
   private readonly FEEDBACK_API_BASE = '/apis/protected/v8/user/feedbackV2'
 
   constructor(private http: HttpClient) {
-    this.ROOT_ORG = 'Infosys'
+    this.ROOT_ORG = ''
   }
 
   searchFeedback(query: IFeedbackSearchRequest) {

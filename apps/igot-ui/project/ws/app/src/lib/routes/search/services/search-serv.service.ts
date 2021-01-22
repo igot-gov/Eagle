@@ -3,8 +3,6 @@ import { Injectable } from '@angular/core'
 import { NSSearch } from '@ws-widget/collection'
 import { ConfigurationsService, EventService, WsEvents } from '@ws-widget/utils'
 import { Observable, of } from 'rxjs'
-import { KnowledgeHubApiService } from '../../infy/routes/knowledge-hub/apis/knowledge-hub-api.service'
-import { IKhubAutoMation, IKhubFilterObj, IKhubItemTile, IKhubKshop, IKhubProject, IKhubViewResultDocs, IKhubViewResultProject, ISearchObjForSearch } from '../../infy/routes/knowledge-hub/models/knowledgeHub.model'
 import { SearchApiService } from '../apis/search-api.service'
 import { IFilterUnitItem, IFilterUnitResponse, ISearchAutoComplete, ISearchQuery, ISearchRequestV2, ISearchSocialSearchPartialRequest, ISocialSearchRequest } from '../models/search.model'
 
@@ -24,7 +22,6 @@ export class SearchServService {
   constructor(
     private events: EventService,
     // private contentApi: WidgetContentService,
-    private khubApiSvc: KnowledgeHubApiService,
     private searchApi: SearchApiService,
     private configSrv: ConfigurationsService,
     private http: HttpClient,
@@ -88,11 +85,13 @@ export class SearchServService {
     return this.searchApi.getSearchResults(req)
   }
 
-  fetchSearchDataDocs(request: ISearchObjForSearch): Observable<IKhubViewResultDocs> {
-    return this.khubApiSvc.fetchSearchDataDocs(request)
+  fetchSearchDataDocs(_request: any): Observable<any> {
+    // return this.khubApiSvc.fetchSearchDataDocs(request)
+    return '' as any
   }
-  fetchSearchDataProjects(request: ISearchObjForSearch): Observable<IKhubViewResultProject> {
-    return this.khubApiSvc.fetchSearchDataProject(request)
+  fetchSearchDataProjects(_request: any): Observable<any> {
+    // return this.khubApiSvc.fetchSearchDataProject(request)
+    return  '' as any
   }
 
   updateSelectedFiltersSet(filters: { [key: string]: string[] }) {
@@ -195,11 +194,11 @@ export class SearchServService {
   }
 
   // tslint:disable-next-line: prefer-array-literal
-  setTilesDocs(response: Array<IKhubKshop | IKhubAutoMation>) {
+  setTilesDocs(response: Array<any>) {
     try {
-      const tiles: IKhubItemTile[] = []
-      response.map((cur: IKhubKshop | IKhubAutoMation) => {
-        const tile: IKhubItemTile = {
+      const tiles: any = []
+      response.map((cur: any) => {
+        const tile: any = {
           author: cur.authors || [],
           category: cur.category || '',
           description: cur.description || '',
@@ -223,14 +222,14 @@ export class SearchServService {
     }
   }
 
-  setTileProject(response: IKhubProject[]) {
+  setTileProject(response: any) {
     try {
-      const tilesProject: IKhubItemTile[] = []
-      response.map((cur: IKhubProject) => {
-        const tile: IKhubItemTile = {
+      const tilesProject: any = []
+      response.map((cur: any) => {
+        const tile: any = {
           pm: cur.pm || [],
           dm: cur.dm || [],
-          objectives: cur.mstInfyObjectives || '',
+          objectives: cur.mstObjectives || '',
           risks: cur.risks || [],
           contribution: cur.contributions || [],
           category: 'Project',
@@ -255,7 +254,7 @@ export class SearchServService {
     }
   }
 
-  formatKhubFilters(filters: { [key: string]: IKhubFilterObj[] }) {
+  formatKhubFilters(filters: { [key: string]: any }) {
     try {
       const returnArr: IFilterUnitResponse[] = []
       for (const key in filters) {
@@ -274,9 +273,9 @@ export class SearchServService {
     }
   }
 
-  fetchContentOfFilter(filter: IKhubFilterObj[]) {
+  fetchContentOfFilter(filter: any) {
     const filterItemArr: IFilterUnitItem[] = []
-    filter.map((cur: IKhubFilterObj) => {
+    filter.map((cur: any) => {
       const obj = {
         count: cur.doc_count,
         displayName: cur.key,

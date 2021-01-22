@@ -42,7 +42,6 @@ import { AppTocDiscussionComponent } from './components/app-toc-discussion/app-t
 // services
 import { AppTocResolverService } from './resolvers/app-toc-resolver.service'
 import { AppTocService } from './services/app-toc.service'
-import { TrainingApiService } from '../infy/routes/training/apis/training-api.service'
 
 // custom modules
 import { WidgetResolverModule } from '@ws-widget/resolver'
@@ -86,7 +85,6 @@ import { CertificationMetaResolver } from './routes/app-toc-certification/resolv
 import { ContentCertificationResolver } from './routes/app-toc-certification/resolvers/content-certification.resolver'
 import { CertificationApiService } from './routes/app-toc-certification/apis/certification-api.service'
 import { AppTocCertificationModule } from './routes/app-toc-certification/app-toc-certification.module'
-import { TrainingService } from '../infy/routes/training/services/training.service'
 import { AppTocOverviewDirective } from './routes/app-toc-overview/app-toc-overview.directive'
 import { AppTocOverviewComponent as AppTocOverviewRootComponent } from './routes/app-toc-overview/app-toc-overview.component'
 import { AppTocHomeDirective } from './routes/app-toc-home/app-toc-home.directive'
@@ -189,8 +187,6 @@ import { AppTocSinglePageDirective } from './routes/app-toc-single-page/app-toc-
     AppTocResolverService,
     AppTocService,
     PipeContentRoutePipe,
-    TrainingApiService,
-    TrainingService,
     CertificationApiService,
     CertificationMetaResolver,
     ContentCertificationResolver,

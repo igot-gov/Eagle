@@ -16,7 +16,7 @@ interface IUserShareId {
 export class EmailInputComponent implements OnInit {
 
   @Input()
-  defaultDomain = 'ad.wingspan.com' // TODO: read this from instance config
+  defaultDomain = 'ad.igot.com' // TODO: read this from instance config
 
   @Output()
   change = new EventEmitter<string[]>()
@@ -25,7 +25,7 @@ export class EmailInputComponent implements OnInit {
   userEmailIds: IUserShareId[] = []
 
   // TODO: read this from instance config
-  validDomains: string[] = ['ad.wingspan.com', 'demo.com']
+  validDomains: string[] = ['ad.igot.com', 'demo.com']
 
   errorType: 'no-domain' | 'invalid-domain' | 'none' = 'none'
 

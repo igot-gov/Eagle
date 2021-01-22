@@ -2,7 +2,6 @@
 export * from './lib/components/image-crop/image-crop.component'
 // components
 export * from './lib/components/image-crop/image-crop.module'
-export * from './lib/constants/features.enum'
 export * from './lib/constants/instances.enum'
 export * from './lib/constants/misc.constants'
 export * from './lib/directives/class-change-on-scroll/class-change-on-scroll.module'

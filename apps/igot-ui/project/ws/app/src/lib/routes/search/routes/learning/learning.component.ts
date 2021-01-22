@@ -4,8 +4,6 @@ import { NsContent, NsError, NSSearch, ROOT_WIDGET_CONFIG } from '@ws-widget/col
 import { NsWidgetResolver } from '@ws-widget/resolver'
 import { ConfigurationsService, ValueService, UtilityService } from '@ws-widget/utils'
 import { Subscription } from 'rxjs'
-import { IKhubFetchStatus } from '../../../infy/routes/knowledge-hub/models/knowledgeHub.model'
-import { TrainingService } from '../../../infy/routes/training/services/training.service'
 import { FilterDisplayComponent } from '../../components/filter-display/filter-display.component'
 import { IFilterUnitResponse, ISearchRequestV2, ISearchTab } from '../../models/search.model'
 import { SearchServService } from '../../services/search-serv.service'
@@ -24,7 +22,7 @@ export class LearningComponent implements OnInit, OnDestroy {
   isLtMedium$ = this.valueSvc.isLtMedium$
   screenSizeIsLtMedium = false
   sideNavBarOpened = true
-  searchRequestStatus: IKhubFetchStatus = 'none'
+  searchRequestStatus: any = 'none'
   searchResults: NSSearch.ISearchV6ApiResultV2 = {
     id: '',
     ver: '',
@@ -102,7 +100,6 @@ export class LearningComponent implements OnInit, OnDestroy {
     private valueSvc: ValueService,
     private searchServ: SearchServService,
     private configSvc: ConfigurationsService,
-    private trainingSvc: TrainingService,
     private utilitySvc: UtilityService,
   ) { }
 
@@ -586,12 +583,12 @@ export class LearningComponent implements OnInit, OnDestroy {
     this.sideNavBarOpened = value
   }
 
-  private getTrainingsLHub(searchResults: NSSearch.ISearchV6ApiResultV2) {
+  private getTrainingsLHub(_searchResults: NSSearch.ISearchV6ApiResultV2) {
     const restrictedFeatures = this.configSvc.restrictedFeatures
     const trainingLHubEnabled = restrictedFeatures && !restrictedFeatures.has('trainingLHub')
 
     if (trainingLHubEnabled) {
-      this.trainingSvc.getTrainingCountsForSearchResults(searchResults)
+      // this.trainingSvc.getTrainingCountsForSearchResults(searchResults)
     }
   }
 }
