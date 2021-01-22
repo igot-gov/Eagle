@@ -33,27 +33,14 @@
     </div>
 </div>
 
-<!-- <div class="w-full px-10">
-    <div class="flex flex-1 flex-column margin-fix mb-2">
-        <span class="f-medium mat-title">Featured Events </span>
-    </div>
-    <div class="flex flex-wrap margin-fix">
-        <ng-container>
-            <div class="flex w-full sm:w-full md:w-1/2 mb-5" [ngClass]="{ 'justify-start  md:justify-end': odd, 'justify-start':even}">
-                <ws-app-events-card class="w-fix"></ws-app-events-card>
-            </div>
-        </ng-container>
-    </div>
-</div> -->
-
 <div class="w-full pt-10  px-10">
     <div class="flex flex-1 flex-column margin-fix mb-2">
         <span class="f-medium mat-title">Joined by me </span>
     </div>
     <div class="flex flex-wrap margin-fix">
-        <!-- *ngFor="let discuss of data.topics | orderBy: currentFilter :'desc' | pipeFilterSearch: searchInput.value; let i = index;let odd=odd; let even=even;" -->
+        
         <ng-container>
-            <div class="flex w-full sm:w-full md:w-1/2 mb-5" [ngClass]="{ 'justify-start  md:justify-end': odd, 'justify-start':even}">
+            <div class="flex w-full sm:w-full md:w-1/2 mb-5">
                 <ng-container *ngFor="let event of eventData['joinedByMe']">
                     <ws-app-events-card class="w-fix" [data]="event"></ws-app-events-card>
                 </ng-container>
@@ -67,7 +54,7 @@
         <span class="f-medium mat-title">All events </span>
     </div>
     <div class="flex flex-1 flex-column margin-fix search">
-        <form (submit)="updateQuery(queryControl.value)">
+        <form >
             <mat-form-field appearance="outline" class="autocomplete-form mat-body-2" color="primary"
                 [floatLabel]="'never'">
                 <mat-icon matPrefix class="search-home flex items-center justify-center">search</mat-icon>
@@ -80,12 +67,10 @@
     <div class="flex flex-1 flex-column margin-fix mt-5">
         <div class="flex flex-1 filter">
             <a href="javascript:void(0)" role="button" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'timestamp',
-                            'ws-mat-accent-border font-normal':currentFilter !== 'timestamp'}" mat-button
-                (click)="filter('timestamp')">
+                            'ws-mat-accent-border font-normal':currentFilter !== 'timestamp'}" mat-button>
                 All </a>
             <a href="javascript:void(0)" role="button" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'viewcount',
-                            'ws-mat-accent-border font-normal':currentFilter !== 'viewcount'}" mat-button
-                (click)="filter('viewcount')">
+                            'ws-mat-accent-border font-normal':currentFilter !== 'viewcount'}" mat-button>
                 Hosted by my MDO </a>
         </div>
     </div>
