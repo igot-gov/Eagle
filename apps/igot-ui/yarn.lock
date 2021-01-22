@@ -1118,25 +1118,20 @@
   resolved "https://registry.yarnpkg.com/@project-sunbird/sb-styles/-/sb-styles-0.0.7.tgz#b7e2440f79d34dc056dd8c5c7005fff0eefaf631"
   integrity sha512-XirxDLdQnaKJC+tFh4IAD05ULHS7DE9ZkNsPRHglWzly8erTXe6M1DAL+XWKYVFLf+GK9U6HVKlvvxIUpRCiVw==
 
-"@project-sunbird/sunbird-player-sdk-v8@0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@project-sunbird/sunbird-player-sdk-v8/-/sunbird-player-sdk-v8-0.0.1.tgz#56824bea41de0df62905673b5c6ba5cb0565f719"
-  integrity sha512-rpQk7XoYS2X/jQeNwDenPM7Zjprg6uUvtDEzP22KAPEEtsEIBTPJ1iOUlWkgQJRev8GwOjUZKCVxN+LrGTnKLA==
+"@project-sunbird/sunbird-player-sdk@0.0.11":
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/@project-sunbird/sunbird-player-sdk/-/sunbird-player-sdk-0.0.11.tgz#dadd73154625e9b3266762e6abe46df31bcd37a0"
+  integrity sha512-sabbNAU9F/KO5+LHdTpEx+WW/leQ2wPqT6tU7dghgB2sgiMqpwHs303JVxSOSt5Q4MhDnRaq2WmuV1ooxR0HoQ==
   dependencies:
     tslib "^1.9.0"
 
-"@project-sunbird/sunbird-quml-player-v8@E:\\projects\\Eagle\\quml\\sunbird-quml-player\\dist\\quml-library":
-  version "0.0.1"
+"@project-sunbird/sunbird-quml-player@0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@project-sunbird/sunbird-quml-player/-/sunbird-quml-player-0.0.6.tgz#7101c217cb9a0f68cd9aabf0f79209ae4633c27e"
+  integrity sha512-ia9zkU4SjZAFu5gT7lLPHVm1Yx5CGaN4ioMWMIXwwH5fbEQ1mjBXJKpNk/hRXKXCJFNBov/8NFr4rQolBNJ4kQ==
   dependencies:
     "@project-sunbird/client-services" "^3.4.9"
-    "@project-sunbird/sunbird-player-sdk-v8" "0.0.1"
-    tslib "^1.9.0"
-
-"@project-sunbird/sunbird-quml-player-v8@file:../../../../quml/sunbird-quml-player/dist/quml-library":
-  version "0.0.1"
-  dependencies:
-    "@project-sunbird/client-services" "^3.4.9"
-    "@project-sunbird/sunbird-player-sdk-v8" "0.0.1"
+    "@project-sunbird/sunbird-player-sdk" "0.0.11"
     tslib "^1.9.0"
 
 "@project-sunbird/telemetry-sdk@0.0.26":

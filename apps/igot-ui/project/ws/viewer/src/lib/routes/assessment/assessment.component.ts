@@ -67,6 +67,7 @@ export class AssessmentComponent implements OnInit {
                     'createdBy',
                 ],
                 copyright: 'Ekstep',
+                // tslint:disable-next-line:max-line-length
                 previewUrl: 'https://ekstep-public-qa.s3-ap-south-1.amazonaws.com/assets/do_2123922457085296641201/activity-1.pdf',
                 subject: [
                     'English',
@@ -184,6 +185,7 @@ export class AssessmentComponent implements OnInit {
                 status: 'Live',
                 code: '23356335-8da2-4b2d-9850-613deddceb48',
                 description: 'fghjk',
+                // tslint:disable-next-line:max-line-length
                 streamingUrl: 'https://ekstep-public-qa.s3-ap-south-1.amazonaws.com/assets/do_2123922457085296641201/activity-1.pdf',
                 // tslint:disable-next-line:max-line-length
                 posterImage: 'https://ntpstagingall.blob.core.windows.net/ntp-content-staging/content/do_2123922457085296641201/artifact/asder0_123456_1512019015777.jpg',
@@ -204,6 +206,7 @@ export class AssessmentComponent implements OnInit {
                 versionKey: '1527768913243',
                 idealScreenDensity: 'hdpi',
                 framework: 'NCF',
+                // tslint:disable-next-line:max-line-length
                 s3Key: 'ecar_files/do_2123922457085296641201/test_pdf1234_1538551443413_do_2123922457085296641201_9.0.ecar',
                 lastSubmittedOn: '2017-12-08T09:29:39.254+0000',
                 createdBy: '4c4530df-0d4f-42a5-bd91-0366716c8c24',
@@ -292,13 +295,13 @@ export class AssessmentComponent implements OnInit {
             visibility: 'default',
             setType: 'materialised',
             navigationMode: 'non-linear',
-            allowSkip: true,
-            requiresSubmit: true,
-            shuffle: true,
-            showFeedback: false,
-            showSolutions: true,
+            allowSkip: 'Yes',
+            requiresSubmit: 'Yes',
+            shuffle: 'Yes',
+            showFeedback: 'Yes',
+            showSolutions: 'Yes',
             quMLVersion: 1.5,
-            showTimer: true,
+            showTimer: 'Yes',
             outcomeProcessing: {
                 template: 'AVG_OF_SCORES',
                 ignoreNullValues: false,
@@ -424,7 +427,7 @@ export class AssessmentComponent implements OnInit {
                     ],
                     qType: 'MCQ',
                     mimeType: 'application/vnd.ekstep.qml-archive',
-                    primaryCategory: 'Practice Question Set',
+                    primaryCategory: 'Multiple Choice Question',
                     solutions: [
                         {
                             id: '293d752e-844d-24c6-dd48-1ac78bb2793c',
@@ -550,7 +553,7 @@ export class AssessmentComponent implements OnInit {
                     ],
                     qType: 'MCQ',
                     mimeType: 'application/vnd.ekstep.qml-archive',
-                    primaryCategory: 'Practice Question Set',
+                    primaryCategory: 'Multiple Choice Question',
                     solutions: [
                         {
                             id: '293d752e-844d-24c6-dd48-1ac78bb2793c',
@@ -676,7 +679,7 @@ export class AssessmentComponent implements OnInit {
                     ],
                     qType: 'MCQ',
                     mimeType: 'application/vnd.ekstep.qml-archive',
-                    primaryCategory: 'Practice Question Set',
+                    primaryCategory: 'Multiple Choice Question',
                     solutions: [
                         {
                             id: '293d752e-844d-24c6-dd48-1ac78bb2793c',
@@ -686,20 +689,268 @@ export class AssessmentComponent implements OnInit {
                     ],
                 },
                 {
-                    code: 'a3fb49c5-94ee-3112-08ff-ff2c1f63ae81',
-                    body: '<p>4.what is the capital of india?</p>',
-                    answer: '<p>New Delhi</p>',
-                    templateId: '',
-                    status: 'Draft',
-                    name: 'SA',
-                    qType: 'SA',
-                    mimeType: 'application/vnd.sunbird.question',
-                    primaryCategory: 'Subjective Question',
+                    code: 'questionId',
+                    media: [{
+                            id: 'do_11310507846892748812026',
+                            type: 'image',
+                            // tslint:disable-next-line:max-line-length
+                            src: 'https://dockstorage.blob.core.windows.net/sunbird-content-dock/content/do_11310507846892748812026/artifact/icon.png',
+                            baseUrl: 'https://dock.sunbirded.org',
+                        },
+                        {
+                            id: 'do_11318931140144332811620',
+                            type: 'image',
+                            // tslint:disable-next-line:max-line-length
+                            src: 'https://dockstorage.blob.core.windows.net/sunbird-content-dock/content/do_11318931140144332811620/artifact/i.png',
+                            baseUrl: 'https://dock.sunbirded.org',
+                        },
+                    ],
+                    // tslint:disable-next-line:max-line-length
+                    body: '<p>capital of india is?&nbsp;</p><figure class="image"><img src="https://dockstorage.blob.core.windows.net/sunbird-content-dock/content/do_11310507846892748812026/artifact/icon.png" alt="do_11310507846892748812026" data-asset-variable="do_11310507846892748812026"></figure>',
                     editorState: {
-                        question: '<p>what is the capital of india?</p>',
-                        answer: '<p>New Delhi</p>',
+                        // tslint:disable-next-line:max-line-length
+                        answer: '<p>new delhi&nbsp;</p><figure class="image"><img src="https://dockstorage.blob.core.windows.net/sunbird-content-dock/content/do_11318931140144332811620/artifact/i.png" alt="do_11318931140144332811620" data-asset-variable="do_11318931140144332811620"></figure>',
+                        // tslint:disable-next-line:max-line-length
+                        question: '<p>capital of india is?&nbsp;</p><figure class="image"><img src="https://dockstorage.blob.core.windows.net/sunbird-content-dock/content/do_11310507846892748812026/artifact/icon.png" alt="do_11310507846892748812026" data-asset-variable="do_11310507846892748812026"></figure>',
+                        solutions: [{
+                            id: '6f1efbba-82cb-7847-2868-409f8b58bf10',
+                            type: 'html',
+                            // tslint:disable-next-line:max-line-length
+                            value: '<p>New Delhi is the solution&nbsp;</p><figure class="image"><img src="https://dockstorage.blob.core.windows.net/sunbird-content-dock/content/do_11318931140144332811620/artifact/i.png" alt="do_11318931140144332811620" data-asset-variable="do_11318931140144332811620"></figure>',
+                        }],
                     },
+                    primaryCategory: 'Subjective Question',
+                    identifier: 'do_113192172820889600114',
+                    solutions: [{
+                        id: '6f1efbba-82cb-7847-2868-409f8b58bf10',
+                        type: 'html',
+                        // tslint:disable-next-line:max-line-length
+                        value: '<p>New Delhi is the solution&nbsp;</p><figure class="image"><img src="https://dockstorage.blob.core.windows.net/sunbird-content-dock/content/do_11318931140144332811620/artifact/i.png" alt="do_11318931140144332811620" data-asset-variable="do_11318931140144332811620"></figure>',
+                    }],
+                    qType: 'SA',
+                    languageCode: [
+                        'en',
+                    ],
+                    // tslint:disable-next-line:max-line-length
+                    answer: '<p>new delhi&nbsp;</p><figure class="image"><img src="https://dockstorage.blob.core.windows.net/sunbird-content-dock/content/do_11318931140144332811620/artifact/i.png" alt="do_11318931140144332811620" data-asset-variable="do_11318931140144332811620"></figure>',
+                    name: 'Subjective',
                 },
+                {
+                    code: 'UUID',
+                    responseDeclaration: {
+
+                    },
+                    media: [
+                      {
+                        id: 'do_11310514452158873612374',
+                        type: 'image',
+                        // tslint:disable-next-line:max-line-length
+                        src: 'https://dockstorage.blob.core.windows.net/sunbird-content-dock/content/do_11310514452158873612374/artifact/800px-pizigani_1367_chart_10mb.jpg',
+                        baseUrl: 'https://dock.sunbirded.org',
+                      },
+                      {
+                        id: 'do_11310521238735257612388',
+                        type: 'image',
+                        // tslint:disable-next-line:max-line-length
+                        src: 'https://dockstorage.blob.core.windows.net/sunbird-content-dock/content/do_11310521238735257612388/artifact/800px-pizigani_1367_chart_10mb.jpg',
+                        baseUrl: 'https://dock.sunbirded.org',
+                      },
+                      {
+                        id: 'do_11310493520062873611557',
+                        type: 'image',
+                        // tslint:disable-next-line:max-line-length
+                        src: 'https://dockstorage.blob.core.windows.net/sunbird-content-dock/content/do_11310493520062873611557/artifact/800px-pizigani_1367_chart_10mb.jpg',
+                        baseUrl: 'https://dock.sunbirded.org',
+                      },
+                      {
+                        // tslint:disable-next-line:max-line-length
+                        src: 'https://dockstorage.blob.core.windows.net/sunbird-content-dock/content/do_113143855600418816181/artifact/1604474581720.thumb.png',
+                        type: 'image',
+                        id: 'video_do_113143855600418816181',
+                      },
+                      {
+                        id: 'do_113143855600418816181',
+                        // tslint:disable-next-line:max-line-length
+                        src: 'https://dockstorage.blob.core.windows.net/sunbird-content-dock/content/assets/do_113143855600418816181/13mb.mp4',
+                        type: 'video',
+                        assetId: 'do_113143855600418816181',
+                        name: '13mb',
+                        // tslint:disable-next-line:max-line-length
+                        thumbnail: 'https://dockstorage.blob.core.windows.net/sunbird-content-dock/content/do_113143855600418816181/artifact/1604474581720.thumb.png',
+                      },
+                      {
+                        // tslint:disable-next-line:max-line-length
+                        src: 'https://dockstorage.blob.core.windows.net/sunbird-content-dock/content/do_113143855600418816181/artifact/1604474581720.thumb.png',
+                        type: 'image',
+                        id: 'video_do_113143855600418816181',
+                      },
+                      {
+                        id: 'do_113143855600418816181',
+                        // tslint:disable-next-line:max-line-length
+                        src: 'https://dockstorage.blob.core.windows.net/sunbird-content-dock/content/assets/do_113143855600418816181/13mb.mp4',
+                        type: 'video',
+                        assetId: 'do_113143855600418816181',
+                        name: '13mb',
+                        // tslint:disable-next-line:max-line-length
+                        thumbnail: 'https://dockstorage.blob.core.windows.net/sunbird-content-dock/content/do_113143855600418816181/artifact/1604474581720.thumb.png',
+                      },
+                      {
+                        id: 'do_11318931140144332811620',
+                        type: 'image',
+                        // tslint:disable-next-line:max-line-length
+                        src: 'https://dockstorage.blob.core.windows.net/sunbird-content-dock/content/do_11318931140144332811620/artifact/i.png',
+                        baseUrl: 'https://dock.sunbirded.org',
+                      },
+                    ],
+                    // tslint:disable-next-line:max-line-length
+                    body: '<p>question (solution has video in tis question)&nbsp;</p><figure class="image"><img src="data:image/png;base64,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" data-mathtext="A%3D%5Cpi%20r%5E2" advanced="false"></figure>',
+                    editorState: {
+                        // tslint:disable-next-line:max-line-length
+                      answer: '<p>answer&nbsp;</p><figure class="image"><img src="https://dockstorage.blob.core.windows.net/sunbird-content-dock/content/do_11318931140144332811620/artifact/i.png" alt="do_11318931140144332811620" data-asset-variable="do_11318931140144332811620"></figure>',
+                      // tslint:disable-next-line:max-line-length
+                      question: '<p>question&nbsp;</p><figure class="image"><img src="data:image/png;base64,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" data-mathtext="A%3D%5Cpi%20r%5E2" advanced="false"></figure>',
+                      solutions: [
+                        {
+                          id: '56de89ee-2da9-3db0-de36-dea9f5856cb2',
+                          type: 'video',
+                          value: 'do_113143855600418816181',
+                        },
+                      ],
+                    },
+                    templateId: '',
+                    interactions: {
+
+                    },
+                    primaryCategory: 'Subjective Question',
+                    identifier: 'do_113188021231157248116',
+                    solutions: [
+                      {
+                        id: '56de89ee-2da9-3db0-de36-dea9f5856cb2',
+                        type: 'video',
+                        value: 'do_113143855600418816181',
+                      },
+                    ],
+                    qType: 'SA',
+                    languageCode: [
+                      'en',
+                    ],
+                    // tslint:disable-next-line:max-line-length
+                    answer: '<p>answer&nbsp;</p><figure class="image"><img src="https://dockstorage.blob.core.windows.net/sunbird-content-dock/content/do_11318931140144332811620/artifact/i.png" alt="do_11318931140144332811620" data-asset-variable="do_11318931140144332811620"></figure>',
+                    name: 'Subjective',
+                },
+                {
+                    responseDeclaration: {
+                        maxScore: 1,
+                      response1: {
+                        cardinality: 'single',
+                        type: 'integer',
+                        correctResponse: {
+                          value: '1',
+                          outcomes: {
+                            SCORE: 1,
+                          },
+                        },
+                      },
+                    },
+                    mimeType: 'application/vnd.sunbird.question',
+                    media: [
+                      {
+                        id: 'do_113143851323514880165',
+                        type: 'image',
+                        // tslint:disable-next-line:max-line-length
+                        src: 'https://dockstorage.blob.core.windows.net/sunbird-content-dock/content/do_113143851323514880165/artifact/icon24.png',
+                        baseUrl: 'https://dock.sunbirded.org',
+                      },
+                    ],
+                    // tslint:disable-next-line:max-line-length
+                    body: '<div class=\'question-body\'><div class=\'mcq-title\'><p>MCQ solution html</p></div><div data-choice-interaction=\'response1\' class=\'mcq-vertical\'></div></div>',
+                    editorState: {
+                      options: [
+                        {
+                          answer: false,
+                          value: {
+                            body: '<p>Option 111</p>',
+                            value: 0,
+                          },
+                        },
+                        {
+                          answer: true,
+                          value: {
+                              // tslint:disable-next-line:max-line-length
+                            body: '<p>Option 222<br><br data-cke-filler="true"></p><figure class="image"><img src="https://dockstorage.blob.core.windows.net/sunbird-content-dock/content/do_113143851323514880165/artifact/icon24.png" alt="do_113143851323514880165" data-asset-variable="do_113143851323514880165"></figure>',
+                            value: 1,
+                          },
+                        },
+                        {
+                          answer: false,
+                          value: {
+                            body: '<p>Option 333</p>',
+                            value: 2,
+                          },
+                        },
+                        {
+                          answer: false,
+                          value: {
+                            body: '<p>Option 444</p>',
+                            value: 3,
+                          },
+                        },
+                      ],
+                      question: '<p>MCQ solution html</p>',
+                      solutions: [
+                        {
+                          id: 'd418da85-529f-6ae3-6f5b-4394c57a84b7',
+                          type: 'html',
+                          // tslint:disable-next-line:max-line-length
+                          value: '<p>This is solution&nbsp;<br><br data-cke-filler="true"></p><figure class="image"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAI4AAAAnCAYAAADZ7nAuAAAABmJLR0QA/wD/AP+gvaeTAAAGLUlEQVR4nO2ca2wVRRSAv7aA0NJWHtJiKtbEJ0+lYoxFMBaJUSRoFBM1pimigi9+GImoGA0mxRCFGB4JP4REYhoFifiKWvH9A19FRYX6IBUplqK2gNqCvf44u9nZvbt79/bOXG7Lfsmmszuzc2Z3z5w5M2duISYGpgAvA23AcWA/8BJwxQlsU0yOUwt0Axut9CJgB5CwjlVA3glqW0yOMhlRmlrP9XzgRRzlWZrdZsXkOpuAw8DjwCBP3mjgb0Rx/gFOy27TYnKZPThWZYFP/jYl/1Y1I99402JymU4l7bU4AD8q6Uo1Y4CJ1gAjLEG7gSOGZMRkzt2I/7IXWO+Tf4qS/st0Y0qBfQSbv5i+wxc4Q9UFpoU9qwh70rSwGGNU4XzHraaFjUWmd7bAdaYFxhghD3gH+Yb7gNNNC3wLR2kSwBbTAmOMcC/y/X4lC0PUjbiVJgF8bFpojHamAl3AD8AY08KGAL+QrDjNpgXHaOUcJF71OVla8HsCUZSNuBWnIxvCY7QwGvgJaASKPXk1iLOslbOQpelmoATowa08g3ULjNHOMGAnsBn32o3Nl8CduoVuQRTkGuu8HbfiGB8nYzJiMPAR8DxQ4JNfChwDrlQvZrpyXANcj8Q03rCutSIrxzZlQEuGcmLMkI8EOqcgw9QaxOIUIkpUAgxH9GSPLqEDgG8QD/xc5bo9/7ePa3UJjEkiH3EVRoaUGYT4L36xqOUkT2j8jg48e3IysTj3A+OBp3BrY6un3KgMZPQXxgC3ABcRvCmqELd/cRRZTLXpAh5D4koAZyBuwsXW+Q5k/eUz67wGeBS4HLEeR4GVVh0Jq8xtEdv/vXJPRpQjWtgCFHnyVuDW1sU6BPZh6pBAb5SenepYYtVZhExGmoGFQJOV3w1U48xyvwMeAubjxJ0W6nio3lqc5cj4dweiySqHPOdlvZQRxChgqOY6/TiAzBYzYSnyEXXQgeNHLkGGqEnALuA/JLwzEHgdcWjXI0rSAzwNjLPuvQnxZbLOZVZjGgPy5+PuJZs0yi5GdqPp6L2pjtcybOs9Vj1dwHPAXGAmMAOZ9iaQoWKGchxChgX7vBpZP5mEdFQQa/Mn0KDIWuxp+1acIfFmT94HGT4XkL7FKQBWIxq+KKCM1+KUp9uoEA4D9+GetZnikwzunQA8g6ymzwG+9uSvBQ4incr2Hc5EZjBvA++G1H01cCruDnmhku4E5in1jsPN9khPoBm7F60IKTMNt4Z/m4V25RqvIpOESp+8S5D3stlzfa51fVmKutciPpO6sPozzvte6Sk/AYlwH0esaGHK1mtmBLK4dwAZQ4MYi1tx2s03LeeoBCoC8lYh7+UBz/V663pdirpnIQFlmwrc77sm4D6/6XivSWeoqsdRniD/BpIbOBxx2o6l17Q+zd6A6wWIZYHkd2jHgv5IUbfX95qupLuATwPu6w64bpQqxK/praMZ1PtONmYi72M/yes5bYRbjCDW4bznrPkvUSxOPjJ9y0PiFU0R7mnCHaMqQ8bZk51a628j7gW1EpxtDOlOWKYp6ZxSnHmIQ7eB6A1rw604OmdWVUg01zS7kR1wuqjA8U28s6ZKJZ3OGtVI4Hzl/L30m2WGYYgSdJLex38T91CVyuGLit+2DVNHmB/XG2zn12/onq7kPZhGnXOU+46g2QEOI5XFWYaY0IeR2VRUDnrOdVmcTmS4zMbutK801lWILIyChAG8w7YatpmYRr3VSvpDsugAhynOZOAuxFx71wZS4Z2C6ww7vK+xrmxxOzK7BCdsoKL6O1chfmVPhHqnKmndFjKUoJ8An41EXguAF4B/06zXpOL0NfJwr9m84lNGjfeV40S8wxiCdG6brCqOzUDE6ZyNxFXUaO4u4AZS7+SbiITw63D/AjCBbBKaDVwKnIf/TrP+yiyc9/Ab/p21COmcdrn6CPWqflF7QL3GWUBqZzFs4/n4CPerx3UmHiJHacB57tUh5bYr5bZFqPcRpXxDirLasX2cNuRfd4GsPtrbCYYi1gjCncUe5X77XFW0YkVWF5kFEPsaO5HV4t+RcEMQa5B/ndZKtK0YLcii7GEkoBrTDykn2lS5kPT+bVop8a9IYmJi+j3/A8o03ZLHDA7mAAAAAElFTkSuQmCC" data-mathtext="A%3D%5Cpi%20r%5E2" advanced="false"></figure><p><br data-cke-filler="true"></p><figure class="image"><img src="https://dockstorage.blob.core.windows.net/sunbird-content-dock/content/do_113143851323514880165/artifact/icon24.png" alt="do_113143851323514880165" data-asset-variable="do_113143851323514880165"></figure>',
+                        },
+                      ],
+                    },
+                    templateId: 'mcq-vertical',
+                    interactions: {
+                      response1: {
+                        type: 'choice',
+                        options: [
+                          {
+                            label: '<p>Option 111</p>',
+                            value: 0,
+                          },
+                          {
+                              // tslint:disable-next-line:max-line-length
+                            label: '<p>Option 222<br><br data-cke-filler="true"></p><figure class="image"><img src="https://dockstorage.blob.core.windows.net/sunbird-content-dock/content/do_113143851323514880165/artifact/icon24.png" alt="do_113143851323514880165" data-asset-variable="do_113143851323514880165"></figure>',
+                            value: 1,
+                          },
+                          {
+                            label: '<p>Option 333</p>',
+                            value: 2,
+                          },
+                          {
+                            label: '<p>Option 444</p>',
+                            value: 3,
+                          },
+                        ],
+                      },
+                    },
+                    primaryCategory: 'Multiple Choice Question',
+                    identifier: 'do_113193463656955904143',
+                    solutions: [
+                      {
+                        id: 'd418da85-529f-6ae3-6f5b-4394c57a84b7',
+                        type: 'html',
+                        // tslint:disable-next-line:max-line-length
+                        value: '<p>This is solution&nbsp;<br><br data-cke-filler="true"></p><figure class="image"><img src="data:image/png;base64,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" data-mathtext="A%3D%5Cpi%20r%5E2" advanced="false"></figure><p><br data-cke-filler="true"></p><figure class="image"><img src="https://dockstorage.blob.core.windows.net/sunbird-content-dock/content/do_113143851323514880165/artifact/icon24.png" alt="do_113143851323514880165" data-asset-variable="do_113143851323514880165"></figure>',
+                      },
+                    ],
+                    qType: 'MCQ',
+                    languageCode: [
+                      'en',
+                    ],
+                    interactionTypes: [
+                      'choice',
+                    ],
+                    answer: '1',
+                    name: 'Multiple Choice',
+                  },
             ],
         },
     }
