@@ -195,8 +195,13 @@ export class CreateEventComponent implements OnInit {
       reader.onload = () => this.imageSrcURL = reader.result
       reader.readAsDataURL(file)
       this.imageSrc = file
-      
     }
+  }
+
+  removeSelectedFile() {
+    this.createEventForm.controls['eventPicture'].reset()
+    this.imageSrc = ''
+    this.imageSrcURL = ''
   }
 
     fileSubmit(identifier: string) {
