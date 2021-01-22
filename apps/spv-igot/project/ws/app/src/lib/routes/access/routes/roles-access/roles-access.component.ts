@@ -1,6 +1,6 @@
 import { DirectoryService } from './../../../home/routes/directory/directory.services'
 import { AfterViewInit, Component, OnInit, OnDestroy } from '@angular/core'
-import { Router } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 // import { RolesAccessService } from '../../services/roles-access.service'
 @Component({
   selector: 'ws-app-roles-access',
@@ -12,7 +12,12 @@ export class RolesAccessComponent implements OnInit, AfterViewInit, OnDestroy {
   data: any = []
   deparmentId!: string
 
-  constructor(private router: Router, private directoryService: DirectoryService) {
+  constructor(private router: Router, private directoryService: DirectoryService, private activatedRoute: ActivatedRoute) {
+
+    this.activatedRoute.params.subscribe(params => {
+      this.deparmentId = params['department']
+
+    })
   }
 
   ngOnInit() {
