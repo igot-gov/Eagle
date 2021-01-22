@@ -8,7 +8,7 @@ const API_END_POINTS = {
   PUBLISH_EVENT: '/apis/authApi/action/content/status/change',
   SEARCH_EVENT: '/apis/protected/v8/content/searchV6',
   GET_PARTICIPANTS: '/apis/protected/v8/portal/mdo/mydepartment?allUsers=true',
-  IMAGE_UPLOAD: '/apis/authContent/upload/igot/dopt/Public/',
+  IMAGE_UPLOAD: '/apis/authContent/upload/igot/dopt/Public',
   SEARCH_USERS: '/apis/protected/v8/user/autocomplete/department',
 }
 
