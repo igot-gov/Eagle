@@ -23,13 +23,15 @@ export const APP_DATE_FORMATS: MatDateFormats = {
   display: {
     dateInput: 'input',
     monthYearLabel: { year: 'numeric', month: 'numeric' },
-    dateA11yLabel: { year: 'numeric', month: 'long', day: 'numeric',
+    dateA11yLabel: {
+      year: 'numeric', month: 'long', day: 'numeric',
     },
     monthYearA11yLabel: { year: 'numeric', month: 'long' },
   },
 }
 
-export function changeformat(date: Date): string {
+export function changeformat(date?: Date): string {
+  if (date) {
     let day: string = date.getDate().toString()
     day = +day < 10 ? `0${day}` : day
     let month: string = (date.getMonth() + 1).toString()
@@ -37,4 +39,7 @@ export function changeformat(date: Date): string {
     const year = date.getFullYear()
     // return `${year}-${month}-${day}`
     return `${day}-${month}-${year}`
+  } else {
+    return '01-01-1900'
+  }
 }

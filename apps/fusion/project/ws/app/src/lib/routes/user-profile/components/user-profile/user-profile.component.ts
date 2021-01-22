@@ -495,42 +495,42 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   }
 
   getUserDetails() {
-    if (this.configSvc.profileDetailsStatus) {
-      if (this.configSvc.userProfile) {
-        this.userProfileSvc.getUserdetailsFromRegistry().subscribe(
-          data => {
-            if (data && data.length) {
-              const academics = this.populateAcademics(data[0])
-              this.setDegreeValuesArray(academics)
-              this.setPostDegreeValuesArray(academics)
-              const organisations = this.populateOrganisationDetails(data[0])
-              this.constructFormFromRegistry(data[0], academics, organisations)
-              this.populateChips(data[0])
-              this.userProfileData = data[0]
-            }
-            // this.handleFormData(data[0])
-          },
-          (_err: any) => {
-          })
-      }
-    } else {
-      if (this.configSvc.userProfile) {
-        this.userProfileSvc.getUserdetails(this.configSvc.userProfile.email).subscribe(
-          data => {
-            if (data && data.length) {
-              this.createUserForm.patchValue({
-                firstname: data[0].first_name,
-                surname: data[0].last_name,
-                primaryEmail: data[0].email,
-                departmentName: data[0].department_name,
-              })
-            }
-          },
-          () => {
-            // console.log('err :', err)
-          })
-      }
-    }
+    // if (this.configSvc.profileDetailsStatus) {
+    //   if (this.configSvc.userProfile) {
+    this.userProfileSvc.getUserdetailsFromRegistry().subscribe(
+      data => {
+        if (data && data.length) {
+          const academics = this.populateAcademics(data[0])
+          this.setDegreeValuesArray(academics)
+          this.setPostDegreeValuesArray(academics)
+          const organisations = this.populateOrganisationDetails(data[0])
+          this.constructFormFromRegistry(data[0], academics, organisations)
+          this.populateChips(data[0])
+          this.userProfileData = data[0]
+        }
+        // this.handleFormData(data[0])
+      },
+      (_err: any) => {
+      })
+    // }
+    // } else {
+    //   if (this.configSvc.userProfile) {
+    //     this.userProfileSvc.getUserdetails(this.configSvc.userProfile.email).subscribe(
+    //       data => {
+    //         if (data && data.length) {
+    //           this.createUserForm.patchValue({
+    //             firstname: data[0].first_name,
+    //             surname: data[0].last_name,
+    //             primaryEmail: data[0].email,
+    //             departmentName: data[0].department_name,
+    //           })
+    //         }
+    //       },
+    //       () => {
+    //         // console.log('err :', err)
+    //       })
+    //   }
+    // }
   }
 
   private populateOrganisationDetails(data: any) {
@@ -622,14 +622,14 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         }
       })
     }
-    if (data.interests.professional && data.interests.professional.length) {
+    if (data.interests && data.interests.professional && data.interests.professional.length) {
       data.interests.professional.map((interest: IChipItems) => {
         if (interest) {
           this.personalInterests.push(interest)
         }
       })
     }
-    if (data.interests.hobbies && data.interests.hobbies.length) {
+    if (data.interests && data.interests.hobbies && data.interests.hobbies.length) {
       data.interests.hobbies.map((interest: IChipItems) => {
         if (interest) {
           this.selectedHobbies.push(interest)
@@ -686,17 +686,17 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       orgNameOther: organisation.orgNameOther,
       industryOther: organisation.industryOther,
       designationOther: organisation.designationOther,
-      service: data.employmentDetails.service,
-      cadre: data.employmentDetails.cadre,
-      allotmentYear: data.employmentDetails.allotmentYearOfService,
-      otherDetailsDoj: this.getDateFromText(data.employmentDetails.dojOfService),
-      payType: data.employmentDetails.payType,
-      civilListNo: data.employmentDetails.civilListNo,
-      employeeCode: data.employmentDetails.employeeCode,
-      otherDetailsOfficeAddress: data.employmentDetails.officialPostalAddress,
-      otherDetailsOfficePinCode: data.employmentDetails.pinCode,
-      skillAquiredDesc: data.skills.additionalSkills,
-      certificationDesc: data.skills.certificateDetails,
+      service: _.get(data, 'employmentDetails.service') || undefined,
+      cadre: _.get(data, 'employmentDetails.cadre') || undefined,
+      allotmentYear: _.get(data, 'employmentDetails.allotmentYearOfService') || undefined,
+      otherDetailsDoj: this.getDateFromText(_.get(data, 'employmentDetails.dojOfService') || undefined),
+      payType: _.get(data, 'employmentDetails.payType') || undefined,
+      civilListNo: _.get(data, 'employmentDetails.civilListNo') || undefined,
+      employeeCode: _.get(data, 'employmentDetails.employeeCode') || undefined,
+      otherDetailsOfficeAddress: _.get(data, 'employmentDetails.officialPostalAddress') || undefined,
+      otherDetailsOfficePinCode: _.get(data, 'employmentDetails.pinCode') || undefined,
+      skillAquiredDesc: _.get(data, 'skills.additionalSkills') || undefined,
+      certificationDesc: _.get(data, 'skills.certificateDetails') || undefined,
     },
       {
         emitEvent: true,
@@ -774,20 +774,20 @@ export class UserProfileComponent implements OnInit, OnDestroy {
           service: form.value.service,
           cadre: form.value.cadre,
           allotmentYearOfService: form.value.allotmentYear,
-          dojOfService: form.value.otherDetailsDoj,
+          dojOfService: form.value.otherDetailsDoj || undefined,
           payType: form.value.payType,
           civilListNo: form.value.civilListNo,
           employeeCode: form.value.employeeCode,
           officialPostalAddress: form.value.otherDetailsOfficeAddress,
           pinCode: form.value.otherDetailsOfficePinCode,
-          departmentName: form.value.departmentName,
+          departmentName: form.value.departmentName || undefined,
         }
       case 'professionalDetails':
         return [
           ...this.getOrganisationsHistory(form),
         ]
       default:
-        return null
+        return undefined
     }
   }
   private getDataforKRemove(k: string, fields: string[], form: any) {
@@ -823,17 +823,31 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     return lst
   }
   private constructReq(form: any) {
-    const profileReq = {
-      photo: form.value.photo,
-      skills: {
-        additionalSkills: form.value.skillAquiredDesc,
-        certificateDetails: form.value.certificationDesc,
-      },
-      interests: {
-        professional: form.value.interests,
-        hobbies: form.value.hobbies,
-      },
+    let profileReq = {}
+    if (form.value.photo) {
+      _.set(profileReq, 'photo', form.value.photo)
     }
+    if (form.value.skillAquiredDesc) {
+      _.set(profileReq, 'skills.additionalSkills', form.value.skillAquiredDesc)
+    }
+    if (form.value.certificationDesc) {
+      _.set(profileReq, 'skills.certificateDetails', form.value.certificationDesc)
+    }
+    if (form.value.interests) {
+      _.set(profileReq, 'interests.professional', form.value.interests)
+    }
+    if (form.value.hobbies) {
+      _.set(profileReq, 'interests.hobbies', form.value.hobbies)
+    }
+    // skills: {
+    //   additionalSkills: form.value.skillAquiredDesc,
+    //     certificateDetails: form.value.certificationDesc,
+    //   },
+    // interests: {
+    //   professional: form.value.interests,
+    //     hobbies: form.value.hobbies,
+    //   },
+    // }
     let approvalData
     _.forOwn(this.approvalConfig, (v, k) => {
       if (!v.approvalRequired) {
@@ -928,17 +942,16 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   async onSubmit(form: any) {
     // DO some customization on the input data
     form.value.knownLanguages = this.selectedKnowLangs
-    form.value.interests = this.personalInterests
-    form.value.hobbies = this.selectedHobbies
-    form.value.dob = changeformat(new Date(`${form.value.dob}`))
+    form.value.interests = this.personalInterests && this.personalInterests.length > 0 ? this.personalInterests : undefined
+    form.value.hobbies = this.selectedHobbies && this.selectedHobbies.length > 0 ? this.selectedHobbies : undefined
+    form.value.dob = changeformat(form.value.dob ? new Date(`${form.value.dob}`) : undefined)
+    form.value.allotmentYear = form.value.allotmentYear ? `${form.value.allotmentYear}` : undefined
+    form.value.civilListNo = form.value.civilListNo ? `${form.value.civilListNo}` : undefined
+    form.value.employeeCode = form.value.employeeCode ? `${form.value.employeeCode}` : undefined
 
-    form.value.allotmentYear = `${form.value.allotmentYear}`
-    form.value.civilListNo = `${form.value.civilListNo}`
-    form.value.employeeCode = `${form.value.employeeCode}`
-
-    form.value.otherDetailsOfficePinCode = `${form.value.otherDetailsOfficePinCode}`
+    form.value.otherDetailsOfficePinCode = form.value.otherDetailsOfficePinCode ? `${form.value.otherDetailsOfficePinCode}` : undefined
     if (form.value.otherDetailsDoj) {
-      form.value.otherDetailsDoj = changeformat(new Date(`${form.value.otherDetailsDoj}`))
+      form.value.otherDetailsDoj = changeformat(form.value.otherDetailsDoj ? new Date(`${form.value.otherDetailsDoj}`) : undefined)
     }
     //
     if (form.value.doj) {
@@ -1108,7 +1121,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       const dateToBeConverted = `${yyyy}-${mm}-${dd}`
       return new Date(dateToBeConverted)
     }
-    return ''
+    return undefined
   }
 
   otherDropDownChange(value: any, field: string) {
