@@ -16,6 +16,7 @@ export class EventsCardComponent implements OnInit, OnChanges {
   presentersCount: any
   duration: any
   identifier: any
+  joinUrl: any
 
   monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December',
@@ -38,6 +39,7 @@ export class EventsCardComponent implements OnInit, OnChanges {
       this.eventDate = this.eventDateFormat(this.eventDetails.eventDate, this.eventDetails.eventDuration)
       this.presentersCount = (this.eventDetails.eventjoined.includes('---')) ? '' :  this.eventDetails.eventjoined.substr(0, 2)
       this.identifier = this.eventDetails.identifier
+      this.joinUrl = this.eventDetails.eventJoinURL
     }
   }
 
@@ -59,6 +61,10 @@ export class EventsCardComponent implements OnInit, OnChanges {
 
     return `${monthName} ${dateArr[0]}, ${timeArr[1]} - ${toHours}:${minutesEnd}`
 
+  }
+
+  joinEvent(meetingURL: any) {
+    window.open(meetingURL, '_blank')
   }
 
 }

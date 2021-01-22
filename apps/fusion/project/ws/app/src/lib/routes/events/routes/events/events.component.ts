@@ -21,6 +21,7 @@ export class EventsComponent implements OnInit {
     fetchNewData = false
     eventData: any = []
     todayEventsCount: any
+    joinedByMeEventsCount: any
 
     constructor(
         private router: Router,
@@ -95,6 +96,7 @@ export class EventsComponent implements OnInit {
                     ? eventObj.creatorContacts : '',
                     identifier: eventObj.identifier,
                     presenters: eventObj.creatorDetails,
+                    eventJoinURL: eventObj.artifactUrl,
                 }
 
                 // Today's events
@@ -106,17 +108,18 @@ export class EventsComponent implements OnInit {
                 }
 
                 // Joined by me
-                if (eventObj.creatorDetails) {
-                    const myUserId = this.configSvc.userProfile && this.configSvc.userProfile.userId
-                    Object.keys(eventObj.creatorDetails).forEach((key: any) => {
-                        if (eventObj.creatorDetails[key].id ===  myUserId) {
-                            this.eventData['joinedByMe'].push(eventDataObj)
-                        }
-                    })
-                }
+                // if (eventObj.creatorDetails) {
+                //     const myUserId = this.configSvc.userProfile && this.configSvc.userProfile.userId
+                //     Object.keys(eventObj.creatorDetails).forEach((key: any) => {
+                //         if (eventObj.creatorDetails[key].id ===  myUserId) {
+                //             this.eventData['joinedByMe'].push(eventDataObj)
+                //         }
+                //     })
+                // }
 
                 
                 this.todayEventsCount = this.eventData['todayEvents'].length;
+                this.joinedByMeEventsCount = this.eventData['joinedByMe'].length;
                 
                 // All events
                 this.eventData['allEvents'].push(eventDataObj)
