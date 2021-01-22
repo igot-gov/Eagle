@@ -346,8 +346,8 @@ public class PortalServiceImpl implements PortalService {
 		logger.info(mapper.writeValueAsString(roleRepo.findAll()));
 		logger.info("roles record end");
 
+		while (roles.hasNext()) {
 		for (String r : userDeptRole.getRoles()) {
-			while (roles.hasNext()) {
 				Role role = roles.next();
 				if (role.getRoleName().equalsIgnoreCase(r)) {
 					roleIds.add(role.getId());
