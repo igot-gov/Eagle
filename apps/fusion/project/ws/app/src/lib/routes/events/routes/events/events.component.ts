@@ -20,6 +20,7 @@ export class EventsComponent implements OnInit {
     currentActivePage!: any
     fetchNewData = false
     eventData: any = []
+    todayEventsCount: any
 
     constructor(
         private router: Router,
@@ -114,10 +115,17 @@ export class EventsComponent implements OnInit {
                     })
                 }
 
+                
+                this.todayEventsCount = this.eventData['todayEvents'].length;
+                
                 // All events
                 this.eventData['allEvents'].push(eventDataObj)
             })
         }
+    }
+
+    scroll(el: HTMLElement) {
+      el.scrollIntoView();
     }
 
     customDateFormat(date: any) {
