@@ -36,6 +36,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     })
     const url = this.router.url.split('/')
     this.role = url[url.length - 2]
+    this.role = this.role.replace(/%20/g, ' ')
   }
 
   ngOnDestroy() {

@@ -41,6 +41,7 @@ export class RolesAccessComponent implements OnInit, AfterViewInit, OnDestroy {
     const totalUsers: any[] = []
     this.profile.getMyDepartment().subscribe(user => {
       user.rolesInfo.forEach((element: { roleName: any, noOfUsers: any }) => {
+        element.roleName = element.roleName.replace(/[/_/]/g, ' ')
         totalUsers.push({
           role: element.roleName,
           count: element.noOfUsers,
