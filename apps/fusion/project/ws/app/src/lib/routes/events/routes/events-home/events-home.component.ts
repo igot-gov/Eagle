@@ -8,7 +8,7 @@ import { NsWidgetResolver } from 'library/ws-widget/resolver/src/public-api'
     styleUrls: ['./events-home.component.scss'],
 })
 export class EventsHomeComponent implements OnInit, OnDestroy {
-    titles = [{ title: 'EVENTS', url: '/app/event-hub/home', icon: 'calendar' }]
+    titles = [{ title: 'EVENTS', url: '/app/event-hub/home', icon: 'today' }]
     banner!: NsWidgetResolver.IWidgetData<any>
     currentRoute = 'home'
     private bannerSubscription: any

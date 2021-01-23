@@ -66,7 +66,7 @@ export class EventsComponent implements OnInit {
             ],
             includeSourceFields: [
                 'creatorLogo',
-                'thumbnail',
+                'appIcon',
             ],
         }
 
@@ -85,7 +85,6 @@ export class EventsComponent implements OnInit {
             Object.keys(eventList).forEach((index: any) => {
                 const eventObj = eventList[index]
                 const expiryDateFormat = this.customDateFormat(eventObj.expiryDate)
-                // const eventUpdateDate = this.customDateFormat(eventObj.last)
                 const eventDataObj = {
                     eventName: eventObj.name.replace(/http?.*?(?= |$)/g, ''),
                     eventDate: expiryDateFormat,
@@ -93,7 +92,7 @@ export class EventsComponent implements OnInit {
                     eventDuration: eventObj.duration,
                     eventjoined: (eventObj.creatorDetails !== undefined && eventObj.creatorDetails.length > 0) ?
                     ((eventObj.creatorDetails.length === 1) ? '1 person' :  `${eventObj.creatorDetails.length} people`) : ' --- ',
-                    eventThumbnail: (eventObj.thumbnail !== null || eventObj.thumbnail !== undefined) ? eventObj.thumbnail : '---',
+                    eventThumbnail: (eventObj.appIcon !== null || eventObj.appIcon !== undefined) ? eventObj.appIcon : '---',
                     eventDescription: eventObj.description,
                     eventStatus: eventObj.status,
                     eventObjective: eventObj.learningObjective,
@@ -213,12 +212,12 @@ export class EventsComponent implements OnInit {
 
     applyFilter(filterValue: any) {
         if (filterValue !== '') {
-            const data = this.data.filter((tag: any) => {
+            const data = this.subData.filter((tag: any) => {
                 return tag.eventName.includes(filterValue)
             })
-            this.data = data
+            this.subData = data
         } else {
-            this.data = this.eventData['allEvents']
+            this.subData = this.data
         }
     }
 

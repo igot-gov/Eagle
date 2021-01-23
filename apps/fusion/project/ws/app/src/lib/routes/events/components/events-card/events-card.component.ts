@@ -21,6 +21,7 @@ export class EventsCardComponent implements OnInit, OnChanges {
   presenters: any = []
   avatarArr: any = []
   splitArr: any = []
+  appIcon: any
 
   monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December',
@@ -38,12 +39,13 @@ export class EventsCardComponent implements OnInit, OnChanges {
   ngOnChanges() {
    if (this.data !== undefined) {
       this.eventDetails = this.data
-      this.eventTitle = this.eventDetails.eventName
+      this.eventTitle = this.eventDetails.eventName.replace(/http?.*?(?= |$)/g, '')
       this.description = this.eventDetails.eventName.replace(/(?:https?|ftp):\/\/[\n\S]+/g, '')
       this.eventDate = this.eventDateFormat(this.eventDetails.expirtyDate, this.eventDetails.eventDuration)
       this.presentersCount = (this.eventDetails.eventjoined.includes('---')) ? '' :  this.eventDetails.eventjoined.substr(0, 2)
       this.identifier = this.eventDetails.identifier
       this.joinUrl = this.eventDetails.eventJoinURL
+      this.appIcon = this.eventDetails.eventThumbnail
       if (this.eventDetails.presenters && this.eventDetails.presenters.length > 0) {
         this.presenters = this.eventDetails.presenters
         // this.userCountArray()
@@ -75,7 +77,7 @@ export class EventsCardComponent implements OnInit, OnChanges {
     const futureDate = new Date(getTime + duration * 60000)
     const formatedHoursMin = this.formatTimeAmPm(futureDate)
     const readableDateMonth = moment(formatedDate).format('MMMM DD, hh:mm a')
-    const finalDateTimeValue = `${readableDateMonth} ${formatedHoursMin}`
+    const finalDateTimeValue = `${readableDateMonth} - ${formatedHoursMin}`
     return finalDateTimeValue
   }
 
