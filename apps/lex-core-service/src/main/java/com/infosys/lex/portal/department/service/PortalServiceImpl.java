@@ -616,6 +616,9 @@ public class PortalServiceImpl implements PortalService {
 					try {
 						logger.info(mapper.writeValueAsString(roleList));
 						for (Role role : roleList) {
+							logger.info(role.getId().toString());
+							logger.info(deptInfo.getId().toString());
+							logger.info(String.valueOf(userDepartmentRoleRepo.getTotalUserCountOnRoleIdAndDeptId(role.getId(), deptInfo.getId())));
 							role.setNoOfUsers(userDepartmentRoleRepo.getTotalUserCountOnRoleIdAndDeptId(role.getId(), deptInfo.getId()));
 						}
 						logger.info("Final Role list");
