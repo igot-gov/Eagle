@@ -266,19 +266,6 @@
         {
           "type": "featureButton",
           "config": {
-            "actionBtnId": "feature_dashboard_v2",
-            "toolTip": "Dashboard",
-            "className": "fixtopMargin",
-            "config": {
-              "actionBtnId": "feature_dashboard_v2",
-              "type": "card-mini",
-              "hideTitle": true
-            }
-          }
-        },
-        {
-          "type": "featureButton",
-          "config": {
             "actionBtnId": "feature_notification",
             "toolTip": "Notification",
             "className": "fixtopMargin",

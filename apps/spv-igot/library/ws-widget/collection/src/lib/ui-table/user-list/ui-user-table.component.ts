@@ -25,6 +25,7 @@ export class UIUserTableComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() needAddAdmin?: boolean
   @Input() isUpload?: boolean
   @Input() isCreate?: boolean
+  @Input() inputDepartmentId?: string | undefined
   @Output() clicked?: EventEmitter<any>
   @Output() actionsClick?: EventEmitter<any>
   @Output() eOnRowClick = new EventEmitter<any>()
@@ -35,7 +36,7 @@ export class UIUserTableComponent implements OnInit, AfterViewInit, OnChanges {
   widgetData: any
   length!: number
   departmentRole!: string
-  departmentId!: string
+  departmentId!: string | undefined
   pageSize = 5
   pageSizeOptions = [5, 10, 20]
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator
@@ -43,7 +44,7 @@ export class UIUserTableComponent implements OnInit, AfterViewInit, OnChanges {
   selection = new SelectionModel<any>(true, [])
 
   constructor(private router: Router, public dialog: MatDialog, private activatedRoute: ActivatedRoute,
-              private createMDOService: CreateMDOService, private snackBar: MatSnackBar) {
+    private createMDOService: CreateMDOService, private snackBar: MatSnackBar) {
     this.dataSource = new MatTableDataSource<any>()
     this.actionsClick = new EventEmitter()
     this.clicked = new EventEmitter()
@@ -68,6 +69,9 @@ export class UIUserTableComponent implements OnInit, AfterViewInit, OnChanges {
       }
 
     })
+    if (!this.departmentId && this.inputDepartmentId) {
+      this.departmentId = this.inputDepartmentId
+    }
   }
 
   ngOnChanges(data: SimpleChanges) {
@@ -126,15 +130,17 @@ export class UIUserTableComponent implements OnInit, AfterViewInit, OnChanges {
     })
     dialogRef.afterClosed().subscribe((response: any) => {
       response.data.forEach((user: { userId: string }) => {
-        const role = `MDO ADMIN`
-        this.createMDOService.assignAdminToDepartment(user.userId, this.departmentId, role).subscribe(res => {
-          if (res) {
-            this.snackBar.open('Admin assigned Successfully')
-            this.router.navigate(['/app/home/directory', { department: this.departmentRole }])
-          }
-        },                                                                                            (err: { error: any }) => {
-          this.openSnackbar(err.error.errors[0].message)
-        })
+        if (this.departmentId) {
+          const role = `MDO ADMIN`
+          this.createMDOService.assignAdminToDepartment(user.userId, this.departmentId, role).subscribe(res => {
+            if (res) {
+              this.snackBar.open('Admin assigned Successfully')
+              this.router.navigate(['/app/home/directory', { department: this.departmentRole }])
+            }
+          }, (err: { error: any }) => {
+            this.openSnackbar(err.error.errors[0].message)
+          })
+        }
       })
 
     })

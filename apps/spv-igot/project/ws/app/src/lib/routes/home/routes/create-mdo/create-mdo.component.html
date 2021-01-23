@@ -116,11 +116,12 @@
       {{department}}. Add Minimum
       one user
       as Admin</p>
-    <button mat-raised-button type="button" class="text-white ws-mat-primary-background text-white margin-right-m"
+    <!-- <button mat-raised-button type="button" class="text-white ws-mat-primary-background text-white margin-right-m"
       (click)="openPopup()">
       <b class="text-white" i18n>Add User</b>
-    </button>
-    <ws-widget-ui-user-table [tableData]="tabledata" [data]="data" [needAddAdmin]="false" [needCreateUser]="true">
+    </button> -->
+    <ws-widget-ui-user-table [tableData]="tabledata" [data]="data" [needAddAdmin]="true" [needCreateUser]="true"
+      [inputDepartmentId]="departmentId">
     </ws-widget-ui-user-table>
   </mat-card>
 </ng-container>
