@@ -135,6 +135,7 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
         break
       case 'unblock':
         _.set(user, 'isBlocked', false)
+        _.set(user, 'isActive', true)
         _.set(user, 'roles', _.map(_.get($event.row, 'role'), i => i.roleName))
         this.usersService.blockUser(user).subscribe(response => {
           if (response) {

@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   private defaultSideNavBarOpenedSubscription: any
   public screenSizeIsLtMedium = false
   sideNavBarOpened = true
+  mydept!: string
   role: any
   dept!: string
   constructor(private valueSvc: ValueService, private router: Router, private activeRoute: ActivatedRoute) {
@@ -35,6 +36,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+
     this.defaultSideNavBarOpenedSubscription = this.isLtMedium$.subscribe(isLtMedium => {
       this.sideNavBarOpened = !isLtMedium
       this.screenSizeIsLtMedium = isLtMedium
@@ -42,14 +44,22 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     const url = this.router.url.split('/')
     const dept = this.router.url.split('=')
-    const nxt = dept[1].split(';')
-    if (nxt[0] === 'true' || nxt[0].includes("%")) {
-      this.dept = url[3]
-    } else {
-      this.dept = nxt[0]
-    }
+    if (dept[1]) {
+      const nxt = dept[1].split(';')
 
-    this.role = url[url.length - 2]
+      if (nxt[0] === 'true' || nxt[0].includes('%')) {
+        this.dept = url[3].replace("%20", " ")
+      } else {
+        this.dept = nxt[0].replace("%20", " ")
+      }
+      if (dept[3]) {
+        this.mydept = dept[3].replace("%20", " ")
+      } else {
+        this.mydept = 'Basic Information'
+      }
+
+      this.role = url[url.length - 2]
+    }
   }
 
   ngOnDestroy() {

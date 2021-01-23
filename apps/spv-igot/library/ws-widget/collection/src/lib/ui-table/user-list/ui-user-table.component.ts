@@ -44,7 +44,7 @@ export class UIUserTableComponent implements OnInit, AfterViewInit, OnChanges {
   selection = new SelectionModel<any>(true, [])
 
   constructor(private router: Router, public dialog: MatDialog, private activatedRoute: ActivatedRoute,
-    private createMDOService: CreateMDOService, private snackBar: MatSnackBar) {
+              private createMDOService: CreateMDOService, private snackBar: MatSnackBar) {
     this.dataSource = new MatTableDataSource<any>()
     this.actionsClick = new EventEmitter()
     this.clicked = new EventEmitter()
@@ -137,7 +137,7 @@ export class UIUserTableComponent implements OnInit, AfterViewInit, OnChanges {
               this.snackBar.open('Admin assigned Successfully')
               this.router.navigate(['/app/home/directory', { department: this.departmentRole }])
             }
-          }, (err: { error: any }) => {
+          },                                                                                            (err: { error: any }) => {
             this.openSnackbar(err.error.errors[0].message)
           })
         }
