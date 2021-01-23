@@ -21,21 +21,28 @@
         <div class="mat-body-2">
             <span class="event_date" style="margin-left: 16px;color:#0074B6;">
                 {{ eventDate }}
-                <!-- January 24, 10:00 am - 12:00 pm -->
             </span>
-            <p style="margin: 16px; width: 320px;">{{ description }}</p>
         </div>
     </mat-card-content>
     <mat-card-footer class="flex flex-1 custom margin-0">
         <div class="flex flex-1 flex-row mx-4">
             <span class="flex mobile">
-                 <button mat-stroked-button color="accent" type="button" class=" mat-accent-border flex-auto-display">
-                    <span class="" i18n>Join</span>
+                 <button mat-stroked-button color="accent" type="button" class=" mat-accent-border flex-auto-display" (click)="joinEvent(joinUrl)">
+                    <span i18n>Join</span>
                 </button>
             </span>
         </div>
         <div class="flex flex-1" class="cursor-pointer text-right mobile2">
-            <span class="noocoments ws-mat-default-text mat-subheading-2">{{ presentersCount }}</span>
+            <!-- <span class="noocoments ws-mat-default-text mat-subheading-2">
+                <div class="avatars" style="margin-left: 225px;">
+                        <span class="avatar" *ngFor="let avatar of avatarArr">
+                            <span class="headline avatar-img">
+                                {{ avatar.name }}
+                            </span>
+                        </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+                    <span class="split-count"> + {{ splitArr.length }}</span>
+            </span> -->
         </div>
     </mat-card-footer>
 </mat-card>
