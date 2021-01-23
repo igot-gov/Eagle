@@ -80,6 +80,8 @@ export class CreateEventComponent implements OnInit {
   username: any
   minDate: any
   maxDate: any
+  todayDate: any
+  todayTime: any
 
   constructor(private snackBar: MatSnackBar,
               private eventsSvc: EventsService,
@@ -93,7 +95,7 @@ export class CreateEventComponent implements OnInit {
       this.department = this.configSvc.userProfile.departmentName
     }
     this.createEventForm = new FormGroup({
-      eventPicture: new FormControl('', [Validators.required]),
+      // eventPicture: new FormControl('', [Validators.required]),
       eventTitle: new FormControl('', [Validators.required]),
       summary: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
@@ -110,9 +112,12 @@ export class CreateEventComponent implements OnInit {
     this.createEventForm.controls['eventDurationHours'].setValue(0)
     this.createEventForm.controls['eventDurationMinutes'].setValue(30)
     this.createEventForm.controls['eventType'].setValue('Webinar')
-    const currentYear = moment().year()
-    this.minDate = moment([currentYear - 1, 0, 1])
-    this.maxDate = moment([currentYear + 1, 11, 31])
+    const minCurrentDate = new Date()
+    const maxNewDate = new Date()
+    this.minDate = minCurrentDate
+    this.maxDate  = maxNewDate.setMonth(maxNewDate.getMonth() + 1)
+    this.todayDate = new Date((new Date().getTime()))
+    this.todayTime = '00:00'
   }
 
   ngOnInit() {
@@ -208,9 +213,7 @@ export class CreateEventComponent implements OnInit {
       this.eventsSvc.uploadCoverImage(formData, identifier).subscribe(
         res => {
           this.artifactURL = res.artifactURL
-          this.createEventForm.controls['eventPicture'].setValue(this.artifactURL)
           this.updateContent(identifier)
-          //
         },
         (err: any) => {
           this.openSnackbar(err.error.split(':')[1])
@@ -229,7 +232,7 @@ export class CreateEventComponent implements OnInit {
               isNew: false,
               root: true,
               metadata: {
-                thumbnail: this.artifactURL,
+                appIcon: this.artifactURL,
               },
           },
         },
@@ -278,7 +281,6 @@ export class CreateEventComponent implements OnInit {
           resourceType: this.createEventForm.controls['eventType'].value,
           categoryType: 'Article',
           creatorDetails: this.createEventForm.controls['presenters'].value,
-          thumbnail: this.createEventForm.controls['eventPicture'].value,
           sourceName: this.department,
         },
       }
