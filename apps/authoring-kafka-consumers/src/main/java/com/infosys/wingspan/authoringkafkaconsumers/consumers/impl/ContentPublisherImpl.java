@@ -77,7 +77,7 @@ public class ContentPublisherImpl {
     private Logger logger = LoggerFactory.getLogger(ContentPublisher.class);
     private List<String> noZipButCopyAUrlMimeTypes = Arrays.asList("audio/mp3","audio/mpeg","application/pdf","application/x-mpegURL","video/mp4");
     private List<String> supportedMimeTypesForZip = Arrays.asList("application/htmlpicker", "application/drag-drop", "resource/collection", "application/web-module");
-    private List<String> disableFileMovementForContentType = Arrays.asList("Event");
+    private List<String> disableFileMovementForContentType = Arrays.asList("Demo");
 
 
     public Map<String, Object> processMessage(Map<String, Object> message, UUID uuid) {
