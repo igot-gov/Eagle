@@ -1,10 +1,10 @@
 package com.infosys.lex.portal.department.repo;
 
-import java.util.List;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import com.infosys.lex.portal.department.dto.UserDepartmentRole;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
 
 public interface UserDepartmentRoleRepository extends JpaRepository<UserDepartmentRole, Integer> {
 
@@ -19,4 +19,7 @@ public interface UserDepartmentRoleRepository extends JpaRepository<UserDepartme
 	UserDepartmentRole findByUserIdAndDeptId(String userId, Integer deptId);
 
 	List<UserDepartmentRole> findAllByUserIdAndDeptId(String userId, List<Integer> deptIds);
+
+	@Query(value = "SELECT count(*) FROM wingspan.user_department_role WHERE ?1 = ANY (role_ids) and dept_id = ?2", nativeQuery = true)
+	int getTotalUserCountOnRoleIdAndDeptId(Integer roleId, Integer deptId);
 }

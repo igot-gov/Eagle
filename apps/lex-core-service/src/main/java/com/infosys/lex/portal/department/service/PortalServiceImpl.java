@@ -609,6 +609,9 @@ public class PortalServiceImpl implements PortalService {
 
 				// Get Role Informations
 				List<Role> roleList = getDepartmentRoles(Arrays.asList(deptInfo.getDeptTypeIds()));
+				for(Role role : roleList){
+					role.setNoOfUsers(userDepartmentRoleRepo.getTotalUserCountOnRoleIdAndDeptId(role.getId(), deptInfo.getId()));
+				}
 				deptInfo.setRolesInfo(roleList);
 
 				// TODO Current User Roles
