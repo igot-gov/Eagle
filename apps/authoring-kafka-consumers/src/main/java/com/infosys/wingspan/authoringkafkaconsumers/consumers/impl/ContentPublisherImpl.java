@@ -34,7 +34,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
@@ -77,8 +76,6 @@ public class ContentPublisherImpl {
     private Logger logger = LoggerFactory.getLogger(ContentPublisher.class);
     private List<String> noZipButCopyAUrlMimeTypes = Arrays.asList("audio/mp3","audio/mpeg","application/pdf","application/x-mpegURL","video/mp4");
     private List<String> supportedMimeTypesForZip = Arrays.asList("application/htmlpicker", "application/drag-drop", "resource/collection", "application/web-module");
-    private List<String> disableFileMovementForContentType = Arrays.asList("Demo");
-
 
     public Map<String, Object> processMessage(Map<String, Object> message, UUID uuid) {
         logger.info(uuid + "#PROCESSING");
@@ -106,19 +103,15 @@ public class ContentPublisherImpl {
             }
             logger.info(uuid + "    END UPDATE NEO$J STATUS");
 
-       if(!isFileMovementDisable(rootOrg, topLevelContentId, transaction)){
-                logger.info(uuid + "    STARTING FILE MOVEMENT");
-                if (!callContentAPIForFileMovement(rootOrg, org, allContentIds, transaction, uuid, errors).isEmpty()) {
-                    logger.error(uuid + "#callContentAPIForFileMovement FAILED");
-                    transaction.failure();
-                    transaction.close();
-                    mainSession.close();
-                    return errors;
-                }
-                logger.info(uuid + "    END FILE MOVEMENT");
-            }else{
-                logger.info("File Movement is disable");
+            logger.info(uuid + "    STARTING FILE MOVEMENT");
+            if (!callContentAPIForFileMovement(rootOrg, org, allContentIds, transaction, uuid, errors).isEmpty()) {
+                logger.error(uuid + "#callContentAPIForFileMovement FAILED");
+                transaction.failure();
+                transaction.close();
+                mainSession.close();
+                return errors;
             }
+            logger.info(uuid + "    END FILE MOVEMENT");
         } catch (Exception e){
             logger.error(uuid + " Exception message " + e.getMessage());
             e.printStackTrace();
@@ -590,16 +583,6 @@ public class ContentPublisherImpl {
             logger.info(uuid + "     NO DATA TO SEND EMAIL");
             logger.info(uuid + "      " + data);
         }
-    }
-  
-      private boolean isFileMovementDisable(String rootOrg, String identifier, Transaction transaction){
-       Map<String, Object> topLevelContentNode = neo4JQueryHelpers.getNodeByIdentifier(rootOrg,identifier,Sets.newHashSet("contentType"),transaction);
-       logger.info("Content type : {}", topLevelContentNode.get("contentType"));
-       if(StringUtils.isEmpty(topLevelContentNode.getOrDefault("contentType", null)))
-           return false;
-       if(disableFileMovementForContentType.contains(topLevelContentNode.get("contentType")))
-           return true;
-       return false;
     }
 
 
