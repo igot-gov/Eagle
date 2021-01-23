@@ -2,6 +2,18 @@
 @import 'ws-vars';
 @import 'ws-mixins';
 
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
 .page_title_flex {
   display:flex; 
   justify-content: right;
@@ -109,7 +121,8 @@ mat-card.dull {
   margin: 8px 16px 8px 38px;
 }
 .button-row-inline .mat-button-base {
-  margin: 8px 16px 8px 21px;
+  /*margin: 8px 16px 8px 21px;*/
+  margin: 8px 0px 8px 15px;
 }
 .button-row-add-user .mat-button-base {
   margin: 8px 16px 8px 0;

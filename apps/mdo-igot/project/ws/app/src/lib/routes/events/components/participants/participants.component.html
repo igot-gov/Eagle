@@ -5,7 +5,7 @@
         </p>
     </div>
     <mat-form-field appearance="outline" class="margin-top-xs">
-        <input matInput placeholder="Search" aria-label="State" [matAutocomplete]="auto" [formControl]="searchMoviesCtrl">
+        <input matInput placeholder="Search" aria-label="State" [matAutocomplete]="auto" [formControl]="searchUserCtrl">
         <mat-autocomplete #auto="matAutocomplete">
           <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
           <ng-container *ngIf="!isLoading">
@@ -40,7 +40,7 @@
                 <td mat-cell *matCellDef="let element"> {{element.email}} </td>
             </ng-container>
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)" ></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
         </table> 
     </div>
     <div class="flex flex-1 custom button-row" align="end" *ngIf="participants.length > 0">
