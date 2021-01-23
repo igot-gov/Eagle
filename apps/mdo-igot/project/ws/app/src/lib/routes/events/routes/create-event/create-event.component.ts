@@ -232,7 +232,7 @@ export class CreateEventComponent implements OnInit {
               isNew: false,
               root: true,
               metadata: {
-                thumbnail: this.artifactURL,
+                appIcon: this.artifactURL,
               },
           },
         },
@@ -281,7 +281,6 @@ export class CreateEventComponent implements OnInit {
           resourceType: this.createEventForm.controls['eventType'].value,
           categoryType: 'Article',
           creatorDetails: this.createEventForm.controls['presenters'].value,
-          thumbnail: this.createEventForm.controls['eventPicture'].value,
           sourceName: this.department,
         },
       }

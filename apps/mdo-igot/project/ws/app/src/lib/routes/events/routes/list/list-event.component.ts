@@ -107,7 +107,7 @@ export class ListEventComponent implements OnInit, AfterViewInit, OnDestroy {
           eventDuration: duration,
           eventjoined: (obj.creatorDetails !== undefined && obj.creatorDetails.length > 0) ?  ((obj.creatorDetails.length === 1) ?
             '1 person' :  `${obj.creatorDetails.length} people`) : ' --- ',
-          eventThumbnail: (obj.thumbnail !== null || obj.thumbnail !== undefined) ? obj.thumbnail : '---',
+          eventThumbnail: (obj.appIcon !== null || obj.appIcon !== undefined) ? obj.appIcon : '---',
         }
         const isPast = this.compareDate(expiryDateFormat);
         (isPast) ? this.eventData['pastEvents'].push(eventDataObj) : this.eventData['upcomingEvents'].push(eventDataObj)
