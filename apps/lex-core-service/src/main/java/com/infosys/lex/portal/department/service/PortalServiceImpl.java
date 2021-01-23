@@ -615,11 +615,11 @@ public class PortalServiceImpl implements PortalService {
 					ObjectMapper mapper = new ObjectMapper();
 					try {
 						logger.info(mapper.writeValueAsString(roleList));
-						for (Role role : roleList) {
-							logger.info(role.getId().toString());
+						for(int i=0; i< roleList.size(); i++){
+							logger.info(roleList.get(i).getId().toString());
 							logger.info(deptInfo.getId().toString());
-							logger.info(String.valueOf(userDepartmentRoleRepo.getTotalUserCountOnRoleIdAndDeptId(role.getId(), deptInfo.getId())));
-							role.setNoOfUsers(userDepartmentRoleRepo.getTotalUserCountOnRoleIdAndDeptId(role.getId(), deptInfo.getId()));
+							logger.info(String.valueOf(userDepartmentRoleRepo.getTotalUserCountOnRoleIdAndDeptId(roleList.get(i).getId(), deptInfo.getId())));
+							roleList.get(i).setNoOfUsers(userDepartmentRoleRepo.getTotalUserCountOnRoleIdAndDeptId(roleList.get(i).getId(), deptInfo.getId()));
 						}
 						logger.info("Final Role list");
 						logger.info(mapper.writeValueAsString(roleList));
@@ -840,7 +840,7 @@ public class PortalServiceImpl implements PortalService {
 		if (DataValidator.isCollectionEmpty(deptTypeList)) {
 			return null;
 		}
-		Set<String> deptTypeNames = new HashSet<String>();
+		Set<String> deptTypeNames = new HashSet<>();
 		deptTypeNames.add("COMMON");
 		for (DepartmentType deptType : deptTypeList) {
 			deptTypeNames.add(deptType.getDeptType());
@@ -848,7 +848,7 @@ public class PortalServiceImpl implements PortalService {
 
 		Iterable<DepartmentRole> deptRoleList = deptRoleRepo
 				.findAllByDeptTypeIn(deptTypeNames.stream().collect(Collectors.toList()));
-		Set<Role> roleList = new HashSet<Role>();
+		Set<Role> roleList = new HashSet<>();
 		if (DataValidator.isCollectionEmpty(deptRoleList)) {
 			return null;
 		}
