@@ -16,6 +16,7 @@ export class EventDetailComponent implements OnInit {
     currentFilter = 'overview'
     overviewData: any = []
     participantsData: any = []
+    participantsCount: any
 
     constructor(
         public dialog: MatDialog,
@@ -73,13 +74,16 @@ export class EventDetailComponent implements OnInit {
         if (responseObj.result !== undefined) {
             this.eventDataObj = responseObj.result[0]
             this.overviewData.push(responseObj.result[0])
-            Object.keys(responseObj.result[0].creatorDetails).forEach((index: any) => {
-                const obj = {
-                    name: responseObj.result[0].creatorDetails[index].name,
-                    id: responseObj.result[0].creatorDetails[index].id,
-                }
-                this.participantsData.push(obj)
-            })
+            if (responseObj.result[0].creatorDetails !== undefined && responseObj.result[0].creatorDetails.length > 0) {
+                Object.keys(responseObj.result[0].creatorDetails).forEach((index: any) => {
+                    const obj = {
+                        name: responseObj.result[0].creatorDetails[index].name,
+                        id: responseObj.result[0].creatorDetails[index].id,
+                    }
+                    this.participantsData.push(obj)
+                })
+            }
+            this.participantsCount = this.participantsData.length
         }
     }
 
