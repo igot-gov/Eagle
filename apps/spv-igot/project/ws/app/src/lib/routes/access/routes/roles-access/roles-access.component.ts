@@ -47,18 +47,20 @@ export class RolesAccessComponent implements OnInit, AfterViewInit, OnDestroy {
   /* API call to get all roles*/
   fetchRoles() {
 
+    const rolesAndAccessData: any[] = []
     this.directoryService.getAllDepartments().subscribe(res => {
       res.forEach((dept: { id: number, rolesInfo: any }) => {
         if (dept.id === parseInt(this.deparmentId, 10)) {
           dept.rolesInfo.forEach((role: { roleName: string, noOfUsers: string }) => {
-            const obj = {
+            rolesAndAccessData.push({
               role: role.roleName,
               count: role.noOfUsers,
-            }
-            this.data.push(obj)
+            })
+
           })
         }
       })
+      this.data = rolesAndAccessData
     })
   }
 

@@ -84,12 +84,11 @@
             <mat-row *matRowDef="let row; columns: getFinalColumns();" (click)="selection.toggle(row); onRowClick(row)">
             </mat-row>
         </mat-table>
-        <div class="no-information-found" *ngIf="dataSource.filteredData.length===0">No User inforamtion found
+        <div class="no-information-found" *ngIf="dataSource.filteredData.length===0">No User information found
         </div>
     </div>
 
-    <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
-        *ngIf="dataSource.data.length > 0">
+    <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions">
     </mat-paginator>
 </div>
 
