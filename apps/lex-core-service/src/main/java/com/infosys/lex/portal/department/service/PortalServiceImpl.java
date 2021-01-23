@@ -12,6 +12,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -609,8 +610,19 @@ public class PortalServiceImpl implements PortalService {
 
 				// Get Role Informations
 				List<Role> roleList = getDepartmentRoles(Arrays.asList(deptInfo.getDeptTypeIds()));
-				for(Role role : roleList){
-					role.setNoOfUsers(userDepartmentRoleRepo.getTotalUserCountOnRoleIdAndDeptId(role.getId(), deptInfo.getId()));
+				if(!isUserInfoRequired) {
+					logger.info("Role list");
+					ObjectMapper mapper = new ObjectMapper();
+					try {
+						logger.info(mapper.writeValueAsString(roleList));
+						for (Role role : roleList) {
+							role.setNoOfUsers(userDepartmentRoleRepo.getTotalUserCountOnRoleIdAndDeptId(role.getId(), deptInfo.getId()));
+						}
+						logger.info("Final Role list");
+						logger.info(mapper.writeValueAsString(roleList));
+					} catch (JsonProcessingException e) {
+						e.printStackTrace();
+					}
 				}
 				deptInfo.setRolesInfo(roleList);
 
