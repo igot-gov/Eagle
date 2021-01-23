@@ -125,7 +125,6 @@ export class DirectoryViewComponent implements OnInit, AfterViewInit, OnDestroy 
   fetchConnectionDetails() {
   }
   onRoleClick(role: any) {
-    console.log(role)
     this.router.navigate([`/app/roles/${role.id}/users`, { currentDept: this.currentFilter, roleId: role.id, depatName: role.mdo }])
   }
   filter(key: string | 'timestamp' | 'best' | 'saved') {

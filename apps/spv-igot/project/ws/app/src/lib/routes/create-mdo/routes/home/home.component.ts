@@ -48,12 +48,12 @@ export class HomeComponent implements OnInit, OnDestroy {
       const nxt = dept[1].split(';')
 
       if (nxt[0] === 'true' || nxt[0].includes('%')) {
-        this.dept = url[3].replace("%20", " ")
+        this.dept = url[3].replace('%20', ' ')
       } else {
-        this.dept = nxt[0].replace("%20", " ")
+        this.dept = nxt[0].replace('%20', ' ')
       }
       if (dept[3]) {
-        this.mydept = dept[3].replace("%20", " ")
+        this.mydept = dept[3].replace('%20', ' ')
       } else {
         this.mydept = 'Basic Information'
       }
