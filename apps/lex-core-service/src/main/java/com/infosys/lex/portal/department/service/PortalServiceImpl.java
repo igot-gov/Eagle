@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.client.RestTemplate;
 
 import com.infosys.lex.common.service.UserUtilityService;
@@ -610,24 +611,21 @@ public class PortalServiceImpl implements PortalService {
 
 				// Get Role Informations
 				List<Role> roleList = getDepartmentRoles(Arrays.asList(deptInfo.getDeptTypeIds()));
-				if(!isUserInfoRequired) {
-					logger.info("Role list");
-					ObjectMapper mapper = new ObjectMapper();
-					try {
-						logger.info(mapper.writeValueAsString(roleList));
-						for(int i=0; i< roleList.size(); i++){
-							logger.info(roleList.get(i).getId().toString());
-							logger.info(deptInfo.getId().toString());
-							logger.info(String.valueOf(userDepartmentRoleRepo.getTotalUserCountOnRoleIdAndDeptId(roleList.get(i).getId(), deptInfo.getId())));
-							roleList.get(i).setNoOfUsers(userDepartmentRoleRepo.getTotalUserCountOnRoleIdAndDeptId(roleList.get(i).getId(), deptInfo.getId()));
-						}
-						logger.info("Final Role list");
-						logger.info(mapper.writeValueAsString(roleList));
-					} catch (JsonProcessingException e) {
-						e.printStackTrace();
+				if (!isUserInfoRequired && !CollectionUtils.isEmpty(roleList)) {
+					List<Role> newRoleList = new ArrayList<>();
+					for (Role role : roleList) {
+						Role assignRole = new Role();
+						assignRole.setDescription(role.getDescription());
+						assignRole.setId(role.getId());
+						assignRole.setRoleName(role.getRoleName());
+						assignRole.setNoOfUsers(userDepartmentRoleRepo.getTotalUserCountOnRoleIdAndDeptId(role.getId(), deptInfo.getId()));
+						newRoleList.add(assignRole);
 					}
+					deptInfo.setRolesInfo(newRoleList);
+				} else {
+					deptInfo.setRolesInfo(roleList);
 				}
-				deptInfo.setRolesInfo(roleList);
+
 
 				// TODO Current User Roles
 
