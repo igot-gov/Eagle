@@ -114,29 +114,46 @@ export class CreateUserComponent implements OnInit {
     form.value.department = this.selectedDept ? this.selectedDept.deptName : this.receivedDept.deptName
 
     this.usersSvc.createUser(form.value).subscribe(res => {
-      let user
+      // let user
       this.openSnackbar(res.data)
       if (res) {
         const req = { departments: [] }
         req.departments = this.selectedDept ? this.selectedDept.deptName : this.receivedDept.deptName
+
         this.usersSvc.onSearchUserByEmail(form.value.email, req).subscribe(data => {
-          user = data[0]
-          const dreq = {
-            userId: user ? user.wid : null,
-            deptId: this.selectedDept ? this.selectedDept.id : this.receivedDept.id,
-            roles: form.value.roles,
-            isActive: true,
-            isBlocked: false,
+          // user = data[0]
+          const userreq = {
+            personalDetails: {
+                firstname: data[0].first_name,
+                surname: data[0].last_name,
+                primaryEmail: data[0].email,
+            },
+            professionalDetails: [
+                {
+                    name: data[0].department_name,
+                },
+            ],
           }
-          this.usersSvc.addUserToDepartment(dreq).subscribe(dres => {
-            if (dres) {
-              this.createUserForm.reset({ fname: '', lname: '', email: '', department: '', roles: '' })
-              if (this.selectedDept) {
-                this.router.navigate(['/app/home/users'])
-              } else {
-                this.router.navigate([`/app/roles/${this.receivedDept.id}/users`,
-                { currentDept: this.currentDept, roleId: this.receivedDept.id }])
+          this.usersSvc.createUserById(data[0].wid, userreq).subscribe(userdata => {
+            if (userdata) {
+              const dreq = {
+                userId: data[0] ? data[0].wid : null,
+                deptId: this.selectedDept ? this.selectedDept.id : this.receivedDept.id,
+                roles: form.value.roles,
+                isActive: true,
+                isBlocked: false,
               }
+              this.usersSvc.addUserToDepartment(dreq).subscribe(dres => {
+                if (dres) {
+                  this.createUserForm.reset({ fname: '', lname: '', email: '', department: '', roles: '' })
+                  if (this.selectedDept) {
+                    this.router.navigate(['/app/home/users'])
+                  } else {
+                    this.router.navigate([`/app/roles/${this.receivedDept.id}/users`,
+                    { currentDept: this.currentDept, roleId: this.receivedDept.id }])
+                  }
+                }
+              })
             }
           })
         })
