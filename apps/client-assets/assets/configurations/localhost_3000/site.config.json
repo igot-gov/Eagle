@@ -458,7 +458,7 @@
       "path": "/app/event-hub/home",
       "active": true,
       "hubname": "Events",
-      "desc": "Add your events",
+      "desc": "View your Events & Webinars",
       "icon": "today",
       "accessKey": "E"
     }
