@@ -2,13 +2,7 @@
   <ng-container *ngFor="let participant of userdata">
     <mat-card style="box-shadow: none; background-color: rgba(0, 0, 0, 0.04);">
       <div class="badge-container">
-        <div class="image-container btn-circle mat-elevation-z5" 
-            [ngClass]="random_color"
-             style="border-radius: 50%;
-             width: 50px;
-             height: 50px;
-             line-height: 50px;
-             padding-left: 14px;">
+        <div class="image-container btn-circle mat-elevation-z5 presenter-shortname-box" [ngStyle]="{'background-color': participant.color,'color':'white'}">
           {{ participant.shortName}}
         </div>
 

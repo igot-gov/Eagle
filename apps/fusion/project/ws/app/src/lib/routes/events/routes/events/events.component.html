@@ -72,13 +72,13 @@
         <span class="f-medium mat-title">All events </span>
     </div>
     <div class="flex flex-1 flex-column margin-fix search" *ngIf="allEventsCount > 0">
-            <mat-form-field appearance="outline" class="autocomplete-form mat-body-2" color="primary"
-                [floatLabel]="'never'">
-                <mat-icon matPrefix class="search-home flex items-center justify-center">search</mat-icon>
-                <input type="search" #searchInput class="ml-2" i18n-placeholder="search content"
-                    [placeholder]="'Search'" i18-aria-label aria-label="Query" matInput
-                    accesskey="F" [(ngModel)] = "searchTerm" (input)="applyFilter($event.target.value)"  />
-            </mat-form-field>
+        <mat-form-field appearance="outline" class="autocomplete-form mat-body-2" color="primary"
+            [floatLabel]="'never'">
+            <mat-icon matPrefix class="search-home flex items-center justify-center">search</mat-icon>
+            <input type="search" #searchInput class="ml-2" i18n-placeholder="search content"
+                [placeholder]="'Search'" i18-aria-label aria-label="Query" matInput
+                accesskey="F" [(ngModel)] = "searchTerm" (input)="applyFilter($event.target.value)"  />
+        </mat-form-field>
     </div>
     <div class="flex flex-1 margin-fix mt-5" *ngIf="allEventsCount > 0">
         <div class="flex flex-1 filter custom">

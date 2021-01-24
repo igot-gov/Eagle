@@ -2,6 +2,11 @@
 @import 'ws-vars';
 @import 'ws-mixins';
 
+
+.mat-form-field-appearance-outline .mat-form-field-infix {
+  padding: 0px !important;
+}
+
 .card-deck-container {
   width: 100%;
   max-width: 1200px;

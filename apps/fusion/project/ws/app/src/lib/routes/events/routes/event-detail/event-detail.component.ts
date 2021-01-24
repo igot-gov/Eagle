@@ -10,12 +10,12 @@ import { EventsService } from '../../services/events.service'
 })
 
 export class EventDetailComponent implements OnInit {
-
     eventId!: number
     eventDataObj: any
     currentFilter = 'overview'
     overviewData: any = []
     participantsData: any = []
+    participantsCount: any
 
     constructor(
         public dialog: MatDialog,
@@ -60,7 +60,7 @@ export class EventDetailComponent implements OnInit {
             ],
             includeSourceFields: [
                 'creatorLogo',
-                'thumbnail',
+                'appIcon',
             ],
         }
 
@@ -72,14 +72,18 @@ export class EventDetailComponent implements OnInit {
     setEventData(responseObj: any) {
         if (responseObj.result !== undefined) {
             this.eventDataObj = responseObj.result[0]
+            responseObj.result[0].name = responseObj.result[0].name.replace(/http?.*?(?= |$)/g, '')
             this.overviewData.push(responseObj.result[0])
-            Object.keys(responseObj.result[0].creatorDetails).forEach((index: any) => {
-                const obj = {
-                    name: responseObj.result[0].creatorDetails[index].name,
-                    id: responseObj.result[0].creatorDetails[index].id,
-                }
-                this.participantsData.push(obj)
-            })
+            if (responseObj.result[0].creatorDetails !== undefined) {
+                Object.keys(responseObj.result[0].creatorDetails).forEach((index: any) => {
+                    const obj = {
+                        name: responseObj.result[0].creatorDetails[index].name,
+                        id: responseObj.result[0].creatorDetails[index].id,
+                    }
+                    this.participantsData.push(obj)
+                })
+            }
+            this.participantsCount = this.participantsData.length
         }
     }
 

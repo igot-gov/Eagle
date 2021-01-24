@@ -27,6 +27,7 @@ export class PresenterCardComponent implements OnInit, OnChanges {
                     id: userData[index].id,
                     name: userData[index].name,
                     shortName: this.getShortName(userData[index].name),
+                    color: this.random_rgba,
                 }
                 this.userdata.push(obj)
             })
@@ -35,7 +36,16 @@ export class PresenterCardComponent implements OnInit, OnChanges {
 
     getShortName(name: any) {
         const matches = name.match(/\b(\w)/g)
-        return matches.join('')
+        return matches.join('').toLocaleUpperCase()
+    }
+
+    random_rgba() {
+      const letters = '0123456789ABCDEF'
+      let color = '#'
+      for (let i = 0; i < 6; i = i + 1) {
+        color += letters[Math.floor(Math.random() * 16)]
+      }
+      return color
     }
 
 }

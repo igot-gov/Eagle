@@ -1,7 +1,7 @@
 <mat-card class="events-card cursor-pointer">
     <div>
         <a [routerLink]= "['/app/event-hub/home/' + identifier]">
-            <img class="event-card-image image-border" src="/assets/images/profile/business.jpg" alt="Karmayogi Bharat" />
+            <img *ngIf="appIcon != undefined" class="event-card-image image-border" src="{{ appIcon }}" alt="Karmayogi Bharat" />
         </a>
     </div>
     <mat-card-header>
