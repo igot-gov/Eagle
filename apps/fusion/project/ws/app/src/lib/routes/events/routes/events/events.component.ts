@@ -109,9 +109,7 @@ export class EventsComponent implements OnInit {
                 // Today's events
                 if (this.isToday(eventObj.expiryDate)) {
                     this.eventData['todayEvents'].push(eventDataObj)
-                    this.eventData['todayEvents'].sort((a: any, b: any) => {
-                        return a.eventDate - b.eventDate
-                    })
+                    console.log('today events ' + this.eventData['todayEvents'])
                 }
 
                 // Joined by me
@@ -131,11 +129,12 @@ export class EventsComponent implements OnInit {
                     }
                 }
 
+                this.eventData['allEvents'].push(eventDataObj)
+
                 this.allEventsCount = this.eventData['allEvents'].length
                 this.todayEventsCount = this.eventData['todayEvents'].length
                 this.joinedByMeEventsCount = this.eventData['joinedByMe'].length
-
-                this.eventData['allEvents'].push(eventDataObj)
+                
             })
             this.filter('all')
         }
@@ -166,9 +165,10 @@ export class EventsComponent implements OnInit {
         const dDate  = eventDate.split('T')[0].substring(6, 8)
         const today = new Date()
         const monthVal = `0${today.getMonth() + 1}`
-        return dDate === today.getDate() &&
+        let returnVal = (parseInt(dDate,10) === today.getDate() &&
         month === (monthVal).slice(-2) &&
-        year === today.getFullYear()
+        parseInt(year, 10) === today.getFullYear())
+        return returnVal
     }
 
     isJoinedByme(userDetails: any) {

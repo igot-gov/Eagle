@@ -5,9 +5,8 @@
         <div class="image-container btn-circle mat-elevation-z5 presenter-shortname-box" [ngStyle]="{'background-color': participant.color,'color':'white'}">
           {{ participant.shortName}}
         </div>
-
         <div class="badge-data">
-          <div class="mat-title margin-remove text-align" style="font-size: 16px;">
+          <div class="mat-title margin-remove text-align participant-name">
             {{ participant.name}}
           </div>
           <div class="mat-body text-align" style="font-size: 14px;" *ngIf="host == true">Host</div>

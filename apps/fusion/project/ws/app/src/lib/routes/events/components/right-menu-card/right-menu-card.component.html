@@ -12,10 +12,10 @@
     </mat-card-content>
     <mat-card-content>
       <div style="background:rgba(0, 0, 0, 0.04); padding:15px;">
-        <span class="mat-subheading-2" role="link" tabindex="0">{{ joiningInfo[0].lastUpdatedOn | date: 'longDate' }}</span>
+        <span class="mat-subheading-2" role="link" tabindex="0">{{ dateInfo }}</span>
         <div class="flex flex-wrap" role="link" tabindex="0">
             <span class="flex-wrap" role="link" tabindex="0" style="color:rgba(0, 0, 0, 0.6); font-size:14px;">
-              11:00 am - 12:00 pm
+              {{ timeInfo }}
             </span>
         </div>
       </div>
