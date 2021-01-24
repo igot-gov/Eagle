@@ -75,6 +75,53 @@ export class CreateUserComponent implements OnInit {
                     name: data[0].department_name,
                 },
             ],
+            academics: [
+              {
+                nameOfQualification: '',
+                yearOfPassing: '',
+                nameOfInstitute: '',
+                type: 'X_STANDARD',
+              },
+              {
+                nameOfQualification: '',
+                yearOfPassing: '',
+                nameOfInstitute: '',
+                type: 'XII_STANDARD',
+              },
+              {
+                nameOfQualification: '',
+                yearOfPassing: '',
+                nameOfInstitute: '',
+                type: 'GRADUATE',
+              },
+              {
+                nameOfQualification: '',
+                yearOfPassing: '',
+                nameOfInstitute: '',
+                type: 'POSTGRADUATE',
+              },
+            ],
+            interests: {
+              hobbies: [],
+              professional: [],
+            },
+            skills: {
+              certificateDetails: '',
+              additionalSkills: '',
+              osCreatedBy: '',
+            },
+            employmentDetails: {
+              departmentName: '',
+              officialPostalAddress: '',
+              employeeCode: '',
+              allotmentYearOfService: '',
+              payType: '',
+              civilListNo: '',
+              dojOfService: '',
+              service: '',
+              pinCode: '',
+              cadre: '',
+            },
           }
 
           this.usersSvc.createUserById(data[0].wid, userreq).subscribe(userdata => {
