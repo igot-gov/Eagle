@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core'
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ChangeDetectorRef } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { EventsService } from '../../services/events.service'
 import { MatSnackBar, MatPaginator } from '@angular/material'
@@ -88,6 +88,7 @@ export class CreateEventComponent implements OnInit {
               private matDialog: MatDialog,
               private router: Router,
               private configSvc: ConfigurationsService,
+              private changeDetectorRefs: ChangeDetectorRef
               ) {
     if (this.configSvc.userProfile) {
       this.userId = this.configSvc.userProfile.userId
@@ -95,7 +96,7 @@ export class CreateEventComponent implements OnInit {
       this.department = this.configSvc.userProfile.departmentName
     }
     this.createEventForm = new FormGroup({
-      // eventPicture: new FormControl('', [Validators.required]),
+      eventPicture: new FormControl('', [Validators.required]),
       eventTitle: new FormControl('', [Validators.required]),
       summary: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
@@ -106,7 +107,7 @@ export class CreateEventComponent implements OnInit {
       eventDurationHours: new FormControl('', [Validators.required]),
       eventDurationMinutes: new FormControl('', [Validators.required]),
       conferenceLink: new FormControl('', [Validators.required, Validators.pattern(this.myreg)]),
-      presenters: new FormControl(''),
+      presenters: new FormControl('', [Validators.required]),
     })
 
     this.createEventForm.controls['eventDurationHours'].setValue(0)
@@ -164,24 +165,29 @@ export class CreateEventComponent implements OnInit {
     })
     this.dialogRef.afterClosed().subscribe((response: any) => {
         if (response) {
-          Object.keys(response.data).forEach((index: any) => {
-          const obj = response.data[index]
-            const setSelectedPresentersObj = {
-              firstname: obj.firstname,
-              lastname: obj.lastname,
-              email: obj.email,
-              type: 'Karmayogi User',
-            }
-            const contactsObj = {
-              id: obj.id,
-              name: `${obj.firstname} ${obj.lastname}`,
-            }
-            this.presentersArr.push(contactsObj)
-            this.participantsArr.push(setSelectedPresentersObj)
-          })
-          this.createEventForm.controls['presenters'].setValue(this.presentersArr)
+          this.addPresenters(response)
         }
     })
+  }
+
+  addPresenters(responseObj: any) {
+      Object.keys(responseObj.data).forEach((index: any) => {
+      const obj = responseObj.data[index]
+        const setSelectedPresentersObj = {
+          firstname: obj.firstname,
+          lastname: obj.lastname,
+          email: obj.email,
+          type: 'Karmayogi User',
+        }
+        const contactsObj = {
+          id: obj.id,
+          name: `${obj.firstname} ${obj.lastname}`,
+        }
+        this.presentersArr.push(contactsObj)
+        this.participantsArr.push(setSelectedPresentersObj)
+        this.changeDetectorRefs.detectChanges()
+        this.createEventForm.controls['presenters'].setValue(this.presentersArr)
+      })
   }
 
   close() {
@@ -200,11 +206,13 @@ export class CreateEventComponent implements OnInit {
       reader.onload = () => this.imageSrcURL = reader.result
       reader.readAsDataURL(file)
       this.imageSrc = file
+      this.createEventForm.controls['eventPicture'].setValue(this.imageSrc)
     }
   }
 
   removeSelectedFile() {
     this.imageSrcURL = ''
+    this.createEventForm.controls['eventPicture'].setValue('')
   }
 
     fileSubmit(identifier: string) {

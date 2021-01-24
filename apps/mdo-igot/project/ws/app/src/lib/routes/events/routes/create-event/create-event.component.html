@@ -4,7 +4,7 @@
             <div class="page_title_flex">
                 <div class="flex">
                     <ws-widget-btn-page-back
-                        [widgetData]="{titles:[{title:'Events', url:'/app/home/events'},{title:'New Event',url:'none'}] }">
+                        [widgetData]="{titles:[{title:'Events', url:'/app/events'},{title:'New Event',url:'none'}] }">
                     </ws-widget-btn-page-back>
                 </div>
                 <span class="spacer"></span>
@@ -272,35 +272,16 @@
                                                     </button>
                                                 </div>
                                                 <div class="example-table-container" *ngIf="participantsArr.length > 0">
-                                                    <table mat-table [dataSource] = "participantsArr" >
-                                                        <ng-container matColumnDef="select">
-                                                            <th mat-header-cell *matHeaderCellDef>
-                                                                <mat-checkbox (change)="$event ? masterToggle() : null"
-                                                                    [checked]="selection.hasValue() && isAllSelected()"
-                                                                    [indeterminate]="selection.hasValue() && !isAllSelected()">
-                                                                </mat-checkbox>
-                                                            </th>
-                                                            <td mat-cell *matCellDef="let row">
-                                                                <mat-checkbox (click)="$event.stopPropagation()"
-                                                                    (change)="$event ? selection.toggle(row) : null"
-                                                                    [checked]="selection.isSelected(row)">
-                                                                </mat-checkbox>
-                                                            </td>
-                                                        </ng-container>
-                                                        <ng-container matColumnDef="fullname">
-                                                            <th mat-header-cell *matHeaderCellDef> Full name </th>
-                                                            <td mat-cell *matCellDef="let element"> {{element.firstname}} {{element.lastname}} </td>
-                                                        </ng-container>
-                                                        <ng-container matColumnDef="email">
-                                                            <th mat-header-cell *matHeaderCellDef> Email </th>
-                                                            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-                                                        </ng-container>
-                                                        <ng-container matColumnDef="type">
-                                                            <th mat-header-cell *matHeaderCellDef> Type </th>
-                                                            <td mat-cell *matCellDef="let element"> {{element.type}} </td>
-                                                        </ng-container>
-                                                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                                                        <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+                                                    <table>
+                                                        <tr>
+                                                            <td>Name</td>
+                                                            <td>Email</td>
+                                                            <td>Type</td>
+                                                        </tr>
+                                                        <tr *ngFor="let row of participantsArr">
+                                                            <td>{{ row.firstname }} {{ row.lastname }}</td>
+                                                            <td>{{ row.email }}</td>
+                                                            <td>{{ row.type }}</td>
                                                         </tr>
                                                     </table>
                                                 </div>
