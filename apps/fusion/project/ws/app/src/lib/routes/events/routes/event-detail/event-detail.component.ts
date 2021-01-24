@@ -74,7 +74,7 @@ export class EventDetailComponent implements OnInit {
             this.eventDataObj = responseObj.result[0]
             responseObj.result[0].name = responseObj.result[0].name.replace(/http?.*?(?= |$)/g, '')
             this.overviewData.push(responseObj.result[0])
-            if (responseObj.result[0].creatorDetails !== undefined && responseObj.result[0].creatorDetails.length > 0) {
+            if (responseObj.result[0].creatorDetails !== undefined) {
                 Object.keys(responseObj.result[0].creatorDetails).forEach((index: any) => {
                     const obj = {
                         name: responseObj.result[0].creatorDetails[index].name,

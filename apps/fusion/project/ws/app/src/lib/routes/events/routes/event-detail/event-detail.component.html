@@ -94,13 +94,12 @@
     </ng-container>
 
     <ng-container *ngIf="currentFilter == 'participants'">
-
-        <div class="flex" style="width: 65%;" *ngIf="participantsCount > 0">
+        <div class="flex w-65" *ngIf="participantsCount > 0">
             <ng-container *ngFor="let participant of participantsData">
                 <app-presenter-card [data]="participant" [host]="false"></app-presenter-card>
             </ng-container>
         </div>
-        <div class="flex" style="width: 65%;" *ngIf="participantsCount == 0">
+        <div class="flex w-65" *ngIf="participantsCount == 0">
             <div class="flex flex-wrap margin-fix mb-20">
               <mat-card>
                   <mat-card-content>
