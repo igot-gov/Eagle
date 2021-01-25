@@ -69,7 +69,6 @@ export class UsersComponent implements OnInit, AfterViewInit, OnDestroy {
         { displayName: 'Full name', key: 'fullName' },
         { displayName: 'Email', key: 'email' },
         { displayName: 'Position', key: 'position' },
-        { displayName: 'Role', key: 'role' },
       ],
       needCheckBox: false,
       needHash: false,
