@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core'
 import { Storage, IScromData } from './storage'
 import { errorCodes } from './errors'
 import _ from 'lodash'
-import { HttpClient } from '@angular/common/http'
+import { HttpBackend, HttpClient } from '@angular/common/http'
 const API_END_POINTS = {
   SCROM_ADD_UPDTE: '/apis/protected/v8/scrom/add',
   SCROM_FETCH: '/apis/protected/v8/scrom/get',
@@ -13,7 +13,9 @@ const API_END_POINTS = {
 })
 export class SCORMAdapterService {
   id = ''
-  constructor(private store: Storage, private http: HttpClient) { }
+  constructor(private store: Storage, private http: HttpClient, handler: HttpBackend) {
+    this.http = new HttpClient(handler)
+  }
 
   set contentId(id: string) {
     this.store.key = id
@@ -138,6 +140,10 @@ export class SCORMAdapterService {
   }
   loadDataAsync() {
     return this.http.get<any>(API_END_POINTS.SCROM_FETCH + '/' + this.contentId)
+  }
+
+  downladFile(url: any) {
+    return this.http.get(url, { responseType: 'blob' })
   }
   loadData() {
     this.http.get<any>(API_END_POINTS.SCROM_FETCH + '/' + this.contentId).subscribe((response) => {

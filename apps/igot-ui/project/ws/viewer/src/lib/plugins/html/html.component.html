@@ -45,7 +45,7 @@
       This content can only be viewed in Intranet.
     </h2>
     <mat-divider></mat-divider>
-    <mat-progress-bar mode="determinate" *ngIf="progress > 0 && htmlContent?.isIframeSupported.toLowerCase() === 'no'"
+    <mat-progress-bar mode="determinate" *ngIf="progress > 0 && htmlContent?.isIframeSupported === 'no'"
       [value]="progress"></mat-progress-bar>
 
     <div class="flex flex-between padding-top-s">

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core'
-import { NsContent } from '@ws-widget/collection'
 import { filter } from 'rxjs/operators'
 import { AuthKeycloakService } from './auth-keycloak.service'
 import { NsInstanceConfig } from './configurations.model'
@@ -137,21 +136,21 @@ export class TelemetryService {
     if (this.externalApps[impressionData.subApplicationName]) {
       const externalConfig = page.objectId ? {
         context: {
-              pdata: {
-                ...this.pData,
+          pdata: {
+            ...this.pData,
             id: this.externalApps[impressionData.subApplicationName],
-              },
-            },
+          },
+        },
         object: {
           id: page.objectId,
         },
       } : {
           context: {
-              pdata: {
+            pdata: {
               ...this.pData,
               id: this.externalApps[impressionData.subApplicationName],
-              },
             },
+          },
         }
       $t.impression(impressionData.data, externalConfig)
     }
@@ -199,13 +198,8 @@ export class TelemetryService {
         ),
       )
       .subscribe(event => {
-        const content: NsContent.IContent | null = event.data.content
         if (
-          event.data.state === WsEvents.EnumTelemetrySubType.Loaded &&
-          (!content ||
-            content.isIframeSupported.toLowerCase() === 'maybe' ||
-            content.isIframeSupported.toLowerCase() === 'yes')
-        ) {
+          event.data.state === WsEvents.EnumTelemetrySubType.Loaded) {
           this.start(
             event.data.type || WsEvents.WsTimeSpentType.Player,
             event.data.mode || WsEvents.WsTimeSpentMode.Play,
@@ -213,10 +207,7 @@ export class TelemetryService {
           )
         }
         if (
-          event.data.state === WsEvents.EnumTelemetrySubType.Unloaded &&
-          (!content ||
-            content.isIframeSupported.toLowerCase() === 'maybe' ||
-            content.isIframeSupported.toLowerCase() === 'yes')
+          event.data.state === WsEvents.EnumTelemetrySubType.Unloaded
         ) {
           this.end(
             event.data.type || WsEvents.WsTimeSpentType.Player,
@@ -261,11 +252,11 @@ export class TelemetryService {
             },
             {
               context: {
-              pdata: {
-                ...this.pData,
-                id: this.pData.id,
+                pdata: {
+                  ...this.pData,
+                  id: this.pData.id,
+                },
               },
-            },
             })
         }
       })
@@ -303,11 +294,11 @@ export class TelemetryService {
             },
             {
               context: {
-              pdata: {
-                ...this.pData,
-                id: this.pData.id,
+                pdata: {
+                  ...this.pData,
+                  id: this.pData.id,
+                },
               },
-            },
             })
         }
       })

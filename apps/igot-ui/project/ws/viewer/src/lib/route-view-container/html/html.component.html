@@ -6,8 +6,7 @@
       <div>
         <mat-card [ngClass]="{'padding-remove': isLtMedium}">
           <mat-card-content>
-            <div id="fullScreenContainer"
-              [ngClass]="{ 'video-player': htmlData?.isIframeSupported.toLowerCase() != 'no' }">
+            <div id="fullScreenContainer" [ngClass]="{ 'video-player': htmlData?.isIframeSupported != 'no' }">
               <viewer-plugin-html [htmlContent]="htmlData">
               </viewer-plugin-html>
             </div>

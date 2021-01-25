@@ -43,7 +43,7 @@ export const VIEWER_ROUTE_FROM_MIME = (mimeType: NsContent.EMimeTypes) => {
     case NsContent.EMimeTypes.COLLECTION_RESOURCE:
       return 'resource-collection'
     default:
-      return ''
+      return 'html'
   }
 }
 

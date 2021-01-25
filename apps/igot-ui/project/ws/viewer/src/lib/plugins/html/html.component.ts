@@ -82,7 +82,7 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
         this.htmlContent.isIframeSupported = 'No'
       }
       if (typeof iframeSupport !== 'boolean') {
-        iframeSupport = this.htmlContent.isIframeSupported.toLowerCase()
+        iframeSupport = this.htmlContent.isIframeSupported
         if (iframeSupport === 'no') {
           this.showIframeSupportWarning = true
           setTimeout(
@@ -136,6 +136,17 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
           3000,
         )
       }
+      this.scormAdapterService.downladFile(this.htmlContent.artifactUrl).subscribe(data => {
+        const blob = new Blob([data], {
+          type: 'application/zip',
+        })
+        const a = document.createElement('a')
+        const objectUrl = URL.createObjectURL(blob)
+        a.href = objectUrl
+        a.download = 'sunbird.zip'
+        a.click()
+        URL.revokeObjectURL(objectUrl)
+      })
       this.iframeUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(
         `${this.htmlContent.artifactUrl}?timestamp='${new Date().getTime()}`
       )
