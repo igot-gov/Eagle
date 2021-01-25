@@ -308,7 +308,25 @@
   },
   "primaryNavBarConfig": {
     "mediumScreen": {
-      "left": [],
+      "left": [
+        {
+          "type": "widgetButton",
+          "config": {
+            "widgetType": "actionButton",
+            "widgetSubType": "actionButtonCatalog",
+            "widgetData": {}
+          }
+        },
+        {
+          "type": "featureButton",
+          "config": {
+            "actionBtnId": "feature_navigator",
+            "config": {
+              "type": "mat-button"
+            }
+          }
+        }
+      ],
       "right": [
         {
           "type": "featureButton",
