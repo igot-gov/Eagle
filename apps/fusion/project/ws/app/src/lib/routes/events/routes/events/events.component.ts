@@ -25,6 +25,7 @@ export class EventsComponent implements OnInit {
     data: any = []
     subData: any = []
     currentSubFilter = 'upcoming'
+    mymodel: any
 
     constructor(
         private router: Router,
@@ -193,22 +194,12 @@ export class EventsComponent implements OnInit {
                        eventName: eventDataObj.eventName,
                        todayEventDate: eventDataObj.todayEventDate,
                        todayEventDateStr: eventDataObj.todayEventDateStr,
+                       identifier: eventDataObj.identifier,
                     }
                     this.eventData['todayEvents'].push(todayEventObj)
                 }
 
-                // Joined by me
-                if (eventObj.creatorDetails) {
-                    const myUserId = this.configSvc.userProfile && this.configSvc.userProfile.userId
-                    Object.keys(eventObj.creatorDetails).forEach((key: any) => {
-                        if (eventObj.creatorDetails[key].id ===  myUserId) {
-                            this.eventData['joinedByMe'].push(eventDataObj)
-                        }
-                    })
-                }
-
                 this.eventData['allEvents'].push(eventDataObj)
-
                 this.allEventsCount = this.eventData['allEvents'].length
                 this.todayEventsCount = this.eventData['todayEvents'].length
                 this.joinedByMeEventsCount = this.eventData['joinedByMe'].length
@@ -218,9 +209,6 @@ export class EventsComponent implements OnInit {
         if (this.todayEventsCount > 0) {
              this.sortTodayEvents()
         }
-        if (this.allEventsCount > 0) {
-            this.sortAllEvents()
-        }
         this.getMyMDOEvents()
     }
 
@@ -229,12 +217,6 @@ export class EventsComponent implements OnInit {
             const date1 = new Date(`1970/01/01 ${a.todayEventDate}`)
             const date2 = new Date(`1970/01/01 ${b.todayEventDate}`)
             return date1.getTime() - date2.getTime()
-        })
-    }
-
-    sortAllEvents() {
-        this.eventData['allEvents'].sort((a: any, b: any) => {
-            return a.allEventDate - b.allEventDate
         })
     }
 
@@ -253,7 +235,8 @@ export class EventsComponent implements OnInit {
 
     compareDate(selectedDate: any) {
         const now = new Date()
-        const today = moment(now).format('DD-MM-YYYY HH:mm')
+        const today = moment(now).format('YYYY-MM-DD hh:mm a')
+
         return (selectedDate < today) ? true : false
     }
 
@@ -308,26 +291,23 @@ export class EventsComponent implements OnInit {
         this.setEventSubFilter('upcoming')
     }
 
-    applyFilter(filterValue: any) {
-        if (filterValue !== '') {
-            const data = this.subData.filter((tag: any) => {
-                return tag.eventName.toLowerCase().includes(filterValue) || tag.eventName.toUpperCase().includes(filterValue)
+    applyFilter(newValue: any) {
+        if (newValue !== '') {
+            const input = newValue.toLowerCase()
+            this.subData = this.subData.filter((tag: any) => {
+                return tag.eventName.toLowerCase().indexOf(input) !== -1
             })
-
-            this.subData = data
         } else {
             this.subData = this.data
         }
     }
 
-     setEventSubFilter(eventValue: any) {
-
+    setEventSubFilter(eventValue: any) {
         const upcomingEvents: any[] = []
         const pastEvents: any[] = []
-
         if (this.data && this.data.length > 0) {
             this.data.forEach((event: any) => {
-                const isPast = this.compareDate(event.eventDate)
+                const isPast = this.compareDate(event.allEventDate)
                 if (isPast) {
                     pastEvents.push(event)
                 } else {
@@ -350,10 +330,10 @@ export class EventsComponent implements OnInit {
             }
         }
         this.subData.sort((a: any, b: any) => {
-            return new Date(a.eventDate).getTime() - new Date(b.eventDate).getTime()
+            return b.allEventDate - a.allEventDate
         })
     }
-
+    
     allEventDateFormat(datetime: any) {
         const dateTimeArr = datetime.split('T')
         const date = dateTimeArr[0]

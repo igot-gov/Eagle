@@ -7,7 +7,7 @@
             <div>
                 <img i18n-alt alt="today events" src="\assets\images\event\today-events.svg"/>
             </div>
-            <div class="flex flex-3">
+            <div class="today-card-list">
                 <mat-card class="flex-1 no-box-shadow">
                     <mat-card-header class="flex items-baseline margin-fix">
                         <mat-card-title class="margin-l-0 f-medium  flex-1">
@@ -15,20 +15,20 @@
                         </mat-card-title>
                         <span class="spacer"></span>
                     </mat-card-header>
-                    <mat-card-content style="margin-left:16px; width:809px;">
-                        <ng-container *ngIf="todayEventsCount > 0">
-                            <ws-utils-horizontal-scroller>
+                    <mat-card-content style="margin-left:16px;">
+                        <ng-container >
+                            <ws-utils-horizontal-scroller *ngIf="todayEventsCount > 0" [loadStatus]="'done'">
                                 <ws-app-today-event-card *ngFor="let event of eventData['todayEvents']" class="mr-4 mb-10" [data]="event"></ws-app-today-event-card>
                             </ws-utils-horizontal-scroller>
                         </ng-container>
                         <ng-container *ngIf="todayEventsCount == 0">
-                            <div class="today-empty-box" style="background-color: #ededed; width:250px; height: 115px; border-radius: 2px;">
+                            <div class="today-empty-box" style="background-color: #ededed; width:250px; height: 115px; border-radius: 2px; margin-bottom: 45px;">
                                 <h5 class="today_no_event">No events today</h5>
                                 <p class="today_no_event_desc">Scroll down to find out upcoming events</p>
                             </div>
                         </ng-container>
                     </mat-card-content>
-                    <mat-card-footer>
+                    <mat-card-footer class="today-mat-footer">
                         <div class="flex flex-1 custom mx-8">
                             <button mat-stroked-button color="accent" type="button" class=" mat-accent-border flex-auto-display" (click)="scroll(allevents)">
                                 <span i18n>See all events</span>
@@ -41,17 +41,17 @@
     </div>
 </div>
 
-<div class="w-full pt-10  px-10">
+<div class="pt-10  px-10">
     <div class="flex flex-1 flex-column margin-fix mb-2">
         <span class="f-medium mat-title">Joined by me </span>
     </div>
-    <div class="flex flex-wrap margin-fix">
+    <div style="min-width: 700px;">
         <ng-container *ngIf="joinedByMeEventsCount > 0">
-            <div class="flex w-full sm:w-full md:w-1/2 mb-5">
+            <ws-utils-horizontal-scroller [loadStatus]="'done'">
                 <ng-container *ngFor="let event of eventData['joinedByMe']">
-                    <ws-app-events-card [ngStyle]="{'width':'360' + 'px'}" class="w-fix mr-10" [data]="event"></ws-app-events-card>
+                    <ws-app-events-card [ngStyle]="{'width':'350' + 'px'}" class="w-fix mr-10" [data]="event"></ws-app-events-card>
                 </ng-container>
-            </div>
+            </ws-utils-horizontal-scroller>
         </ng-container>
         <ng-container *ngIf="joinedByMeEventsCount == 0">
             <div class="flex w-full sm:w-full">
@@ -79,7 +79,7 @@
             <mat-icon matPrefix class="search-home flex items-center justify-center">search</mat-icon>
             <input type="search" #searchInput class="ml-2" i18n-placeholder="search content"
                 [placeholder]="'Search'" i18-aria-label aria-label="Query" matInput
-                accesskey="F" [(ngModel)] = "searchTerm" (input)="applyFilter($event.target.value)"  />
+                accesskey="F" [(ngModel)] = "searchTerm" [ngModel]="mymodel" (ngModelChange)="applyFilter($event)" />
         </mat-form-field>
     </div>
     <div class="flex flex-1 margin-fix mt-5" *ngIf="allEventsCount > 0">

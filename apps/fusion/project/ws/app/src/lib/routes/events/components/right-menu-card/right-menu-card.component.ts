@@ -33,6 +33,9 @@ export class RightMenuCardComponent implements OnInit, OnChanges {
                 this.expiryDate  = this.data.expiryDate
                 this.duration  = this.data.duration
                 this.data.expiryDate = this.eventDateFormat(this.expiryDate, this.duration)
+                const dateTimeArr = this.data.expiryDate.split(',')
+                this.dateInfo = dateTimeArr[0]
+                this.timeInfo = dateTimeArr[1]
             }
             if (moment(new Date()).isBetween(this.startDate, this.endDate)) {
                 this.disableFlag = false
