@@ -958,6 +958,7 @@ public class PortalServiceImpl implements PortalService {
 				}
 			}
 		}
+		existingRecord.setUserId(userRoleDepartmentInfo.getUserId());
 		existingRecord.setIsActive(true);
 		existingRecord.setIsBlocked(false);
 		existingRecord.setDeptId(department.getDeptId());
