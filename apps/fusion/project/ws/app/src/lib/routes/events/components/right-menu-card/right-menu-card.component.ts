@@ -14,8 +14,14 @@ export class RightMenuCardComponent implements OnInit, OnChanges {
     joiningInfo: any = []
     dateInfo: any
     timeInfo: any
+    todayDateTime: any
+    disableFlag: boolean
+    startDate: any
+    endDate: any
 
     constructor() {
+        this.disableFlag = true
+        this.todayDateTime = moment(new Date()).format('MMMM DD YYYY, hh:mm a')
     }
 
     ngOnInit() {
@@ -23,13 +29,13 @@ export class RightMenuCardComponent implements OnInit, OnChanges {
 
     ngOnChanges() {
         if (this.data !== undefined) {
-            if(this.data.expiryDate != undefined) {
+            if (this.data.expiryDate !== undefined) {
                 this.expiryDate  = this.data.expiryDate
                 this.duration  = this.data.duration
                 this.data.expiryDate = this.eventDateFormat(this.expiryDate, this.duration)
-                let dateTimeArr = this.data.expiryDate.split(',')
-                this.dateInfo = dateTimeArr[0]
-                this.timeInfo = dateTimeArr[1]
+            }
+            if (moment(new Date()).isBetween(this.startDate, this.endDate)) {
+                this.disableFlag = false
             }
             this.joiningInfo.push(this.data)
         }
@@ -54,6 +60,8 @@ export class RightMenuCardComponent implements OnInit, OnChanges {
         const futureDate = new Date(getTime + duration * 60000)
         const formatedHoursMin = this.formatTimeAmPm(futureDate)
         const readableDateMonth = moment(formatedDate).format('MMMM DD YYYY, hh:mm a')
+        this.startDate = moment(formatedDate).format('MMMM DD YYYY, hh:mm a')
+        this.endDate = moment(futureDate).format('MMMM DD YYYY, hh:mm a')
         const finalDateTimeValue = `${readableDateMonth} - ${formatedHoursMin}`
         return finalDateTimeValue
     }

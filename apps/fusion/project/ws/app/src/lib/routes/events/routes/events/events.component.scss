@@ -20,6 +20,29 @@
   padding: 3px 20px 3px 3px;
 }
 
+.mat-card-content>:last-child:not(.mat-card-footer), .mat-card>:last-child:not(.mat-card-footer) {
+  padding-bottom: 20px;
+}
+
+.event-filter {
+  width: 175px; 
+  line-height: 10px; 
+  padding: 0px;
+}
+
+.select-event-filter {
+  text-align: right; 
+  margin-right: 40px;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-infix {
+  padding: 10px !important;
+}
+
+.mat-form-field-infix {
+  width: 140px !important;
+}
+
 .today-empty-box {
   background-color: rgba(0, 0, 0, 0.04);
   width: 250px;

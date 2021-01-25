@@ -58,8 +58,8 @@ export class EventsCardComponent implements OnInit, OnChanges {
     this.router.navigate([`/app/event-hub/home/123`])
   }
 
-  joinEvent(meetingURL: any) {
-    window.open(meetingURL, '_blank')
+  joinEvent(identifier: any) {
+    this.router.navigate([`/app/event-hub/home/${identifier}`])
   }
 
   eventDateFormat(datetime: any, duration: any) {
@@ -91,20 +91,5 @@ export class EventsCardComponent implements OnInit, OnChanges {
       const strTime = `${hours}:${minutes} ${ampm}`
       return strTime
   }
-
-  // userCountArray(){
-  //     for (let i = 0; i < this.presenters.length; i++) {
-  //         const firstname = this.presenters[i].name.charAt(0)
-  //         const lastname = this.presenters[i].name.split('')[1]
-  //         const userObj = {
-  //             name: `${firstname} ${lastname}`
-  //         }
-  //         if(i <= 2){
-  //             this.avatarArr.push(userObj)
-  //         }else{
-  //             this.splitArr.push(userObj)
-  //         }
-  //     }
-  // }
 
 }

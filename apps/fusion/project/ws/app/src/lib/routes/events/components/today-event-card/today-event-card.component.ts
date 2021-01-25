@@ -27,9 +27,7 @@ export class TodayEventCardComponent implements OnInit, OnChanges {
         if (this.data !== undefined) {
             this.eventDetails = this.data
             this.eventTitle = this.eventDetails.eventName
-            this.description = this.eventDetails.eventName.replace(/(?:https?|ftp):\/\/[\n\S]+/g, '')
-            this.eventDate = this.eventDateFormat(this.eventDetails.eventDate, this.eventDetails.eventDuration)
-            this.presentersCount = (this.eventDetails.eventjoined.includes('---')) ? '' :  this.eventDetails.eventjoined.substr(0, 2)
+            this.eventDate = this.eventDetails.todayEventDateStr
             this.identifier = this.eventDetails.identifier
             this.isLive = this.eventDetails.status
         }
@@ -37,25 +35,5 @@ export class TodayEventCardComponent implements OnInit, OnChanges {
 
     getDetails() {
         this.router.navigate([`/app/event-hub/home/${this.identifier}`])
-    }
-
-    eventDateFormat(date: any, duration: any) {
-        const timeArr = date.split(' ')
-        const mediumArr = timeArr[1].split(':')
-        const mediumStart = (mediumArr[0] >= 12) ? 'pm' : 'am'
-        const floor = Math.floor
-        const hours = floor(duration / 60)
-        const minutes = duration % 60
-        const hoursEnd = parseInt(mediumArr[0], 10) + hours
-        const toHours = (hoursEnd < 10) ? `0${hoursEnd}` : hoursEnd
-        const minutesEnd = parseInt(mediumArr[1], 10) + minutes
-        const mediumEnd = (toHours >= 12) ? 'pm' : 'am'
-        let str = ''
-        if (minutesEnd === 60) {
-            str =  `${timeArr[1]} ${mediumStart} - ${toHours}:00 ${mediumEnd}`
-        } else {
-            str = `${timeArr[1]} ${mediumStart} - ${toHours}:${minutesEnd} ${mediumEnd}`
-        }
-        return str
     }
 }

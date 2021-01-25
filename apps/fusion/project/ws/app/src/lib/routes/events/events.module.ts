@@ -36,6 +36,7 @@ import { RelatedPostsComponent } from './components/related-posts/related-posts.
 import { WidgetResolverModule } from '@ws-widget/resolver'
 import { RightMenuCardComponent } from './components/right-menu-card/right-menu-card.component'
 import { PresenterCardComponent } from './components/presenter-card/presenter-card.component'
+import { HorizontalScrollerModule, PipeDurationTransformModule, DefaultThumbnailModule } from '@ws-widget/utils'
 
 @NgModule({
   declarations: [
@@ -75,6 +76,9 @@ import { PresenterCardComponent } from './components/presenter-card/presenter-ca
     PipeFilterSearchModule,
     BtnPageBackModule,
     WidgetResolverModule,
+    HorizontalScrollerModule,
+    PipeDurationTransformModule,
+    DefaultThumbnailModule,
   ],
   providers: [
     LoaderService,
