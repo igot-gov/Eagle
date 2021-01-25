@@ -245,36 +245,36 @@
           "name": "Competencies",
           "key": "competencies",
           "fragment": false,
-          "render": true,
+          "render": false,
           "badges": {
             "enabled": false,
             "uri": ""
           },
-          "enabled": true,
+          "enabled": false,
           "routerLink": "/app/notifications"
         },
         {
           "name": "Policies",
           "key": "policies",
           "fragment": false,
-          "render": true,
+          "render": false,
           "badges": {
             "enabled": false,
             "uri": ""
           },
-          "enabled": true,
+          "enabled": false,
           "routerLink": "/app/notifications"
         },
         {
           "name": "About",
           "key": "about",
           "fragment": false,
-          "render": true,
+          "render": false,
           "badges": {
             "enabled": false,
             "uri": ""
           },
-          "enabled": true,
+          "enabled": false,
           "routerLink": "/app/info/about"
         }
       ]
