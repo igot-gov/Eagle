@@ -69,10 +69,9 @@
       </div>
       <div class="flex flex-row margin-top-l">
         <div class="flex">
-
-          <button mat-raised-button (click)="data.emit('back')"
-            class="btn-n text-white ws-mat-primary-background margin-left-s">
-            <span class="mat-subheading-2 padding-xs" style="vertical-align: unset;" i18n>Back: Content quality
+          <button mat-raised-button type="button" (click)="data.emit('back')"
+            class="ws-mat-accent-text ws-mat-accent-border-active margin-left-s">
+            <span class="mat-subheading-2 padding-xs m-0" style="vertical-align: unset;" i18n>Take test again
             </span>
           </button>
         </div>
@@ -80,7 +79,7 @@
         <div class="flex">
           <button mat-raised-button (click)="data.emit('next')"
             class="btn-n text-white ws-mat-primary-background margin-left-s">
-            <span class="mat-subheading-2 padding-xs" style="vertical-align: unset;" i18n>Next: Summary
+            <span class="mat-subheading-2 padding-xs m-0" style="vertical-align: unset;" i18n>Next: Summary
             </span>
           </button>
         </div>

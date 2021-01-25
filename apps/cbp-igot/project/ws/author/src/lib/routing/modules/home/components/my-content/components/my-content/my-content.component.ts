@@ -289,6 +289,13 @@ export class MyContentComponent implements OnInit, OnDestroy {
       this.queryFilter,
       this.isAdmin,
     )
+    let isUserRecordEnabled = true
+    const adminOnlyRoles = this.accessService.hasRole(['admin', 'super-admin', 'content-admin', 'editor', 'content-creator'])
+    if (adminOnlyRoles) {
+      isUserRecordEnabled = true
+    } else if (this.accessService.hasRole(['reviewer', 'publisher'])) {
+      isUserRecordEnabled = false
+    }
     const requestData = {
       request: {
         locale: this.searchLanguage ? [this.searchLanguage] : [],
@@ -308,7 +315,7 @@ export class MyContentComponent implements OnInit, OnDestroy {
         uuid: this.userId,
         rootOrg: this.accessService.rootOrg,
         // this is for Author Only
-        isUserRecordEnabled: !this.accessService.hasRole(['reviewer', 'publisher']),
+        isUserRecordEnabled: isUserRecordEnabled,
         // !this.accessService.hasRole(['admin', 'super-admin', 'content-admin', 'editor', 'reviewer', 'publisher']),
       },
     }

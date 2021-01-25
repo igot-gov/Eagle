@@ -150,7 +150,7 @@ export class AllContentComponent implements OnInit, OnDestroy {
     } else {
       this.leftmenues = this.authInitService.authAdditionalConfig.menus
     }
-    this.isAdmin = this.accessService.hasRole(['admin', 'super-admin', 'content-admin', 'editor'])
+    this.isAdmin = this.accessService.hasRole(['admin', 'super-admin', 'content-admin', 'editor', 'content-creator'])
     if (this.courseTaken.mandatoryCourseCompleted) {
       this.initCardTable()
     } else {
