@@ -1,4 +1,4 @@
-<ng-container *ngIf="displayType === 'basic' && content.contentType.toLowerCase() !== 'event'">
+<ng-container *ngIf="displayType === 'basic'">
   <mat-card>
     <mat-card-header>
       <mat-card-title>
@@ -10,7 +10,7 @@
   </mat-card>
 </ng-container>
 
-<ng-container *ngIf="displayType === 'advanced' && content.contentType.toLowerCase() !== 'event'">
+<ng-container *ngIf="displayType === 'advanced'">
   <mat-card *ngIf="content" class="advanced-view relative">
     <div *ngIf="content.status === 'Deleted' || content.status === 'Expired'" i18n-aria-label
       aria-label="Content expired or deleted" class="status-danger"></div>

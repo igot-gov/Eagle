@@ -28,7 +28,7 @@ export interface IFilterUnitResponse {
   checked?: boolean
 }
 export interface IFilterUnitContent {
-  type: string
+  type?: string
   id?: string
   displayName: string
   count: number
