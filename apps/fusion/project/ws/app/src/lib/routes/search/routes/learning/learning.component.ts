@@ -380,6 +380,9 @@ export class LearningComponent implements OnInit, OnDestroy {
             this.activated.snapshot.data.pageroute !== 'learning' ? true : false,
           )
           this.filtersResponse = filteR.filtersRes
+          this.filtersResponse.forEach(contents => {
+            contents.content = contents.content.filter(content => content.type.toLowerCase() !== 'event')
+          })
           if (
             this.searchResults.totalHits === 0 && this.isDefaultFilterApplied
           ) {
