@@ -46,14 +46,14 @@ export class HomeComponent implements OnInit, OnDestroy {
     const dept = this.router.url.split('=')
     if (dept[1]) {
       const nxt = dept[1].split(';')
-
+      const re = /\%20/gi
       if (nxt[0] === 'true' || nxt[0].includes('%')) {
-        this.dept = url[3].replace('%20', ' ')
+        this.dept = url[3].replace(re, ' ')
       } else {
-        this.dept = nxt[0].replace('%20', ' ')
+        this.dept = nxt[0].replace(re, ' ')
       }
       if (dept[3]) {
-        this.mydept = dept[3].replace('%20', ' ')
+        this.mydept = dept[3].replace(re, ' ')
       } else {
         this.mydept = 'Basic Information'
       }

@@ -1,0 +1,7 @@
+<mat-nav-list class="margin-left-xl margin-right-s flex-1" style="padding:0">
+  <ng-container *ngFor="let tab of tabsData">
+    <a mat-list-item *ngIf="tab?.enabled" matRipple [class.ws-active-left-menu]="isLinkActive(tab.key)"
+      (click)="onSideNavTabClick(tab.key)">
+      {{tab?.name}}</a>
+  </ng-container>
+</mat-nav-list>

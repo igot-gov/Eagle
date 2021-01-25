@@ -1,24 +1,43 @@
-<div class="pad-l-4r">
-  <div class="margin-top-xs flex flex-column">
-    <a [routerLink]="['/app/home/users']" role="link" i18n class="flex flex-column margin-top-l">
-      <img src="spv-assets/icons/goi.png" alt="Department of Personnel and Training" class="goi" />
-      <span i18n class="mat-body-2 margin-top-m padding-right-m">{{widgetData.name}}
+<div class="flex flex-1 flex-column pad-l-4r min-wid">
+  <div class="margin-top-xs flex flex-column max-width" *ngIf="widgetData.logo">
+    <a href="javascript:void(0)" role="link" i18n class="flex flex-column margin-top-l">
+      <img [src]="widgetData.logoPath" [alt]="widgetData.name" class="img" (error)="changeToDefaultImg($event)" />
+      <span i18n class="mat-subheading-2 margin-top-m padding-right-m">
+        <!-- this will be dynamic -->
+        {{widgetData.name}}
       </span>
     </a>
   </div>
-  <mat-nav-list class="margin-top-m flex-1" aria-label="left menu">
-    <ng-container *ngFor="let tab of widgetData; let i = index">
-      <!-- {{tab | json}} -->
-      <a mat-list-item class="mat-body-2 flex flex-1 outline-1" *ngIf="tab?.enabled && !tab.customRouting" matRipple
-        active i18n-aria-label [routerLink]="[tab.routerLink]" [queryParamsHandling]="preserve"
-        routerLinkActive="ws-active-route-menu">
-        <span class="padding-left-xs">{{tab?.name}}</span>
-      </a>
-      <a mat-list-item class="mat-body-2 flex flex-1 outline-1" *ngIf="tab?.enabled && tab.customRouting" matRipple
-        active i18n-aria-label [routerLink]="getLink(tab)" [queryParamsHandling]="preserve"
-        [class.ws-active-route-menu]="isLinkActive(tab?.routerLink)" routerLinkActive="ws-active-route-menu">
-        <span class="padding-left-xs">{{tab?.name}}</span>
-      </a>
+  <mat-nav-list class="margin-top-m flex-1">
+    <ng-container *ngFor="let tab of widgetData.menus; let i = index">
+      <ng-container *ngIf="isAllowed(tab)">
+        <a mat-list-item disableRipple class="flex outline-1" [attr.data-index]="i"
+          *ngIf="tab?.enabled && !tab.customRouting && !tab.fragment && !tab.queryParams"
+          [routerLink]="[tab.routerLink]" [queryParamsHandling]="'preserve'" routerLinkActive="ws-active-route-menu">
+          <!--  [class.ws-active-route-menu]="isLinkActive(tab.key)" [fragment]="tab.fragment? tab.key : ''" [queryParamsHandling]="preserve" -->
+          <span class="padding-left-xs">{{tab?.name}}</span>
+        </a>
+        <a mat-list-item disableRipple class="flex outline-1" [attr.data-index]="i"
+          *ngIf="tab?.enabled && !tab.customRouting && tab.fragment && !tab.queryParams" [routerLink]="'.'"
+          [class.ws-active-route-menu]="isLinkActive(tab.key, i)" [fragment]="tab.fragment? tab.key : ''"
+          [queryParamsHandling]="'preserve'">
+          <span class="padding-left-xs">{{tab?.name}}</span>
+        </a>
+        <a mat-list-item disableRipple class="flex outline-1" [attr.data-index]="i"
+          *ngIf="tab?.enabled && tab.customRouting && !tab.queryParams" [routerLink]="getLink(tab)"
+          [queryParamsHandling]="'preserve'" routerLinkActive="ws-active-route-menu">
+          <!--  [class.ws-active-route-menu]="isLinkActive(tab.key)" [fragment]="tab.fragment? tab.key : ''" [queryParamsHandling]="preserve" -->
+          <span class="padding-left-xs">{{tab?.name}}</span>
+        </a>
+        <a mat-list-item disableRipple class="flex outline-1" [attr.data-index]="i"
+          *ngIf="tab?.enabled && !tab.customRouting  && !tab.fragment && tab.queryParams" [routerLink]="tab.routerLink"
+          [queryParams]="{'status':tab.queryParams}" [queryParamsHandling]="'preserve'"
+          [class.ws-active-route-menu]="isLinkActive2(tab.routerLink)">
+          <!-- routerLinkActive="ws-active-route-menu"> -->
+          <!--  [class.ws-active-route-menu]="isLinkActive(tab.key)" [fragment]="tab.fragment? tab.key : ''" [queryParamsHandling]="preserve" -->
+          <span class="padding-left-xs">{{tab?.name}}</span>
+        </a>
+      </ng-container>
     </ng-container>
   </mat-nav-list>
 </div>

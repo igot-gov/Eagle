@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { CreateMDORoutingModule } from './create-mdo-routing.module'
 import { HomeComponent } from './routes/home/home.component'
-import { BtnPageBackModule, LeftMenuModule, GroupCheckboxModule, UITableModule } from '@ws-widget/collection'
+import { BtnPageBackModule, LeftMenuModule, GroupCheckboxModule, UITableModule, ScrollspyLeftMenuModule } from '@ws-widget/collection'
 import { WidgetResolverModule } from '@ws-widget/resolver'
 import { HomeModule } from '../home/home.module'
 import { RouterModule } from '@angular/router'
@@ -18,7 +18,7 @@ import { RolesAccessComponent } from '../access/routes/roles-access/roles-access
 @NgModule({
   declarations: [HomeComponent, UsersComponent, RolesAccessComponent],
   imports: [CommonModule, CreateMDORoutingModule, BtnPageBackModule, LeftMenuModule, WidgetResolverModule,
-    MatSidenavModule, MatIconModule, GroupCheckboxModule, HomeModule, RouterModule, UITableModule, MatCardModule],
+    MatSidenavModule, MatIconModule, GroupCheckboxModule, HomeModule, RouterModule, UITableModule, MatCardModule, ScrollspyLeftMenuModule],
   exports: [UsersComponent, RolesAccessComponent],
   providers: [UsersService],
 })

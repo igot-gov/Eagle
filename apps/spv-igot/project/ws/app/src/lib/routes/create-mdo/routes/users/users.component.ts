@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, OnDestroy } from '@angular/core'
+import { AfterViewInit, Component, OnInit, OnDestroy, ElementRef, HostListener, ViewChild } from '@angular/core'
 import { Router, ActivatedRoute } from '@angular/router'
 import { ProfileV2Service } from '../../../home/services/home.servive'
 import { UsersService } from '../../services/users.service'
@@ -11,15 +11,45 @@ import { UsersService } from '../../services/users.service'
 
 export class UsersComponent implements OnInit, AfterViewInit, OnDestroy {
   tabledata: any = []
+  currentTab = 'users'
   data: any = []
   role: any
+  tabsData!: any[]
+  elementPosition: any
+  sticky = false
+  basicInfo: any
   id!: string
   currentDept!: string
   private defaultSideNavBarOpenedSubscription: any
+  @ViewChild('stickyMenu', { static: true }) menuElement!: ElementRef
+
+  @HostListener('window:scroll', ['$event'])
+  handleScroll() {
+    const windowScroll = window.pageYOffset
+    if (windowScroll >= this.elementPosition) {
+      this.sticky = true
+    } else {
+      this.sticky = false
+    }
+  }
 
   constructor(private usersSvc: UsersService, private router: Router, private route: ActivatedRoute, private profile: ProfileV2Service) {
   }
   ngOnInit() {
+    this.tabsData = [
+      {
+        name: 'Users',
+        key: 'users',
+        render: true,
+        enabled: true,
+      },
+      {
+        name: 'Roles And Access',
+        key: 'rolesandaccess',
+        render: true,
+        enabled: true,
+      }]
+
     const url = this.router.url.split('/')
     this.role = url[url.length - 2]
     this.route.params.subscribe(params => {
@@ -30,7 +60,6 @@ export class UsersComponent implements OnInit, AfterViewInit, OnDestroy {
         this.getAllActiveUsers()
       } else {
         this.getAllActiveUsersByDepartmentId(this.id)
-        // this.fetchUsersWithRole()
       }
 
     })
@@ -52,6 +81,14 @@ export class UsersComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   ngAfterViewInit() {
     // this.elementPosition = this.menuElement.nativeElement.parentElement.offsetTop
+    this.elementPosition = 127
+  }
+  onSideNavTabClick(id: string) {
+    this.currentTab = id
+    const el = document.getElementById(id)
+    if (el != null) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' })
+    }
   }
 
   /* API call to get all roles*/

@@ -1,14 +1,16 @@
-<div class="flex flex-4 flex-column">
-  <mat-card class="flex-custom">
-    <!-- <button mat-raised-button type="button" *ngIf="id!=='undefined' && data.length===0 "
-      class="text-white ws-mat-primary-background text-white margin-right-m custom-btn" (click)="gotoAddAdmin()">
-      <b class="text-white" i18n>Add Admin</b>
-    </button> -->
-    <mat-card-content>
-      <ng-container>
-        <ws-widget-ui-user-table [tableData]="tabledata" [data]="data" [needAddAdmin]="false" [needCreateUser]="true">
-        </ws-widget-ui-user-table>
-      </ng-container>
-    </mat-card-content>
-  </mat-card>
+<div class="flex">
+  <div class="min-wid" style="position: relative;">
+    <div #stickyMenu [class.sticky]="sticky">
+      <ws-widget-scrollspy-left-menu [currentTab]="currentTab" [tabsData]="tabsData" class="flex flex-1"
+        (eSideNavClick)="onSideNavTabClick($event)">
+      </ws-widget-scrollspy-left-menu>
+    </div>
+  </div>
+  <div class="flex-display">
+    <ws-widget-ui-user-table *ngIf="currentTab==='users'" [tableData]="tabledata" [data]="data" [needAddAdmin]="false"
+      [needCreateUser]="true">
+    </ws-widget-ui-user-table>
+    <ws-app-roles-access *ngIf="currentTab==='rolesandaccess'">
+    </ws-app-roles-access>
+  </div>
 </div>

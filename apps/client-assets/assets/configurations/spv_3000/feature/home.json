@@ -2,7 +2,9 @@
     "menus": {
         "widgetType": "menus",
         "widgetSubType": "leftMenu",
-        "widgetData": [
+        "widgetData": {
+            "logo":true,
+            "menus":[
             {
                 "name": "Directory",
                 "key": "directory",
@@ -40,5 +42,6 @@
                 "routerLink": "/app/home/roles-access"
             }
         ]
+    }
     }
 }
