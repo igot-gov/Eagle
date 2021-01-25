@@ -1,15 +1,6 @@
 package com.infosys.lex.portal.department.service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -611,6 +602,7 @@ public class PortalServiceImpl implements PortalService {
 
 				// Get Role Informations
 				List<Role> roleList = getDepartmentRoles(Arrays.asList(deptInfo.getDeptTypeIds()));
+				Collections.sort(roleList, Comparator.nullsFirst(Comparator.comparing(Role::getRoleName)));
 				if (!isUserInfoRequired && !CollectionUtils.isEmpty(roleList)) {
 					List<Role> newRoleList = new ArrayList<>();
 					for (Role role : roleList) {
@@ -671,7 +663,23 @@ public class PortalServiceImpl implements PortalService {
 							deptInfo.addInActiveUser(pUserInfo);
 						}
 					}
+					List<PortalUserInfo> portalActiveUsers = deptInfo.getActive_users();
+					if (!CollectionUtils.isEmpty(portalActiveUsers)) {
+						Collections.sort(portalActiveUsers, Comparator.nullsFirst(Comparator.comparing(PortalUserInfo::getFirstName)));
+						deptInfo.setActive_users(portalActiveUsers);
+					}
+					List<PortalUserInfo> portalBlockedUsers = deptInfo.getBlocked_users();
+					if (!CollectionUtils.isEmpty(portalBlockedUsers)) {
+						Collections.sort(portalBlockedUsers, Comparator.nullsFirst(Comparator.comparing(PortalUserInfo::getFirstName)));
+						deptInfo.setBlocked_users(portalBlockedUsers);
+					}
+					List<PortalUserInfo> portalInActiveUsers = deptInfo.getInActive_users();
+					if (!CollectionUtils.isEmpty(portalInActiveUsers)) {
+						Collections.sort(portalInActiveUsers, Comparator.nullsFirst(Comparator.comparing(PortalUserInfo::getFirstName)));
+						deptInfo.setInActive_users(portalInActiveUsers);
+					}
 				}
+
 			}
 
 			logger.info("enrichDepartmentInfo: " + deptInfo);
