@@ -18,7 +18,7 @@ export class UsersComponent implements OnInit, AfterViewInit, OnDestroy {
   private defaultSideNavBarOpenedSubscription: any
 
   constructor(private usersSvc: UsersService, private router: Router
-    ,         public dialog: MatDialog) { }
+    , public dialog: MatDialog) { }
   ngOnInit() {
     const url = this.router.url.split('/')
     this.role = url[url.length - 2]
@@ -27,7 +27,6 @@ export class UsersComponent implements OnInit, AfterViewInit, OnDestroy {
     // int left blank
 
     this.tabledata = {
-      actions: [{ name: 'Details', label: 'Details', icon: 'remove_red_eye', type: 'link' }],
       columns: [
         { displayName: 'Full name', key: 'fullName' },
         { displayName: 'Email', key: 'email' },

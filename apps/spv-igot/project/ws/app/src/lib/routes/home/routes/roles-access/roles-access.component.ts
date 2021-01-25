@@ -17,7 +17,6 @@ export class RolesAccessComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit() {
     this.tabledata = {
-      actions: [{ name: 'Details', label: 'Details', icon: 'remove_red_eye', type: 'link' }],
       columns: [
         { displayName: 'Role', key: 'role' },
         { displayName: 'Number of users', key: 'count' },
