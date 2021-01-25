@@ -68,15 +68,26 @@ export class UsersComponent implements OnInit, AfterViewInit, OnDestroy {
     this.profile.getMyDepartment().subscribe(res => {
       res.active_users.map((user: any) => {
         if (user.roleInfo.length > 0) {
-          if (user.roleInfo[0].roleName === this.roleName) {
-            users.push({
-              fullName: `${user.firstName} ${user.lastName}`,
-              email: user.emailId,
-              position: user.department_name,
-              role: this.roleName,
-              wid: user.wid,
-            })
-          }
+          // if (user.roleInfo[0].roleName === this.roleName) {
+          //   users.push({
+          //     fullName: `${user.firstName} ${user.lastName}`,
+          //     email: user.emailId,
+          //     position: user.department_name,
+          //     role: this.roleName,
+          //     wid: user.wid,
+          //   })
+          // }
+          user.roleInfo.forEach((eachrole: any) => {
+            if (eachrole.roleName === this.roleName) {
+              users.push({
+                fullName: `${user.firstName} ${user.lastName}`,
+                email: user.emailId,
+                position: user.department_name,
+                role: this.roleName,
+                wid: user.wid,
+              })
+            }
+          })
         }
         this.data = users
       })
