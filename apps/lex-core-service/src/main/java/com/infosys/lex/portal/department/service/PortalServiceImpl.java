@@ -12,11 +12,13 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.client.RestTemplate;
 
 import com.infosys.lex.common.service.UserUtilityService;
@@ -609,10 +611,21 @@ public class PortalServiceImpl implements PortalService {
 
 				// Get Role Informations
 				List<Role> roleList = getDepartmentRoles(Arrays.asList(deptInfo.getDeptTypeIds()));
-				for(Role role : roleList){
-					role.setNoOfUsers(userDepartmentRoleRepo.getTotalUserCountOnRoleIdAndDeptId(role.getId(), deptInfo.getId()));
+				if (!isUserInfoRequired && !CollectionUtils.isEmpty(roleList)) {
+					List<Role> newRoleList = new ArrayList<>();
+					for (Role role : roleList) {
+						Role assignRole = new Role();
+						assignRole.setDescription(role.getDescription());
+						assignRole.setId(role.getId());
+						assignRole.setRoleName(role.getRoleName());
+						assignRole.setNoOfUsers(userDepartmentRoleRepo.getTotalUserCountOnRoleIdAndDeptId(role.getId(), deptInfo.getId()));
+						newRoleList.add(assignRole);
+					}
+					deptInfo.setRolesInfo(newRoleList);
+				} else {
+					deptInfo.setRolesInfo(roleList);
 				}
-				deptInfo.setRolesInfo(roleList);
+
 
 				// TODO Current User Roles
 
@@ -825,7 +838,7 @@ public class PortalServiceImpl implements PortalService {
 		if (DataValidator.isCollectionEmpty(deptTypeList)) {
 			return null;
 		}
-		Set<String> deptTypeNames = new HashSet<String>();
+		Set<String> deptTypeNames = new HashSet<>();
 		deptTypeNames.add("COMMON");
 		for (DepartmentType deptType : deptTypeList) {
 			deptTypeNames.add(deptType.getDeptType());
@@ -833,7 +846,7 @@ public class PortalServiceImpl implements PortalService {
 
 		Iterable<DepartmentRole> deptRoleList = deptRoleRepo
 				.findAllByDeptTypeIn(deptTypeNames.stream().collect(Collectors.toList()));
-		Set<Role> roleList = new HashSet<Role>();
+		Set<Role> roleList = new HashSet<>();
 		if (DataValidator.isCollectionEmpty(deptRoleList)) {
 			return null;
 		}
