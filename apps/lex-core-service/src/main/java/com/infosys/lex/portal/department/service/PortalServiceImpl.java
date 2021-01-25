@@ -908,13 +908,11 @@ public class PortalServiceImpl implements PortalService {
 	public UserDepartmentRole updateUserRoleDepartment(UserRoleDepartmentInfo userRoleDepartmentInfo, String wid, String rootOrg,
 													   String org) throws Exception {
 		logger.info("Start updating the department name");
-		UserDepartmentRole userDepartmentRole = new UserDepartmentRole();
 		Department department = deptRepo.findByDeptName(userRoleDepartmentInfo.getNewDeptName());
-		userDepartmentRole.setDeptId(department.getDeptId());
-		userDepartmentRole.setUserId(userRoleDepartmentInfo.getUserId());
-		userDepartmentRole.setRoles(userRoleDepartmentInfo.getRoles());
-		validateUserDepartmentRole(userDepartmentRole, false);
-		UserDepartmentRole existingRecord = userDepartmentRoleRepo.findByUserIdAndDeptId(userDepartmentRole.getUserId(),
+		if (!userUtilService.validateUser("igot", userRoleDepartmentInfo.getUserId())) {
+			throw new Exception("Invalid UserId.");
+		}
+		UserDepartmentRole existingRecord = userDepartmentRoleRepo.findByUserIdAndDeptId(userRoleDepartmentInfo.getUserId(),
 				department.getDeptId());
 		if (existingRecord != null) {
 			throw new Exception("User already assigned to the : " + department.getDeptName() + " Department");
@@ -922,7 +920,7 @@ public class PortalServiceImpl implements PortalService {
 			Department oldDepartment = deptRepo.findByDeptName(userRoleDepartmentInfo.getOldDeptName());
 			if (ObjectUtils.isEmpty(oldDepartment)) {
 				logger.info("No department is there with the name : " + userRoleDepartmentInfo.getOldDeptName());
-				List<UserDepartmentRole> oldUserDepartmentRoles = userDepartmentRoleRepo.findByUserId(userDepartmentRole.getUserId());
+				List<UserDepartmentRole> oldUserDepartmentRoles = userDepartmentRoleRepo.findByUserId(userRoleDepartmentInfo.getUserId());
 				if (!oldUserDepartmentRoles.isEmpty() && oldUserDepartmentRoles.size() > 1) {
 					throw new Exception("More than one department exists for user" + oldUserDepartmentRoles);
 				}
@@ -932,10 +930,10 @@ public class PortalServiceImpl implements PortalService {
 					existingRecord = new UserDepartmentRole();
 				}
 			} else {
-				existingRecord = userDepartmentRoleRepo.findByUserIdAndDeptId(userDepartmentRole.getUserId(),
+				existingRecord = userDepartmentRoleRepo.findByUserIdAndDeptId(userRoleDepartmentInfo.getUserId(),
 						oldDepartment.getDeptId());
 				if (ObjectUtils.isEmpty(existingRecord)) {
-					List<UserDepartmentRole> oldUserDepartmentRoles = userDepartmentRoleRepo.findByUserId(userDepartmentRole.getUserId());
+					List<UserDepartmentRole> oldUserDepartmentRoles = userDepartmentRoleRepo.findByUserId(userRoleDepartmentInfo.getUserId());
 					if (oldUserDepartmentRoles.size() > 1) {
 						throw new Exception("More than one department exists for user" + oldUserDepartmentRoles);
 					}
