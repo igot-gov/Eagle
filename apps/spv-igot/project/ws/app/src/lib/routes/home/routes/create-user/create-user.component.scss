@@ -544,6 +544,10 @@ input.mat-input-element {
     border: 1px solid #ccc !important;
     width: 92% !important;
   }
+
+  .dropdown-list .filter-textbox input{
+    width: 90% !important;
+  }
 }
 
 ::ng-deep.mat-list-base {
