@@ -10,5 +10,5 @@ public class PortalConstants {
 	public final static String SPV_DEPT_TYPE = "SPV";
 	public final static String CBP_DEPT_TYPE = "CBP";
 	public final static String CBP_ROLE_NAME = "CBP ADMIN";
-	public final static List<String> CBP_ROLES = Arrays.asList("EDITOR", "CONTENT_CREATOR", "REVIEWER", "PUBLISHER");
+	public final static List<String> CBP_ROLES = Arrays.asList("EDITOR", "REVIEWER", "PUBLISHER", "CONTENT-CREATOR");
 }
