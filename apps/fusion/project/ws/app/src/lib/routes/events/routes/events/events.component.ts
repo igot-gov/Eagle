@@ -31,7 +31,7 @@ export class EventsComponent implements OnInit {
         private eventSrvc: EventsService,
         private configSvc: ConfigurationsService,
         ) {
-        this.getEventData()
+        this.getAllEventData()
         this.department = this.configSvc.userProfile && this.configSvc.userProfile.departmentName
     }
 
@@ -45,17 +45,22 @@ export class EventsComponent implements OnInit {
         }
     }
 
-    getEventData() {
+    getAllEventData() {
         const reqObj = {
             locale: [
                 'en',
             ],
-            pageSize: 25,
+            pageSize: 50,
             query: 'all',
             didYouMean: true,
             filters: [
                 {
                     andFilters: [
+                        {
+                            lastUpdatedOn: [
+                                'month',
+                            ],
+                        },
                         {
                             contentType: [
                                 'Event',
@@ -75,12 +80,49 @@ export class EventsComponent implements OnInit {
         })
     }
 
-    setEventData(responseObj: any) {
+    getMyMDOEvents() {
+        const reqObj = {
+            locale: [
+                'en',
+            ],
+            pageSize: 50,
+            query: 'all',
+            didYouMean: true,
+            filters: [
+                {
+                    andFilters: [
+                        {
+                            lastUpdatedOn: [
+                                'month',
+                            ],
+                        },
+                        {
+                            contentType: [
+                                'Event',
+                            ],
+                        },
+                        {
+                            sourceName: [
+                                this.department,
+                            ],
+                        },
+                    ],
+                },
+            ],
+            includeSourceFields: [
+                'creatorLogo',
+                'appIcon',
+            ],
+        }
+
+        this.eventSrvc.getEvents(reqObj).subscribe((res: any) => {
+            this.setMyMDOEventData(res)
+        })
+    }
+
+    setMyMDOEventData(responseObj: any) {
         if (responseObj.result !== undefined) {
             const eventList = responseObj.result
-            this.eventData['todayEvents'] = []
-            this.eventData['allEvents'] = []
-            this.eventData['joinedByMe'] = []
             this.eventData['myMDOEvents'] = []
             Object.keys(eventList).forEach((index: any) => {
                 const eventObj = eventList[index]
@@ -105,13 +147,54 @@ export class EventsComponent implements OnInit {
                     expirtyDate: eventObj.expiryDate,
                     participants: eventObj.creatorContacts,
                 }
+                this.eventData['myMDOEvents'].push(eventDataObj)
+                this.joinedByMeEventsCount = this.eventData['joinedByMe'].length
+            })
+        }
+    }
+
+    setEventData(responseObj: any) {
+        if (responseObj.result !== undefined) {
+            const eventList = responseObj.result
+            this.eventData['todayEvents'] = []
+            this.eventData['allEvents'] = []
+            this.eventData['joinedByMe'] = []
+            Object.keys(eventList).forEach((index: any) => {
+                const eventObj = eventList[index]
+                const expiryDateFormat = this.customDateFormat(eventObj.expiryDate)
+                const eventDataObj = {
+                    eventName: eventObj.name.replace(/http?.*?(?= |$)/g, ''),
+                    eventDate: expiryDateFormat,
+                    eventUpdatedOn: eventObj.lastUpdatedOn,
+                    eventDuration: eventObj.duration,
+                    eventjoined: (eventObj.creatorDetails !== undefined && eventObj.creatorDetails.length > 0) ?
+                    ((eventObj.creatorDetails.length === 1) ? '1 person' :  `${eventObj.creatorDetails.length} people`) : ' --- ',
+                    eventThumbnail: (eventObj.appIcon !== null || eventObj.appIcon !== undefined) ? eventObj.appIcon : '---',
+                    eventDescription: eventObj.description,
+                    eventStatus: eventObj.status,
+                    eventObjective: eventObj.learningObjective,
+                    eventPresenters: (eventObj.creatorContacts !== undefined && eventObj.creatorContacts.length > 0)
+                    ? eventObj.creatorContacts : '',
+                    identifier: eventObj.identifier,
+                    presenters: eventObj.creatorDetails,
+                    eventJoinURL: eventObj.artifactUrl,
+                    eventSource: eventObj.sourceName,
+                    expirtyDate: eventObj.expiryDate,
+                    participants: eventObj.creatorContacts,
+                    todayEventDate: this.eventDateFormat(eventObj.expiryDate, ''),
+                    todayEventDateStr: this.eventDateFormat(eventObj.expiryDate, eventObj.duration),
+                    allEventDate: this.allEventDateFormat(eventObj.expiryDate),
+                }
 
                 // Today's events
                 if (this.isToday(eventObj.expiryDate)) {
-                    this.eventData['todayEvents'].push(eventDataObj)
-                    this.eventData['todayEvents'].sort((a: any, b: any) => {
-                        return a.eventDate - b.eventDate
-                    })
+                    const todayEventObj = {
+                       eventId: eventDataObj.identifier,
+                       eventName: eventDataObj.eventName,
+                       todayEventDate: eventDataObj.todayEventDate,
+                       todayEventDateStr: eventDataObj.todayEventDateStr,
+                    }
+                    this.eventData['todayEvents'].push(todayEventObj)
                 }
 
                 // Joined by me
@@ -124,21 +207,35 @@ export class EventsComponent implements OnInit {
                     })
                 }
 
-                // My MDO
-                if (eventObj.sourceName !== undefined) {
-                    if (this.department === eventObj.sourceName) {
-                        this.eventData['myMDOEvents'].push(eventDataObj)
-                    }
-                }
+                this.eventData['allEvents'].push(eventDataObj)
 
                 this.allEventsCount = this.eventData['allEvents'].length
                 this.todayEventsCount = this.eventData['todayEvents'].length
                 this.joinedByMeEventsCount = this.eventData['joinedByMe'].length
-
-                this.eventData['allEvents'].push(eventDataObj)
             })
             this.filter('all')
         }
+        if (this.todayEventsCount > 0) {
+             this.sortTodayEvents()
+        }
+        if (this.allEventsCount > 0) {
+            this.sortAllEvents()
+        }
+        this.getMyMDOEvents()
+    }
+
+    sortTodayEvents() {
+        this.eventData['todayEvents'].sort((a: any, b: any) => {
+            const date1 = new Date(`1970/01/01 ${a.todayEventDate}`)
+            const date2 = new Date(`1970/01/01 ${b.todayEventDate}`)
+            return date1.getTime() - date2.getTime()
+        })
+    }
+
+    sortAllEvents() {
+        this.eventData['allEvents'].sort((a: any, b: any) => {
+            return a.allEventDate - b.allEventDate
+        })
     }
 
     scroll(el: HTMLElement) {
@@ -166,9 +263,10 @@ export class EventsComponent implements OnInit {
         const dDate  = eventDate.split('T')[0].substring(6, 8)
         const today = new Date()
         const monthVal = `0${today.getMonth() + 1}`
-        return dDate === today.getDate() &&
+        const returnVal = (parseInt(dDate, 10) === today.getDate() &&
         month === (monthVal).slice(-2) &&
-        year === today.getFullYear()
+        parseInt(year, 10) === today.getFullYear())
+        return returnVal
     }
 
     isJoinedByme(userDetails: any) {
@@ -213,8 +311,9 @@ export class EventsComponent implements OnInit {
     applyFilter(filterValue: any) {
         if (filterValue !== '') {
             const data = this.subData.filter((tag: any) => {
-                return tag.eventName.includes(filterValue)
+                return tag.eventName.toLowerCase().includes(filterValue) || tag.eventName.toUpperCase().includes(filterValue)
             })
+
             this.subData = data
         } else {
             this.subData = this.data
@@ -254,4 +353,57 @@ export class EventsComponent implements OnInit {
             return new Date(a.eventDate).getTime() - new Date(b.eventDate).getTime()
         })
     }
+
+    allEventDateFormat(datetime: any) {
+        const dateTimeArr = datetime.split('T')
+        const date = dateTimeArr[0]
+        const year = date.substr(0, 4)
+        const month = date.substr(4, 2)
+        const day = date.substr(6, 2)
+        const time = dateTimeArr[1]
+        const hours = time.substr(0, 2)
+        const minutes = time.substr(2, 2)
+        const seconds = time.substr(4, 2)
+        const formatedDate = new Date(year, month - 1, day, hours, minutes, seconds, 0)
+        const readableDateMonth = moment(formatedDate).format('YYYY-MM-DD hh:mm a')
+        const finalDateTimeValue = `${readableDateMonth}`
+        return finalDateTimeValue
+    }
+
+    eventDateFormat(datetime: any, duration: any) {
+        const dateTimeArr = datetime.split('T')
+        const date = dateTimeArr[0]
+        const year = date.substr(0, 4)
+        const month = date.substr(4, 2)
+        const day = date.substr(6, 2)
+        const time = dateTimeArr[1]
+        const hours = time.substr(0, 2)
+        const minutes = time.substr(2, 2)
+        const seconds = time.substr(4, 2)
+        const formatedDate = new Date(year, month - 1, day, hours, minutes, seconds, 0)
+        let finalDateTimeValue = ''
+        let readableDateMonth = ''
+        if (duration === '') {
+            readableDateMonth = moment(formatedDate).format('hh:mm a')
+            finalDateTimeValue = `${readableDateMonth}`
+        } else {
+            const getTime = formatedDate.getTime()
+            const futureDate = new Date(getTime + duration * 60000)
+            const formatedHoursMin = this.formatTimeAmPm(futureDate)
+            readableDateMonth = moment(formatedDate).format('hh:mm a')
+            finalDateTimeValue = `${readableDateMonth} - ${formatedHoursMin}`
+        }
+        return finalDateTimeValue
+    }
+
+    formatTimeAmPm(futureDate: any) {
+      let hours = futureDate.getHours()
+      let minutes = futureDate.getMinutes()
+      const ampm = hours >= 12 ? 'pm' : 'am'
+      hours = hours % 12
+      hours = hours ? hours : 12
+      minutes = minutes < 10 ? `0${minutes}` : minutes
+      const strTime = `${hours}:${minutes} ${ampm}`
+      return strTime
+  }
 }

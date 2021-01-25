@@ -2,20 +2,22 @@
   <mat-card class="right-menu-card" *ngIf="joiningInfo != undefined">
     <mat-card-content role="link" tabindex="0">
       <ng-container>
-        <div class="ml-4 mr-6 mb-2 view-more ws-mat-accent-text view-all ws-mat-accent-background">
-          <!-- [routerLink]="'/app/user-profile/details'" -->
-          <a href="javascript:void(0);" mat-button class="flex-1" (click)="startMeeting(joiningInfo[0].artifactUrl)">
+        <div class="ml-4 mr-6 mb-2 view-more ws-mat-accent-text view-all ws-mat-accent-background" *ngIf="!disableFlag">
+          <a href="javascript:void(0);" mat-button class="flex-1"  (click)="startMeeting(joiningInfo[0].artifactUrl)" *ngIf="!disableFlag">
             <span class="text-white" i18n >Attend Live Event</span>
           </a>
+        </div>
+        <div class="ml-4 mr-6 mb-2 view-more ws-mat-accent-text view-all ws-mat-accent-background disable-style" *ngIf="disableFlag">
+          <span class="text-white" i18n >Attend Live Event</span>
         </div>
       </ng-container>
     </mat-card-content>
     <mat-card-content>
       <div style="background:rgba(0, 0, 0, 0.04); padding:15px;">
-        <span class="mat-subheading-2" role="link" tabindex="0">{{ joiningInfo[0].lastUpdatedOn | date: 'longDate' }}</span>
+        <span class="mat-subheading-2" role="link" tabindex="0">{{ dateInfo }}</span>
         <div class="flex flex-wrap" role="link" tabindex="0">
             <span class="flex-wrap" role="link" tabindex="0" style="color:rgba(0, 0, 0, 0.6); font-size:14px;">
-              11:00 am - 12:00 pm
+              {{ timeInfo }}
             </span>
         </div>
       </div>

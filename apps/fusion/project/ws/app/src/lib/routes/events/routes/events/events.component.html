@@ -9,15 +9,17 @@
             </div>
             <div class="flex flex-3">
                 <mat-card class="flex-1 no-box-shadow">
-                    <mat-card-header class="flex items-baseline margin-fix" *ngIf="todayEventsCount > 0">
+                    <mat-card-header class="flex items-baseline margin-fix">
                         <mat-card-title class="margin-l-0 f-medium  flex-1">
                             <span class="width-expand">Today's events</span>
                         </mat-card-title>
                         <span class="spacer"></span>
                     </mat-card-header>
-                    <mat-card-content class="mb-0-imp flex flex-wrap" style="margin-left:16px;">
+                    <mat-card-content style="margin-left:16px; width:809px;">
                         <ng-container *ngIf="todayEventsCount > 0">
-                            <ws-app-today-event-card *ngFor="let event of eventData['todayEvents']" class="mr-4" [data]="event"></ws-app-today-event-card>
+                            <ws-utils-horizontal-scroller>
+                                <ws-app-today-event-card *ngFor="let event of eventData['todayEvents']" class="mr-4 mb-10" [data]="event"></ws-app-today-event-card>
+                            </ws-utils-horizontal-scroller>
                         </ng-container>
                         <ng-container *ngIf="todayEventsCount == 0">
                             <div class="today-empty-box" style="background-color: #ededed; width:250px; height: 115px; border-radius: 2px;">
@@ -47,7 +49,7 @@
         <ng-container *ngIf="joinedByMeEventsCount > 0">
             <div class="flex w-full sm:w-full md:w-1/2 mb-5">
                 <ng-container *ngFor="let event of eventData['joinedByMe']">
-                    <ws-app-events-card class="w-fix" [data]="event"></ws-app-events-card>
+                    <ws-app-events-card [ngStyle]="{'width':'360' + 'px'}" class="w-fix mr-10" [data]="event"></ws-app-events-card>
                 </ng-container>
             </div>
         </ng-container>
@@ -92,9 +94,9 @@
             </a>
         </div>
         <span class="spacer"></span>
-        <div class="flex-1 flex-auto-display" style="text-align: right;">
-            <mat-form-field appearance="outline">
-                <mat-select (selectionChange)="setEventSubFilter($event.value)" [(value)]="currentSubFilter" style="width: 150px; line-height: 10px;">
+        <div class="flex-1 flex-auto-display select-event-filter">
+            <mat-form-field appearance="outline" class="event-filter">
+                <mat-select (selectionChange)="setEventSubFilter($event.value)" [(value)]="currentSubFilter" >
                     <mat-option value="upcoming">Live and upcoming</mat-option>
                     <mat-option value="past">Past events</mat-option>
                 </mat-select>

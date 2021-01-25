@@ -27,7 +27,7 @@ export class PresenterCardComponent implements OnInit, OnChanges {
                     id: userData[index].id,
                     name: userData[index].name,
                     shortName: this.getShortName(userData[index].name),
-                    color: this.random_rgba,
+                    color: this.random_rgba(),
                 }
                 this.userdata.push(obj)
             })
