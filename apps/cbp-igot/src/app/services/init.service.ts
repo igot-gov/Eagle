@@ -273,7 +273,7 @@ export class InitService {
       .get<IDetailsResponse>(endpoint.details).pipe(retry(3))
       .toPromise()
     this.configSvc.userGroups = new Set(details.group)
-    this.configSvc.userRoles = new Set(details.roles)
+    this.configSvc.userRoles = new Set((details.roles || []).map(v => v.toLowerCase()))
     if (this.configSvc.userProfile && this.configSvc.userProfile.isManager) {
       this.configSvc.userRoles.add('is_manager')
     }
