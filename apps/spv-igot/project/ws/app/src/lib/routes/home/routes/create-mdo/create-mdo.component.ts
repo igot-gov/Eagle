@@ -4,21 +4,15 @@ import { FormGroup, FormControl } from '@angular/forms'
 import { MatDialog, MatSnackBar } from '@angular/material'
 import { UserPopupComponent } from '../user-popup/user-popup'
 
-import { NSContent } from '../author-kid/content'
-import { UploadService } from '../../services/upload.service'
 
-import { EditorContentService } from '../../services/editor-content.service'
 import { LoaderService } from '../../services/loader.service'
 import { AuthInitService } from '../../services/init.service'
-import { ApiService } from '../../services/api.service'
-import { AccessControlService } from '../../services/access-control.service'
-import { EditorService } from '../../services/editor.service'
 import { ActivatedRoute, Router } from '@angular/router'
 import { CreateMDOService } from './create-mdo.services'
 interface IUser { userId: string, fullName: string; email: string; role: string }
 @Component({
   selector: 'ws-app-create-mdo',
-  providers: [UploadService, ApiService, AccessControlService, EditorContentService, EditorService, AuthInitService, LoaderService],
+  providers: [AuthInitService, LoaderService],
   templateUrl: './create-mdo.component.html',
   styleUrls: ['./create-mdo.component.scss'],
 })
@@ -27,7 +21,6 @@ export class CreateMdoComponent implements OnInit {
   @Input() nextAction = 'done'
   @Input() stage = 1
   @Input() type = ''
-  contentMeta!: NSContent.IContentMeta
   fracData: any = []
   contentForm!: FormGroup
 
@@ -57,11 +50,11 @@ export class CreateMdoComponent implements OnInit {
   { isActive: false, isCompleted: false, name: 'Classification', step: 1 },
   { isActive: false, isCompleded: false, name: 'Intended for', step: 2 }]
   constructor(public dialog: MatDialog,
-              private snackBar: MatSnackBar,
-              private createMdoService: CreateMDOService,
-              private router: Router,
-              private directoryService: DirectoryService,
-              private activatedRoute: ActivatedRoute) {
+    private snackBar: MatSnackBar,
+    private createMdoService: CreateMDOService,
+    private router: Router,
+    private directoryService: DirectoryService,
+    private activatedRoute: ActivatedRoute) {
     {
 
       this.contentForm = new FormGroup({
@@ -167,7 +160,7 @@ export class CreateMdoComponent implements OnInit {
             this.snackBar.open('Admin assigned Successfully')
             this.router.navigate(['/app/home/directory', { department: this.department }])
           }
-        },                                                                                                              (err: { error: any }) => {
+        }, (err: { error: any }) => {
           this.openSnackbar(err.error.errors[0].message)
         })
       })
@@ -209,7 +202,7 @@ export class CreateMdoComponent implements OnInit {
             this.submittedForm = false
             this.openSnackbar('Success')
           }
-        },                                                                                (err: { error: any }) => {
+        }, (err: { error: any }) => {
           this.openSnackbar(err.error.errors[0].message)
         })
 
@@ -232,7 +225,7 @@ export class CreateMdoComponent implements OnInit {
             this.router.navigate(['/app/home/directory', { department: this.department }])
 
           }
-        },                                                                                               (err: { error: any }) => {
+        }, (err: { error: any }) => {
           this.openSnackbar(err.error.errors[0].message)
         })
 

@@ -65,7 +65,6 @@ export class UsersComponent implements OnInit, AfterViewInit, OnDestroy {
     })
     // int left blank
     this.tabledata = {
-      actions: [{ name: 'Details', label: 'Details', icon: 'remove_red_eye', type: 'link' }],
       columns: [
         { displayName: 'Full name', key: 'fullName' },
         { displayName: 'Email', key: 'email' },
