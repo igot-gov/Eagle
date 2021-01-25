@@ -65,7 +65,7 @@ export class UsersComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   getMyDepartment() {
     const users: any[] = []
-    this.profile.getMyDepartment().subscribe(res => {
+    this.profile.getMyDepartmentAll().subscribe(res => {
       res.active_users.map((user: any) => {
         if (user.roleInfo.length > 0) {
           // if (user.roleInfo[0].roleName === this.roleName) {
