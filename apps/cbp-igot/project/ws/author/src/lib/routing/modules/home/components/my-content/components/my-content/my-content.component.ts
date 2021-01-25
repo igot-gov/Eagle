@@ -150,7 +150,7 @@ export class MyContentComponent implements OnInit, OnDestroy {
       const leftData = this.authInitService.authAdditionalConfig.menus
       _.set(leftData, 'widgetData.logo', true)
       _.set(leftData, 'widgetData.logoPath', _.get(this.activatedRoute, 'snapshot.data.departmentData.data.logo'))
-      _.set(leftData, 'widgetData.name', _.get(this.activatedRoute, 'snapshot.data.departmentData.data.description'))
+      _.set(leftData, 'widgetData.name', _.get(this.activatedRoute, 'snapshot.data.departmentData.data.deptName'))
       _.set(leftData, 'widgetData.userRoles', this.myRoles)
       this.leftmenues = leftData
     } else {
