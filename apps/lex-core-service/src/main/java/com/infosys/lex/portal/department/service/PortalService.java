@@ -7,6 +7,7 @@ import com.infosys.lex.portal.department.dto.UserDepartmentRole;
 import com.infosys.lex.portal.department.model.DepartmentInfo;
 import com.infosys.lex.portal.department.model.SearchUserInfo;
 import com.infosys.lex.portal.department.model.UserDepartmentInfo;
+import com.infosys.lex.portal.department.model.UserRoleDepartmentInfo;
 
 public interface PortalService {
 	List<DepartmentInfo> getAllDepartments();
@@ -44,4 +45,6 @@ public interface PortalService {
 	DepartmentInfo getMyDepartmentForRole(String roleName, String userId, boolean isUserInfoRequired) throws Exception;
 	
 	List<SearchUserInfo> searchUserForRole(Integer deptId, String roleName, String userName) throws Exception;
+
+	UserDepartmentRole updateUserRoleDepartment(UserRoleDepartmentInfo userRoleDepartmentInfo, String wid, String rootOrg, String org) throws Exception;
 }

@@ -5,11 +5,13 @@ import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.infosys.lex.portal.department.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.client.RestTemplate;
 
 import com.infosys.lex.common.service.UserUtilityService;
@@ -23,11 +25,6 @@ import com.infosys.lex.portal.department.dto.DepartmentRole;
 import com.infosys.lex.portal.department.dto.DepartmentType;
 import com.infosys.lex.portal.department.dto.Role;
 import com.infosys.lex.portal.department.dto.UserDepartmentRole;
-import com.infosys.lex.portal.department.model.DepartmentInfo;
-import com.infosys.lex.portal.department.model.DeptTypeInfo;
-import com.infosys.lex.portal.department.model.PortalUserInfo;
-import com.infosys.lex.portal.department.model.SearchUserInfo;
-import com.infosys.lex.portal.department.model.UserDepartmentInfo;
 import com.infosys.lex.portal.department.repo.DepartmentRepository;
 import com.infosys.lex.portal.department.repo.DepartmentRoleRepository;
 import com.infosys.lex.portal.department.repo.DepartmentTypeRepository;
@@ -906,5 +903,68 @@ public class PortalServiceImpl implements PortalService {
 			}
 		}
 		return false;
+	}
+
+	public UserDepartmentRole updateUserRoleDepartment(UserRoleDepartmentInfo userRoleDepartmentInfo, String wid, String rootOrg,
+													   String org) throws Exception {
+		logger.info("Start updating the department name");
+		UserDepartmentRole userDepartmentRole = new UserDepartmentRole();
+		Department department = deptRepo.findByDeptName(userRoleDepartmentInfo.getNewDeptName());
+		userDepartmentRole.setDeptId(department.getDeptId());
+		userDepartmentRole.setUserId(userRoleDepartmentInfo.getUserId());
+		userDepartmentRole.setRoles(userRoleDepartmentInfo.getRoles());
+		validateUserDepartmentRole(userDepartmentRole, false);
+		UserDepartmentRole existingRecord = userDepartmentRoleRepo.findByUserIdAndDeptId(userDepartmentRole.getUserId(),
+				department.getDeptId());
+		if (existingRecord != null) {
+			throw new Exception("User already assigned to the : " + department.getDeptName() + " Department");
+		} else {
+			Department oldDepartment = deptRepo.findByDeptName(userRoleDepartmentInfo.getOldDeptName());
+			if (ObjectUtils.isEmpty(oldDepartment)) {
+				logger.info("No department is there with the name : " + userRoleDepartmentInfo.getOldDeptName());
+				List<UserDepartmentRole> oldUserDepartmentRoles = userDepartmentRoleRepo.findByUserId(userDepartmentRole.getUserId());
+				if (!oldUserDepartmentRoles.isEmpty() && oldUserDepartmentRoles.size() > 1) {
+					throw new Exception("More than one department exists for user" + oldUserDepartmentRoles);
+				}
+				if (!oldUserDepartmentRoles.isEmpty()) {
+					existingRecord = oldUserDepartmentRoles.get(0);
+				} else {
+					existingRecord = new UserDepartmentRole();
+				}
+			} else {
+				existingRecord = userDepartmentRoleRepo.findByUserIdAndDeptId(userDepartmentRole.getUserId(),
+						oldDepartment.getDeptId());
+				if (ObjectUtils.isEmpty(existingRecord)) {
+					List<UserDepartmentRole> oldUserDepartmentRoles = userDepartmentRoleRepo.findByUserId(userDepartmentRole.getUserId());
+					if (oldUserDepartmentRoles.size() > 1) {
+						throw new Exception("More than one department exists for user" + oldUserDepartmentRoles);
+					}
+					if (!oldUserDepartmentRoles.isEmpty()) {
+						existingRecord = oldUserDepartmentRoles.get(0);
+					} else {
+						existingRecord = new UserDepartmentRole();
+					}
+				}
+			}
+		}
+		Iterator<Role> roles = roleRepo.findAll().iterator();
+		Set<Integer> roleIds = new HashSet<>();
+		if (!CollectionUtils.isEmpty(userRoleDepartmentInfo.getRoles())) {
+			while (roles.hasNext()) {
+				Role role = roles.next();
+				for (String r : userRoleDepartmentInfo.getRoles()) {
+					if (role.getRoleName().equalsIgnoreCase(r)) {
+						roleIds.add(role.getId());
+						continue;
+					}
+				}
+			}
+		}
+		existingRecord.setIsActive(true);
+		existingRecord.setIsBlocked(false);
+		existingRecord.setDeptId(department.getDeptId());
+		existingRecord.setRoleIds(roleIds.stream().collect(Collectors.toList()).toArray(new Integer[roleIds.size()]));
+		logger.info("Successfully updated the department name");
+		return userDepartmentRoleRepo.save(existingRecord);
 	}
 }

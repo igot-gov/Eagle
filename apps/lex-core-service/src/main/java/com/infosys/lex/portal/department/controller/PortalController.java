@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import com.infosys.lex.portal.department.model.UserRoleDepartmentInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -254,5 +255,13 @@ public class PortalController {
 		if (!portalService.validateCBPUserLogin(userId)) {
 			throw new Exception("User is not assigned with any CBP related roles.");
 		}
+	}
+
+	@PostMapping("/portal/updateuserroledept")
+	public ResponseEntity<UserDepartmentRole> updateUserRoleDept(
+			@RequestBody UserRoleDepartmentInfo userRoleDepartmentInfo, @RequestHeader("rootOrg") String rootOrg,
+			@RequestHeader("org") String org, @RequestHeader("wid") String wid) throws Exception {
+		return new ResponseEntity<UserDepartmentRole>(
+				portalService.updateUserRoleDepartment(userRoleDepartmentInfo, wid, rootOrg, org), HttpStatus.OK);
 	}
 }
