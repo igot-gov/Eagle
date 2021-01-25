@@ -6,6 +6,8 @@
     "start": "node --max_old_space_size=8000 ./node_modules/@angular/cli/bin/ng serve --proxy-config proxy/localhost.proxy.json -o",
     "dev": "npm run start:svp-dev",
     "prebuild": "npm run lint:fix",
+    "build-dev": "node --max_old_space_size=8000 ./node_modules/@angular/cli/bin/ng build --prod --configuration=dev --outputPath=dist/www/en --baseHref=/ --i18nLocale=en",
+    "build-pre": "node --max_old_space_size=8000 ./node_modules/@angular/cli/bin/ng build --prod --configuration=preprod --outputPath=dist/www/en --baseHref=/ --i18nLocale=en",
     "build": "node --max_old_space_size=8000 ./node_modules/@angular/cli/bin/ng build --prod --outputPath=dist/www/en --baseHref=/ --i18nLocale=en",
     "postbuild": "npm run compress:gzip && npm run compress:brotli",
     "compress:brotli": "gzipper --brotli --gzip-level=9 --verbose ./dist/www",
