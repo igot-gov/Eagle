@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { MatDialog } from '@angular/material/dialog'
 import { EventsService } from '../../services/events.service'
+import * as moment from 'moment'
 
 @Component({
     selector: 'ws-app-event-detail',
@@ -16,6 +17,10 @@ export class EventDetailComponent implements OnInit {
     overviewData: any = []
     participantsData: any = []
     participantsCount: any
+    presenters: any = []
+    presentersCount: any
+    isToday: any
+    status: any
 
     constructor(
         public dialog: MatDialog,
@@ -74,16 +79,39 @@ export class EventDetailComponent implements OnInit {
             this.eventDataObj = responseObj.result[0]
             responseObj.result[0].name = responseObj.result[0].name.replace(/http?.*?(?= |$)/g, '')
             this.overviewData.push(responseObj.result[0])
+            if (responseObj.result[0].creatorContacts !== undefined) {
+                Object.keys(responseObj.result[0].creatorContacts).forEach((index: any) => {
+                    const obj = {
+                        name: responseObj.result[0].creatorContacts[index].name,
+                        id: responseObj.result[0].creatorContacts[index].id,
+                        type: 'Host',
+                    }
+                    this.presenters.push(obj)
+                })
+            }
             if (responseObj.result[0].creatorDetails !== undefined) {
                 Object.keys(responseObj.result[0].creatorDetails).forEach((index: any) => {
                     const obj = {
                         name: responseObj.result[0].creatorDetails[index].name,
                         id: responseObj.result[0].creatorDetails[index].id,
+                        type: 'Guest',
                     }
-                    this.participantsData.push(obj)
+                    this.presenters.push(obj)
                 })
             }
+            this.presentersCount = this.presenters.length
             this.participantsCount = this.participantsData.length
+            const eventDate = responseObj.result[0].allEventDate
+            this.isToday = moment(eventDate).isSame(moment(), 'day')
+            const startDate = responseObj.result[0].eventStartDate
+            const endDate = responseObj.result[0].eventEndDate
+
+            const now = new Date()
+            const today = moment(now).format('YYYY-MM-DD hh:mm a')
+            const isBetween = moment(today).isBetween(startDate, endDate)
+            if (isBetween) {
+                this.status = 'between'
+            }
         }
     }
 
