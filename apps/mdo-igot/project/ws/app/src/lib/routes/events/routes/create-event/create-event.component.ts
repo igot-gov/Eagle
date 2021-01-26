@@ -359,4 +359,9 @@ export class CreateEventComponent implements OnInit {
         this.router.navigate([`/app/events`])
       })
     }
+
+  omit_special_char(event: any) {
+    const k = event.charCode
+    return((k > 64 && k < 91) || (k > 96 && k < 123) || k === 8 || k === 32 || (k >= 48 && k <= 57))
+  }
 }
