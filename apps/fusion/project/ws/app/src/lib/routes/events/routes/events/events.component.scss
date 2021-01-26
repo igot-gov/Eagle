@@ -2,6 +2,14 @@
 @import 'ws-vars';
 @import 'ws-mixins';
 
+.today-mat-footer {
+  margin-top: -32px;
+}
+
+.today-card-list {
+  max-width: 896px;
+  min-width: 896px;
+}
 
 .mat-form-field-appearance-outline .mat-form-field-infix {
   padding: 0px !important;
@@ -45,11 +53,12 @@
 
 .today-empty-box {
   background-color: rgba(0, 0, 0, 0.04);
-  width: 250px;
-  height: 90px;
-  border-radius: 4px;
   padding: 15px;
   margin-top: 15px;
+  width:250px; 
+  height: 115px; 
+  border-radius: 2px; 
+  margin-bottom: 45px;
 }
 
 .today_no_event {
