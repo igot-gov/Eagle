@@ -950,6 +950,9 @@ public class PortalServiceImpl implements PortalService {
 		if (!CollectionUtils.isEmpty(userRoleDepartmentInfo.getRoles())) {
 			while (roles.hasNext()) {
 				Role role = roles.next();
+				if (PortalConstants.MDO_DEFAULT_ROLE.equals(role.getRoleName())) {
+					roleIds.add(role.getId());
+				}
 				for (String r : userRoleDepartmentInfo.getRoles()) {
 					if (role.getRoleName().equalsIgnoreCase(r)) {
 						roleIds.add(role.getId());

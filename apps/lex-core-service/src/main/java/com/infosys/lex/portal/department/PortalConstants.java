@@ -11,4 +11,5 @@ public class PortalConstants {
 	public final static String CBP_DEPT_TYPE = "CBP";
 	public final static String CBP_ROLE_NAME = "CBP ADMIN";
 	public final static List<String> CBP_ROLES = Arrays.asList("EDITOR", "REVIEWER", "PUBLISHER", "CONTENT-CREATOR");
+	public final static String MDO_DEFAULT_ROLE = "MEMBER";
 }
