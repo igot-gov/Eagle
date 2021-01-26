@@ -65,8 +65,8 @@ export class ParticipantsComponent implements OnInit {
         ).subscribe(() => {
             this.eventSrc.searchUser(this.searchUserCtrl.value, requestObj).subscribe((data: any) => {
                 this.dataSource = new MatTableDataSource<IParticipantElement>(data)
+                this.participants = []
                 Object.keys(data).forEach((key: any) => {
-                    this.participants = []
                     const obj = data[key]
                     if (obj.email !== undefined) {
                         const participantObj = {
