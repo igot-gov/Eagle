@@ -283,7 +283,10 @@
       "permission": [
         "editor",
         "author",
-        "publisher"
+        "publisher",
+        "EDITOR",
+        "PUBLISHER",
+        "CONTENT_CREATOR"
       ],
       "show": true,
       "status": "live",
@@ -302,7 +305,8 @@
       "isExternal": "true",
       "name": "MDO",
       "permission": [
-        "admin"
+        "admin",
+        "MDO ADMIN"
       ],
       "show": true,
       "status": "live",
@@ -321,7 +325,8 @@
       "isExternal": "true",
       "name": "SPV",
       "permission": [
-        "superAdmin"
+        "superAdmin",
+        "SPV ADMIN"
       ],
       "show": true,
       "status": "live",
