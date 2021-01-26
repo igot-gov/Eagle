@@ -2,13 +2,20 @@
   <mat-card class="right-menu-card" *ngIf="joiningInfo != undefined">
     <mat-card-content role="link" tabindex="0">
       <ng-container>
-        <div class="ml-4 mr-6 mb-2 view-more ws-mat-accent-text view-all ws-mat-accent-background" *ngIf="!disableFlag">
-          <a href="javascript:void(0);" mat-button class="flex-1"  (click)="startMeeting(joiningInfo[0].artifactUrl)" *ngIf="!disableFlag">
-            <span class="text-white" i18n >Attend Live Event</span>
+        <div class="ml-4 mr-6 mb-2 view-more ws-mat-accent-text view-all black-bg" *ngIf="status == 'expired'">
+          <a href="javascript:void(0);" mat-button class="flex-1" style="cursor: default;">
+            <span class="text-white" i18n >{{ btnLabel }}</span>
           </a>
         </div>
-        <div class="ml-4 mr-6 mb-2 view-more ws-mat-accent-text view-all ws-mat-accent-background disable-style" *ngIf="disableFlag">
-          <span class="text-white" i18n >Attend Live Event</span>
+        <div class="ml-4 mr-6 mb-2 view-more ws-mat-accent-text view-all ws-mat-accent-background" *ngIf="status == 'upcoming'">
+          <a href="javascript:void(0);" mat-button class="flex-1" style="cursor: default;">
+            <span class="text-white" i18n >{{ btnLabel }}</span>
+          </a>
+        </div>
+        <div class="ml-4 mr-6 mb-2 view-more ws-mat-accent-text view-all ws-mat-accent-background" *ngIf="status == 'between'">
+          <a href="javascript:void(0);" mat-button class="flex-1" (click)="startMeeting(joiningInfo[0].artifactUrl)">
+            <span class="text-white" i18n >{{ btnLabel }}</span>
+          </a>
         </div>
       </ng-container>
     </mat-card-content>

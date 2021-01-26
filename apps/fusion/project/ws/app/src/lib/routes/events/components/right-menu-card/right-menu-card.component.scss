@@ -27,6 +27,11 @@
   padding: #{$size-xs/2}
 }
 
+.black-bg {
+  background-color: black;
+  color: white;
+}
+
 .disable-style {
     padding: 5px;
     text-align: center;

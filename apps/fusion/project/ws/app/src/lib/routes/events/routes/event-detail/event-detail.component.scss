@@ -14,8 +14,32 @@
   height: 167px;
 }
 
+.presenters-box {
+  display: flex; 
+  flex-wrap: wrap; 
+  max-width: 700px;
+}
+
 ::ng-deep.event-details-card .mat-card-header-text {
   margin: 0 !important;
+}
+
+.today-status {
+  color: black;
+  background-color: white;
+  width: 80px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.live-status {
+    background-color: rgb(255, 130, 104) !important;
+    color: white;
+    width: 80px;
+    font-weight: bold;
+    text-transform: uppercase;
+    justify-content: center;
 }
 
 .w-65 {

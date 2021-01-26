@@ -128,41 +128,7 @@ export class EventsComponent implements OnInit {
             Object.keys(eventList).forEach((index: any) => {
                 const eventObj = eventList[index]
                 const expiryDateFormat = this.customDateFormat(eventObj.expiryDate)
-                const eventDataObj = {
-                    eventName: eventObj.name.replace(/http?.*?(?= |$)/g, ''),
-                    eventDate: expiryDateFormat,
-                    eventUpdatedOn: eventObj.lastUpdatedOn,
-                    eventDuration: eventObj.duration,
-                    eventjoined: (eventObj.creatorDetails !== undefined && eventObj.creatorDetails.length > 0) ?
-                    ((eventObj.creatorDetails.length === 1) ? '1 person' :  `${eventObj.creatorDetails.length} people`) : ' --- ',
-                    eventThumbnail: (eventObj.appIcon !== null || eventObj.appIcon !== undefined) ? eventObj.appIcon : '---',
-                    eventDescription: eventObj.description,
-                    eventStatus: eventObj.status,
-                    eventObjective: eventObj.learningObjective,
-                    eventPresenters: (eventObj.creatorContacts !== undefined && eventObj.creatorContacts.length > 0)
-                    ? eventObj.creatorContacts : '',
-                    identifier: eventObj.identifier,
-                    presenters: eventObj.creatorDetails,
-                    eventJoinURL: eventObj.artifactUrl,
-                    eventSource: eventObj.sourceName,
-                    expirtyDate: eventObj.expiryDate,
-                    participants: eventObj.creatorContacts,
-                }
-                this.eventData['myMDOEvents'].push(eventDataObj)
-                this.joinedByMeEventsCount = this.eventData['joinedByMe'].length
-            })
-        }
-    }
-
-    setEventData(responseObj: any) {
-        if (responseObj.result !== undefined) {
-            const eventList = responseObj.result
-            this.eventData['todayEvents'] = []
-            this.eventData['allEvents'] = []
-            this.eventData['joinedByMe'] = []
-            Object.keys(eventList).forEach((index: any) => {
-                const eventObj = eventList[index]
-                const expiryDateFormat = this.customDateFormat(eventObj.expiryDate)
+                const eventStartEndDateArr = this.eventStartEndDateFormat(eventObj.expiryDate, eventObj.duration).split(' - ')
                 const eventDataObj = {
                     eventName: eventObj.name.replace(/http?.*?(?= |$)/g, ''),
                     eventDate: expiryDateFormat,
@@ -185,6 +151,49 @@ export class EventsComponent implements OnInit {
                     todayEventDate: this.eventDateFormat(eventObj.expiryDate, ''),
                     todayEventDateStr: this.eventDateFormat(eventObj.expiryDate, eventObj.duration),
                     allEventDate: this.allEventDateFormat(eventObj.expiryDate),
+                    eventStartDate: eventStartEndDateArr[0],
+                    eventEndDate: eventStartEndDateArr[1],
+                }
+                this.eventData['myMDOEvents'].push(eventDataObj)
+                this.joinedByMeEventsCount = this.eventData['joinedByMe'].length
+            })
+        }
+    }
+
+    setEventData(responseObj: any) {
+        if (responseObj.result !== undefined) {
+            const eventList = responseObj.result
+            this.eventData['todayEvents'] = []
+            this.eventData['allEvents'] = []
+            this.eventData['joinedByMe'] = []
+            Object.keys(eventList).forEach((index: any) => {
+                const eventObj = eventList[index]
+                const expiryDateFormat = this.customDateFormat(eventObj.expiryDate)
+                const eventStartEndDateArr = this.eventStartEndDateFormat(eventObj.expiryDate, eventObj.duration).split(' - ')
+                const eventDataObj = {
+                    eventName: eventObj.name.replace(/http?.*?(?= |$)/g, ''),
+                    eventDate: expiryDateFormat,
+                    eventUpdatedOn: eventObj.lastUpdatedOn,
+                    eventDuration: eventObj.duration,
+                    eventjoined: (eventObj.creatorDetails !== undefined && eventObj.creatorDetails.length > 0) ?
+                    ((eventObj.creatorDetails.length === 1) ? '1 person' :  `${eventObj.creatorDetails.length} people`) : ' --- ',
+                    eventThumbnail: (eventObj.appIcon !== null || eventObj.appIcon !== undefined) ? eventObj.appIcon : '---',
+                    eventDescription: eventObj.description,
+                    eventStatus: eventObj.status,
+                    eventObjective: eventObj.learningObjective,
+                    eventPresenters: (eventObj.creatorContacts !== undefined && eventObj.creatorContacts.length > 0)
+                    ? eventObj.creatorContacts : '',
+                    identifier: eventObj.identifier,
+                    presenters: eventObj.creatorDetails,
+                    eventJoinURL: eventObj.artifactUrl,
+                    eventSource: eventObj.sourceName,
+                    expirtyDate: eventObj.expiryDate,
+                    participants: eventObj.creatorContacts,
+                    todayEventDate: this.eventDateFormat(eventObj.expiryDate, ''),
+                    todayEventDateStr: this.eventDateFormat(eventObj.expiryDate, eventObj.duration),
+                    allEventDate: this.allEventDateFormat(eventObj.expiryDate),
+                    eventStartDate: eventStartEndDateArr[0],
+                    eventEndDate: eventStartEndDateArr[1],
                 }
 
                 // Today's events
@@ -233,11 +242,15 @@ export class EventsComponent implements OnInit {
         return `${dDate}-${month}-${year} ${hour}:${min}`
     }
 
-    compareDate(selectedDate: any) {
+    compareDate(startDate: any, endDate: any) {
         const now = new Date()
         const today = moment(now).format('YYYY-MM-DD hh:mm a')
-
-        return (selectedDate < today) ? true : false
+        const isBetween = moment(new Date()).isBetween(startDate, endDate)
+        const isAfter = moment(endDate).isAfter(today)
+        if (isAfter || isBetween) {
+            return false
+        }
+        return true
     }
 
     isToday(eventDate: any) {
@@ -247,8 +260,8 @@ export class EventsComponent implements OnInit {
         const today = new Date()
         const monthVal = `0${today.getMonth() + 1}`
         const returnVal = (parseInt(dDate, 10) === today.getDate() &&
-        month === (monthVal).slice(-2) &&
-        parseInt(year, 10) === today.getFullYear())
+            month === (monthVal).slice(-2) &&
+            parseInt(year, 10) === today.getFullYear())
         return returnVal
     }
 
@@ -307,7 +320,7 @@ export class EventsComponent implements OnInit {
         const pastEvents: any[] = []
         if (this.data && this.data.length > 0) {
             this.data.forEach((event: any) => {
-                const isPast = this.compareDate(event.allEventDate)
+                const isPast = this.compareDate(event.eventStartDate, event.eventEndDate)
                 if (isPast) {
                     pastEvents.push(event)
                 } else {
@@ -333,7 +346,7 @@ export class EventsComponent implements OnInit {
             return b.allEventDate - a.allEventDate
         })
     }
-    
+
     allEventDateFormat(datetime: any) {
         const dateTimeArr = datetime.split('T')
         const date = dateTimeArr[0]
@@ -373,6 +386,28 @@ export class EventsComponent implements OnInit {
             readableDateMonth = moment(formatedDate).format('hh:mm a')
             finalDateTimeValue = `${readableDateMonth} - ${formatedHoursMin}`
         }
+        return finalDateTimeValue
+    }
+
+    eventStartEndDateFormat(datetime: any, duration: any) {
+        const dateTimeArr = datetime.split('T')
+        const date = dateTimeArr[0]
+        const year = date.substr(0, 4)
+        const month = date.substr(4, 2)
+        const day = date.substr(6, 2)
+        const time = dateTimeArr[1]
+        const hours = time.substr(0, 2)
+        const minutes = time.substr(2, 2)
+        const seconds = time.substr(4, 2)
+        const formatedDate = new Date(year, month - 1, day, hours, minutes, seconds, 0)
+        let finalDateTimeValue = ''
+        let readableDateMonth = ''
+        const getTime = formatedDate.getTime()
+        const futureDate = new Date(getTime + duration * 60000)
+        // const formatedHoursMin = this.formatTimeAmPm(futureDate)
+        readableDateMonth = moment(formatedDate).format('YYYY-MM-DD hh:mm a')
+        const endDate = moment(futureDate).format('YYYY-MM-DD hh:mm a')
+        finalDateTimeValue = `${readableDateMonth} - ${endDate}`
         return finalDateTimeValue
     }
 

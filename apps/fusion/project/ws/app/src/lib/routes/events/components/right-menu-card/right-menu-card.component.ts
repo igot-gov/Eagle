@@ -18,6 +18,9 @@ export class RightMenuCardComponent implements OnInit, OnChanges {
     disableFlag: boolean
     startDate: any
     endDate: any
+    btnLabel: any
+    status: any
+    isToday: any
 
     constructor() {
         this.disableFlag = true
@@ -37,8 +40,22 @@ export class RightMenuCardComponent implements OnInit, OnChanges {
                 this.dateInfo = dateTimeArr[0]
                 this.timeInfo = dateTimeArr[1]
             }
-            if (moment(new Date()).isBetween(this.startDate, this.endDate)) {
+            const now = new Date()
+            const today = moment(now).format('YYYY-MM-DD hh:mm a')
+            const isBetween = moment(today).isBetween(this.startDate, this.endDate)
+            const isAfter = moment(this.endDate).isAfter(today)
+            if (isBetween) {
                 this.disableFlag = false
+                this.btnLabel = 'Attend live event'
+                this.status = 'between'
+            } else if (isAfter) {
+                this.btnLabel = 'Attend live event'
+                this.disableFlag = true
+                this.status = 'upcoming'
+            } else {
+                this.btnLabel = 'Joined'
+                this.disableFlag = true
+                this.status = 'expired'
             }
             this.joiningInfo.push(this.data)
         }

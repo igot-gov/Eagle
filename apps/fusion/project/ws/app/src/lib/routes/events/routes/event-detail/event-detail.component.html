@@ -16,9 +16,18 @@
                   <span class="flex mat-body-2" role="link" tabindex="0" i18n-aria-label>
                     {{ overviewData[0].description }}
                   </span>
-                  <span class="flex mat-body-2 ws-mat-black60-text" role="link" tabindex="0" i18n-aria-label>
-                    
+                  <span class="flex mat-body-2 ws-mat-black60-text mt-10" role="link" tabindex="0" i18n-aria-label >
+                    <mat-chip-list *ngIf="isToday && status != 'between'">
+                        <mat-chip class="today-status" selected>TODAY</mat-chip>
+                    </mat-chip-list>
+                    <mat-chip-list *ngIf="!isToday && status == 'between'">
+                        <mat-chip class="live-status" selected>LIVE</mat-chip>
+                    </mat-chip-list>
+                    <mat-chip-list *ngIf="isToday && status == 'between'">
+                        <mat-chip class="live-status" selected>LIVE</mat-chip>
+                    </mat-chip-list>
                   </span>
+                  
                 </mat-card-content>
               </div>
               <div class="flex flex-row-reverse">
@@ -63,14 +72,14 @@
             </ng-container>
         </div>
       </ng-container>
-      <ng-container *ngIf="overviewData[0].creatorContacts != undefined">
+      <ng-container *ngIf="presentersCount > 0">
         <div class="flex flex-1 flex-column margin-fix mb-2">
             <span class="f-medium mat-title">Presenters</span>
         </div>
         <div class="flex flex-wrap margin-fix">
             <ng-container>
-                <div class="flex" style="width: 65%;">
-                  <ng-container *ngFor="let presenter of overviewData[0].creatorContacts">
+                <div class="flex presenters-box">
+                  <ng-container *ngFor="let presenter of presenters">
                       <app-presenter-card [data]="presenter" [host]="true"></app-presenter-card>
                   </ng-container>
                 </div>
@@ -78,7 +87,7 @@
         </div>
       </ng-container>
       <ng-container *ngIf="overviewData[0].learningObjective != undefined">
-        <div class="flex flex-1 flex-column margin-fix mb-2">
+        <div class="flex flex-1 flex-column margin-fix mb-2 mt-10">
             <span class="f-medium mat-title">Agenda</span>
         </div>
         <div class="flex flex-wrap margin-fix mb-20">
@@ -94,12 +103,12 @@
     </ng-container>
 
     <ng-container *ngIf="currentFilter == 'participants'">
-        <div class="flex w-65" *ngIf="participantsCount > 0">
+        <div class="flex w-65" *ngIf="participantsCount > 0" style="display: flex; flex-wrap: wrap;">
             <ng-container *ngFor="let participant of participantsData">
                 <app-presenter-card [data]="participant" [host]="false"></app-presenter-card>
             </ng-container>
         </div>
-        <div class="flex w-65" *ngIf="participantsCount == 0">
+        <div class="flex w-65" *ngIf="participantsCount == 0" >
             <div class="flex flex-wrap margin-fix mb-20">
               <mat-card>
                   <mat-card-content>
