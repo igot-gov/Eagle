@@ -39,10 +39,10 @@ export class ListEventComponent implements OnInit, AfterViewInit, OnDestroy {
     ngOnInit() {
         this.tabledata = {
             columns: [
-            { displayName: 'Thumbnail', key: 'eventThumbnail' },
+            { displayName: 'Cover Picture', key: 'eventThumbnail' },
             { displayName: 'Title', key: 'eventName' },
             { displayName: 'Date and time', key: 'eventDate' },
-            { displayName: 'Updated at', key: 'eventUpdatedOn' },
+            { displayName: 'Created On', key: 'eventUpdatedOn' },
             { displayName: 'Duration', key: 'eventDuration' },
             { displayName: 'Joined', key: 'eventjoined' },
             ],
@@ -99,8 +99,8 @@ export class ListEventComponent implements OnInit, AfterViewInit, OnDestroy {
                 `${hours} hours ${minutes} minutes`
                 const eventDataObj = {
                     eventName: obj.name.substring(0, 30),
-                    eventDate: this.allEventDateFormat(obj.expiryDate),
-                    eventUpdatedOn: this.allEventDateFormat(obj.lastUpdatedOn),
+                    eventDate: this.allEventDateFormat(obj.expiryDate, true),
+                    eventUpdatedOn: this.allEventDateFormat(obj.lastUpdatedOn, false),
                     eventDuration: duration,
                     eventjoined: (obj.creatorDetails !== undefined && obj.creatorDetails.length > 0) ?
                     ((obj.creatorDetails.length === 1) ? '1 person' :  `${obj.creatorDetails.length} people`) : ' --- ',
@@ -171,7 +171,7 @@ export class ListEventComponent implements OnInit, AfterViewInit, OnDestroy {
         return (selectedDate < today) ? true : false
     }
 
-    allEventDateFormat(datetime: any) {
+    allEventDateFormat(datetime: any, timeAllow: any) {
         const dateTimeArr = datetime.split('T')
         const date = dateTimeArr[0]
         const year = date.substr(0, 4)
@@ -182,7 +182,11 @@ export class ListEventComponent implements OnInit, AfterViewInit, OnDestroy {
         const minutes = time.substr(2, 2)
         const seconds = time.substr(4, 2)
         const formatedDate = new Date(year, month - 1, day, hours, minutes, seconds, 0)
-        const readableDateMonth = moment(formatedDate).format('YYYY-MM-DD hh:mm a')
+        let format = 'YYYY-MM-DD hh:mm a'
+        if (!timeAllow) {
+            format = 'YYYY-MM-DD'
+        }
+        const readableDateMonth = moment(formatedDate).format(format)
         const finalDateTimeValue = `${readableDateMonth}`
         return finalDateTimeValue
     }

@@ -59,7 +59,7 @@
                                                 </label>
                                                 <mat-form-field appearance="outline" class="margin-top-xs">
                                                     <input id="eventTitle" matInput #eventTitle formControlName="eventTitle" i18n-placeholder placeholder="Type here"
-                                                        i18n-aria-label aria-label="Event Title input" class="form-input" />
+                                                        i18n-aria-label aria-label="Event Title input" class="form-input" (keypress)="omit_special_char($event)" />
                                                     <mat-error [hidden]="false" i18n="Event title Error|Explains event title is required" i18n-aria-label
                                                         aria-label="Event title Error|Explains event title is required "
                                                         *ngIf="createEventForm?.controls['eventTitle']?.touched && createEventForm?.controls['eventTitle'].errors?.required">
