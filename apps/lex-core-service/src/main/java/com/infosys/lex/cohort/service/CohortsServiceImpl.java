@@ -212,8 +212,12 @@ public class CohortsServiceImpl implements CohortsService {
 					.valueOf(appConfigServ.getConfigForKey(rootOrg, LexConstants.ACTIVEUSER_DURATION_CONFIG_KEY));
 			d = Date.from(Instant.now().minus(duration, ChronoUnit.MINUTES));
 		}
+		ObjectMapper mapper = new ObjectMapper();
 		List<Map<String, Object>> collection = contentProgressByLastAccessRepo.findActiveUsers(resourceParentList,
 				rootOrg, d);
+		
+		System.out.println("Progress repo value");
+		System.out.println(mapper.writeValueAsString(collection));
 
 		/*------------------updated active users-------------------*/
 
@@ -226,6 +230,8 @@ public class CohortsServiceImpl implements CohortsService {
 		List<String> activeUserIdList = new ArrayList<String>(activeUserUUIDSet);
 		if (!activeUserUUIDSet.isEmpty())
 			activeUserUUIDEmailMap = userUtilService.getUserEmailsFromUserIds(rootOrg, activeUserIdList);
+		System.out.println("Active activeUserUUIDEmailMap");
+		System.out.println(mapper.writeValueAsString(activeUserUUIDEmailMap));
 		for (Map<String, Object> userContentProgress : collection) {
 			String activeUserUUID = userContentProgress.get("user_id").toString();
 			if (activeUserUUIDEmailMap.containsKey(activeUserUUID)) {
@@ -233,6 +239,11 @@ public class CohortsServiceImpl implements CohortsService {
 				int isEmail = activeUserEmail.indexOf("@");
 				if (isEmail > 1) {
 					String userName = activeUserEmail.substring(0, isEmail);
+					System.out.print("");
+					System.out.print("activeUserUUID and userUUID-> ");System.out.print(activeUserUUID + " : "+ userUUID);
+					System.out.print("");
+					System.out.print("userNames and userName-> ");System.out.print(mapper.writeValueAsString(userNames) + " : "+ userName);
+					System.out.print("");
 					if (!activeUserUUID.equals(userUUID) && !userNames.contains(userName)) {
 						userNames.add(userName);
 
@@ -288,6 +299,9 @@ public class CohortsServiceImpl implements CohortsService {
 		}
 
 		/*-----------------(end) updated active users--------------*/
+		
+		System.out.println("ACTIVE USER COLLECTION");
+		System.out.println(mapper.writeValueAsString(activeUserCollection));
 
 		if (!userNames.isEmpty())
 			validateUsersFromActiveDirectory(rootOrg, activeUserCollection, userNames, activeUserIdList);
