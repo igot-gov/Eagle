@@ -1,15 +1,28 @@
-<mat-card class="events-card cursor-pointer">
+<mat-card class="events-card">
     <div>
         <a [routerLink]= "['/app/event-hub/home/' + identifier]">
-            <img *ngIf="appIcon != undefined" class="event-card-image image-border" src="{{ appIcon }}" alt="Karmayogi Bharat" />
+            <img mat-card-image class="event-card-image image-border mat-lite-background" role="link"
+            [src]="appIcon" (error)="changeToDefaultImg($event)" [alt]="eventTitle" class="card-img" />
         </a>
+        <span class="flex mat-body-2 ws-mat-black60-text mt-10" role="link" tabindex="0" i18n-aria-label 
+        style="position: absolute; right: 5px; top: -30px;">
+            <mat-chip-list *ngIf="isToday && status != 'between'">
+                <mat-chip class="today-status" selected>TODAY</mat-chip>
+            </mat-chip-list>
+            <mat-chip-list *ngIf="!isToday && status == 'between'">
+                <mat-chip class="live-status" selected>LIVE</mat-chip>
+            </mat-chip-list>
+            <mat-chip-list *ngIf="isToday && status == 'between'">
+                <mat-chip class="live-status" selected>LIVE</mat-chip>
+            </mat-chip-list>
+        </span>
     </div>
     <mat-card-header>
         <mat-card-subtitle class="responsive">
             <span class="mat-body-2">Karmayogi Bharat</span>
         </mat-card-subtitle>
         <mat-card-title>
-            <a class="" i18n-aria-label role="link" [routerLink]="['/app/event-hub/home/' + identifier]">
+            <a i18n-aria-label role="link" [routerLink]="['/app/event-hub/home/' + identifier]">
                 <span role="link" i18n-aria-label tabindex="0" 
                       class="cursor-pointer mat-subheading-1">
                     {{ eventTitle }}
@@ -28,12 +41,13 @@
         <div class="flex flex-1 flex-row mx-4">
             <span class="flex mobile">
                  <button mat-stroked-button color="accent" type="button" class=" mat-accent-border flex-auto-display" (click)="joinEvent(identifier)">
-                    <span i18n>Join</span>
+                    <span *ngIf="!isPast" i18n>Join</span>
+                    <span *ngIf="isPast" i18n>Event Ended</span>
                 </button>
             </span>
         </div>
-        <div class="flex flex-1" class="cursor-pointer text-right mobile2">
-            <!-- <span class="noocoments ws-mat-default-text mat-subheading-2">
+        <div class="flex flex-1" class="text-right mobile2" *ngIf="avatarArr.length > 0">
+            <span class="noocoments ws-mat-default-text mat-subheading-2">
                 <div class="avatars" style="margin-left: 225px;">
                         <span class="avatar" *ngFor="let avatar of avatarArr">
                             <span class="headline avatar-img">
@@ -42,7 +56,7 @@
                         </span>&nbsp;&nbsp;&nbsp;&nbsp;
                     </div>
                     <span class="split-count"> + {{ splitArr.length }}</span>
-            </span> -->
+            </span>
         </div>
     </mat-card-footer>
 </mat-card>

@@ -5,6 +5,8 @@ import { Observable } from 'rxjs'
 
 const API_END_POINTS = {
     SEARCH_EVENT: '/apis/protected/v8/content/searchV6',
+    JOIN_A_MEETING: '/apis/protected/v8/user/realTimeProgress/update',
+    GET_PARTICIPANTS: 'apis/protected/v8/cohorts/activeusers',
 }
 
 @Injectable({
@@ -20,5 +22,13 @@ export class EventsService {
 
     getEvents(req: any): Observable<any> {
         return this.http.post<any>(API_END_POINTS.SEARCH_EVENT, req)
+    }
+
+    joinMeeting(req: any, identifier: any) {
+        return this.http.post<any>(`${API_END_POINTS.JOIN_A_MEETING}/${identifier}`, req)
+    }
+
+    getParticipants(identifier: any) {
+        return this.http.get<any>(`${API_END_POINTS.GET_PARTICIPANTS}/${identifier}`)
     }
 }

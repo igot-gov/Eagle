@@ -1,4 +1,6 @@
 import { Component, OnInit, OnChanges, Input } from '@angular/core'
+import { EventsService } from '../../services/events.service'
+import { ConfigurationsService } from '@ws-widget/utils/src/public-api'
 import * as moment from 'moment'
 
 @Component({
@@ -21,13 +23,19 @@ export class RightMenuCardComponent implements OnInit, OnChanges {
     btnLabel: any
     status: any
     isToday: any
+    myUserId: any
+    identifier: any
 
-    constructor() {
+    constructor(
+        private eventSrv: EventsService,
+        private configSvc: ConfigurationsService,
+    ) {
         this.disableFlag = true
         this.todayDateTime = moment(new Date()).format('MMMM DD YYYY, hh:mm a')
     }
 
     ngOnInit() {
+        this.myUserId = this.configSvc.userProfile && this.configSvc.userProfile.userId
     }
 
     ngOnChanges() {
@@ -35,6 +43,7 @@ export class RightMenuCardComponent implements OnInit, OnChanges {
             if (this.data.expiryDate !== undefined) {
                 this.expiryDate  = this.data.expiryDate
                 this.duration  = this.data.duration
+                this.identifier = this.data.identifier
                 this.data.expiryDate = this.eventDateFormat(this.expiryDate, this.duration)
                 const dateTimeArr = this.data.expiryDate.split(',')
                 this.dateInfo = dateTimeArr[0]
@@ -42,7 +51,8 @@ export class RightMenuCardComponent implements OnInit, OnChanges {
             }
             const now = new Date()
             const today = moment(now).format('YYYY-MM-DD hh:mm a')
-            const isBetween = moment(today).isBetween(this.startDate, this.endDate)
+            let isBetween = moment(today).isBetween(this.startDate, this.endDate)
+            isBetween = true
             const isAfter = moment(this.endDate).isAfter(today)
             if (isBetween) {
                 this.disableFlag = false
@@ -62,7 +72,20 @@ export class RightMenuCardComponent implements OnInit, OnChanges {
     }
 
     startMeeting(meetingURL: any) {
-        window.open(meetingURL, '_blank')
+        this.joinAMeeting(meetingURL)
+    }
+
+    joinAMeeting(meetingURL: any) {
+        const reqObj = {
+            content_type: 'Resource',
+            current: ['1'],
+            max_size: 1,
+            mime_type: 'application/html',
+            user_id_type: this.myUserId,
+        }
+        this.eventSrv.joinMeeting(reqObj, this.identifier).subscribe(() => {
+            window.open(meetingURL, '_blank')
+        })
     }
 
     eventDateFormat(datetime: any, duration: any) {

@@ -6,8 +6,11 @@
         <div class="flex-1" style="height: 167px;">
             <div class="flex flex-4" style="height: 167px;">
               <div class="flex-1">
-                <img src="{{ overviewData[0].appIcon }}" class="event-card-image">
+                <!-- <img src="{{ overviewData[0].appIcon }}" class="event-card-image"> -->
+                <img mat-card-image class="event-card-image image-border mat-lite-background" role="link"
+                  [src]="overviewData[0].appIcon" (error)="changeToDefaultImg($event)" [alt]="overviewData[0].name" class="card-img" />
               </div>
+
               <div class="flex-3 px-10" style="margin-top: 10px;height: 167px;">
                 <mat-card-title role="link" tabindex="0" class="flex-4 mobile-margin text-capitalize mat-h2">
                   {{ overviewData[0].name }}
