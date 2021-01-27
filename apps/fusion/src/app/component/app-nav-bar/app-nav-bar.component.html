@@ -5,7 +5,6 @@
       <a routerLink="/page/home" class="logo-dim" role="link" title="Home" i18n-aria-title i18n-aria-label>
         <img [src]="appIcon" alt="Application Logo" class="app-logo" />
       </a>
-      <!-- <span class="spacer"></span> -->
       <ng-container *ngIf="primaryNavbarConfig?.mediumScreen">
         <ng-container [ngTemplateOutlet]="navbarSide" [ngTemplateOutletContext]="{ item: item }"
           *ngFor="let item of primaryNavbarConfig?.mediumScreen?.left">
@@ -27,17 +26,13 @@
         }
       }"></ng-container>
         </div>
-        <!-- <button class="home-help" mat-icon-button id='helper' [matMenuTriggerFor]="helpMenu" *ngIf="!isHelpMenuRestricted"
-        >
-        <mat-icon>help_outline</mat-icon>
-      </button> -->
+        <button class="home-help" mat-icon-button id='helper' [matMenuTriggerFor]="helpMenu"
+          *ngIf="!isHelpMenuRestricted">
+          <mat-icon>help_outline</mat-icon>
+        </button>
         <ng-container [ngTemplateOutlet]="navbarSide" [ngTemplateOutletContext]="{ item: item }"
           *ngFor="let item of primaryNavbarConfig?.mediumScreen?.right">
         </ng-container>
-        <!-- <div class="mat-icon-button pipe-icon">
-        |
-      </div> -->
-        <!-- <ng-container [wsResolverWidget]="btnAppsConfig"></ng-container> -->
       </ng-container>
 
     </ng-container>
@@ -66,12 +61,6 @@
       <ng-container [wsResolverWidget]="btnAppsConfig"></ng-container>
     </div>
   </div>
-  <!-- <div class="fix-ww" *ngIf="mode === 'top'">
-    <ng-container [wsResolverWidget]="{ 'widgetType': 'card',
-      'widgetSubType': 'cardHomeHubs',
-      widgetData: {}}">
-    </ng-container>
-  </div> -->
 </mat-toolbar>
 
 <ng-template #navbarSide let-item="item">

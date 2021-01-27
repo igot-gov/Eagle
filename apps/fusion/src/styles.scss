@@ -51,8 +51,12 @@ h1 {
  * 1. Add the correct box sizing in Firefox.
  * 2. Show the overflow in Edge and IE.
  */
+/*
+ * Ensure horizontal rules are visible by default
+ */
 
 hr {
+  border-top-width: 1px;
   box-sizing: content-box;
   /* 1 */
   height: 0;
@@ -67,7 +71,7 @@ hr {
  */
 
 pre {
-  font-family: monospace, monospace;
+  font-family: monospace;
   /* 1 */
   font-size: 1em;
   /* 2 */
@@ -115,7 +119,7 @@ strong {
 code,
 kbd,
 samp {
-  font-family: monospace, monospace;
+  font-family: monospace;
   /* 1 */
   font-size: 1em;
   /* 2 */
@@ -240,13 +244,6 @@ button:-moz-focusring,
   outline: 1px dotted ButtonText;
 }
 
-/**
- * Correct the padding in Firefox.
- */
-
-fieldset {
-  padding: 0.35em 0.75em 0.625em;
-}
 
 /**
  * 1. Correct the text wrapping in Edge and IE.
@@ -419,6 +416,14 @@ button:focus {
   outline: 5px auto -webkit-focus-ring-color;
 }
 
+/**
+ * Correct the padding in Firefox.
+ */
+
+// fieldset {
+//   padding: 0.35em 0.75em 0.625em;
+// }
+
 fieldset {
   margin: 0;
   padding: 0;
@@ -488,13 +493,7 @@ html {
   /* 2 */
 }
 
-/*
- * Ensure horizontal rules are visible by default
- */
 
-hr {
-  border-top-width: 1px;
-}
 
 /**
  * Undo the `border-style: none` reset that Normalize applies to images so that

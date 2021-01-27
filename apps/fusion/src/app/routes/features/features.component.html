@@ -1,6 +1,4 @@
-<!-- <mat-toolbar class="sec-nav-bar" [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles"> -->
 <ws-widget-btn-page-back [widgetData]="{ url: '/',titles:[{title:'Features',url:'none'}] }"></ws-widget-btn-page-back>
-<!-- <h1 i18n>Features</h1> -->
 <div class="flex flex-1 container-balanced">
   <span class="spacer"></span>
   <mat-form-field floatLabel="never" class="search-container">
@@ -16,7 +14,6 @@
     <mat-icon>contact_support</mat-icon>
   </button>
 </div>
-<!-- </mat-toolbar> -->
 
 <section class="padding-m container-balanced" *ngFor="let group of featureGroups">
   <div [ngClass]="{ pad: group?.stripBackground }" [ngStyle]="{ 'background-color': group?.stripBackground }">
@@ -35,29 +32,5 @@
 </section>
 
 <div class="my-4 mx-6 flex flex-wrapped">
-  <!-- <div class="flex items-center mr-4">
-    <mat-icon class="mr-2" color="primary">
-      brightness_1
-    </mat-icon>
-    <span>Early Access</span>
-  </div>
-  <div class="flex items-center mr-4">
-    <mat-icon class="mr-2" color="accent">
-      brightness_1
-    </mat-icon>
-    <span>Beta</span>
-  </div>
-  <div class="flex items-center">
-    <mat-icon class="mr-2" color="warn">
-      brightness_1
-    </mat-icon>
-    <span>Alpha</span>
-  </div> -->
   <span class="spacer"></span>
-  <!-- <div class="logout">
-    <button (click)="logout()" color="warn" mat-button>
-      <mat-icon>power_settings_new</mat-icon>&nbsp;
-      <span i18n>Logout</span>
-    </button>
-  </div> -->
 </div>

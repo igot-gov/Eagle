@@ -28,7 +28,7 @@ export class AppNavBarComponent implements OnInit, OnChanges {
   primaryNavbarConfig: NsInstanceConfig.IPrimaryNavbarConfig | null = null
   pageNavbar: Partial<NsPage.INavBackground> | null = null
   featureApps: string[] = []
-  isHelpMenuRestricted = false
+  isHelpMenuRestricted = true
   isTourGuideAvailable = false
   isTourGuideClosed = false
   showAppNavBar = false
@@ -41,7 +41,7 @@ export class AppNavBarComponent implements OnInit, OnChanges {
   ) {
     this.btnAppsConfig = { ...this.basicBtnAppsConfig }
     if (this.configSvc.restrictedFeatures) {
-      this.isHelpMenuRestricted = this.configSvc.restrictedFeatures.has('helpNavBarMenu')
+      // this.isHelpMenuRestricted = this.configSvc.restrictedFeatures.has('helpNavBarMenu')
     }
     this.router.events.subscribe(event => {
       if (event instanceof NavigationStart) {
