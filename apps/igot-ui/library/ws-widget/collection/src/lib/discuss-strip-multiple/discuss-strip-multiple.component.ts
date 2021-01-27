@@ -4,6 +4,8 @@ import { NsDiscussStripNewMultiple } from './discuss-strip-multiple.model'
 import { ContentStripNewMultipleService } from './discuss-strip-multiple.service'
 import { WidgetContentService } from '../_services/widget-content.service'
 import { NsContent } from '../_services/widget-content.model'
+import { Router } from '@angular/router';
+
 import {
   TFetchStatus,
   LoggerService,
@@ -70,6 +72,7 @@ export class DiscussStripMultipleComponent extends WidgetBaseComponent
     // private eventSvc: EventService,
     // private configSvc: ConfigurationsService,
     protected utilitySvc: UtilityService,
+    public router: Router
     // private searchServSvc: SearchServService,
   ) {
     super()
@@ -83,6 +86,16 @@ export class DiscussStripMultipleComponent extends WidgetBaseComponent
     if (this.changeEventSubscription) {
       this.changeEventSubscription.unsubscribe()
     }
+  }
+
+  navigate() {
+    const result = [16];
+    this.router.navigate(['/app/discuss/home/discussion-forum'], {
+      queryParams: {
+        categories: JSON.stringify({ result }),
+        userName: 'ntptest104',
+      },
+    });
   }
 
   private initData() {
