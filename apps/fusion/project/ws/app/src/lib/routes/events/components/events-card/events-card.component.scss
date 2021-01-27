@@ -34,9 +34,14 @@
     align-items: center;
   }
   .event-card-image {
-    width: 370px;
-    height:186px;
+    width: 100%;
   }
+}
+
+.mat-card-image {
+    width: 370px !important;
+    margin: 0 -16px 16px 0px;
+    height: 186px;
 }
 
 .avatar-img{
@@ -48,6 +53,25 @@
     margin-left: -10px;
     font-size: 19px !important;
 }
+
+.today-status {
+  color: black;
+  background-color: white;
+  width: 80px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.live-status {
+    background-color: rgb(255, 130, 104) !important;
+    color: white;
+    width: 80px;
+    font-weight: bold;
+    text-transform: uppercase;
+    justify-content: center;
+}
+
 .split-count{
     text-align: left;
     margin-left: 19px;

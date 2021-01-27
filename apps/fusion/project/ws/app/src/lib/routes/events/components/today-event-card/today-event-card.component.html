@@ -1,4 +1,4 @@
-<mat-card class="today-event-card no-box-shadow cursor-pointer" [ngClass]="(isLive)?'bg-black':'bg-white'" style="width: 220px;">
+<mat-card class="today-event-card no-box-shadow" [ngClass]="(isLive)?'bg-black':'bg-white'" style="width: 220px;">
     <mat-card-header>
         <mat-card-title>
             <a [routerLink]="['/app/event-hub/home/' + identifier]">
@@ -17,7 +17,11 @@
         <ng-container>
             <span class="light-font">
                 <mat-chip-list>
-                    <mat-chip class="live-status" selected>Live</mat-chip>
+                    <mat-chip class="live-status" selected>
+                        <a [routerLink]="['/app/event-hub/home/' + identifier]">
+                            Live
+                        </a>
+                    </mat-chip>
                 </mat-chip-list>
             </span>
         </ng-container>
