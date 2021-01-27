@@ -166,7 +166,7 @@ export class DirectoryViewComponent implements OnInit, AfterViewInit, OnDestroy 
     }
   }
   actionClick(clickedData: any) {
-    this.router.navigate([`/app/roles/${this.currentFilter}/basicinfo`, { data: JSON.stringify(clickedData) }])
+    this.router.navigate([`/app/home/${this.currentFilter}/create-department`, { data: JSON.stringify(clickedData) }])
   }
 
 }

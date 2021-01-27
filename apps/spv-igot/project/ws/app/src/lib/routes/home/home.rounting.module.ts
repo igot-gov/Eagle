@@ -42,7 +42,7 @@ const routes: Routes = [
         component: DirectoryViewComponent,
       },
       {
-        path: 'create-department',
+        path: ':department/create-department',
         component: CreateMdoComponent,
       },
       {

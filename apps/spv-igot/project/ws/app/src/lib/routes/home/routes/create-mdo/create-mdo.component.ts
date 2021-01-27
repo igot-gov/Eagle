@@ -4,11 +4,14 @@ import { FormGroup, FormControl } from '@angular/forms'
 import { MatDialog, MatSnackBar } from '@angular/material'
 import { UserPopupComponent } from '../user-popup/user-popup'
 
-
 import { LoaderService } from '../../services/loader.service'
 import { AuthInitService } from '../../services/init.service'
 import { ActivatedRoute, Router } from '@angular/router'
 import { CreateMDOService } from './create-mdo.services'
+import { ValueService } from '../../../../../../../../../library/ws-widget/utils/src/lib/services/value.service'
+import { NsWidgetResolver } from '../../../../../../../../../library/ws-widget/resolver/src/public-api'
+import { ILeftMenu } from '../../../../../../../../../library/ws-widget/collection/src/public-api'
+import { map } from 'rxjs/operators'
 interface IUser { userId: string, fullName: string; email: string; role: string }
 @Component({
   selector: 'ws-app-create-mdo',
@@ -41,20 +44,30 @@ export class CreateMdoComponent implements OnInit {
   data1: any
   updateId !: number
   department!: string
+  widgetData!: NsWidgetResolver.IWidgetData<ILeftMenu>
+  sideNavBarOpened = true
   isFromDirectory = false
+  private bannerSubscription: any
+  public screenSizeIsLtMedium = false
+
+  isLtMedium$ = this.valueSvc.isLtMedium$
+  mode$ = this.isLtMedium$.pipe(map(isMedium => (isMedium ? 'over' : 'side')))
   subDepartments!: any
   subMDODepartments!: any
+  private defaultSideNavBarOpenedSubscription: any
+
   isUpdate = false
   isAddAdmin = false
   workFlow = [{ isActive: true, isCompleted: false, name: 'Basic Details', step: 0 },
   { isActive: false, isCompleted: false, name: 'Classification', step: 1 },
   { isActive: false, isCompleded: false, name: 'Intended for', step: 2 }]
   constructor(public dialog: MatDialog,
-    private snackBar: MatSnackBar,
-    private createMdoService: CreateMDOService,
-    private router: Router,
-    private directoryService: DirectoryService,
-    private activatedRoute: ActivatedRoute) {
+              private snackBar: MatSnackBar,
+              private createMdoService: CreateMDOService,
+              private router: Router,
+              private directoryService: DirectoryService,
+              private valueSvc: ValueService,
+              private activatedRoute: ActivatedRoute) {
     {
 
       this.contentForm = new FormGroup({
@@ -121,6 +134,10 @@ export class CreateMdoComponent implements OnInit {
       sortColumn: '',
       sortState: 'asc',
     }
+    this.defaultSideNavBarOpenedSubscription = this.isLtMedium$.subscribe(isLtMedium => {
+      this.sideNavBarOpened = !isLtMedium
+      this.screenSizeIsLtMedium = isLtMedium
+    })
   }
   getAllDepartmentsAPI() {
     this.createMdoService.getAllSubDepartments(this.department).subscribe(res => {
@@ -160,7 +177,7 @@ export class CreateMdoComponent implements OnInit {
             this.snackBar.open('Admin assigned Successfully')
             this.router.navigate(['/app/home/directory', { department: this.department }])
           }
-        }, (err: { error: any }) => {
+        },                                                                                                              (err: { error: any }) => {
           this.openSnackbar(err.error.errors[0].message)
         })
       })
@@ -202,7 +219,7 @@ export class CreateMdoComponent implements OnInit {
             this.submittedForm = false
             this.openSnackbar('Success')
           }
-        }, (err: { error: any }) => {
+        },                                                                                (err: { error: any }) => {
           this.openSnackbar(err.error.errors[0].message)
         })
 
@@ -225,7 +242,7 @@ export class CreateMdoComponent implements OnInit {
             this.router.navigate(['/app/home/directory', { department: this.department }])
 
           }
-        }, (err: { error: any }) => {
+        },                                                                                               (err: { error: any }) => {
           this.openSnackbar(err.error.errors[0].message)
         })
 
@@ -274,6 +291,14 @@ export class CreateMdoComponent implements OnInit {
 
   capitalizeFirstLetter(uppercaseString: string) {
     return uppercaseString.charAt(0).toUpperCase() + uppercaseString.slice(1)
+  }
+  onDestroy() {
+    if (this.defaultSideNavBarOpenedSubscription) {
+      this.defaultSideNavBarOpenedSubscription.unsubscribe()
+    }
+    if (this.bannerSubscription) {
+      this.bannerSubscription.unsubscribe()
+    }
   }
 
 }
