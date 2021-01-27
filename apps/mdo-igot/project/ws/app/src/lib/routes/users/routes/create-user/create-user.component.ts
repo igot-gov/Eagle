@@ -1,15 +1,30 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, OnDestroy, HostListener, ViewChild, ElementRef } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router, Event, NavigationEnd } from '@angular/router'
 import { UsersService } from '../../services/users.service'
 import { MatSnackBar } from '@angular/material'
-
+import { ILeftMenu } from '@ws-widget/collection'
+import { NsWidgetResolver } from 'library/ws-widget/resolver/src/public-api'
+import { ConfigurationsService, ValueService } from '@ws-widget/utils/src/public-api'
+/* tslint:disable */
+import _ from 'lodash'
+/* tslint:enable */
 @Component({
   selector: 'ws-app-create-user',
   templateUrl: './create-user.component.html',
   styleUrls: ['./create-user.component.scss'],
 })
-export class CreateUserComponent implements OnInit {
+export class CreateUserComponent implements OnInit, OnDestroy {
+  sideNavBarOpened = true
+  currentRoute = 'users'
+  myRoles!: Set<string>
+  widgetData!: NsWidgetResolver.IWidgetData<ILeftMenu>
+  @ViewChild('stickyMenu', { static: true }) menuElement!: ElementRef
+  elementPosition: any
+  sticky = false
+  private defaultSideNavBarOpenedSubscription: any
+  public screenSizeIsLtMedium = false
+  isLtMedium$ = this.valueSvc.isLtMedium$
   createUserForm: FormGroup
   namePatern = `^[a-zA-Z\\s\\']{1,32}$`
   department: any = {}
@@ -18,14 +33,46 @@ export class CreateUserComponent implements OnInit {
   rolesList: any = []
   public userRoles: Set<string> = new Set()
 
+  @HostListener('window:scroll', ['$event'])
+  handleScroll() {
+    const windowScroll = window.pageYOffset
+    if (windowScroll >= this.elementPosition) {
+      this.sticky = true
+    } else {
+      this.sticky = false
+    }
+  }
+
   constructor(private router: Router, private activeRoute: ActivatedRoute,
               private snackBar: MatSnackBar,
-              private usersSvc: UsersService) {
+              private usersSvc: UsersService,
+              private configService: ConfigurationsService,
+              private valueSvc: ValueService) {
+    if (this.configService.userRoles) {
+      this.myRoles = this.configService.userRoles
+    }
+    this.router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationEnd) {
+        this.bindUrl(event.urlAfterRedirects.replace('/app/home/', ''))
+        if (this.activeRoute.snapshot.data.department.data) {
+          const leftData = this.activeRoute.snapshot.data.pageData.data.menus
+          _.set(leftData, 'widgetData.logo', true)
+          _.set(leftData, 'widgetData.logoPath', _.get(this.activeRoute, 'snapshot.data.department.data.logo'))
+          _.set(leftData, 'widgetData.name', _.get(this.activeRoute, 'snapshot.data.department.data.deptName')
+            || _.get(this.activeRoute, 'snapshot.data.department.data.description'))
+          _.set(leftData, 'widgetData.userRoles', this.myRoles)
+          this.widgetData = leftData
+        } else {
+          this.widgetData = this.activeRoute.snapshot.data.pageData.data.menus
+        }
+      }
+    })
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
         this.department = this.activeRoute.snapshot.data.department.data
         this.departmentName = this.department ? this.department.deptName : ''
         this.rolesList = this.department.rolesInfo
+        this.configService.departName = this.departmentName
       }
     })
     this.createUserForm = new FormGroup({
@@ -38,6 +85,10 @@ export class CreateUserComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.defaultSideNavBarOpenedSubscription = this.isLtMedium$.subscribe(isLtMedium => {
+      this.sideNavBarOpened = !isLtMedium
+      this.screenSizeIsLtMedium = isLtMedium
+    })
   }
 
   onSubmit(form: any) {
@@ -161,5 +212,20 @@ export class CreateUserComponent implements OnInit {
     } else {
       this.userRoles.add(role)
     }
+  }
+
+  bindUrl(path: string) {
+    if (path) {
+      this.currentRoute = path
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.defaultSideNavBarOpenedSubscription) {
+      this.defaultSideNavBarOpenedSubscription.unsubscribe()
+    }
+    // if (this.bannerSubscription) {
+    //   this.bannerSubscription.unsubscribe()
+    // }
   }
 }
