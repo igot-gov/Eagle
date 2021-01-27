@@ -98,7 +98,7 @@ const routes: Routes = [
     canActivate: [GeneralGuard],
   },
   {
-    path: 'app/discuss',
+    path: 'app/discussion-forum',
     loadChildren: () =>
       import('./routes/route-discuss.module').then(u => u.RouteDiscussModule),
     canActivate: [GeneralGuard],

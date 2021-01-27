@@ -90,7 +90,7 @@ export class DiscussStripMultipleComponent extends WidgetBaseComponent
 
   navigate() {
     const result = [16];
-    this.router.navigate(['/app/discuss/home/discussion-forum'], {
+    this.router.navigate(['/app/discussion-forum'], {
       queryParams: {
         categories: JSON.stringify({ result }),
         userName: 'ntptest104',

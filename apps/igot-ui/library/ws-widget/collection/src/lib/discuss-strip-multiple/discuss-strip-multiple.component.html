@@ -44,8 +44,7 @@
                 <div
                   *ngIf="widgetData.strips[0].viewMoreUrl && stripsResultDataMap[key] && stripsResultDataMap[key].widgets"
                   class="ml-4 mr-6 mb-2 view-more ws-mat-accent-text view-all ws-mat-primary-lite-background-important">
-                  <a mat-button [routerLink]="widgetData.strips[0]?.viewMoreUrl?.path"
-                    [queryParams]="widgetData.strips[0]?.viewMoreUrl?.queryParams">
+                  <a mat-button (click)="navigate()">
                     <span i18n>{{widgetData.strips[0].viewMoreUrl.viewMoreText || 'View All'}}</span>
                     <mat-icon>arrow_forward</mat-icon>
                   </a>

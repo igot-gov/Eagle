@@ -18,6 +18,7 @@ import { DiscussUnreadResolve } from './resolvers/discuss-unread-resolve'
 import { DiscussProfileResolve } from './resolvers/discuss-profile-resolve'
 
 const routes: Routes = [
+
   {
     path: '',
     // component: DiscussComponent,
