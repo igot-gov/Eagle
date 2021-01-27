@@ -41,6 +41,7 @@ export class BtnFeatureComponent extends WidgetBaseComponent
   defaultIconSize = 24
   isPinned = false
   instanceVal = ''
+  actionUrl!: string
   isPinFeatureAvailable = true
   private pinnedAppsChangeSubs?: Subscription
   private navigationSubs?: Subscription
@@ -74,6 +75,7 @@ export class BtnFeatureComponent extends WidgetBaseComponent
   }
 
   ngOnInit() {
+    this.actionUrl = "/app/home/directory"
     this.instanceVal = this.configSvc.rootOrg || ''
     if (this.configSvc.restrictedFeatures) {
       this.isPinFeatureAvailable = !this.configSvc.restrictedFeatures.has('pinFeatures')
@@ -158,7 +160,12 @@ export class BtnFeatureComponent extends WidgetBaseComponent
       this.configurationsSvc.pinnedApps.next(newPinnedApps)
     })
   }
+  gotoUrl(url: string) {
+    if (url.indexOf('users') > -1) {
+      window.open("https://igot-dashboard.tarento.com/", "_blank")
+    }
 
+  }
   startTour() {
     this.tour.startTour()
   }

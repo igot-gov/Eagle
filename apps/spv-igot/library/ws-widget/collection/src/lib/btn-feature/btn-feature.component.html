@@ -45,8 +45,8 @@
 <!-- TEMPLATES -->
 <ng-template #buttonContent let-actionBtn="actionBtn" let-config="config">
   <ng-container [ngTemplateOutlet]="icon" [ngTemplateOutletContext]="actionBtn"></ng-container>
-  <span id="widgetInstanceId" *ngIf="!config.hideTitle"
-    [ngClass]="{ 'ml-2': actionBtn.icon }">{{ actionBtn.name }}</span>
+  <span id="widgetInstanceId" *ngIf="!config.hideTitle" [ngClass]="{ 'ml-2': actionBtn.icon }">{{ actionBtn.name
+    }}</span>
 </ng-template>
 
 <ng-template #buttonExternalLinkTextContent let-actionBtn="actionBtn">
@@ -103,9 +103,9 @@
   </a>
 </ng-template>
 <ng-template #cardMini let-actionBtn="actionBtn" let-config="config">
-  <a role="link" matRipple routerLink={{actionBtn.url}} active [wsWidgetUrlResolver]="actionBtn.isExternal"
-    [attr.aria-label]="actionBtn.name" role="link" routerLinkActive="ws-mat-selected-home-menu"
-    class="flex items-center flex-col px-4 box-sizing-box rem">
+  <a role="link" matRipple routerLink={{actionBtn.url}} (click)="gotoUrl(actionBtn.url)" active
+    [wsWidgetUrlResolver]="actionBtn.isExternal" [attr.aria-label]="actionBtn.name" role="link"
+    routerLinkActive="ws-mat-selected-home-menu" class="flex items-center flex-col px-4 box-sizing-box rem">
     <!-- <mat-icon *ngIf="!config.hideIcon">{{ actionBtn.icon }}</mat-icon> -->
     <!-- <span *ngIf="!config.hideTitle" Class="mat-caption">{{ actionBtn.name }}</span> -->
     <ng-container [ngTemplateOutlet]="icon" [ngTemplateOutletContext]="{
