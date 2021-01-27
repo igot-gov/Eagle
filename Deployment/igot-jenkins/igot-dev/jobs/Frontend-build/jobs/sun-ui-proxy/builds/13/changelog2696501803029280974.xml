@@ -1,0 +1,10 @@
+commit de2d0bed467d72e2a8238f6df986581d02587206
+tree 06cd1fe35c952cebe17fc97a574a90644466ff50
+parent 9747bdfbf700cbdac660bb4fe9daed431ae847ac
+author bandanasahu <bandanasahu8@gmail.com> 2020-12-08 12:34:29 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2020-12-08 12:34:29 +0530
+
+    fixed build error
+
+
+:100644 100644 6b0d0f75aab01e6ad9dd9e3f5470e8a68dcb3c7f 40dfb13f15774aaa681347cfd5c24f20e7a3e5ab M	apps/ui-proxy/src/protectedApi_v8/user/profile-registry.ts

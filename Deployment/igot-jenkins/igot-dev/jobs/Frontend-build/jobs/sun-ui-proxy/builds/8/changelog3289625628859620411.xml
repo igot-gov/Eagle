@@ -1,0 +1,10 @@
+commit 68d1b39714a84e48f84ad0337f441c70e89703e5
+tree 3dfc6d9456015ceb706f26b33ae1d63c957817a7
+parent c01440cf572f1394b2ede3205999bd38340fd08c
+author bandanasahu <bandanasahu8@gmail.com> 2020-12-03 14:27:20 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2020-12-03 14:27:20 +0530
+
+    Modified the method.
+
+
+:100644 100644 5b493f1bb770068db36b7bf06d8332794eaf0a6b 33dbd48bb1dc42c5b6838cd6903017ceb10cd35c M	apps/ui-proxy/src/protectedApi_v8/user/profile-registry.ts

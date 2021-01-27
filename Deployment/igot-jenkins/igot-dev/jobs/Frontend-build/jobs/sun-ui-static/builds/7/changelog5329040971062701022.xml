@@ -1,0 +1,97 @@
+commit 38b7203d6119e4ed27612404430a92a8704a0577
+tree af3e3efbe6781f47fa9ff7084492108ed5724e64
+parent 1a7a3a3c843d59e338ff9c8b4e3db60cfbd8f66f
+author bandanasahu <bandanasahu8@gmail.com> 2020-12-21 19:40:38 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2020-12-21 19:40:38 +0530
+
+    Integrated network apis
+
+
+:000000 100644 0000000000000000000000000000000000000000 4e637713e0e9afa2b3ccb8d2b70f74e5465e4258 A	.gitignore
+:100644 100644 208e61e7a3259a4fd680807be50e40e542ed6820 516fc3ed01f349e0f39c158dd2dbbb027e57dfcf M	apps/igot-ui/library/ws-widget/utils/src/lib/services/configurations.model.ts
+:100644 100644 d6fd073f1243ea1e8bb2cdc080d637db80e9b7b6 d674c1ec544f68624711761bdfb0ecdc02930664 M	apps/igot-ui/library/ws-widget/utils/src/lib/services/configurations.service.ts
+:100644 100644 8d9de15c360817ccab540debceb3fcb2bf4362c2 899f06a68019c97d406d28a088e494ac634d7503 M	apps/igot-ui/project/ws/app/src/lib/routes/network-v2/components/connection-people-card/connection-people-card.component.ts
+:000000 100644 0000000000000000000000000000000000000000 cf2830fdaf3bfc94b626954558b491c1f0beea97 A	apps/igot-ui/project/ws/app/src/lib/routes/network-v2/components/connection-recommended-card/connection-recommended-card.component.html
+:000000 100644 0000000000000000000000000000000000000000 e39480c28db420b0affba2ea9d9931d7199e8426 A	apps/igot-ui/project/ws/app/src/lib/routes/network-v2/components/connection-recommended-card/connection-recommended-card.component.scss
+:000000 100644 0000000000000000000000000000000000000000 64edc5121b9448d5d344fefe13110d0251a68725 A	apps/igot-ui/project/ws/app/src/lib/routes/network-v2/components/connection-recommended-card/connection-recommended-card.component.spec.ts
+:000000 100644 0000000000000000000000000000000000000000 d2e0b435e6ce867064b25a2952ff48a90d6b6924 A	apps/igot-ui/project/ws/app/src/lib/routes/network-v2/components/connection-recommended-card/connection-recommended-card.component.ts
+:100644 100644 b2d1e212a98ea60312f4b405e7c2b01f784f83c1 3b329305baaade5c31a5049393fdf579e826c3bf M	apps/igot-ui/project/ws/app/src/lib/routes/network-v2/components/connection-request-card/connection-request-card.component.ts
+:100644 100644 2ed74326d62e700e8fc982cfb0f84a84c11b7321 7d33dda78a824a9d20ecceb5045d14fd211c0d9a M	apps/igot-ui/project/ws/app/src/lib/routes/network-v2/network-v2.module.ts
+:100644 100644 cb40c1f3c261a925a1c169455ba998827fdbdb69 5e83c406ae9b730ce767e96c1c2fd7ef185f14d3 M	apps/igot-ui/project/ws/app/src/lib/routes/network-v2/routes/network-home/network-home.component.ts
+:100644 100644 b91769bc8ada099cea0c964793a350dbe615873e cce59923ad3236c1b4be712f36a96babd4514f3b M	apps/igot-ui/project/ws/app/src/lib/routes/network-v2/routes/network-recommended/network-recommended.component.html
+:100644 100644 45127e3392998b3c6fcc095c059fd5daaf34bf03 075b4fc46a6b327129056fe84e21c9ed0633c3ed M	apps/igot-ui/proxy/localhost.proxy.json
+:100644 100644 41893ed17634884dbf7caf536b6a67c7e85f1253 f53815ebf6f9b6214cb5185eb75783e1021f6f29 M	apps/igot-ui/src/app/services/app-interceptor.service.ts
+:100644 100644 5f59fbcc86df1032af66eec70443742376109e79 776f42ae8394b9b8f24afc1a26dfbe9594052046 M	apps/igot-ui/src/app/services/init.service.ts
+commit 76a3fd68208ca7cff3ecb1b3d8fe557369bc9b30
+tree 5ab4a244900b74e64a4fa3e0a6a3fab154456a3c
+parent 31993eaf84274a9c3fc5706aa01b51567bbb54fa
+author abhishek-K-P <abishek.koira@tarento.com> 2020-12-21 17:44:38 +0530
+committer abhishek-K-P <abishek.koira@tarento.com> 2020-12-21 17:44:38 +0530
+
+    prod build issues fixed
+
+
+:100644 100644 c968e866845e5aa162c65e410a64c2e4ff5e4798 803235909caf5233cb9e8f37e4e99b080fe09c7d M	apps/igot-ui/project/ws/author/src/lib/routing/modules/editor/components/editor/editor.component.ts
+:100644 100644 09da15d6a9fa61a2bd98424ac739d230d9d4f88e 45f7ff308e880e4a82d6efa5aea7c006cab0e7f1 M	apps/igot-ui/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/services/store.service.ts
+:100644 100644 ab281fd01c33543bbb43f70a6182b74e2faf16c6 b215be02eb01de8295efa5f8c5f6b2b4a0c1c8b6 M	apps/igot-ui/project/ws/author/src/lib/routing/modules/editor/services/editor-content.service.ts
+:100644 100644 2c1bfbccd191fc4ef059127c000b2840e44534b8 27cf032151cc8f4e1b49888ea140c3129abc3696 M	apps/igot-ui/project/ws/author/src/lib/routing/modules/editor/services/editor.service.ts
+commit 9399461441fbc45a08d6da25f4e4a06d1f011ef8
+tree 6346465a2e047cbcdbfbb8d36759671982fa2cb4
+parent 02f89252df967e0f8b7e94b8bc881cd6dd015e4d
+author pilliarunkumar <arunkumar.pilli@tarento.com> 2020-12-21 16:51:33 +0530
+committer pilliarunkumar <arunkumar.pilli@tarento.com> 2020-12-21 16:51:33 +0530
+
+    more add to playlist changes
+
+
+:100644 100644 9c3fbe5eec114a2146f10ff9646d170f88e6f5e9 672c11cec510a907cb74a4f0b3fb5f78b2ce4093 M	apps/igot-ui/library/ws-widget/collection/src/lib/btn-playlist/btn-playlist-selection/btn-playlist-selection.component.html
+:100644 100644 30a097038fa74d4d70e065f7ec52dc9ba0da1fd5 b35374c40427b0b28af0a82a5a8b64aba733ba35 M	apps/igot-ui/library/ws-widget/collection/src/lib/btn-playlist/btn-playlist-selection/btn-playlist-selection.component.ts
+:100644 100644 c0237a94ca47e9d96801d1eccf7e783a4377f023 2b0d017ee57b089acbc1892a28b779ffbc81b55f M	apps/igot-ui/library/ws-widget/collection/src/lib/btn-playlist/btn-playlist.model.ts
+:100644 100644 13eb64bcfda1091b16f0a6240501ed7655b487d4 6e85082fa08e96cebeeff42d5c012f98ff3f3e49 M	apps/igot-ui/library/ws-widget/collection/src/lib/btn-playlist/btn-playlist.service.ts
+:100644 100644 a11510e6c70b40150e07dc7509cf220510030dc5 e7172056aff17a1cedfbac253e31e86a7e42d8c3 M	apps/igot-ui/project/ws/app/src/lib/routes/playlist/pipes/filter-playlist.pipe.ts
+:100644 100644 e98ba947e0c36a014a177234ac674bb496c84b62 956e52d4dcec9c079cb2b60ed79cefed754b8c03 M	apps/igot-ui/project/ws/app/src/lib/routes/playlist/resolvers/playlists.resolve.ts
+:100644 100644 635df60c8dbc0a7376582c30b022d1571b1be923 461a7d8f137a44d01fffc319ce04596d93019971 M	apps/igot-ui/project/ws/app/src/lib/routes/playlist/routes/playlist-home/playlist-home.component.ts
+:100644 100644 0a60556cb6124fc84b7904d2c147e5afe97c0797 b98455e7c9dcc46fd859639e6adeddacbb5bfaf5 M	apps/ui-proxy/src/models/playlist.model.ts
+:100644 100644 8c5d4e99317930e644e6acd38cd24c8ca6235fb6 aa2f1657c71f9f585e084ac5b2081df5fafb36d7 M	apps/ui-proxy/src/protectedApi_v8/user/playlist.ts
+:100644 100644 272a5eaba665895e5f06a0619a2f9e7f7070ccde 632ddb7611b2490e24e5879aa25eb496be41673b M	apps/ui-proxy/src/service/playlist.ts
+commit 1f70ff86dec6d12a2756f87330a5d6696c46206e
+tree f67ff1009a816209c9a1155affee4d1c8007f83f
+parent 61782a7f6b931e83565d64b9818df2fdc8525bc4
+author abhishek-K-P <abishek.koira@tarento.com> 2020-12-21 11:56:40 +0530
+committer abhishek-K-P <abishek.koira@tarento.com> 2020-12-21 11:56:40 +0530
+
+    authoring curd operation with permision removed
+
+
+:100644 100644 539f0f2c36afb425502b7364348c6efdcf85fbc5 e78c8ce8509fbf6968e620119313b35fc7728955 M	apps/client-assets/assets/configurations/localhost_3000/feature/apps.json
+:100644 100644 d41fece7cc0a32163d9e055f7ac4340dbcd2f75d 7c4c3ce8b718976c8c7a101f59e35a298e6579af M	apps/client-assets/assets/configurations/localhost_3000/feature/auth-create.json
+:100644 100644 e887361d509618ad6d7f1b494e96d3bcc0fb423d 3abac80413d820ff1756102c77197c45ab5316d3 M	apps/igot-ui/project/ws/author/src/lib/interface/apiRequest.ts
+:100644 100644 63c0c4dec6dd9c63831202a4f0e3cc0534c3464e f4af03e8ec4326de36a26e8f105c20bbff25eb7d M	apps/igot-ui/project/ws/author/src/lib/interface/apiResponse.ts
+:100644 100644 ad389c88654c3467c35c8a537197d916cd790136 d3fa0eb69d536cf1f4a176b4f13bea12594c7f68 M	apps/igot-ui/project/ws/author/src/lib/interface/content.ts
+:100644 100644 2e956f294fbadcc07aa748dd5d3eed3136620ac4 bfba06b4b7a99424769afed1bb3a162197dd285e M	apps/igot-ui/project/ws/author/src/lib/interface/create-entity.ts
+:100644 100644 e7ed1d03dd430b4f96f866017c357bbb87685c8c 3afd52f0add2c1ddf2757736944a3cc35ea646d6 M	apps/igot-ui/project/ws/author/src/lib/modules/shared/services/access-control.service.ts
+:100644 100644 0cbfbcf362bb00be57cb2caa22406125f1d7d99e f0c7bc5ef62e29f6e0298b1155c5cbd0ebf32dce M	apps/igot-ui/project/ws/author/src/lib/modules/shared/services/api.service.ts
+:100644 100644 5fa59e62f5cbc0d07e69092c5792d1e9f9052a3d 5eadf12e7db58940e8a35c3bb6542d09e9a91255 M	apps/igot-ui/project/ws/author/src/lib/routing/modules/create/components/create/create.component.ts
+:100644 100644 090863b56e7906661f14bed07011253fa14dc373 dcdb8a0b41f528135915260383a6b9033eb8aba1 M	apps/igot-ui/project/ws/author/src/lib/routing/modules/create/components/create/create.service.ts
+:100644 100644 c570d27f78e0308609f7c20af6c4ffb6722a255b bf8a306ffba21be56d9f95997e79989c524bba0c M	apps/igot-ui/project/ws/author/src/lib/routing/modules/create/components/entity-card/entity-card.component.html
+:100644 100644 a53d67bff36b816b460a0e1aedd18e5e1f41e3a6 c968e866845e5aa162c65e410a64c2e4ff5e4798 M	apps/igot-ui/project/ws/author/src/lib/routing/modules/editor/components/editor/editor.component.ts
+:100644 100644 609e54c57ec1350c8c4bf3d4b9893aaa89026688 c8e7d56828d127e3bd5043bbe3b929a57961171c M	apps/igot-ui/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/auth-editor-options/auth-editor-options.component.ts
+:100644 100644 9270a269e8afdb4c43b74790ccc96ee474bc7d68 aacc2e21441ba77f3b7927a3ef97b1872ba93966 M	apps/igot-ui/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/services/resolver.service.ts
+:100644 100644 75a26c4d5310b2319561d23b88aa04903255bfa3 09da15d6a9fa61a2bd98424ac739d230d9d4f88e M	apps/igot-ui/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/services/store.service.ts
+:100644 100644 205b49ce39167d93df031bd67339ccb09c4e036b 1263383746248030fac4996f25395bd4717b5488 M	apps/igot-ui/project/ws/author/src/lib/routing/modules/editor/routing/modules/curate/components/curate/curate.component.ts
+:100644 100644 455761192daee9c65d00eab677a02ee53d18fe22 6b0d877a7c49b7531621f37793b4f9701b6c40c8 M	apps/igot-ui/project/ws/author/src/lib/routing/modules/editor/routing/modules/curate/components/url-upload/url-upload.component.ts
+:100644 100644 dae332298d0fb84d7ae1af0d8dd36e6a5edbf5b4 1a595ce751631024661497899d88f47d8233a890 M	apps/igot-ui/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/upload/upload.component.ts
+:100644 100644 a4e157adb523ad9b91d2696d160a13ffb49608d1 ab281fd01c33543bbb43f70a6182b74e2faf16c6 M	apps/igot-ui/project/ws/author/src/lib/routing/modules/editor/services/editor-content.service.ts
+:100644 100644 9183253cbe1de0649f47b93b56c954ed37685898 2c1bfbccd191fc4ef059127c000b2840e44534b8 M	apps/igot-ui/project/ws/author/src/lib/routing/modules/editor/services/editor.service.ts
+:100644 100644 070722bb782bf124c69865f0848a3f6aa9dd09da 8440ef9a48bcc3914f67679d22046590ad9eb22e M	apps/igot-ui/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.ts
+:100644 100644 477eb7af39988bef5873a578415317743dcefc8f aa8fde61bef0dd583b740d8459e9cc769435919c M	apps/igot-ui/project/ws/author/src/lib/routing/modules/editor/shared/components/options/options.component.ts
+:100644 100644 b10bdc25d7fb64896276645cb7e48d9bad9939ac 33740c905d2ec37b108b68c9bde5a539587d891a M	apps/igot-ui/project/ws/author/src/lib/routing/modules/editor/shared/services/upload.service.ts
+:100644 100644 49664649d72be6eb7fdaad4c2efd01de835af468 6146d9c328b3e11583b5f18e50b7705f0be1628e M	apps/igot-ui/project/ws/author/src/lib/routing/modules/home/components/home/home.component.ts
+:100644 100644 fa942d4b251fcdbf0ff75038dd27fb3b7ac9f55d 24c88c4ae699c13525280c24a13b168760b312e8 M	apps/igot-ui/project/ws/author/src/lib/services/content-and-data-read-multi-lang.service.ts
+:100644 100644 edc0f0d5baa111f88a65c070da6badfe41178482 ee16b10ca1545f60b63516c3bbdc95f83b8a0576 M	apps/igot-ui/project/ws/author/src/lib/services/init-resolve.service.ts
+:100644 100644 7776330b29f1ebe6adce07a4b096059f5c0f55e3 0c69804e4a4894c618c56beb879c2148dc234427 M	apps/igot-ui/project/ws/author/src/lib/ws-auth-root-routing.module.ts
+:100644 100644 fa6ff5f4629fdd39062dd981b1f7c3ac7d12880d e3be8d7707042ea646a04f2d84c8f544578aad30 M	apps/igot-ui/src/app/app-routing.module.ts
+:100644 100644 c35c13675569174fa81d4076c7215467c984b11f 3852660d20dbca2d63670edff441ab55d4863034 M	apps/igot-ui/src/environments/environment.prod.ts
+:100644 100644 d55e26e70fb2401c954e62982e723ec66d029c6e 1a4091bbb76fe1c9f76dd6655c8eeff126670077 M	apps/igot-ui/src/environments/environment.ts
+:100644 100644 7fc411ac511a5196fb6482d9806bb2879a5597e3 66da5782aceaaf093b4ad4279c7a6dca60c411dd M	apps/ui-proxy/src/authoring/content/index.ts
+:100644 100644 a698dcfef51818878619ac0fc3aa2cde41f394f8 381f4ae95fc28a0510ec7a150ace8ec48ad861c9 M	apps/ui-proxy/src/utils/env.ts

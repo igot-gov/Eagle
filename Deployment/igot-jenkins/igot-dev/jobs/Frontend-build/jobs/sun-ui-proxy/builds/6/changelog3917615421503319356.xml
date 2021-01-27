@@ -1,0 +1,10 @@
+commit 8786785d73b8aab3ea212dba987178aeb488c3b8
+tree 7b76849aba973860df59bdd359de5bcb59780b01
+parent 77d4ceaa7d8f5b3b49f1430aa2acb708781ccb46
+author bandanasahu <bandanasahu8@gmail.com> 2020-12-03 11:35:27 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2020-12-03 11:35:27 +0530
+
+    modified the url for create registry
+
+
+:100644 100644 24ece36807044c167fdc9d39bbe5b53c213e557c 1a4ef7901193c6a9ea29168e5c86e4ed312c92fc M	apps/ui-proxy/src/protectedApi_v8/user/profile-registry.ts

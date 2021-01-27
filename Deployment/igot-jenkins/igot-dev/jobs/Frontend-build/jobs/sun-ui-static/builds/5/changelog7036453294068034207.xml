@@ -1,0 +1,11 @@
+commit 441eb775f3b1f076b481eb7033c0da85508a57f3
+tree 42a68f37ca0387b228e267c716bdcb2f45390d25
+parent 313ea904d84d4462a6634a12ea983b01255461bd
+author pilliarunkumar <arunkumar.pilli@tarento.com> 2020-12-15 13:22:44 +0530
+committer pilliarunkumar <arunkumar.pilli@tarento.com> 2020-12-15 13:22:44 +0530
+
+    fixed lint errors
+
+
+:100644 100644 509009383dfb41873112b87c41b0b5c328c0283f 13eb64bcfda1091b16f0a6240501ed7655b487d4 M	apps/igot-ui/library/ws-widget/collection/src/lib/btn-playlist/btn-playlist.service.ts
+:100644 100644 562c51a548009c5f3b56a860f691995b9238e243 dd11ba4727bfa4a0e351c338bc6670a103476f45 M	apps/igot-ui/library/ws-widget/collection/src/lib/picker-content/picker-content.component.ts

@@ -1,0 +1,21 @@
+commit a7a403ae8d33a1bb8367beaaf818577716d93973
+tree ea355ff43d91f40e6fb1d8c14e89c9c45e9f1df9
+parent 0c8e9879186f3e4be3f4053ae70527fa643d11d2
+author bandanasahu <bandanasahu8@gmail.com> 2020-12-10 09:23:12 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2020-12-10 09:23:12 +0530
+
+    fixed error in profie-registry
+
+
+:100644 100644 0ed87ef6e1c59d634e16ead0fcac47b51ab5d7e0 772ad5ff2a05238d1d6e14365aea7106d6aceede M	apps/ui-proxy/src/protectedApi_v8/user/profile-registry.ts
+commit 0c8e9879186f3e4be3f4053ae70527fa643d11d2
+tree 4ddcb803466733d4458cc014ec0c9643e12859df
+parent 2fd7a5b0fb6c22855b708557944c2dbbb7bd5f8d
+author bandanasahu <bandanasahu8@gmail.com> 2020-12-09 20:40:04 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2020-12-09 20:40:04 +0530
+
+    added getUserbyId API in profile registry file
+
+
+:100644 100644 d4fcfae543f418c7272ef50e7751326251d555e7 13b86175866d901de7d18a22dda4137f1e19f81d M	apps/ui-proxy/src/protectedApi_v8/connections.ts
+:100644 100644 c4604a91cd4bc86585f9c6be662ef0e3e7acc513 0ed87ef6e1c59d634e16ead0fcac47b51ab5d7e0 M	apps/ui-proxy/src/protectedApi_v8/user/profile-registry.ts

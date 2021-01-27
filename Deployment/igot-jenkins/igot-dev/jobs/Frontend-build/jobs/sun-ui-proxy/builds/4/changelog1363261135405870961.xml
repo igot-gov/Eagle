@@ -1,0 +1,10 @@
+commit 2d99324f31662df13943fe7603b720dee7220a0a
+tree cc1f6ff3169c3b7cc8c629fd26061eb9a67ada83
+parent 82e8ed3485466052cb34d2b857bcd06f350ff1ac
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-12-01 11:24:56 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-12-01 11:24:56 +0530
+
+    Task #52666: Add the hierarchy end point for content read proxy
+
+
+:100644 100644 4a43a6a2fe5c048b7c321dfbc91eaf8eb6a34b2b ad54dd508693f3773f983419288c1d52d5a84ff1 M	apps/ui-proxy/src/proxies_v8/proxies_v8.ts

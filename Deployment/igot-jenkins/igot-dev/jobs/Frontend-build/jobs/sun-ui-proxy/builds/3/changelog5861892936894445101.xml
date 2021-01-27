@@ -1,0 +1,10 @@
+commit 82e8ed3485466052cb34d2b857bcd06f350ff1ac
+tree 26f5199b5ef582b513376916d2d668b187f3e55d
+parent 3c74dd0203121b8e976ad129a5cda665667e9ba7
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-11-30 13:56:51 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-11-30 13:56:51 +0530
+
+    Task #52555: Fixed the build error
+
+
+:100644 100644 52f483cd31be7878fdb87297bb75eb7dc430d54f cc5c8ba1e1c4da0c1eff57c6b3e19fc29810944e M	apps/ui-proxy/src/protectedApi_v8/user/details.ts

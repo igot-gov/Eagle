@@ -1,0 +1,58 @@
+commit 7bb9dcdd7322c4d4e7d5d0534a4ee4f95e410242
+tree ed175b4a047309c57fe07b19e2c6e2db883cd1dc
+parent 23d17fbf176f03bf73d44fd356068b7f493d059b
+author pilliarunkumar <arunkumar.pilli@tarento.com> 2021-01-11 20:18:31 +0530
+committer pilliarunkumar <arunkumar.pilli@tarento.com> 2021-01-11 20:18:31 +0530
+
+    fixed content issue
+
+
+:100644 100644 4fd7c1b1b8f5b99a2e3cf77cc125696d2fe44d74 a31fca6d8bb8e650898b8ea3402e95f82685d07c M	apps/igot-ui/library/ws-widget/collection/src/lib/btn-goals/btn-goals.service.ts
+commit 5a208ae3202727baedff548aa2606dc263288550
+tree 713cf080f424600b10530d8895ebb269685de6ca
+parent 877faf19adeca5baa3410ca277afbd697e5fc6a2
+author pilliarunkumar <arunkumar.pilli@tarento.com> 2021-01-11 14:21:41 +0530
+committer pilliarunkumar <arunkumar.pilli@tarento.com> 2021-01-11 14:21:41 +0530
+
+    fixed lint edrrors
+
+
+:100644 100644 80f56d4b4d09bdc4c328c954e3a525474016a44d 0fd25104b90868483a4c30a29505134b84ff9691 M	apps/igot-ui/library/ws-widget/collection/src/lib/btn-playlist/btn-playlist.model.ts
+commit 877faf19adeca5baa3410ca277afbd697e5fc6a2
+tree 009f7e463337f01b2bc067fc53ea0c7cd6af5b6a
+parent 0a8489863e15240cba0a661b51ca7aac866c900f
+author pilliarunkumar <arunkumar.pilli@tarento.com> 2021-01-11 11:28:06 +0530
+committer pilliarunkumar <arunkumar.pilli@tarento.com> 2021-01-11 11:28:06 +0530
+
+    changes in playlsit service file
+
+
+:100644 100644 8c7165ea1dbe3d7e3bde1774e11c92414af9d1ce 7c25d710278d0972d3c01845926429eeae316d90 M	apps/igot-ui/library/ws-widget/collection/src/lib/btn-playlist/btn-playlist.service.ts
+commit 0a8489863e15240cba0a661b51ca7aac866c900f
+tree 14fa614325a64e0770aa02a51eb85710ee0ee9ca
+parent e2a815e524cfb65e08025e4019e7bb59472de49b
+author pilliarunkumar <arunkumar.pilli@tarento.com> 2021-01-11 11:23:51 +0530
+committer pilliarunkumar <arunkumar.pilli@tarento.com> 2021-01-11 11:23:51 +0530
+
+    fixed the share and edite issue
+
+
+:100644 100644 064ed466a55c3369655ddff7efe694350ef8f342 8c7165ea1dbe3d7e3bde1774e11c92414af9d1ce M	apps/igot-ui/library/ws-widget/collection/src/lib/btn-playlist/btn-playlist.service.ts
+:100644 100644 8bbfe4d036b4d5a2039956d3c6d63ba5d3ec51de cc37eccb05ef73026671bb1427939529120368ee M	apps/igot-ui/project/ws/app/src/lib/routes/playlist/components/playlist-share-dialog/playlist-share-dialog.component.ts
+:100644 100644 35df822bb9e1d13390232ee7954df9db1788448c 9769abe9c1828adf782c65a2e714ea1ec95b021e M	apps/igot-ui/project/ws/app/src/lib/routes/playlist/routes/playlist-detail/playlist-detail.component.ts
+:100644 100644 f3925f7d094e8d6d4198e0b071974c63571846d1 f3589416d3206ccc0db201134c28eb8b5bba3131 M	apps/ui-proxy/src/protectedApi_v8/user/playlist.ts
+commit 5fa7655782c5d26c05bbb097f8254e8a4931b403
+tree d7486dc634158ee47a8868fb23ef48393a89740b
+parent 73a1d564c01fc7944ad2ebb734e2768034b151e0
+author pilliarunkumar <arunkumar.pilli@tarento.com> 2020-12-11 10:06:10 +0530
+committer pilliarunkumar <arunkumar.pilli@tarento.com> 2020-12-11 10:06:10 +0530
+
+    goal changes
+
+
+:100644 100644 261a1e35f2415bc4ab0657a0e2ab9fe2645d76e2 be6206f0ec1b75015f1e0c5dce52243ce9f22e10 M	apps/igot-ui/library/ws-widget/collection/src/lib/btn-goals/btn-goals.model.ts
+:100644 100644 eb3bfe7cf24779439be6277ceca92b833d7de46d 4fd7c1b1b8f5b99a2e3cf77cc125696d2fe44d74 M	apps/igot-ui/library/ws-widget/collection/src/lib/btn-goals/btn-goals.service.ts
+:100644 100644 f9e26492f94d9427b4d101f56b90a5e69ff84daf 45bbe793bb9024956653a647591540bc3b20b3f8 M	apps/igot-ui/project/ws/app/src/lib/routes/goals/components/goal-card/goal-card.component.html
+:100644 100644 83be6abd586b88feb30fcca3555085c406b7303e 0f6e04edb3e6b124d432ff970f034eda87e5a6f0 M	apps/igot-ui/project/ws/app/src/lib/routes/goals/components/goal-card/goal-card.component.ts
+:100644 100644 9bc9121799486169842364b623de893f79f19257 4cbb5ce237a55ab7ecd05645dd79d035f24f7860 M	apps/igot-ui/project/ws/app/src/lib/routes/goals/routes/goal-me/goal-me.component.html
+:100644 100644 70309ab02f4644b040ba6dc41bc793174f668f63 eeda8e35323c0a84e8ff25c48802ea27c5f7c990 M	apps/igot-ui/project/ws/app/src/lib/routes/goals/routes/goal-me/goal-me.component.ts

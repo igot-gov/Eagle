@@ -1,0 +1,10 @@
+commit 71d735ff20972142cffc08eef6a94db5c44bdc2c
+tree 48e72d12b2ac15cb79c667b22ecdcdadd52a9082
+parent f7c2a6e3970c1525ccfc6c0c5bc8fdaae420f15a
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-12-16 18:29:24 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-12-16 18:29:24 +0530
+
+    Task #52811: Changed proxy rule for /apis
+
+
+:100644 100644 e7fbd5b53982abde7077abf3b647d9412d95ba69 8066f147aa40401e99905bed7c9f89dcc66ddcac M	apps/ui-proxy/src/utils/proxyCreator.ts

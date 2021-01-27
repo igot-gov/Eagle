@@ -1,0 +1,10 @@
+commit 5d45009e64b21be7bbd04878d947f1e0c86c3aae
+tree 417f88bab1949422e1e17f3ac1f03d64d9851ff2
+parent a238ad84d6442466533c130a77a9be7c07dd9dcc
+author abhishek-K-P <abishek.koira@tarento.com> 2020-12-22 17:03:51 +0530
+committer abhishek-K-P <abishek.koira@tarento.com> 2020-12-22 17:03:51 +0530
+
+    lint issues fixed for intex
+
+
+:100644 100644 66da5782aceaaf093b4ad4279c7a6dca60c411dd bf4ad3b0d17a997de190434c6867b64aa73b85f3 M	apps/ui-proxy/src/authoring/content/index.ts

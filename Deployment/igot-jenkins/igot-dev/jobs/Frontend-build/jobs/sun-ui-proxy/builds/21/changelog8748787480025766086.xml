@@ -1,0 +1,10 @@
+commit 0a161c8fa6caaf362253b4fa1ae8cc7bee311ac8
+tree df4b43373684190e0fccf3447c19482cb8473099
+parent 4eae96536d0d16a7213819d173cf3e2f0595d823
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-12-11 20:21:15 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-12-11 20:21:15 +0530
+
+    Task #52811: Fixed the end point
+
+
+:100644 100644 2d2e1ea3dd838e5fa57bdcafe0040cd5a50ba6d9 53444bbd613f657ee3a6d55599025bcb1219716b M	apps/ui-proxy/src/proxies_v8/proxies_v8.ts

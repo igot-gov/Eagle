@@ -1,0 +1,10 @@
+commit 1cd8ad8c2dc28897c95a8978f89c29143af205eb
+tree 2f2e11b9ebbd473eff0386a46b5ecf6ff615c9f6
+parent 7f0d4843c8bbfebfd893579effc1409a983a69a6
+author pilliarunkumar <arunkumar.pilli@tarento.com> 2020-12-14 17:30:43 +0530
+committer pilliarunkumar <arunkumar.pilli@tarento.com> 2020-12-14 17:30:43 +0530
+
+    lint fixes
+
+
+:100644 100644 812e5971e8a63db3c80ade5038b9b0f9802752b7 ddb779cd6bc343c32aee425090653e7841d8991a M	apps/ui-proxy/src/utils/proxyCreator.ts

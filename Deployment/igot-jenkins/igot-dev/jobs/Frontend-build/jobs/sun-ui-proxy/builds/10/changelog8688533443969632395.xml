@@ -1,0 +1,31 @@
+commit 65a957ed9f4a9e7f242950acb13f4bde84069576
+tree 67e243a88a136c32f93c0a5b02d5ebd4f8a064fa
+parent bae2c7bd98c987189660d8c381de7a8f4b2e2b65
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-12-07 19:07:32 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-12-07 19:07:32 +0530
+
+    Task #52555: Changed the end point for hierarchy
+
+
+:100644 100644 b778c93ec8d08f390b49f4d81062e376db3fdc47 c3b3d34fb9b009f49220bca49f937a09c1349179 M	apps/ui-proxy/src/proxies_v8/proxies_v8.ts
+commit 716b46fc433a0601f90226d85cc5098b3115c70d
+tree 45eebd75054d53d59b5dcba9c708f8d90091efdf
+parent c6976f839692ea6813d502c3a410f93ce1392ff7
+author pilliarunkumar <arunkumar.pilli@tarento.com> 2020-12-07 17:30:01 +0530
+committer pilliarunkumar <arunkumar.pilli@tarento.com> 2020-12-07 17:30:01 +0530
+
+    plalylist changes
+
+
+:100644 100644 ed992bebee80ca2f3938760c81cea2890e631fba 391595b1da72d5695a3f38b829f9e2a49692aca0 M	apps/igot-ui/library/ws-widget/collection/src/lib/_services/widget-content.service.ts
+:100644 100644 b6aaaaa9345827e20a8d6c94e837403e6dff7b1e 2ee638d759027705538bac2e2e66d72e1dfb2996 M	apps/igot-ui/library/ws-widget/collection/src/lib/btn-playlist/btn-playlist.service.ts
+:100644 100644 4d2bd4bdc9a3dd072dd6a703d9020ffdc14fde03 3d898c133141e02ed0f816e1f2a3bf9e35ed97e2 M	apps/igot-ui/project/ws/app/src/lib/routes/notification/components/notification/notification.component.ts
+:100644 100644 f8f290fdc75a371de21941399be9040f5611137a 50a4741bb98763f69e4ea967d56fdb0baba75c13 M	apps/igot-ui/project/ws/app/src/lib/routes/playlist/components/playlist-card/playlist-card.component.html
+:100644 100644 c13510eb844d9985c8d29e96fba3250b9bcee898 6b7bb291aa1a335edff3e488259c739df87f180b M	apps/igot-ui/project/ws/app/src/lib/routes/playlist/components/playlist-card/playlist-card.component.ts
+:100644 100644 430e9882e54bd632d8fb44263098263f6d911a14 a11510e6c70b40150e07dc7509cf220510030dc5 M	apps/igot-ui/project/ws/app/src/lib/routes/playlist/pipes/filter-playlist.pipe.ts
+:100644 100644 2d5074d171456d822f036c0a8fb9eb6c3a46ce6b e0f41b9fbc394b7fa297876699ab6a40f083561d M	apps/igot-ui/project/ws/app/src/lib/routes/playlist/resolvers/playlist.resolve.ts
+:100644 100644 bd223bc6dbad4ad7e68cb261cbe4771fae873c97 e98ba947e0c36a014a177234ac674bb496c84b62 M	apps/igot-ui/project/ws/app/src/lib/routes/playlist/resolvers/playlists.resolve.ts
+:100644 100644 91f106993a39c679b8981aaba83265e95c5af839 8fc66a396cf0fb87a0cefc979118417d642d15fd M	apps/igot-ui/project/ws/app/src/lib/routes/playlist/routes/playlist-detail/playlist-detail.component.html
+:100644 100644 8147b2ba3cfd75d4eb55596a2a7b9f3f556e1091 31c537ebfecfa6490dc31046d8ed5bd9afc5bd3d M	apps/igot-ui/project/ws/app/src/lib/routes/playlist/routes/playlist-detail/playlist-detail.component.ts
+:100644 100644 adce977b3252508d650e05e1e64f9e008b73c150 635df60c8dbc0a7376582c30b022d1571b1be923 M	apps/igot-ui/project/ws/app/src/lib/routes/playlist/routes/playlist-home/playlist-home.component.ts
+:100644 100644 a1a5b3070717dd9cd7a2e994e5878cad225ee0b9 8439beef23351642cd2179baa0cb78dbff79f7ae M	apps/igot-ui/project/ws/app/src/lib/routes/playlist/routes/playlist-notification/playlist-notification.component.ts

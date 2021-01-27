@@ -1,0 +1,54 @@
+commit 39ce7f4ef11ae542398ef5a259209c8b00c5a191
+tree 2c969ea98c89136c5c2e68e2fbad8340aaafc44b
+parent d6b56bf35a90c7766f216f77f3b6ecb1e1b2668f
+author bandanasahu <bandanasahu8@gmail.com> 2020-12-08 14:02:46 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2020-12-08 14:02:46 +0530
+
+    fix error
+
+
+:100644 100644 09da201b6ef650afd2b26ce190be87496668f940 08e23dcd9b7e909fc9ba46751e1550fa311a5743 M	apps/ui-proxy/src/protectedApi_v8/user/profile-registry.ts
+commit d6b56bf35a90c7766f216f77f3b6ecb1e1b2668f
+tree 04c9d3b9d0b77d8870171cac9f1aee8bea9fc218
+parent d58565da8e6ebb72463e732d7fed9d183b0937db
+author bandanasahu <bandanasahu8@gmail.com> 2020-12-08 14:01:16 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2020-12-08 14:01:16 +0530
+
+    fixed the err in profile registry
+
+
+:100644 100644 b296d76816ba6c10b1007c46521e5de68bb55e9f 09da201b6ef650afd2b26ce190be87496668f940 M	apps/ui-proxy/src/protectedApi_v8/user/profile-registry.ts
+commit d58565da8e6ebb72463e732d7fed9d183b0937db
+tree b5730b6669fbcb0f36b993ffacd7b0af07ec8c20
+parent b963271c838b46015fa2c1e7c5043ab1d100284a
+author bandanasahu <bandanasahu8@gmail.com> 2020-12-08 13:52:21 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2020-12-08 13:52:21 +0530
+
+    fixed the err in profile registry
+
+
+:100644 100644 40dfb13f15774aaa681347cfd5c24f20e7a3e5ab b296d76816ba6c10b1007c46521e5de68bb55e9f M	apps/ui-proxy/src/protectedApi_v8/user/profile-registry.ts
+commit ff4aa0726b5a54520d017248a1dcf78e51bf61ba
+tree 68c42c1c20d5b4f39cdb95e871142d95c19d453a
+parent 1f20303d4f02aaa40750a780e3a26848f75e3139
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-12-08 13:51:40 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-12-08 13:51:40 +0530
+
+    Task #52787: Fixed the search filters issue and default filters added
+
+
+:100644 100644 b1b90f657f4ec5ec2b56e07c2d2a14a26cb11d17 8bd1ec2955af87ed15b173b774a35b69e953dc4b M	apps/igot-ui/project/ws/app/src/lib/routes/search/routes/learning/learning.component.ts
+commit b963271c838b46015fa2c1e7c5043ab1d100284a
+tree 82addbcf4cfb2b67064621151f77503d825345bb
+parent de2d0bed467d72e2a8238f6df986581d02587206
+author bandanasahu <bandanasahu8@gmail.com> 2020-12-08 12:42:05 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2020-12-08 12:42:05 +0530
+
+    added user registry apis
+
+
+:100644 100644 8b8e3bea853e7b86415c0eae4156115317239fad 7517c611d67dd64cb8f32d3347fe4792312332f8 M	apps/igot-ui/project/ws/app/src/lib/routes/profile-v2/resolvers/badges-resolve.ts
+:100644 100644 dd7ded299d3b22f21ec55c4fec4b943edc56100a e6a5be56afc04ba8a4d30d3b76ad3ca8debd8d0b M	apps/igot-ui/project/ws/app/src/lib/routes/profile-v2/resolvers/profile-v2-resolve.ts
+:100644 100644 c73f21bb216102499eb0a6f9343adc32783dd7a1 60427e43bf316fda9814e7b45a70a75eaf236ba2 M	apps/igot-ui/project/ws/app/src/lib/routes/profile-v2/services/profile-v2.servive.ts
+:100644 100644 afe5ff57ac19ee07db7be25c72101250c4fa54bf 7348a750e813c2e9cd1c73178815740abd2c7a84 M	apps/igot-ui/project/ws/app/src/lib/routes/user-profile/components/user-profile/user-profile.component.ts
+:100644 100644 3598f9fefa95800880fc81ff08939f080aea4ec6 e7c39fe4e07f7dbabf37d01d0646615bf360601e M	apps/igot-ui/project/ws/app/src/lib/routes/user-profile/models/user-profile.model.ts

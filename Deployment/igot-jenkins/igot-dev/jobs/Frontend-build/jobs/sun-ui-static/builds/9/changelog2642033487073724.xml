@@ -1,0 +1,13 @@
+commit e17cdc91810746dbaef2a55ca15e6d26f48df63d
+tree aab8e723ba3e7c8a22d7c3850024b89b5dba88f1
+parent 72fe393bbf23289efc7062c95f6830d96e543c62
+author abhishek-K-P <abishek.koira@tarento.com> 2020-12-23 10:45:06 +0530
+committer abhishek-K-P <abishek.koira@tarento.com> 2020-12-23 10:45:06 +0530
+
+    changed to /apis/ for create
+
+
+:100644 100644 f0c7bc5ef62e29f6e0298b1155c5cbd0ebf32dce 0cbfbcf362bb00be57cb2caa22406125f1d7d99e M	apps/igot-ui/project/ws/author/src/lib/modules/shared/services/api.service.ts
+:100644 100644 dcdb8a0b41f528135915260383a6b9033eb8aba1 401a9cbf7399f39a08318e3b9a2097550cbfbd2d M	apps/igot-ui/project/ws/author/src/lib/routing/modules/create/components/create/create.service.ts
+:100644 100644 27cf032151cc8f4e1b49888ea140c3129abc3696 599c1c13df00f9a027c09a07d71dfd9504f46573 M	apps/igot-ui/project/ws/author/src/lib/routing/modules/editor/services/editor.service.ts
+:100644 100644 24c88c4ae699c13525280c24a13b168760b312e8 d78812fe9cc5414d503cdc1f567cfed7fff12998 M	apps/igot-ui/project/ws/author/src/lib/services/content-and-data-read-multi-lang.service.ts

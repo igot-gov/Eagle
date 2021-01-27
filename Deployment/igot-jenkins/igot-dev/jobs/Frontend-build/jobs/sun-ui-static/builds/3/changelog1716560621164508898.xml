@@ -1,0 +1,294 @@
+commit 07f906c1c15e64487eaf16332a1af4035e150db9
+tree 43ec5b13b300f4a1576062c8a32aa30dfc3b32b9
+parent e46f0d156be02b4e9ff41bb7c01a7fcb698605b1
+author bandanasahu <bandanasahu8@gmail.com> 2020-12-12 12:14:59 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2020-12-12 12:14:59 +0530
+
+    modified configuration.model
+
+
+:100644 100644 3744649702cc6e6975b99849a49c3a9b6f61bf42 208e61e7a3259a4fd680807be50e40e542ed6820 M	apps/igot-ui/library/ws-widget/utils/src/lib/services/configurations.model.ts
+commit e46f0d156be02b4e9ff41bb7c01a7fcb698605b1
+tree 4c6268419905af1fe9ca51e0d6e09655726e9e50
+parent 99b1880f680f13dc96e2fdf8a28a70a7a37e000c
+author bandanasahu <bandanasahu8@gmail.com> 2020-12-11 20:35:09 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2020-12-11 20:35:09 +0530
+
+    modified profile-v2.model.ts
+
+
+:100644 100644 921c69bf04396e160adb54ef4b9226eccb0a42ae 8518b78fa56cd6911b3cd469109f2305376ef191 M	apps/igot-ui/project/ws/app/src/lib/routes/profile-v2/models/profile-v2.model.ts
+commit 0a161c8fa6caaf362253b4fa1ae8cc7bee311ac8
+tree df4b43373684190e0fccf3447c19482cb8473099
+parent 4eae96536d0d16a7213819d173cf3e2f0595d823
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-12-11 20:21:15 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-12-11 20:21:15 +0530
+
+    Task #52811: Fixed the end point
+
+
+:100644 100644 2d2e1ea3dd838e5fa57bdcafe0040cd5a50ba6d9 53444bbd613f657ee3a6d55599025bcb1219716b M	apps/ui-proxy/src/proxies_v8/proxies_v8.ts
+commit 4eae96536d0d16a7213819d173cf3e2f0595d823
+tree 29d626fbeab430e381e23da3d8da51e1e101f549
+parent bb149cd432076d7738cdf6015a2f4a9fe1ac0667
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-12-11 20:05:18 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-12-11 20:05:18 +0530
+
+    Task #52811: Changed the /action route
+
+
+:100644 100644 2f2498441113c82351b602131e983b4b7bc0cd3f 2d2e1ea3dd838e5fa57bdcafe0040cd5a50ba6d9 M	apps/ui-proxy/src/proxies_v8/proxies_v8.ts
+commit 99b1880f680f13dc96e2fdf8a28a70a7a37e000c
+tree 7a64b4d428b0f222ef09ac3f3dc71bd6f4d0e834
+parent a7a403ae8d33a1bb8367beaaf818577716d93973
+author bandanasahu <bandanasahu8@gmail.com> 2020-12-11 19:53:30 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2020-12-11 19:53:30 +0530
+
+    integrated network and update user latest apis
+
+
+:100644 100644 4735a5bd7498480f9f6c1941cce256d7b99c618b af64176196593932620cadb8602ef255ab67b8d8 M	apps/client-assets/assets/configurations/localhost_3000/page/home.json
+:100644 100644 46299292076346ecaee03a5c0132b083b0d49bff dd69b4453ca02477c89ee336b68e5fadf0179d62 M	apps/igot-ui/project/ws/app/src/lib/routes/profile-v2/components/right-menu/right-menu.component.html
+:100644 100644 7517c611d67dd64cb8f32d3347fe4792312332f8 86ecbdd7577c22b17ca54b8aedc02c961610691f M	apps/igot-ui/project/ws/app/src/lib/routes/profile-v2/resolvers/badges-resolve.ts
+:100644 100644 e6a5be56afc04ba8a4d30d3b76ad3ca8debd8d0b 04130a21633dfd46bef409c6e9629554cbe9e958 M	apps/igot-ui/project/ws/app/src/lib/routes/profile-v2/resolvers/profile-v2-resolve.ts
+:100644 100644 60427e43bf316fda9814e7b45a70a75eaf236ba2 379ea62e4729d9368beb01a7efbe634ee97d07bf M	apps/igot-ui/project/ws/app/src/lib/routes/profile-v2/services/profile-v2.servive.ts
+:100644 100644 7348a750e813c2e9cd1c73178815740abd2c7a84 0248339e7099c05f4183c7aa21f4ee201d845368 M	apps/igot-ui/project/ws/app/src/lib/routes/user-profile/components/user-profile/user-profile.component.ts
+:100644 100644 c3d7f0966ca0da7897fc0035c5bd9d6e6591dd76 d8b77d63f645af9fae89e7f75e678b81530ce2db M	apps/igot-ui/project/ws/app/src/lib/routes/user-profile/services/user-profile.service.ts
+:100644 100644 b37a7c34f1d3b74bf0d79867191304515b64cbe5 5f59fbcc86df1032af66eec70443742376109e79 M	apps/igot-ui/src/app/services/init.service.ts
+commit 6d051ca5786daac1f5d26ac7361c08cdabb06e87
+tree 8c35ff4412d05408d1d13a62c8ac792865222072
+parent ff4aa0726b5a54520d017248a1dcf78e51bf61ba
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-12-11 19:35:21 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-12-11 19:35:21 +0530
+
+    Task #52811: /action route added for testing
+
+
+:100644 100644 c3b3d34fb9b009f49220bca49f937a09c1349179 2f2498441113c82351b602131e983b4b7bc0cd3f M	apps/ui-proxy/src/proxies_v8/proxies_v8.ts
+commit a7a403ae8d33a1bb8367beaaf818577716d93973
+tree ea355ff43d91f40e6fb1d8c14e89c9c45e9f1df9
+parent 0c8e9879186f3e4be3f4053ae70527fa643d11d2
+author bandanasahu <bandanasahu8@gmail.com> 2020-12-10 09:23:12 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2020-12-10 09:23:12 +0530
+
+    fixed error in profie-registry
+
+
+:100644 100644 0ed87ef6e1c59d634e16ead0fcac47b51ab5d7e0 772ad5ff2a05238d1d6e14365aea7106d6aceede M	apps/ui-proxy/src/protectedApi_v8/user/profile-registry.ts
+commit 0c8e9879186f3e4be3f4053ae70527fa643d11d2
+tree 4ddcb803466733d4458cc014ec0c9643e12859df
+parent 2fd7a5b0fb6c22855b708557944c2dbbb7bd5f8d
+author bandanasahu <bandanasahu8@gmail.com> 2020-12-09 20:40:04 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2020-12-09 20:40:04 +0530
+
+    added getUserbyId API in profile registry file
+
+
+:100644 100644 d4fcfae543f418c7272ef50e7751326251d555e7 13b86175866d901de7d18a22dda4137f1e19f81d M	apps/ui-proxy/src/protectedApi_v8/connections.ts
+:100644 100644 c4604a91cd4bc86585f9c6be662ef0e3e7acc513 0ed87ef6e1c59d634e16ead0fcac47b51ab5d7e0 M	apps/ui-proxy/src/protectedApi_v8/user/profile-registry.ts
+commit 2fd7a5b0fb6c22855b708557944c2dbbb7bd5f8d
+tree 3db94c34678831618d55d860a996d065f82d45aa
+parent 11373e8593edbfa04eb8c1fdd611fa4171c42337
+author bandanasahu <bandanasahu8@gmail.com> 2020-12-09 18:12:05 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2020-12-09 18:12:05 +0530
+
+    fixed build error
+
+
+:100644 100644 6605a1e07b59d2d8f381922c0d9a0e7b693bc8d2 d4fcfae543f418c7272ef50e7751326251d555e7 M	apps/ui-proxy/src/protectedApi_v8/connections.ts
+commit 11373e8593edbfa04eb8c1fdd611fa4171c42337
+tree 82f4eaba783623965ae89a00e8612f07da656435
+parent 323e92402868c54988f91fb0dfe259fe6b9429a8
+author bandanasahu <bandanasahu8@gmail.com> 2020-12-09 17:52:57 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2020-12-09 17:52:57 +0530
+
+    modified userdepartment API for connection.ts
+
+
+:100644 100644 354f2304cbfe5c58eed9150403853d031f2799f4 6605a1e07b59d2d8f381922c0d9a0e7b693bc8d2 M	apps/ui-proxy/src/protectedApi_v8/connections.ts
+commit 323e92402868c54988f91fb0dfe259fe6b9429a8
+tree 981acacd3a36f56ae9132eedc08da9534046c7a7
+parent 452184fa40c3ffe537812c51f66d2528ceab6708
+author bandanasahu <bandanasahu8@gmail.com> 2020-12-09 15:07:59 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2020-12-09 15:07:59 +0530
+
+    modified the file path
+
+
+:100644 100644 681e09cd229cb75ebcc4efdccbf18f6f872f6ab3 c4604a91cd4bc86585f9c6be662ef0e3e7acc513 M	apps/ui-proxy/src/protectedApi_v8/user/profile-registry.ts
+commit 452184fa40c3ffe537812c51f66d2528ceab6708
+tree 58e4d730e527860e8497cd3009e2b6e0025acabc
+parent 39ce7f4ef11ae542398ef5a259209c8b00c5a191
+author bandanasahu <bandanasahu8@gmail.com> 2020-12-09 13:08:25 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2020-12-09 13:08:25 +0530
+
+    added apis for language,nationalit and profile meta
+
+
+:100644 100644 08e23dcd9b7e909fc9ba46751e1550fa311a5743 681e09cd229cb75ebcc4efdccbf18f6f872f6ab3 M	apps/ui-proxy/src/protectedApi_v8/user/profile-registry.ts
+:000000 100644 0000000000000000000000000000000000000000 a2db558edbfe8c0e5196e2dcb426c0e7840ab1e8 A	apps/ui-proxy/src/static-data/degrees.json
+:000000 100644 0000000000000000000000000000000000000000 4863e42221a0255944b13a11ecf7a0d7eb81f4f5 A	apps/ui-proxy/src/static-data/designation.json
+:000000 100644 0000000000000000000000000000000000000000 394f717aa5ad658de685781aa0c0711c27ff08a2 A	apps/ui-proxy/src/static-data/govtOrg.json
+:000000 100644 0000000000000000000000000000000000000000 46aafb1ff9809ab5d71ef89b8695bc6c0b4ffe7d A	apps/ui-proxy/src/static-data/industries.json
+:100644 100644 33f252aa00decc3ebe7afd3ab4a125b7e4dca3c8 35a0a739c3b855abdeb7f27031f9191c54ee22f1 M	apps/ui-proxy/src/static-data/languages.json
+:100644 100644 0c609104d7e5ebb298272861ad40ecddfe5a79b4 a13ef62be8b5e8b848e35182eafbd7552a4b530c M	apps/ui-proxy/src/static-data/nationality.json
+commit 39ce7f4ef11ae542398ef5a259209c8b00c5a191
+tree 2c969ea98c89136c5c2e68e2fbad8340aaafc44b
+parent d6b56bf35a90c7766f216f77f3b6ecb1e1b2668f
+author bandanasahu <bandanasahu8@gmail.com> 2020-12-08 14:02:46 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2020-12-08 14:02:46 +0530
+
+    fix error
+
+
+:100644 100644 09da201b6ef650afd2b26ce190be87496668f940 08e23dcd9b7e909fc9ba46751e1550fa311a5743 M	apps/ui-proxy/src/protectedApi_v8/user/profile-registry.ts
+commit d6b56bf35a90c7766f216f77f3b6ecb1e1b2668f
+tree 04c9d3b9d0b77d8870171cac9f1aee8bea9fc218
+parent d58565da8e6ebb72463e732d7fed9d183b0937db
+author bandanasahu <bandanasahu8@gmail.com> 2020-12-08 14:01:16 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2020-12-08 14:01:16 +0530
+
+    fixed the err in profile registry
+
+
+:100644 100644 b296d76816ba6c10b1007c46521e5de68bb55e9f 09da201b6ef650afd2b26ce190be87496668f940 M	apps/ui-proxy/src/protectedApi_v8/user/profile-registry.ts
+commit d58565da8e6ebb72463e732d7fed9d183b0937db
+tree b5730b6669fbcb0f36b993ffacd7b0af07ec8c20
+parent b963271c838b46015fa2c1e7c5043ab1d100284a
+author bandanasahu <bandanasahu8@gmail.com> 2020-12-08 13:52:21 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2020-12-08 13:52:21 +0530
+
+    fixed the err in profile registry
+
+
+:100644 100644 40dfb13f15774aaa681347cfd5c24f20e7a3e5ab b296d76816ba6c10b1007c46521e5de68bb55e9f M	apps/ui-proxy/src/protectedApi_v8/user/profile-registry.ts
+commit ff4aa0726b5a54520d017248a1dcf78e51bf61ba
+tree 68c42c1c20d5b4f39cdb95e871142d95c19d453a
+parent 1f20303d4f02aaa40750a780e3a26848f75e3139
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-12-08 13:51:40 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-12-08 13:51:40 +0530
+
+    Task #52787: Fixed the search filters issue and default filters added
+
+
+:100644 100644 b1b90f657f4ec5ec2b56e07c2d2a14a26cb11d17 8bd1ec2955af87ed15b173b774a35b69e953dc4b M	apps/igot-ui/project/ws/app/src/lib/routes/search/routes/learning/learning.component.ts
+commit b963271c838b46015fa2c1e7c5043ab1d100284a
+tree 82addbcf4cfb2b67064621151f77503d825345bb
+parent de2d0bed467d72e2a8238f6df986581d02587206
+author bandanasahu <bandanasahu8@gmail.com> 2020-12-08 12:42:05 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2020-12-08 12:42:05 +0530
+
+    added user registry apis
+
+
+:100644 100644 8b8e3bea853e7b86415c0eae4156115317239fad 7517c611d67dd64cb8f32d3347fe4792312332f8 M	apps/igot-ui/project/ws/app/src/lib/routes/profile-v2/resolvers/badges-resolve.ts
+:100644 100644 dd7ded299d3b22f21ec55c4fec4b943edc56100a e6a5be56afc04ba8a4d30d3b76ad3ca8debd8d0b M	apps/igot-ui/project/ws/app/src/lib/routes/profile-v2/resolvers/profile-v2-resolve.ts
+:100644 100644 c73f21bb216102499eb0a6f9343adc32783dd7a1 60427e43bf316fda9814e7b45a70a75eaf236ba2 M	apps/igot-ui/project/ws/app/src/lib/routes/profile-v2/services/profile-v2.servive.ts
+:100644 100644 afe5ff57ac19ee07db7be25c72101250c4fa54bf 7348a750e813c2e9cd1c73178815740abd2c7a84 M	apps/igot-ui/project/ws/app/src/lib/routes/user-profile/components/user-profile/user-profile.component.ts
+:100644 100644 3598f9fefa95800880fc81ff08939f080aea4ec6 e7c39fe4e07f7dbabf37d01d0646615bf360601e M	apps/igot-ui/project/ws/app/src/lib/routes/user-profile/models/user-profile.model.ts
+commit de2d0bed467d72e2a8238f6df986581d02587206
+tree 06cd1fe35c952cebe17fc97a574a90644466ff50
+parent 9747bdfbf700cbdac660bb4fe9daed431ae847ac
+author bandanasahu <bandanasahu8@gmail.com> 2020-12-08 12:34:29 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2020-12-08 12:34:29 +0530
+
+    fixed build error
+
+
+:100644 100644 6b0d0f75aab01e6ad9dd9e3f5470e8a68dcb3c7f 40dfb13f15774aaa681347cfd5c24f20e7a3e5ab M	apps/ui-proxy/src/protectedApi_v8/user/profile-registry.ts
+commit 9747bdfbf700cbdac660bb4fe9daed431ae847ac
+tree 68677b8c63cc1ce65c9ee22459427f8242d999a6
+parent a9f140ee4f43aa7cf50832a7668f768856266622
+author bandanasahu <bandanasahu8@gmail.com> 2020-12-08 12:09:11 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2020-12-08 12:09:11 +0530
+
+    modified profileregistry.ts
+
+
+:100644 100644 33dbd48bb1dc42c5b6838cd6903017ceb10cd35c 6b0d0f75aab01e6ad9dd9e3f5470e8a68dcb3c7f M	apps/ui-proxy/src/protectedApi_v8/user/profile-registry.ts
+commit 82493c3a0affc496d3335dde8fb6d6821c42669e
+tree 9a251520a9c97d9099d73b1c8f8aa1213df10513
+parent a636483a0032c123c88986135b3565d46723c863
+author pilliarunkumar <arunkumar.pilli@tarento.com> 2020-12-08 12:05:21 +0530
+committer pilliarunkumar <arunkumar.pilli@tarento.com> 2020-12-08 12:05:21 +0530
+
+    changed the filter to playlist
+
+
+:100644 100644 2ee638d759027705538bac2e2e66d72e1dfb2996 428c277ac0b2566ed1521bfad0b15f0bd5f1066c M	apps/igot-ui/library/ws-widget/collection/src/lib/btn-playlist/btn-playlist.service.ts
+commit a636483a0032c123c88986135b3565d46723c863
+tree dd70345f630f79e6a1514bcd6d880e4edcf18efd
+parent 716b46fc433a0601f90226d85cc5098b3115c70d
+author pilliarunkumar <arunkumar.pilli@tarento.com> 2020-12-08 09:43:44 +0530
+committer pilliarunkumar <arunkumar.pilli@tarento.com> 2020-12-08 09:43:44 +0530
+
+    fixed the greyedout  strips
+
+
+:100644 100644 8fc66a396cf0fb87a0cefc979118417d642d15fd b1362e294fc5c49d14b67c62d2cb66578abb3ddc M	apps/igot-ui/project/ws/app/src/lib/routes/playlist/routes/playlist-detail/playlist-detail.component.html
+commit 65a957ed9f4a9e7f242950acb13f4bde84069576
+tree 67e243a88a136c32f93c0a5b02d5ebd4f8a064fa
+parent bae2c7bd98c987189660d8c381de7a8f4b2e2b65
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-12-07 19:07:32 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-12-07 19:07:32 +0530
+
+    Task #52555: Changed the end point for hierarchy
+
+
+:100644 100644 b778c93ec8d08f390b49f4d81062e376db3fdc47 c3b3d34fb9b009f49220bca49f937a09c1349179 M	apps/ui-proxy/src/proxies_v8/proxies_v8.ts
+commit 716b46fc433a0601f90226d85cc5098b3115c70d
+tree 45eebd75054d53d59b5dcba9c708f8d90091efdf
+parent c6976f839692ea6813d502c3a410f93ce1392ff7
+author pilliarunkumar <arunkumar.pilli@tarento.com> 2020-12-07 17:30:01 +0530
+committer pilliarunkumar <arunkumar.pilli@tarento.com> 2020-12-07 17:30:01 +0530
+
+    plalylist changes
+
+
+:100644 100644 ed992bebee80ca2f3938760c81cea2890e631fba 391595b1da72d5695a3f38b829f9e2a49692aca0 M	apps/igot-ui/library/ws-widget/collection/src/lib/_services/widget-content.service.ts
+:100644 100644 b6aaaaa9345827e20a8d6c94e837403e6dff7b1e 2ee638d759027705538bac2e2e66d72e1dfb2996 M	apps/igot-ui/library/ws-widget/collection/src/lib/btn-playlist/btn-playlist.service.ts
+:100644 100644 4d2bd4bdc9a3dd072dd6a703d9020ffdc14fde03 3d898c133141e02ed0f816e1f2a3bf9e35ed97e2 M	apps/igot-ui/project/ws/app/src/lib/routes/notification/components/notification/notification.component.ts
+:100644 100644 f8f290fdc75a371de21941399be9040f5611137a 50a4741bb98763f69e4ea967d56fdb0baba75c13 M	apps/igot-ui/project/ws/app/src/lib/routes/playlist/components/playlist-card/playlist-card.component.html
+:100644 100644 c13510eb844d9985c8d29e96fba3250b9bcee898 6b7bb291aa1a335edff3e488259c739df87f180b M	apps/igot-ui/project/ws/app/src/lib/routes/playlist/components/playlist-card/playlist-card.component.ts
+:100644 100644 430e9882e54bd632d8fb44263098263f6d911a14 a11510e6c70b40150e07dc7509cf220510030dc5 M	apps/igot-ui/project/ws/app/src/lib/routes/playlist/pipes/filter-playlist.pipe.ts
+:100644 100644 2d5074d171456d822f036c0a8fb9eb6c3a46ce6b e0f41b9fbc394b7fa297876699ab6a40f083561d M	apps/igot-ui/project/ws/app/src/lib/routes/playlist/resolvers/playlist.resolve.ts
+:100644 100644 bd223bc6dbad4ad7e68cb261cbe4771fae873c97 e98ba947e0c36a014a177234ac674bb496c84b62 M	apps/igot-ui/project/ws/app/src/lib/routes/playlist/resolvers/playlists.resolve.ts
+:100644 100644 91f106993a39c679b8981aaba83265e95c5af839 8fc66a396cf0fb87a0cefc979118417d642d15fd M	apps/igot-ui/project/ws/app/src/lib/routes/playlist/routes/playlist-detail/playlist-detail.component.html
+:100644 100644 8147b2ba3cfd75d4eb55596a2a7b9f3f556e1091 31c537ebfecfa6490dc31046d8ed5bd9afc5bd3d M	apps/igot-ui/project/ws/app/src/lib/routes/playlist/routes/playlist-detail/playlist-detail.component.ts
+:100644 100644 adce977b3252508d650e05e1e64f9e008b73c150 635df60c8dbc0a7376582c30b022d1571b1be923 M	apps/igot-ui/project/ws/app/src/lib/routes/playlist/routes/playlist-home/playlist-home.component.ts
+:100644 100644 a1a5b3070717dd9cd7a2e994e5878cad225ee0b9 8439beef23351642cd2179baa0cb78dbff79f7ae M	apps/igot-ui/project/ws/app/src/lib/routes/playlist/routes/playlist-notification/playlist-notification.component.ts
+commit bae2c7bd98c987189660d8c381de7a8f4b2e2b65
+tree 8bbc9fd92248bf0fa630740437d295e0a7b4a664
+parent df180ce4328bcd1090204248a9565bad1d1daabf
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-12-07 13:48:17 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-12-07 13:48:17 +0530
+
+    Task #52555: Changed the endpoint
+
+
+:100644 100644 e08186185e7912622903cc02167a79c7991213cd b778c93ec8d08f390b49f4d81062e376db3fdc47 M	apps/ui-proxy/src/proxies_v8/proxies_v8.ts
+commit 61782a7f6b931e83565d64b9818df2fdc8525bc4
+tree 178b685ef86341a4befa4230ee1536480cba1eff
+parent c6976f839692ea6813d502c3a410f93ce1392ff7
+author abhishek-K-P <abishek.koira@tarento.com> 2020-12-07 12:17:20 +0530
+committer abhishek-K-P <abishek.koira@tarento.com> 2020-12-07 12:17:20 +0530
+
+    lable dynamic for search api
+
+
+:100644 100644 e6b793a96f8167782ec468cf98d47802f1dd2ddb b594587e1459f30f140f0bae27f1f8653d8644e1 M	apps/client-assets/assets/configurations/localhost_3000/feature/search.json
+:100644 100644 c5c1f754997c8f8af76d209a957ef59d040879a6 afa6805f5f02115a8426188e7fcba992369493a4 M	apps/igot-ui/project/ws/app/src/lib/routes/search/components/search-input-home/search-input-home.component.ts
+:100644 100644 ac203088a88bad3e754c576de4229c0da5a51032 b1b90f657f4ec5ec2b56e07c2d2a14a26cb11d17 M	apps/igot-ui/project/ws/app/src/lib/routes/search/routes/learning/learning.component.ts
+:100644 100644 63e5cc5ec5497cd173ca7d9af05aa68747c0b88e ff13a0496ab643cac070b936436cf07853ce77ac M	apps/igot-ui/project/ws/app/src/lib/routes/search/services/search-serv.service.ts
+commit a8b84addd63f3292b4980460a83a14f667aae505
+tree 9a2da5ed9023bd324963503140ceb5c584a5b6af
+parent 68d1b39714a84e48f84ad0337f441c70e89703e5
+author bandanasahu <bandanasahu8@gmail.com> 2020-12-04 11:12:19 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2020-12-04 11:12:19 +0530
+
+    modified the url for user registry
+
+
+:100644 100644 17cd4669592e649bd5b29ccea62747480580c1b8 ed2352ea067a569e79a877739d5f589fb3e99831 M	apps/igot-ui/project/ws/app/src/lib/routes/competencies/services/competence.service.ts
+:100644 100644 dc2a20ff71ebae41c267aa328e7e31edae145e37 c73f21bb216102499eb0a6f9343adc32783dd7a1 M	apps/igot-ui/project/ws/app/src/lib/routes/profile-v2/services/profile-v2.servive.ts
+:100644 100644 16cb438072488e2a878c0200183161d8b815d7c7 c3d7f0966ca0da7897fc0035c5bd9d6e6591dd76 M	apps/igot-ui/project/ws/app/src/lib/routes/user-profile/services/user-profile.service.ts

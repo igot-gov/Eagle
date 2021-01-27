@@ -1,0 +1,328 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<flow-build plugin="workflow-job@2.36">
+  <actions>
+    <hudson.model.CauseAction>
+      <causeBag class="linked-hash-map">
+        <entry>
+          <hudson.model.Cause_-UserIdCause>
+            <userId>admin</userId>
+          </hudson.model.Cause_-UserIdCause>
+          <int>1</int>
+        </entry>
+        <entry>
+          <com.sonyericsson.rebuild.RebuildCause plugin="rebuild@1.31">
+            <upstreamProject>igot-dev/Frontend-build/sun-ui-proxy</upstreamProject>
+            <upstreamUrl>job/igot-dev/job/Frontend-build/job/sun-ui-proxy/</upstreamUrl>
+            <upstreamBuild>12</upstreamBuild>
+            <upstreamCauses>
+              <hudson.model.Cause_-UserIdCause>
+                <userId>admin</userId>
+              </hudson.model.Cause_-UserIdCause>
+            </upstreamCauses>
+          </com.sonyericsson.rebuild.RebuildCause>
+          <int>1</int>
+        </entry>
+      </causeBag>
+    </hudson.model.CauseAction>
+    <hudson.model.ParametersAction>
+      <safeParameters class="sorted-set"/>
+      <parameters>
+        <hudson.model.StringParameterValue>
+          <name>branch_name</name>
+          <description>github repo branch</description>
+          <value>sunbird-ui-dev</value>
+        </hudson.model.StringParameterValue>
+        <hudson.model.StringParameterValue>
+          <name>docker_server</name>
+          <description></description>
+          <value>eagle-docker.tarento.com</value>
+        </hudson.model.StringParameterValue>
+        <hudson.model.StringParameterValue>
+          <name>docker_repo</name>
+          <description></description>
+          <value>sun-ui-proxies</value>
+        </hudson.model.StringParameterValue>
+        <hudson.model.StringParameterValue>
+          <name>image_tag</name>
+          <description></description>
+          <value>sbbronze</value>
+        </hudson.model.StringParameterValue>
+        <hudson.model.StringParameterValue>
+          <name>docker_file_path</name>
+          <description></description>
+          <value>./apps/ui-proxy/</value>
+        </hudson.model.StringParameterValue>
+        <hudson.model.StringParameterValue>
+          <name>docker_pre_build</name>
+          <description></description>
+          <value>web-services.build</value>
+        </hudson.model.StringParameterValue>
+      </parameters>
+      <parameterDefinitionNames>
+        <string>branch_name</string>
+        <string>docker_server</string>
+        <string>docker_repo</string>
+        <string>image_tag</string>
+        <string>docker_file_path</string>
+        <string>docker_pre_build</string>
+      </parameterDefinitionNames>
+    </hudson.model.ParametersAction>
+    <hudson.plugins.git.util.BuildData plugin="git@4.1.1">
+      <buildsByBranchName>
+        <entry>
+          <string>origin/sunbird-home</string>
+          <hudson.plugins.git.util.Build>
+            <marked plugin="git-client@3.1.1">
+              <sha1>5000dc36d89bf439e7ae2ac6c91d39972e4fca75</sha1>
+              <branches class="list">
+                <hudson.plugins.git.Branch>
+                  <sha1 reference="../../../sha1"/>
+                  <name>origin/sunbird-home</name>
+                </hudson.plugins.git.Branch>
+              </branches>
+            </marked>
+            <revision plugin="git-client@3.1.1">
+              <sha1 reference="../../marked/sha1"/>
+              <branches class="list">
+                <hudson.plugins.git.Branch reference="../../../marked/branches/hudson.plugins.git.Branch"/>
+              </branches>
+            </revision>
+            <hudsonBuildNumber>2</hudsonBuildNumber>
+          </hudson.plugins.git.util.Build>
+        </entry>
+        <entry>
+          <string>origin/sunbird-ui-dev</string>
+          <hudson.plugins.git.util.Build>
+            <marked plugin="git-client@3.1.1">
+              <sha1>03f7c48f435de7c20c13c899cd64663271835292</sha1>
+              <branches class="list">
+                <hudson.plugins.git.Branch>
+                  <sha1 reference="../../../sha1"/>
+                  <name>origin/sunbird-ui-dev</name>
+                </hudson.plugins.git.Branch>
+              </branches>
+            </marked>
+            <revision reference="../marked"/>
+            <hudsonBuildNumber>13</hudsonBuildNumber>
+          </hudson.plugins.git.util.Build>
+        </entry>
+      </buildsByBranchName>
+      <lastBuild reference="../buildsByBranchName/entry[2]/hudson.plugins.git.util.Build"/>
+      <remoteUrls>
+        <string>https://github.com/igot-gov/Eagle.git</string>
+      </remoteUrls>
+    </hudson.plugins.git.util.BuildData>
+    <hudson.plugins.git.GitTagAction plugin="git@4.1.1">
+      <tags class="hudson.util.CopyOnWriteMap$Tree">
+        <entry>
+          <string>origin/sunbird-ui-dev</string>
+          <list/>
+        </entry>
+      </tags>
+      <ws>/var/lib/jenkins/workspace/igot-dev/Frontend-build/sun-ui-proxy@script</ws>
+    </hudson.plugins.git.GitTagAction>
+    <org.jenkinsci.plugins.workflow.steps.scm.MultiSCMRevisionState plugin="workflow-scm-step@2.10">
+      <revisionStates>
+        <entry>
+          <string>git https://github.com/igot-gov/Eagle.git</string>
+          <hudson.scm.SCMRevisionState_-None/>
+        </entry>
+      </revisionStates>
+    </org.jenkinsci.plugins.workflow.steps.scm.MultiSCMRevisionState>
+    <org.jenkinsci.plugins.workflow.libs.LibrariesAction plugin="workflow-cps-global-lib@2.15">
+      <libraries/>
+    </org.jenkinsci.plugins.workflow.libs.LibrariesAction>
+    <hudson.plugins.ansicolor.ColorizedAction plugin="ansicolor@0.6.2">
+      <colorMapName>xterm</colorMapName>
+    </hudson.plugins.ansicolor.ColorizedAction>
+    <com.cloudbees.plugins.credentials.builds.CredentialsParameterBinder plugin="credentials@2.3.1">
+      <boundCredentials class="concurrent-hash-map"/>
+    </com.cloudbees.plugins.credentials.builds.CredentialsParameterBinder>
+    <hudson.plugins.sonar.action.SonarMarkerAction plugin="sonar@2.12"/>
+    <hudson.plugins.sonar.action.SonarAnalysisAction plugin="sonar@2.12">
+      <installationName>sonarqube</installationName>
+      <installationUrl>https://sonarqube.idc.tarento.com</installationUrl>
+      <ceTaskId>AXZBNoqlaClvBaEcebli</ceTaskId>
+      <url>https://sonarqube.idc.tarento.com/dashboard?id=sun-ui-proxies</url>
+      <serverUrl>https://sonarqube.idc.tarento.com</serverUrl>
+      <isNew>true</isNew>
+      <isSkipped>false</isSkipped>
+    </hudson.plugins.sonar.action.SonarAnalysisAction>
+    <com.sonyericsson.rebuild.RebuildAction plugin="rebuild@1.31"/>
+    <hudson.plugins.sonar.action.SonarCacheAction plugin="sonar@2.12">
+      <infoByTaskId>
+        <entry>
+          <string>AXZBNoqlaClvBaEcebli</string>
+          <hudson.plugins.sonar.client.ProjectInformation>
+            <created>1607411885787</created>
+            <name>sun-ui-proxies</name>
+            <url>https://sonarqube.idc.tarento.com/dashboard?id=sun-ui-proxies</url>
+            <status>OK</status>
+            <ceStatus>success</ceStatus>
+            <ceUrl>https://sonarqube.idc.tarento.com/api/ce/task?id=AXZBNoqlaClvBaEcebli</ceUrl>
+          </hudson.plugins.sonar.client.ProjectInformation>
+        </entry>
+      </infoByTaskId>
+      <lastRequest>1607411886179</lastRequest>
+      <lastProjInfo>
+        <hudson.plugins.sonar.client.ProjectInformation reference="../../infoByTaskId/entry/hudson.plugins.sonar.client.ProjectInformation"/>
+      </lastProjInfo>
+    </hudson.plugins.sonar.action.SonarCacheAction>
+  </actions>
+  <queueId>14105</queueId>
+  <timestamp>1607411664208</timestamp>
+  <startTime>1607411664211</startTime>
+  <result>SUCCESS</result>
+  <duration>221576</duration>
+  <charset>UTF-8</charset>
+  <keepLog>false</keepLog>
+  <execution class="org.jenkinsci.plugins.workflow.cps.CpsFlowExecution">
+    <result>SUCCESS</result>
+    <script>
+node() {
+    try {
+        String ANSI_GREEN = &quot;\u001B[32m&quot;
+        String ANSI_NORMAL = &quot;\u001B[0m&quot;
+        String ANSI_BOLD = &quot;\u001B[1m&quot;
+        String ANSI_RED = &quot;\u001B[31m&quot;
+        String ANSI_YELLOW = &quot;\u001B[33m&quot;
+
+        ansiColor(&apos;xterm&apos;) {
+            stage(&apos;Checkout&apos;) {
+                cleanWs()
+                checkout scm
+                }
+        }
+            stage(&apos;docker-pre-build&apos;) {
+              sh &apos;&apos;&apos;
+              cd $docker_file_path
+              pwd
+              docker build -f ./Dockerfile.build -t $docker_pre_build .
+              docker run --name=$docker_pre_build $docker_pre_build &amp;&amp; docker cp $docker_pre_build:/usr/src/app/dist.zip .
+              sleep 30
+              docker rm -f $docker_pre_build
+              docker rmi -f $docker_pre_build
+              unzip dist.zip              
+                &apos;&apos;&apos;
+        }
+      
+              stage(&apos;SonarQube analysis&apos;) {
+               
+                  sh &apos;cd $docker_file_path &amp;&amp; npm install&apos;
+             
+   			 // requires SonarQube Scanner 2.8+
+   				 def scannerHome = tool &apos;sonar_scanner&apos;;
+   				 withSonarQubeEnv(&apos;sonarqube&apos;) {
+    					   sh &apos;&apos;&apos;
+                   cd $docker_file_path &amp;&amp; pwd &amp;&amp; /var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonar_scanner/bin/sonar-scanner
+                 &apos;&apos;&apos;
+    			 }
+  	}
+  stage(&quot;Quality Gate&quot;) {
+  
+    timeout(time: 1, unit: &apos;HOURS&apos;) {       // Just in case something goes wrong, pipeline will be killed after a timeout
+  		 def qg = waitForQualityGate() // Reuse taskId previously collected by withSonarQubeEnv
+   		 if (qg.status != &apos;OK&apos;) {
+    		error &quot;Pipeline aborted due to quality gate failure: ${qg.status}&quot;
+   					}
+  
+  }
+}
+
+            stage(&apos;docker-build&apos;) {
+                sh &apos;&apos;&apos;
+                   commit_id=$(git rev-parse --short HEAD)
+                   echo $commit_id&gt; commit_id.txt
+                   cd $docker_file_path
+                   pwd
+                   docker build -f Dockerfile -t $docker_server/$docker_repo:$commit_id .
+                   docker tag $docker_server/$docker_repo:$commit_id $docker_server/$docker_repo:$image_tag
+                   &apos;&apos;&apos;
+        }
+
+         stage(&apos;docker-push&apos;) {
+
+               sh &apos;&apos;&apos;
+                  pwd
+                  commit_id=$(git rev-parse --short HEAD)
+                  docker push $docker_server/$docker_repo:$commit_id
+                  docker push $docker_server/$docker_repo:$image_tag
+                  docker rmi -f $docker_server/$docker_repo:$commit_id
+                  docker rmi -f $docker_server/$docker_repo:$image_tag
+                  rm -rf dist
+                  rm -rf dist.zip
+
+                  &apos;&apos;&apos;
+
+                    }
+                 }
+    catch (err) {
+        currentBuild.result = &quot;FAILURE&quot;
+        throw err
+    }
+
+}
+ 
+</script>
+    <loadedScripts class="map"/>
+    <durabilityHint>MAX_SURVIVABILITY</durabilityHint>
+    <timings class="map">
+      <entry>
+        <string>flowNode</string>
+        <long>301825470</long>
+      </entry>
+      <entry>
+        <string>classLoad</string>
+        <long>127247675</long>
+      </entry>
+      <entry>
+        <string>run</string>
+        <long>804281100</long>
+      </entry>
+      <entry>
+        <string>parse</string>
+        <long>75029011</long>
+      </entry>
+      <entry>
+        <string>saveProgram</string>
+        <long>101191091</long>
+      </entry>
+    </timings>
+    <sandbox>true</sandbox>
+    <iota>52</iota>
+    <head>1:52</head>
+    <done>true</done>
+    <resumeBlocked>false</resumeBlocked>
+  </execution>
+  <completed>true</completed>
+  <checkouts class="hudson.util.PersistedList">
+    <org.jenkinsci.plugins.workflow.job.WorkflowRun_-SCMCheckout>
+      <scm class="hudson.plugins.git.GitSCM" plugin="git@4.1.1">
+        <configVersion>2</configVersion>
+        <userRemoteConfigs>
+          <hudson.plugins.git.UserRemoteConfig>
+            <url>https://github.com/igot-gov/Eagle.git</url>
+          </hudson.plugins.git.UserRemoteConfig>
+        </userRemoteConfigs>
+        <branches>
+          <hudson.plugins.git.BranchSpec>
+            <name>${branch_name}</name>
+          </hudson.plugins.git.BranchSpec>
+        </branches>
+        <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+        <submoduleCfg class="list"/>
+        <extensions/>
+      </scm>
+      <node></node>
+      <workspace>/var/lib/jenkins/workspace/igot-dev/Frontend-build/sun-ui-proxy@script</workspace>
+      <changelogFile>/var/lib/jenkins/jobs/igot-dev/jobs/Frontend-build/jobs/sun-ui-proxy/builds/13/changelog2696501803029280974.xml</changelogFile>
+      <pollingBaseline class="hudson.scm.SCMRevisionState$None" reference="../../../actions/org.jenkinsci.plugins.workflow.steps.scm.MultiSCMRevisionState/revisionStates/entry/hudson.scm.SCMRevisionState_-None"/>
+    </org.jenkinsci.plugins.workflow.job.WorkflowRun_-SCMCheckout>
+    <org.jenkinsci.plugins.workflow.job.WorkflowRun_-SCMCheckout>
+      <scm class="hudson.plugins.git.GitSCM" reference="../../org.jenkinsci.plugins.workflow.job.WorkflowRun_-SCMCheckout/scm"/>
+      <node></node>
+      <workspace>/var/lib/jenkins/workspace/igot-dev/Frontend-build/sun-ui-proxy</workspace>
+      <pollingBaseline class="hudson.scm.SCMRevisionState$None" reference="../../../actions/org.jenkinsci.plugins.workflow.steps.scm.MultiSCMRevisionState/revisionStates/entry/hudson.scm.SCMRevisionState_-None"/>
+    </org.jenkinsci.plugins.workflow.job.WorkflowRun_-SCMCheckout>
+  </checkouts>
+</flow-build>

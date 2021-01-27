@@ -1,0 +1,111 @@
+commit 1a7a3a3c843d59e338ff9c8b4e3db60cfbd8f66f
+tree 77666c849dd98abf913d09dd60a71683548f6baf
+parent 0899e48a33711cfe2ac83c6e5b4d31dacc455334
+author bandanasahu <bandanasahu8@gmail.com> 2020-12-15 12:26:12 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2020-12-15 12:26:12 +0530
+
+    fixed local search for network
+
+
+:100644 100644 c5dadf3ef45b13930b27e7425925af3865be8664 08c7a08fdf83f7ae42763664c6246684348ced24 M	apps/igot-ui/library/ws-widget/utils/src/lib/pipes/pipe-filter-search/pipe-filter-search.pipe.ts
+:100644 100644 2df7845c325669e5f994688c435cc8cd5492e550 8d9de15c360817ccab540debceb3fcb2bf4362c2 M	apps/igot-ui/project/ws/app/src/lib/routes/network-v2/components/connection-people-card/connection-people-card.component.ts
+:100644 100644 05b0b0e7a2de67445c0653606cb9a67b9201ee44 cb19f316e5589245ff3bf40c88cab647c18d797c M	apps/igot-ui/project/ws/app/src/lib/routes/network-v2/routes/network-my-connection/network-my-connection.component.html
+:100644 100644 969d90eb3199830e1a1c8ea65c68cf425b0fcedf d64778dd111db1ae1ee05be1ad14ea3a75fbc646 M	apps/igot-ui/project/ws/app/src/lib/routes/network-v2/routes/network-my-mdo/network-my-mdo.component.html
+:100644 100644 57ef93f2543bfcfb1557cd068a4b321d688e82d1 b91769bc8ada099cea0c964793a350dbe615873e M	apps/igot-ui/project/ws/app/src/lib/routes/network-v2/routes/network-recommended/network-recommended.component.html
+commit 313ea904d84d4462a6634a12ea983b01255461bd
+tree 6c770d7393bf7fa81c25a428725bf6e5a44129b0
+parent 85b493b1850a764e6eebee7217a2b9a5e2afd2f3
+author pilliarunkumar <arunkumar.pilli@tarento.com> 2020-12-15 11:41:12 +0530
+committer pilliarunkumar <arunkumar.pilli@tarento.com> 2020-12-15 11:41:12 +0530
+
+    fixed search
+
+
+:100644 100644 daa346b13a07d48f2440cb0230754adbb8fea764 509009383dfb41873112b87c41b0b5c328c0283f M	apps/igot-ui/library/ws-widget/collection/src/lib/btn-playlist/btn-playlist.service.ts
+:100644 100644 bb2cf8b39304116c251d891bade8bce8992956c7 562c51a548009c5f3b56a860f691995b9238e243 M	apps/igot-ui/library/ws-widget/collection/src/lib/picker-content/picker-content.component.ts
+commit 0899e48a33711cfe2ac83c6e5b4d31dacc455334
+tree 56f5d4f377c71e84410e1f5d12fc9b3648ffd9a8
+parent e092c69e82a46fc0286d5ccfc72719317ec9afa4
+author bandanasahu <bandanasahu8@gmail.com> 2020-12-15 11:16:39 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2020-12-15 11:16:39 +0530
+
+    integrated connection apis
+
+
+:100644 100644 aa2bdc8f8f1e1ddbb5ce4ba44d27a20632b0d305 6f2f48300cddd855bf1f95af51643fadf1faa039 M	apps/igot-ui/library/ws-widget/collection/src/lib/card-network/card-network.service.ts
+:100644 100644 7c74fa489ba26a86b5447b38cb3a9db70abad3b1 f6dd7e0022528a43e1d41b973b241c0c7b01bccd M	apps/igot-ui/project/ws/app/src/lib/routes/network-v2/components/connection-people-card/connection-people-card.component.html
+:100644 100644 06fbadd51bb8fdc89f3ca9a509a36284e5655582 2df7845c325669e5f994688c435cc8cd5492e550 M	apps/igot-ui/project/ws/app/src/lib/routes/network-v2/components/connection-people-card/connection-people-card.component.ts
+:100644 100644 e99cf9b479514d736a7d675d6b4aee4496441223 fbf8276618c754dae2bc17cb06c695ec7105e0ca M	apps/igot-ui/project/ws/app/src/lib/routes/network-v2/components/connection-request-card/connection-request-card.component.html
+:100644 100644 1c511e21c771801bcf3702b1d2b33ba556c45215 b2d1e212a98ea60312f4b405e7c2b01f784f83c1 M	apps/igot-ui/project/ws/app/src/lib/routes/network-v2/components/connection-request-card/connection-request-card.component.ts
+:100644 100644 54edd3bc6ea78a17bc5f656828aef200966ee75e 9af69f42566a024538660428ea1f1b9ce98cb4fb M	apps/igot-ui/project/ws/app/src/lib/routes/network-v2/components/connection-search-card/connection-search-card.component.html
+:100644 100644 df6e43953bfbd2f49587c27fd9471aec5625e314 38691b274d6ee60d19d5a572a741a32a66e0bc47 M	apps/igot-ui/project/ws/app/src/lib/routes/network-v2/components/my-connection-card/my-connection-card.component.html
+:100644 100644 1e307e2441cc1ac424b3e0b967dc92d7deeeaaed 73158262ba2e223fef666733ed27ad4dbceb6d5f M	apps/igot-ui/project/ws/app/src/lib/routes/network-v2/components/my-connection-card/my-connection-card.component.ts
+:100644 100644 47ff2746d38b896338ae2eb272d0dadc4c748b39 9a05dc2d2abab91906de6d51eebae9275a3a8ab3 M	apps/igot-ui/project/ws/app/src/lib/routes/network-v2/models/network-v2.model.ts
+:100644 100644 1a7b9b14b3460c4fb97555ee22512342c7e45b69 0f46088fe1b8f0950972af0376652b1ac59f5418 M	apps/igot-ui/project/ws/app/src/lib/routes/network-v2/resolvers/my-mdo-resolve.service.ts
+:100644 100644 bf6e2580f22c06dff44470c924ff237852c0c74d cb40c1f3c261a925a1c169455ba998827fdbdb69 M	apps/igot-ui/project/ws/app/src/lib/routes/network-v2/routes/network-home/network-home.component.ts
+:100644 100644 7e612e6be5f390190ead510713cf56f1e988c549 4babf28d97859d060d289d58d4f865ba0f7c2270 M	apps/igot-ui/project/ws/app/src/lib/routes/network-v2/routes/network-my-mdo/network-my-mdo.component.ts
+:100644 100644 73015f7e8c06b6c905eac32a67dd317890716d75 c70ad32da91c44bf903d85b84e35f5633de41d9b M	apps/igot-ui/project/ws/app/src/lib/routes/network-v2/services/network-v2.service.ts
+commit ceea439a9c9fda33dd4c5e468f24618e13a6d5a9
+tree aead1bcc58fd55fe62274bbeeb852b648e90b180
+parent 1cd8ad8c2dc28897c95a8978f89c29143af205eb
+author pilliarunkumar <arunkumar.pilli@tarento.com> 2020-12-15 02:05:00 +0530
+committer pilliarunkumar <arunkumar.pilli@tarento.com> 2020-12-15 02:05:00 +0530
+
+    create playlist functionality
+
+
+:100644 100644 428c277ac0b2566ed1521bfad0b15f0bd5f1066c daa346b13a07d48f2440cb0230754adbb8fea764 M	apps/igot-ui/library/ws-widget/collection/src/lib/btn-playlist/btn-playlist.service.ts
+:100644 100644 3b4d9e48573d3851252210b50eb59a9613097b76 bb2cf8b39304116c251d891bade8bce8992956c7 M	apps/igot-ui/library/ws-widget/collection/src/lib/picker-content/picker-content.component.ts
+:100644 100644 74631d44a9745f383986bc2e8b973b53eb24c2e5 8c5d4e99317930e644e6acd38cd24c8ca6235fb6 M	apps/ui-proxy/src/protectedApi_v8/user/playlist.ts
+:100644 100644 6ca26e40ff4c15e464db4b9049af460ed1ea70f6 625253e2b55dd8bc2b82f37b9099b2ce28ead4f6 M	apps/ui-proxy/src/proxies_v8/proxies_v8.ts
+:100644 100644 923283e1580b7afcdf74fc6d858977b717e60020 272a5eaba665895e5f06a0619a2f9e7f7070ccde M	apps/ui-proxy/src/service/playlist.ts
+:100644 100644 ba0b6977f3d0e45b9c2e6f40557744b0a2d2014f 886459dec4d830afe781f396215a074d7bc1f8ff M	apps/ui-proxy/tsconfig.json
+commit b6a9f8cc2c344a6f0f1b254c5ce20e80d1ef39c1
+tree 0a9e090321af139af974441e64fde753b127cc38
+parent 99f8896c376c2567b28e0a96023c7ee5df9a35ac
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-12-14 22:00:53 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-12-14 22:00:53 +0530
+
+    Task #52811: Progress state/read and update api integrated for resume feature
+
+
+:100644 100644 e1f4230d7ea115a6f119b1a3b89c3b4114623846 fc35d6890b96b59dcb649c5009f74e4b4a5eae10 M	apps/igot-ui/library/ws-widget/collection/src/lib/_services/widget-content.model.ts
+:100644 100644 391595b1da72d5695a3f38b829f9e2a49692aca0 d6b4396b40445bf62d90dddeecbf0066228601af M	apps/igot-ui/library/ws-widget/collection/src/lib/_services/widget-content.service.ts
+:100644 100644 428c277ac0b2566ed1521bfad0b15f0bd5f1066c 421765a783df9a549dfd439a0003bcbc5c761acc M	apps/igot-ui/library/ws-widget/collection/src/lib/btn-playlist/btn-playlist.service.ts
+:100644 100644 ac72bf56844a61b2409b71fe46113644cab0eade 635d0f0574ef2eb38bfafec40fb52b28ac853979 M	apps/igot-ui/library/ws-widget/collection/src/lib/player-pdf/player-pdf.component.ts
+:100644 100644 94388c1a51fd876e2c28d2f935a30cafa36b093c 6eb5080783a080a151518850640ea630410537f4 M	apps/igot-ui/library/ws-widget/collection/src/lib/player-video/player-video.component.ts
+:100644 100644 38bc558917398648be90874b338b187c8ddc8d11 1cde08b88ced9be1514cf64966916c09e28e4316 M	apps/igot-ui/project/ws/app/src/lib/routes/app-toc/components/app-toc-banner/app-toc-banner.component.ts
+:100644 100644 20f37f18df699dcd1c128aa2b932581fc4322b0d 7cbdb1259f9a06d8a59f117ad40258d280000b88 M	apps/igot-ui/project/ws/app/src/lib/routes/app-toc/components/app-toc-home/app-toc-home.component.ts
+:100644 100644 615484b7ba84c5c277b89114d157283ea64058ab 2ecebf9881abe8fd2bdadfb31f7e8f36a6185e45 M	apps/igot-ui/project/ws/viewer/src/lib/components/viewer-toc/viewer-toc.component.ts
+:100644 100644 24d468b3a84cdb5464f2044334484629ecb03b41 4d87305c951d9ea57c665d4d5f74137323a5098f M	apps/igot-ui/project/ws/viewer/src/lib/viewer-util.service.ts
+commit 1cd8ad8c2dc28897c95a8978f89c29143af205eb
+tree 2f2e11b9ebbd473eff0386a46b5ecf6ff615c9f6
+parent 7f0d4843c8bbfebfd893579effc1409a983a69a6
+author pilliarunkumar <arunkumar.pilli@tarento.com> 2020-12-14 17:30:43 +0530
+committer pilliarunkumar <arunkumar.pilli@tarento.com> 2020-12-14 17:30:43 +0530
+
+    lint fixes
+
+
+:100644 100644 812e5971e8a63db3c80ade5038b9b0f9802752b7 ddb779cd6bc343c32aee425090653e7841d8991a M	apps/ui-proxy/src/utils/proxyCreator.ts
+commit e092c69e82a46fc0286d5ccfc72719317ec9afa4
+tree d33ddbe71046e480b645fae4587b667a80537892
+parent 07f906c1c15e64487eaf16332a1af4035e150db9
+author bandanasahu <bandanasahu8@gmail.com> 2020-12-14 17:02:59 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2020-12-14 17:02:59 +0530
+
+    modified the req body name
+
+
+:100644 100644 13b86175866d901de7d18a22dda4137f1e19f81d 4b2981b4f62d22f398f40d1af92a5a9b359ffed0 M	apps/ui-proxy/src/protectedApi_v8/connections.ts
+commit 7f0d4843c8bbfebfd893579effc1409a983a69a6
+tree 3c0c6e28f9a3e92b680d0c4b20f9e10376118091
+parent 8a6a265f5267e6633bb774fca9b3223c40559e5c
+author pilliarunkumar <arunkumar.pilli@tarento.com> 2020-12-14 16:34:50 +0530
+committer pilliarunkumar <arunkumar.pilli@tarento.com> 2020-12-14 16:34:50 +0530
+
+    proxy changes
+
+
+:100644 100644 53444bbd613f657ee3a6d55599025bcb1219716b 6ca26e40ff4c15e464db4b9049af460ed1ea70f6 M	apps/ui-proxy/src/proxies_v8/proxies_v8.ts
+:100644 100644 53dfbbbee6c28948c245f9d2558e75234f37a678 812e5971e8a63db3c80ade5038b9b0f9802752b7 M	apps/ui-proxy/src/utils/proxyCreator.ts

@@ -1,0 +1,11 @@
+commit c42913423e22951fe0596eacd2420206ff60de03
+tree 9f935ca7b58e1135450c9847315b5e22aff32ddf
+parent 70613478b4f0560947fdc3e84d14a4b7ed9cf7c4
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-12-22 20:26:41 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-12-22 20:26:41 +0530
+
+    Task #52925: Fixed build issues
+
+
+:100644 100644 caefd79784a2af79baf8373f6a39214fe13015b4 752d45bd9de95b23dab47643e55ebcf2643d62df M	apps/ui-proxy/src/proxies_v8/proxies_v8.ts
+:100644 100644 381f4ae95fc28a0510ec7a150ace8ec48ad861c9 8db209b384601871a7529992be2553070c71ed09 M	apps/ui-proxy/src/utils/env.ts

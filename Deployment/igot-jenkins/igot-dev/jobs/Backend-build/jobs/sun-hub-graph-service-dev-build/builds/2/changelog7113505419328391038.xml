@@ -1,0 +1,10 @@
+commit 25e0ff6a3ff79293658288bbe9c73d55e7e2d970
+tree 59c8991114757ade275723a9bfaf3dd024f9fdd9
+parent 88ccb6f1f69c8aa9f44f85a6f7da2a10f825194d
+author amit-kumaryadav <amtydv630@gmail.com> 2021-01-12 15:02:35 +0530
+committer amit-kumaryadav <amtydv630@gmail.com> 2021-01-12 15:02:35 +0530
+
+    Fixed the null pointer exception
+
+
+:100644 100644 56cf4c0ccda9888a8a71a03e6c3f978062deb63b 249bbdc12e6c226def16ce40fd0c2112297506e7 M	apps/hub-services/src/main/java/com/infosys/hubservices/profile/handler/ProfileRequestHandler.java

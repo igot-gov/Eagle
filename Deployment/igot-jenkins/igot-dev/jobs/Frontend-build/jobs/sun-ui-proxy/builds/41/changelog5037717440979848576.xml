@@ -1,0 +1,27 @@
+commit bbcbb1e3fcb93751168e34d61eee52706e294882
+tree 13a5405fb47b8139de1d082cf28fdc5100804a5f
+parent 7a83813b13eb296b417e5c1a2332a0c4d997d100
+author pilliarunkumar <arunkumar.pilli@tarento.com> 2021-01-18 16:59:26 +0530
+committer pilliarunkumar <arunkumar.pilli@tarento.com> 2021-01-18 16:59:26 +0530
+
+    fixed create goal issue
+
+
+:100644 100644 6faee4d80afa60996af08ad97ea20f94a1c685ab 765a80621078545155a8109c7310e0ecdf74e6db M	apps/igot-ui/project/ws/app/src/lib/routes/goals/components/goal-create-custom/goal-create-custom.component.ts
+:100644 100644 0efff7ef150cfceae2c34a718873c01310e56732 2f2a70a1a48e5e1845f4d968092d893aa38f2331 M	apps/igot-ui/project/ws/app/src/lib/routes/playlist/components/playlist-card/playlist-card.component.html
+commit 7a83813b13eb296b417e5c1a2332a0c4d997d100
+tree 0ab2e15dff8c69b93db970782491bcc916fdb12d
+parent 70524a8e1c20944fd7c3fa0b481b334e4176c07c
+author pilliarunkumar <arunkumar.pilli@tarento.com> 2021-01-15 10:48:07 +0530
+committer pilliarunkumar <arunkumar.pilli@tarento.com> 2021-01-15 10:48:07 +0530
+
+    goals create and edit fixes
+
+
+:100644 100644 be6206f0ec1b75015f1e0c5dce52243ce9f22e10 3c3d0230ba466726d1e65202d5eb56786963c203 M	apps/igot-ui/library/ws-widget/collection/src/lib/btn-goals/btn-goals.model.ts
+:100644 100644 a31fca6d8bb8e650898b8ea3402e95f82685d07c b8788a7928892a08f3b6f6078f5b94bd45453398 M	apps/igot-ui/library/ws-widget/collection/src/lib/btn-goals/btn-goals.service.ts
+:100644 100644 0f6e04edb3e6b124d432ff970f034eda87e5a6f0 4e53830d1982c50494d6989bfbec687d8e8928b6 M	apps/igot-ui/project/ws/app/src/lib/routes/goals/components/goal-card/goal-card.component.ts
+:100644 100644 f1eb309076e5352873e118dc820802680509c84a e2371bb12998b353a1775dd9ebe0365e54d7bdc2 M	apps/igot-ui/project/ws/app/src/lib/routes/goals/components/goal-create-custom/goal-create-custom.component.html
+:100644 100644 c8acb770c0527cfceb40b354cbdceb26f60c263a 6faee4d80afa60996af08ad97ea20f94a1c685ab M	apps/igot-ui/project/ws/app/src/lib/routes/goals/components/goal-create-custom/goal-create-custom.component.ts
+:100644 100644 8bbf1c20099958a98bff6d805bb631b46d8ae309 d02b4bd644b82472f29ea71511d1b3aef67fdb78 M	apps/ui-proxy/src/protectedApi_v8/user/goals.ts
+:100644 100644 2099c2984ad881c273c229bae1c9fc857e7ec15b bf24fe131e7ff15d7fc3175fb80eec4caf60851f M	apps/ui-proxy/src/service/goals.ts

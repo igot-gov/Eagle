@@ -1,0 +1,30 @@
+commit 5cd371baa580001fc342daa94989997f2f355d3f
+tree 7f4781a7023a1cd68142be25381eb39a19ab22e4
+parent 85c7f0186e5513d87be87f517e9b273760e3c1ad
+author bandanasahu <bandanasahu8@gmail.com> 2020-12-22 15:56:47 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2020-12-22 15:56:47 +0530
+
+    Fixed build error
+
+
+:100644 100644 699f60ad7ce471c9b80ea061da00391ee4cae02f 0e38f0cf573596f07486ef1cc6e480339fb27d39 M	apps/ui-proxy/src/protectedApi_v8/user/profile-registry.ts
+commit 85c7f0186e5513d87be87f517e9b273760e3c1ad
+tree d1483e0b325385e2305300691422cde256c5436c
+parent 38b7203d6119e4ed27612404430a92a8704a0577
+author bandanasahu <bandanasahu8@gmail.com> 2020-12-22 15:52:36 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2020-12-22 15:52:36 +0530
+
+    Added searchuser proxy api
+
+
+:100644 100644 772ad5ff2a05238d1d6e14365aea7106d6aceede 699f60ad7ce471c9b80ea061da00391ee4cae02f M	apps/ui-proxy/src/protectedApi_v8/user/profile-registry.ts
+commit a238ad84d6442466533c130a77a9be7c07dd9dcc
+tree b1b3b639cf9d823622087533ce00f841fc108a53
+parent 7bc8dcbca5fe18a97229bdcaca3066c02096ec2e
+author abhishek-K-P <abishek.koira@tarento.com> 2020-12-22 13:35:35 +0530
+committer abhishek-K-P <abishek.koira@tarento.com> 2020-12-22 13:35:35 +0530
+
+    proxies v8 change
+
+
+:100644 100644 09be14e2f193938d3d7b459c430007a8bd360a5f e407e5c8b0a5e559b5b3e1f676c81ece8e42e0b6 M	apps/ui-proxy/src/proxies_v8/proxies_v8.ts

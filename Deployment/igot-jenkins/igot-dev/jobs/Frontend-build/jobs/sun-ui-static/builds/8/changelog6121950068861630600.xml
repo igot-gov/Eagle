@@ -1,0 +1,91 @@
+commit e1019edc0bbf2febabc58889a420004f59aa2c72
+tree ed85715c21fd5f95ed8829db3c60d52a5c33c00f
+parent c42913423e22951fe0596eacd2420206ff60de03
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-12-22 23:52:13 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-12-22 23:52:13 +0530
+
+    Task #52925: Batch enroll, and update & read progress to have resume from point left off feature
+
+
+:100644 100644 f30fa04ea980c57800c3bab698f57200268c6951 b80ceb3d3f88207e4a2054b27790c4e3bf70a627 M	apps/igot-ui/library/ws-widget/collection/src/lib/_services/viewer-route-util.ts
+:100644 100644 4b864e9282fc57e016d3d8846d1ac11a6230a051 c7975f6e15651c98d20d098c957d1909206b7561 M	apps/igot-ui/library/ws-widget/collection/src/lib/_services/widget-content.model.ts
+:100644 100644 586a4f052301f2ad0e139cc07ca42e0485f1d422 e1980f4899eb661941fd2547f66fce27299e0dcd M	apps/igot-ui/library/ws-widget/collection/src/lib/_services/widget-content.service.ts
+:100644 100644 2dcf2cd9fd7706f5a420af19657cb899c6a9172e 1a7e647714c50e15ce6191728f1dbe9beaf402ba M	apps/igot-ui/library/ws-widget/collection/src/lib/_services/widget-user.service.ts
+:100644 100644 635d0f0574ef2eb38bfafec40fb52b28ac853979 6c2030fa58eb8a47c63ee551c7b7ab4126ccb0c6 M	apps/igot-ui/library/ws-widget/collection/src/lib/player-pdf/player-pdf.component.ts
+:100644 100644 e7ecc513c5d7b320eb0d5d428752dd5eae8579d6 28c5a73d6775c40441a9bee904edd08d23714208 M	apps/igot-ui/library/ws-widget/collection/src/lib/player-video/player-video.component.ts
+:100644 100644 0c8dc70317a951aed4ffce811bba2fb0a1f55711 de429ae8896dfd5e874df9120e29b9325714952e M	apps/igot-ui/project/ws/app/src/lib/routes/app-toc/app-toc.module.ts
+:100644 100644 fab80b4630f6bf85a7e69c19d691f3175a731349 d5de1b7a479094ea81fa291aa4fb16979656f0a4 M	apps/igot-ui/project/ws/app/src/lib/routes/app-toc/components/app-toc-banner/app-toc-banner.component.html
+:100644 100644 b42cc566b7d4c8159a13107fcae5cb6512dd28af 2458bb35f495920054022cb1ae5202eb78996451 M	apps/igot-ui/project/ws/app/src/lib/routes/app-toc/components/app-toc-banner/app-toc-banner.component.ts
+:100644 100644 066c3b6c6499e7d773aa829e326d3d6b75dad3de c73093bec9e85ddd372fa5c4d905f4ce14f8adda M	apps/igot-ui/project/ws/app/src/lib/routes/app-toc/components/app-toc-content-card/app-toc-content-card.component.html
+:100644 100644 ae86e25ced4a5424d7aab6e3748bd5f6c7ed536a 3257da92bcdba4ab30d1796de5eaca800fd5b5c5 M	apps/igot-ui/project/ws/app/src/lib/routes/app-toc/components/app-toc-content-card/app-toc-content-card.component.ts
+:100644 100644 eaa8f8f1a6b70d668b0701a35b13039b07909336 988a76bb5d55d353717d5ad75c51fe866e009db9 M	apps/igot-ui/project/ws/app/src/lib/routes/app-toc/components/app-toc-home/app-toc-home.component.html
+:100644 100644 7cbdb1259f9a06d8a59f117ad40258d280000b88 9b6a7736dcd117c0acec90cd8e182c2cbcbfc8f9 M	apps/igot-ui/project/ws/app/src/lib/routes/app-toc/components/app-toc-home/app-toc-home.component.ts
+:100644 100644 6aab8fb9c99014dd2ac22ede68a36ea119bdf726 dfed40b6d0bcbe46ae9acf840f8ba768e43efb7c M	apps/igot-ui/project/ws/app/src/lib/routes/app-toc/components/app-toc-single-page/app-toc-single-page.component.html
+:100644 100644 bf53c2c218b57fb89f8e0ad4e528963a5a5a56b8 549056f19900d88dfaab80b9a593321899e88e00 M	apps/igot-ui/project/ws/app/src/lib/routes/app-toc/components/app-toc-single-page/app-toc-single-page.component.ts
+:100644 100644 6fb8865c32677f72411e4383998c8d6a7da1d196 9f3dd9347107302228c52aa075b7b92d794a4817 M	apps/igot-ui/project/ws/app/src/lib/routes/app-toc/routes/app-toc-contents/app-toc-contents.component.html
+:100644 100644 7d56a31f45772575a360663c5bcfb9ae069b8ab2 ddb7d38603924a4f723ce4fe18ee0a9c0550bfd1 M	apps/igot-ui/project/ws/app/src/lib/routes/app-toc/routes/app-toc-contents/app-toc-contents.component.ts
+:100644 100644 b4773f51a05b1e3eb6e01ca56b95debcbcd08270 288dfc0420afae7c5add91ba4f685b164516afb2 M	apps/igot-ui/project/ws/viewer/src/lib/routes/pdf/pdf.component.ts
+:100644 100644 3cbad4d63e367e0b1256db66730c23f7660a8cfc 80874c8d2830412fa3f3b7c7fe6a5e72d33037ce M	apps/igot-ui/project/ws/viewer/src/lib/routes/video/video.component.ts
+:100644 100644 11027aa93a2073e4ace67f41d4d53f735f381a1f 6e3fa5a521d89aa41d092ec2c169e42bb05b321c M	apps/igot-ui/project/ws/viewer/src/lib/viewer-util.service.ts
+:100644 100644 4715ed5a9e8d95e6d29075cb42eb6b6aadc9c8f5 f5779b4e8090caa22b6ea3637144b9bd91d68187 M	apps/igot-ui/project/ws/viewer/src/lib/viewer.component.ts
+commit c42913423e22951fe0596eacd2420206ff60de03
+tree 9f935ca7b58e1135450c9847315b5e22aff32ddf
+parent 70613478b4f0560947fdc3e84d14a4b7ed9cf7c4
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-12-22 20:26:41 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-12-22 20:26:41 +0530
+
+    Task #52925: Fixed build issues
+
+
+:100644 100644 caefd79784a2af79baf8373f6a39214fe13015b4 752d45bd9de95b23dab47643e55ebcf2643d62df M	apps/ui-proxy/src/proxies_v8/proxies_v8.ts
+:100644 100644 381f4ae95fc28a0510ec7a150ace8ec48ad861c9 8db209b384601871a7529992be2553070c71ed09 M	apps/ui-proxy/src/utils/env.ts
+commit 70613478b4f0560947fdc3e84d14a4b7ed9cf7c4
+tree 8af1c8cc4c4ad0ac26752cd7a50de324f0e8a146
+parent 73d8502e141cda690b2ea47474be6ae25a0f58d0
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-12-22 18:42:24 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-12-22 18:42:24 +0530
+
+    Task #52925: Removed the upload proxy url
+
+
+:100644 100644 e407e5c8b0a5e559b5b3e1f676c81ece8e42e0b6 caefd79784a2af79baf8373f6a39214fe13015b4 M	apps/ui-proxy/src/proxies_v8/proxies_v8.ts
+commit 5d45009e64b21be7bbd04878d947f1e0c86c3aae
+tree 417f88bab1949422e1e17f3ac1f03d64d9851ff2
+parent a238ad84d6442466533c130a77a9be7c07dd9dcc
+author abhishek-K-P <abishek.koira@tarento.com> 2020-12-22 17:03:51 +0530
+committer abhishek-K-P <abishek.koira@tarento.com> 2020-12-22 17:03:51 +0530
+
+    lint issues fixed for intex
+
+
+:100644 100644 66da5782aceaaf093b4ad4279c7a6dca60c411dd bf4ad3b0d17a997de190434c6867b64aa73b85f3 M	apps/ui-proxy/src/authoring/content/index.ts
+commit 5cd371baa580001fc342daa94989997f2f355d3f
+tree 7f4781a7023a1cd68142be25381eb39a19ab22e4
+parent 85c7f0186e5513d87be87f517e9b273760e3c1ad
+author bandanasahu <bandanasahu8@gmail.com> 2020-12-22 15:56:47 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2020-12-22 15:56:47 +0530
+
+    Fixed build error
+
+
+:100644 100644 699f60ad7ce471c9b80ea061da00391ee4cae02f 0e38f0cf573596f07486ef1cc6e480339fb27d39 M	apps/ui-proxy/src/protectedApi_v8/user/profile-registry.ts
+commit 85c7f0186e5513d87be87f517e9b273760e3c1ad
+tree d1483e0b325385e2305300691422cde256c5436c
+parent 38b7203d6119e4ed27612404430a92a8704a0577
+author bandanasahu <bandanasahu8@gmail.com> 2020-12-22 15:52:36 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2020-12-22 15:52:36 +0530
+
+    Added searchuser proxy api
+
+
+:100644 100644 772ad5ff2a05238d1d6e14365aea7106d6aceede 699f60ad7ce471c9b80ea061da00391ee4cae02f M	apps/ui-proxy/src/protectedApi_v8/user/profile-registry.ts
+commit a238ad84d6442466533c130a77a9be7c07dd9dcc
+tree b1b3b639cf9d823622087533ce00f841fc108a53
+parent 7bc8dcbca5fe18a97229bdcaca3066c02096ec2e
+author abhishek-K-P <abishek.koira@tarento.com> 2020-12-22 13:35:35 +0530
+committer abhishek-K-P <abishek.koira@tarento.com> 2020-12-22 13:35:35 +0530
+
+    proxies v8 change
+
+
+:100644 100644 09be14e2f193938d3d7b459c430007a8bd360a5f e407e5c8b0a5e559b5b3e1f676c81ece8e42e0b6 M	apps/ui-proxy/src/proxies_v8/proxies_v8.ts

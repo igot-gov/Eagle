@@ -1,0 +1,99 @@
+commit 77d4ceaa7d8f5b3b49f1430aa2acb708781ccb46
+tree ec2734513b15a6904f8ed1ca28171b924286433e
+parent 60e3c7d114dc707b3d6a494e0315cfafb81dc277
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-12-02 17:07:35 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-12-02 17:07:35 +0530
+
+    Task #52761: added new wrappers for network and profile, added proxy route for progress api
+
+
+:000000 100644 0000000000000000000000000000000000000000 354f2304cbfe5c58eed9150403853d031f2799f4 A	apps/ui-proxy/src/protectedApi_v8/connections.ts
+:100644 100644 def4fca6599bfa33d7ea3fb207b17e72dd76d95e 5f0715efa8433301ed8a1a290b47b623bb7489e6 M	apps/ui-proxy/src/protectedApi_v8/protectedApiV8.ts
+:000000 100644 0000000000000000000000000000000000000000 24ece36807044c167fdc9d39bbe5b53c213e557c A	apps/ui-proxy/src/protectedApi_v8/user/profile-registry.ts
+:100644 100644 e5c605ea943541b35fc139c18d4e289125b6cb31 5af72bd6f27697972448e659898a61e657c6424f M	apps/ui-proxy/src/protectedApi_v8/user/user.ts
+:100644 100644 ad54dd508693f3773f983419288c1d52d5a84ff1 e08186185e7912622903cc02167a79c7991213cd M	apps/ui-proxy/src/proxies_v8/proxies_v8.ts
+commit 6742776ff32d21c8a525d2599d978459474d32b1
+tree cf4219e6452e9917f98d55b629e854ca10f0a1a5
+parent 1acaa455ba0f7c57f3ed65a831614d8f4d2bfe97
+author abhishek-K-P <abishek.koira@tarento.com> 2020-12-01 13:37:33 +0530
+committer abhishek-K-P <abishek.koira@tarento.com> 2020-12-01 13:37:33 +0530
+
+    filter bug fix
+
+
+:100644 100644 995f7611475932696f25f06c81ecdff08d45d8d3 c78b0aae389ea6e2bb76dbf73e7a067c200a0a15 M	apps/igot-ui/library/ws-widget/collection/src/lib/_services/widget-search.model.ts
+:100644 100644 8fa1e42337d804853a12e9c86caa236824d35ddc bdfd2c92dae71c2f9a46c924f7779f5dad4834f5 M	apps/igot-ui/project/ws/app/src/lib/routes/search/models/search.model.ts
+:100644 100644 c263131787c578cf0e78ea55ab88dee73b2680c0 ac203088a88bad3e754c576de4229c0da5a51032 M	apps/igot-ui/project/ws/app/src/lib/routes/search/routes/learning/learning.component.ts
+:100644 100644 35dae8c58e8551966cc5e002bbe68d238ebccb85 7da87a6dcb732a14acf6d48abe28ccfb9018b9cc M	apps/igot-ui/project/ws/app/src/lib/routes/search/services/search-serv.service.ts
+commit 1acaa455ba0f7c57f3ed65a831614d8f4d2bfe97
+tree 3049c686668f9cb3a5de6509ac050fc13e1bb1dd
+parent 91c7e6f2204a90e56425218069143557f61a52ec
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-12-01 12:58:02 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-12-01 12:58:02 +0530
+
+    Task #52666: reverted husky and resolved lint errors
+
+
+:100644 100644 3d3451871d08dcc6bdbe6d5327506cee5f826524 f8e483ff4071209e4330a9e9145a5715f57545ed M	apps/igot-ui/.huskyrc.json
+:100644 100644 2357c2d628a4528c5638ed9b73b32b2f4851ac5d 3993dab29eca5d3186cc8831e69e8b05a549312c M	apps/ui-proxy/src/protectedApi_v8/user/details.ts
+commit 7ee3785ab80087165c8ba722d45e7c3397b740fe
+tree 14c6589ac85cd0db0d0927a83f152be9982501bd
+parent 357d352797caa8b1e55661782da830251f2a3948
+author bandanasahu <bandanasahu8@gmail.com> 2020-12-01 12:27:12 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2020-12-01 12:27:12 +0530
+
+    build error fixed.
+
+
+:100644 100644 b60f5a9ec6ce0d74a58770571349f5533b400a4c 3d3451871d08dcc6bdbe6d5327506cee5f826524 M	apps/igot-ui/.huskyrc.json
+:100644 100644 31fc6b4fb7fc0c2604ec8ccf3287366962188ae2 e146153858677947e76c9216d585c12858c05d49 M	apps/ui-proxy/src/server.ts
+commit 2330a4f1ea31620dc6444c762a05f3a34c8b93ab
+tree 35fcb3c73fb333d8425eb1a2776c229a0f19c6c2
+parent be741bc0be12ae795469b43b005e085a0a56af9e
+author bandanasahu <bandanasahu8@gmail.com> 2020-12-01 12:22:00 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2020-12-01 12:22:00 +0530
+
+    Added discussion cards UI
+
+
+:100644 100644 b8abc04f79a0d9e690bcd347894f9a6247550e4b 4735a5bd7498480f9f6c1941cce256d7b99c618b M	apps/client-assets/assets/configurations/localhost_3000/page/home.json
+:100644 100644 52f483cd31be7878fdb87297bb75eb7dc430d54f cc5c8ba1e1c4da0c1eff57c6b3e19fc29810944e M	apps/ui-proxy/src/protectedApi_v8/user/details.ts
+commit 1ec9c04fcee83938775ac1a4d6e972deb9536e71
+tree 79fbd6ec475057d0eb6d495ea732e75c9a70d3df
+parent 566bb6436251e19ae9c0a135b3523154f115bbcf
+author abhishek-K-P <abishek.koira@tarento.com> 2020-12-01 12:16:37 +0530
+committer abhishek-K-P <abishek.koira@tarento.com> 2020-12-01 12:16:37 +0530
+
+    dynamic filters and applying filters for search
+
+
+:100644 100644 79506fe359b044839491ebf767cc8984bcc46917 995f7611475932696f25f06c81ecdff08d45d8d3 M	apps/igot-ui/library/ws-widget/collection/src/lib/_services/widget-search.model.ts
+:100644 100644 575f0f738c5dca8fa6209a2c6cff2d9d3b444bf3 d13a13f37838b55879ae2d630272d27148f7ee95 M	apps/igot-ui/library/ws-widget/collection/src/lib/picker-content/picker-content.component.ts
+:100644 100644 b654d690e4bc6e51ad5131d9cc1fc3f9c5ff26a7 f6bb3443a088176ffb65d69cd97163d5b141694b M	apps/igot-ui/project/ws/app/src/lib/routes/search/apis/search-api.service.ts
+:100644 100644 26e1bf9a004cca2944b11828fee8efe8bbd06411 8fa1e42337d804853a12e9c86caa236824d35ddc M	apps/igot-ui/project/ws/app/src/lib/routes/search/models/search.model.ts
+:100644 100644 fd219d7e95ad2c2fca98dbe6ff649961c32a9d99 c263131787c578cf0e78ea55ab88dee73b2680c0 M	apps/igot-ui/project/ws/app/src/lib/routes/search/routes/learning/learning.component.ts
+:100644 100644 98439c5e9f0f85c55f3370bb3530740d0ce64b7c 35dae8c58e8551966cc5e002bbe68d238ebccb85 M	apps/igot-ui/project/ws/app/src/lib/routes/search/services/search-serv.service.ts
+:100644 100644 52f483cd31be7878fdb87297bb75eb7dc430d54f 36f390ab4cb171c091c65a7f18ac6b6767ce9edc M	apps/ui-proxy/src/protectedApi_v8/user/details.ts
+commit 8ed2fae582e6eb2b982599af134c7a5a614e0018
+tree ba41cc72a1619fbe88738ad00da50b0b16700ac6
+parent 2d99324f31662df13943fe7603b720dee7220a0a
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-12-01 12:04:44 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-12-01 12:04:44 +0530
+
+    Task #52666: Added dev server end point changes
+
+
+:100644 100644 fca4548815b23dbde200292e1893c8c145e87261 5de149c1fe6101f5be0ab67c8f79cf4b27049d04 M	apps/igot-ui/library/ws-widget/collection/src/lib/_services/widget-content.service.ts
+:100644 100644 b654d690e4bc6e51ad5131d9cc1fc3f9c5ff26a7 31ddabe0f9a396adf1408e7b5a5c59ef0d25221b M	apps/igot-ui/project/ws/app/src/lib/routes/search/apis/search-api.service.ts
+:100644 100644 6bfb6f67048864618fdfb8dc81abffce3b67e09b 45127e3392998b3c6fcc095c059fd5daaf34bf03 M	apps/igot-ui/proxy/localhost.proxy.json
+:100644 100644 7a8b53ac003f1836b2ee8ad01aeb68c8822dd03c 2c79b42c08d8beb09036cca36cb4f1b6cea69fb0 M	apps/igot-ui/src/app/services/init.service.ts
+commit 1137582fe611531be9efba72256f523a80fa36dc
+tree 304ec2d637c9c107215167bff7d0f7ca9ef4496e
+parent 5000dc36d89bf439e7ae2ac6c91d39972e4fca75
+author Haridas <haridas.kakunje@tarento.com> 2020-11-27 12:10:25 +0000
+committer Haridas <haridas.kakunje@tarento.com> 2020-11-27 12:10:25 +0000
+
+    sonar-project.properties updated
+
+
+:100644 100644 10d5bade4a0d8a9bdb5a7d46ecea131e854bb9f5 055df05dc3441f318c2459687d463dc7c4d7762d M	apps/ui-proxy/sonar-project.properties

@@ -1,0 +1,92 @@
+commit d134fbf8566e87b6a15a84d32efdf52d2a8c193c
+tree 59db8bfcc1115843edc9a07ea40b954ba03786bf
+parent c240373c43d4df5d187846d70fb39d373876b025
+author pilliarunkumar <arunkumar.pilli@tarento.com> 2020-12-30 14:38:49 +0530
+committer pilliarunkumar <arunkumar.pilli@tarento.com> 2020-12-30 14:38:49 +0530
+
+    file upload changes
+
+
+:100644 100644 0bd7db9e7be1cb6b68b06ffafdd4ccbb07c6bbd4 3b2c6ea6d6e0a664ad5d450141dcee49f9adc67e M	apps/ui-proxy/src/protectedApi_v8/user/playlist.ts
+:100644 100644 752d45bd9de95b23dab47643e55ebcf2643d62df f5ec2117fc9522126612f6bb2c1befc76f927668 M	apps/ui-proxy/src/proxies_v8/proxies_v8.ts
+commit 8da054af8027d065cfc110ed355c85251beb835e
+tree 3623f0105f2bedf21bd0eb9aa4755a4085dada0a
+parent 83e0ef2ce6af11766fde3a639b6cac83584285f9
+author bandanasahu <bandanasahu8@gmail.com> 2020-12-23 18:02:04 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2020-12-23 18:02:04 +0530
+
+    modified learn.json file
+
+
+:100644 100644 8fe40a7370200d49046010b641355729827643c2 75384baaab8a7dc4b3ae2b708d8879f8ae8d98f7 M	apps/client-assets/assets/configurations/localhost_3000/page/learn.json
+commit 0e3d3807da464660967afee81b149b0449b134e6
+tree 4e480881923f0ecd71eca62958cf629513ee84ef
+parent 9399461441fbc45a08d6da25f4e4a06d1f011ef8
+author pilliarunkumar <arunkumar.pilli@tarento.com> 2020-12-23 12:13:17 +0530
+committer pilliarunkumar <arunkumar.pilli@tarento.com> 2020-12-23 12:13:17 +0530
+
+    fixing the uncheck button for playlist selsction
+
+
+:100644 100644 6e85082fa08e96cebeeff42d5c012f98ff3f3e49 9436fb69535d1abb622298d3e03c13bd8731663d M	apps/igot-ui/library/ws-widget/collection/src/lib/btn-playlist/btn-playlist.service.ts
+:100644 100644 6b7bb291aa1a335edff3e488259c739df87f180b 0f663a4cd21023b93c304015d6590a020336d103 M	apps/igot-ui/project/ws/app/src/lib/routes/playlist/components/playlist-card/playlist-card.component.ts
+:100644 100644 aa2f1657c71f9f585e084ac5b2081df5fafb36d7 0bd7db9e7be1cb6b68b06ffafdd4ccbb07c6bbd4 M	apps/ui-proxy/src/protectedApi_v8/user/playlist.ts
+commit 83e0ef2ce6af11766fde3a639b6cac83584285f9
+tree b3b61180ac324bd9f394b5a9124eda823ec95999
+parent e0a132bdf9c87dd18a8dbda0e034e677cd2abbe8
+author bandanasahu <bandanasahu8@gmail.com> 2020-12-23 12:05:20 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2020-12-23 12:05:20 +0530
+
+    Integrated network apis
+
+
+:100644 100644 6f2f48300cddd855bf1f95af51643fadf1faa039 95e86ca91b5ac7afce4eb5b07ab9eb7de24268a7 M	apps/igot-ui/library/ws-widget/collection/src/lib/card-network/card-network.service.ts
+:100644 100644 d2e0b435e6ce867064b25a2952ff48a90d6b6924 50de19fd4f2c1cd63e8e890282cf87098450c004 M	apps/igot-ui/project/ws/app/src/lib/routes/network-v2/components/connection-recommended-card/connection-recommended-card.component.ts
+:100644 100644 9af69f42566a024538660428ea1f1b9ce98cb4fb c4cc207473a2ec6cd134c758be5c326d7da0d87f M	apps/igot-ui/project/ws/app/src/lib/routes/network-v2/components/connection-search-card/connection-search-card.component.html
+:100644 100644 58dfff92374e8de4f53a82980447092b360accea 56a35fb94b50be1c4d392f0573bfc1beef98e326 M	apps/igot-ui/project/ws/app/src/lib/routes/network-v2/components/connection-search-card/connection-search-card.component.ts
+:100644 100644 9a05dc2d2abab91906de6d51eebae9275a3a8ab3 cd1b6c53f3abacd6d121a10adaf8f74e6d3fede0 M	apps/igot-ui/project/ws/app/src/lib/routes/network-v2/models/network-v2.model.ts
+:100644 100644 6a6e9862378014f689a6b853e061906df7728427 17e3a8d8cdb3e25a56318208d7711cdbbdf97007 M	apps/igot-ui/project/ws/app/src/lib/routes/network-v2/routes/network-home/network-home.component.html
+:100644 100644 5e83c406ae9b730ce767e96c1c2fd7ef185f14d3 67ae885ddf9a4f6e2936d1d19ca52547bd080df3 M	apps/igot-ui/project/ws/app/src/lib/routes/network-v2/routes/network-home/network-home.component.ts
+commit e17cdc91810746dbaef2a55ca15e6d26f48df63d
+tree aab8e723ba3e7c8a22d7c3850024b89b5dba88f1
+parent 72fe393bbf23289efc7062c95f6830d96e543c62
+author abhishek-K-P <abishek.koira@tarento.com> 2020-12-23 10:45:06 +0530
+committer abhishek-K-P <abishek.koira@tarento.com> 2020-12-23 10:45:06 +0530
+
+    changed to /apis/ for create
+
+
+:100644 100644 f0c7bc5ef62e29f6e0298b1155c5cbd0ebf32dce 0cbfbcf362bb00be57cb2caa22406125f1d7d99e M	apps/igot-ui/project/ws/author/src/lib/modules/shared/services/api.service.ts
+:100644 100644 dcdb8a0b41f528135915260383a6b9033eb8aba1 401a9cbf7399f39a08318e3b9a2097550cbfbd2d M	apps/igot-ui/project/ws/author/src/lib/routing/modules/create/components/create/create.service.ts
+:100644 100644 27cf032151cc8f4e1b49888ea140c3129abc3696 599c1c13df00f9a027c09a07d71dfd9504f46573 M	apps/igot-ui/project/ws/author/src/lib/routing/modules/editor/services/editor.service.ts
+:100644 100644 24c88c4ae699c13525280c24a13b168760b312e8 d78812fe9cc5414d503cdc1f567cfed7fff12998 M	apps/igot-ui/project/ws/author/src/lib/services/content-and-data-read-multi-lang.service.ts
+commit e1019edc0bbf2febabc58889a420004f59aa2c72
+tree ed85715c21fd5f95ed8829db3c60d52a5c33c00f
+parent c42913423e22951fe0596eacd2420206ff60de03
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-12-22 23:52:13 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-12-22 23:52:13 +0530
+
+    Task #52925: Batch enroll, and update & read progress to have resume from point left off feature
+
+
+:100644 100644 f30fa04ea980c57800c3bab698f57200268c6951 b80ceb3d3f88207e4a2054b27790c4e3bf70a627 M	apps/igot-ui/library/ws-widget/collection/src/lib/_services/viewer-route-util.ts
+:100644 100644 4b864e9282fc57e016d3d8846d1ac11a6230a051 c7975f6e15651c98d20d098c957d1909206b7561 M	apps/igot-ui/library/ws-widget/collection/src/lib/_services/widget-content.model.ts
+:100644 100644 586a4f052301f2ad0e139cc07ca42e0485f1d422 e1980f4899eb661941fd2547f66fce27299e0dcd M	apps/igot-ui/library/ws-widget/collection/src/lib/_services/widget-content.service.ts
+:100644 100644 2dcf2cd9fd7706f5a420af19657cb899c6a9172e 1a7e647714c50e15ce6191728f1dbe9beaf402ba M	apps/igot-ui/library/ws-widget/collection/src/lib/_services/widget-user.service.ts
+:100644 100644 635d0f0574ef2eb38bfafec40fb52b28ac853979 6c2030fa58eb8a47c63ee551c7b7ab4126ccb0c6 M	apps/igot-ui/library/ws-widget/collection/src/lib/player-pdf/player-pdf.component.ts
+:100644 100644 e7ecc513c5d7b320eb0d5d428752dd5eae8579d6 28c5a73d6775c40441a9bee904edd08d23714208 M	apps/igot-ui/library/ws-widget/collection/src/lib/player-video/player-video.component.ts
+:100644 100644 0c8dc70317a951aed4ffce811bba2fb0a1f55711 de429ae8896dfd5e874df9120e29b9325714952e M	apps/igot-ui/project/ws/app/src/lib/routes/app-toc/app-toc.module.ts
+:100644 100644 fab80b4630f6bf85a7e69c19d691f3175a731349 d5de1b7a479094ea81fa291aa4fb16979656f0a4 M	apps/igot-ui/project/ws/app/src/lib/routes/app-toc/components/app-toc-banner/app-toc-banner.component.html
+:100644 100644 b42cc566b7d4c8159a13107fcae5cb6512dd28af 2458bb35f495920054022cb1ae5202eb78996451 M	apps/igot-ui/project/ws/app/src/lib/routes/app-toc/components/app-toc-banner/app-toc-banner.component.ts
+:100644 100644 066c3b6c6499e7d773aa829e326d3d6b75dad3de c73093bec9e85ddd372fa5c4d905f4ce14f8adda M	apps/igot-ui/project/ws/app/src/lib/routes/app-toc/components/app-toc-content-card/app-toc-content-card.component.html
+:100644 100644 ae86e25ced4a5424d7aab6e3748bd5f6c7ed536a 3257da92bcdba4ab30d1796de5eaca800fd5b5c5 M	apps/igot-ui/project/ws/app/src/lib/routes/app-toc/components/app-toc-content-card/app-toc-content-card.component.ts
+:100644 100644 eaa8f8f1a6b70d668b0701a35b13039b07909336 988a76bb5d55d353717d5ad75c51fe866e009db9 M	apps/igot-ui/project/ws/app/src/lib/routes/app-toc/components/app-toc-home/app-toc-home.component.html
+:100644 100644 7cbdb1259f9a06d8a59f117ad40258d280000b88 9b6a7736dcd117c0acec90cd8e182c2cbcbfc8f9 M	apps/igot-ui/project/ws/app/src/lib/routes/app-toc/components/app-toc-home/app-toc-home.component.ts
+:100644 100644 6aab8fb9c99014dd2ac22ede68a36ea119bdf726 dfed40b6d0bcbe46ae9acf840f8ba768e43efb7c M	apps/igot-ui/project/ws/app/src/lib/routes/app-toc/components/app-toc-single-page/app-toc-single-page.component.html
+:100644 100644 bf53c2c218b57fb89f8e0ad4e528963a5a5a56b8 549056f19900d88dfaab80b9a593321899e88e00 M	apps/igot-ui/project/ws/app/src/lib/routes/app-toc/components/app-toc-single-page/app-toc-single-page.component.ts
+:100644 100644 6fb8865c32677f72411e4383998c8d6a7da1d196 9f3dd9347107302228c52aa075b7b92d794a4817 M	apps/igot-ui/project/ws/app/src/lib/routes/app-toc/routes/app-toc-contents/app-toc-contents.component.html
+:100644 100644 7d56a31f45772575a360663c5bcfb9ae069b8ab2 ddb7d38603924a4f723ce4fe18ee0a9c0550bfd1 M	apps/igot-ui/project/ws/app/src/lib/routes/app-toc/routes/app-toc-contents/app-toc-contents.component.ts
+:100644 100644 b4773f51a05b1e3eb6e01ca56b95debcbcd08270 288dfc0420afae7c5add91ba4f685b164516afb2 M	apps/igot-ui/project/ws/viewer/src/lib/routes/pdf/pdf.component.ts
+:100644 100644 3cbad4d63e367e0b1256db66730c23f7660a8cfc 80874c8d2830412fa3f3b7c7fe6a5e72d33037ce M	apps/igot-ui/project/ws/viewer/src/lib/routes/video/video.component.ts
+:100644 100644 11027aa93a2073e4ace67f41d4d53f735f381a1f 6e3fa5a521d89aa41d092ec2c169e42bb05b321c M	apps/igot-ui/project/ws/viewer/src/lib/viewer-util.service.ts
+:100644 100644 4715ed5a9e8d95e6d29075cb42eb6b6aadc9c8f5 f5779b4e8090caa22b6ea3637144b9bd91d68187 M	apps/igot-ui/project/ws/viewer/src/lib/viewer.component.ts

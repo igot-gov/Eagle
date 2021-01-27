@@ -1,0 +1,10 @@
+commit fd748d62d15f771c173af796934fe69792cb3a4a
+tree 641667ad29875c83ce012ae57eb0aad38fb3313f
+parent fe4e0a4add4cecc71baf6a6b71d2aa246e2783bf
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-12-16 16:17:06 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-12-16 16:17:06 +0530
+
+    Task #52811: Changed the endpoint for upload url
+
+
+:100644 100644 1b81f62820083489f53f13c08906f41e2a5f54eb 6ff41292ec7f58bd6f7020a7f9dacce022c9e8e8 M	apps/ui-proxy/src/proxies_v8/proxies_v8.ts

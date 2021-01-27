@@ -1,0 +1,242 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<flow-build plugin="workflow-job@2.36">
+  <actions>
+    <hudson.model.ParametersAction>
+      <safeParameters class="sorted-set"/>
+      <parameters>
+        <hudson.model.StringParameterValue>
+          <name>branch_name</name>
+          <description>github repo branch</description>
+          <value>sunbird-cbp</value>
+        </hudson.model.StringParameterValue>
+        <hudson.model.StringParameterValue>
+          <name>docker_server</name>
+          <description></description>
+          <value>eagle-docker.tarento.com</value>
+        </hudson.model.StringParameterValue>
+        <hudson.model.StringParameterValue>
+          <name>docker_repo</name>
+          <description></description>
+          <value>ui-cbp-igot</value>
+        </hudson.model.StringParameterValue>
+        <hudson.model.StringParameterValue>
+          <name>image_tag</name>
+          <description></description>
+          <value>sbbronze</value>
+        </hudson.model.StringParameterValue>
+        <hudson.model.StringParameterValue>
+          <name>docker_file_path</name>
+          <description></description>
+          <value>./apps/cbp-igot/</value>
+        </hudson.model.StringParameterValue>
+      </parameters>
+      <parameterDefinitionNames>
+        <string>branch_name</string>
+        <string>docker_server</string>
+        <string>docker_repo</string>
+        <string>image_tag</string>
+        <string>docker_file_path</string>
+      </parameterDefinitionNames>
+    </hudson.model.ParametersAction>
+    <hudson.model.CauseAction>
+      <causeBag class="linked-hash-map">
+        <entry>
+          <hudson.model.Cause_-UserIdCause>
+            <userId>admin</userId>
+          </hudson.model.Cause_-UserIdCause>
+          <int>1</int>
+        </entry>
+      </causeBag>
+    </hudson.model.CauseAction>
+    <hudson.plugins.git.util.BuildData plugin="git@4.1.1">
+      <buildsByBranchName>
+        <entry>
+          <string>origin/sunbird-cbp</string>
+          <hudson.plugins.git.util.Build>
+            <marked plugin="git-client@3.1.1">
+              <sha1>d868f54c98ab1fe1a97c9ee6cf555989ccdd61e3</sha1>
+              <branches class="list">
+                <hudson.plugins.git.Branch>
+                  <sha1 reference="../../../sha1"/>
+                  <name>origin/sunbird-cbp</name>
+                </hudson.plugins.git.Branch>
+              </branches>
+            </marked>
+            <revision reference="../marked"/>
+            <hudsonBuildNumber>1</hudsonBuildNumber>
+          </hudson.plugins.git.util.Build>
+        </entry>
+      </buildsByBranchName>
+      <lastBuild reference="../buildsByBranchName/entry/hudson.plugins.git.util.Build"/>
+      <remoteUrls>
+        <string>https://github.com/igot-gov/Eagle.git</string>
+      </remoteUrls>
+    </hudson.plugins.git.util.BuildData>
+    <hudson.plugins.git.GitTagAction plugin="git@4.1.1">
+      <tags class="hudson.util.CopyOnWriteMap$Tree">
+        <entry>
+          <string>origin/sunbird-cbp</string>
+          <list/>
+        </entry>
+      </tags>
+      <ws>/var/lib/jenkins/workspace/igot-dev/Frontend-build/sub-cbp-build@script</ws>
+    </hudson.plugins.git.GitTagAction>
+    <org.jenkinsci.plugins.workflow.steps.scm.MultiSCMRevisionState plugin="workflow-scm-step@2.10">
+      <revisionStates>
+        <entry>
+          <string>git https://github.com/igot-gov/Eagle.git</string>
+          <hudson.scm.SCMRevisionState_-None/>
+        </entry>
+      </revisionStates>
+    </org.jenkinsci.plugins.workflow.steps.scm.MultiSCMRevisionState>
+    <org.jenkinsci.plugins.workflow.libs.LibrariesAction plugin="workflow-cps-global-lib@2.15">
+      <libraries/>
+    </org.jenkinsci.plugins.workflow.libs.LibrariesAction>
+    <hudson.plugins.ansicolor.ColorizedAction plugin="ansicolor@0.6.2">
+      <colorMapName>xterm</colorMapName>
+    </hudson.plugins.ansicolor.ColorizedAction>
+    <com.sonyericsson.rebuild.RebuildAction plugin="rebuild@1.31"/>
+  </actions>
+  <queueId>15461</queueId>
+  <timestamp>1609942454775</timestamp>
+  <startTime>1609942454778</startTime>
+  <result>FAILURE</result>
+  <duration>703740</duration>
+  <charset>UTF-8</charset>
+  <keepLog>false</keepLog>
+  <execution class="org.jenkinsci.plugins.workflow.cps.CpsFlowExecution">
+    <result>FAILURE</result>
+    <script>node() {
+    try {
+        String ANSI_GREEN = &quot;\u001B[32m&quot;
+        String ANSI_NORMAL = &quot;\u001B[0m&quot;
+        String ANSI_BOLD = &quot;\u001B[1m&quot;
+        String ANSI_RED = &quot;\u001B[31m&quot;
+        String ANSI_YELLOW = &quot;\u001B[33m&quot;
+
+        ansiColor(&apos;xterm&apos;) {
+            stage(&apos;Checkout&apos;) {
+                cleanWs()
+                checkout scm
+                }
+        }
+
+           stage(&apos;docker-build&apos;) {
+                sh &apos;&apos;&apos;
+                   commit_id=$(git rev-parse --short HEAD)
+                   echo $commit_id&gt; commit_id.txt
+                   cd $docker_file_path
+                   pwd
+                   docker build -t $docker_server/$docker_repo:$commit_id .
+                   docker tag $docker_server/$docker_repo:$commit_id $docker_server/$docker_repo:$image_tag
+                   echo &quot;docker build is completed !!!! Starting docker push&quot;
+                   &apos;&apos;&apos;
+        }
+
+              stage(&apos;SonarQube analysis&apos;) {
+               
+             
+   			 // requires SonarQube Scanner 2.8+
+   				 def scannerHome = tool &apos;sonar_scanner&apos;;
+   				 withSonarQubeEnv(&apos;sonarqube&apos;) {
+    					   sh &apos;&apos;&apos;
+                   cd $docker_file_path &amp;&amp; pwd &amp;&amp; /var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonar_scanner/bin/sonar-scanner
+                 &apos;&apos;&apos;
+    			 }
+  	}
+
+stage(&quot;Quality Gate&quot;) {
+  
+    timeout(time: 1, unit: &apos;HOURS&apos;) {       // Just in case something goes wrong, pipeline will be killed after a timeout
+  		 def qg = waitForQualityGate() // Reuse taskId previously collected by withSonarQubeEnv
+   		 if (qg.status != &apos;OK&apos;) {
+    		error &quot;Pipeline aborted due to quality gate failure: ${qg.status}&quot;
+   					}
+  
+  }
+}
+ 
+        stage(&apos;docker-push&apos;) {
+
+               sh &apos;&apos;&apos;
+                  pwd
+                  commit_id=$(git rev-parse --short HEAD)
+                  docker push $docker_server/$docker_repo:$commit_id
+                  docker push $docker_server/$docker_repo:$image_tag
+                  docker rmi -f $docker_server/$docker_repo:$commit_id
+                  docker rmi -f $docker_server/$docker_repo:$image_tag
+                  &apos;&apos;&apos;
+
+}
+
+
+}
+    catch (err) {
+        currentBuild.result = &quot;FAILURE&quot;
+        throw err
+    }
+
+}
+
+</script>
+    <loadedScripts class="map"/>
+    <durabilityHint>MAX_SURVIVABILITY</durabilityHint>
+    <timings class="map">
+      <entry>
+        <string>flowNode</string>
+        <long>122090361</long>
+      </entry>
+      <entry>
+        <string>classLoad</string>
+        <long>111007406</long>
+      </entry>
+      <entry>
+        <string>run</string>
+        <long>248489249</long>
+      </entry>
+      <entry>
+        <string>parse</string>
+        <long>67009539</long>
+      </entry>
+      <entry>
+        <string>saveProgram</string>
+        <long>40474974</long>
+      </entry>
+    </timings>
+    <sandbox>true</sandbox>
+    <iota>22</iota>
+    <head>1:22</head>
+    <done>true</done>
+    <resumeBlocked>false</resumeBlocked>
+  </execution>
+  <completed>true</completed>
+  <checkouts class="hudson.util.PersistedList">
+    <org.jenkinsci.plugins.workflow.job.WorkflowRun_-SCMCheckout>
+      <scm class="hudson.plugins.git.GitSCM" plugin="git@4.1.1">
+        <configVersion>2</configVersion>
+        <userRemoteConfigs>
+          <hudson.plugins.git.UserRemoteConfig>
+            <url>https://github.com/igot-gov/Eagle.git</url>
+          </hudson.plugins.git.UserRemoteConfig>
+        </userRemoteConfigs>
+        <branches>
+          <hudson.plugins.git.BranchSpec>
+            <name>${branch_name}</name>
+          </hudson.plugins.git.BranchSpec>
+        </branches>
+        <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+        <submoduleCfg class="list"/>
+        <extensions/>
+      </scm>
+      <node></node>
+      <workspace>/var/lib/jenkins/workspace/igot-dev/Frontend-build/sub-cbp-build@script</workspace>
+      <pollingBaseline class="hudson.scm.SCMRevisionState$None" reference="../../../actions/org.jenkinsci.plugins.workflow.steps.scm.MultiSCMRevisionState/revisionStates/entry/hudson.scm.SCMRevisionState_-None"/>
+    </org.jenkinsci.plugins.workflow.job.WorkflowRun_-SCMCheckout>
+    <org.jenkinsci.plugins.workflow.job.WorkflowRun_-SCMCheckout>
+      <scm class="hudson.plugins.git.GitSCM" reference="../../org.jenkinsci.plugins.workflow.job.WorkflowRun_-SCMCheckout/scm"/>
+      <node></node>
+      <workspace>/var/lib/jenkins/workspace/igot-dev/Frontend-build/sub-cbp-build</workspace>
+      <pollingBaseline class="hudson.scm.SCMRevisionState$None" reference="../../../actions/org.jenkinsci.plugins.workflow.steps.scm.MultiSCMRevisionState/revisionStates/entry/hudson.scm.SCMRevisionState_-None"/>
+    </org.jenkinsci.plugins.workflow.job.WorkflowRun_-SCMCheckout>
+  </checkouts>
+</flow-build>

@@ -1,0 +1,20 @@
+commit e2a815e524cfb65e08025e4019e7bb59472de49b
+tree ace9e7880f79fa8d35a242771e74b12b0c071ab1
+parent dcf0926db10e2696a5560e263304fd5f19c35557
+author pilliarunkumar <arunkumar.pilli@tarento.com> 2021-01-04 17:08:29 +0530
+committer pilliarunkumar <arunkumar.pilli@tarento.com> 2021-01-04 17:08:29 +0530
+
+    implemented edit playlist
+
+
+:100644 100644 4e07c8335ac4950949bcec98ae8a7c4038a9a6ba 99df7758a0057bc52ed5b0d530970fcf864ae663 M	apps/igot-ui/library/ws-widget/collection/src/lib/_common/user-autocomplete/user-autocomplete.component.html
+:100644 100644 cbde0c1943e3fc99d1b3c5e978509d368a6ea431 e5c773c8340b77249330aa7555f223dfe7047db9 M	apps/igot-ui/library/ws-widget/collection/src/lib/_common/user-autocomplete/user-autocomplete.component.ts
+:100644 100644 1db3c55ae599fbf63b4ca088b970b89fe20d4d2c d98c18d7e3efdbe9519424a936113208d37b548a M	apps/igot-ui/library/ws-widget/collection/src/lib/_common/user-autocomplete/user-autocomplete.model.ts
+:100644 100644 fd21337cc2d38b6e7ca21ada5d63adaa0b7db4a5 2ff01616e01f5d90a385396e9436f2c15c2940ed M	apps/igot-ui/library/ws-widget/collection/src/lib/_common/user-autocomplete/user-autocomplete.service.ts
+:100644 100644 2b0d017ee57b089acbc1892a28b779ffbc81b55f 80f56d4b4d09bdc4c328c954e3a525474016a44d M	apps/igot-ui/library/ws-widget/collection/src/lib/btn-playlist/btn-playlist.model.ts
+:100644 100644 9436fb69535d1abb622298d3e03c13bd8731663d 064ed466a55c3369655ddff7efe694350ef8f342 M	apps/igot-ui/library/ws-widget/collection/src/lib/btn-playlist/btn-playlist.service.ts
+:100644 100644 0f663a4cd21023b93c304015d6590a020336d103 0039807bbcf154476d43e2695922295382482dda M	apps/igot-ui/project/ws/app/src/lib/routes/playlist/components/playlist-card/playlist-card.component.ts
+:100644 100644 9a2c58bcbcc9ec81559cadbe92ec894bca91332e 7208ebc9166d64424d04be68a1fbc2b8b45ed74b M	apps/igot-ui/project/ws/app/src/lib/routes/playlist/routes/playlist-create/playlist-create.component.ts
+:100644 100644 e0d17e6a435e59949993919f24b2de13f80c13c5 ac2c496c59e9ebb620b92adfd3b1e8659d7b5509 M	apps/igot-ui/project/ws/app/src/lib/routes/playlist/routes/playlist-edit/playlist-edit.component.ts
+:100644 100644 3b2c6ea6d6e0a664ad5d450141dcee49f9adc67e f3925f7d094e8d6d4198e0b071974c63571846d1 M	apps/ui-proxy/src/protectedApi_v8/user/playlist.ts
+:100644 100644 632ddb7611b2490e24e5879aa25eb496be41673b ac3e5c91867a2ac95dcb9cc9ddf5bcc1bee36384 M	apps/ui-proxy/src/service/playlist.ts

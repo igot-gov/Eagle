@@ -1,0 +1,20 @@
+commit 2fd7a5b0fb6c22855b708557944c2dbbb7bd5f8d
+tree 3db94c34678831618d55d860a996d065f82d45aa
+parent 11373e8593edbfa04eb8c1fdd611fa4171c42337
+author bandanasahu <bandanasahu8@gmail.com> 2020-12-09 18:12:05 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2020-12-09 18:12:05 +0530
+
+    fixed build error
+
+
+:100644 100644 6605a1e07b59d2d8f381922c0d9a0e7b693bc8d2 d4fcfae543f418c7272ef50e7751326251d555e7 M	apps/ui-proxy/src/protectedApi_v8/connections.ts
+commit 11373e8593edbfa04eb8c1fdd611fa4171c42337
+tree 82f4eaba783623965ae89a00e8612f07da656435
+parent 323e92402868c54988f91fb0dfe259fe6b9429a8
+author bandanasahu <bandanasahu8@gmail.com> 2020-12-09 17:52:57 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2020-12-09 17:52:57 +0530
+
+    modified userdepartment API for connection.ts
+
+
+:100644 100644 354f2304cbfe5c58eed9150403853d031f2799f4 6605a1e07b59d2d8f381922c0d9a0e7b693bc8d2 M	apps/ui-proxy/src/protectedApi_v8/connections.ts

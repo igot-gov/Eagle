@@ -1,0 +1,10 @@
+commit 323e92402868c54988f91fb0dfe259fe6b9429a8
+tree 981acacd3a36f56ae9132eedc08da9534046c7a7
+parent 452184fa40c3ffe537812c51f66d2528ceab6708
+author bandanasahu <bandanasahu8@gmail.com> 2020-12-09 15:07:59 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2020-12-09 15:07:59 +0530
+
+    modified the file path
+
+
+:100644 100644 681e09cd229cb75ebcc4efdccbf18f6f872f6ab3 c4604a91cd4bc86585f9c6be662ef0e3e7acc513 M	apps/ui-proxy/src/protectedApi_v8/user/profile-registry.ts

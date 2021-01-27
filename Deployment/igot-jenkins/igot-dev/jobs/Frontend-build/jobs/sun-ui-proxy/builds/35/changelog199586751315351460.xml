@@ -1,0 +1,10 @@
+commit 70613478b4f0560947fdc3e84d14a4b7ed9cf7c4
+tree 8af1c8cc4c4ad0ac26752cd7a50de324f0e8a146
+parent 73d8502e141cda690b2ea47474be6ae25a0f58d0
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-12-22 18:42:24 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-12-22 18:42:24 +0530
+
+    Task #52925: Removed the upload proxy url
+
+
+:100644 100644 e407e5c8b0a5e559b5b3e1f676c81ece8e42e0b6 caefd79784a2af79baf8373f6a39214fe13015b4 M	apps/ui-proxy/src/proxies_v8/proxies_v8.ts

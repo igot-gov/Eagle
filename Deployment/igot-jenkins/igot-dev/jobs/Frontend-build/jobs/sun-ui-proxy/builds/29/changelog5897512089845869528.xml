@@ -1,0 +1,11 @@
+commit f7c2a6e3970c1525ccfc6c0c5bc8fdaae420f15a
+tree 2b492fd74b25cff5fc1552b5fdff1ef5281e17f6
+parent fd748d62d15f771c173af796934fe69792cb3a4a
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-12-16 16:43:55 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-12-16 16:43:55 +0530
+
+    Task #52811: Fixed the content upload url endpoint
+
+
+:100644 100644 6ff41292ec7f58bd6f7020a7f9dacce022c9e8e8 2165c63c575bf703361c859c61e7c4847b863884 M	apps/ui-proxy/src/proxies_v8/proxies_v8.ts
+:100644 100644 ab2903a610c234c43da027c32647b8b8b670bf91 e7fbd5b53982abde7077abf3b647d9412d95ba69 M	apps/ui-proxy/src/utils/proxyCreator.ts

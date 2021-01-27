@@ -1,0 +1,12 @@
+commit b929733aee16e4864695511fec9205298f6bfcfc
+tree fdcc798910b3f80722a7e66a0d28aabe7e6ef0ce
+parent 610200b9a1b416f6da27d73a0b6a8649a94da29b
+author @somvit.bhowmik <somvit.bhowmik@tarento.com> 2021-01-20 11:19:19 +0530
+committer @somvit.bhowmik <somvit.bhowmik@tarento.com> 2021-01-20 11:19:19 +0530
+
+    Fix the file name split issue
+    
+    Fix the file name split issue
+
+
+:100644 100644 a09825df5ce6522869315e6e176a738103ecda41 bb7ab448c616f968373baed2dac88f961e8ba1cf M	src/main/java/org/sunbird/contentvalidation/service/impl/ContentValidationServiceImpl.java

@@ -1,0 +1,10 @@
+commit e092c69e82a46fc0286d5ccfc72719317ec9afa4
+tree d33ddbe71046e480b645fae4587b667a80537892
+parent 07f906c1c15e64487eaf16332a1af4035e150db9
+author bandanasahu <bandanasahu8@gmail.com> 2020-12-14 17:02:59 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2020-12-14 17:02:59 +0530
+
+    modified the req body name
+
+
+:100644 100644 13b86175866d901de7d18a22dda4137f1e19f81d 4b2981b4f62d22f398f40d1af92a5a9b359ffed0 M	apps/ui-proxy/src/protectedApi_v8/connections.ts

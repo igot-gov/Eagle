@@ -1,0 +1,16 @@
+commit 452184fa40c3ffe537812c51f66d2528ceab6708
+tree 58e4d730e527860e8497cd3009e2b6e0025acabc
+parent 39ce7f4ef11ae542398ef5a259209c8b00c5a191
+author bandanasahu <bandanasahu8@gmail.com> 2020-12-09 13:08:25 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2020-12-09 13:08:25 +0530
+
+    added apis for language,nationalit and profile meta
+
+
+:100644 100644 08e23dcd9b7e909fc9ba46751e1550fa311a5743 681e09cd229cb75ebcc4efdccbf18f6f872f6ab3 M	apps/ui-proxy/src/protectedApi_v8/user/profile-registry.ts
+:000000 100644 0000000000000000000000000000000000000000 a2db558edbfe8c0e5196e2dcb426c0e7840ab1e8 A	apps/ui-proxy/src/static-data/degrees.json
+:000000 100644 0000000000000000000000000000000000000000 4863e42221a0255944b13a11ecf7a0d7eb81f4f5 A	apps/ui-proxy/src/static-data/designation.json
+:000000 100644 0000000000000000000000000000000000000000 394f717aa5ad658de685781aa0c0711c27ff08a2 A	apps/ui-proxy/src/static-data/govtOrg.json
+:000000 100644 0000000000000000000000000000000000000000 46aafb1ff9809ab5d71ef89b8695bc6c0b4ffe7d A	apps/ui-proxy/src/static-data/industries.json
+:100644 100644 33f252aa00decc3ebe7afd3ab4a125b7e4dca3c8 35a0a739c3b855abdeb7f27031f9191c54ee22f1 M	apps/ui-proxy/src/static-data/languages.json
+:100644 100644 0c609104d7e5ebb298272861ad40ecddfe5a79b4 a13ef62be8b5e8b848e35182eafbd7552a4b530c M	apps/ui-proxy/src/static-data/nationality.json

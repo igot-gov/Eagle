@@ -1,0 +1,31 @@
+commit 7f0d4843c8bbfebfd893579effc1409a983a69a6
+tree 3c0c6e28f9a3e92b680d0c4b20f9e10376118091
+parent 8a6a265f5267e6633bb774fca9b3223c40559e5c
+author pilliarunkumar <arunkumar.pilli@tarento.com> 2020-12-14 16:34:50 +0530
+committer pilliarunkumar <arunkumar.pilli@tarento.com> 2020-12-14 16:34:50 +0530
+
+    proxy changes
+
+
+:100644 100644 53444bbd613f657ee3a6d55599025bcb1219716b 6ca26e40ff4c15e464db4b9049af460ed1ea70f6 M	apps/ui-proxy/src/proxies_v8/proxies_v8.ts
+:100644 100644 53dfbbbee6c28948c245f9d2558e75234f37a678 812e5971e8a63db3c80ade5038b9b0f9802752b7 M	apps/ui-proxy/src/utils/proxyCreator.ts
+commit 07f906c1c15e64487eaf16332a1af4035e150db9
+tree 43ec5b13b300f4a1576062c8a32aa30dfc3b32b9
+parent e46f0d156be02b4e9ff41bb7c01a7fcb698605b1
+author bandanasahu <bandanasahu8@gmail.com> 2020-12-12 12:14:59 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2020-12-12 12:14:59 +0530
+
+    modified configuration.model
+
+
+:100644 100644 3744649702cc6e6975b99849a49c3a9b6f61bf42 208e61e7a3259a4fd680807be50e40e542ed6820 M	apps/igot-ui/library/ws-widget/utils/src/lib/services/configurations.model.ts
+commit e46f0d156be02b4e9ff41bb7c01a7fcb698605b1
+tree 4c6268419905af1fe9ca51e0d6e09655726e9e50
+parent 99b1880f680f13dc96e2fdf8a28a70a7a37e000c
+author bandanasahu <bandanasahu8@gmail.com> 2020-12-11 20:35:09 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2020-12-11 20:35:09 +0530
+
+    modified profile-v2.model.ts
+
+
+:100644 100644 921c69bf04396e160adb54ef4b9226eccb0a42ae 8518b78fa56cd6911b3cd469109f2305376ef191 M	apps/igot-ui/project/ws/app/src/lib/routes/profile-v2/models/profile-v2.model.ts

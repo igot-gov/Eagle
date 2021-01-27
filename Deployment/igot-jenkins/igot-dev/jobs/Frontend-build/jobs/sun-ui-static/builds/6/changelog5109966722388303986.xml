@@ -1,0 +1,116 @@
+commit 02f89252df967e0f8b7e94b8bc881cd6dd015e4d
+tree d3d8a3e6ec6c3caba6c80aa12439d0a4a2977cc2
+parent 59a247255e28a271a7f641730222bb70b6c78e7b
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-12-18 12:55:49 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-12-18 12:55:49 +0530
+
+    Task #52925: Learner proxy route added
+
+
+:100644 100644 2165c63c575bf703361c859c61e7c4847b863884 09be14e2f193938d3d7b459c430007a8bd360a5f M	apps/ui-proxy/src/proxies_v8/proxies_v8.ts
+:100644 100644 8066f147aa40401e99905bed7c9f89dcc66ddcac f53c9b5fb330aceddc3e92fa4881fc31041de3d7 M	apps/ui-proxy/src/utils/proxyCreator.ts
+commit 59a247255e28a271a7f641730222bb70b6c78e7b
+tree 35d7cb6f263b2ec31a491c05e13e46bfb20e716b
+parent 73a27f524fafbd7850d5ce659bb600c917d6acd2
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-12-18 00:44:51 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-12-18 00:44:51 +0530
+
+    Task #52903: Added primaryCategory in the query params for all the /toc route invokes
+
+
+:100644 100644 1b18fc4736df3725408da4d18bf4047f0d316dc0 4108428a82a02edd1d759243a9fee8a32d41fee2 M	apps/igot-ui/library/ws-widget/collection/src/lib/_common/pipe-content-route/pipe-content-route.pipe.ts
+:100644 100644 3d5ea435994b914a652b26be3f16fd456761a81a e124f2ac3f9ffb800be1c987824a167bbb053f8e M	apps/igot-ui/library/ws-widget/collection/src/lib/_common/player-brief/player-brief.component.html
+:100644 100644 3fcd4778455e5639c64c3206d449c31dcc3d197a de729d4c53073e6c64bbba76d52d005ccb9a4efc M	apps/igot-ui/library/ws-widget/collection/src/lib/_models/player-media.model.ts
+:100644 100644 62fbb94f004a4c135eb3322711e84fd8f1c89f92 f30fa04ea980c57800c3bab698f57200268c6951 M	apps/igot-ui/library/ws-widget/collection/src/lib/_services/viewer-route-util.ts
+:100644 100644 ba043c8c8c75832a34a67c75f2e065211cfcd004 35ae7e7d9fb4ca3df0f6750f5ebf292b8bf28683 M	apps/igot-ui/library/ws-widget/collection/src/lib/_services/widget-content-share.service.ts
+:100644 100644 fc35d6890b96b59dcb649c5009f74e4b4a5eae10 4b864e9282fc57e016d3d8846d1ac11a6230a051 M	apps/igot-ui/library/ws-widget/collection/src/lib/_services/widget-content.model.ts
+:100644 100644 d6b4396b40445bf62d90dddeecbf0066228601af 586a4f052301f2ad0e139cc07ca42e0485f1d422 M	apps/igot-ui/library/ws-widget/collection/src/lib/_services/widget-content.service.ts
+:100644 100644 6fd85b8c7e0028b305b3f4a3b5db1740b0ec6d9c e2a38789e202c949d4b354b8b0f660d8ffd01d58 M	apps/igot-ui/library/ws-widget/collection/src/lib/btn-content-share/btn-content-share-dialog/btn-content-share-dialog.component.ts
+:100644 100644 c186a1eb0acddedddf2696fd12b778a5d3bbb6f1 db729ee7bfe02919c2ffa1dd4987fe221c90a7e4 M	apps/igot-ui/library/ws-widget/collection/src/lib/btn-page-back-nav/btn-page-back-nav.component.ts
+:100644 100644 07c04a9115665ff4c1156c23a1e36945f2f61428 402421c2b19304e0b1184ed136304f51931dcdf1 M	apps/igot-ui/library/ws-widget/collection/src/lib/content-strip-single/content-strip-single.component.ts
+:100644 100644 b48ca346560d6f96c9e7bb2b176ce5ac95a0a5cc 414cc0f1f88719b4be3f5c2a620109a384d677be M	apps/igot-ui/library/ws-widget/collection/src/lib/player-audio/player-audio.component.ts
+:100644 100644 6eb5080783a080a151518850640ea630410537f4 e7ecc513c5d7b320eb0d5d428752dd5eae8579d6 M	apps/igot-ui/library/ws-widget/collection/src/lib/player-video/player-video.component.ts
+:100644 100644 0c24ef3e253685ba0fb789a3b177cad7ef30eca6 6326e7dc8c2fe5ffde884d9d43b862ee3cc9abbe M	apps/igot-ui/project/ws/analytics/src/lib/routes/learning-analytics/components/content/content.component.ts
+:100644 100644 1cde08b88ced9be1514cf64966916c09e28e4316 b42cc566b7d4c8159a13107fcae5cb6512dd28af M	apps/igot-ui/project/ws/app/src/lib/routes/app-toc/components/app-toc-banner/app-toc-banner.component.ts
+:100644 100644 0ef485c10a725ca5398301a607a0305cdc5e6d21 ae86e25ced4a5424d7aab6e3748bd5f6c7ed536a M	apps/igot-ui/project/ws/app/src/lib/routes/app-toc/components/app-toc-content-card/app-toc-content-card.component.ts
+:100644 100644 d30eda465b6b340185ce77327dbac53306983006 6aab8fb9c99014dd2ac22ede68a36ea119bdf726 M	apps/igot-ui/project/ws/app/src/lib/routes/app-toc/components/app-toc-single-page/app-toc-single-page.component.html
+:100644 100644 bb90248396de0264c75d6f4e71e09fc223d65b2a bf53c2c218b57fb89f8e0ad4e528963a5a5a56b8 M	apps/igot-ui/project/ws/app/src/lib/routes/app-toc/components/app-toc-single-page/app-toc-single-page.component.ts
+:100644 100644 76ad05d57b3c6949ab25513e513617b48108972b 7326af927009af1db430d873c8a5887bbc4826f8 M	apps/igot-ui/project/ws/app/src/lib/routes/app-toc/resolvers/app-toc-resolver.service.ts
+:100644 100644 4bdab5baf385d7a2554ee2108c5dc43358e4173c cb176ca6c6dcc86559a953b36c1edf8ffbbbc062 M	apps/igot-ui/project/ws/app/src/lib/routes/person-profile/components/content-authored/content-authored.component.html
+:100644 100644 12c8dbd5e31e9d65ba4a20a8b0d5fefc97027ec7 956aa7ad0e20c7ae30af0d3d676ebfd2c64bc21a M	apps/igot-ui/project/ws/app/src/lib/routes/person-profile/components/content-reviewed/content-reviewed.component.html
+:100644 100644 50a4741bb98763f69e4ea967d56fdb0baba75c13 0efff7ef150cfceae2c34a718873c01310e56732 M	apps/igot-ui/project/ws/app/src/lib/routes/playlist/components/playlist-card/playlist-card.component.html
+:100644 100644 b1362e294fc5c49d14b67c62d2cb66578abb3ddc 2eb8293817128713efe2fa42916263a915e8c67a M	apps/igot-ui/project/ws/app/src/lib/routes/playlist/routes/playlist-detail/playlist-detail.component.html
+:100644 100644 31c537ebfecfa6490dc31046d8ed5bd9afc5bd3d 35df822bb9e1d13390232ee7954df9db1788448c M	apps/igot-ui/project/ws/app/src/lib/routes/playlist/routes/playlist-detail/playlist-detail.component.ts
+:100644 100644 ad389c88654c3467c35c8a537197d916cd790136 602a0e5e4f3ac95dccf17e4336760ebb57ab0f4d M	apps/igot-ui/project/ws/author/src/lib/interface/content.ts
+:100644 100644 e695747436b605a0a7ac09bacbb615c0d31a2043 cea62e674430dc53d3afa8c91006245901953eb8 M	apps/igot-ui/project/ws/author/src/lib/routing/modules/my-content/components/content-card-v2/content-card-v2.component.html
+:100644 100644 9e0894e477cb291c59c3b266d20c34ff5d1d2688 a7135b8d63e6ed5a2f3cb3d8872d1f2011bfc82c M	apps/igot-ui/project/ws/author/src/lib/services/notification.service.ts
+:100644 100644 2ecebf9881abe8fd2bdadfb31f7e8f36a6185e45 86ea99a4c9a60962b5720887858058d906897787 M	apps/igot-ui/project/ws/viewer/src/lib/components/viewer-toc/viewer-toc.component.ts
+:100644 100644 bbd533afeed40cec13e3c3db1959956ef527d2e0 4bfe8dab6b3941985a06d6d09a54e461cded6e29 M	apps/igot-ui/project/ws/viewer/src/lib/components/viewer-top-bar/viewer-top-bar.component.html
+:100644 100644 51a432875c19c1583e27ca627eb3b0aa1aa9264a 892c920495b0a8e9bc66c42ee06c8628dbdea9d6 M	apps/igot-ui/project/ws/viewer/src/lib/components/viewer-top-bar/viewer-top-bar.component.ts
+:100644 100644 a3f82ce849191c5229b514f43c7748a4078b87fd b56058a388ec3335ce53ad20feafa61bd3a52b06 M	apps/igot-ui/project/ws/viewer/src/lib/plugins/html/html.component.ts
+:100644 100644 6bf542cc6690f20949a69fb982512c3aa6676161 c455f411ae459b4979f50412a47267bf2027e132 M	apps/igot-ui/project/ws/viewer/src/lib/viewer-data.service.ts
+:100644 100644 6e1d4e08ad16a16cfbaedc3968f37a47342604ef 0879a03b93f32bb676b82a994400cd93a6838f16 M	apps/igot-ui/project/ws/viewer/src/lib/viewer.resolve.ts
+commit 73a27f524fafbd7850d5ce659bb600c917d6acd2
+tree 1ac814e0a12523ff3d24320cff2bc4f6fe19b968
+parent 71d735ff20972142cffc08eef6a94db5c44bdc2c
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-12-17 23:34:55 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-12-17 23:34:55 +0530
+
+    Task #52811: Added the package for sending accessTime in sunbird required format
+
+
+:100644 100644 060c439cdbdb5e4df2d576efb4a3d6ad58655565 a07304e440a1a3ab785dc1c9fb3f77d139062e67 M	apps/igot-ui/package.json
+:100644 100644 4d87305c951d9ea57c665d4d5f74137323a5098f 11027aa93a2073e4ace67f41d4d53f735f381a1f M	apps/igot-ui/project/ws/viewer/src/lib/viewer-util.service.ts
+:100644 100644 dc2b432f88a6fcac0ac66a93a3b02e601955f1c2 a9cb02308500381c9bdd3dc10ac88c4439e09a07 M	apps/igot-ui/yarn.lock
+commit 71d735ff20972142cffc08eef6a94db5c44bdc2c
+tree 48e72d12b2ac15cb79c667b22ecdcdadd52a9082
+parent f7c2a6e3970c1525ccfc6c0c5bc8fdaae420f15a
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-12-16 18:29:24 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-12-16 18:29:24 +0530
+
+    Task #52811: Changed proxy rule for /apis
+
+
+:100644 100644 e7fbd5b53982abde7077abf3b647d9412d95ba69 8066f147aa40401e99905bed7c9f89dcc66ddcac M	apps/ui-proxy/src/utils/proxyCreator.ts
+commit f7c2a6e3970c1525ccfc6c0c5bc8fdaae420f15a
+tree 2b492fd74b25cff5fc1552b5fdff1ef5281e17f6
+parent fd748d62d15f771c173af796934fe69792cb3a4a
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-12-16 16:43:55 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-12-16 16:43:55 +0530
+
+    Task #52811: Fixed the content upload url endpoint
+
+
+:100644 100644 6ff41292ec7f58bd6f7020a7f9dacce022c9e8e8 2165c63c575bf703361c859c61e7c4847b863884 M	apps/ui-proxy/src/proxies_v8/proxies_v8.ts
+:100644 100644 ab2903a610c234c43da027c32647b8b8b670bf91 e7fbd5b53982abde7077abf3b647d9412d95ba69 M	apps/ui-proxy/src/utils/proxyCreator.ts
+commit fd748d62d15f771c173af796934fe69792cb3a4a
+tree 641667ad29875c83ce012ae57eb0aad38fb3313f
+parent fe4e0a4add4cecc71baf6a6b71d2aa246e2783bf
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-12-16 16:17:06 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-12-16 16:17:06 +0530
+
+    Task #52811: Changed the endpoint for upload url
+
+
+:100644 100644 1b81f62820083489f53f13c08906f41e2a5f54eb 6ff41292ec7f58bd6f7020a7f9dacce022c9e8e8 M	apps/ui-proxy/src/proxies_v8/proxies_v8.ts
+commit fe4e0a4add4cecc71baf6a6b71d2aa246e2783bf
+tree 952878e5e501a34b0e73a0a3c1e61f74362ce20b
+parent c80f93ce08bb3dee971ca3c909a03fcfa7407cd8
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-12-16 15:42:52 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-12-16 15:42:52 +0530
+
+    Task #52811: Changed the endpoint for upload url
+
+
+:100644 100644 af7c2bd305ea7bc95394d818bed3e62f78aa39d3 1b81f62820083489f53f13c08906f41e2a5f54eb M	apps/ui-proxy/src/proxies_v8/proxies_v8.ts
+commit c80f93ce08bb3dee971ca3c909a03fcfa7407cd8
+tree 26f8c48b280b5892ec126e828ad038ce25f40134
+parent 24337b7c3880ad0c581bea487f16184b77507444
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-12-16 12:24:27 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-12-16 12:24:27 +0530
+
+    Task #52811: Added proxy rule for the upload url
+
+
+:100644 100644 625253e2b55dd8bc2b82f37b9099b2ce28ead4f6 af7c2bd305ea7bc95394d818bed3e62f78aa39d3 M	apps/ui-proxy/src/proxies_v8/proxies_v8.ts
+:100644 100644 ddb779cd6bc343c32aee425090653e7841d8991a ab2903a610c234c43da027c32647b8b8b670bf91 M	apps/ui-proxy/src/utils/proxyCreator.ts

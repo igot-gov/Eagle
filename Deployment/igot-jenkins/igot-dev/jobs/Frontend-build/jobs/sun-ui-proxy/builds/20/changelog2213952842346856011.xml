@@ -1,0 +1,27 @@
+commit 4eae96536d0d16a7213819d173cf3e2f0595d823
+tree 29d626fbeab430e381e23da3d8da51e1e101f549
+parent bb149cd432076d7738cdf6015a2f4a9fe1ac0667
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-12-11 20:05:18 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-12-11 20:05:18 +0530
+
+    Task #52811: Changed the /action route
+
+
+:100644 100644 2f2498441113c82351b602131e983b4b7bc0cd3f 2d2e1ea3dd838e5fa57bdcafe0040cd5a50ba6d9 M	apps/ui-proxy/src/proxies_v8/proxies_v8.ts
+commit 99b1880f680f13dc96e2fdf8a28a70a7a37e000c
+tree 7a64b4d428b0f222ef09ac3f3dc71bd6f4d0e834
+parent a7a403ae8d33a1bb8367beaaf818577716d93973
+author bandanasahu <bandanasahu8@gmail.com> 2020-12-11 19:53:30 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2020-12-11 19:53:30 +0530
+
+    integrated network and update user latest apis
+
+
+:100644 100644 4735a5bd7498480f9f6c1941cce256d7b99c618b af64176196593932620cadb8602ef255ab67b8d8 M	apps/client-assets/assets/configurations/localhost_3000/page/home.json
+:100644 100644 46299292076346ecaee03a5c0132b083b0d49bff dd69b4453ca02477c89ee336b68e5fadf0179d62 M	apps/igot-ui/project/ws/app/src/lib/routes/profile-v2/components/right-menu/right-menu.component.html
+:100644 100644 7517c611d67dd64cb8f32d3347fe4792312332f8 86ecbdd7577c22b17ca54b8aedc02c961610691f M	apps/igot-ui/project/ws/app/src/lib/routes/profile-v2/resolvers/badges-resolve.ts
+:100644 100644 e6a5be56afc04ba8a4d30d3b76ad3ca8debd8d0b 04130a21633dfd46bef409c6e9629554cbe9e958 M	apps/igot-ui/project/ws/app/src/lib/routes/profile-v2/resolvers/profile-v2-resolve.ts
+:100644 100644 60427e43bf316fda9814e7b45a70a75eaf236ba2 379ea62e4729d9368beb01a7efbe634ee97d07bf M	apps/igot-ui/project/ws/app/src/lib/routes/profile-v2/services/profile-v2.servive.ts
+:100644 100644 7348a750e813c2e9cd1c73178815740abd2c7a84 0248339e7099c05f4183c7aa21f4ee201d845368 M	apps/igot-ui/project/ws/app/src/lib/routes/user-profile/components/user-profile/user-profile.component.ts
+:100644 100644 c3d7f0966ca0da7897fc0035c5bd9d6e6591dd76 d8b77d63f645af9fae89e7f75e678b81530ce2db M	apps/igot-ui/project/ws/app/src/lib/routes/user-profile/services/user-profile.service.ts
+:100644 100644 b37a7c34f1d3b74bf0d79867191304515b64cbe5 5f59fbcc86df1032af66eec70443742376109e79 M	apps/igot-ui/src/app/services/init.service.ts

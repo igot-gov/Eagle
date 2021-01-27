@@ -1,0 +1,44 @@
+commit bae2c7bd98c987189660d8c381de7a8f4b2e2b65
+tree 8bbc9fd92248bf0fa630740437d295e0a7b4a664
+parent df180ce4328bcd1090204248a9565bad1d1daabf
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-12-07 13:48:17 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-12-07 13:48:17 +0530
+
+    Task #52555: Changed the endpoint
+
+
+:100644 100644 e08186185e7912622903cc02167a79c7991213cd b778c93ec8d08f390b49f4d81062e376db3fdc47 M	apps/ui-proxy/src/proxies_v8/proxies_v8.ts
+commit 61782a7f6b931e83565d64b9818df2fdc8525bc4
+tree 178b685ef86341a4befa4230ee1536480cba1eff
+parent c6976f839692ea6813d502c3a410f93ce1392ff7
+author abhishek-K-P <abishek.koira@tarento.com> 2020-12-07 12:17:20 +0530
+committer abhishek-K-P <abishek.koira@tarento.com> 2020-12-07 12:17:20 +0530
+
+    lable dynamic for search api
+
+
+:100644 100644 e6b793a96f8167782ec468cf98d47802f1dd2ddb b594587e1459f30f140f0bae27f1f8653d8644e1 M	apps/client-assets/assets/configurations/localhost_3000/feature/search.json
+:100644 100644 c5c1f754997c8f8af76d209a957ef59d040879a6 afa6805f5f02115a8426188e7fcba992369493a4 M	apps/igot-ui/project/ws/app/src/lib/routes/search/components/search-input-home/search-input-home.component.ts
+:100644 100644 ac203088a88bad3e754c576de4229c0da5a51032 b1b90f657f4ec5ec2b56e07c2d2a14a26cb11d17 M	apps/igot-ui/project/ws/app/src/lib/routes/search/routes/learning/learning.component.ts
+:100644 100644 63e5cc5ec5497cd173ca7d9af05aa68747c0b88e ff13a0496ab643cac070b936436cf07853ce77ac M	apps/igot-ui/project/ws/app/src/lib/routes/search/services/search-serv.service.ts
+commit a4cd3b9ccca5afaeb21fbbd054c848306db2e5f5
+tree bcb021daa02b3f08b438230eb68fbd4bc350b0c6
+parent 77d4ceaa7d8f5b3b49f1430aa2acb708781ccb46
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-12-04 20:43:36 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-12-04 20:43:36 +0530
+
+    Task #52787: Fixed the lint errors &  prod build issues
+
+
+:100644 100644 a4898a4e33c34d97a5d295cb4849bd4af1b874cc 43ac7707a719a56b5240b8a4eb9aae696a957416 M	apps/igot-ui/library/ws-widget/collection/src/lib/_common/content-picker-v2/content-picker-v2.component.html
+:100644 100644 5de149c1fe6101f5be0ab67c8f79cf4b27049d04 ed992bebee80ca2f3938760c81cea2890e631fba M	apps/igot-ui/library/ws-widget/collection/src/lib/_services/widget-content.service.ts
+:100644 100644 c78b0aae389ea6e2bb76dbf73e7a067c200a0a15 90dce19b291e90394493f544202105219a0b726e M	apps/igot-ui/library/ws-widget/collection/src/lib/_services/widget-search.model.ts
+:100644 100644 e07314092eee23e1dbb2276b9657bd8e04f3dcd1 96fa565a5ca3d70aa4a1703a4d61476a31367177 M	apps/igot-ui/library/ws-widget/collection/src/lib/content-strip-multiple/content-strip-multiple.component.ts
+:100644 100644 741c3059ec2426b268a03e238c3d106f94bfc5ac 159916af6174e69d9b02e43e07a8de104deebd14 M	apps/igot-ui/library/ws-widget/collection/src/lib/content-strip-new-multiple/content-strip-new-multiple.component.ts
+:100644 100644 13326386e056f85dd4c3da43ca31de8d2768a491 07c04a9115665ff4c1156c23a1e36945f2f61428 M	apps/igot-ui/library/ws-widget/collection/src/lib/content-strip-single/content-strip-single.component.ts
+:100644 100644 7e5d600e27a812d27e41f43c9952a4f271946c0f fa64b6e6c0eb5faaa5ad911adf8a462e334d38f1 M	apps/igot-ui/library/ws-widget/collection/src/lib/content-strip-vertical/content-strip-vertical.component.ts
+:100644 100644 d13a13f37838b55879ae2d630272d27148f7ee95 3b4d9e48573d3851252210b50eb59a9613097b76 M	apps/igot-ui/library/ws-widget/collection/src/lib/picker-content/picker-content.component.ts
+:100644 100644 af9f85524cd7224461f5194e60920d013967640f c547e81c6fcdbfab618d67ba36a739d2aba3272a M	apps/igot-ui/project/ws/app/src/lib/routes/infy/routes/training/services/training.service.ts
+:100644 100644 7019e0c62763f422f286d3ef331a3a5b6a1e1be5 38ee866f9ace55852a013b2af133bf5ab4b13679 M	apps/igot-ui/project/ws/app/src/lib/routes/search/apis/search-api.service.ts
+:100644 100644 7da87a6dcb732a14acf6d48abe28ccfb9018b9cc 63e5cc5ec5497cd173ca7d9af05aa68747c0b88e M	apps/igot-ui/project/ws/app/src/lib/routes/search/services/search-serv.service.ts
+:100644 100644 2c79b42c08d8beb09036cca36cb4f1b6cea69fb0 b37a7c34f1d3b74bf0d79867191304515b64cbe5 M	apps/igot-ui/src/app/services/init.service.ts

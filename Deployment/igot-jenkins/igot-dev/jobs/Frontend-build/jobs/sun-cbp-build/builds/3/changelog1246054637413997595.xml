@@ -1,0 +1,297 @@
+commit 13ff53e97cbf89d3267ebf81403ad723beed27e9
+tree f60afbb28609b35327da8bf4095aed57b8936c3a
+parent 7da222ce3f4f8bc093550eb2354c7b6de8520dc8
+author abhishek-K-P <abishek.koira@tarento.com> 2021-01-19 12:36:24 +0530
+committer abhishek-K-P <abishek.koira@tarento.com> 2021-01-19 12:36:24 +0530
+
+    checking parent node
+
+
+:100644 100644 65de63a54783f4bc5c57c8847c6cf6bdc23039c9 38c3459a725cd8e79d05b04d027c2980f533433c M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/auth-table-of-contents/auth-table-of-contents.component.ts
+commit 7da222ce3f4f8bc093550eb2354c7b6de8520dc8
+tree f1a65763838198ca0e47b803f48e7df0f2d81f88
+parent 8286922aea4f0350096bf41c65945ce08d7f8fd9
+author abhishek-K-P <abishek.koira@tarento.com> 2021-01-19 12:21:23 +0530
+committer abhishek-K-P <abishek.koira@tarento.com> 2021-01-19 12:21:23 +0530
+
+    update bug fix
+
+
+:100644 100644 d508a84ed7854441ce401026ca03e2de97439316 fcca3151526646d20993335c7193d1d45a3c427b M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.ts
+commit 8286922aea4f0350096bf41c65945ce08d7f8fd9
+tree b48588915b31179871fec7fcf37036d279d7c59f
+parent 0e6d8c28971291b5ecaa57c7e57ffc3ae02c6160
+author bandanasahu <bandanasahu8@gmail.com> 2021-01-18 19:36:05 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2021-01-18 19:36:05 +0530
+
+    fix: added removed code and fixed issue
+
+
+:100644 100644 53c5c74f203b9a2b836f7a4d336b2a95c5eaa490 887d3dd574ecde35459f56733f2a26a9077c3469 M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/home/components/my-content/components/my-content/my-content.component.ts
+commit 58d476bf1b087f3974cbebe4317c935244853c23
+tree 48d29505c123075ed000ae5e02104750d7758b31
+parent 4e8fd4a77438584b769583d4fd25184c8ffc61ed
+author bandanasahu <bandanasahu8@gmail.com> 2021-01-18 17:50:53 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2021-01-18 17:50:53 +0530
+
+    fix: fixed build errors
+
+
+:100644 100644 ae37c45bf8e921377dbdae79cda6d8ed0b17ece7 2b45020e433d81020ee63a527731da16ae0d0979 M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/shared/components/add-thumbnail/add-thumbnail.component.html
+:100644 100644 7b3b8938434f5cb64128dfdacd333a649b7ff8eb 5f0b978527f415661fdce43f5e591bf297564171 M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/shared/components/add-thumbnail/add-thumbnail.component.ts
+:100644 100644 9a702c20c290e628408a582e16ebed9e4869831c 67533355e93678f9951e531966d904709ff2e7bc M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.ts
+:100644 100644 6c113ab7944213aae5381b00b51a24af96427c59 2563c19c0903e4c4947880fc80a9ef69121e1c4f M	apps/ui-proxy/src/proxies_v8/proxies_v8.ts
+commit 5de93469d61d9336b5fa69e19ac178b1ffe71e21
+tree 9cf80aad5346b564a081e7c25c39cf698d0942b3
+parent 0059c7b356f1189152b9368e31325c0c135917da
+author bandanasahu <bandanasahu8@gmail.com> 2021-01-18 17:34:02 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2021-01-18 17:34:02 +0530
+
+    feat: added update
+
+
+:100644 100644 005aa08dcdbbea585f419ef5f8c5622aa69067da b83f6275cd737b2ac2002ec5f65fbc6a4c3cf557 M	apps/cbp-igot/project/ws/author/src/lib/interface/apiRequest.ts
+:100644 100644 3d02c5c686a3d7f4d24e39d9a21817507180c8a2 ae37c45bf8e921377dbdae79cda6d8ed0b17ece7 M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/shared/components/add-thumbnail/add-thumbnail.component.html
+:100644 100644 30c75379865ad74c87cbec18d5630fa7469b6db6 6581d305b7dfcf203b2623080b960bbb3b34e3d7 M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/shared/components/add-thumbnail/add-thumbnail.component.scss
+:100644 100644 c69c5eaa91703d5dd5740aed9df4c1ed2319bdd0 7b3b8938434f5cb64128dfdacd333a649b7ff8eb M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/shared/components/add-thumbnail/add-thumbnail.component.ts
+:100644 100644 0e8588b95dad275a0b95ca764b6c71b3fbc504d6 095e6a4ed7b67d94d25a45fcf4261bfeae99798c M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.ts
+:100644 100644 752d45bd9de95b23dab47643e55ebcf2643d62df 6c113ab7944213aae5381b00b51a24af96427c59 M	apps/ui-proxy/src/proxies_v8/proxies_v8.ts
+commit 691d344507a24aebd74ea447459282870a46bbc9
+tree c43d71261a52ec78560c5c0e8129feca4c871972
+parent cafc46a85b257e23af3bd604af923e724a805f51
+author abhishek-K-P <abishek.koira@tarento.com> 2021-01-18 17:21:59 +0530
+committer abhishek-K-P <abishek.koira@tarento.com> 2021-01-18 17:21:59 +0530
+
+    child hirechy done
+
+
+:100644 100644 12ded01faa61da8472bb272f812bc427db73ada2 43ac2cbe649f41877c8d756b38211cd32d72e5ac M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/auth-table-of-contents/auth-table-of-contents.component.ts
+:100644 100644 7a90aefa4e23edca052d93725e281a79f4b26472 d66e8777c6505271a0785d9e7292c648ca9a5726 M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/collection/collection.component.ts
+:100644 100644 f9ac5ef3aa552d524d4e01d7f86f584f2423ea00 22d7fca93b497d647e4bdccbc46be412c2b7d78f M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/routing/modules/curate/components/url-upload/url-upload.component.ts
+:000000 100644 0000000000000000000000000000000000000000 8c738cd3f9ccb375a50b8cbbfff62e9949060919 A	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/shared/components/confirm-modal/confirm-modal.component.html
+:000000 100644 0000000000000000000000000000000000000000 e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 A	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/shared/components/confirm-modal/confirm-modal.component.scss
+:000000 100644 0000000000000000000000000000000000000000 3bcef8d2c5b80cfe149ba28dbec0cd4d0e0f8f87 A	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/shared/components/confirm-modal/confirm-modal.component.spec.ts
+:000000 100644 0000000000000000000000000000000000000000 645ef46f7dac97d99114a3be9c987a223c174b0e A	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/shared/components/confirm-modal/confirm-modal.component.ts
+:100644 100644 0e8588b95dad275a0b95ca764b6c71b3fbc504d6 469c10f363b5924f5b87a0f4fa543ef885008215 M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.ts
+:100644 100644 b36716aba8a5809b8e5255f0abc19d7bd44756c3 553d08ff0dcdc9b5503cbfc64417afe037185875 M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/shared/shared.module.ts
+:100644 100644 65da8445d6f401260868dd7fa546dfb3d265b856 41853eeafd87fc992d28dadf2bacf57975bc5b14 M	apps/client-assets/assets/configurations/cbp_3000/feature/auth-meta-form.json
+commit 2a0ef7223124f544b8b38da5f3b20ce5059c58e0
+tree 217034f60aaa5a7481d0732aaba262db8e2dd305
+parent 62ace9c61b8b58f2e88b344ee2b4137a85807fa8
+author Amit Kumar <amit.sengar@tarento.com> 2021-01-18 17:11:22 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2021-01-18 17:11:22 +0530
+
+    lint fix
+
+
+:100644 100644 80b317ebc2537f240e088aad814a1300e6f88bf3 c9d69a6bc031c4e6086114c7b86b5d797488886e M	apps/cbp-igot/project/ws/app/src/lib/routes/app-toc/app-toc.module.ts
+:100644 100644 be36c5370253a76b775dbba320d68b2b4c952196 9d73adeb096312995147d70da63a8193f786fb63 M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/collection/collection.component.ts
+:100644 100644 9476fb59e0331c7eaebd482d7db9369a53a40c37 8aa2cd0e40e71c82fda7ebce7253350752d3cfae M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/shared/components/content-summary/content-summary.component.ts
+commit 62ace9c61b8b58f2e88b344ee2b4137a85807fa8
+tree ab355bb6d3dab77fbbaf169a8cdfe9f2daff3dc1
+parent b7c41e3192c1e975197c4ff7d90fa240c804453d
+author Amit Kumar <amit.sengar@tarento.com> 2021-01-18 17:03:25 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2021-01-18 17:03:25 +0530
+
+    toc image
+
+
+:100644 100644 1a0d4cb284b6f8f574c243fb96ddd8170755957b 80b317ebc2537f240e088aad814a1300e6f88bf3 M	apps/cbp-igot/project/ws/app/src/lib/routes/app-toc/app-toc.module.ts
+:100644 100644 56a2c743b161ddaf4f45e6bd19fe85b9a091282f f74aaae13bab0958463335482c28504210f6867b M	apps/cbp-igot/project/ws/app/src/lib/routes/app-toc/components/app-toc-content-card/app-toc-content-card.component.html
+:100644 100644 93e7463d4afb1ceaf93f55f93347d7fd066d08c1 9476fb59e0331c7eaebd482d7db9369a53a40c37 M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/shared/components/content-summary/content-summary.component.ts
+commit b7c41e3192c1e975197c4ff7d90fa240c804453d
+tree 4ca3efdd86b672ded307f58e7d58b92bc109a45f
+parent 1e7aba600541b83fc805a0622b7c43bcc560f18c
+author Amit Kumar <amit.sengar@tarento.com> 2021-01-18 15:38:38 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2021-01-18 15:38:38 +0530
+
+    grid and list icon update
+
+
+:100644 100644 4148d2d1145308eef02250fd136a3321fe38a13c a0ddf3f1312d180e8d108896f005794abcc0e57e M	apps/cbp-igot/library/ws-widget/collection/src/lib/card-table/card-table.component.html
+commit 1e7aba600541b83fc805a0622b7c43bcc560f18c
+tree 6e096647f80afabd0a4daa8dca7dbd9ab97b75db
+parent 46683c2fb6171e4d6e336b9d8388836203985056
+author Amit Kumar <amit.sengar@tarento.com> 2021-01-18 15:27:57 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2021-01-18 15:27:57 +0530
+
+    Proad Fix
+
+
+:100644 100644 9dc3a49663d0b91f7c151b9fa6523a4bad5ae9b4 571fb283bb993c0ddbcadc00fe70b50256bb5228 M	apps/cbp-igot/project/ws/app/src/lib/routes/app-toc/components/knowledge-artifact-details/knowledge-artifact-details.component.ts
+:100644 100644 8aa9dd58e01cf1e26953f8545820d2ca9ed7096e be36c5370253a76b775dbba320d68b2b4c952196 M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/collection/collection.component.ts
+:100644 100644 95e8325826abe6e181440c2ae06db0c3dcd82666 98ff1115d03ffbd987456c35c3555e680afeaa5b M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/shared/components/content-self-curation/content-self-curation.component.html
+:100644 100644 c3b186efeb8b569797f22809aba78ac5acea88af 0555dc25269f6d600a4ccc45c480400b9592fafd M	apps/cbp-igot/project/ws/viewer/src/lib/components/viewer-top-bar/viewer-top-bar.component.html
+commit 46683c2fb6171e4d6e336b9d8388836203985056
+tree 555548c65410ff0aba523793b9b6f599aadaa106
+parent 0728c4fcf3a2d447e1e12f0d94b4063179c85d96
+author Amit Kumar <amit.sengar@tarento.com> 2021-01-16 18:07:02 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2021-01-16 18:07:02 +0530
+
+    upload fix
+
+
+:100644 100644 6484947f9e4e286bcf46bbdf0582a1b29529025f 981b00d9b44ff93baf6cd31a7145ec766a97d559 M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/auth-table-of-contents/auth-table-of-contents.component.ts
+:100644 100644 decc5c4d137c67f5e24e54ed74d47670c5f0445c 689e5c35696a1b040291c79ae814e4e9380e6210 M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/collection/collection.component.html
+:100644 100644 455761192daee9c65d00eab677a02ee53d18fe22 9dee007508a472c2f7d06887aac05f1088183d69 M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/routing/modules/curate/components/url-upload/url-upload.component.ts
+commit 0728c4fcf3a2d447e1e12f0d94b4063179c85d96
+tree 7c2c84aa9559ed117a8ad5e8bd40c1ec07a05fb2
+parent 44a1a01ad652451aeaa2d8c07424b4db5857f791
+author Amit Kumar <amit.sengar@tarento.com> 2021-01-16 17:51:47 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2021-01-16 17:51:47 +0530
+
+    License is mandatory
+
+
+:100644 100644 2558914be3c37428409c349fdee260cdb43e6a5b decc5c4d137c67f5e24e54ed74d47670c5f0445c M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/collection/collection.component.html
+:100644 100644 821838cfac06ae6a5e864f7dcdb11a2812b91b7a 8aa9dd58e01cf1e26953f8545820d2ca9ed7096e M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/collection/collection.component.ts
+:100644 100644 b670d8ccff7b07ca1121d013dd5e7f462fbda944 66673db9aaf2c642e2729b2487073d2580440f44 M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/file-upload/file-upload.component.ts
+:100644 100644 e4bafe7aaab9f0e3b0729b731923bd2f27bcb4c0 9ca7aa5c05b3f3f1e8baadfcb7e862a79ac09bf5 M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.html
+:100644 100644 4cc8ddcb078ce050bf4ef4dd3b85439849af0b39 d82dbd685daccddfb19cda17b571f44c3d7231ca M	apps/client-assets/assets/configurations/cbp_3000/feature/auth-create.json
+commit 44a1a01ad652451aeaa2d8c07424b4db5857f791
+tree 9fd8bc2aeacc6a424d566f85f5f350a2150deb72
+parent ae0199b2f77f89189c33193d4271d393ce9966a6
+author Amit Kumar <amit.sengar@tarento.com> 2021-01-16 13:07:59 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2021-01-16 13:07:59 +0530
+
+    my content rev pub ~
+
+
+:100644 100644 a85c7a6f0ba5f674b86afe7a95af32aaa73fdf0f 1afa90da6240d79fd22353a7841f25fd71aafd53 M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/home/components/my-content/components/my-content/my-content.component.html
+:100644 100644 291cb34659c96c31810359b5ab9294166b38587d 2e494c3287f6484beafa464349b8acc2c6cfe978 M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/home/components/my-content/components/my-content/my-content.component.ts
+:100644 100644 e09690246bd86837b374b785583fd63d0b6bd337 ccce6ae3d87aa287c4165a82447a70f374bc1086 M	apps/cbp-igot/src/environments/environment.prod.ts
+:100644 100644 60a65716d229e9d68788efb7e7d7b4edd201f89c f67ae10e32867c709ca0651f88fc2e4250bb9e94 M	apps/client-assets/assets/configurations/cbp_3000/feature/auth-config.json
+:100644 100644 fc9fcaf9001cd8866ee75b3637e430dc273ee3db 1ad44fce2003125a2d7ba81400acce99f15fe14c M	apps/client-assets/assets/configurations/cbp_3000/feature/auth-meta-form.json
+commit ae0199b2f77f89189c33193d4271d393ce9966a6
+tree 4c8b3904e54ccf15cf0a0b719d5f1077cf1b1215
+parent a7ffce0763fed97e9a6f580b5b15c18299278dd9
+author Amit Kumar <amit.sengar@tarento.com> 2021-01-16 12:40:30 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2021-01-16 12:40:30 +0530
+
+    content overview json Left menue
+
+
+:100644 100644 74e5edad11e355c6666ad70246ad850b072b5628 35b718447766394636b7b18acecd75297c449aaf M	apps/client-assets/assets/configurations/cbp_3000/feature/content-detail.json
+commit a7ffce0763fed97e9a6f580b5b15c18299278dd9
+tree aaa3c41453cebeb92fb4a38957e452fe54cf417e
+parent 07fc9c0f71ceb7a75c4301cad1dae4fa243fc32b
+author Amit Kumar <amit.sengar@tarento.com> 2021-01-16 12:39:54 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2021-01-16 12:39:54 +0530
+
+    audio play fix
+
+
+:100644 100644 a6c98d5455cc1620db785cea6da5a88c77b2b5dd 930c539d3e804f241779d3f92abcb279914a9c35 M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/routing/modules/web-page/components/web-module-editor/add-web-pages/add-web-pages.component.ts
+:100644 100644 b24fc606a2658149a1dcb900cee6c97d9e48724c 4bd8a88871a50b62fe16a59f09dda7f724ea0a8e M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/shared/components/auth-picker/auth-picker.component.html
+:100644 100644 ff31110e82bfc8a35b0344bcbfe00e818ec0eb8e 23f677fc08dce85280751de6c4fe171a0dbb696a M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/home/components/my-content/components/all-content/all-content.component.ts
+:100644 100644 602dfea86c02b95711072d6529514f9f5b41f4f0 291cb34659c96c31810359b5ab9294166b38587d M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/home/components/my-content/components/my-content/my-content.component.ts
+commit 07fc9c0f71ceb7a75c4301cad1dae4fa243fc32b
+tree ee26858f98eea6b3c18fc24aeb3c693b77a238a0
+parent d11c1df8b23f02ca5a68a7a565c68162e42bc0bf
+author Amit Kumar <amit.sengar@tarento.com> 2021-01-15 22:58:24 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2021-01-15 22:58:24 +0530
+
+    curation popup
+
+
+:100644 100644 f0510a0523d5b8c9dfc29ed5d1f187f473ea4406 0a5bde7de2e1fd8afbf2c14773cf0be4c2e91493 M	apps/cbp-igot/library/ws-widget/collection/src/lib/_common/user-content-rating/user-content-rating.component.ts
+:100644 100644 2d52a337ef49a54b42abc81d0f0d110a297c682c 45e8a83352315a5bd43210d22f9bb05e4ae1946c M	apps/cbp-igot/library/ws-widget/collection/src/lib/_models/contentRating.model.ts
+:100644 100644 04a5e7639e4ac0d790f82358df76e30422f3c4d8 6a6cdab9c0d08cda8e24778a2573e78157acb09f M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/routing/modules/quiz/components/quiz/quiz-questions/quiz-questions.component.ts
+:100644 100644 00de6adcbf3e401a5fcd33996c56f66e84e0b675 a6c98d5455cc1620db785cea6da5a88c77b2b5dd M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/routing/modules/web-page/components/web-module-editor/add-web-pages/add-web-pages.component.ts
+:100644 100644 334d40d07ea61d020fd8e5ebcad710303f9c8913 58e2d18e9ddacb6d4b09e124ce2c0b165ef53c1a M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/shared/components/content-quality/content-quality.component.ts
+:000000 100644 0000000000000000000000000000000000000000 c79ba0d31ae612bcc2ebe409a5297eed631bfbee A	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/shared/components/content-self-curation/curation-detail/curation-detail.component.html
+:000000 100644 0000000000000000000000000000000000000000 a29af505cf760c400e4cf7fc6d0548e62879533d A	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/shared/components/content-self-curation/curation-detail/curation-detail.component.scss
+:000000 100644 0000000000000000000000000000000000000000 8958144fe1ceafbde1b9e28a267bb63baf4821a8 A	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/shared/components/content-self-curation/curation-detail/curation-detail.component.spec.ts
+:000000 100644 0000000000000000000000000000000000000000 59758b5720bb2b12303ef2119d35a5b2e9de8f25 A	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/shared/components/content-self-curation/curation-detail/curation-detail.component.ts
+:100644 100644 0bd02d976bc781fbe5cfcaeede373f869d412973 c9eb4030eb76e8e09c9c778ea46eb8be3fe453f4 M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/shared/components/content-self-curation/curation-progress-card/curation-progress-card.component.html
+:100644 100644 f7d2a1748dc5022d622b9a4635c7b46e492217e5 cf29c1005ba675ac699ad2a47d7778ad8baa046b M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/shared/components/content-self-curation/curation-progress-card/curation-progress-card.component.ts
+:100644 100644 3b4db7c2dbf2fc88d89fd2a2e919f378d3adfdef 3044f3ea57bacf0e0f5f5066bef427d17c678637 M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/shared/shared.module.ts
+:100644 100644 697836ab41cda21d0ea460876279f3c17465d6f0 602dfea86c02b95711072d6529514f9f5b41f4f0 M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/home/components/my-content/components/my-content/my-content.component.ts
+:100644 100644 b2de417c705a95d3ec934ee0dc4b95459f2c3863 4cb064a8d8e2278f4b9414d13a8f899e53538222 M	apps/cbp-igot/project/ws/author/src/lib/ws-auth-root.module.ts
+:100644 100644 8785ed761872f141bb250becf1bc0ded6c1b8204 944772fbc3b7e9e13e09a6edeb4af8f96122938c M	apps/cbp-igot/src/styles/styles.scss
+commit d11c1df8b23f02ca5a68a7a565c68162e42bc0bf
+tree 58a6f418c256d50bbce8e952c6e8f9db6a1c64c5
+parent 2fd886969e80bf27e870b711d88791f908d4b417
+author Amit Kumar <amit.sengar@tarento.com> 2021-01-15 18:09:14 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2021-01-15 18:09:14 +0530
+
+    self curation and rating@detail page
+
+
+:100644 100644 243cc396e0936e046eb7c602230ff4709c7159e1 153dc549a3ec8e82f4b4ca647f23aab1f2394350 M	apps/cbp-igot/library/ws-widget/collection/src/lib/_common/user-content-detailed-rating/user-content-detailed-rating.component.html
+:100644 100644 0ee44f880e629d3cc111b0b895a38416c3fdf085 d4d127d2265dc3ead85084c0fd1882add0437f13 M	apps/cbp-igot/library/ws-widget/collection/src/lib/_common/user-content-rating/user-content-rating.component.html
+:100644 100644 3838be6ffac806ed794a81c9989aca571c3e8bd1 d73efd28ffd16f5ba95cdde0739ffd28f1641856 M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/routing/modules/web-page/components/web-module-editor/add-web-pages/add-web-pages.component.html
+:100644 100644 eca9d00d574e0698badabc2aa61b569e70033794 95e8325826abe6e181440c2ae06db0c3dcd82666 M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/shared/components/content-self-curation/content-self-curation.component.html
+:100644 100644 763021efa76b4001143a7a477415f3f988c681c9 308f5a8ee50ecf7338100486f265de34d96d4889 M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/shared/components/content-self-curation/content-self-curation.component.scss
+:100644 100644 4678e4d8926740d3eca4553bd0bc7dcdf80f6826 b9068bd7cb613fea628b25bfaba23e26362d8a81 M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/shared/components/content-self-curation/content-self-curation.component.ts
+:100644 100644 c415b94e925076879ab0414b5978f75d581ce35a 6191772a0870e9e218ae21b8f94cc766aac7648a M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/shared/components/content-summary/content-summary.component.html
+:100644 100644 c56445147221c3727e51bbe4830c1b3910546925 a14ceb30377100a47c188a91a096f8d822313d8e M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/home/components/content-detail/components/content-detail/content-detail.component.html
+commit 2fd886969e80bf27e870b711d88791f908d4b417
+tree cbf7f621b3b44291f33bf15f119afd43a91181ec
+parent 33db008520ea471ca65fe0b834a45619284830e7
+author Amit Kumar <amit.sengar@tarento.com> 2021-01-15 17:29:35 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2021-01-15 17:29:35 +0530
+
+    content rating, html, quiz updated: partial update
+
+
+:100644 100644 e55dee467c49719c9b1d0995f56afa4c3b7d40cf 243cc396e0936e046eb7c602230ff4709c7159e1 M	apps/cbp-igot/library/ws-widget/collection/src/lib/_common/user-content-detailed-rating/user-content-detailed-rating.component.html
+:100644 100644 973f9c16b2bf695467cf3f9ab7a42d09cc964933 d0a7ada26b4b739c02463fd18d483c2ea55590f0 M	apps/cbp-igot/library/ws-widget/collection/src/lib/_common/user-content-detailed-rating/user-content-detailed-rating.component.ts
+:100644 100644 615ddf32d6e58d789cfa28be4a58c006a9104a6b 0ee44f880e629d3cc111b0b895a38416c3fdf085 M	apps/cbp-igot/library/ws-widget/collection/src/lib/_common/user-content-rating/user-content-rating.component.html
+:100644 100644 ae973cff6d44e4e573b01125d3abed1d5b838e1d f0510a0523d5b8c9dfc29ed5d1f187f473ea4406 M	apps/cbp-igot/library/ws-widget/collection/src/lib/_common/user-content-rating/user-content-rating.component.ts
+:000000 100644 0000000000000000000000000000000000000000 2d52a337ef49a54b42abc81d0f0d110a297c682c A	apps/cbp-igot/library/ws-widget/collection/src/lib/_models/contentRating.model.ts
+:100644 100644 21bdd817597e1cbf98f091338d23810b37afd9a9 5b009a5ad74ad611643356441e4ad9c417eb335f M	apps/cbp-igot/library/ws-widget/collection/src/lib/_services/widget-content.service.ts
+:100644 100644 72717204d6c3d6d96a40a7b9af412f58d5069235 4148d2d1145308eef02250fd136a3321fe38a13c M	apps/cbp-igot/library/ws-widget/collection/src/lib/card-table/card-table.component.html
+:100644 100644 e407b5be9e36e78fe99d6616559b46ba68ca7b96 2558914be3c37428409c349fdee260cdb43e6a5b M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/collection/collection.component.html
+:100644 100644 15c77ca09a1df21ec87a4779a3bf0fe82a3c0fc0 04a5e7639e4ac0d790f82358df76e30422f3c4d8 M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/routing/modules/quiz/components/quiz/quiz-questions/quiz-questions.component.ts
+:100644 100644 061d28caa47709f81f669462b24431edce918d22 00de6adcbf3e401a5fcd33996c56f66e84e0b675 M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/routing/modules/web-page/components/web-module-editor/add-web-pages/add-web-pages.component.ts
+:000000 100644 0000000000000000000000000000000000000000 0206d3570a5dad8898fa8172e18fb962036d6139 A	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/routing/modules/web-page/services/resolver.service.ts
+:100644 100644 b7275a67528d00f9f0bb05a54f6da8d644033f62 2a18feece3bd5ca74115b2338ed5778c850ad76d M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/routing/modules/web-page/web-page.module.ts
+:100644 100644 fc8711c9dc3d397b29d2a40584a431b64f783fe8 d50f453c7f9d91b204d97968db73f313983ceac7 M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/shared/components/content-quality/content-quality.component.html
+:100644 100644 b576d4187da19cde531d68d30aba8cb6479e9e1a 334d40d07ea61d020fd8e5ebcad710303f9c8913 M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/shared/components/content-quality/content-quality.component.ts
+:100644 100644 93cb8d150c13ae28f1c364e189da9d772711b19c c56445147221c3727e51bbe4830c1b3910546925 M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/home/components/content-detail/components/content-detail/content-detail.component.html
+:100644 100644 1c85b09a4782cc6e22ff00d3ad88edceb04b3920 6b9a8d29ff5105c59fdc9044fc3abdca9d1b25a7 M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/home/components/content-detail/components/content-detail/content-detail.component.ts
+:100644 100644 4e31478d568f25a79e3da77a18f448a83bc5b535 b2de417c705a95d3ec934ee0dc4b95459f2c3863 M	apps/cbp-igot/project/ws/author/src/lib/ws-auth-root.module.ts
+commit 33db008520ea471ca65fe0b834a45619284830e7
+tree 783e74f9abb3f12f1c4136158c1f5e7595ca2ab9
+parent 9913a20c509027e1ef96be2242e64d6a96f46615
+author Amit Kumar <amit.sengar@tarento.com> 2021-01-14 00:27:09 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2021-01-14 00:27:09 +0530
+
+    bug fixes
+
+
+:100644 100644 e875e03ae0792fbda9382c35d18f384036563d90 72717204d6c3d6d96a40a7b9af412f58d5069235 M	apps/cbp-igot/library/ws-widget/collection/src/lib/card-table/card-table.component.html
+:100644 100644 7bf3134f1210e9e768f133aace445bdf7817ce2b 6484947f9e4e286bcf46bbdf0582a1b29529025f M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/auth-table-of-contents/auth-table-of-contents.component.ts
+:100644 100644 785596f3d90b3ae3cb040bd43bbb7c226bcc06fc b670d8ccff7b07ca1121d013dd5e7f462fbda944 M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/file-upload/file-upload.component.ts
+:100644 100644 5746887a3529a72f3d33a920f7dbe6740453137c b576d4187da19cde531d68d30aba8cb6479e9e1a M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/shared/components/content-quality/content-quality.component.ts
+:100644 100644 46be983d7fcfedf69f5ef7efb40ec834d2514f7d 5c0ff80453512d1c83a3ae6afeb88b5059617af8 M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.ts
+:100644 100644 a3a57bfbb8aafa3e847ced2c4bf0959033a7c076 6eb7c96e8e02935aecd8ccb5c3df03ba6210d106 M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/home/components/my-content/components/all-content/all-content.component.html
+:100644 100644 132ef08a4070d0b45cae00c5db6f10381cbff920 e87750fdbe07f5d6357c2a39656a03292915c42c M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/home/components/my-content/components/all-content/all-content.component.scss
+:100644 100644 e9517804571f12ad992775b5b2105156aaab08e3 a85c7a6f0ba5f674b86afe7a95af32aaa73fdf0f M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/home/components/my-content/components/my-content/my-content.component.html
+:100644 100644 132ef08a4070d0b45cae00c5db6f10381cbff920 e87750fdbe07f5d6357c2a39656a03292915c42c M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/home/components/my-content/components/my-content/my-content.component.scss
+:100644 100644 1641554648c8a98273ea596e313ee40b3673ce02 697836ab41cda21d0ea460876279f3c17465d6f0 M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/home/components/my-content/components/my-content/my-content.component.ts
+commit dc435af7d9ce1336678591093d926ac3088aaea3
+tree 758bd15feae4291630be94099c8a7918c93ae7f7
+parent 8069581e32e7aa338593f068d0ff7de2f0941117
+author bandanasahu <bandanasahu8@gmail.com> 2021-01-13 18:24:38 +0530
+committer bandanasahu <bandanasahu8@gmail.com> 2021-01-13 18:24:38 +0530
+
+    modified thumbnail ui
+
+
+:100644 100644 58842fbe5c255599d443fb3b578545cdc2e9f3c4 3d02c5c686a3d7f4d24e39d9a21817507180c8a2 M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/shared/components/add-thumbnail/add-thumbnail.component.html
+:100644 100644 fdaebfcf7c616a059147f8af8a8f9ba1dfc75f37 30c75379865ad74c87cbec18d5630fa7469b6db6 M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/shared/components/add-thumbnail/add-thumbnail.component.scss
+:100644 100644 db76233c3d71f2dd14873b51444b38a81afdfdd0 c69c5eaa91703d5dd5740aed9df4c1ed2319bdd0 M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/shared/components/add-thumbnail/add-thumbnail.component.ts
+commit cafc46a85b257e23af3bd604af923e724a805f51
+tree 5da389e34b56f68517c75ef3d6f732fb939ed3fa
+parent 8069581e32e7aa338593f068d0ff7de2f0941117
+author abhishek-K-P <abishek.koira@tarento.com> 2021-01-12 19:31:22 +0530
+committer abhishek-K-P <abishek.koira@tarento.com> 2021-01-12 19:31:22 +0530
+
+    child update in-progress
+
+
+:100644 100644 ab7106c8808b665b20f64d758ccb136509b8e2bf 12ded01faa61da8472bb272f812bc427db73ada2 M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/auth-table-of-contents/auth-table-of-contents.component.ts
+:100644 100644 b0d0028438092b7d6844b979e51abfc8d577c37d 7a90aefa4e23edca052d93725e281a79f4b26472 M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/collection/collection.component.ts
+:100644 100644 22d7fca93b497d647e4bdccbc46be412c2b7d78f f9ac5ef3aa552d524d4e01d7f86f584f2423ea00 M	apps/cbp-igot/project/ws/author/src/lib/routing/modules/editor/routing/modules/curate/components/url-upload/url-upload.component.ts

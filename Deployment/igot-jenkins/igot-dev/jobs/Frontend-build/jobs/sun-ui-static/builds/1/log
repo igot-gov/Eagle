@@ -1,0 +1,22 @@
+Started by user [8mha:////4IC/XGvaJgDWPDkzydBhNmQZQV0m+OlPLzVeSdGBpAbTAAAAlx+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzOEgZu/dLi1CL9xJTczDwAawhpaMAAAAA=[0midc-eagle
+Checking out git https://github.com/igot-gov/Eagle.git into /var/lib/jenkins/workspace/igot-dev/Frontend-build/sun-ui-static@script to read apps/fusion/Jenkinsfile
+No credentials specified
+Cloning the remote Git repository
+Cloning repository https://github.com/igot-gov/Eagle.git
+ > git init /var/lib/jenkins/workspace/igot-dev/Frontend-build/sun-ui-static@script # timeout=10
+Fetching upstream changes from https://github.com/igot-gov/Eagle.git
+ > git --version # timeout=10
+ > git fetch --tags --progress https://github.com/igot-gov/Eagle.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url https://github.com/igot-gov/Eagle.git # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url https://github.com/igot-gov/Eagle.git # timeout=10
+Fetching upstream changes from https://github.com/igot-gov/Eagle.git
+ > git fetch --tags --progress https://github.com/igot-gov/Eagle.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse origin/sunbird-ui-dev^{commit} # timeout=10
+Checking out Revision c6976f839692ea6813d502c3a410f93ce1392ff7 (origin/sunbird-ui-dev)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f c6976f839692ea6813d502c3a410f93ce1392ff7 # timeout=10
+Commit message: "Merge branch 'sunbird-ui-dev' of https://github.com/igot-gov/Eagle into sunbird-ui-dev"
+First time build. Skipping changelog.
+ERROR: /var/lib/jenkins/workspace/igot-dev/Frontend-build/sun-ui-static@script/apps/fusion/Jenkinsfile not found
+Finished: FAILURE

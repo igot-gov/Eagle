@@ -1,0 +1,13 @@
+commit 4743731a3d21d01b062d0e07fb0ebe66270dc143
+tree 85d5c7765dd0046940215bdd8df3c310660b41e1
+parent 3cd71cc3e892b89d9e50ddc41fe8044c305236ab
+author christopher.fernandes <christyabcd.05@gmail.com> 2021-01-22 17:03:56 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2021-01-22 17:03:56 +0530
+
+    Task #53404: Quml player version and data updated, with lint fixes
+
+
+:100644 100644 ef618275435221a62468b8a106878de8f121f561 4c73b6f458f13f53bf045111739c7e1c68158a9f M	apps/igot-ui/package.json
+:100644 100644 607ea24a772bd2af83ae1dc9a57aa4403f149b46 7e6f59d3f4758e3af525d3fe4a68e59a86b4f18f M	apps/igot-ui/project/ws/viewer/src/lib/routes/assessment/assessment.component.ts
+:100644 100644 b7bc709e2e51f947ca0c1765070b6c07b6345cfa ba59083f76e401800fcfea5a31af4eb6e7a04cbc M	apps/igot-ui/project/ws/viewer/src/lib/routes/assessment/assessment.module.ts
+:100644 100644 cd8f7f615a284339a0576dfe9751a6c9d7730726 d5437e9f0c7e83d73724955c82a557dc99a6d1fc M	apps/igot-ui/yarn.lock
