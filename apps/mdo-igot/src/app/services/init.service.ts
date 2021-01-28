@@ -21,6 +21,7 @@ import {
   UserPreferenceService,
 } from '@ws-widget/utils'
 import { environment } from '../../environments/environment'
+import { Omit } from 'lodash'
 
 interface IDetailsResponse {
   tncStatus: boolean
@@ -277,7 +278,8 @@ export class InitService {
     if (this.configSvc.userProfile && this.configSvc.userProfile.isManager) {
       this.configSvc.userRoles.add('is_manager')
     }
-    this.configSvc.hasAcceptedTnc = details.tncStatus
+    // this.configSvc.hasAcceptedTnc = details.tncStatus
+    this.configSvc.hasAcceptedTnc = true
     this.configSvc.profileDetailsStatus = details.profileDetailsStatus
     return details
   }
