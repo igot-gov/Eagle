@@ -49,7 +49,7 @@
         <ng-container *ngIf="joinedByMeEventsCount > 0">
             <ws-utils-horizontal-scroller [loadStatus]="'done'">
                 <ng-container *ngFor="let event of eventData['joinedByMe']">
-                    <ws-app-events-card [ngStyle]="{'width':'350' + 'px'}" class="w-fix mr-10" [data]="event"></ws-app-events-card>
+                    <ws-app-events-card [ngStyle]="{'width':'360' + 'px'}" class="w-fix mr-10" [data]="event"></ws-app-events-card>
                 </ng-container>
             </ws-utils-horizontal-scroller>
         </ng-container>

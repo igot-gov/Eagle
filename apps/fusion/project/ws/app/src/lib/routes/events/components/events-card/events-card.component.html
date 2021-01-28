@@ -48,14 +48,14 @@
         </div>
         <div class="flex flex-1" class="text-right mobile2" *ngIf="avatarArr.length > 0">
             <span class="noocoments ws-mat-default-text mat-subheading-2">
-                <div class="avatars" style="margin-left: 225px;">
+                <div class="avatars" style="display: inline-flex;">
                         <span class="avatar" *ngFor="let avatar of avatarArr">
                             <span class="headline avatar-img">
-                                {{ avatar.name }}
+                                {{ avatar.shortname }}
                             </span>
                         </span>&nbsp;&nbsp;&nbsp;&nbsp;
                     </div>
-                    <span class="split-count"> + {{ splitArr.length }}</span>
+                    <span class="split-count" *ngIf="splitUsersCount > 0"> + {{ splitUsersCount }}</span>
             </span>
         </div>
     </mat-card-footer>

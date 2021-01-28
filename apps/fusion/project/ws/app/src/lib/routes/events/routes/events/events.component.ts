@@ -211,6 +211,17 @@ export class EventsComponent implements OnInit {
                     }
                     this.eventData['todayEvents'].push(todayEventObj)
                 }
+
+                // Joined By Me
+                if (eventDataObj.participants.length > 0) {
+                    const myUserId = this.configSvc.userProfile && this.configSvc.userProfile.userId
+                    Object.keys(eventDataObj.participants).forEach((indexKey: any) => {
+                        if (eventDataObj.participants[indexKey].user_id === myUserId) {
+                           this.eventData['joinedByMe'].push(eventDataObj)
+                        }
+                    })
+                }
+                // All Events
                 this.eventData['allEvents'].push(eventDataObj)
                 this.allEventsCount = this.eventData['allEvents'].length
                 this.todayEventsCount = this.eventData['todayEvents'].length

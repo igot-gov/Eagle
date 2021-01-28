@@ -22,6 +22,7 @@ export class EventDetailComponent implements OnInit {
     presentersCount: any
     isToday: any
     status: any
+    participants: any = []
 
     constructor(
         public dialog: MatDialog,
@@ -79,6 +80,10 @@ export class EventDetailComponent implements OnInit {
     setEventData(responseObj: any) {
         if (responseObj.result !== undefined) {
             this.eventDataObj = responseObj.result[0]
+            const eventStartEndDateArr =
+            this.eventStartEndDateFormat(responseObj.result[0].expiryDate, responseObj.result[0].duration).split(' - ')
+            this.setParticipants(eventStartEndDateArr[0], eventStartEndDateArr[1], responseObj.result[0].identifier)
+            this.participantsCount = this.participants.length
             responseObj.result[0].name = responseObj.result[0].name.replace(/http?.*?(?= |$)/g, '')
             this.overviewData.push(responseObj.result[0])
             if (responseObj.result[0].creatorContacts !== undefined) {
@@ -102,11 +107,7 @@ export class EventDetailComponent implements OnInit {
                 })
             }
             this.presentersCount = this.presenters.length
-            this.participantsCount = this.participantsData.length
-            const eventDate = responseObj.result[0].allEventDate
-            this.isToday = moment(eventDate).isSame(moment(), 'day')
-            const eventStartEndDateArr =
-            this.eventStartEndDateFormat(responseObj.result[0].expiryDate, responseObj.result[0].duration).split(' - ')
+            this.isToday = moment(eventStartEndDateArr[0]).isSame(moment(), 'day')
             const now = new Date()
             const today = moment(now).format('YYYY-MM-DD hh:mm a')
             const isBetween = moment(today).isBetween(eventStartEndDateArr[0], eventStartEndDateArr[1])
@@ -114,6 +115,39 @@ export class EventDetailComponent implements OnInit {
                 this.status = 'between'
             }
         }
+    }
+
+    setParticipants(startDate: any, endDate: any, identifier: any) {
+        const isPast = this.compareDate(startDate, endDate)
+        const isBetween = moment(new Date()).isBetween(startDate, endDate)
+        if (isPast || isBetween) {
+
+            this.eventSrvc.getParticipants(identifier).subscribe((res: any) => {
+                if (res.length > 0) {
+
+                    Object.keys(res).forEach((index: any) => {
+                        const dataObj = res[index]
+                        const userObj = {
+                            first_name: dataObj.first_name,
+                            last_name: dataObj.last_name,
+                            email: dataObj.email,
+                        }
+                        this.participants.push(userObj)
+                    })
+                }
+            })
+        }
+    }
+
+    compareDate(startDate: any, endDate: any) {
+        const now = new Date()
+        const today = moment(now).format('YYYY-MM-DD hh:mm a')
+        const isBetween = moment(new Date()).isBetween(startDate, endDate)
+        const isAfter = moment(endDate).isAfter(today)
+        if (isAfter || isBetween) {
+            return false
+        }
+        return true
     }
 
     filter(key: string | 'timestamp' | 'best' | 'saved') {
