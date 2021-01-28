@@ -1,0 +1,27 @@
+server.port={{ application_port }}
+
+spring.data.cassandra.bodhi.contact-points={{ cassandra_host }}
+spring.data.cassandra.bodhi.port={{ cassandra_port }}
+spring.data.cassandra.bodhi.keyspace-name={{ keyspace_bodhi }}
+spring.data.cassandra.bodhi.username={{ cassandra_username }}
+spring.data.cassandra.bodhi.password={{ cassandra_password }}
+
+spring.data.cassandra.sunbird.contact-points={{ cassandra_host }}
+spring.data.cassandra.sunbird.port={{ cassandra_port }}
+spring.data.cassandra.sunbird.keyspace-name={{ keyspace_sunbird }}
+spring.data.cassandra.sunbird.username={{ cassandra_username }}
+spring.data.cassandra.sunbird.password={{ cassandra_password }}
+
+
+es.auth.enabled=false
+es.host={{ elasticsearch_host }}
+es.port={{ elasticsearch_http_port }}
+es.username={{ elasticsearch_username }}
+es.password={{ elasticsearch_password }}
+#es.index=mlsearch_*
+es.score.index=scorecard_index
+es.score.index.type=resources
+es.scoring.enabled=true
+
+scoring.template.id=temp-01
+

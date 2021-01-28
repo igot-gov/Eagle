@@ -190,6 +190,7 @@ tags_content_validation_service: "{{ master_tag }}"
 tags_social_share_service: "{{ master_tag }}"
 tags_sb_hub_graph_service: "{{ master_tag }}"
 tags_workflow_handler_service: "{{ master_tag }}"
+tags_scoring_engine_service: "{{ master_tag }}"
 
 # Service scale levels
 service_replicas_content_service: 1
@@ -234,6 +235,8 @@ service_replicas_content_validation_service: 1
 service_replicas_social_share_service: 1
 service_replicas_sb_hub_graph_service: 1
 service_replicas_workflow_handler_service: 1
+service_replicas_scoring_engine_service: 1
+
 
 # Memory reserves for each service
 service_mem_reserved_content_service: "{{ memory_m }}"
@@ -278,6 +281,7 @@ service_mem_reserved_content_validation_service: "{{ memory_s }}"
 service_mem_reserved_social_share_service: "{{ memory_s }}"
 service_mem_reserved_sb_hub_graph_service: "{{ memory_xs }}"
 service_mem_reserved_workflow_handler_service: "{{ memory_xs }}"
+service_mem_reserved_scoring_engine_service: "{{ memory_xs }}"
 
 # Memory limits
 service_mem_limit_content_service: "{{ memory_l }}"
@@ -322,6 +326,7 @@ service_mem_limit_content_validation_service: "{{ memory_m }}"
 service_mem_limit_social_share_service: "{{ memory_m }}"
 service_mem_limit_sb_hub_graph_service: "{{ memory_m }}"
 service_mem_limit_workflow_handler_service: "{{ memory_m }}"
+service_mem_limit_scoring_engine_service: "{{ memory_m }}"
 
 # Force reload for app variables
 force_reload_content_service: true
@@ -368,6 +373,7 @@ force_reload_content_validation_service: true
 force_reload_social_share_service: true
 force_reload_sb_hub_graph_service: true
 force_reload_workflow_handler_service: true
+force_reload_scoring_engine_service: true
 
 publish_ports: false
 

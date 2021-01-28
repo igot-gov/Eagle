@@ -50,8 +50,10 @@ service_content_validation_service: content_validation_service
 service_social_share: social-share
 service_sb_hub_graph_service: sb-hub-graph-service
 service_workflow_handler_service: workflow-handler-service
+service_scoring_engine_service: scoring-engine-service
 
 # Ports
+
 service_antivirus_port: 3310
 service_authtool_ui_port: 3006
 service_bulk_upload_port: 3009
@@ -104,6 +106,7 @@ service_content_validation_port: 6590
 service_social_share_port: 3009
 service_sb_hub_graph_port: 4013
 service_workflow_handler_port: 5099
+service_scoring_engine_port: 7014
 
 # Network alias names, so that one service can talk to another
 network_alias_content_service: private-content-service
@@ -159,6 +162,7 @@ network_alias_content_validation_service: content-validation-service
 network_alias_social_share_service: social_share
 network_alias_sb_hub_graph_service: hub-graph-service
 network_alias_workflow_handler_service: workflow-handler-service
+network_alias_scoring_engine_service: scoring-engine-service
 
 # Image names, this is used by the service alone, but since we want to have all the images in one place, we are oncfiguring the images here
 image_ui_static: ui-static
@@ -210,6 +214,7 @@ image_content_validation_service: content-validation-service
 image_social_share_service: social-share
 image_sb_hub_graph_service: sb-hub-graph-service
 image_workflow_handler_service: workflow-handler-service
+image_scoring_engine_service: scoring-engine-service
 
 health_end_point_sb_ext_service: "http://localhost:{{ service_sb_ext_port }}/v1/latest/terms/user"
 elasticsearch_hosts_list: "{{ elasticsearch_http_hosts_list | map('regex_replace','^(?P<host>.+):(?P<port>\\d+)$', '\\g<host>') | list | join (',') }}"

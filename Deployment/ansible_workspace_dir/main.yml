@@ -82,7 +82,20 @@
       tags: [deploy-content-validation-service]
     - role: deploy-social-share-service
       tags: [deploy-social-share-service]
-
+    - role: deploy-profanity-filter-service
+      tags: [deploy-profanity-filter-service]
+    - role: deploy-ui-cbp-igot
+      tags: [deploy-ui-cbp-igot]
+    - role: deploy-ui-mdo-igot
+      tags: [deploy-ui-mdo-igot]
+    - role: deploy-sb-hub-graph-service
+      tags: [deploy-sb-hub-graph-service]
+    - role: deploy-workflow-handler-service
+      tags: [deploy-workflow-handler-service]
+    - role: deploy-scoring-engine-service
+      tags: [deploy-scoring-engine-service]
+    - role: deploy-ui-spv-igot
+      tags: [deploy-ui-spv-igot]
  
   tasks:
     - name: Remove the env directory
