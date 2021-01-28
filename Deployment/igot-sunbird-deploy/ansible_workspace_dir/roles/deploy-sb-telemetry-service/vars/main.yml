@@ -1,0 +1,33 @@
+---
+# vars file for deploy-telemetry-service
+# For script
+template_compose_file_name: telemetry-sb-service.j2
+template_env_file_name: telemetry-sb-service-env.j2
+compose_file_name: "{{ service_sb_telemetry_service }}.yml"
+env_file_name: "{{ service_sb_telemetry_service }}.env"
+env_file_deployment_location: "{{ env_files_dir }}/{{ env_file_name }}"
+compose_file_deployment_location: "{{ compose_files_dir }}/{{ compose_file_name }}"
+user_friendly_name: Lex SB telemetry service
+
+# For service
+application_port: "{{ service_sb_telemetry_port }}"
+image_name: "{{ image_sb_telemetry_service }}"
+tag: "{{ tags_sb_telemetry_service }}"
+host_port: "{{ application_port }}"
+docker_port: "{{ application_port }}"
+replicas: "{{ service_replicas_sb_telemetry_service }}"
+reserved_memory: "{{ service_mem_reserved_sb_telemetry_service }}"
+limited_memory: "{{ service_mem_limit_sb_telemetry_service }}"
+health_check_endpoint: http://127.0.0.1:{{ docker_port }}
+network_alias_name: "{{ network_alias_sb_telemetry_service }}"
+docker_service_stack_name: telemetry
+docker_service_name: "{{ service_sb_telemetry_service }}"
+force_reload: "{{ force_reload_sb_telemetry_service }}"
+
+# For application
+
+telemetry_log_level: info
+telemetry_local_storage_enabled: "true"
+telemetry_proxy_enabled: "false"
+telemetry_local_storage_type: kafka
+telemetry_kafka_broker_list: "{{ kafka_servers_list }}"

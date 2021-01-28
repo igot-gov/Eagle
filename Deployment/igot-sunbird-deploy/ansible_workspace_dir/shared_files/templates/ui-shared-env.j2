@@ -1,0 +1,136 @@
+# Node settings
+NODE_TLS_REJECT_UNAUTHORIZED=0
+NODE_ENV=production
+
+# HOST config for keycloak protection
+HTTPS_HOST={{ https_host }}
+
+# App configurations
+APP_LOGS={{ app_logs_directory }}
+APP_CONFIGURATIONS={{ app_config_directory }}
+KEYCLOAK_REALM={{ keycloak_realm_name }}
+TIMEOUT={{ connection_timeout_ms }}
+
+# Content service
+CONTENT_API_BASE={{ content_api_base }}
+CONTENT_HIERARCHY={{ content_hierarchy_base }}
+
+# Sb-ext service
+SBEXT_API_BASE={{ sb_ext_api_base }}
+
+# frac-api service
+FRAC_API_BASE={{ frac_api_base }}
+
+#profanity_service_host
+PROFANITY_SERVICE_API_BASE={{ profanity_service_host }}
+
+# network_hub Service
+NETWORK_HUB_SERVICE_BACKEND={{ network_hub_service }}
+
+# Telemetry service
+TELEMETRY_API_BASE={{ telemetry_api_base }}
+
+CONTENT_VALIDATION_API_BASE={{ content_validation_api_base }}
+
+# dbms api service
+VIEWER_PLUGIN_RDBMS_API_BASE={{ dbms_api_base }}
+
+# Web host service
+WEB_HOST_PROXY={{ web_hosted_api_base }}
+NAVIGATOR_JSON_HOST={{ navigator_json_api_host }}
+STATIC_ILP_PROXY={{ static_ilp_api_base }}
+
+# Social forum service
+NODE_API_BASE={{ social_forum_api_base }}
+
+# Core services endpoint
+SBEXT_API_BASE_2={{ lms_core_api_base }}
+client_id={{ lms_core_client_id }}
+client_secret={{ lms_core_client_secret }}
+
+SBEXT_API_BASE_4={{ lms_core_cassandra_api_base }}
+
+# Khub services
+KHUB_SEARCH_BASE={{ khub_service_api_base }}
+
+# Bulk upload API service
+NODE_API_BASE_2={{ keycloak_helper_service_api_base }}
+NODE_API_BASE_2_CLIENT_ID={{ keycloak_helper_service_client_id }}
+NODE_API_BASE_2_CLIENT_SECRET={{ keycloak_helper_service_client_secret }}
+
+# More like this service
+NODE_API_BASE_3={{ more_like_this_api_base }}
+
+## External services ##
+# IAP service
+IAP_PROFILE_API_BASE={{ iap_profile_api_base }}
+IAP_CODE_API_BASE={{ iap_code_api_base }}
+IAP_CLIENT_SECRET=qWEH1rbrFmDd3V6D
+
+# Learning analytics service
+LA_HOST_PROXY={{ var_ui_shared_la_host }}
+
+# ILP FP service
+ILP_FP_PROXY={{ var_ui_shared_ilp_fp_host }}
+
+#Java service for notification : the port is not sure as 5825, will same as whichever port will be used to host the notification service.
+JAVA_API_BASE=http://10.177.157.30:5825
+USER_PROFILE_API_BASE=http://up_eagle-user-profile:3008
+
+KEYCLOAK_ADMIN_PASSWORD={{ keycloak_password }}
+KEYCLOAK_ADMIN_USERNAME={{ keycloak_username }}
+KC_NEW_USER_DEFAULT_PWD=Us3r@12kC
+
+DISCUSSION_HUB_API_BASE={{ discussion_hub_api_base }}
+DISCUSSION_HUB_DEFAULT_PASSWORD={{ discussion_hub_default_password }}
+DISCUSSION_HUB_WRITE_API_KEY={{ discussion_hub_write_api_key }}
+DISCUSSION_HUB_WRITE_API_UID={{ discussion_hub_write_api_uid }}
+DISCUSSION_CATEGORY_LIST={{ discussion_category_list }}
+#DISCUSSION_CATEGORY_LIST=cid[]='5&cid[]=6&cid[]=8&cid[]=9&cid[]=10&cid[]=11&cid[]=12&cid[]=13'
+
+DEFAULT_ORG={{ default_org }}
+DEFAULT_ROOT_ORG={{ default_root_org }}
+
+## Database configurations ##
+# Elasticsearch configuration
+ES_BASE=http://{{ elasticsearch_host }}:{{ elasticsearch_http_port }}
+ES_USERNAME={{ elasticsearch_username }}
+ES_PASSWORD={{ elasticsearch_password }}
+
+# Authentication for Cassandra
+CASSANDRA_IP={{ cassandra_contact_points }}
+CASSANDRA_USERNAME={{ cassandra_username }}
+CASSANDRA_PASSWORD={{ cassandra_password }}
+CASSANDRA_AUTH_ENABLED={{ enable_password_for_cassandra }}
+TELEMETRY_SB_BASE={{ telemetry_sb_api_base }}
+
+SUNBIRD_BACKEND={{ authoring_tool_backend_base }}
+
+ROOT_ORG={{ var_common_root_org }}
+ORG={{ var_common_org }}
+PID_API_BASE={{ pid_api_base }}
+NOTIFICATIONS_API_BASE={{ notification_api_base }}
+
+# Lex Core split
+PREFERENCE_API_BASE={{ lms_core_cassandra_api_base }}
+HIERARCHY_API_BASE={{ lms_core_high_api_base }}
+CONTENT_SOURCE_API_BASE={{ lms_core_cassandra_api_base }}
+GOALS_API_BASE={{ lms_core_api_base }}
+USER_DETAILS_API_BASE={{ lms_core_cassandra_api_base }}
+BADGE_API_BASE={{ lms_core_api_base }}
+CONTINUE_LEARNING_API_BASE={{ lms_core_high_api_base }}
+PROGRESS_API_BASE={{ lms_core_critical_api_base }}
+FEEDBACK_API_BASE={{ lms_core_api_base }}
+TIMESPENT_API_BASE={{ lms_core_cassandra_api_base }}
+TNC_API_BASE={{ lms_core_cassandra_api_base }}
+ROLES_API_BASE={{ lms_core_cassandra_api_base }}
+INTEREST_API_BASE={{ lms_core_high_api_base }}
+PLAYLIST_API_BASE={{ lms_core_api_base }}
+LIKE_API_BASE={{ lms_core_cassandra_api_base }}
+RATING_API_BASE={{ lms_core_cassandra_api_base }}
+COHORTS_API_BASE={{ lms_core_api_base }}
+LEARNING_HISTORY_API_BASE={{ lms_core_high_api_base }}
+SUBMISSION_API_BASE={{ lms_core_high_api_base }}
+LEADERBOARD_API_BASE={{ lms_core_cassandra_api_base }}
+LEARNING_HUB_API_BASE={{ lms_core_lhub_api_base }}
+MULTI_TENANT_KEYCLOAK={{ vault_rootorg_to_authdomain_and_realm_mapping }}

@@ -1,0 +1,45 @@
+---
+# App confiurations
+https_host: https://{{ domain_name }}
+#https_host: https://eagle-keycloak.idc.tarento.com
+app_logs_directory: /logs
+app_config_directory: /app-config
+connection_timeout_ms: 210000
+
+multi_tenant_keycloak: "{{ vault_rootorg_to_authdomain_and_realm_mapping }}"
+
+# Other services being used inside the service endpoint and auth details
+content_api_base: "http://{{ network_alias_content_service }}:{{ service_content_service_port }}"
+sb_ext_api_base: "http://{{ network_alias_sb_ext_service }}:{{ service_sb_ext_port }}"
+telemetry_api_base: "http://{{ network_alias_telemetry_service }}:{{ service_telemetry_port }}"
+web_hosted_api_base: "http://{{ network_alias_static_host }}:3007"
+navigator_json_api_host: "http://{{ network_alias_static_host }}:3007/web-hosted/navigator/json"
+static_ilp_api_base: "http://{{ network_alias_static_host }}:3005"
+social_forum_api_base: "http://{{ network_alias_social_forum_service }}:{{ service_social_forum_port }}"
+lms_core_api_base: "http://{{ network_alias_lex_core_service }}:{{ service_lex_core_port }}"
+lms_core_client_id: "{{ lex_microsoft_client_id }}"
+lms_core_client_secret: "{{ lex_microsoft_client_secret }}"
+khub_service_api_base: "http://{{ network_alias_khub_migration_service }}:{{ service_khub_migration_port }}"
+keycloak_helper_service_api_base: "http://{{ network_alias_bulk_upload_service }}:{{ service_bulk_upload_port }}"
+keycloak_helper_service_client_id: admin
+keycloak_helper_service_client_secret: MdiDn@342$
+more_like_this_api_base: "http://{{ network_alias_more_like_this_service }}:{{ service_more_like_this_port }}"
+iap_profile_api_base: https://{{ var_common_iap_base }}
+iap_code_api_base: https://{{ var_common_iap_base }}
+dbms_api_base: "http://{{network_alias_dbms_api_service}}:{{service_dbms_api_port}}/"
+cassandra_contact_points: "{{ cassandra_host }}:{{ cassandra_port }}"
+telemetry_sb_api_base: "http://{{ network_alias_sb_telemetry_service }}:{{ service_sb_telemetry_port }}"
+
+content_validation_api_base: "http://{{ network_alias_content_validation_service }}:{{ service_content_validation_port }}"
+
+authoring_tool_backend_base: "http://{{ network_alias_sb_ext_authoring_service }}:{{ service_sb_ext_auth_tool_port }}"
+
+pid_api_base: "http://{{ network_alias_pid_service }}:{{ service_pid_service_port }}"
+notification_api_base: "http://{{ network_alias_notification_service }}:{{ service_notification_service_port }}"
+content_hierarchy_base: "http://{{ network_alias_lex_hierarchy_service }}:{{ service_lex_hierarchy_service_port }}/hierarchy"
+lms_core_critical_api_base: "http://{{ network_alias_lex_core_critical_service }}:{{ service_lex_core_critical_port }}"
+lms_core_high_api_base: "http://{{ network_alias_lex_core_high_service }}:{{ service_lex_core_high_port }}"
+lms_core_lhub_api_base: "http://{{ network_alias_lex_core_lhub_service }}:{{ service_lex_core_lhub_port }}"
+lms_core_cassandra_api_base: "http://{{ network_alias_lex_core_cassandra_service }}:{{ service_lex_core_cassandra_port }}"
+#network_hub_service: "http://{{ service_sb_hub_service }}:{{ service_sb_hub_port }}"
+network_hub_service: "http://{{ network_alias_sb_hub_graph_service }}:{{ service_sb_hub_graph_port }}"

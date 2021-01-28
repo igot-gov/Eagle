@@ -1,0 +1,4 @@
+---
+# tasks file for deploy-web-assets
+- import_tasks: copy-files.yml
+- import_tasks: change-folder-permissions.yml

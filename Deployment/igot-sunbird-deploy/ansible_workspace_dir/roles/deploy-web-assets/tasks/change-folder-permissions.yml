@@ -1,0 +1,8 @@
+---
+  - name: "Change the file permissions for web-client directory"
+    file:
+      path: "{{ destination_folder }}"
+      mode: 0755
+      recurse: yes
+      owner: "content_user"
+      group: "content_user"

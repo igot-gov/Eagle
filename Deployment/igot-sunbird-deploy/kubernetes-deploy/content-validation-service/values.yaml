@@ -1,0 +1,30 @@
+### Default variable file for lms-service ###
+
+namespace: dev
+imagepullsecrets: devregistrysecret
+dockerhub: eagle-docker.tarento.com
+
+
+env:
+  javaoptions: -Xmx600m
+
+replicaCount: 1
+repository: content-validation-service
+image_tag: b929733
+resources:
+  requests:
+    cpu: 100m
+    memory: 100Mi
+  limits:
+    cpu: 1
+    memory: 1024Mi
+network:
+  port: 6590
+  targetport: 6590
+strategy:
+  type: RollingUpdate
+  maxsurge: 25%
+  maxunavailable: 25%
+
+
+

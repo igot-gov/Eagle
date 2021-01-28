@@ -1,0 +1,52 @@
+---
+# vars file for deploy-authtool-ui
+
+# For script
+template_compose_file_name: authtool-ui-service.j2
+template_env_file_name: authtool-ui-env.j2
+compose_file_name: "{{ service_authtool_ui_service }}.yml"
+env_file_name: "{{ service_authtool_ui_service }}.env"
+env_file_deployment_location: "{{ env_files_dir }}/{{ env_file_name }}"
+compose_file_deployment_location: "{{ compose_files_dir }}/{{ compose_file_name }}"
+user_friendly_name: Lex authtool UI service
+
+# For service
+image_name: "{{ image_authtool_ui_service }}"
+tag: "{{ tags_authtool_ui_service }}"
+application_port: "{{ service_authtool_ui_port }}"
+host_port: "{{ application_port }}"
+docker_port: "{{ application_port }}"
+replicas: "{{ service_replicas_authtool_ui_service }}"
+reserved_memory: "{{ service_mem_reserved_authtool_ui_service }}"
+limited_memory: "{{ service_mem_limit_authtool_ui_service }}"
+health_check_endpoint: http://127.0.0.1:{{ docker_port1 }}
+network_alias_name: "{{ network_alias_ui_authoring }}"
+docker_service_stack_name: ui
+docker_service_name: "{{ service_authtool_ui_service }}"
+force_reload: "{{ force_reload_authtool_ui_service }}"
+
+# For application
+keycloak_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjMmJiMGNlOWI0NGI0OGM4ODNmNDdlZjhjZDkyZjJlMyJ9.uLIH_V1_pSIW3LPZ1pEFmcRf_q5OIFR7uy1iiGFsOmY
+node_env: PRODUCTION
+node_tls_reject_unauthorized: 0
+realm: "{{ keycloak_realm_name }}"
+client: portal
+app_id: sunbird.portal
+iap_base_url: http://10.177.62.154:80/
+content_base: "http://{{ network_alias_content_service }}:{{ service_content_service_port }}/"
+webhosted_base: "http://{{ network_alias_static_host }}:3007/"
+iap_verify_base_pf: http://10.177.62.154:8040/
+iap_verify_base_ce: http://10.177.62.154:8040/ 
+iap_verify_base: http://10.177.62.182:5512/
+iap_client_secret: qWEH1rbrFmDd3V6D
+iap_client_id: LEX
+es_protocol: http
+sb_ext_base: "http://{{ network_alias_sb_ext_service }}:{{ service_sb_ext_port }}/"
+authtool_sb_ext_base: "http://{{ network_alias_sb_ext_authoring_service }}:{{ service_sb_ext_auth_tool_port }}/"
+km_project_base: "http://{{ network_alias_khub_migration_service }}:{{ service_khub_migration_port }}/"
+pid_api_base: "http://{{ network_alias_pid_service }}:{{ service_pid_service_port }}/"
+sb_ext_base_2: "http://{{ network_alias_lex_core_service }}:{{ service_lex_core_port}}/"
+
+# DB config
+cassandra_contact_points: "{{ cassandra_host }}:{{ cassandra_port }}"
+app_url: "https://{{ domain_name }}"

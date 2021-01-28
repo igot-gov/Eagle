@@ -1,0 +1,14 @@
+cassandra_host={{ cassandra_contact_points }}
+cassandra_keyspace={{ keyspace_bodhi }}
+cassandra_username={{ cassandra_username }}
+cassandra_password={{ cassandra_password }}
+realm_name={{ realm_name }}
+domain_name={{ auth_domain_name }}
+
+content_url=http://{{ network_alias_content_service }}:{{ service_content_service_port }}
+sb_ext_url=http://{{ network_alias_sb_ext_service }}:{{ service_sb_ext_port }}
+sb_ext_authtool_url=http://{{ network_alias_sb_ext_authoring_service }}:{{ service_sb_ext_auth_tool_port }}
+lex_core_url=http://{{ network_alias_lex_core_service }}:{{ service_lex_core_port }}
+port={{docker_port}}
+
+proxy_urls=content=http://{{ network_alias_content_service }}:{{ service_content_service_port }};sb-ext=http://{{ network_alias_sb_ext_service }}:{{ service_sb_ext_port }};sb-ext-authtool=http://{{ network_alias_sb_ext_authoring_service }}:{{ service_sb_ext_auth_tool_port }};lex-core=http://{{ network_alias_lex_core_service }}:{{ service_lex_core_port }};pid=http://{{ network_alias_pid_service }}:{{ service_pid_service_port }}

@@ -1,0 +1,7 @@
+---
+- name: Copy assets folder
+  synchronize:
+    src: "{{ source_folder }}"
+    dest: "{{ destination_folder }}"
+    rsync_opts:
+      - "--chmod=F777"

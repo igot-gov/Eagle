@@ -1,0 +1,12 @@
+[dev]
+#10.0.1.111
+
+#[all:vars]
+#ansible_connection=ssh
+#ansible_ssh_user=deployer
+#ansible_ssh_private_key_file=/var/lib/jenkins/secrets/deployer_ssh_key
+
+#localhost
+#[all:vars]
+localhost ansible_connection=local
+

@@ -1,0 +1,5 @@
+---
+- name: "Ensure if the host mount directory exists"
+  file:
+    path: "{{ host_mount_location }}"
+    state: directory

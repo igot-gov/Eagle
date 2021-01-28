@@ -1,0 +1,30 @@
+### Default variable file for lms-service ###
+
+namespace: dev
+imagepullsecrets: devregistrysecret
+dockerhub: eagle-docker.tarento.com
+
+
+env:
+  javaoptions: -Xmx600m
+
+replicaCount: 1
+repository: sb-hub-service
+image_tag: wn-silver
+resources:
+  requests:
+    cpu: 100m
+    memory: 100Mi
+  limits:
+    cpu: 1
+    memory: 1024Mi
+network:
+  port: 3013
+  targetport: 3013
+strategy:
+  type: RollingUpdate
+  maxsurge: 25%
+  maxunavailable: 25%
+
+
+

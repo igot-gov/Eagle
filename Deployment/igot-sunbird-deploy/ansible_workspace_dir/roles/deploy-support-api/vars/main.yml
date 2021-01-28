@@ -1,0 +1,31 @@
+---
+# vars file for deploy-content-service
+# For script
+template_compose_file_name: support-api.j2
+template_env_file_name: support-api-env.j2
+compose_file_name: "{{ service_support_api_service }}.yml"
+env_file_name: "{{ service_support_api_service }}.env"
+env_file_deployment_location: "{{ env_files_dir }}/{{ env_file_name }}"
+compose_file_deployment_location: "{{ compose_files_dir }}/{{ compose_file_name }}"
+user_friendly_name: Supoort API service
+
+# For service
+application_port: 80
+image_name: "{{ image_support_api_service }}"
+tag: "{{ tags_support_api_service }}"
+host_port: "{{ service_support_api_port }}"
+docker_port: "{{ application_port }}"
+replicas: "{{ service_replicas_support_api_service }}"
+reserved_memory: "{{ service_mem_reserved_support_api_service }}"
+limited_memory: "{{ service_mem_limit_support_api_service }}"
+health_check_endpoint: http://127.0.0.1:{{ docker_port }}
+network_alias_name: "{{ network_alias_support_api_service }}"
+
+docker_service_stack_name: support
+docker_service_name: "{{ service_support_api_service }}"
+force_reload: "{{ force_reload_support_service }}"
+
+# DB config
+cassandra_contact_points: "{{ cassandra_host }}:{{ cassandra_port }}"
+auth_domain_name: "https://{{ domain_name }}"
+realm_name: "{{ keycloak_realm_name }}"

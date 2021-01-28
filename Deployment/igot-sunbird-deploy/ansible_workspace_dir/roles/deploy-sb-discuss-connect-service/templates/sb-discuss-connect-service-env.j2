@@ -1,0 +1,37 @@
+server.port={{ application_port }}
+server.context-path=/notifyHandler
+server.servlet.context-path=/notifyHandler
+spring.kafka.bootstrap.servers={{ kafka_servers_list }}
+
+spring.data.mongodb.uri=mongodb://{{ mongodb_nodebb_user }}:{{ mongodb_nodebb_password | urlencode }}@{{ mongodb_host }}:{{ mongodb_port }}/{{ mongodb_nodebb_database }}
+spring.data.mongodb.database={{ mongodb_nodebb_database }}
+
+spring.kafka.consumer.value-deserializer=com.eagle.hubnotifier.consumer.HashMapDeserializer
+spring.kafka.consumer.key-deserializer=org.apache.kafka.common.serialization.StringDeserializer
+spring.kafka.consumer.group-id=notifyHandler-group
+spring.kafka.producer.key-serializer=org.apache.kafka.common.serialization.StringSerializer
+spring.kafka.producer.value-serializer=org.springframework.kafka.support.serializer.JsonSerializer
+spring.kafka.listener.missing-topics-fatal=false
+
+# KAFKA CONSUMER CONFIGURATIONS
+kafka.consumer.config.auto_commit=true
+kafka.consumer.config.auto_commit_interval=100
+kafka.consumer.config.session_timeout=15000
+kafka.consumer.config.group_id=pipeline-group
+kafka.consumer.config.auto_offset_reset=earliest
+
+
+#Topics
+kafka.topics.incoming.notify=notifyHookTopic
+
+notify.service.host=http://{{ service_notification_service }}:{{ service_notification_service_port }}/
+notify.service.path=v1/notification/event
+
+hub.service.host={{ nodebb_url }}
+hub.service.get.path=/api
+hub.service.getUser.path=/user/uid/
+hub.service.topic.path=/topic/{topicId}
+
+hub.notification.rootOrg={{ default_root_org }}
+discussion.create.targetUrl=https://{{ domain_name }}/app/discuss/home/
+telemetry.service.host=http://{{ network_alias_sb_telemetry_service }}:{{ service_sb_telemetry_port }}

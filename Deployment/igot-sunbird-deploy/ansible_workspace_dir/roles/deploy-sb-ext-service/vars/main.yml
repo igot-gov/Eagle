@@ -1,0 +1,48 @@
+---
+# vars file for deploy-sb-ext
+# For script
+release_name: "{{ network_alias_sb_ext_service }}"
+template_compose_file_name: sb-ext-service-compose-file.j2
+template_env_file_name: sb-ext-service-env.j2
+compose_file_name: "{{ service_sb_ext_service }}.yml"
+env_file_name: "{{ service_sb_ext_service }}.env"
+helm_env_file_location: "../kubernetes-deploy/templates"
+helm_env_file_name: "{{ helm_env_file_location }}/{{ service_sb_ext_service }}.env"
+chart_path: "../kubernetes-deploy/sb-ext-service"
+compose_file_deployment_location: "{{ compose_files_dir }}/{{ compose_file_name }}"
+env_file_deployment_location: "{{ env_files_dir }}/{{ env_file_name }}"
+user_friendly_name: Sb-ext service
+
+
+# For service
+application_port: "{{ service_sb_ext_port }}"
+image_name: "{{ image_sb_ext_service }}"
+tag: "{{ tags_sb_ext_service }}"
+host_port: "{{ application_port }}"
+docker_port: "{{ application_port }}"
+replicas: "{{ service_replicas_sb_ext_service }}"
+reserved_memory: "{{ service_mem_reserved_sb_ext_service }}"
+limited_memory: "{{ service_mem_limit_sb_ext_service }}"
+health_check_endpoint: http://127.0.0.1:{{ docker_port }}/actuator/health
+network_alias_name: "{{ network_alias_sb_ext_service }}"
+docker_service_stack_name: lms
+docker_service_name: "{{ service_sb_ext_service }}"
+force_reload: "{{ force_reload_sb_ext_service }}"
+host_logs_location: "{{ sb_ext_logs_path }}"
+docker_logs_location: /logs
+
+spring_datasource_jdbc_url: jdbc:postgresql://{{ postgresql_host }}:{{ postgresql_port }}/{{ postgresql_user_profile_database }}
+
+# For application
+spring_data_mongodb_uri: mongodb://{{ mongodb_user }}:{{ mongodb_password | urlencode }}@{{ mongodb_host }}:{{ mongodb_port }}/{{ mongodb_authentication_database }}
+enable_new_assessments: 1
+bodhi_ui_index: lexcontentindex
+bodhi_content_port: "{{ service_content_service_port }}"
+iap_certification_url: https://{{ var_common_iap_base }}/backend/Profile/CertificationResult
+com_infosys_root_org: "{{ var_common_root_org }}"
+com_infosys_org: "{{ var_common_org }}"
+com_infosys_neo4j_ip: http://10.177.157.22:7474/graphaware/
+com_infosys_enable_access_control: "{{ var_sb_ext_service_enable_access_control }}"
+app_name: "Lex"
+infosys_lex_core_ip: http://{{ network_alias_lex_core_service }}:{{ service_lex_core_port }}
+infosys_core_ip: http://{{ network_alias_lex_core_service }}:{{ service_lex_core_port }}

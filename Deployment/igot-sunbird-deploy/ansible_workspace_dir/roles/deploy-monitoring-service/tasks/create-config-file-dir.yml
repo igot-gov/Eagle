@@ -1,0 +1,5 @@
+---
+- name: Ensure config files directory exists
+  file:
+    path: "{{ config_files_dir }}"
+    state: directory

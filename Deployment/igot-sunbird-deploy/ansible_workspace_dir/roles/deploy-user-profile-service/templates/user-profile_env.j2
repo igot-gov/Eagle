@@ -1,0 +1,26 @@
+APP_CONFIGURATIONS=/app-config
+APP_LOGS=/logs
+CASSANDRA_AUTH_ENABLED=false
+CASSANDRA_IP={{ cassandra_host }}:{{ cassandra_port }}
+CASSANDRA_PASSWORD= {{ cassandra_password }}
+CASSANDRA_USERNAME= {{ cassandra_username }}
+HTTPS_HOST={{ HTTPS_HOST }}
+PORTAL_PORT={{ PORTAL_PORT }}
+TIMEOUT=210000
+OPEN_SABER_USER_REGISTRY_BASE=http://{{ network_alias_opensaber }}:{{ service_opensaber_port }}
+
+PGDATABASE={{ postgresql_user_profile_database }}
+PGHOST={{ postgresql_host }}
+PGPASSWORD={{ postgresql_user_profile_password }}
+PGPORT={{ postgresql_port }}
+PGUSER={{ postgresql_user_profile_username }}
+cache_location=/eagleUser_cache
+http_base={{ HTTPS_HOST }}/{{  docker_service_stack_name  }}_{{ docker_service_name }}
+keycloak_api_base={{ keycloak_api_base }}:{{ keycloak_api_base_port }}
+keycloak_http_base=http://{{ keycloak_host }}:{{keycloak_port }}/auth
+keycloak_password={{ keycloak_password }}
+keycloak_username={{ keycloak_username }}
+
+smtp_host={{ smtp_host }}
+smtp_port={{ smtp_port }}
+DEFAULT_DEPARTMENT_NAME={{ default_department_name }}

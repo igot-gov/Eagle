@@ -1,0 +1,12 @@
+---
+# tasks file for deploy-monitoring-service
+- import_tasks: create-and-save-env-file.yml
+- import_tasks: create-compose-dir.yml
+- import_tasks: create-config-file-dir.yml
+- import_tasks: copy-config-file.yml
+- import_tasks: create-docker-config.yml
+- import_tasks: create-compose-file.yml
+- import_tasks: remove-existing-service.yml
+- import_tasks: deploy-service.yml
+- import_tasks: remove-compose-file.yml
+- import_tasks: remove-env-file.yml

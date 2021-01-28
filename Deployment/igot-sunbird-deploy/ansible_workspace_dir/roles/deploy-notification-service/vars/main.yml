@@ -1,0 +1,39 @@
+---
+# vars file for deploy-notification-service
+# For script
+template_compose_file_name: notification-service.j2
+template_env_file_name: notification-service-env.j2
+compose_file_name: "{{ service_notification_service }}.yml"
+env_file_name: "{{ service_notification_service }}.env"
+compose_file_deployment_location: "{{ compose_files_dir }}/{{ compose_file_name }}"
+env_file_deployment_location: "{{ env_files_dir }}/{{ env_file_name }}"
+user_friendly_name: Notification service
+
+
+# For service
+application_port: "{{ service_notification_service_port }}"
+image_name: "{{ image_notification_service }}"
+tag: "{{ tags_notification_service }}"
+host_port: "{{ application_port }}"
+docker_port: "{{ application_port }}"
+replicas: "{{ service_replicas_notification_service }}"
+reserved_memory: "{{ service_mem_reserved_notification_service }}"
+limited_memory: "{{ service_mem_limit_notification_service }}"
+health_check_endpoint: http://127.0.0.1:{{ docker_port }}/actuator/health
+network_alias_name: "{{ network_alias_notification_service }}"
+docker_service_stack_name: lms
+docker_service_name: "{{ service_notification_service }}"
+force_reload: "{{ force_reload_notification_service }}"
+
+# For application
+
+infosys_smtp_key: ace44299-8672-4c8e-9694-e168afe449ef
+siemens_smtp_key: ace44299-8672-4c8e-9694-e168afe449ef
+pid_service_url: "{{ network_alias_pid_service }}:{{ service_pid_service_port }}"
+spring_datasource_jdbc_url: jdbc:postgresql://{{ postgresql_host }}:{{ postgresql_port }}/{{ postgresql_wingspan_database }}
+igot_smtp_key: "{{ igot_smtpkey }}"
+# Siemens sepcific
+secret_siemens_smtp_key_name: smtp_key
+secret_siemens_smtp_cert_name: smtp_cert
+siemens_smtp_key_path: "/run/secrets/{{ secret_siemens_smtp_key_name }}"
+siemens_smtp_cert_path: "/run/secrets/{{ secret_siemens_smtp_cert_name }}"

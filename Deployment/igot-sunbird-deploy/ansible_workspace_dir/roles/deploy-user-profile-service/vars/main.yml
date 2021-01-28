@@ -1,0 +1,26 @@
+---
+# vars file for deploy-user-profile-service
+# For script
+template_compose_file_name: user-profile.j2
+template_env_file_name: user-profile_env.j2
+compose_file_name: "{{ service_user_profile_service }}.yml"
+env_file_name: "{{ service_user_profile_service }}.env"
+env_file_deployment_location: "{{ env_files_dir }}/{{ env_file_name }}"
+compose_file_deployment_location: "{{ compose_files_dir }}/{{ compose_file_name }}"
+user_friendly_name: user-profile-service
+
+# For service
+application_port: "{{ service_user_profile_port }}"
+image_name: "{{ image_user_profile }}"
+tag: "{{ tags_user_profile }}"
+host_port: "{{ application_port }}"
+docker_port: "{{ application_port }}"
+replicas: "{{ service_replicas_user_profile_service }}"
+reserved_memory: "{{ service_mem_reserved_user_profile_service }}"
+limited_memory: "{{ service_mem_limit_user_profile_service }}"
+health_check_endpoint: http://127.0.0.1:{{ docker_port }}
+network_alias_name: "{{ network_alias_user_profile }}"
+docker_service_stack_name: up
+docker_service_name: "{{ service_user_profile_service }}"
+force_reload: "{{ force_reload_user_profile_service }}"
+

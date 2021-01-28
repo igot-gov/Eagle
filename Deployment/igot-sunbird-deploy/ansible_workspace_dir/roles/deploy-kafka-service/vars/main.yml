@@ -1,0 +1,40 @@
+---
+# vars file for deploy-sb-ext
+# For script
+template_compose_file_name: kafka-service-compose-file.j2
+template_env_file_name: kafka-service-env.j2
+compose_file_name: "{{ service_lex_kafka_service }}.yml"
+env_file_name: "{{ service_lex_kafka_service }}.env"
+compose_file_deployment_location: "{{ compose_files_dir }}/{{ compose_file_name }}"
+env_file_deployment_location: "{{ env_files_dir }}/{{ env_file_name }}"
+user_friendly_name: Kafka service
+
+
+# For service
+application_port: "{{ service_lex_kafka_service_port }}"
+image_name: "{{ iamge_lex_kafka_service }}"
+tag: "{{ tags_kafka_service }}"
+host_port: "{{ application_port }}"
+docker_port: "{{ application_port }}"
+replicas: "{{ service_replicas_kafka_service }}"
+reserved_memory: "{{ service_mem_reserved_kafka_service }}"
+limited_memory: "{{ service_mem_limit_kafka_service }}"
+health_check_endpoint: http://127.0.0.1:8080/actuator/health 
+network_alias_name: "{{ network_alias_lex_kafka_service }}"
+docker_service_stack_name: lms
+docker_service_name: "{{ service_lex_kafka_service }}"
+force_reload: "{{ force_reload_kafka_service }}"
+
+# For application
+kafka_ip: "http://{{ kafka_servers_list }}"
+kafka_search_indexer_errors_topic: search-indexer-errors
+kafka_publisher_topic: publishpipeline-stage1-errors
+kafka_replication_factor: 1
+neo4j_url: "bolt://{{ neo4j_host }}:{{ neo4j_port }}"
+content_service_url: "http://{{ network_alias_content_service }}:{{ service_content_service_port }}"
+content_service_zip_url: "{{ content_service_url }}/contentv3/zip"
+content_service_publish_url: "{{ content_service_url }}/contentv3/publish"
+catalog_url: "{{ content_service_url }}/content/DEFAULTS/JSONS/tags.json?type=artifacts"
+
+core_service_url: "http://{{ network_alias_lex_core_service }}:{{ service_lex_core_port }}"
+core_content_sources_url: "{{ core_service_url }}/v1/content-sources/source-short-names"
