@@ -6,11 +6,9 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { ConfigurationsService } from '@ws-widget/utils/src/public-api'
 /* tslint:disable */
 import _ from 'lodash'
-import { UserViewService } from '../../services/user-view.services'
 import { UsersService } from '../../services/users.service'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { environment } from 'src/environments/environment'
-interface IUser { userid: string, fullname: string; email: string; type: string }
 
 @Component({
   selector: 'ws-app-users-view',
@@ -48,7 +46,6 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
     private router: Router,
     private usersService: UsersService,
     private configSvc: ConfigurationsService,
-    private userViewServcie: UserViewService,
     private snackBar: MatSnackBar,
   ) {
     this.Math = Math
@@ -83,15 +80,7 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
       sortState: 'asc',
       needUserMenus: true,
     }
-
     this.getAllUsers()
-  }
-
-  getAllActiveUsersAPI() {
-    this.userViewServcie.getAllDepartments().subscribe(res => {
-      this.fullUserData = res
-      this.data = this.getAllUserByKey(this.fullUserData.active_users)
-    })
   }
 
   ngAfterViewInit() {
@@ -165,10 +154,6 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
           }
         })
         break
-      //   case 'delete':
-      //     _.set(user, 'isBlocked', false)
-      //     this.usersSvc.deleteUser(user)
-      //     break
     }
   }
   getAllUsers() {
@@ -183,40 +168,45 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
     const inactiveUsersData: any[] = []
     if (this.usersData.active_users && this.usersData.active_users.length > 0) {
       this.usersData.active_users.forEach((user: any) => {
-        activeUsersData.push({
-          fullname: user ? `${user.firstName} ${user.lastName}` : null,
-          email: user.emailId,
-          role: user.roleInfo,
-          userId: user.userId,
-          active: user.active,
-          blocked: user.blocked,
-        })
+        if (this.currentUser !== user.userId) {
+          activeUsersData.push({
+            fullname: user ? `${user.firstName} ${user.lastName}` : null,
+            email: user.emailId,
+            role: user.roleInfo,
+            userId: user.userId,
+            active: user.active,
+            blocked: user.blocked,
+          })
+        }
       })
     }
 
     if (this.usersData.blocked_users && this.usersData.blocked_users.length > 0) {
       this.usersData.blocked_users.forEach((user: any) => {
-        blockedUsersData.push({
-
-          fullname: user ? `${user.firstName} ${user.lastName}` : null,
-          email: user.emailId,
-          role: user.roleInfo,
-          userId: user.userId,
-          active: user.active,
-          blocked: user.blocked,
-        })
+        if (this.currentUser !== user.userId) {
+          blockedUsersData.push({
+            fullname: user ? `${user.firstName} ${user.lastName}` : null,
+            email: user.emailId,
+            role: user.roleInfo,
+            userId: user.userId,
+            active: user.active,
+            blocked: user.blocked,
+          })
+        }
       })
     }
     if (this.usersData.inActive_users && this.usersData.inActive_users.length > 0) {
       this.usersData.inActive_users.forEach((user: any) => {
-        inactiveUsersData.push({
-          fullname: user ? `${user.firstName} ${user.lastName}` : null,
-          email: user.emailId,
-          role: user.roleInfo,
-          userId: user.userId,
-          active: user.active,
-          blocked: user.blocked,
-        })
+        if (this.currentUser !== user.userId) {
+          inactiveUsersData.push({
+            fullname: user ? `${user.firstName} ${user.lastName}` : null,
+            email: user.emailId,
+            role: user.roleInfo,
+            userId: user.userId,
+            active: user.active,
+            blocked: user.blocked,
+          })
+        }
       })
     }
 
@@ -238,25 +228,4 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     }
   }
-
-  getAllUserByKey(userObj: any) {
-    if (userObj && userObj !== null && userObj !== undefined) {
-      const tempArray: IUser[] = []
-      userObj.forEach((users: any) => {
-        const obj: IUser = {
-          userid: users.wid,
-          fullname: `${users.firstName} ${users.lastName}`,
-          email: users.emailId,
-          type: users.roleInfo.roleName,
-        }
-        tempArray.push(obj)
-      })
-      return tempArray
-    }
-    return []
-
-  }
-
-  // need to enhance
-
 }
