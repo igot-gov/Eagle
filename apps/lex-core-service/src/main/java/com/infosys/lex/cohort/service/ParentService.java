@@ -43,5 +43,7 @@ public interface ParentService {
 
 	String getCourseParent(String resourceId) throws Exception;
 
+	boolean isContentIsEventType(String contentId);
+
 
 }

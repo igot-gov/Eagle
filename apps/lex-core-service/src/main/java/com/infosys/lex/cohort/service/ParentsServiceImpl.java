@@ -332,6 +332,7 @@ import com.infosys.lex.common.service.ContentService;
 import com.infosys.lex.common.util.ContentMetaConstants;
 import com.infosys.lex.core.exception.ApplicationLogicError;
 import com.infosys.lex.core.logger.LexLogger;
+import org.springframework.util.CollectionUtils;
 
 @Service
 public class ParentsServiceImpl implements ParentService {
@@ -584,5 +585,30 @@ public class ParentsServiceImpl implements ParentService {
 		}
 		return assessmentIds;
 	}
+
+	public boolean isContentIsEventType(String contentId) {
+		boolean eventType = false;
+		String[] stringArray2 = {"contentType", "identifier"};
+		try {
+			List<Map<String, Object>> responseMap = contentService.getMetaByIDListandSource(Arrays.asList(contentId), stringArray2, LexProjectUtil.Status.LIVE.getValue());
+			if (!CollectionUtils.isEmpty(responseMap)) {
+				for (Map<String, Object> map : responseMap) {
+					if (map.get("identifier").equals(contentId)) {
+						String contentType = (String)map.get("contentType");
+						if (contentType.equals("Event")) {
+							eventType = true;
+							break;
+						}
+
+					}
+				}
+			}
+		} catch (IOException e) {
+			logger.info("Exception occured while fetching the content");
+			logger.error(e);
+		}
+		return eventType;
+	}
+
 
 }

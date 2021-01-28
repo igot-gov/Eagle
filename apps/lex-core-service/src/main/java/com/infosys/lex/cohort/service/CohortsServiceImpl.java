@@ -196,7 +196,7 @@ public class CohortsServiceImpl implements CohortsService {
 		} else {
 			resourceParentList.add(contentId);
 		}
-
+		boolean isContentIsEventType = parentSvc.isContentIsEventType(contentId);
 		// Active users are added to this
 		List<CohortUsers> activeUserCollection = new ArrayList<CohortUsers>();
 
@@ -233,7 +233,10 @@ public class CohortsServiceImpl implements CohortsService {
 				int isEmail = activeUserEmail.indexOf("@");
 				if (isEmail > 1) {
 					String userName = activeUserEmail.substring(0, isEmail);
-					if (!activeUserUUID.equals(userUUID) && !userNames.contains(userName)) {
+					boolean userIdCheck = !activeUserUUID.equals(userUUID);
+					if(isContentIsEventType)
+						userIdCheck = true;
+					if (userIdCheck && !userNames.contains(userName)) {
 						userNames.add(userName);
 
 						CohortUsers activeCohortUser = new CohortUsers();
