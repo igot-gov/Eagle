@@ -46,13 +46,12 @@ export class RightMenuCardComponent implements OnInit, OnChanges {
                 this.identifier = this.data.identifier
                 this.data.expiryDate = this.eventDateFormat(this.expiryDate, this.duration)
                 const dateTimeArr = this.data.expiryDate.split(',')
-                this.dateInfo = dateTimeArr[0]
+                this.dateInfo =  moment(dateTimeArr[0]).format('MMMM DD, YYYY')
                 this.timeInfo = dateTimeArr[1]
             }
             const now = new Date()
             const today = moment(now).format('YYYY-MM-DD hh:mm a')
-            let isBetween = moment(today).isBetween(this.startDate, this.endDate)
-            isBetween = true
+            const isBetween = moment(today).isBetween(this.startDate, this.endDate)
             const isAfter = moment(this.endDate).isAfter(today)
             if (isBetween) {
                 this.disableFlag = false
@@ -63,7 +62,7 @@ export class RightMenuCardComponent implements OnInit, OnChanges {
                 this.disableFlag = true
                 this.status = 'upcoming'
             } else {
-                this.btnLabel = 'Joined'
+                this.btnLabel = 'Event ended'
                 this.disableFlag = true
                 this.status = 'expired'
             }

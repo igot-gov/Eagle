@@ -38,6 +38,17 @@
   }
 }
 
+.status-badge {
+  position: absolute; 
+  right: 5px; 
+  top: -30px;
+}
+
+.event_date {
+  margin-left: 16px;
+  color:#0074B6;
+}
+
 .mat-card-image {
     width: 370px !important;
     margin: 0 -16px 16px 0px;
@@ -45,13 +56,27 @@
 }
 
 .avatar-img{
-    border: 1px solid white;
     border-radius: 50%;
     text-align: center;
     background-color: #9e53a7;
     color: white !important;
     margin-left: -10px;
-    font-size: 19px !important;
+    font-size: 10px !important;
+    width: 24px;
+    height: 24px;
+    padding: 8px;
+}
+
+.numberCircle {
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    padding: 8px;
+    background-color: #9e53a7;
+    border: 2px solid #666;
+    color: #666;
+    text-align: center;
+    font: 14px Arial, sans-serif;
 }
 
 .today-status {

@@ -4,8 +4,7 @@
             <img mat-card-image class="event-card-image image-border mat-lite-background" role="link"
             [src]="appIcon" (error)="changeToDefaultImg($event)" [alt]="eventTitle" class="card-img" />
         </a>
-        <span class="flex mat-body-2 ws-mat-black60-text mt-10" role="link" tabindex="0" i18n-aria-label 
-        style="position: absolute; right: 5px; top: -30px;">
+        <span class="flex mat-body-2 ws-mat-black60-text mt-10 status-badge" role="link" tabindex="0" i18n-aria-label>
             <mat-chip-list *ngIf="isToday && status != 'between'">
                 <mat-chip class="today-status" selected>TODAY</mat-chip>
             </mat-chip-list>
@@ -32,7 +31,7 @@
     </mat-card-header>
     <mat-card-content class="flex flex-1">
         <div class="mat-body-2">
-            <span class="event_date" style="margin-left: 16px;color:#0074B6;">
+            <span class="event_date">
                 {{ eventDate }}
             </span>
         </div>
@@ -48,14 +47,14 @@
         </div>
         <div class="flex flex-1" class="text-right mobile2" *ngIf="avatarArr.length > 0">
             <span class="noocoments ws-mat-default-text mat-subheading-2">
-                <div class="avatars" style="margin-left: 225px;">
+                <div class="avatars" style="display: inline-flex;">
                         <span class="avatar" *ngFor="let avatar of avatarArr">
                             <span class="headline avatar-img">
-                                {{ avatar.name }}
+                                {{ avatar.shortname }}
                             </span>
-                        </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                        </span>
                     </div>
-                    <span class="split-count"> + {{ splitArr.length }}</span>
+                    <span class="split-count" *ngIf="splitUsersCount > 0"> + {{ splitUsersCount }}</span>
             </span>
         </div>
     </mat-card-footer>
