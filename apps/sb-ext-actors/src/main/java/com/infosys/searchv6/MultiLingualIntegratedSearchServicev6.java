@@ -485,6 +485,8 @@ class MultiLingualIntegratedSearchServicev6 {
         templateRequest.setScriptType(ScriptType.STORED);
         templateRequest.setScriptParams(paramsMap);
         templateRequest.setRequest(searchRequest);
+      
+        System.out.println("search Template request: " + new ObjectMapper().writeValueAsString(templateRequest));
 
         return elasticClient.searchTemplate(templateRequest, RequestOptions.DEFAULT).getResponse();
     }
