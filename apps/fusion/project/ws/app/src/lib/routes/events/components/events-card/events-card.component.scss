@@ -38,6 +38,17 @@
   }
 }
 
+.status-badge {
+  position: absolute; 
+  right: 5px; 
+  top: -30px;
+}
+
+.event_date {
+  margin-left: 16px;
+  color:#0074B6;
+}
+
 .mat-card-image {
     width: 370px !important;
     margin: 0 -16px 16px 0px;
