@@ -72,11 +72,11 @@ support_email_id: "{{ var_content_service_support_mail_id }}"
 # S3 configuration details
 
 ## Credentials
-#aws_access_key: AKIAICRRSRDMWQ2GTKNA
-#aws_secret_key: 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
-aws_access_key: AKIAUT2CINKDW3ZZHMG2
-aws_secret_key: 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
-aws_cloudfront_access_key: APKAITSDQNFBTHDWFWJA
+#aws_access_key: 
+#aws_secret_key: 
+aws_access_key: 
+aws_secret_key: 
+aws_cloudfront_access_key: 
 aws_private_key_file_path: /run/secrets/S3_PEM
 
 ## CDN Configuration
