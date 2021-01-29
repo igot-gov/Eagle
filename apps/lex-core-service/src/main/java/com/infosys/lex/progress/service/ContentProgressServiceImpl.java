@@ -409,11 +409,17 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 		List<String> contentIds = new ArrayList<String>((Set<String>) hierarchy.get("progress_id_set"));
 //		List<Map<String, Object>> searchHits = contentService.getMetaByIDListandSource(contentIds,
 //				new String[] { "identifier", "resourceType", "duration" }, "Live");
+		logger.info("hierarchy.get(progress_id_set) :: "+ contentIds);
+
 		List<Map<String, Object>> searchHits = contentService.getMetaByIDListandStatusList(
 				contentIds, 
 				new String[] { "identifier", "resourceType", "duration" }, 
 				(new String[] { "Live", "Marked For Deletion", "Deleted", "Expired", "Unpublished" }));
+
+		logger.info("searchHits :: "+ searchHits);
 		for (Map<String, Object> source : searchHits) {
+			logger.info("source.get(identifier).toString() :: "+ source.get("identifier").toString());
+
 			if (!contentProgressMap.containsKey(source.get("identifier").toString()))
 				contentProgressMap.put(source.get("identifier").toString(),
 						new ContentProgress(source.getOrDefault("resourceType", "").toString(), -1,
@@ -424,8 +430,14 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 		// content progress
 		List<ContentProgressModel> contentProgressList = contentProgressRepo.getProgress(rootOrg, userUUID,
 				new ArrayList<String>((Set<String>) hierarchy.get("content_type_set")), contentIds);
+		logger.info("hierarchy.get(content_type_set) :: "+ hierarchy.get("content_type_set"));
+
+		logger.info("contentProgressList :: "+ contentProgressList.size());
+
 //		System.out.println(contentProgressList);
 		for (ContentProgressModel cpm : contentProgressList) {
+			logger.info("contentProgressList cpm:: "+ cpm.getPrimaryKey().getContentId());
+
 //			System.out.println(cpm);
 			contentProgressMap.get(cpm.getPrimaryKey().getContentId()).setProgress(cpm.getProgress());
 		}
