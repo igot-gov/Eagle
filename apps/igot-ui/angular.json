@@ -20,12 +20,16 @@
             "assets": [
               "src/favicon.ico",
               "src/favicon.png",
-              "src/fusion-assets"
+              "src/fusion-assets",
+              {
+                "glob": "**/*.*",
+                "input": "./node_modules/@project-sunbird/discussions-ui-v8/assets",
+                "output": "./assets/discussion-ui"
+              }
             ],
+
             "stylePreprocessorOptions": {
-              "includePaths": [
-                "src/styles"
-              ]
+              "includePaths": ["src/styles"]
             },
             "styles": [
               "./node_modules/@project-sunbird/sb-styles/assets/_styles.scss",
@@ -39,7 +43,7 @@
               "src/styles/mat-typography.scss",
               "src/styles/styles.scss",
               "node_modules/shepherd.js/dist/css/shepherd.css",
-              
+
               {
                 "input": "src/themes/theme-deep-purple.scss",
                 "bundleName": "theme-deep-purple",
@@ -85,10 +89,11 @@
                 "bundleName": "theme-igot",
                 "lazy": true
               },
-              
+
               "node_modules/pdfjs-dist/web/pdf_viewer.css",
               "src/fusion-assets/fonts/lato/stylesheet.css",
-              "src/fusion-assets/fonts/montserrat/stylesheet.css"
+              "src/fusion-assets/fonts/montserrat/stylesheet.css",
+              "./node_modules/@project-sunbird/discussions-ui-v8/assets/styles/global.scss"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
@@ -157,11 +162,15 @@
             "karmaConfig": "karma.conf.js",
             "assets": [
               "src/favicon.ico",
-              "src/fusion-assets"
+              "src/fusion-assets",
+              {
+                "glob": "**/*.*",
+                "input": "./node_modules/@project-sunbird/discussions-ui-v8/assets",
+                "output": "./assets/discussion-ui"
+              }
             ],
             "styles": [
-              "src/styles.scss"
-            ],
+              "src/styles.scss"            ],
             "scripts": []
           }
         },
@@ -173,9 +182,7 @@
               "tsconfig.spec.json",
               "e2e/tsconfig.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         },
         "e2e": {
@@ -220,9 +227,7 @@
               "library/ws-widget/resolver/tsconfig.lib.json",
               "library/ws-widget/resolver/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -255,9 +260,7 @@
               "library/ws-widget/collection/tsconfig.lib.json",
               "library/ws-widget/collection/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -290,9 +293,7 @@
               "library/ws-widget/utils/tsconfig.lib.json",
               "library/ws-widget/utils/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -325,9 +326,7 @@
               "project/ws/app/tsconfig.lib.json",
               "project/ws/app/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -360,9 +359,7 @@
               "project/ws/author/tsconfig.lib.json",
               "project/ws/author/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -395,9 +392,7 @@
               "project/ws/admin/tsconfig.lib.json",
               "project/ws/admin/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -430,9 +425,7 @@
               "project/ws/analytics/tsconfig.lib.json",
               "project/ws/analytics/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -465,9 +458,7 @@
               "project/ws/viewer/tsconfig.lib.json",
               "project/ws/viewer/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
