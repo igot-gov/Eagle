@@ -23,6 +23,7 @@ import { networkConnectionApi } from './network'
 import { networkHubApi } from './network-hub'
 import { portalApi } from './portal-v3'
 import { recommendationApi } from './recommendation'
+import { scoringApi } from './scoring'
 import { scromApi } from './scrom'
 import { socialApi } from './social'
 import { trainingApi } from './training'
@@ -67,4 +68,5 @@ protectedApiV8.use('/connections', connectionsApi)
 protectedApiV8.use('/competency', competencyApi)
 protectedApiV8.use('/dept', deptApi)
 protectedApiV8.use('/portal', portalApi)
+protectedApiV8.use('/scroing', scoringApi)
 protectedApiV8.use('/workflowhandler', workflowHandlerApi)
