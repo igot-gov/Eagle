@@ -21,12 +21,14 @@ import { leaderBoardApi } from './leaderboard'
 import { navigatorApi } from './navigator'
 import { networkConnectionApi } from './network'
 import { networkHubApi } from './network-hub'
+import { portalApi } from './portal-v3'
 import { recommendationApi } from './recommendation'
 import { scromApi } from './scrom'
 import { socialApi } from './social'
 import { trainingApi } from './training'
 import { translateApi } from './translate'
 import { user } from './user/user'
+import { workflowHandlerApi } from './workflow-handler'
 
 export const protectedApiV8 = express.Router()
 
@@ -64,3 +66,5 @@ protectedApiV8.use('/network', networkConnectionApi)
 protectedApiV8.use('/connections', connectionsApi)
 protectedApiV8.use('/competency', competencyApi)
 protectedApiV8.use('/dept', deptApi)
+protectedApiV8.use('/portal', portalApi)
+protectedApiV8.use('/workflowhandler', workflowHandlerApi)
