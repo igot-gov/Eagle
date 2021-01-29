@@ -147,13 +147,13 @@ export class AllContentComponent implements OnInit, OnDestroy {
       const leftData = this.authInitService.authAdditionalConfig.menus
       _.set(leftData, 'widgetData.logo', true)
       _.set(leftData, 'widgetData.logoPath', _.get(this.activatedRoute, 'snapshot.data.departmentData.data.logo'))
-      _.set(leftData, 'widgetData.name', _.get(this.activatedRoute, 'snapshot.data.departmentData.data.description'))
+      _.set(leftData, 'widgetData.name', _.get(this.activatedRoute, 'snapshot.data.departmentData.data.deptName'))
       _.set(leftData, 'widgetData.userRoles', this.myRoles)
       this.leftmenues = leftData
     } else {
       this.leftmenues = this.authInitService.authAdditionalConfig.menus
     }
-    this.isAdmin = this.accessService.hasRole(['admin', 'super-admin', 'content-admin', 'editor'])
+    this.isAdmin = this.accessService.hasRole(['admin', 'super-admin', 'content-admin', 'editor', 'content-creator'])
     // if (this.courseTaken && this.courseTaken.mandatoryCourseCompleted) {
     this.initCardTable()
     // } else {
@@ -173,7 +173,7 @@ export class AllContentComponent implements OnInit, OnDestroy {
           image: 'appIcon',
         },
         { displayName: 'Kind', key: 'contentType', isList: false, prop: '', defaultValue: 'NA', pipe: PipeContentTypePipe },
-        { displayName: 'Active users', key: 'uniqueUsersCount', isList: false, prop: '', defaultValue: 0 },
+        // { displayName: 'Active users', key: 'uniqueUsersCount', isList: false, prop: '', defaultValue: 0 },
         { displayName: 'Duration', key: 'duration', defaultValue: 0, pipe: PipeDurationTransformPipe },
       ], //  :> this will load from json
       actions: [], // :> this will load from json

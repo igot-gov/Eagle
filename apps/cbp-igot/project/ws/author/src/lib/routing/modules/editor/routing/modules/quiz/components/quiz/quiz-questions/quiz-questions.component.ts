@@ -143,7 +143,7 @@ export class QuizQusetionsComponent implements OnInit, OnDestroy {
                     this.quizStoreSvc.collectiveQuiz[id] = updatedData[0].data.questions
                     // need to arrange
                     this.canEditJson = this.quizResolverSvc.canEdit(quizContent)
-                    this.resourceType = quizContent.categoryType || 'Quiz'
+                    this.resourceType = quizContent.categoryType || 'Assessment'
                     this.quizDuration = quizContent.duration || 300
                     this.questionsArr =
                       this.quizStoreSvc.collectiveQuiz[id] || []
@@ -162,7 +162,7 @@ export class QuizQusetionsComponent implements OnInit, OnDestroy {
               //   : []
 
               this.canEditJson = this.quizResolverSvc.canEdit(quizContent)
-              this.resourceType = quizContent.categoryType || 'Quiz'
+              this.resourceType = quizContent.categoryType || 'Assessment'
               this.quizDuration = quizContent.duration || 300
               this.questionsArr =
                 this.quizStoreSvc.collectiveQuiz[id] || []

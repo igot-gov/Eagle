@@ -287,13 +287,9 @@ export class InitService {
     //   .get<IDetailsResponse>(endpoint.details).pipe(retry(3))
     //   .toPromise()
     // this.configSvc.userGroups = new Set(details.group)
-    // this.configSvc.userRoles = new Set(details.roles)
+    // this.configSvc.userRoles = new Set((details.roles || []).map(v => v.toLowerCase()))
     // if (this.configSvc.userProfile && this.configSvc.userProfile.isManager) {
     //   this.configSvc.userRoles.add('is_manager')
-    // }
-    // this.configSvc.hasAcceptedTnc = details.tncStatus
-    // this.configSvc.profileDetailsStatus = details.profileDetailsStatus
-    // return details
 
     const details = { group: [], profileDetailsStatus: true, roles: userRoles, tncStatus: true }
     this.configSvc.hasAcceptedTnc = details.tncStatus

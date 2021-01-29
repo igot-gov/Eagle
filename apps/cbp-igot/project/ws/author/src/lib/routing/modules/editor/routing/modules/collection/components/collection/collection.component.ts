@@ -31,6 +31,7 @@ import { ContentQualityService } from '../../../../../shared/services/content-qu
 import { ConfigurationsService } from '../../../../../../../../../../../../../library/ws-widget/utils/src/public-api'
 /* tslint:disable */
 import _ from 'lodash'
+import { NSIQuality } from '../../../../../../../../interface/content-quality'
 /* tslint:enable */
 /**
  * @description
@@ -353,14 +354,15 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
         if (result && result.result && result.result.resources) {
           const rse = result.result.resources || []
           if (rse.length === 1) {
-            const qualityScore = rse[0]
+            let qualityScore: NSIQuality.IQualityResponse
+            qualityScore = rse[0]
             if (qualityScore) {
               if (qualityScore) {
-                const score = (qualityScore.finalTotalScore / qualityScore.finalMaxScore) * 100
+                const score = qualityScore.finalWeightedScore || 0
                 if (this.initService.authAdditionalConfig.contentQuality) {
                   minPassPercentage = this.initService.authAdditionalConfig.contentQuality.passPercentage
                 }
-                if (score >= minPassPercentage) {
+                if (score >= minPassPercentage && qualityScore.qualifiedMinCriteria) {
                   /** final call */
                   const dialogRef = this.dialog.open(CommentsDialogComponent, {
                     width: '750px',
@@ -373,16 +375,19 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
                   })
                   /** final call */
                 } else {
-                  this.snackBar.open(`To proceed further minimum quality score must be  ${minPassPercentage}% or greater`)
+                  this.snackBar.open(`To proceed further minimum quality score must be
+                  ${minPassPercentage}% or greater, and need to qualify in all the sections`)
                 }
               } else {
-                this.snackBar.open(`To proceed further minimum quality score must be  ${minPassPercentage}% or greater`)
+                this.snackBar.open(`To proceed further minimum quality score must be
+                ${minPassPercentage}% or greater, and need to qualify in all the sections`)
               }
             } else {
-              this.snackBar.open(`To proceed further minimum quality score must be  ${minPassPercentage}% or greater`)
+              this.snackBar.open(`To proceed further minimum quality score must be
+               ${minPassPercentage}% or greater, and need to qualify in all the sections`)
             }
           } else {
-            this.snackBar.open(`To proceed further minimum quality score is required`)
+            this.snackBar.open(`To proceed further minimum quality score is required, and need to qualify in all the sections`)
           }
         }
       })

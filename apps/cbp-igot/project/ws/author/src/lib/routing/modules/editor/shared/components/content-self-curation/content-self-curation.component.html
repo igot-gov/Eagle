@@ -67,17 +67,22 @@
       <div class="flex flex-1 flex-column" *ngIf="pdfCount === 0">
         <span class="flex flex-1 mat-subheading-1 m-auto">Please move to next tab</span>
       </div>
-      <div class="flex flex-1 flex-row m-auto margin-top-l">
-        <button mat-raised-button (click)="data.emit('back')"
-          class="btn-n text-white ws-mat-primary-background margin-left-s">
-          <span class="mat-subheading-2 padding-xs" style="vertical-align: unset;" i18n>Back: Content quality
-          </span>
-        </button>
-        <button mat-raised-button (click)="data.emit('next')"
-          class="btn-n text-white ws-mat-primary-background margin-left-s">
-          <span class="mat-subheading-2 padding-xs" style="vertical-align: unset;" i18n>Next: Summary
-          </span>
-        </button>
+      <div class="flex flex-row margin-top-l">
+        <div class="flex">
+          <button mat-raised-button type="button" (click)="data.emit('back')"
+            class="ws-mat-accent-text ws-mat-accent-border-active margin-left-s">
+            <span class="mat-subheading-2 padding-xs m-0" style="vertical-align: unset;" i18n>Take test again
+            </span>
+          </button>
+        </div>
+        <div class="flex margin-xl"></div>
+        <div class="flex">
+          <button mat-raised-button (click)="data.emit('next')"
+            class="btn-n text-white ws-mat-primary-background margin-left-s">
+            <span class="mat-subheading-2 padding-xs m-0" style="vertical-align: unset;" i18n>Next: Summary
+            </span>
+          </button>
+        </div>
       </div>
     </div>
   </mat-sidenav-content>

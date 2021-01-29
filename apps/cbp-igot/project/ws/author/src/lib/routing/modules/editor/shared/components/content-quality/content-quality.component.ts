@@ -230,6 +230,21 @@ export class ContentQualityComponent implements OnInit, OnDestroy, AfterViewInit
       })
     }
   }
+  get UnQualidiedSections() {
+    const sections: NSIQuality.ICriteriaModels[] = []
+    _.map(this.qualityResponse.criteriaModels, qr => {
+      if (!qr.qualifiedMinCriteria) {
+        sections.push(qr)
+      }
+    })
+    return sections
+  }
+
+  checkUnQualidied(idx: number): boolean {
+    const obj = this.qualityResponse.criteriaModels[idx]
+    return obj && obj.qualifiedMinCriteria
+  }
+
   get getQualityPercent() {
     const score = this.qualityResponse.finalWeightedScore || 0
     return score.toFixed(2)
@@ -388,7 +403,7 @@ export class ContentQualityComponent implements OnInit, OnDestroy, AfterViewInit
     this.selectedKey = this.questionData[0].type
   }
   showMinDialogue() {
-    this.snackBar.open(`To proceed further minimum quality score must be  ${this.minPassPercentage}% or greater`)
+    this.snackBar.open(`To proceed further minimum quality score must be  ${this.minPassPercentage}% or greater, and need to qualify in all the sections`)
   }
 
   selectMenu(key: string, index: number) {

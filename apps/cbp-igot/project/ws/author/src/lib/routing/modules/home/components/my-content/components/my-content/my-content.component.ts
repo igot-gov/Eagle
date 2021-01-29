@@ -153,7 +153,7 @@ export class MyContentComponent implements OnInit, OnDestroy {
       const leftData = this.authInitService.authAdditionalConfig.menus
       _.set(leftData, 'widgetData.logo', true)
       _.set(leftData, 'widgetData.logoPath', _.get(this.activatedRoute, 'snapshot.data.departmentData.data.logo'))
-      _.set(leftData, 'widgetData.name', _.get(this.activatedRoute, 'snapshot.data.departmentData.data.description'))
+      _.set(leftData, 'widgetData.name', _.get(this.activatedRoute, 'snapshot.data.departmentData.data.deptName'))
       _.set(leftData, 'widgetData.userRoles', this.myRoles)
       this.leftmenues = leftData
     } else {
@@ -179,7 +179,7 @@ export class MyContentComponent implements OnInit, OnDestroy {
           image: 'appIcon',
         },
         { displayName: 'Kind', key: 'contentType', isList: false, prop: '', defaultValue: 'NA', pipe: PipeContentTypePipe },
-        { displayName: 'Active users', key: 'uniqueUsersCount', isList: false, prop: '', defaultValue: 0 },
+        // { displayName: 'Active users', key: 'uniqueUsersCount', isList: false, prop: '', defaultValue: 0 },
         { displayName: 'Duration', key: 'duration', defaultValue: 0, pipe: PipeDurationTransformPipe },
       ], //  :> this will load from json
       actions: [], // :> this will load from json
@@ -292,6 +292,13 @@ export class MyContentComponent implements OnInit, OnDestroy {
       this.queryFilter,
       this.isAdmin,
     )
+    let isUserRecordEnabled = true
+    const adminOnlyRoles = this.accessService.hasRole(['admin', 'super-admin', 'content-admin', 'editor', 'content-creator'])
+    if (adminOnlyRoles) {
+      isUserRecordEnabled = true
+    } else if (this.accessService.hasRole(['reviewer', 'publisher'])) {
+      isUserRecordEnabled = false
+    }
     const requestData = {
       locale: this.searchLanguage ? [this.searchLanguage] : ['en'],
       query: this.queryFilter,

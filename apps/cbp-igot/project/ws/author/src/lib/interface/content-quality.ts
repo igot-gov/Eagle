@@ -42,8 +42,10 @@ export namespace NSIQuality {
     criteriaModels: ICriteriaModels[]
     finalWeightedScore: number
     timeStamp: string
+    qualifiedMinCriteria: boolean
   }
   export interface ICriteriaModels {
+    qualifiedMinCriteria: boolean
     criteria: string
     totalScore: number
     weightage: number
