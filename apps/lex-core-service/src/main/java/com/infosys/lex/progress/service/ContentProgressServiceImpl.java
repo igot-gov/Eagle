@@ -89,6 +89,7 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 	private LexLogger logger = new LexLogger(getClass().getName());
 
 	public static final String PROGRESS_CONSTANT = "progress";
+	ObjectMapper mapper = new ObjectMapper();
 
 	/*
 	 * (non-Javadoc)
@@ -213,6 +214,13 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 			ContentProgressDTO resourceInfo, Map<String, ContentProgressModel> meta,
 			Map<String, ContentProgress> contentProgressMap, Boolean markAsRead) throws Exception {
 
+		logger.info("contentId ::"+contentId);
+		logger.info("resourceInfo ::"+mapper.writeValueAsString(resourceInfo));
+		logger.info("meta ::"+mapper.writeValueAsString(meta));
+		logger.info("contentProgressMap ::"+mapper.writeValueAsString(contentProgressMap));
+		logger.info("markAsRead ::"+markAsRead);
+
+
 		Boolean completedAssessment = false;
 		Boolean updateOnlyLastAccessedOn = false;
 		Boolean exerciseWithFeedback = false;
@@ -336,12 +344,16 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 		ret.put("update_Only_last_accessed", updateOnlyLastAccessedOn);
 		ret.put("exercise_with_feedback", exerciseWithFeedback);
 
+		logger.info("ret ::"+mapper.writeValueAsString(ret));
 		return ret;
 	}
 
 	// get all required meta for resource and validates if the id exists
 	@SuppressWarnings("unchecked")
 	private Map<String, Object> getMetaForResource(String rootOrg, String contentId, String userUUID) throws Exception {
+
+		logger.info("userUUID ::"+mapper.writeValueAsString(userUUID));
+
 		Map<String, Object> ret = new HashMap<>();
 		Map<String, ContentProgressModel> contentDataMap = new HashMap<>();
 		List<String> parentContentType = new ArrayList<>();
@@ -393,6 +405,8 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 		} else
 			throw new InvalidDataInputException("invalid.resource");
 		ret.put("meta", contentDataMap);
+		logger.info("ret ::"+mapper.writeValueAsString(ret));
+
 		return ret;
 	}
 
@@ -401,6 +415,13 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 			Map<String, ContentProgress> contentProgressMap, String userUUID, String contentId,
 			Boolean updateOnlyLastAccessedOn, Boolean completedAssessment, Boolean exerciseWithFeedback,
 			Boolean recalculate) throws Exception {
+
+		logger.info("meta ##"+mapper.writeValueAsString(meta));
+		logger.info("contentProgressMap ##"+mapper.writeValueAsString(contentProgressMap));
+		logger.info("updateOnlyLastAccessedOn ##"+updateOnlyLastAccessedOn);
+		logger.info("completedAssessment ##"+completedAssessment);
+		logger.info("exerciseWithFeedback ##"+exerciseWithFeedback);
+
 
 		// meta for the hierarchy
 		Map<String, Object> hierarchy = getHierarchyForResource(rootOrg, meta.get(contentId).getParentList(), userUUID);
@@ -581,6 +602,12 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 			Map<String, ContentProgress> contentProgressMap, String contentId, Boolean updateOnlyLastAccessedOn,
 			Boolean completedAssessment, String parentContentType, Boolean recalculate) throws Exception {
 
+		logger.info("meta ##"+mapper.writeValueAsString(meta));
+		logger.info("contentProgressMap ##"+mapper.writeValueAsString(contentProgressMap));
+		logger.info("updateOnlyLastAccessedOn ##"+updateOnlyLastAccessedOn);
+		logger.info("completedAssessment ##"+completedAssessment);
+		logger.info("recalculate ##"+recalculate);
+
 		List<String> missingIds = new ArrayList<>();
 		List<String> updateProgressList = new ArrayList<>();
 		updateProgressList.addAll(meta.get(contentId).getParentList());
@@ -657,6 +684,7 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 			updateProgressList = nextProgressList;
 			completedAssessment = false;
 		}
+		logger.info("missingIds ##"+missingIds);
 		return missingIds;
 	}
 
@@ -732,6 +760,9 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 	@Override
 	public Map<String, Object> metaForProgress(String rootOrg, String userUUID, List<String> idsList) throws Exception {
 
+		logger.info("rootOrg:: "+rootOrg);
+		logger.info("userUUID:: "+userUUID);
+		logger.info("idsList:: "+idsList);
 		Map<String, Object> ret = new HashMap<>();
 		// Map<String, Object> meta = new HashMap<>();
 		Map<String, Boolean> contentSourceMap = new HashMap<>();
@@ -907,6 +938,8 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 			}
 			ret.put(id, meta);
 		}
+
+		logger.info("ret:: "+ret);
 		return ret;
 	}
 
