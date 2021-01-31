@@ -180,9 +180,11 @@
                                                 </label>
                                                 <mat-form-field appearance="outline">
                                                     <mat-select formControlName="eventTime" #eventTime [(ngModel)]="todayTime">
-                                                        <mat-option *ngFor="let timeObj of timeArr" [value]="timeObj.value">
-                                                            {{ timeObj.value }}
-                                                        </mat-option>
+                                                        <ng-container *ngFor="let timeObj of timeArr">
+                                                            <mat-option *ngIf="timeObj.value > currentTime" [value]="timeObj.value">
+                                                                {{ timeObj.value }}
+                                                            </mat-option>
+                                                        </ng-container>
                                                     </mat-select>
                                                     <mat-error [hidden]="false" i18n="eventTime Error|Explains eventTime is required" i18n-aria-label
                                                         aria-label="eventTime Error|Explains eventTime is required "

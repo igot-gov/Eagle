@@ -82,6 +82,7 @@ export class CreateEventComponent implements OnInit {
   maxDate: any
   todayDate: any
   todayTime: any
+  currentTime: any
 
   constructor(private snackBar: MatSnackBar,
               private eventsSvc: EventsService,
@@ -94,6 +95,8 @@ export class CreateEventComponent implements OnInit {
       this.userId = this.configSvc.userProfile.userId
       this.username = this.configSvc.userProfile.userName
       this.department = this.configSvc.userProfile.departmentName
+      const today = new Date()
+      this.currentTime = moment(today).format('HH:mm')
     }
     this.createEventForm = new FormGroup({
       eventPicture: new FormControl('', [Validators.required]),
