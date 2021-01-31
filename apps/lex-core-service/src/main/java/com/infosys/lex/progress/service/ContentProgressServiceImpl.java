@@ -252,17 +252,25 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 		Set<Float> progressPages = new HashSet<>();
 		if (resourceProgress != null) {
 			oldProgress = resourceProgress.getProgress();
+			logger.info("oldProgress >"+oldProgress);
+
 			progressPages = resourceProgress.getVisitedSet() != null ? resourceProgress.getVisitedSet()
 					: new HashSet<>();
+			logger.info("progressPages >"+progressPages);
+
 		} else {
 			meta.get(contentId).setFirstAccessedOn(new Date());
 		}
 		if (markAsRead) {
+			logger.info("markAsRead >"+markAsRead);
+
 			oldProgress = 1f;
 			meta.get(contentId).setLastTS(new Date());
 			meta.get(contentId).setDateUpdated(format.parse(format.format(new Date())));
 			meta.get(contentId).setFirstCompletedOn(new Date());
 			meta.get(contentId).setUpdatedBy("marked_read");
+			logger.info("meta >"+mapper.writeValueAsString(meta));
+
 
 		}
 
@@ -273,17 +281,17 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 			float newProgress = oldProgress;
 			// page based
 			if (mimes.get("page").contains(mimeType)) {
-				logger.info("progressPages ::"+progressPages);
+				logger.info("progressPages :::"+progressPages);
 
 				progressPages.addAll(current);
 				newProgress = ((float) progressPages.size()) / maxSize;
 			}
 			// time based
 			else if (mimes.get("time").contains(mimeType)) {
-				logger.info("resourceProgress ::"+mapper.writeValueAsString(resourceProgress));
+				logger.info("resourceProgress :::"+mapper.writeValueAsString(resourceProgress));
 
 				float previousTime = !progressPages.isEmpty() ? progressPages.toArray(new Float[1])[0] : 0;
-				logger.info("previousTime ::"+previousTime);
+					logger.info("previousTime :::"+previousTime);
 
 				// create old duration
 				float oldMax = (previousTime) / oldProgress;
@@ -308,7 +316,7 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 			else if (mimes.get("result").contains(mimeType)) {
 
 				float previousResult = !progressPages.isEmpty() ? progressPages.toArray(new Float[1])[0] : 0;
-				logger.info("previousResult ::"+previousResult);
+				logger.info("previousResult :::"+previousResult);
 
 				if (current.get(0) > previousResult || current.get(0) == -1) {
 					progressPages = new HashSet<>();
@@ -336,10 +344,10 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 					}
 				}
 			}
-			logger.info("overrideProgress ::"+overrideProgress);
-			logger.info("resourceProgress ::"+resourceProgress);
-			logger.info("newProgress ::"+newProgress);
-			logger.info("oldProgress ::"+oldProgress);
+			logger.info("overrideProgress>:"+overrideProgress);
+			logger.info("resourceProgress>:"+resourceProgress);
+			logger.info("newProgress>:"+newProgress);
+			logger.info("oldProgress>:"+oldProgress);
 
 
 			if (overrideProgress && resourceProgress != null && (newProgress <= oldProgress)) {
