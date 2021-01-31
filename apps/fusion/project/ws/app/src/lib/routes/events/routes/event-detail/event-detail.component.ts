@@ -23,6 +23,7 @@ export class EventDetailComponent implements OnInit {
     isToday: any
     status: any
     participants: any = []
+    participantsArr: any = []
 
     constructor(
         public dialog: MatDialog,
@@ -80,10 +81,8 @@ export class EventDetailComponent implements OnInit {
     setEventData(responseObj: any) {
         if (responseObj.result !== undefined) {
             this.eventDataObj = responseObj.result[0]
-            const eventStartEndDateArr =
-            this.eventStartEndDateFormat(responseObj.result[0].expiryDate, responseObj.result[0].duration).split(' - ')
-            this.setParticipants(eventStartEndDateArr[0], eventStartEndDateArr[1], responseObj.result[0].identifier)
-            this.participantsCount = this.participants.length
+            
+            const eventStartEndDateArr = this.eventStartEndDateFormat(responseObj.result[0].expiryDate, responseObj.result[0].duration).split(' - ')
             responseObj.result[0].name = responseObj.result[0].name.replace(/http?.*?(?= |$)/g, '')
             this.overviewData.push(responseObj.result[0])
             if (responseObj.result[0].creatorContacts !== undefined) {
@@ -114,6 +113,10 @@ export class EventDetailComponent implements OnInit {
             if (isBetween) {
                 this.status = 'between'
             }
+            this.eventSrvc.getParticipants(responseObj.result[0].identifier).subscribe((participantsResponse: any) => {
+                this.participantsArr = participantsResponse
+                this.participantsCount = this.participantsArr.length
+            });
         }
     }
 

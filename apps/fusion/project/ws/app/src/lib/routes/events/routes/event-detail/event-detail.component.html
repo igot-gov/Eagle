@@ -107,7 +107,7 @@
 
     <ng-container *ngIf="currentFilter == 'participants'">
         <div class="flex w-65" *ngIf="participantsCount > 0" style="display: flex; flex-wrap: wrap;">
-            <ng-container *ngFor="let participant of participants">
+            <ng-container *ngFor="let participant of participantsArr">
                 <app-presenter-card [data]="participant" [host]="false"></app-presenter-card>
             </ng-container>
         </div>

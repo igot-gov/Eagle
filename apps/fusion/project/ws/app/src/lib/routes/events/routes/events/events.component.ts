@@ -26,6 +26,8 @@ export class EventsComponent implements OnInit {
     subData: any = []
     currentSubFilter = 'upcoming'
     mymodel: any
+    participantsArr: any = []
+    subDataCount: any
 
     constructor(
         private router: Router,
@@ -34,6 +36,9 @@ export class EventsComponent implements OnInit {
         ) {
         this.getAllEventData()
         this.department = this.configSvc.userProfile && this.configSvc.userProfile.departmentName
+        this.allEventsCount = 0
+        this.todayEventsCount = 0
+        this.joinedByMeEventsCount = 0
     }
 
     ngOnInit() {
@@ -76,8 +81,103 @@ export class EventsComponent implements OnInit {
             ],
         }
 
-        this.eventSrvc.getEvents(reqObj).subscribe((res: any) => {
-            this.setEventData(res)
+        this.eventSrvc.getEvents(reqObj).subscribe((eventResponse: any) => {
+            this.eventData['todayEvents'] = []
+            this.eventData['allEvents'] = []
+            this.eventData['joinedByMe'] = []
+
+            if (eventResponse.result !== undefined) {
+                const eventList = eventResponse.result
+                this.allEventsCount = eventList.length
+
+                Object.keys(eventList).forEach((index: any) => {
+                    const eventObj = eventList[index]
+                    const expiryDateFormat = this.customDateFormat(eventObj.expiryDate)
+                    const eventStartEndDateArr = this.eventStartEndDateFormat(eventObj.expiryDate, eventObj.duration).split(' - ')
+                    this.eventSrvc.getParticipants(eventObj.identifier).subscribe((participantsResponse: any) => {
+                        this.participantsArr = participantsResponse
+                        const eventDataObj = {
+                            eventName: eventObj.name.replace(/http?.*?(?= |$)/g, ''),
+                            eventDate: expiryDateFormat,
+                            eventUpdatedOn: eventObj.lastUpdatedOn,
+                            eventDuration: eventObj.duration,
+                            eventjoined: (eventObj.creatorDetails !== undefined && eventObj.creatorDetails.length > 0) ?
+                            ((eventObj.creatorDetails.length === 1) ? '1 person' :  `${eventObj.creatorDetails.length} people`) : ' --- ',
+                            eventThumbnail: (eventObj.appIcon !== null || eventObj.appIcon !== undefined) ? eventObj.appIcon : '---',
+                            eventDescription: eventObj.description,
+                            eventStatus: eventObj.status,
+                            eventObjective: eventObj.learningObjective,
+                            eventPresenters: (eventObj.creatorContacts !== undefined && eventObj.creatorContacts.length > 0)
+                            ? eventObj.creatorContacts : '',
+                            identifier: eventObj.identifier,
+                            presenters: eventObj.creatorDetails,
+                            eventJoinURL: eventObj.artifactUrl,
+                            eventSource: eventObj.sourceName,
+                            expirtyDate: eventObj.expiryDate,
+                            todayEventDate: this.eventDateFormat(eventObj.expiryDate, ''),
+                            todayEventDateStr: this.eventDateFormat(eventObj.expiryDate, eventObj.duration),
+                            allEventDate: this.allEventDateFormat(eventObj.expiryDate),
+                            eventStartDate: eventStartEndDateArr[0],
+                            eventEndDate: eventStartEndDateArr[1],
+                            isPast: this.compareDate(eventStartEndDateArr[0], eventStartEndDateArr[1]),
+                            participants: this.participantsArr,
+                        }
+                        if(this.setJoinedByMeEvents(this.participantsArr)) {
+                            this.eventData['joinedByMe'].push(eventDataObj)
+                        }
+                    })
+
+
+                    const eventDataObj = {
+                        eventName: eventObj.name.replace(/http?.*?(?= |$)/g, ''),
+                        eventDate: expiryDateFormat,
+                        eventUpdatedOn: eventObj.lastUpdatedOn,
+                        eventDuration: eventObj.duration,
+                        eventjoined: (eventObj.creatorDetails !== undefined && eventObj.creatorDetails.length > 0) ?
+                        ((eventObj.creatorDetails.length === 1) ? '1 person' :  `${eventObj.creatorDetails.length} people`) : ' --- ',
+                        eventThumbnail: (eventObj.appIcon !== null || eventObj.appIcon !== undefined) ? eventObj.appIcon : '---',
+                        eventDescription: eventObj.description,
+                        eventStatus: eventObj.status,
+                        eventObjective: eventObj.learningObjective,
+                        eventPresenters: (eventObj.creatorContacts !== undefined && eventObj.creatorContacts.length > 0)
+                        ? eventObj.creatorContacts : '',
+                        identifier: eventObj.identifier,
+                        presenters: eventObj.creatorDetails,
+                        eventJoinURL: eventObj.artifactUrl,
+                        eventSource: eventObj.sourceName,
+                        expirtyDate: eventObj.expiryDate,
+                        todayEventDate: this.eventDateFormat(eventObj.expiryDate, ''),
+                        todayEventDateStr: this.eventDateFormat(eventObj.expiryDate, eventObj.duration),
+                        allEventDate: this.allEventDateFormat(eventObj.expiryDate),
+                        eventStartDate: eventStartEndDateArr[0],
+                        eventEndDate: eventStartEndDateArr[1],
+                        isPast: this.compareDate(eventStartEndDateArr[0], eventStartEndDateArr[1]),
+                        participants: this.participantsArr,
+                    }
+                    
+                    // Today's events
+                    if(moment(eventStartEndDateArr[0]).isSame(moment(), 'day')) {
+                        const todayEventObj = {
+                           eventId: eventObj.identifier,
+                           eventName: eventObj.name.replace(/http?.*?(?= |$)/g, ''),
+                           todayEventDate: this.eventDateFormat(eventObj.expiryDate, ''),
+                           todayEventDateStr: this.eventDateFormat(eventObj.expiryDate, eventObj.duration)
+                        }
+                        this.eventData['todayEvents'].push(todayEventObj)
+                    }
+                    this.eventData['allEvents'].push(eventDataObj)
+                })
+            }
+            setTimeout(() => {
+                console.log(this.eventData);
+                this.todayEventsCount = this.eventData['todayEvents'].length
+                this.joinedByMeEventsCount = this.eventData['joinedByMe'].length
+                this.filter('all')
+                if (this.todayEventsCount > 0) {
+                     this.sortTodayEvents()
+                }
+                this.getMyMDOEvents()
+            }, 500)
         })
     }
 
@@ -129,7 +229,7 @@ export class EventsComponent implements OnInit {
                 const eventObj = eventList[index]
                 const expiryDateFormat = this.customDateFormat(eventObj.expiryDate)
                 const eventStartEndDateArr = this.eventStartEndDateFormat(eventObj.expiryDate, eventObj.duration).split(' - ')
-                const participantsArr = this.setParticipants(eventStartEndDateArr[0], eventStartEndDateArr[1], eventObj.identifier)
+                //const participantsArr = this.setParticipants(eventStartEndDateArr[0], eventStartEndDateArr[1], eventObj.identifier)
                 const eventDataObj = {
                     eventName: eventObj.name.replace(/http?.*?(?= |$)/g, ''),
                     eventDate: expiryDateFormat,
@@ -154,85 +254,39 @@ export class EventsComponent implements OnInit {
                     eventStartDate: eventStartEndDateArr[0],
                     eventEndDate: eventStartEndDateArr[1],
                     isPast: this.compareDate(eventStartEndDateArr[0], eventStartEndDateArr[1]),
-                    participants: (participantsArr !== undefined || participantsArr) ? participantsArr : [],
+                    participants: [],
                 }
+
+                // Today's events
+                // let findEvent = this.eventData['allEvents'].find((o: any) => o.identifier !== eventObj.identifier)
+                // console.log(findEvent)
+                // if (findEvent) {
+                //     if (this.isToday(eventObj.expiryDate)) {
+                //         const todayEventObj = {
+                //            eventId: eventDataObj.identifier,
+                //            eventName: eventDataObj.eventName,
+                //            todayEventDate: eventDataObj.todayEventDate,
+                //            todayEventDateStr: eventDataObj.todayEventDateStr,
+                //            identifier: eventDataObj.identifier,
+                //         }
+                //         this.eventData['todayEvents'].push(todayEventObj)
+                //     }
+                // }
+
                 this.eventData['myMDOEvents'].push(eventDataObj)
                 this.joinedByMeEventsCount = this.eventData['joinedByMe'].length
             })
         }
     }
 
-    setEventData(responseObj: any) {
-        if (responseObj.result !== undefined) {
-            const eventList = responseObj.result
-            this.eventData['todayEvents'] = []
-            this.eventData['allEvents'] = []
-            this.eventData['joinedByMe'] = []
-            Object.keys(eventList).forEach((index: any) => {
-                const eventObj = eventList[index]
-                const expiryDateFormat = this.customDateFormat(eventObj.expiryDate)
-                const eventStartEndDateArr = this.eventStartEndDateFormat(eventObj.expiryDate, eventObj.duration).split(' - ')
-                const participantsArr = this.setParticipants(eventStartEndDateArr[0], eventStartEndDateArr[1], eventObj.identifier)
-                const eventDataObj = {
-                    eventName: eventObj.name.replace(/http?.*?(?= |$)/g, ''),
-                    eventDate: expiryDateFormat,
-                    eventUpdatedOn: eventObj.lastUpdatedOn,
-                    eventDuration: eventObj.duration,
-                    eventjoined: (eventObj.creatorDetails !== undefined && eventObj.creatorDetails.length > 0) ?
-                    ((eventObj.creatorDetails.length === 1) ? '1 person' :  `${eventObj.creatorDetails.length} people`) : ' --- ',
-                    eventThumbnail: (eventObj.appIcon !== null || eventObj.appIcon !== undefined) ? eventObj.appIcon : '---',
-                    eventDescription: eventObj.description,
-                    eventStatus: eventObj.status,
-                    eventObjective: eventObj.learningObjective,
-                    eventPresenters: (eventObj.creatorContacts !== undefined && eventObj.creatorContacts.length > 0)
-                    ? eventObj.creatorContacts : '',
-                    identifier: eventObj.identifier,
-                    presenters: eventObj.creatorDetails,
-                    eventJoinURL: eventObj.artifactUrl,
-                    eventSource: eventObj.sourceName,
-                    expirtyDate: eventObj.expiryDate,
-                    todayEventDate: this.eventDateFormat(eventObj.expiryDate, ''),
-                    todayEventDateStr: this.eventDateFormat(eventObj.expiryDate, eventObj.duration),
-                    allEventDate: this.allEventDateFormat(eventObj.expiryDate),
-                    eventStartDate: eventStartEndDateArr[0],
-                    eventEndDate: eventStartEndDateArr[1],
-                    isPast: this.compareDate(eventStartEndDateArr[0], eventStartEndDateArr[1]),
-                    participants: (participantsArr !== undefined || participantsArr) ? participantsArr : [],
-                }
-
-                // Today's events
-                if (this.isToday(eventObj.expiryDate)) {
-                    const todayEventObj = {
-                       eventId: eventDataObj.identifier,
-                       eventName: eventDataObj.eventName,
-                       todayEventDate: eventDataObj.todayEventDate,
-                       todayEventDateStr: eventDataObj.todayEventDateStr,
-                       identifier: eventDataObj.identifier,
-                    }
-                    this.eventData['todayEvents'].push(todayEventObj)
-                }
-
-                // Joined By Me
-                if (eventDataObj.participants.length > 0) {
-                    const myUserId = this.configSvc.userProfile && this.configSvc.userProfile.userId
-                    Object.keys(eventDataObj.participants).forEach((indexKey: any) => {
-                        if (eventDataObj.participants[indexKey].user_id === myUserId) {
-                           this.eventData['joinedByMe'].push(eventDataObj)
-                        }
-                    })
-                }
-                // All Events
-                this.eventData['allEvents'].push(eventDataObj)
-                this.allEventsCount = this.eventData['allEvents'].length
-                this.todayEventsCount = this.eventData['todayEvents'].length
-                this.joinedByMeEventsCount = this.eventData['joinedByMe'].length
-            })
-            this.filter('all')
+    setJoinedByMeEvents(participantsArr: any) {
+        if(participantsArr.length > 0) {
+            const myEmail = this.configSvc.userProfile && this.configSvc.userProfile.email
+            if(participantsArr.find((x: any) => x.email === myEmail)) {
+                return true
+            }
         }
-        if (this.todayEventsCount > 0) {
-             this.sortTodayEvents()
-        }
-        this.getMyMDOEvents()
+        return false
     }
 
     setParticipants(startDate: any, endDate: any, identifier: any) {
@@ -337,6 +391,8 @@ export class EventsComponent implements OnInit {
                 break
             }
         }
+        console.log(key)
+        console.log(this.data)
         this.setEventSubFilter('upcoming')
     }
 
@@ -381,6 +437,7 @@ export class EventsComponent implements OnInit {
         this.subData.sort((a: any, b: any) => {
             return b.allEventDate - a.allEventDate
         })
+        this.subDataCount = this.subData.length
     }
 
     allEventDateFormat(datetime: any) {

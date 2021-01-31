@@ -9,7 +9,8 @@
           <div class="mat-title margin-remove text-align participant-name">
             {{ participant.name}}
           </div>
-          <div class="mat-body text-align" style="font-size: 14px;">{{ participant.type }}</div>
+          <div *ngIf="participant.type != ''" class="mat-body text-align" style="font-size: 14px;">{{ participant.type }}</div>
+          <div *ngIf="participant.designation != ''" class="mat-body text-align" style="font-size: 14px;">{{ participant.designation }}</div>
         </div>
       </div>
     </mat-card>
