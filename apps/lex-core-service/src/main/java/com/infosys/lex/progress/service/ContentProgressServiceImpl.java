@@ -237,11 +237,18 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 		// add the resource to the map with new progress to be updated in cassandra
 		meta.putAll((Map<String, ContentProgressModel>) temp.get("meta"));
 		float oldProgress = 0f;
+		logger.info("meta frm temp ::"+mapper.writeValueAsString(meta));
 
 		float maxSize = resourceInfo.getMax_size();
+		logger.info("maxSize ::"+maxSize);
+
 		List<Float> current = resourceInfo.getCurrent() == null ? new ArrayList<Float>(0)
 				: resourceInfo.getCurrent().size() == 0 ? new ArrayList<Float>(0) : resourceInfo.getCurrent();
 		String mimeType = resourceInfo.getMime_type().toLowerCase();
+		logger.info("mimeType ::"+mimeType);
+		logger.info("resourceProgress ::"+mapper.writeValueAsString(resourceProgress));
+
+
 		Set<Float> progressPages = new HashSet<>();
 		if (resourceProgress != null) {
 			oldProgress = resourceProgress.getProgress();
@@ -266,15 +273,21 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 			float newProgress = oldProgress;
 			// page based
 			if (mimes.get("page").contains(mimeType)) {
+				logger.info("progressPages ::"+progressPages);
+
 				progressPages.addAll(current);
 				newProgress = ((float) progressPages.size()) / maxSize;
 			}
 			// time based
 			else if (mimes.get("time").contains(mimeType)) {
+				logger.info("resourceProgress ::"+mapper.writeValueAsString(resourceProgress));
+
 				float previousTime = !progressPages.isEmpty() ? progressPages.toArray(new Float[1])[0] : 0;
+				logger.info("previousTime ::"+previousTime);
 
 				// create old duration
 				float oldMax = (previousTime) / oldProgress;
+				logger.info("oldProgress ::"+oldProgress);
 
 				if (Math.abs(oldMax - maxSize) < 10.0) {
 					if (current.get(0) > previousTime) {
@@ -293,11 +306,16 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 			}
 			// result based
 			else if (mimes.get("result").contains(mimeType)) {
+
 				float previousResult = !progressPages.isEmpty() ? progressPages.toArray(new Float[1])[0] : 0;
+				logger.info("previousResult ::"+previousResult);
+
 				if (current.get(0) > previousResult || current.get(0) == -1) {
 					progressPages = new HashSet<>();
 					progressPages.addAll(current);
 					if (temp.get("resource_type").toString().toLowerCase().equals("exercise")) {
+						logger.info("temp ::"+temp);
+
 						if (current.get(0) == -1) {
 							exerciseWithFeedback = true;
 							newProgress = 100;
@@ -307,6 +325,8 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 							else
 								newProgress = 0;
 						}
+						logger.info("newProgress ::"+newProgress);
+
 					} else {
 						if (current.get(0) >= 60) {
 							newProgress = 1;
@@ -316,6 +336,11 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 					}
 				}
 			}
+			logger.info("overrideProgress ::"+overrideProgress);
+			logger.info("resourceProgress ::"+resourceProgress);
+			logger.info("newProgress ::"+newProgress);
+			logger.info("oldProgress ::"+oldProgress);
+
 
 			if (overrideProgress && resourceProgress != null && (newProgress <= oldProgress)) {
 				newProgress = oldProgress;
