@@ -11,7 +11,7 @@ const API_END_POINTS = {
   CREATE_PROFILE_REGISTRY: 'apis/protected/v8/user/profileRegistry/createUserRegistryV2',
   ADD_USER_TO_DEPARTMENT: 'apis/protected/v8/portal/deptAction',
   WF_HISTORY_BY_APPID: 'apis/protected/v8/workflowhandler/historyByApplicationId/',
-  SEARCH_USER: 'apis/protected/v8/user/autocomplete/department',
+  SEARCH_USER: 'apis/protected/v8/user/autocomplete',
   USER_BDD: '/apis/protected/v8/portal/spv/deptAction/userrole',
 }
 
@@ -52,8 +52,8 @@ export class UsersService {
     return this.http.get<any>(API_END_POINTS.WF_HISTORY_BY_APPID + appid)
   }
 
-  onSearchUserByEmail(email: string, req: any): Observable<any> {
-    return this.http.post<any>(`${API_END_POINTS.SEARCH_USER}/${email}`, req)
+  onSearchUserByEmail(email: string): Observable<any> {
+    return this.http.get<any>(`${API_END_POINTS.SEARCH_USER}/${email}`)
   }
   blockUser(user: object): Observable<any> {
     return this.http.patch<any>(`${API_END_POINTS.USER_BDD}/`, user)

@@ -15,7 +15,7 @@ export class CreateUserComponent implements OnInit {
   rolesList: any = []
   departmentName = ''
   toastSuccess: any
-  departmentoptions:  any = []
+  departmentoptions: any = []
   dropdownSettings = {}
   receivedDept: any
   selectedDept: any
@@ -27,12 +27,12 @@ export class CreateUserComponent implements OnInit {
               private route: ActivatedRoute,
               private snackBar: MatSnackBar,
               private usersSvc: UsersService) {
-                this.route.queryParams.subscribe(params => {
-                  this.queryParam = params['id']
-                  this.currentDept = params['currentDept']
-                  // tslint:disable-next-line:radix
-                  this.queryParam = parseInt(this.queryParam)
-                })
+    this.route.queryParams.subscribe(params => {
+      this.queryParam = params['id']
+      this.currentDept = params['currentDept']
+      // tslint:disable-next-line:radix
+      this.queryParam = parseInt(this.queryParam)
+    })
     this.createUserForm = new FormGroup({
       fname: new FormControl('', [Validators.required]),
       lname: new FormControl('', [Validators.required]),
@@ -117,21 +117,21 @@ export class CreateUserComponent implements OnInit {
       // let user
       this.openSnackbar(res.data)
       if (res) {
-        const req = { departments: [] }
-        req.departments = this.selectedDept ? this.selectedDept.deptName : this.receivedDept.deptName
+        // const req = { departments: [] }
+        // req.departments = this.selectedDept ? this.selectedDept.deptName : this.receivedDept.deptName
 
-        this.usersSvc.onSearchUserByEmail(form.value.email, req).subscribe(data => {
+        this.usersSvc.onSearchUserByEmail(form.value.email).subscribe(data => {
           // user = data[0]
           const userreq = {
             personalDetails: {
-                firstname: data[0].first_name,
-                surname: data[0].last_name,
-                primaryEmail: data[0].email,
+              firstname: data[0].first_name,
+              surname: data[0].last_name,
+              primaryEmail: data[0].email,
             },
             professionalDetails: [
-                {
-                    name: data[0].department_name,
-                },
+              {
+                name: data[0].department_name,
+              },
             ],
             academics: [
               {

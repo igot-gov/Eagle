@@ -75,7 +75,7 @@ export class BtnFeatureComponent extends WidgetBaseComponent
   }
 
   ngOnInit() {
-    this.actionUrl = "/app/home/directory"
+    this.actionUrl = '/app/home/directory'
     this.instanceVal = this.configSvc.rootOrg || ''
     if (this.configSvc.restrictedFeatures) {
       this.isPinFeatureAvailable = !this.configSvc.restrictedFeatures.has('pinFeatures')
@@ -162,7 +162,7 @@ export class BtnFeatureComponent extends WidgetBaseComponent
   }
   gotoUrl(url: string) {
     if (url.indexOf('users') > -1) {
-      window.open("https://igot-dashboard.tarento.com/", "_blank")
+      window.open('https://igot-dashboard.tarento.com/', '_blank')
     }
 
   }
