@@ -14,7 +14,7 @@
     "start:ws-stage": "nodemon --config nodemon/nodemon-ws-stage.json",
     "start:siemens-stage": "nodemon --config nodemon/nodemon-siemens-stage.json",
     "start:nodemon": "nodemon --config nodemon/nodemon.json",
-    "start:eagle": "nodemon --config nodemon/nodemon-eagle-stage.json",
+    "start:igot": "nodemon --config nodemon/nodemon-igot-stage.json",
     "start": "node index.js"
   },
   "keywords": [],
