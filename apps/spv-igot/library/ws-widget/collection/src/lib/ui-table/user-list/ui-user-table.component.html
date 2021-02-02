@@ -1,0 +1,125 @@
+<div class="example-container">
+    <div class="example-loading-shade">
+
+    </div>
+    <!-- <div>{{JSON.stringfy(dataSource)}}</div> -->
+    <div class="example-table-container">
+
+        <div class="search">
+            <!-- <div class="lsearch">
+                <span class="searchText">Search:</span>
+            </div> -->
+            <div class=rsearch>
+                <div *ngIf="dataSource.data.length > 0">
+                    <div class="sinput">
+                        <span class="material-icons"> search </span>
+                        <input type="Standard" label="" (input)="applyFilter($event.target.value)" placeholder="Search">
+                    </div>
+                </div>
+            </div>
+            <!-- <button mat-raised-button type="button" *ngIf="dataSource.data.length > 0 && needCreateUser"
+                    class="text-white ws-mat-primary-background text-white margin-right-m custom-btn"
+                    (click)="gotoCreateUser()"> -->
+            <button mat-raised-button type="button" *ngIf="needCreateUser"
+                class="text-white ws-mat-primary-background text-white margin-right-l custom-btn"
+                (click)="gotoCreateUser()">
+                <b class="text-white" i18n>Create User</b>
+            </button>
+            <button mat-raised-button type="button" *ngIf="needAddAdmin"
+                class="text-white ws-mat-primary-background text-white margin-right-m custom-btn" (click)="openPopup()">
+                <b class="text-white" i18n>Add Admin</b>
+            </button>
+        </div>
+
+
+        <!-- </mat-form-field> -->
+
+        <mat-table #table matSort [ngStyle]="{'height': bodyHeight}" [matSortActive]="tableData!.sortColumn"
+            [matSortDirection]="tableData!.sortState" [dataSource]="dataSource" *ngIf="dataSource.data.length > 0"
+            class=" example-table table1 responsiveTable">
+
+            <ng-container matColumnDef="{{col.key}}" *ngFor="let col of tableData!.columns">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> {{col.displayName}} </mat-header-cell>
+                <mat-cell *matCellDef="let element" (click)="onRowClick(element)">
+                    <span *ngIf="col.isList" class="textclass"
+                        [matTooltip]="(element[col.key]).split('<br />').join(', ')">
+                        <div innerHTML="{{element[col.key]}}"></div>
+                    </span>
+                    <span *ngIf="!col.isList" class="textclass mat-body-2">
+                        {{element[col.key]}} {{col.isList}}
+                    </span>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Actions" *ngIf="tableData!.actions && tableData!.actions.length > 0">
+                <mat-header-cell *matHeaderCellDef class="clr-darkish-blue action-header"> Actions </mat-header-cell>
+                <mat-cell *matCellDef="let row" class="action-cell">
+                    <div *ngFor="let ac of tableData.actions">
+                        <div *ngIf="ac.optional">
+                            <ws-widget-app-button *ngIf="row[ac.optional_key] === ac.optional_Value" [type]="ac.type"
+                                [icon]="ac.icon" [disabled]="ac.disabled || false" [label]="ac.label"
+                                (click)="buttonClick(ac.name,row)"></ws-widget-app-button>
+                        </div>
+                        <div *ngIf="!ac.optional">
+                            <ws-widget-app-button [type]="ac.type" [icon]="ac.icon" [label]="ac.label"
+                                [disabled]="ac.disabled || false" (click)="buttonClick(ac.name,row)">
+                            </ws-widget-app-button>
+                        </div>
+                    </div>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="Menu">
+                <mat-header-cell *matHeaderCellDef class="clr-darkish-blue action-header">
+                    <mat-icon>view_comfy</mat-icon>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row" class="action-cell">
+                    <button type="button" mat-icon-button i18n-aria-label aria-label="action items"
+                        [matMenuTriggerFor]="cardMenu" [matMenuTriggerData]="{'data':row}" class="action-btn">
+                        <mat-icon>more_horiz</mat-icon>
+                    </button>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="getFinalColumns()"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: getFinalColumns();" (click)="selection.toggle(row); onRowClick(row)">
+            </mat-row>
+        </mat-table>
+        <div class="no-information-found" *ngIf="dataSource.filteredData.length===0">No User information found
+        </div>
+    </div>
+
+    <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions">
+    </mat-paginator>
+</div>
+
+<mat-menu #cardMenu="matMenu">
+    <ng-template matMenuContent let-rowData="data">
+        <!-- <div > -->
+        <button (click)="buttonClick('showOnKarma',rowData)" mat-menu-item name="channel-analytics-button"
+            class="ws-mat-primary-text" i18n-aria-label aria-label="Analytics">
+            <mat-icon>input</mat-icon> <span>Show on Karmayogi</span>
+        </button>
+        <!-- </div> -->
+        <!-- <div mat-menu-item> -->
+        <button (click)="rowData && rowData.blocked ? buttonClick('unblock',rowData): buttonClick('block',rowData)"
+            mat-menu-item name="channel-analytics-button" class="ws-mat-primary-text" i18n-aria-label
+            aria-label="Analytics">
+            <mat-icon>block</mat-icon><span>{{rowData && rowData.blocked ? 'Unblock user':'Block user' }}</span>
+        </button>
+        <!-- </div> -->
+        <!-- <div mat-menu-item> -->
+        <button (click)="rowData && rowData.active ? buttonClick('deactive',rowData): buttonClick('active',rowData)"
+            mat-menu-item name="channel-analytics-button" class="ws-mat-primary-text" i18n-aria-label
+            aria-label="Analytics">
+            <mat-icon>edit_attributes</mat-icon>
+            <span>{{rowData && rowData.active? 'Deactivate User':'Activate User'}}</span>
+        </button>
+        <!-- </div> -->
+        <!-- <div mat-menu-item> -->
+        <!-- <button (click)="buttonClick('delete',rowData)" mat-menu-item name="channel-analytics-button"
+            class="ws-mat-primary-text" i18n-aria-label aria-label="Analytics">
+            <mat-icon>delete</mat-icon><span>Delete User</span>
+        </button> -->
+        <!-- </div> -->
+    </ng-template>
+</mat-menu>

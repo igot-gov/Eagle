@@ -1,0 +1,27 @@
+<div class="flex flex-4 flex-column">
+  <mat-card class="flex-custom">
+    <mat-card-header class="flex-custom-m margin-bottom-l" id="directorycs">
+      <div class="flex-1" role="link" tabindex="0">
+        <div class="flex flex-1">
+          <mat-card-title class="flex-4 mobile-margin text-capitalize margin-remove-bottom">
+            <span class="mat-title">Directory</span>
+          </mat-card-title>
+        </div>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="flex flex-1 flex-column margin-fix">
+        <div class="flex flex-1 filter max-height-60">
+          <a *ngFor="let department of departmentHearders" href="javascript:void(0)" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter ===department,
+              'ws-mat-accent-border font-medium':currentFilter !== 'department'}" mat-button
+            (click)="filter(department)" role="button">{{department}}</a>
+        </div>
+      </div>
+      <ng-container>
+        <ws-widget-directory-table [selectedDepartment]='currentDepartment' [tableData]='tabledata' [data]='data'
+          (eOnRowClick)="onRoleClick($event)" (actionsClick)="actionClick($event)">
+        </ws-widget-directory-table>
+      </ng-container>
+    </mat-card-content>
+  </mat-card>
+</div>

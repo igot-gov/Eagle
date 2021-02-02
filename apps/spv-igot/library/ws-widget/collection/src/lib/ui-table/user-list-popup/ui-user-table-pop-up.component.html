@@ -1,0 +1,97 @@
+<div class="example-container">
+    <div class="example-loading-shade">
+
+    </div>
+    <!-- <div>{{JSON.stringfy(dataSource)}}</div> -->
+    <div class="example-table-container">
+
+        <div class="search">
+            <!-- <div class="lsearch">
+                <span class="searchText">Search:</span>
+            </div> -->
+            <div class=rsearch>
+                <input class="sinput" type="Standard" label="" (input)="applyFilter($event.target.value)"
+                    placeholder="Search to find the Users">
+            </div>
+        </div>
+
+        <!-- </mat-form-field> -->
+        <mat-table #table matSort [ngStyle]="{'height': bodyHeight}" [matSortActive]="tableData!.sortColumn"
+            [matSortDirection]="tableData!.sortState" [dataSource]="dataSource"
+            class=" example-table table1 responsiveTable" *ngIf="this.dataSource.data.length>0">
+            <ng-container matColumnDef="Actions" *ngIf="tableData!.actions && tableData!.actions.length > 0">
+                <mat-header-cell *matHeaderCellDef class="clr-darkish-blue action-header"> Mark as Admin
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row" class="action-cell">
+                    <!-- <mat-radio-group aria-label="Select an Admin"> -->
+                    <mat-radio-button *ngFor="let ac of tableData.actions" [value]="ac.name"
+                        (click)="buttonClick(ac.name,row)">
+                    </mat-radio-button>
+                    <!-- </mat-radio-group> -->
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="{{col.key}}" *ngFor="let col of tableData!.columns">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> {{col.displayName}} </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <span *ngIf="col.isList" class="textclass"
+                        [matTooltip]="(element[col.key]).split('<br />').join(', ')">
+                        <div innerHTML="{{element[col.key]}}"></div>
+                    </span>
+                    <span *ngIf="!col.isList" class="textclass mat-body-2">
+                        {{element[col.key]}} {{col.isList}}
+                    </span>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="Menu">
+                <mat-header-cell *matHeaderCellDef class="clr-darkish-blue action-header">
+                    <mat-icon>view_comfy</mat-icon>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row" class="action-cell">
+                    <button type="button" mat-icon-button i18n-aria-label aria-label="action items"
+                        [matMenuTriggerFor]="cardMenu" class="action-btn">
+                        <mat-icon>more_horiz</mat-icon>
+                    </button>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="getFinalColumns()"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: getFinalColumns();" (click)="selection.toggle(row); onRowClick(row)">
+            </mat-row>
+        </mat-table>
+        <div class="no-information-found" *ngIf="dataSource.filteredData.length===0">No User information found
+        </div>
+    </div>
+
+    <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+        *ngIf="this.dataSource.data.length===-32">
+    </mat-paginator>
+</div>
+
+<mat-menu #cardMenu="matMenu">
+    <ng-template matMenuContent>
+        <div mat-menu-item>
+            <button name="channel-analytics-button" class="ws-mat-primary-text" mat-icon-button i18n-aria-label
+                aria-label="Analytics">
+                <mat-icon>input</mat-icon> <span>Show on Karmayogi</span>
+            </button>
+        </div>
+        <div mat-menu-item>
+            <button name="channel-analytics-button" class="ws-mat-primary-text" mat-icon-button i18n-aria-label
+                aria-label="Analytics">
+                <mat-icon>block</mat-icon><span>Block user</span>
+            </button>
+        </div>
+        <div mat-menu-item>
+            <button name="channel-analytics-button" class="ws-mat-primary-text" mat-icon-button i18n-aria-label
+                aria-label="Analytics">
+                <mat-icon>edit_attributes</mat-icon><span>Deactivate User</span>
+            </button>
+        </div>
+        <div mat-menu-item>
+            <button name="channel-analytics-button" class="ws-mat-primary-text" mat-icon-button i18n-aria-label
+                aria-label="Analytics">
+                <mat-icon>delete</mat-icon><span>Delete User</span>
+            </button>
+        </div>
+    </ng-template>
+</mat-menu>

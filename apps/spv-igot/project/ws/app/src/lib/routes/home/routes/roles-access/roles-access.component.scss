@@ -1,0 +1,10 @@
+.mat-card-title{
+  // margin-left: -31px !important;
+}
+
+::ng-deep#rolescs {
+  .mat-card-header-text {
+    display: none !important;
+    margin: 0 !important;
+  }
+}

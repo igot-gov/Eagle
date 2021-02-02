@@ -1,0 +1,12 @@
+<mat-sidenav-container autosize name="discuss-menu">
+  <mat-sidenav [mode]="mode$ | async" [(opened)]="sideNavBarOpened">
+    <div #stickyMenu>
+      <ng-container [wsResolverWidget]="widgetData"></ng-container>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="container-balanced">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

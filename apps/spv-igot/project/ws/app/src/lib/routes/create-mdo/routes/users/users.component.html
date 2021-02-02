@@ -1,0 +1,16 @@
+<div class="flex">
+  <div class="min-wid" style="position: relative;">
+    <div #stickyMenu [class.sticky]="sticky">
+      <ws-widget-scrollspy-left-menu [currentTab]="currentTab" [tabsData]="tabsData" class="flex flex-1"
+        (eSideNavClick)="onSideNavTabClick($event)">
+      </ws-widget-scrollspy-left-menu>
+    </div>
+  </div>
+  <div class="flex-display">
+    <ws-widget-ui-user-table *ngIf="currentTab==='users'" [tableData]="tabledata" [data]="data" [needAddAdmin]="false"
+      [needCreateUser]="true">
+    </ws-widget-ui-user-table>
+    <ws-app-roles-access *ngIf="currentTab==='rolesandaccess'">
+    </ws-app-roles-access>
+  </div>
+</div>

@@ -1,0 +1,436 @@
+@import 'ws-mixins';
+@import 'ws-vars';
+@import 'ws-common';
+
+.font-weight-300 {
+  font-weight: 300;
+}
+
+.space-around {
+  justify-content: space-around;
+}
+.para-font-color{
+  color: #666666;
+  font-size: 14px;
+}
+.image-border {
+  border: 2px solid;
+  border-radius: 5px;
+}
+
+.remove-card-box {
+  box-shadow: none !important;
+}
+
+.rotate {
+  transform: rotate(45deg);
+}
+
+.flex-05 {
+  flex: 0.49;
+}
+
+.width-90 {
+  width: 90%;
+}
+
+.disable {
+  opacity: 0.3;
+  pointer-events: none;
+  cursor: none;
+}
+
+.not-disable {
+  opacity: 0.7;
+}
+
+input {
+  line-height: 1px;
+}
+
+.required {
+  &::after {
+    color: red;
+    content: ' *';
+  }
+}
+.floatright {
+  float: right;
+}
+
+.max-width {
+  max-width: 256px;
+  max-height: 150px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  position: absolute;
+  top: 110px;
+  right: 60px;
+  z-index: 3;
+}
+
+.small-button {
+  height: 32px;
+  width: 32px;
+  transition: 0.5s;
+  margin-right: 4px;
+}
+
+.small-icon {
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  height: auto;
+  width: auto;
+  transition: 0.5s;
+}
+
+.normal-button {
+  border-radius: 50%;
+  height: 40px;
+  display: flex;
+  width: 40px;
+  z-index: 3;
+  justify-content: center;
+}
+
+// forms
+
+.photo {
+  height: 20px;
+  width: 20px;
+  background: #f2f2f2;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  bottom: 12px;
+  cursor: pointer;
+}
+
+.photo-icon {
+  position: relative;
+  top: 2px;
+  left: 4px;
+  width: 12px;
+  height: 12px;
+  font-size: 12px;
+}
+
+.mat-form-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.resize-none {
+  resize: none;
+}
+
+.margin-left-40 {
+  margin-left: 66px;
+}
+
+.custom-form-control {
+  margin: 0.25em 25px;
+}
+
+.info {
+  opacity: 0.8;
+}
+
+.margin-l-l {
+  margin-left: 32px;
+
+  @media only screen and(max-width: 585px) {
+    margin-left: 0px;
+  }
+}
+
+.margin-r-l {
+  margin-right: 32px;
+
+  @media only screen and(max-width: 585px) {
+    margin-left: 0px;
+  }
+}
+
+.op30 {
+  opacity: 0.3;
+}
+
+.op100 {
+  opacity: 1;
+}
+
+.margin-top-60 {
+  margin-top: 60px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.flex-grow80 {
+  flex-grow: 0.8;
+}
+
+.transform {
+  transform: rotate(45deg);
+  transition: 0.3s;
+}
+
+.conceptsField {
+  transform: translateX(0);
+  opacity: 1;
+  transition: 0.3s;
+}
+
+.conceptsFieldInitial {
+  transform: translateX(-100px);
+  opacity: 0;
+  transition: 0.3s;
+}
+
+textarea {
+  line-height: 1.5;
+}
+
+//upload box
+
+.op100 {
+  opacity: 1;
+}
+
+.upload-box {
+  border: 2px dashed rgba(28, 28, 28, 0.6);
+  border-radius: 2%;
+  width: 235px;
+}
+
+.text-white {
+  color: #fff !important;
+}
+
+.set-hw {
+  .mat-form-field-wrapper {
+    .mat-form-field-infix {
+      padding: 4px 0 8px 0px !important;
+    }
+  }
+}
+
+ul li {
+  margin: 20px 0;
+}
+
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.inputfile + label {
+  font-size: 1.25em;
+  color: white;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.thumb-text {
+  display: flex;
+  flex-direction: row;
+
+  @include breakpoint-xs {
+    flex-direction: column;
+  }
+}
+
+.duration-time {
+  display: flex;
+  flex: 1;
+
+  .duration-d {
+    display: flex;
+    // flex: 1;
+  }
+
+  @include breakpoint-xs {
+    flex-wrap: wrap;
+  }
+
+  @include breakpoint-s {
+    flex-wrap: wrap;
+  }
+
+  @include breakpoint-m {
+    flex-wrap: wrap;
+    flex: auto;
+  }
+}
+
+.duration-width {
+  max-width: 55px;
+
+  @include breakpoint-s {
+    max-width: 60px;
+  }
+
+  @include breakpoint-xs {
+    max-width: 50px;
+  }
+
+  @include breakpoint-m {
+    max-width: 70px;
+  }
+}
+
+.padding-small {
+  padding: 5px;
+}
+
+.numberInput::-webkit-inner-spin-button,
+.numberInput::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.mat-button-size {
+  height: 37.5px !important;
+  cursor: pointer;
+  margin: auto;
+}
+
+.row-wise {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.mobile-break {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  margin: 0 5px 0 5px;
+  flex: 1;
+  background: bisque;
+}
+
+.new-mobile {
+  display: flex;
+  flex-direction: row;
+
+  @include breakpoint-s {
+    flex-direction: column;
+  }
+
+  @include breakpoint-xs {
+    flex-direction: column;
+  }
+}
+
+.logos {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+
+  .thumbnail-logo {
+    background: rgba(217, 242, 254, 0.49);
+    border: 1px dashed rgb(0, 169, 244);
+    border-radius: 8px;
+    // opacity: 0.49;
+    width: 256px;
+    height: 150px;
+
+    @include breakpoint-s {
+      min-width: 150px;
+      min-height: 75px;
+      max-width: 256px;
+      max-height: 150px;
+      width: auto;
+      // height: auto;
+    }
+
+    @include breakpoint-xs {
+      min-width: 100px;
+      min-height: 75px;
+      max-width: 256px;
+      max-height: 150px;
+      width: auto;
+      height: auto;
+    }
+  }
+
+  .source-logo {
+    background: rgba(217, 242, 254, 0.49);
+    border: 1px dashed rgb(0, 169, 244);
+    border-radius: 8px;
+    // opacity: 0.49;
+    width: 72px;
+    height: 74px;
+    box-shadow: 0px 2px 4px #00000029;
+  }
+
+  @include breakpoint-s {
+    // flex-direction: column;
+  }
+
+  @include breakpoint-xs {
+    flex-direction: column;
+  }
+}
+
+.card-contan {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+
+  @include breakpoint-s {
+    flex-direction: column;
+  }
+
+  @include breakpoint-xs {
+    flex-direction: column;
+  }
+}
+
+.bannerSelect {
+  width: 75px;
+  height: 45px;
+  display: flex;
+  margin: 10px;
+}
+
+.example-radio-button {
+  display: flex;
+}
+
+.c-footer {
+  display: flex;
+  margin: auto;
+  width: fit-content;
+}
+
+.min-w {
+  width: 650px;
+
+  @include breakpoint-xs {
+    width: auto;
+  }
+
+  @include breakpoint-s {
+    width: auto;
+  }
+}
