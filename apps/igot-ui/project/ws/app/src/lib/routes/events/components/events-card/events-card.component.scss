@@ -1,0 +1,188 @@
+@import 'ws-common';
+@import 'ws-vars';
+@import 'ws-mixins';
+
+.career-card {
+  // display: flex;
+  flex: 1;
+//   height: 100%;
+  height: calc(100% - 2rem);
+  &.mat-card{
+    flex-direction: column;
+    display: flex;
+  }
+  .mat-card-footer{
+    justify-self: flex-end;
+    align-items: center;
+  }
+}
+
+.events-card {
+  flex: 1;
+  height: 447px;
+  width: 370px;
+  &.mat-card{
+    flex-direction: column;
+    display: flex;
+    padding:0px;
+  }
+  .mat-card-content {
+    margin-bottom: 5px;
+  }
+  .mat-card-footer{
+    justify-self: flex-end;
+    align-items: center;
+  }
+  .event-card-image {
+    width: 100%;
+  }
+}
+
+.status-badge {
+  position: absolute; 
+  right: 5px; 
+  top: -30px;
+}
+
+.event_date {
+  margin-left: 16px;
+  color:#0074B6;
+}
+
+.mat-card-image {
+    width: 370px !important;
+    margin: 0 -16px 16px 0px;
+    height: 186px;
+}
+
+.avatar-img{
+    border-radius: 50%;
+    text-align: center;
+    background-color: #9e53a7;
+    color: white !important;
+    margin-left: -10px;
+    font-size: 10px !important;
+    width: 24px;
+    height: 24px;
+    padding: 8px;
+}
+
+.avatars {
+  display: inline-flex;
+}
+
+.numberCircle {
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    padding: 8px;
+    background-color: #9e53a7;
+    border: 2px solid #666;
+    color: #666;
+    text-align: center;
+    font: 14px Arial, sans-serif;
+}
+
+.today-status {
+  color: black;
+  background-color: white;
+  width: 80px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.live-status {
+    background-color: rgb(255, 130, 104) !important;
+    color: white;
+    width: 80px;
+    font-weight: bold;
+    text-transform: uppercase;
+    justify-content: center;
+}
+
+.split-count{
+    text-align: left;
+    margin-left: 19px;
+    width: 28px;
+    font-weight: 500;
+    color:  #9e53a7;
+}
+
+.dot:before {
+  content: '•';
+  margin: 1rem;
+
+  @include breakpoint-xs {
+    margin: 0.65rem;
+  }
+}
+
+.mobile {
+  @include breakpoint-xs {
+    flex: 1;
+  }
+
+  @include breakpoint-s {
+    flex: 1;
+  }
+}
+
+.responsive {
+  display: flex;
+  flex-direction: row;
+
+  @include breakpoint-xs {
+    flex-direction: column;
+  }
+}
+
+.mobile2 {
+  @include breakpoint-xs {
+    margin-top: $size-s;
+  }
+
+  // @include breakpoint-s {
+  //   margin-top: $size-s;
+  // }
+}
+
+.tag {
+  display: flex;
+  margin: 0 10px;
+  padding: 3px 15px;
+  font-size: 12px;
+  min-width: 50px;
+  justify-content: center;
+  border-radius: 20px 5px 5px 20px;
+}
+
+.noocoments {
+  flex: 1;
+  text-align: right;
+  margin-right: $size-m;
+}
+
+.custom {
+  flex-direction: row;
+
+  @include breakpoint-xs {
+    flex-direction: column;
+    margin: 0 24px 0 24px;
+
+  }
+
+  // @include breakpoint-s {
+  //   flex-direction: column;
+  //   margin: 0 24px 0 24px;
+
+  // }
+}
+
+.margin-0 {
+  margin: 0;
+}
+
+.pad-4 {
+  padding: 4px;
+}

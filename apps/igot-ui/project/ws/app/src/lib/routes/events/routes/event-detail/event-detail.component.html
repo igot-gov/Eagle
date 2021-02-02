@@ -1,0 +1,128 @@
+<div class="container-balanced">
+  <!-- <ws-widget-btn-page-back [widgetData]="{ url: 'home',titles: titles }">
+  </ws-widget-btn-page-back> -->
+  <div class="flex flex-4 flex-column py-10" *ngIf="eventDataObj != undefined && currentFilter == 'overview' || currentFilter == 'participants'">
+    <mat-card class="flex-custom event-details-card" style="box-shadow: none;background:none;">
+        <div class="flex-1" style="height: 167px;">
+            <div class="flex flex-4" style="height: 167px;">
+              <div class="flex-1">
+                <!-- <img src="{{ overviewData[0].appIcon }}" class="event-card-image"> -->
+                <img mat-card-image class="event-card-image image-border mat-lite-background" role="link"
+                  [src]="overviewData[0].appIcon" (error)="changeToDefaultImg($event)" [alt]="overviewData[0].name" class="card-img" />
+              </div>
+
+              <div class="flex-3 px-10" style="margin-top: 10px;height: 167px;">
+                <mat-card-title role="link" tabindex="0" class="flex-4 mobile-margin text-capitalize mat-h2">
+                  {{ overviewData[0].name }}
+                </mat-card-title>
+                <mat-card-content>
+                  <span class="flex mat-body-2" role="link" tabindex="0" i18n-aria-label>
+                    {{ overviewData[0].description }}
+                  </span>
+                  <span class="flex mat-body-2 ws-mat-black60-text mt-10" role="link" tabindex="0" i18n-aria-label >
+                    <mat-chip-list *ngIf="isToday && status != 'between'">
+                        <mat-chip class="today-status" selected>TODAY</mat-chip>
+                    </mat-chip-list>
+                    <mat-chip-list *ngIf="!isToday && status == 'between'">
+                        <mat-chip class="live-status" selected>LIVE</mat-chip>
+                    </mat-chip-list>
+                    <mat-chip-list *ngIf="isToday && status == 'between'">
+                        <mat-chip class="live-status" selected>LIVE</mat-chip>
+                    </mat-chip-list>
+                  </span>
+                  
+                </mat-card-content>
+              </div>
+              <div class="flex flex-row-reverse">
+                <div class="ml-4 mb-2 view-more ws-mat-accent-text view-all">
+                  <div class="flex-1" style="position: relative;">
+                    <div #stickyMenu [class.sticky]="sticky">
+                      <app-right-menu-card [data]="overviewData[0]"></app-right-menu-card>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </mat-card>
+  </div>
+  <div class="w-full px-2" *ngIf="eventDataObj != undefined">
+    <mat-card style="box-shadow: none; background:none; padding-left: 0px;">
+      <mat-card-content>
+        <div class="flex flex-1 flex-column margin-fix">
+          <div class="flex flex-1 filter max-height-60">
+            <a href="javascript:void(0)" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'overview',
+              'ws-mat-accent-border font-medium':currentFilter !== 'overview'}" mat-button (click)="filter('overview')"
+              role="button">OVERVIEW</a>
+            <a href="javascript:void(0)" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'participants',
+              'ws-mat-accent-border font-medium':currentFilter !== 'participants'}" mat-button
+              (click)="filter('participants')" role="button">PARTICIPANTS</a>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <ng-container *ngIf="currentFilter == 'overview'">
+      <ng-container *ngIf="overviewData[0].description != undefined">
+        <div class="flex flex-1 flex-column margin-fix mb-2">
+            <span class="f-medium mat-title">Description </span>
+        </div>
+        <div class="flex flex-wrap margin-fix">
+            <ng-container>
+                <div class="flex w-65 mb-5">
+                   <p>{{ overviewData[0].description }}</p>
+                </div>
+            </ng-container>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="presentersCount > 0">
+        <div class="flex flex-1 flex-column margin-fix mb-2">
+            <span class="f-medium mat-title">Presenters</span>
+        </div>
+        <div class="flex flex-wrap margin-fix">
+            <ng-container>
+                <div class="flex presenters-box">
+                  <ng-container *ngFor="let presenter of presenters">
+                      <app-presenter-card [data]="presenter" [host]="true"></app-presenter-card>
+                  </ng-container>
+                </div>
+            </ng-container>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="overviewData[0].learningObjective != undefined">
+        <div class="flex flex-1 flex-column margin-fix mb-2 mt-10">
+            <span class="f-medium mat-title">Agenda</span>
+        </div>
+        <div class="flex flex-wrap margin-fix mb-20">
+          <mat-card>
+              <mat-card-content>
+                  <div class="flex w-65  mb-5">
+                     <p> {{ overviewData[0].learningObjective }} </p>
+                  </div>
+              </mat-card-content>
+          </mat-card>
+        </div>
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="currentFilter == 'participants'">
+        <div class="flex w-65" *ngIf="participantsCount > 0" style="display: flex; flex-wrap: wrap;">
+            <ng-container *ngFor="let participant of participantsArr">
+                <app-presenter-card [data]="participant" [host]="false"></app-presenter-card>
+            </ng-container>
+        </div>
+        <div class="flex w-65" *ngIf="participantsCount == 0" >
+            <div class="flex flex-wrap margin-fix mb-20">
+              <mat-card>
+                  <mat-card-content>
+                      <div class="flex w-full  mb-5">
+                         <p>No participants found!</p>
+                      </div>
+                  </mat-card-content>
+              </mat-card>
+            </div>
+        </div>
+
+    </ng-container>
+  </div>
+</div>

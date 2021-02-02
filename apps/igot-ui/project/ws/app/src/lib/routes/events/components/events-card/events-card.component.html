@@ -1,0 +1,61 @@
+<mat-card class="events-card">
+    <div>
+        <a [routerLink]= "['/app/event-hub/home/' + identifier]">
+            <img mat-card-image class="event-card-image image-border mat-lite-background" role="link"
+            [src]="appIcon" (error)="changeToDefaultImg($event)" [alt]="eventTitle" class="card-img" />
+        </a>
+        <span class="flex mat-body-2 ws-mat-black60-text mt-10 status-badge" role="link" tabindex="0" i18n-aria-label>
+            <mat-chip-list *ngIf="isToday && status != 'between'">
+                <mat-chip class="today-status" selected>TODAY</mat-chip>
+            </mat-chip-list>
+            <mat-chip-list *ngIf="!isToday && status == 'between'">
+                <mat-chip class="live-status" selected>LIVE</mat-chip>
+            </mat-chip-list>
+            <mat-chip-list *ngIf="isToday && status == 'between'">
+                <mat-chip class="live-status" selected>LIVE</mat-chip>
+            </mat-chip-list>
+        </span>
+    </div>
+    <mat-card-header>
+        <mat-card-subtitle class="responsive">
+            <span class="mat-body-2">Karmayogi Bharat</span>
+        </mat-card-subtitle>
+        <mat-card-title>
+            <a i18n-aria-label role="link" [routerLink]="['/app/event-hub/home/' + identifier]">
+                <span role="link" i18n-aria-label tabindex="0" 
+                      class="cursor-pointer mat-subheading-1">
+                    {{ eventTitle }}
+                </span>
+            </a>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="flex flex-1">
+        <div class="mat-body-2">
+            <span class="event_date">
+                {{ eventDate }}
+            </span>
+        </div>
+    </mat-card-content>
+    <mat-card-footer class="flex flex-1 custom margin-0">
+        <div class="flex flex-1 flex-row mx-4">
+            <span class="flex mobile">
+                 <button mat-stroked-button color="accent" type="button" class=" mat-accent-border flex-auto-display" (click)="joinEvent(identifier)">
+                    <span *ngIf="!isPast" i18n>Join</span>
+                    <span *ngIf="isPast" i18n>Event Ended</span>
+                </button>
+            </span>
+        </div>
+        <div class="flex flex-1" class="text-right mobile2" *ngIf="avatarArr.length > 0">
+            <span class="noocoments ws-mat-default-text mat-subheading-2">
+                <div class="avatars" style="">
+                        <span class="avatar" *ngFor="let avatar of avatarArr">
+                            <span class="headline avatar-img">
+                                {{ avatar.shortname }}
+                            </span>
+                        </span>
+                    </div>
+                    <span class="split-count" *ngIf="splitUsersCount > 0"> + {{ splitUsersCount }}</span>
+            </span>
+        </div>
+    </mat-card-footer>
+</mat-card>
