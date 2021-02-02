@@ -60,7 +60,7 @@ public class PortalController {
 	public ResponseEntity<DepartmentInfo> addDepartment(@RequestHeader("wid") String wid,
 			@RequestBody DepartmentInfo deptInfo,@RequestHeader("Authorization") String authorization,
 			@RequestHeader("X-Authenticated-User-Token") String xAuthenticatedUserToken,@RequestHeader("rootOrg") String rootOrg) throws Exception {
-		//validateUserAccess(PortalConstants.SPV_DEPT_TYPE, PortalConstants.SPV_ROLE_NAME, wid);
+		validateUserAccess(PortalConstants.SPV_DEPT_TYPE, PortalConstants.SPV_ROLE_NAME, wid);
 		return new ResponseEntity<DepartmentInfo>(spvPortalService.addDepartment(wid, deptInfo,rootOrg,authorization,xAuthenticatedUserToken), HttpStatus.OK);
 	}
 
@@ -75,7 +75,7 @@ public class PortalController {
 	@GetMapping("/portal/spv/department")
 	public ResponseEntity<List<DepartmentInfo>> getAllDepartments(@RequestHeader("wid") String wid,@RequestHeader("Authorization") String authorization,
 			@RequestHeader("X-Authenticated-User-Token") String xAuthenticatedUserToken,@RequestHeader("rootOrg") String rootOrg) throws Exception {
-		//validateUserAccess(PortalConstants.SPV_DEPT_TYPE, PortalConstants.SPV_ROLE_NAME, wid);
+		validateUserAccess(PortalConstants.SPV_DEPT_TYPE, PortalConstants.SPV_ROLE_NAME, wid);
 		return new ResponseEntity<List<DepartmentInfo>>(spvPortalService.getAllDepartments(rootOrg,authorization,xAuthenticatedUserToken), HttpStatus.OK);
 	}
 
@@ -128,7 +128,7 @@ public class PortalController {
 	public ResponseEntity<?> getMyMdoDepartment(@RequestHeader("wid") String wid,
 			@RequestParam(name = "allUsers", required = false) boolean isUserInfoRequired,@RequestHeader("Authorization") String authorization,
 			@RequestHeader("X-Authenticated-User-Token") String xAuthenticatedUserToken,@RequestHeader("rootOrg") String rootOrg) throws Exception {
-		//validateUserAccess(PortalConstants.MDO_DEPT_TYPE, PortalConstants.MDO_ROLE_NAME, wid);
+		validateUserAccess(PortalConstants.MDO_DEPT_TYPE, PortalConstants.MDO_ROLE_NAME, wid);
 		return new ResponseEntity<>(mdoPortalService.getMyDepartment(wid, isUserInfoRequired,rootOrg,authorization,xAuthenticatedUserToken), HttpStatus.OK);
 	}
 
@@ -136,7 +136,7 @@ public class PortalController {
 	public ResponseEntity<DepartmentInfo> updateMdoDepartment(@RequestHeader("wid") String wid,
 			@RequestBody DepartmentInfo deptInfo,@RequestHeader("Authorization") String authorization,
 			@RequestHeader("X-Authenticated-User-Token") String xAuthenticatedUserToken,@RequestHeader("rootOrg") String rootOrg) throws Exception {
-		//validateUserAccess(PortalConstants.MDO_DEPT_TYPE, PortalConstants.MDO_ROLE_NAME, wid, deptInfo.getId());
+		validateUserAccess(PortalConstants.MDO_DEPT_TYPE, PortalConstants.MDO_ROLE_NAME, wid, deptInfo.getId());
 		return new ResponseEntity<DepartmentInfo>(mdoPortalService.updateDepartment(deptInfo,rootOrg,authorization,xAuthenticatedUserToken), HttpStatus.OK);
 	}
 
@@ -145,7 +145,7 @@ public class PortalController {
 			@RequestHeader("rootOrg") String rootOrg, @RequestHeader("org") String org,
 			@RequestHeader("wid") String wid, @RequestHeader("Authorization") String authorization,
 			@RequestHeader("X-Authenticated-User-Token") String xAuthenticatedUserToken) throws Exception {
-		//validateUserAccess(PortalConstants.MDO_DEPT_TYPE, PortalConstants.MDO_ROLE_NAME, wid, userDeptRole.getDeptId());
+		validateUserAccess(PortalConstants.MDO_DEPT_TYPE, PortalConstants.MDO_ROLE_NAME, wid, userDeptRole.getDeptId());
 		return new ResponseEntity<UserDepartmentInfo>(
 				portalService.addUserRoleInDepartment(userDeptRole, wid, rootOrg, org,authorization,xAuthenticatedUserToken), HttpStatus.OK);
 	}
@@ -155,7 +155,7 @@ public class PortalController {
 			@RequestBody UserDepartmentRole userDeptRole, @RequestHeader("rootOrg") String rootOrg,
 			@RequestHeader("org") String org, @RequestHeader("wid") String wid, @RequestHeader("Authorization") String authorization,
 			@RequestHeader("X-Authenticated-User-Token") String xAuthenticatedUserToken) throws Exception {
-		//validateUserAccess(PortalConstants.MDO_DEPT_TYPE, PortalConstants.MDO_ROLE_NAME, wid, userDeptRole.getDeptId());
+		validateUserAccess(PortalConstants.MDO_DEPT_TYPE, PortalConstants.MDO_ROLE_NAME, wid, userDeptRole.getDeptId());
 		return new ResponseEntity<UserDepartmentInfo>(
 				portalService.updateUserRoleInDepartment(userDeptRole, wid, rootOrg, org,authorization,xAuthenticatedUserToken), HttpStatus.OK);
 	}
@@ -180,7 +180,7 @@ public class PortalController {
 	public ResponseEntity<DepartmentInfo> updateCbpDepartment(@RequestHeader("wid") String wid,
 			@RequestBody DepartmentInfo deptInfo,@RequestHeader("Authorization") String authorization,
 			@RequestHeader("X-Authenticated-User-Token") String xAuthenticatedUserToken,@RequestHeader("rootOrg") String rootOrg) throws Exception {
-		//validateUserAccess(PortalConstants.CBP_DEPT_TYPE, PortalConstants.CBP_ROLE_NAME, wid);
+		validateUserAccess(PortalConstants.CBP_DEPT_TYPE, PortalConstants.CBP_ROLE_NAME, wid);
 		return new ResponseEntity<DepartmentInfo>(mdoPortalService.updateDepartment(deptInfo,rootOrg,authorization,xAuthenticatedUserToken), HttpStatus.OK);
 	}
 
@@ -189,7 +189,7 @@ public class PortalController {
 			@RequestHeader("rootOrg") String rootOrg, @RequestHeader("org") String org,
 			@RequestHeader("wid") String wid, @RequestHeader("Authorization") String authorization,
 			@RequestHeader("X-Authenticated-User-Token") String xAuthenticatedUserToken) throws Exception {
-		//validateUserAccess(PortalConstants.CBP_DEPT_TYPE, PortalConstants.CBP_ROLE_NAME, wid, userDeptRole.getDeptId());
+		validateUserAccess(PortalConstants.CBP_DEPT_TYPE, PortalConstants.CBP_ROLE_NAME, wid, userDeptRole.getDeptId());
 		return new ResponseEntity<UserDepartmentInfo>(
 				portalService.addUserRoleInDepartment(userDeptRole, wid, rootOrg, org,authorization,xAuthenticatedUserToken), HttpStatus.OK);
 	}
@@ -199,7 +199,7 @@ public class PortalController {
 			@RequestBody UserDepartmentRole userDeptRole, @RequestHeader("rootOrg") String rootOrg,
 			@RequestHeader("org") String org, @RequestHeader("wid") String wid, @RequestHeader("Authorization") String authorization,
 			@RequestHeader("X-Authenticated-User-Token") String xAuthenticatedUserToken) throws Exception {
-		//validateUserAccess(PortalConstants.CBP_DEPT_TYPE, PortalConstants.CBP_ROLE_NAME, wid, userDeptRole.getDeptId());
+		validateUserAccess(PortalConstants.CBP_DEPT_TYPE, PortalConstants.CBP_ROLE_NAME, wid, userDeptRole.getDeptId());
 		return new ResponseEntity<UserDepartmentInfo>(
 				portalService.updateUserRoleInDepartment(userDeptRole, wid, rootOrg, org,authorization,xAuthenticatedUserToken), HttpStatus.OK);
 	}

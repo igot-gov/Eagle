@@ -11,7 +11,6 @@ import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
-//@ServletComponentScan
 @ComponentScan(basePackages = "org.sunbird")
 @SpringBootApplication
 public class SbCbExtApplication {
