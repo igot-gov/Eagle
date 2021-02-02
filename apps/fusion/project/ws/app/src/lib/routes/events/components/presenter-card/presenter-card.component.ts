@@ -23,7 +23,7 @@ export class PresenterCardComponent implements OnInit, OnChanges {
             const userData: any = []
             userData.push(this.data)
             Object.keys(userData).forEach((index: any) => {
-                if(userData[index].name != undefined) {
+                if (userData[index].name !== undefined) {
                     const obj = {
                         id: userData[index].id,
                         name: userData[index].name,
@@ -33,13 +33,12 @@ export class PresenterCardComponent implements OnInit, OnChanges {
                     }
                     this.userdata.push(obj)
                 } else {
-                    const name = `${userData[index].first_name} ${userData[index].last_name}`
                     const obj = {
                         id: userData[index].user_id,
-                        name: name,
+                        name: `${userData[index].first_name} ${userData[index].last_name}`,
                         shortName: this.getShortName(name),
                         type: '',
-                        designation: userData[index].designation
+                        designation: userData[index].designation,
                     }
                     this.userdata.push(obj)
                 }
