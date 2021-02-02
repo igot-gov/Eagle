@@ -165,15 +165,13 @@ export class EventsComponent implements OnInit {
                     this.eventData['allEvents'].push(eventDataObj)
                 })
             }
-            setTimeout( () => {
-                    this.todayEventsCount = this.eventData['todayEvents'].length
-                    this.joinedByMeEventsCount = this.eventData['joinedByMe'].length
-                    this.filter('all')
-                    if (this.todayEventsCount > 0) {
-                        this.sortTodayEvents()
-                    }
-                    this.getMyMDOEvents()
-            }, 500)
+            this.todayEventsCount = this.eventData['todayEvents'].length
+            this.joinedByMeEventsCount = this.eventData['joinedByMe'].length
+            this.filter('all')
+            if (this.todayEventsCount > 0) {
+                this.sortTodayEvents()
+            }
+            this.getMyMDOEvents()
         })
     }
 
