@@ -67,6 +67,16 @@
     padding: 8px;
 }
 
+.avatars {
+  display: inline-flex;
+}
+
+.user-rows {
+  top: 88%;
+  position: absolute;
+  right: 10px;
+}
+
 .numberCircle {
     border-radius: 50%;
     width: 36px;

@@ -23,14 +23,25 @@ export class PresenterCardComponent implements OnInit, OnChanges {
             const userData: any = []
             userData.push(this.data)
             Object.keys(userData).forEach((index: any) => {
-                const obj = {
-                    id: userData[index].id,
-                    name: userData[index].name,
-                    shortName: this.getShortName(userData[index].name),
-                    color: this.random_rgba(),
-                    type: userData[index].type,
+                if (userData[index].name !== undefined) {
+                    const obj = {
+                        id: userData[index].id,
+                        name: userData[index].name,
+                        shortName: this.getShortName(userData[index].name),
+                        type: userData[index].type,
+                        designation: userData[index].designation,
+                    }
+                    this.userdata.push(obj)
+                } else {
+                    const obj = {
+                        id: userData[index].user_id,
+                        name: `${userData[index].first_name} ${userData[index].last_name}`,
+                        shortName: this.getShortName(name),
+                        type: '',
+                        designation: userData[index].designation,
+                    }
+                    this.userdata.push(obj)
                 }
-                this.userdata.push(obj)
             })
         }
     }
@@ -39,14 +50,4 @@ export class PresenterCardComponent implements OnInit, OnChanges {
         const matches = name.match(/\b(\w)/g)
         return matches.join('').toLocaleUpperCase()
     }
-
-    random_rgba() {
-      const letters = '0123456789ABCDEF'
-      let color = '#'
-      for (let i = 0; i < 6; i = i + 1) {
-        color += letters[Math.floor(Math.random() * 16)]
-      }
-      return color
-    }
-
 }
