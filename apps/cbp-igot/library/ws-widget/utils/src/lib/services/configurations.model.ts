@@ -250,6 +250,7 @@ export namespace NsUser {
     firstName?: string
     surName?: string
     middleName?: string
+    profileImage?: string
   }
 
   export interface IUserPidProfile {
@@ -338,25 +339,25 @@ export namespace NsUser {
 
   interface IUserVer2 {
     'firstname': string,
-  'motherTongue': string,
-  'secondaryEmail': string,
-  'gender': string,
-  '@type': string,
-  'mobile': number,
-  'middlename': string,
-  'telephone': number,
-  'osid': string,
-  'primaryEmailType': string,
-  'knownLanguages': ILanguages[],
-  'wid': string,
-  'nationality': string,
-  'surname': string,
-  'dob': string,
-  'category': string,
-  'primaryEmail': string,
-  'maritalStatus': string,
-  'residenceAddress': string,
-  'result': any
+    'motherTongue': string,
+    'secondaryEmail': string,
+    'gender': string,
+    '@type': string,
+    'mobile': number,
+    'middlename': string,
+    'telephone': number,
+    'osid': string,
+    'primaryEmailType': string,
+    'knownLanguages': ILanguages[],
+    'wid': string,
+    'nationality': string,
+    'surname': string,
+    'dob': string,
+    'category': string,
+    'primaryEmail': string,
+    'maritalStatus': string,
+    'residenceAddress': string,
+    'result': any
   }
 
   export interface ILanguages {

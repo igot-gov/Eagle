@@ -43,7 +43,11 @@ export class CardTableComponent extends WidgetBaseComponent
   dataSource = new MatTableDataSource<any>()
   display = 'table'
   cardTableColumns!: IColums[]
-  @ViewChild(MatSort, { static: true }) sort?: MatSort
+  @ViewChild(MatSort, { static: false }) set matSort(sort: MatSort) {
+    if (!this.dataSource.sort) {
+      this.dataSource.sort = sort
+    }
+  }
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator
   constructor(
     // private events: EventService,
@@ -64,16 +68,14 @@ export class CardTableComponent extends WidgetBaseComponent
   ngOnInit() {
     if (this.widgetData) {
       this.displayedColumns = this.widgetData.columns || []
-      if (this.data && this.sort) {
+      if (this.data) {
         this.dataSource.data = this.data
         this.dataSource.paginator = this.paginator
-        this.dataSource.sort = this.sort
       }
     }
   }
 
   ngOnChanges(data: any) {
-    // console.log(data);
     this.dataSource.data = _.get(data, 'data.currentValue')
   }
 

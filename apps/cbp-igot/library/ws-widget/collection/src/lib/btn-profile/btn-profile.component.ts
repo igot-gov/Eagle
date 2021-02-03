@@ -46,7 +46,11 @@ export class BtnProfileComponent extends WidgetBaseComponent
     if (this.configSvc.userProfile) {
       this.givenName = this.configSvc.userProfile.givenName || ''
       // this.profileImage = this.configSvc.userProfile.source_profile_picture || null
-      if (localStorage.getItem(this.configSvc.userProfile.userId)) {
+      if (this.configSvc.userProfile && this.configSvc.userProfile.profileImage) {
+        this.profileImage = this.configSvc.userProfile.profileImage
+      } else if (this.configSvc.userProfileV2 && this.configSvc.userProfileV2.profileImage) {
+        this.profileImage = this.configSvc.userProfileV2.profileImage
+      } else if (localStorage.getItem(this.configSvc.userProfile.userId)) {
         this.profileImage = localStorage.getItem(this.configSvc.userProfile.userId)
       }
     }
