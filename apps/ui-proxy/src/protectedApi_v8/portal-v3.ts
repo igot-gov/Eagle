@@ -29,6 +29,7 @@ const API_END_POINTS = {
         `${CONSTANTS.SB_EXT_API_BASE_2}/portal/spv/mydepartment?allUsers=${isUserInfoRequired}`,
     spvUserRoleApi: `${CONSTANTS.SB_EXT_API_BASE_2}/portal/spv/userrole`,
     userRoleApi: (portalName: string) => `${CONSTANTS.SB_EXT_API_BASE_2}/portal/${portalName}/userrole`,
+    userRolesApi: (userId: string) => `${CONSTANTS.SB_EXT_API_BASE_2}/portal/${userId}/roles`,
 }
 
 const unknownError = 'Failed due to unknown reason'
@@ -332,6 +333,21 @@ portalApi.get(departmentType + '/:deptType', async (req, res) => {
     try {
         const deptType = req.params.deptType as string
         const response = await axios.get(API_END_POINTS.deptTypeByName(deptType))
+        res.status(response.status).send(response.data)
+    } catch (err) {
+        logError(failedToProcess + req.originalUrl + err)
+        res.status((err && err.response && err.response.status) || 500).send(
+            (err && err.response && err.response.data) || {
+                error: unknownError,
+            }
+        )
+    }
+})
+
+portalApi.get('/userrole/:userId', async (req, res) => {
+    try {
+        const userId = req.params.userId as string
+        const response = await axios.get(API_END_POINTS.userRolesApi(userId))
         res.status(response.status).send(response.data)
     } catch (err) {
         logError(failedToProcess + req.originalUrl + err)
