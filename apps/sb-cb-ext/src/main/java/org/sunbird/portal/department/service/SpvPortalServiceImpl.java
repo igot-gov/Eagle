@@ -29,27 +29,28 @@ public class SpvPortalServiceImpl implements SpvPortalService {
 	DepartmentTypeRepository deptTypeRepo;
 
 	@Override
-	public List<DepartmentInfo> getAllDepartments(String rootOrg,String authorization,String xAuthenticatedUserToken) throws Exception {
-		return portalService.getAllDepartments(rootOrg,authorization,xAuthenticatedUserToken);
+	public List<DepartmentInfo> getAllDepartments(String rootOrg) throws Exception {
+		return portalService.getAllDepartments(rootOrg);
 	}
 
 	@Override
-	public DepartmentInfo getMyDepartment(String userId, boolean isUserInfoRequired,String rootOrg,String authorization,String xAuthenticatedUserToken) throws Exception {
-		return portalService.getMyDepartment(PortalConstants.SPV_DEPT_TYPE, userId, isUserInfoRequired,rootOrg,authorization,xAuthenticatedUserToken);
+	public DepartmentInfo getMyDepartment(String userId, boolean isUserInfoRequired, String rootOrg) throws Exception {
+		return portalService.getMyDepartment(PortalConstants.SPV_DEPT_TYPE, userId, isUserInfoRequired, rootOrg);
 	}
 
 	@Override
-	public DepartmentInfo addDepartment(String userId, DepartmentInfo deptInfo,String rootOrg,String authorization,String xAuthenticatedUserToken) throws Exception {
-		return portalService.addDepartment(userId, PortalConstants.SPV_ROLE_NAME, deptInfo,rootOrg,authorization,xAuthenticatedUserToken);
+	public DepartmentInfo addDepartment(String userId, DepartmentInfo deptInfo, String rootOrg) throws Exception {
+		return portalService.addDepartment(userId, PortalConstants.SPV_ROLE_NAME, deptInfo, rootOrg);
 	}
 
 	@Override
-	public DepartmentInfo updateDepartment(DepartmentInfo deptInfo,String rootOrg,String authorization,String xAuthenticatedUserToken) throws Exception {
-		return portalService.updateDepartment(deptInfo,rootOrg,authorization,xAuthenticatedUserToken);
+	public DepartmentInfo updateDepartment(DepartmentInfo deptInfo, String rootOrg) throws Exception {
+		return portalService.updateDepartment(deptInfo, rootOrg);
 	}
 
 	@Override
-	public DepartmentInfo getDepartmentById(Integer deptId, boolean isUserInfoRequired,String rootOrg,String authorization,String xAuthenticatedUserToken) throws Exception {
-		return portalService.getDepartmentById(deptId, isUserInfoRequired,rootOrg,authorization,xAuthenticatedUserToken);
+	public DepartmentInfo getDepartmentById(Integer deptId, boolean isUserInfoRequired, String rootOrg)
+			throws Exception {
+		return portalService.getDepartmentById(deptId, isUserInfoRequired, rootOrg);
 	}
 }

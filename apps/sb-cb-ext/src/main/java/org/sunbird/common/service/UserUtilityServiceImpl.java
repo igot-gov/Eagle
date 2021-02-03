@@ -32,8 +32,7 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 	CbExtServerProperties props;
 
 	@Override
-	public boolean validateUser(String rootOrg, String userId, String authorization, String xAuthenticatedUserToken)
-			throws ApplicationLogicError {
+	public boolean validateUser(String rootOrg, String userId) throws ApplicationLogicError {
 
 		Map<String, Object> requestMap = new HashMap<String, Object>();
 
@@ -45,8 +44,6 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 
 		requestMap.put("request", request);
 		HttpHeaders headers = new HttpHeaders();
-		//headers.add("Authorization", authorization);
-		//headers.add("X-Authenticated-User-Token", xAuthenticatedUserToken);
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		try {
 			String reqBodyData = new ObjectMapper().writeValueAsString(requestMap);
@@ -70,8 +67,7 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 	}
 
 	@Override
-	public Map<String, Object> getUsersDataFromUserIds(String rootOrg, List<String> userIds, List<String> source,
-			String authorization, String xAuthenticatedUserToken) {
+	public Map<String, Object> getUsersDataFromUserIds(String rootOrg, List<String> userIds, List<String> source) {
 
 		Map<String, Object> result = new HashMap<>();
 
@@ -85,8 +81,6 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 
 		requestMap.put("request", request);
 		HttpHeaders headers = new HttpHeaders();
-		//headers.add("Authorization", authorization);
-		//headers.add("X-Authenticated-User-Token", xAuthenticatedUserToken);
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		try {
 			String reqBodyData = new ObjectMapper().writeValueAsString(requestMap);

@@ -11,12 +11,12 @@ public class MdoPortalServiceImpl implements MdoPortalService {
 	PortalService portalService;
 
 	@Override
-	public DepartmentInfo updateDepartment(DepartmentInfo deptInfo,String rootOrg,String authorization,String xAuthenticatedUserToken) throws Exception {
-		return portalService.updateDepartment(deptInfo,rootOrg,authorization,xAuthenticatedUserToken);
+	public DepartmentInfo updateDepartment(DepartmentInfo deptInfo,String rootOrg) throws Exception {
+		return portalService.updateDepartment(deptInfo,rootOrg);
 	}
 
 	@Override
-	public DepartmentInfo getMyDepartment(String userId, boolean isUserInfoRequired,String rootOrg,String authorization,String xAuthenticatedUserToken) throws Exception {
-		return portalService.getMyDepartmentForRole(PortalConstants.MDO_ROLE_NAME, userId, isUserInfoRequired,rootOrg,authorization,xAuthenticatedUserToken);
+	public DepartmentInfo getMyDepartment(String userId, boolean isUserInfoRequired,String rootOrg) throws Exception {
+		return portalService.getMyDepartmentForRole(PortalConstants.MDO_ROLE_NAME, userId, isUserInfoRequired,rootOrg);
 	}
 }
