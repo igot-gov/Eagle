@@ -50,7 +50,13 @@ export class InitResolver implements Resolve<NSContent.IContentMeta> {
     }
     if (data.includes('ordinals') && !this.authInitService.ordinals) {
       forkProcess.push(
-        this.apiService.get<IFormMeta>(`http://localhost:3003/authApi/action/meta/v2/ordinals/list${this.accessService.orgRootOrgAsQuery}`),
+        /* temp Fix*/
+        this.apiService.get<ICreateEntity[]>(
+          `${this.configurationsService.baseUrl}/feature/ordinals.json`,
+        ),
+        // this.apiService.get<IFormMeta>
+        //(`http://localhost:3003/authApi/action/meta/v2/
+        //ordinals/list${this.accessService.orgRootOrgAsQuery}`),
       )
       pushedJobs.push('ordinals')
     }

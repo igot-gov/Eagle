@@ -294,7 +294,7 @@ export class MyContentComponent implements OnInit, OnDestroy {
     )
     let isUserRecordEnabled = true
     const adminOnlyRoles = this.accessService.hasRole(['admin', 'super-admin', 'content-admin', 'editor', 'content-creator'])
-    if (adminOnlyRoles) {
+    if (adminOnlyRoles && isUserRecordEnabled) {
       isUserRecordEnabled = true
     } else if (this.accessService.hasRole(['reviewer', 'publisher'])) {
       isUserRecordEnabled = false
