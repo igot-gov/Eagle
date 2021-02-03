@@ -45,15 +45,15 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 
 		requestMap.put("request", request);
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("Authorization", authorization);
-		headers.add("X-Authenticated-User-Token", xAuthenticatedUserToken);
+		//headers.add("Authorization", authorization);
+		//headers.add("X-Authenticated-User-Token", xAuthenticatedUserToken);
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		try {
 			String reqBodyData = new ObjectMapper().writeValueAsString(requestMap);
 
 			HttpEntity<String> requestEnty = new HttpEntity<>(reqBodyData, headers);
 
-			String serverUrl = props.getSbUrl() + "api/user/v1/search";
+			String serverUrl = props.getSbUrl() + "private/user/v1/search";
 
 			SunbirdApiResp sunbirdApiResp = restTemplate.postForObject(serverUrl, requestEnty, SunbirdApiResp.class);
 
