@@ -44,7 +44,7 @@ public class Department {
 	private byte[] logo;
 	
 	@Column(name="creation_date")
-	private long creationDate;
+	private Long creationDate;
 	
 	@Column(name="created_by")
 	private String createdBy;
@@ -116,11 +116,11 @@ public class Department {
 		this.logo = logo;
 	}
 	
-	public long getCreationDate() {
+	public Long getCreationDate() {
 		return creationDate;
 	}
 
-	public void setCreationDate(long created) {
+	public void setCreationDate(Long created) {
 		this.creationDate = created;
 	}
 
