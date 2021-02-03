@@ -1,6 +1,7 @@
 package org.sunbird.portal.department.service;
 
 import java.util.List;
+import java.util.Set;
 
 import org.sunbird.portal.department.dto.DepartmentRole;
 import org.sunbird.portal.department.dto.Role;
@@ -24,4 +25,6 @@ public interface RoleService {
 	Iterable<DepartmentRole> getAllDepartmentRoles();
 
 	public List<String> getUserDepartMentRoles(String userId);
+
+	Set<String> getUserRoles(String userId);
 }

@@ -16,6 +16,8 @@ import org.sunbird.portal.department.dto.DepartmentRole;
 import org.sunbird.portal.department.dto.Role;
 import org.sunbird.portal.department.service.RoleService;
 
+import java.util.Set;
+
 @RestController
 public class RoleController {
 
@@ -63,5 +65,11 @@ public class RoleController {
 	public ResponseEntity<Boolean> removeDepartmentRole(@PathVariable("dept_role_id") Integer deptRoleId)
 			throws Exception {
 		return new ResponseEntity<Boolean>(roleService.removeDepartmentRole(deptRoleId), HttpStatus.OK);
+	}
+
+	@GetMapping("/portal/{user_id}/roles")
+	public ResponseEntity<Set> getUserRoles(@PathVariable("user_id") String userId)
+			throws Exception {
+		return new ResponseEntity<Set>(roleService.getUserRoles(userId), HttpStatus.OK);
 	}
 }
