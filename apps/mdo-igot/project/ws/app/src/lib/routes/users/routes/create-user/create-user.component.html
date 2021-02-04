@@ -4,7 +4,7 @@
   </ws-widget-btn-page-back>
 
   <mat-sidenav-container class="sticky" autosize name="discuss-menu">
-    <mat-sidenav [mode]="mode$ | async" [(opened)]="sideNavBarOpened" class="left-nav">
+    <mat-sidenav [(opened)]="sideNavBarOpened" class="left-nav">
       <div class="container2" #stickyMenu>
         <ng-container [wsResolverWidget]="widgetData"></ng-container>
       </div>
@@ -22,7 +22,7 @@
             <form class="create-user-form ws-mat-accent-border" [formGroup]="createUserForm">
               <div class="input-column px-2">
                 <label class="heading">User Details</label>
-      
+
                 <div class="input-wrapper margin-top-s">
                   <label for="fname" class="margin-remove-bottom form-label required"
                     i18n="First Name label|Label which explains the user to enter first name" i18n-aria-label
@@ -37,12 +37,13 @@
                       *ngIf="createUserForm?.controls['fname']?.touched && createUserForm?.controls['fname'].errors?.required">
                       First name is mandatory
                     </mat-error>
-                    <mat-error [hidden]="false" *ngIf="createUserForm?.controls['fname'].errors?.pattern" i18n-aria-label
+                    <mat-error [hidden]="false" *ngIf="createUserForm?.controls['fname'].errors?.pattern"
+                      i18n-aria-label
                       aria-label="First name Error|Name fields cannot contain numbers and special characters except">
                       Name fields cannot contain numbers and special characters except '
                     </mat-error>
                   </mat-form-field>
-      
+
                   <label for="lname" class="margin-remove-bottom margin-top-xs form-label required"
                     i18n="Last name label|Label which explains the user to enter last name" i18n-aria-label
                     aria-label="Last name label">
@@ -56,14 +57,16 @@
                       *ngIf="createUserForm?.controls['lname']?.touched && createUserForm?.controls['lname'].errors?.required">
                       Last name is mandatory
                     </mat-error>
-                    <mat-error [hidden]="false" *ngIf="createUserForm?.controls['lname'].errors?.pattern" i18n-aria-label
+                    <mat-error [hidden]="false" *ngIf="createUserForm?.controls['lname'].errors?.pattern"
+                      i18n-aria-label
                       aria-label="Last name Error|Name fields cannot contain numbers and special characters except ">
                       Last name fields cannot contain numbers and special characters except '
                     </mat-error>
                   </mat-form-field>
-      
+
                   <label for="email" class="margin-remove-bottom margin-top-xs form-label required"
-                    i18n="Email label|Label which explains the user to enter email" i18n-aria-label aria-label="Email label">
+                    i18n="Email label|Label which explains the user to enter email" i18n-aria-label
+                    aria-label="Email label">
                     Email
                   </label>
                   <mat-form-field appearance="outline" class="margin-top-xs">
@@ -74,15 +77,16 @@
                       *ngIf="createUserForm?.controls['email']?.touched && createUserForm?.controls['email'].errors?.required">
                       Email is mandatory
                     </mat-error>
-                    <mat-error [hidden]="false" *ngIf="createUserForm?.controls['email'].errors?.invalid" i18n-aria-label
-                      aria-label="Email Error|Name fields not valid ">
+                    <mat-error [hidden]="false" *ngIf="createUserForm?.controls['email'].errors?.invalid"
+                      i18n-aria-label aria-label="Email Error|Name fields not valid ">
                       Email field is not valid
                     </mat-error>
                   </mat-form-field>
-      
+
                   <div class="input-wrapper margin-top-s">
                     <label for="department" class="margin-remove-bottom form-label required" i18n-aria-label
-                      aria-label="Department label" i18n="Department label|Label which explains the user to enter department">
+                      aria-label="Department label"
+                      i18n="Department label|Label which explains the user to enter department">
                       Department
                     </label>
                     <mat-form-field appearance="outline" class="w-full margin-top-xs">
@@ -91,14 +95,15 @@
                         aria-label="Department input filed" readonly>
                     </mat-form-field>
                   </div>
-      
+
                   <div class="input-wrapper margin-top-s">
                     <label for="roles" class="margin-remove-bottom form-label required" i18n-aria-label
                       aria-label="Roles label" i18n="Role label|Label which explains the user to select the roles">
                       Role
                     </label>
                     <mat-selection-list id="roles" formControlName="roles" #roles>
-                      <mat-list-option *ngFor="let role of rolesList" (click)="modifyUserRoles(role)" [selected]="userRoles.has(role.roleName)" [value]="role.roleName">
+                      <mat-list-option *ngFor="let role of rolesList" (click)="modifyUserRoles(role)"
+                        [selected]="userRoles.has(role.roleName)" [value]="role.roleName">
                         {{role.roleName}}
                       </mat-list-option>
                     </mat-selection-list>
@@ -118,5 +123,5 @@
     </mat-sidenav-content>
   </mat-sidenav-container>
 
-  
+
 </div>
