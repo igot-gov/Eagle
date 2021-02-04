@@ -38,7 +38,11 @@ export class UIUserTableComponent implements OnInit, AfterViewInit, OnChanges {
   pageSize = 5
   pageSizeOptions = [5, 10, 20]
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator
-  @ViewChild(MatSort, { static: true }) sort?: MatSort
+  @ViewChild(MatSort, { static: false }) set matSort(sort: MatSort) {
+    if (!this.dataSource.sort) {
+      this.dataSource.sort = sort
+    }
+  }
   selection = new SelectionModel<any>(true, [])
 
   constructor() {
@@ -52,9 +56,11 @@ export class UIUserTableComponent implements OnInit, AfterViewInit, OnChanges {
     if (this.tableData) {
       this.displayedColumns = this.tableData.columns
     }
-    this.dataSource.data = this.data
-    this.dataSource.paginator = this.paginator
-    this.dataSource.sort = this.sort
+    if (this.data) {
+      this.dataSource.data = this.data
+      this.dataSource.paginator = this.paginator
+      // this.dataSource.sort = this.sort
+    }
   }
 
   ngOnChanges(data: SimpleChanges) {
