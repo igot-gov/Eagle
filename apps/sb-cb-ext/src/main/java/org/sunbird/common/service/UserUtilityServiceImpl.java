@@ -75,16 +75,18 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 
 		Map<String, Object> result = new HashMap<>();
 
+		Map<String, Object> request = new HashMap<String, Object>();
 		Map<String, Object> filters = new HashMap<String, Object>();
 		Map<String, Object> idKeyword = new HashMap<String, Object>();
 		idKeyword.put("or", userIds);
 		filters.put("id.keyword", idKeyword);
 		filters.put("limit", userIds.size());
 		filters.put("offset", 0);
+		request.put("filters", filters);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		try {
-			String reqBodyData = new ObjectMapper().writeValueAsString(filters);
+			String reqBodyData = new ObjectMapper().writeValueAsString(request);
 
 			HttpEntity<String> requestEnty = new HttpEntity<>(reqBodyData, headers);
 
