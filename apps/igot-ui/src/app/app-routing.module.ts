@@ -74,6 +74,18 @@ const routes: Routes = [
     },
   },
   {
+    path: 'app/event-hub',
+    loadChildren: () => import('./routes/route-events.module').then(u => u.RouteEventsModule),
+    canActivate: [GeneralGuard],
+    data: {
+      pageType: 'feature',
+      pageKey: 'event',
+    },
+    resolve: {
+      pageData: PageResolve,
+    },
+  },
+  {
     path: 'app/channels',
     loadChildren: () => import('./routes/route-channels.module').then(u => u.RouteChannelsModule),
     canActivate: [GeneralGuard],
