@@ -2,14 +2,17 @@ package org.sunbird.common.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class OpenSaberApiRespResult {
-	private List<OpenSaberApiUserProfile> UserProfile;
+	@JsonProperty("UserProfile")
+	private List<OpenSaberApiUserProfile> userProfile;
 
 	public List<OpenSaberApiUserProfile> getUserProfile() {
-		return UserProfile;
+		return userProfile;
 	}
 
 	public void setUserProfile(List<OpenSaberApiUserProfile> userProfile) {
-		this.UserProfile = userProfile;
+		this.userProfile = userProfile;
 	}
 }
