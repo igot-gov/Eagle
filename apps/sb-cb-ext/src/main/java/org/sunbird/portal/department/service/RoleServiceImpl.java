@@ -16,6 +16,7 @@ import org.sunbird.portal.department.repo.UserDepartmentRoleRepository;
 
 import javax.transaction.NotSupportedException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class RoleServiceImpl implements RoleService {
@@ -124,7 +125,7 @@ public class RoleServiceImpl implements RoleService {
 
 		List<String> returnedRoleList = new ArrayList<>();
 		try {
-			List<UserDepartmentRole> userDepartmentRoles = userDepartmentRoleRepository.findByUserId(userId);
+			List<UserDepartmentRole> userDepartmentRoles = userDepartmentRoleRepository.findAllByUserIdAndIsActiveAndIsBlocked(userId, true, false);
 			if (CollectionUtils.isEmpty(userDepartmentRoles))
 				return Collections.emptyList();
 			List<Integer> roleIds = new ArrayList<>();
@@ -142,6 +143,12 @@ public class RoleServiceImpl implements RoleService {
 			ex.printStackTrace();
 		}
 		return returnedRoleList;
+	}
 
+	public Set<String> getUserRoles(String userId) {
+		List<String> userRoles = getUserDepartMentRoles(userId);
+		if (CollectionUtils.isEmpty(userRoles))
+			return Collections.emptySet();
+		return userRoles.stream().collect(Collectors.toSet());
 	}
 }
