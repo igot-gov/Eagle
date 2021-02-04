@@ -19,6 +19,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.client.RestTemplate;
+import org.sunbird.common.model.OpenSaberApiUserProfile;
 import org.sunbird.common.model.SunbirdApiRespContent;
 import org.sunbird.common.service.UserUtilityService;
 import org.sunbird.common.util.Constants;
@@ -661,13 +662,10 @@ public class PortalServiceImpl implements PortalService {
 						pUserInfo.setBlocked(userDeptRole.getIsBlocked());
 						// Fetch User Data
 						if (result != null && result.containsKey(userDeptRole.getUserId())) {
-							// Map<String, String> userData = (Map<String, String>)
-							// result.get(userDeptRole.getUserId());
-							SunbirdApiRespContent content = (SunbirdApiRespContent) result
-									.get(userDeptRole.getUserId());
-							pUserInfo.setEmailId(content.getEmail());
-							pUserInfo.setFirstName(content.getFirstName());
-							pUserInfo.setLastName(content.getLastName());
+							OpenSaberApiUserProfile userProfile = (OpenSaberApiUserProfile) result.get(userDeptRole.getUserId());
+							pUserInfo.setEmailId(userProfile.getPersonalDetails().getPrimaryEmail());
+							pUserInfo.setFirstName(userProfile.getPersonalDetails().getFirstname());
+							pUserInfo.setLastName(userProfile.getPersonalDetails().getSurname());
 						}
 
 						// Assign RoleInfo
@@ -687,6 +685,8 @@ public class PortalServiceImpl implements PortalService {
 							deptInfo.addInActiveUser(pUserInfo);
 						}
 					}
+					
+					logger.info("enrichDepartmentInfo: " + deptInfo);
 					List<PortalUserInfo> portalActiveUsers = deptInfo.getActive_users();
 					if (!CollectionUtils.isEmpty(portalActiveUsers)) {
 						Collections.sort(portalActiveUsers,
@@ -706,7 +706,6 @@ public class PortalServiceImpl implements PortalService {
 						deptInfo.setInActive_users(portalInActiveUsers);
 					}
 				}
-
 			}
 
 			logger.info("enrichDepartmentInfo: " + deptInfo);

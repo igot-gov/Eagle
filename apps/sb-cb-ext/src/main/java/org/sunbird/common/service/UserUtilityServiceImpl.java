@@ -32,7 +32,7 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 
 	@Autowired
 	CbExtServerProperties props;
-	
+
 	private CbExtLogger logger = new CbExtLogger(getClass().getName());
 
 	@Override
@@ -99,6 +99,7 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 				for (OpenSaberApiUserProfile userProfile : openSaberApiResp.getResult().getUserProfile()) {
 					result.put(userProfile.getUserId(), userProfile);
 				}
+				logger.info("Return result -> " + (new ObjectMapper()).writeValueAsString(result));
 				return result;
 			}
 
