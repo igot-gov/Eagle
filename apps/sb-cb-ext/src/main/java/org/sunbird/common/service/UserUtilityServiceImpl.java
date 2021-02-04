@@ -91,6 +91,14 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 			String serverUrl = props.getSbHubGraphServiceUrl() + "/v1/user/search/profile";
 
 			logger.info("Calling URL -> " + serverUrl + ", with request body -> " + reqBodyData);
+			
+			try {
+				Map<String, Object> response = restTemplate.postForObject(serverUrl, requestEnty, Map.class);
+				logger.info("Response by Map -> " + (new ObjectMapper()).writeValueAsString(response));
+			}catch(Exception e) {
+				logger.error(e);
+			}
+			
 			OpenSaberApiResp openSaberApiResp = restTemplate.postForObject(serverUrl, requestEnty,
 					OpenSaberApiResp.class);
 			logger.info("Received Response -> " + (new ObjectMapper()).writeValueAsString(openSaberApiResp));
