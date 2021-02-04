@@ -1,0 +1,9 @@
+---
+  - name: Ensure env directory exists
+    file:
+      path: "{{ env_files_dir }}"
+      state: directory
+  - name: Create and save env template
+    template:
+      src: authtool-ui-env.j2
+      dest: "{{ env_file_deployment_location }}"

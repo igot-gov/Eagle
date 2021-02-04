@@ -1,0 +1,87 @@
+---
+# - hosts: "app_north_virginia_lex_dev"
+- hosts: "{{ deploy_host_name }}"
+  become: yes
+  strategy: free
+  vars_files:
+    - "vars/main.yml"
+  roles:
+    - role: deploy-antivirus-service
+      tags: [deploy-antivirus-service]
+    - role: deploy-authtool-ui
+      tags: [deploy-authtool-ui]
+#    - role: deploy-bulkupload-service
+#      tags: [deploy-bulkupload-service]
+#    - role: deploy-common-authorization-service
+#      tags: [deploy-common-authorization-service]
+    - role: deploy-content-service
+      tags: [deploy-content-service]
+    - role: deploy-external-api-service
+      tags: [deploy-external-api-service]
+    - role: deploy-file-exhaust-service
+      tags: [deploy-file-exhaust-service]
+ #   - role: deploy-khub-migration-service
+ #     tags: [deploy-khub-migration-service]
+    - role: deploy-lex-chatbot-service
+      tags: [deploy-lex-chatbot-service]
+    - role: deploy-lex-core-service
+      tags: [deploy-lex-core-service]
+#    - role: deploy-lex-health-core-service
+#      tags: [deploy-lex-health-core-service]
+    - role: deploy-monitoring-service
+      tags: [deploy-monitoring-service]
+    - role: deploy-more-like-this-service
+      tags: [deploy-more-like-this-service]
+    - role: deploy-sb-ext-authtool-service
+      tags: [deploy-sb-ext-authtool-service]
+    - role: deploy-sb-ext-service
+      tags: [deploy-sb-ext-service]
+    - role: deploy-social-forum-service
+#      tags: [deploy-social-forum-service]
+#    - role: deploy-catalog-service
+      tags: [deploy-catalog-service]
+    - role: deploy-telemetry-service
+      tags: [deploy-telemetry-service]
+    - role: deploy-ui-proxies-service
+      tags: [deploy-ui-proxies-service]
+    - role: deploy-ui-static
+      tags: [deploy-ui-static]
+#    - role: deploy-dbms-api-service
+#      tags: [deploy-dbms-api-service]
+#    - role: deploy-web-assets
+      tags: [deploy-web-assets]
+    - role: deploy-support-api
+      tags: [deploy-support-api]
+    - role: deploy-sb-telemetry-service
+      tags: [deploy-sb-telemetry-service]
+#    - role: deploy-web-assets-fusion
+      tags: [deploy-web-assets-fusion]
+    - role: deploy-pid-service
+      tags: [deploy-pid-service]
+    - role: deploy-notification-service
+#      tags: [deploy-notification-service]
+#    - role: deploy-la-service
+      tags: [deploy-la-service]
+    - role: deploy-access-control-service
+      tags: [deploy-access-control-service]
+    - role: deploy-hierarchy-service
+      tags: [deploy-hierarchy-service]
+    - role: deploy-lex-core-critical-service
+      tags: [deploy-lex-core-critical-service]
+    - role: deploy-lex-core-high-service
+      tags: [deploy-lex-core-high-service]
+    - role: deploy-lex-core-lhub-service
+      tags: [deploy-lex-core-lhub-service]
+    - role: deploy-lex-core-cassandra-service
+      tags: [deploy-lex-core-cassandra-service]
+    - role: deploy-kafka-service
+#      tags: [deploy-kafka-service]
+#    - role: deploy-support-script
+      tags: [deploy-support-script]
+#    - role: deploy-redis
+#      tags: [deploy-redis]
+  tasks:
+    - name: Remove the env directory
+      file: 
+        path: "{{ env_files_dir }}"
+        state: absent

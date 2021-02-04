@@ -1,0 +1,34 @@
+{
+    "services":[
+        {
+            "service-name":"{{ service_content_service }}",
+            "service-url":"http://{{ network_alias_content_service }}:{{ service_content_service_port }}/",
+            "response-code":200
+        },
+        {
+            "service-name":"{{ service_sb_ext_service }}",
+            "service-url":"http://{{ network_alias_sb_ext_service }}:{{ service_sb_ext_port }}/v1/latest/terms/user",
+            "response-code":200
+        },
+        {
+            "service-name":"{{ service_telemetry_service }}",
+            "service-url":"http://{{ network_alias_telemetry_service }}:{{ service_telemetry_port }}/user/dashboard/courses/lex@ad.infosys.com",
+            "response-code":200
+        },
+        {
+            "service-name":"{{ service_ui_static_service }}",
+            "service-url":"https://{{domain_name}}/",
+            "response-code":200
+        },
+        {
+            "service-name":"{{ service_ui_proxies_service }}",
+            "service-url":"https://{{domain_name}}/clientApi/publicApi/v4/user/tnc",
+            "response-code":200
+        },
+        {
+            "service-name":"Dashboard-timespent-api",
+            "service-url":"http://{{ network_alias_sb_ext_service }}:{{ service_sb_ext_port }}/v2/users/lex@ad.infosys.com/dashboard/timespent",
+            "response-code":200
+        }
+    ]
+}

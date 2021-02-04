@@ -1,0 +1,82 @@
+Started by user [8mha:////4E20/w1GckiA/nocQ1f5cF/jB0ZhiDWNy4jAx3sKJkWvAAAAlx+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAyWEgZu/dLi1CL9xJTczDwAZ3pnlMAAAAA=[0miGot
+Running as SYSTEM
+Building in workspace /var/lib/jenkins/workspace/igot-deploy/app_deploy
+[app_deploy] $ /bin/bash /tmp/jenkins5497624081814401704.sh
+[1;35m [WARNING]: While constructing a mapping from /home/ubuntu/igot-sunbird-[0m
+[1;35mdeploy/ansible_workspace_dir/vars/main.yml, line 6, column 1, found a duplicate[0m
+[1;35mdict key (service_sb_telemetry_port). Using last defined value only.[0m
+[1;35m[0m
+[1;35m [WARNING]: While constructing a mapping from /home/ubuntu/igot-sunbird-[0m
+[1;35mdeploy/ansible_workspace_dir/roles/deploy-lex-core-service/defaults/main.yml,[0m
+[1;35mline 3, column 1, found a duplicate dict key (sunbird_time_zone). Using last[0m
+[1;35mdefined value only.[0m
+[1;35m[0m
+[1;35m [WARNING]: While constructing a mapping from /home/ubuntu/igot-sunbird-[0m
+[1;35mdeploy/ansible_workspace_dir/roles/deploy-lex-core-service/defaults/main.yml,[0m
+[1;35mline 3, column 1, found a duplicate dict key (nginx_per_ip_connection_limit).[0m
+[1;35mUsing last defined value only.[0m
+[1;35m[0m
+[1;35m [WARNING]: While constructing a mapping from /home/ubuntu/igot-sunbird-[0m
+[1;35mdeploy/ansible_workspace_dir/roles/deploy-lex-core-service/defaults/main.yml,[0m
+[1;35mline 3, column 1, found a duplicate dict key[0m
+[1;35m(sunbird_portal_player_cdn_enabled). Using last defined value only.[0m
+[1;35m[0m
+[1;35m [WARNING]: While constructing a mapping from /home/ubuntu/igot-sunbird-[0m
+[1;35mdeploy/ansible_workspace_dir/roles/deploy-lex-core-service/defaults/main.yml,[0m
+[1;35mline 3, column 1, found a duplicate dict key (search_liveness_readiness). Using[0m
+[1;35mlast defined value only.[0m
+[1;35m[0m
+[1;35m [WARNING]: While constructing a mapping from /home/ubuntu/igot-sunbird-[0m
+[1;35mdeploy/ansible_workspace_dir/roles/deploy-lex-core-service/defaults/main.yml,[0m
+[1;35mline 3, column 1, found a duplicate dict key (taxonomy_liveness_readiness).[0m
+[1;35mUsing last defined value only.[0m
+[1;35m[0m
+
+PLAY [dev] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+[0;32mok: [localhost][0m
+
+TASK [deploy-scoring-engine-service : template values.yaml file] ***************
+[0;33mchanged: [localhost][0m
+
+TASK [deploy-scoring-engine-service : template configmap file] *****************
+[0;33mchanged: [localhost][0m
+
+TASK [deploy-scoring-engine-service : create env configmap] ********************
+[0;33mchanged: [localhost][0m
+
+TASK [deploy-scoring-engine-service : remove env configmap file] ***************
+[0;33mchanged: [localhost][0m
+
+TASK [deploy-scoring-engine-service : helm upgrade] ****************************
+[0;31mfatal: [localhost]: FAILED! => {[0m
+[0;31m    "changed": true, [0m
+[0;31m    "cmd": "helm upgrade --install --atomic --timeout 10m scoring-engine-service ../kubernetes-deploy/scoring-engine-service -n dev", [0m
+[0;31m    "delta": "0:05:21.140191", [0m
+[0;31m    "end": "2021-01-28 11:30:35.227908", [0m
+[0;31m    "rc": 1, [0m
+[0;31m    "start": "2021-01-28 11:25:14.087717"[0m
+[0;31m}[0m
+[0;31m[0m
+[0;31mSTDOUT:[0m
+[0;31m[0m
+[0;31mRelease "scoring-engine-service" does not exist. Installing it now.[0m
+[0;31m[0m
+[0;31m[0m
+[0;31mSTDERR:[0m
+[0;31m[0m
+[0;31mError: release scoring-engine-service failed, and has been uninstalled due to atomic being set: deployments.apps "scoring-engine-service" not found[0m
+[0;31m[0m
+[0;31m[0m
+[0;31mMSG:[0m
+[0;31m[0m
+[0;31mnon-zero return code[0m
+[0;31m[0m
+	to retry, use: --limit @/home/ubuntu/igot-sunbird-deploy/ansible_workspace_dir/main.retry
+
+PLAY RECAP *********************************************************************
+[0;31mlocalhost[0m                  : [0;32mok=5   [0m [0;33mchanged=4   [0m unreachable=0    [0;31mfailed=1   [0m
+
+Build step 'Execute shell' marked build as failure
+Finished: FAILURE

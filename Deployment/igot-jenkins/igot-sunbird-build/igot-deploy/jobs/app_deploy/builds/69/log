@@ -1,0 +1,64 @@
+Started by user [8mha:////4E20/w1GckiA/nocQ1f5cF/jB0ZhiDWNy4jAx3sKJkWvAAAAlx+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAyWEgZu/dLi1CL9xJTczDwAZ3pnlMAAAAA=[0miGot
+Running as SYSTEM
+Building in workspace /var/lib/jenkins/workspace/igot-deploy/app_deploy
+[app_deploy] $ /bin/bash /tmp/jenkins8709135388984300784.sh
+[1;35m [WARNING]: While constructing a mapping from /home/ubuntu/igot-sunbird-[0m
+[1;35mdeploy/ansible_workspace_dir/vars/main.yml, line 6, column 1, found a duplicate[0m
+[1;35mdict key (service_sb_telemetry_port). Using last defined value only.[0m
+[1;35m[0m
+[1;35m [WARNING]: While constructing a mapping from /home/ubuntu/igot-sunbird-[0m
+[1;35mdeploy/ansible_workspace_dir/roles/deploy-lex-core-service/defaults/main.yml,[0m
+[1;35mline 3, column 1, found a duplicate dict key (sunbird_time_zone). Using last[0m
+[1;35mdefined value only.[0m
+[1;35m[0m
+[1;35m [WARNING]: While constructing a mapping from /home/ubuntu/igot-sunbird-[0m
+[1;35mdeploy/ansible_workspace_dir/roles/deploy-lex-core-service/defaults/main.yml,[0m
+[1;35mline 3, column 1, found a duplicate dict key (nginx_per_ip_connection_limit).[0m
+[1;35mUsing last defined value only.[0m
+[1;35m[0m
+[1;35m [WARNING]: While constructing a mapping from /home/ubuntu/igot-sunbird-[0m
+[1;35mdeploy/ansible_workspace_dir/roles/deploy-lex-core-service/defaults/main.yml,[0m
+[1;35mline 3, column 1, found a duplicate dict key[0m
+[1;35m(sunbird_portal_player_cdn_enabled). Using last defined value only.[0m
+[1;35m[0m
+[1;35m [WARNING]: While constructing a mapping from /home/ubuntu/igot-sunbird-[0m
+[1;35mdeploy/ansible_workspace_dir/roles/deploy-lex-core-service/defaults/main.yml,[0m
+[1;35mline 3, column 1, found a duplicate dict key (search_liveness_readiness). Using[0m
+[1;35mlast defined value only.[0m
+[1;35m[0m
+[1;35m [WARNING]: While constructing a mapping from /home/ubuntu/igot-sunbird-[0m
+[1;35mdeploy/ansible_workspace_dir/roles/deploy-lex-core-service/defaults/main.yml,[0m
+[1;35mline 3, column 1, found a duplicate dict key (taxonomy_liveness_readiness).[0m
+[1;35mUsing last defined value only.[0m
+[1;35m[0m
+
+PLAY [dev] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+[0;32mok: [localhost][0m
+
+TASK [deploy-scoring-engine-service : template values.yaml file] ***************
+[0;33mchanged: [localhost][0m
+
+TASK [deploy-scoring-engine-service : template configmap file] *****************
+[0;33mchanged: [localhost][0m
+
+TASK [deploy-scoring-engine-service : create env configmap] ********************
+[0;33mchanged: [localhost][0m
+
+TASK [deploy-scoring-engine-service : remove env configmap file] ***************
+[0;33mchanged: [localhost][0m
+
+TASK [deploy-scoring-engine-service : helm upgrade] ****************************
+[0;33mchanged: [localhost][0m
+
+TASK [deploy-scoring-engine-service : Get the deployment rollout status] *******
+[0;33mchanged: [localhost][0m
+
+TASK [deploy-scoring-engine-service : Get deployed image name] *****************
+[0;33mchanged: [localhost][0m
+
+PLAY RECAP *********************************************************************
+[0;33mlocalhost[0m                  : [0;32mok=8   [0m [0;33mchanged=7   [0m unreachable=0    failed=0   
+
+Finished: SUCCESS

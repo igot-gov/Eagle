@@ -1,0 +1,29 @@
+kafka.bootstrapAddress={{ kafka_ip }}
+kafka.autOffsetResetConfig={{ var_kafka_service_kafka_offset_reset_config }}
+infosys.spring.kafka.search.indexer.error.output.topic={{ kafka_search_indexer_errors_topic }}
+infosys.spring.kafka.publisher.error.output.topic={{ kafka_publisher_topic }}
+infosys.kafka.default.stream.configs.replication.factor={{ kafka_replication_factor }}
+
+
+infosys.es.auth.enabled={{ enable_password_for_elasticsearch }}
+infosys.es.host={{ elasticsearch_host }}
+infosys.es.port={{ elasticsearch_http_port }}
+infosys.es.username={{ elasticsearch_username }}
+infosys.es.password={{ elasticsearch_password }}
+infosys.es.index={{ kafka_authtool_elasticsearch_contentindex_alias_name }}
+infosys.es.index.type={{ elasticsearch_contentindex_type }}
+
+
+infosys.neo4j.auth.enabled={{ enable_password_for_neo4j }}
+infosys.neo4j.url={{ neo4j_url }}
+infosys.neo4j.auth.username={{ neo4j_username }}
+infosys.neo4j.auth.password={{ neo4j_password }}
+
+
+infosys.content.service.zip.url={{ content_service_zip_url }}
+infosys.content.service.publish.url={{ content_service_publish_url }}
+infosys.catalog.url={{ catalog_url }}
+notification.engine.ip={{ network_alias_notification_service }}
+notification.engine.port={{ service_notification_service_port }}
+
+infosys.core.content-sources.url={{ core_content_sources_url  }}

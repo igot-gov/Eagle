@@ -1,0 +1,84 @@
+o365_required={{ o365_required }}
+static_ilp_proxy={{ static_ilp_proxy }}
+
+directoryCreateURL={{ directoryCreateURL }}
+com.infosys.root-org={{ com_infosys_root_org }}
+com.infosys.org={{ com_infosys_org }}
+content_service={{ content_service }}
+web_host_proxy={{ web_host_proxy }}
+
+spring.data.cassandra.bodhi.contact-points={{ cassandra_host }}
+spring.data.cassandra.bodhi.port={{ cassandra_port }}
+spring.data.cassandra.bodhi.keyspace-name={{ keyspace_bodhi }}
+spring.data.cassandra.username={{ cassandra_username }}
+spring.data.cassandra.password={{ cassandra_password }}
+spring.data.cassandra.sunbird.contact-points={{ cassandra_host }}
+spring.data.cassandra.sunbird.port={{ cassandra_port }}
+spring.data.cassandra.sunbird.keyspace-name={{ keyspace_sunbird }}
+
+es.cluster.name={{ elasticsearch_cluster_name }}
+es.host.name={{ elasticsearch_host }}
+es.host.port={{ elasticsearch_http_port }}
+es.host.username={{ elasticsearch_username }}
+es.host.password={{ elasticsearch_password }}
+
+db.username={{ cassandra_username }}
+db.password={{ cassandra_password }}
+
+## Added new
+server.port={{ service_sb_ext_auth_tool_port }}
+
+sbext.service.host={{ sb_ext_service_url }}
+
+neo4j.auth.enable={{ enable_password_for_neo4j }}
+neo4j.url={{ neo4j_url }}
+neo4j.username={{ neo4j_username }}
+neo4j.password={{ neo4j_password }}
+
+spring.data.cassandra.bodhi.username={{ cassandra_username }}
+spring.data.cassandra.bodhi.password={{ cassandra_password }}
+
+spring.data.cassandra.sunbird.username={{ cassandra_username }}
+spring.data.cassandra.sunbird.password={{ cassandra_password }}
+
+kafka.bootstrapAddress={{ kafka_bootstrapAddress }}
+infosys.spring.kafka.search.indexer.error.output.topic={{ infosys_spring_kafka_search_indexer_error_output_topic }}
+infosys.spring.kafka.publisher.error.output.topic={{ infosys_spring_kafka_publisher_error_output_topic }}
+
+content.id.prefix={{ content_id_prefix }}
+content.service.url={{ content_service_url }}
+content.service.publish.url={{ content_service_publish_url }}
+content.service.zip.url={{ content_service_zip_url }}
+contentUrl.part={{ content_url_part }}
+
+feature.id.prefix={{ feature_id_prefix }}
+
+email.service.url={{ email_service_url }}
+
+access.control.url={{ access_control_url }}
+
+infosys.es.auth.enabled={{ enable_password_for_elasticsearch }}
+infosys.es.host={{ elasticsearch_host }}
+infosys.es.port={{ elasticsearch_http_port }}
+infosys.es.username={{ elasticsearch_username }}
+infosys.es.password={{ elasticsearch_password }}
+infosys.es.index={{ sb_authtool_elasticsearch_contentindex_alias_name }}
+infosys.es.index.type={{ elasticsearch_contentindex_type }}
+
+infosys.fields.nested={{ infosys_fields_nested }}
+
+infosys.catalog.url={{ infosys_catalog_url }}
+
+infosys.kafka.consumer.zk.connect={{ infosys_kafka_consumer_zk_connect }}
+infosys.kafka.producer.bootstrap.servers={{ infosys_kafka_producer_bootstrap_servers }}
+infosys.kafka.default.stream.configs.replication.factor={{ infosys_kafka_default_stream_configs_replication_factor }}
+infosys.kafka.input.topic={{ infosys_kafka_input_topic }}
+infosys.kafka.output.topic={{ infosys_kafka_output_topic }}
+topic.service.url= {{ topic_service_url }}
+
+pid.service.ip={{ network_alias_pid_service }}
+pid.service.port={{ service_pid_service_port }}
+notification.engine.ip={{ network_alias_notification_service }}
+notification.engine.port={{ service_notification_service_port }}
+
+kafka.autOffsetResetConfig={{ var_sb_ext_auth_kafka_offset_reset_config }}

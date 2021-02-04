@@ -1,0 +1,69 @@
+# Cassandra db and keyspace details
+sunbird_cassandra_host={{ cassandra_host }}
+sunbird_cassandra_port={{ cassandra_port }}
+spring.data.cassandra.contact-points={{ cassandra_host }}
+spring.data.cassandra.port={{ cassandra_port }}
+spring.data.cassandra.keyspace-name={{ keyspace_bodhi }}
+spring.data.cassandra.username={{ cassandra_username }}
+spring.data.cassandra.password={{ cassandra_password }}
+
+# Elasticsearch details
+sunbird_es_host={{ elasticsearch_host }}
+# sunbird_es_port={{ elasticsearch_tcp_port }}
+sunbird_es_port={{ elasticsearch_http_port }}
+sunbird_es_cluster={{ elasticsearch_cluster_name }}
+sunbird_es_rest_port={{ elasticsearch_http_port }}
+sunbird_cassandra_username={{ cassandra_username }}
+sunbird_cassandra_password={{ cassandra_password }}
+es.host.name={{ elasticsearch_host }}
+es.host.username={{ elasticsearch_username }}
+es.host.password={{ elasticsearch_password }}
+es.host.port={{ elasticsearch_http_port }}
+es.host.authentication.active={{ enable_password_for_elasticsearch }}
+
+
+sbext.service.host={{ network_alias_sb_ext_service }}
+sbext.service.port={{ service_sb_ext_port }}
+
+#eagle_user db details
+spring.datasource.jdbc-url={{ spring_datasource_jdbc_url }}
+spring.datasource.username={{ postgresql_user_profile_username }}
+spring.datasource.password={{ postgresql_user_profile_password }}
+
+# Mongodb connection and collection details
+mongodb.host={{ mongodb_host }}
+mongodb.port={{ mongodb_port }}
+mongodb.database={{ mongodb_authentication_database }}
+mongodb.username={{ mongodb_user }}
+mongodb.password={{ mongodb_password }}
+spring.data.mongodb.uri={{ spring_data_mongodb_uri }}
+
+# SMTP details
+smtp.host={{ smtp_host }}
+smtp.port={{ smtp_port }}
+smtp.username={{ smtp_username }}
+smtp.password={{ smtp_password }}
+
+# Access control details
+com.infosys.root-org={{ com_infosys_root_org }}
+com.infosys.org={{ com_infosys_org }}
+com.infosys.neo4j-ip={{ com_infosys_neo4j_ip }}
+com.infosys.enable-access-control={{ com_infosys_enable_access_control }}
+
+content.service.host={{ network_alias_content_service }}
+bodhi_content_port={{ bodhi_content_port }}
+bodhi_ui_index={{ bodhi_ui_index }}
+Enable_New_Assessments={{ enable_new_assessments }}
+iap_certification_url={{ iap_certification_url }}
+
+db.username={{ cassandra_username }}
+db.password={{ cassandra_password }}
+appName={{ app_name }}
+infosys.lex.core.ip={{ infosys_lex_core_ip}}
+infosys.core.ip={{ infosys_core_ip }}
+
+pid.service.ip={{ network_alias_pid_service }}
+pid.service.port={{ service_pid_service_port }}
+
+notification.service.ip={{ network_alias_notification_service }}
+notification.service.port={{ service_notification_service_port }}

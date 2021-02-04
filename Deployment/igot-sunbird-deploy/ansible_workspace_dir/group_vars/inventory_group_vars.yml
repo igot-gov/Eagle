@@ -1,0 +1,491 @@
+base_mount_path: /data
+var_pid_service_host: "{{auth_domain_name}}" 
+
+#Opensaber Registry
+#OPEN_SABER_USER_REGISTRY_BASE: http://open_saber_base_ip:open_saber_port # http://10.0.1.1:8005
+default_department_name: iGOT
+default_org: dopt
+default_root_org: igot
+
+#sunbird Cassandra
+sunbird_cassandra_host: cassandra_host_ip #10.0.1.2
+sunbird_cassandra_port: cassandra_host_port #9042
+sunbird_cassandra_username: username
+sunbird_cassandra_password: password
+
+frac_api_base: https://frac_url
+
+# Cassandra configuration
+enable_password_for_cassandra: "false"  #can be true or false
+cassandra_host: cassandra_host_ip #10.0.1.2
+cassandra_port: cassandra_host_port #9042
+cassandra_username: username
+cassandra_password: username
+
+# Cassandra keyspaces
+keyspace_bodhi: bodhi
+keyspace_sunbird: sunbird
+
+# Elasticsearch configuration
+is_es_on_https: "false"    # can be true or false
+enable_password_for_elasticsearch: "true"  # can be true or false
+elasticsearch_host: elasticsearch_host_ip #10.0.1.2
+elasticsearch_http_port: elasticsearch_http_port #9200
+elasticsearch_tcp_port: elasticsearch_tcp_port #9200
+elasticsearch_username: username
+elasticsearch_password: username
+elasticsearch_cluster_name: clusetername #elasticsearch
+elasticsearch_contentindex_alias_name: mlsearch_*
+elasticsearch_contentindex_type: searchresources
+kafka_authtool_elasticsearch_contentindex_alias_name: mlsearch
+elasticsearch_http_hosts_list:
+    - elasticsearch_host_ip1:lasticsearch_http_port1 #10.0.1.2:9200
+    - elasticsearch_host_ip2:lasticsearch_http_port2 #10.0.1.3:9200
+
+# Elasticsearch indices
+elasticsearch_search_index: socialsearch_en
+elasticsearch_thread_timeline_template: threadtemplate_v1
+elasticsearch_search_type: socialsearch
+elasticsearch_search_template: socialsearchtemplate_v1
+elasticsearch_content_search_index: lexsearchall
+elasticsearch_content_search_type: searchresources
+
+# Postgresql
+postgresql_host: postgresql_host_ip #10.0.1.2
+postgresql_port: postgresql_host_port #5432
+postgresql_username_wingspan: username #username
+postgresql_password_wingspan: password #password
+postgresql_username_keycloak: username #username
+postgresql_password_keycloak: password #password
+postgresql_wingspan_database: wingspan
+postgresql_opensaber_password: password #password
+postgresql_opensaber_username: username #username	
+postgresql_opensaber_database: opensaber	
+postgresql_user_profile_password: password #password
+postgresql_user_profile_username: username #username
+postgresql_user_profile_database: eagle_user
+# Mongodb
+mongodb_authentication_database: admin
+mongodb_host: mongodb_host_ip #10.0.1.2
+mongodb_port: mongodb_host_port #27017
+mongodb_user: username #username
+mongodb_password: username #password
+mongodb_nodebb_database: nodebb
+mongodb_nodebb_user: nodeusername
+mongodb_nodebb_password: password
+nodebb_url: nodebb_url
+
+
+# Neo4j
+enable_password_for_neo4j: "true" # can be true or false
+neo4j_host: neo4j_host_ip #10.0.1.3
+neo4j_port: neo4j_host_port #7687
+neo4j_username: username #username
+neo4j_password: password #password
+
+# Kafka
+kafka_host: kafka_host_ip #10.0.1.4
+kafka_port: kafka_port #9092
+kafka_servers_list: "{{ kafka_host }}:{{ kafka_port }}"
+
+# Zookeeper details
+zookeeper_host: zookeeper_host_ip #10.0.1.4
+zookeeper_port: zookeeper_port #2181
+zookeeper_servers_list: "{{ zookeeper_host }}:{{ zookeeper_port }}"
+
+# SMTP Details
+smtp_host: smtp_host_ip
+smtp_port: smtp_port
+
+# Docker hub details
+docker_hub_url: dockerhubip:port #10.0.2.10:5000 or domainname
+
+# App Details
+app_server_host: 10.0.1.10 #core private IP
+domain_name: domain_name #domainname
+
+# App variables
+keycloak_host: keycloak_host_ip #10.0.1.2
+keycloak_port: keycloak_port #8080
+auth_domain_name: domain_name #domainname
+keycloak_domain: https://domain_name/auth #https://domainname/auth
+keycloak_realm_name: wingspan
+keycloak_client_id: portal
+keycloak_sso_realm: wingspan
+keycloak_sso_admin_user: user-manager
+keycloak_sso_admin_user_password: password
+keycloak_username: username
+keycloak_password: password
+keycloak_new_user_def_pwd: password
+vault_rootorg_to_authdomain_and_realm_mapping: rootorg;https://domain_name/auth;wingspan #<<= Format
+HTTPS_HOST: https://domain_name
+PORTAL_PORT: 3008	
+keycloak_api_base: http://bulk-upload-service	
+keycloak_api_base_port: 3009
+# Swarm variables
+var_docker_deploy_node_type: manager
+
+# ENV FILES BASE DIR
+env_files_dir: /wingspan_env_files
+
+# COMPOSE FILES DIR
+compose_files_dir: /wingspan_compose_files
+
+# Config files dir
+config_files_dir: /wingspan_config_files
+
+# Secret files dir
+docker_secret_files_dir: /wingspan_docker_secret_location
+
+# Shared env file names
+ui_shared_env_file_name: ui-shared
+
+# Memory types
+memory_t: 128M
+memory_xs: 256M
+memory_s: 512M
+memory_m: 1024M
+memory_l: 2048M
+memory_xl: 4096M
+
+# TAGS
+master_tag: master_tage #Docker image tag name
+tags_ui_static: "{{ master_tag }}"
+tags_ui_proxies: "{{ master_tag }}"
+tags_content_service: "{{ master_tag }}"
+tags_authtool_ui_service: "{{ master_tag }}"
+tags_more_like_this_service: "{{ master_tag }}"
+tags_social_forum_service: "{{ master_tag }}"
+tags_sb_ext_service: "{{ master_tag }}"
+tags_sb_ext_authtool_service: "{{ master_tag }}"
+tags_lex_core_cassandra_service: "{{ master_tag }}"
+tags_lex_core_critical_service: "{{ master_tag }}"
+tags_lex_core_high_service: "{{ master_tag }}"
+tags_lex_core_lhub_service: "{{ master_tag }}"
+tags_lex_core_service: "{{ master_tag }}"
+tags_file_exhaust_service: "{{ master_tag }}"
+tags_bulk_upload_service: "{{ master_tag }}"
+tags_telemetry_service: "{{ master_tag }}"
+tags_antivirus_service: "{{ master_tag }}"
+tags_external_api_service: "{{ master_tag }}"
+tags_chatbot_service: "{{ master_tag }}"
+tags_monitoring_service: "{{ master_tag }}"
+tags_dbms_api_service: "{{ master_tag }}"
+tags_support_api_service: "{{ master_tag }}"
+tags_sb_telemetry_service: "{{ master_tag }}"
+tags_pid_service: "{{ master_tag }}"
+tags_notification_service: "{{ master_tag }}"
+tags_access_control_service: "{{ master_tag }}"
+tags_hierarchy_service: "{{ master_tag }}"
+tags_kafka_service: "{{ master_tag }}"
+tags_opensaber: "{{ master_tag }}"	
+tags_user_profile: "{{ master_tag }}"
+tags_sb_recommendation_service: "{{ master_tag }}"
+tags_sb_discuss_connect_service: "{{ master_tag }}"
+tags_sb_hub_service: "{{ master_tag }}"
+tags_profanity_filter_service: "{{ master_tag }}"
+tags_ui_cbp_igot: "{{ master_tag }}"
+tags_ui_mdo_igot: "{{ master_tag }}"
+tags_content_validation_service: "{{ master_tag }}"
+tags_social_share_service: "{{ master_tag }}"
+tags_sb_hub_graph_service: "{{ master_tag }}"
+tags_workflow_handler_service: "{{ master_tag }}"
+tags_scoring_engine_service: "{{ master_tag }}"
+
+# Service scale levels
+service_replicas_content_service: 1
+service_replicas_authtool_ui_service: 1
+service_replicas_ui_proxies_service: 1
+service_replicas_more_like_this_service: 1
+service_replicas_social_forum_service: 1
+service_replicas_sb_ext_service: 1
+service_replicas_sb_ext_authtool_service: 1
+service_replicas_lex_core_cassandra_service: 1
+service_replicas_lex_core_critical_service: 1
+service_replicas_lex_core_high_service: 1
+service_replicas_lex_core_lhub_service: 0
+service_replicas_lex_core_service: 1
+service_replicas_file_exhaust_service: 1
+service_replicas_common_authorization: 1
+service_replicas_bulk_upload_service: 1
+service_replicas_telemetry_service: 1
+service_replicas_antivirus_service: 1
+service_replicas_khub_migration_service: 0
+service_replicas_external_api_service: 1
+service_replicas_chatbot_service: 0
+service_replicas_monitoring_service: 0
+service_replicas_ui_static_service: 1
+service_replicas_dbms_api_service: 1
+service_replicas_support_api_service: 1
+service_replicas_sb_telemetry_service: 1
+service_replicas_pid_service: 1
+service_replicas_notification_service: 1
+service_replicas_access_control_service: 1
+service_replicas_hierarchy_service: 1
+service_replicas_kafka_service: 1
+service_replicas_opensaber_service: 1	
+service_replicas_user_profile_service: 1
+service_replicas_sb_recommendation_service: 1
+service_replicas_sb_discuss_connect_service: 1
+service_replicas_sb_hub_service: 1
+service_replicas_profanity_filter_service: 1
+service_replicas_ui_cbp_igot_service: 1
+service_replicas_ui_mdo_igot_service: 1
+service_replicas_content_validation_service: 1
+service_replicas_social_share_service: 1
+service_replicas_sb_hub_graph_service: 1
+service_replicas_workflow_handler_service: 1
+service_replicas_scoring_engine_service: 1
+
+
+# Memory reserves for each service
+service_mem_reserved_content_service: "{{ memory_m }}"
+service_mem_reserved_authtool_ui_service: "{{ memory_s }}"
+service_mem_reserved_ui_proxies_service: "{{ memory_s }}"
+service_mem_reserved_more_like_this_service: "{{ memory_xs }}"
+service_mem_reserved_social_forum_service: "{{ memory_xs }}"
+service_mem_reserved_sb_ext_service: "{{ memory_s }}"
+service_mem_reserved_sb_ext_authtool_service: "{{ memory_s }}"
+service_mem_reserved_lex_core_cassandra_service: "{{ memory_s }}"
+service_mem_reserved_lex_core_critical_service: "{{ memory_s }}"
+service_mem_reserved_lex_core_high_service: "{{ memory_s }}"
+service_mem_reserved_lex_core_lhub_service: "{{ memory_s }}"
+service_mem_reserved_lex_core_service: "{{ memory_s }}"
+service_mem_reserved_file_exhaust_service: "{{ memory_s }}"
+service_mem_reserved_common_authorization: "{{ memory_s }}"
+service_mem_reserved_bulk_upload_service: "{{ memory_s }}"
+service_mem_reserved_telemetry_service: "{{ memory_s }}"
+service_mem_reserved_antivirus_service: "{{ memory_s }}"
+service_mem_reserved_khub_migration_service: "{{ memory_s }}"
+service_mem_reserved_external_api_service: "{{ memory_s }}"
+service_mem_reserved_chatbot_service: "{{ memory_m }}"
+service_mem_reserved_monitoring_service: "{{ memory_t }}"
+service_mem_reserved_ui_static_service: "{{ memory_s }}"
+service_mem_reserved_dbms_api_service: "{{ memory_s }}"
+service_mem_reserved_support_api_service: "{{ memory_s }}"
+service_mem_reserved_sb_telemetry_service: "{{ memory_s }}"
+service_mem_reserved_pid_service: "{{ memory_s }}"
+service_mem_reserved_notification_service: "{{ memory_s }}"
+service_mem_reserved_access_control_service: "{{ memory_s }}"
+service_mem_reserved_hierarchy_service: "{{ memory_m }}"
+service_mem_reserved_kafka_service: "{{ memory_s }}"
+service_mem_reserved_opensaber_service: "{{ memory_s }}"	
+service_mem_reserved_user_profile_service: "{{ memory_s }}"
+service_mem_reserved_sb_recommendation_service: "{{ memory_s }}"
+service_mem_reserved_sb_discuss_connect_service: "{{ memory_s }}"
+service_mem_reserved_sb_hub_service: "{{ memory_s }}"
+service_mem_reserved_profanity_filter_service: "{{ memory_s }}"
+service_mem_reserved_ui_cbp_igot_service: "{{ memory_s }}"
+service_mem_reserved_ui_mdo_igot_service: "{{ memory_s }}"
+service_mem_reserved_content_validation_service: "{{ memory_s }}"
+service_mem_reserved_social_share_service: "{{ memory_s }}"
+service_mem_reserved_sb_hub_graph_service: "{{ memory_xs }}"
+service_mem_reserved_workflow_handler_service: "{{ memory_xs }}"
+service_mem_reserved_scoring_engine_service: "{{ memory_xs }}"
+
+# Memory limits
+service_mem_limit_content_service: "{{ memory_l }}"
+service_mem_limit_authtool_ui_service: "{{ memory_m }}"
+service_mem_limit_ui_proxies_service: "{{ memory_m }}"
+service_mem_limit_more_like_this_service: "{{ memory_s }}"
+service_mem_limit_social_forum_service: "{{ memory_s }}"
+service_mem_limit_sb_ext_service: "{{ memory_l }}"
+service_mem_limit_sb_ext_authtool_service: "{{ memory_l }}"
+service_mem_limit_lex_core_cassandra_service: "{{ memory_m }}"
+service_mem_limit_lex_core_critical_service: "{{ memory_m }}"
+service_mem_limit_lex_core_high_service: "{{ memory_m }}"
+service_mem_limit_lex_core_lhub_service: "{{ memory_m }}"
+service_mem_limit_lex_core_service: "{{ memory_m }}"
+service_mem_limit_file_exhaust_service: "{{ memory_m }}"
+service_mem_limit_common_authorization: "{{ memory_m }}"
+service_mem_limit_bulk_upload_service: "{{ memory_m }}"
+service_mem_limit_telemetry_service: "{{ memory_m }}"
+service_mem_limit_antivirus_service: "{{ memory_l }}"
+service_mem_limit_khub_migration_service: "{{ memory_m }}"
+service_mem_limit_external_api_service: "{{ memory_m }}"
+service_mem_limit_chatbot_service: "{{ memory_xl }}"
+service_mem_limit_monitoring_service: "{{ memory_xs }}"
+service_mem_limit_ui_static_service: "{{ memory_m }}"
+service_mem_limit_dbms_api_service: "{{ memory_m }}"
+service_mem_limit_support_api_service: "{{ memory_s }}"
+service_mem_limit_sb_telemetry_service: "{{ memory_m }}"
+service_mem_limit_pid_service: "{{ memory_s }}"
+service_mem_limit_notification_service: "{{ memory_s }}"
+service_mem_limit_access_control_service: "{{ memory_s }}"
+service_mem_limit_hierarchy_service: "{{ memory_l }}"
+service_mem_limit_kafka_service: "{{ memory_m }}"
+service_mem_limit_opensaber_service: "{{ memory_m }}"	
+service_mem_limit_user_profile_service: "{{ memory_m }}"
+service_mem_limit_sb_recommendation_service: "{{ memory_m }}"
+service_mem_limit_sb_discuss_connect_service: "{{ memory_m }}"
+service_mem_limit_sb_hub_service: "{{ memory_m }}"
+service_mem_limit_profanity_filter_service: "{{ memory_m }}"
+service_mem_limit_ui_cbp_igot_service: "{{ memory_m }}"
+service_mem_limit_ui_mdo_igot_service: "{{ memory_m }}"
+service_mem_limit_content_validation_service: "{{ memory_m }}"
+service_mem_limit_social_share_service: "{{ memory_m }}"
+service_mem_limit_sb_hub_graph_service: "{{ memory_m }}"
+service_mem_limit_workflow_handler_service: "{{ memory_m }}"
+service_mem_limit_scoring_engine_service: "{{ memory_m }}"
+
+# Force reload for app variables
+force_reload_content_service: true
+force_reload_authtool_ui_service: true
+force_reload_ui_proxies_service: true
+force_reload_more_like_this_service: true
+force_reload_social_forum_service: true
+force_reload_sb_ext_service: true
+force_reload_sb_ext_authtool_service: true
+force_reload_lex_core_cassandra_service: true
+force_reload_lex_core_critical_service: true
+force_reload_lex_core_high_service: true
+force_reload_lex_core_lhub_service: true
+force_reload_lex_core_service: true
+force_reload_lex_health_core_service: true
+force_reload_lex_health_core_critical_service: true
+force_reload_file_exhaust_service: true
+force_reload_common_authorization: true
+force_reload_bulk_upload_service: true
+force_reload_telemetry_service: true
+force_reload_antivirus_service: true
+force_reload_khub_migration_service: true
+force_reload_external_api_service: true
+force_reload_chatbot_service: true
+force_reload_monitoring_service: true
+force_reload_ui_static_service: true
+force_reload_dbms_api_service: true
+force_reload_support_api_service: true
+force_reload_sb_telemetry_service: true
+force_reload_pid_service: false
+force_reload_notification_service: true
+force_reload_access_control_service: false
+force_reload_hierarchy_service: true
+force_reload_kafka_service: false
+force_reload_opensaber_service: true	
+force_reload_user_profile_service: true	
+force_reload_sb_recommendation_service: true
+force_reload_sb_discuss_connect_service: true
+force_reload_sb_hub_service: true
+force_reload_profanity_filter_service: true
+force_reload_ui_cbp_igot_service: true
+force_reload_ui_mdo_igot_service: true
+force_reload_content_validation_service: true
+force_reload_social_share_service: true
+force_reload_sb_hub_graph_service: true
+force_reload_workflow_handler_service: true
+force_reload_scoring_engine_service: true
+
+publish_ports: false
+
+# External application details
+lex_microsoft_client_id: client_id
+lex_microsoft_client_secret: client_secret
+
+### Service Level configurations ###
+
+# Mount paths
+host_content_directory_path: /mydata/content-directory
+host_bulk_upload_path: /mydata/bulk_upload
+# Logs
+sb_ext_logs_path: /mydata/logs/sb-ext
+ui_proxies_logs_path: /mydata/logs/ui-proxies
+bulk_upload_logs_path: /mydata/logs/bulk_upload_api
+
+# Common for multiple services
+var_common_iap_base: lex-iap.infosysapps.com
+var_common_root_org: root_org
+var_common_org: org
+
+# For dbms api
+# D for Dev, S for staging, L for Live
+var_dbms_api_oracle_prefix_character: WS
+
+# For lex core service
+# true - real-time progress is enabled, false real-time progress is not enabled
+var_lex_core_enable_realtime_progress: true
+var_lex_health_core_enable_realtime_progress: true
+# learning hub url, test/live url depending on the environment
+var_lex_core_learning_hub_url: https://itgatewaytst.infosys.com/extapilex/api/Learning
+var_lex_health_core_learning_hub_url: https://itgatewaytst.infosys.com/extapilex/api/Learning
+var_lex_core_learning_hub_certification_url: https://itgatewaytst.infosys.com/extapicertification/api/Certification
+var_lex_health_core_learning_hub_certification_url: https://itgatewaytst.infosys.com/extapicertification/api/Certification
+var_lex_core_postgres_db_name: wingspan
+var_lex_health_core_postgres_db_name: wingspan
+var_lex_core_enable_management_endpoints: "true"
+var_lex_health_core_enable_management_endpoints: "true"
+
+# For UI-shared variables
+var_ui_shared_la_host: http://ip:port #http://10.0.1.111:9300
+var_ui_shared_ilp_fp_host: http://ip
+
+# For content service
+var_content_service_streaming_enabled_value: 1 # Make it 1 on all instances for now
+var_content_service_load_balancer_enabled_value: 0 # Make it 0 in all instances for now
+var_content_service_live_api_proxies_enabled_value: 0 # Should be 1 on Live
+var_content_service_stats_enabled_value: 0 # Should be one on Dev
+var_content_service_should_antivirus_be_enabled: "true" # Make it true whereever antivirus is running
+var_content_service_public_content_enabled_value: 0 # Should be 1 in infytq(Dev and live)
+var_content_service_send_email_to_support: "false" 
+var_content_service_environment_name: "Environment name" # Required in include in the emails
+var_content_service_support_mail_id: ""
+var_content_service_users_keyspace: sunbird
+var_content_service_logs_index_name_prefix: logs_nginx
+var_content_service_logs_type_name: nginx_logs
+var_content_service_logs_server_host: ip
+var_content_service_logs_server_port: port
+var_content_service_stats_db_name: stats
+var_content_service_stats_collection_name: stats
+
+### For multi-tenancy in S3 upload
+var_content_service_live_content_buckets : "root_org:main_bucket"
+var_content_service_live_image_buckets : "root_org:sb-images-main_bucket"
+var_content_service_pre_publish_content_buckets : "root_org:sb-pre-publish_bucket"
+var_content_service_pre_publish_image_buckets : "root_org:sb-images-pre-publish_bucket"
+var_content_service_downloads_buckets : "root_org:sb-download_bucket"
+var_content_service_content_cdn : "root_org:main_cdn" #root_org:domain_name
+var_content_service_images_cdn : "root_org:images_cdn" #root_org:image_cdn_URL
+
+
+# For sb-ext service
+var_sb_ext_service_enable_access_control: "true"
+
+# For access control service
+var_access_control_service_enable_access_control: "true"
+
+# For sb-ext authtool service
+var_sb_ext_auth_kafka_offset_reset_config: latest
+
+# For monitoring service
+var_monitoring_service_cc_list: ""
+
+# S3 bucket config
+var_content_service_main_bucket: main_bucket
+var_content_service_pre_publish_bucket: sb-pre-publish_bucket
+var_content_service_transcoding_bucket: sb-transcoding_bucket
+var_content_service_download_bucket: sb-download_bucket
+var_content_service_images_bucket: sb-images-main_bucket
+var_content_service_images_pre_publish_bucket: sb-images-pre-publish_bucket
+var_content_service_keys_bucket: sb-keys_bucket
+
+# CDN to server images
+var_images_cdn_name: images_cdn
+var_content_service_default_images_org: root_org
+
+# Transcoding Server Config
+var_content_service_transcoding_server_ip: transcoding_ip
+var_content_service_transcoding_server_port : transcoding_port
+
+# For telemetry service
+#var_telemetry_kafka_topic: telemetry_ingest_topic
+var_telemetry_kafka_topic: dev.telemetry.ingest
+
+# For pid service
+var_pid_service_pguser: pid
+# pghost be different for pid service, across the instances
+var_pid_service_pghost: postgresql_host
+var_pid_service_password: password
+var_pid_service_pgdatabase: pid
+var_pid_service_pgport: 5432
+
+# For kafka service
+var_kafka_service_kafka_offset_reset_config: latest

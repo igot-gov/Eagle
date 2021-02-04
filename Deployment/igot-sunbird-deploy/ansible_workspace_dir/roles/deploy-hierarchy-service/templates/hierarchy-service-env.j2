@@ -1,0 +1,25 @@
+# Content directory from where the organizations and their content is picked from
+resource_directory={{ internal_resource_dir }}
+
+# Elasticsearch details
+IS_ES_HTTPS={{ is_es_on_https }}
+ES_PASSWORD_ENABLE={{ enable_password_for_elasticsearch }}
+es_host={{ elasticsearch_host }}
+es_port={{ elasticsearch_http_port }}
+es_username={{ elasticsearch_username }}
+es_password={{ elasticsearch_password }}
+es_hosts_list={{ elasticsearch_http_hosts_list | join(',') }}
+
+# Cassandra db and keyspace details
+cassandra_host={{ cassandra_contact_points }}
+cassandra_port={{ cassandra_port }}
+cassandra_keyspace={{ keyspace_bodhi }}
+cassandra_username={{ cassandra_username }}
+cassandra_password={{ cassandra_password }}
+
+# App details
+NODE_ENV=production
+port={{ application_port }}
+
+# Cache time in minutes
+cache_lifetime_minutes={{ cache_lifetime_minutes }}

@@ -1,0 +1,40 @@
+---
+# vars file for deploy-lex-core-service
+
+# For script
+release_name: "{{ network_alias_content_validation_service }}"
+template_compose_file_name: content-validation-service.j2
+template_env_file_name: content-validation-service-env.j2
+compose_file_name: "{{ service_content_validation_service }}.yml"
+env_file_name: "{{ service_content_validation_service }}.env"
+helm_env_file_location: "../kubernetes-deploy/templates"
+helm_env_file_name: "{{ helm_env_file_location }}/{{ service_content_validation_service }}.env"
+chart_path: "../kubernetes-deploy/content-validation-service"
+env_file_deployment_location: "{{ env_files_dir }}/{{ env_file_name }}"
+compose_file_deployment_location: "{{ compose_files_dir }}/{{ compose_file_name }}"
+user_friendly_name: content validation service
+
+# For service
+application_port: "{{ service_content_validation_port }}"
+image_name: "{{ image_content_validation_service }}"
+tag: "{{ tags_content_validation_service }}"
+host_port: "{{ application_port }}"
+docker_port: "{{ application_port }}"
+replicas: "{{ service_replicas_content_validation_service }}"
+reserved_memory: "{{ service_mem_reserved_content_validation_service }}"
+limited_memory: "{{ service_mem_limit_content_validation_service }}"
+#limited_memory: 2048M
+health_check_endpoint: http://127.0.0.1:{{ docker_port }}/contentValidation/actuator/health
+network_alias_name: "{{ network_alias_content_validation_service }}"
+docker_service_stack_name: lms
+docker_service_name: "{{ service_content_validation_service }}"
+force_reload: "{{ force_reload_content_validation_service }}"
+
+# For application
+server_connection_timeout: 5000
+tomcat_max_threads: 400
+tomcat_min_spare_threads: 20
+servlet_multipart_max_file_size: 100Mb
+servlet_multipart_max_request_size: 100Mb
+
+content_service_url: http://{{ network_alias_content_service }}:{{ service_content_service_port }}

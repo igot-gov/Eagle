@@ -1,0 +1,2 @@
+- name: Deploy {{ user_friendly_name }}
+  shell: docker stack deploy --with-registry-auth -c {{ compose_file_deployment_location }} {{  docker_service_stack_name  }}

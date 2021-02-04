@@ -1,0 +1,39 @@
+server.port={{ application_port }}
+#Notification Service -- We may not require this as of now
+notify.service.host=""
+notify.service.path=""
+
+#Profanity Tool Details
+#profanity.service.host={{ profanity_service_host }}
+profanity.service.host=http://{{ network_alias_profanity_filter_service }}:{{ service_profanity_filter_port }}
+profanity.service.path=/checkProfanity
+
+#lex-core-service-hierarchy-search-url
+lexcore.service.host={{ infosys_lex_core_ip }}
+lexcore.hierarchy.searchpath=v1/content/hierarchy/{contentId}
+
+#content-service
+content.service.host={{ content_service_url }}
+
+#Kafka Topics
+kafka.topics.incoming.rest.validation=startContentValidationTopic
+
+#Kafka Server
+spring.kafka.bootstrap.servers={{ kafka_servers_list }}
+
+#kafka properties
+kakfa.offset.reset.value=latest
+kafka.max.poll.interval.ms=5000
+kafka.max.poll.records=100
+
+
+#spring data cassandra application properties
+spring.data.cassandra.startupTimeoutInSeconds=100000
+spring.data.cassandra.contact-points={{ cassandra_host }}
+spring.data.cassandra.port={{ cassandra_port }}
+spring.data.cassandra.keyspace-name={{ keyspace_bodhi }}
+
+#common for both the cassandra keyspaces, hence does not require a getter setter in the config
+spring.data.cassandra.username={{ cassandra_username }}
+spring.data.cassandra.password={{ cassandra_password }}
+

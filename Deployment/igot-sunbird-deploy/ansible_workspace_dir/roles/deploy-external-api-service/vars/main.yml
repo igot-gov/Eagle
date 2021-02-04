@@ -1,0 +1,39 @@
+---
+# vars file for deploy-external-api
+
+# For script
+template_compose_file_name: external-api.j2
+template_env_file_name: external-api-env.j2
+compose_file_name: "{{ service_external_api_service }}.yml"
+env_file_name: "{{ service_external_api_service }}.env"
+env_file_deployment_location: "{{ env_files_dir }}/{{ env_file_name }}"
+compose_file_deployment_location: "{{ compose_files_dir }}/{{ compose_file_name }}"
+user_friendly_name: Lex External Api Service
+
+# For service
+application_port: "{{ service_external_api_port }}"
+image_name: "{{ image_external_api_service }}"
+tag: "{{ tags_external_api_service }}"
+host_port: "{{ application_port }}"
+docker_port: "{{ application_port }}"
+replicas: "{{ service_replicas_external_api_service }}"
+reserved_memory: "{{ service_mem_reserved_external_api_service }}"
+limited_memory: "{{ service_mem_limit_external_api_service }}"
+#limited_memory: 2048M
+health_check_endpoint: http://127.0.0.1:{{ docker_port }}
+network_alias_name: "{{ network_alias_external_api_service }}"
+docker_service_stack_name: external
+docker_service_name: "{{ service_external_api_service }}"
+force_reload: "{{ force_reload_external_api_service }}"
+
+# For application
+spring_data_mongodb_uri: mongodb://{{ mongodb_user }}:{{ mongodb_password | urlencode }}@{{ mongodb_host }}:{{ mongodb_port }}/{{ mongodb_authentication_database }}
+bodhi_content_port: "{{ service_content_service_port }}"
+bodhi_ui_index: lexcontentindex
+sb_ext_port: "{{ service_sb_ext_port }}"
+search_service_url: http://{{ network_alias_sb_ext_service }}:{{ sb_ext_port }}/search5
+server_tomcat_max_threads: 200
+authoring_tool_backend_service: http://{{ network_alias_sb_ext_authoring_service }}:{{ service_sb_ext_auth_tool_port }}
+infosys_domain_name: https://{{ domain_name }}
+
+content_url_part: Infosys/Infosys_Ltd

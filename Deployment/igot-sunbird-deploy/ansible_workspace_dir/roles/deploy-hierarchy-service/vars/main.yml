@@ -1,0 +1,30 @@
+---
+# vars file for deploy-content-service
+# For script
+template_compose_file_name: hierarchy-service.j2
+template_env_file_name: hierarchy-service-env.j2
+compose_file_name: "{{ service_lex_hierarchy_service }}.yml"
+env_file_name: "{{ service_lex_hierarchy_service }}.env"
+env_file_deployment_location: "{{ env_files_dir }}/{{ env_file_name }}"
+compose_file_deployment_location: "{{ compose_files_dir }}/{{ compose_file_name }}"
+user_friendly_name: Hierarchy service
+
+# For service
+application_port: "{{ service_lex_hierarchy_service_port }}"
+image_name: "{{ image_lex_hierarchy_service }}"
+tag: "{{ tags_hierarchy_service }}"
+host_port: "{{ application_port }}"
+docker_port: "{{ application_port }}"
+replicas: "{{ service_replicas_hierarchy_service }}"
+reserved_memory: "{{ service_mem_reserved_hierarchy_service }}"
+limited_memory: "{{ service_mem_limit_hierarchy_service }}"
+health_check_endpoint: http://127.0.0.1:{{ docker_port }}/health
+network_alias_name: "{{ network_alias_lex_hierarchy_service }}"
+host_content_directory: "{{ host_content_directory_path }}"
+docker_service_stack_name: content
+docker_service_name: "{{ service_lex_hierarchy_service }}"
+force_reload: "{{ force_reload_hierarchy_service }}"
+
+internal_resource_dir: /content-directory
+cassandra_contact_points: "{{ cassandra_host }}:{{ cassandra_port }}"
+cache_lifetime_minutes: 1440

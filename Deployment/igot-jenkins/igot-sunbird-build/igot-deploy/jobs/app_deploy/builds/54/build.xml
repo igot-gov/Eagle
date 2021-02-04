@@ -1,0 +1,70 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<build>
+  <actions>
+    <hudson.model.CauseAction>
+      <causeBag class="linked-hash-map">
+        <entry>
+          <hudson.model.Cause_-UserIdCause>
+            <userId>admin</userId>
+          </hudson.model.Cause_-UserIdCause>
+          <int>1</int>
+        </entry>
+        <entry>
+          <com.sonyericsson.rebuild.RebuildCause plugin="rebuild@1.31">
+            <upstreamProject>igot-deploy/app_deploy</upstreamProject>
+            <upstreamUrl>job/igot-deploy/job/app_deploy/</upstreamUrl>
+            <upstreamBuild>53</upstreamBuild>
+            <upstreamCauses>
+              <hudson.model.Cause_-UserIdCause>
+                <userId>admin</userId>
+              </hudson.model.Cause_-UserIdCause>
+              <hudson.model.Cause_-UpstreamCause>
+                <upstreamProject>igot-deploy/app_deploy</upstreamProject>
+                <upstreamUrl>job/igot-deploy/job/app_deploy/</upstreamUrl>
+                <upstreamBuild>52</upstreamBuild>
+                <upstreamCauses>
+                  <hudson.model.Cause_-UserIdCause>
+                    <userId>admin</userId>
+                  </hudson.model.Cause_-UserIdCause>
+                </upstreamCauses>
+              </hudson.model.Cause_-UpstreamCause>
+            </upstreamCauses>
+          </com.sonyericsson.rebuild.RebuildCause>
+          <int>1</int>
+        </entry>
+      </causeBag>
+    </hudson.model.CauseAction>
+    <hudson.model.ParametersAction>
+      <safeParameters class="sorted-set"/>
+      <parameters>
+        <hudson.model.StringParameterValue>
+          <name>app_tag</name>
+          <description></description>
+          <value>deploy-ui-cbp-igot</value>
+        </hudson.model.StringParameterValue>
+        <hudson.model.StringParameterValue>
+          <name>sb_tag</name>
+          <description></description>
+          <value>8069581</value>
+        </hudson.model.StringParameterValue>
+      </parameters>
+      <parameterDefinitionNames>
+        <string>app_tag</string>
+        <string>sb_tag</string>
+      </parameterDefinitionNames>
+    </hudson.model.ParametersAction>
+    <com.sonyericsson.rebuild.RebuildAction plugin="rebuild@1.31"/>
+  </actions>
+  <queueId>1786</queueId>
+  <timestamp>1610452071773</timestamp>
+  <startTime>1610452071787</startTime>
+  <result>FAILURE</result>
+  <duration>61676</duration>
+  <charset>UTF-8</charset>
+  <keepLog>false</keepLog>
+  <builtOn></builtOn>
+  <workspace>/var/lib/jenkins/workspace/igot-deploy/app_deploy</workspace>
+  <hudsonVersion>2.263.1</hudsonVersion>
+  <scm class="hudson.scm.NullChangeLogParser"/>
+  <culprits class="com.google.common.collect.EmptyImmutableSortedSet"/>
+</build>

@@ -1,0 +1,60 @@
+---
+# vars file for deploy-sb-ext-authtool-service
+
+release_name: "{{ network_alias_sb_ext_authoring_service }}"
+template_compose_file_name: sb-ext-authtool.j2
+template_env_file_name: sb-ext-authtool-env.j2
+compose_file_name: "{{ service_sb_ext_authtool_service }}.yml"
+env_file_name: "{{ service_sb_ext_authtool_service }}.env"
+helm_env_file_location: "../kubernetes-deploy/templates"
+helm_env_file_name: "{{ helm_env_file_location }}/{{ service_sb_ext_authtool_service }}.env"
+chart_path: "../kubernetes-deploy/sb-ext-authoring-service"
+env_file_deployment_location: "{{ env_files_dir }}/{{ env_file_name }}"
+compose_file_deployment_location: "{{ compose_files_dir }}/{{ compose_file_name }}"
+user_friendly_name: Sb-ext-authtool-service
+
+application_port: "{{ service_sb_ext_auth_tool_port }}"
+image_name: "{{ image_sb_ext_authtool_service }}"
+tag: "{{ tags_sb_ext_authtool_service }}"
+host_port: "{{ application_port }}"
+docker_port: "{{ application_port }}"
+replicas: "{{ service_replicas_sb_ext_authtool_service }}"
+reserved_memory: "{{ service_mem_reserved_sb_ext_authtool_service }}"
+limited_memory: "{{ service_mem_limit_sb_ext_authtool_service }}"
+health_check_endpoint: http://127.0.0.1:{{ docker_port }}/actuator/health
+network_alias_name: "{{ network_alias_sb_ext_authoring_service }}"
+docker_service_stack_name: lms
+docker_service_name: "{{ service_sb_ext_authtool_service }}"
+force_reload: "{{ force_reload_sb_ext_authtool_service }}"
+
+content_service: http://private-content-service
+web_host_proxy: http://private-static-host:3007
+static_ilp_proxy: http://private-static-host:3005
+o365_required: "true"
+com_infosys_root_org: "{{ var_common_root_org }}"
+com_infosys_org: "{{ var_common_org }}"
+directoryCreateURL: "{{ content_service }}/content/TestAuth/"
+
+infosys_spring_kafka_search_indexer_error_output_topic: search-indexer-errors
+infosys_spring_kafka_publisher_error_output_topic: publishpipeline-stage1-errors
+content_id_prefix: lex_auth_
+feature_id_prefix: ft_
+infosys_fields_nested: comments,certificationList,playgroundResources,softwareRequirements,systemRequirements,references,creatorContacts,creatorDetails,publisherDetails,subTitles,preContents,postContents,tags,clients,skills,track,kArtifacts,trackContacts,org,catalog
+neo4j_url: bolt://{{ neo4j_host }}:{{ neo4j_port }}
+kafka_bootstrapAddress: "{{ kafka_servers_list }}"
+content_service_url: http://{{ network_alias_content_service }}:{{ service_content_service_port }}
+content_service_publish_url: "{{ content_service_url }}/contentv3/publish"
+content_service_zip_url: "{{ content_service_url }}/contentv3/zip"
+sb_ext_service_url: http://{{ network_alias_sb_ext_service }}:{{ service_sb_ext_port }}
+email_service_url: "{{ sb_ext_service_url }}/v1/Notification/Authoring/Review"
+access_control_url: "{{ sb_ext_service_url }}/accesscontrol"
+infosys_catalog_url: "{{ content_service_url }}/content/DEFAULTS/JSONS/tags.json?type=artifacts"
+infosys_kafka_input_topic: learning-graph-events
+infosys_kafka_output_topic: search-indexer-errors
+topic_service_url: http://{{ network_alias_khub_migration_service }}:{{ service_khub_migration_port }}/api/v1/topic/storingTextualContent
+infosys_kafka_producer_bootstrap_servers: "{{ kafka_servers_list }}"
+infosys_kafka_default_stream_configs_replication_factor: 1
+infosys_kafka_consumer_zk_connect: "{{ zookeeper_servers_list }}"
+sb_authtool_elasticsearch_contentindex_alias_name: "{{ elasticsearch_contentindex_alias_name | replace('_*','')}}"
+
+content_url_part: Infosys%2FInfosys_Ltd

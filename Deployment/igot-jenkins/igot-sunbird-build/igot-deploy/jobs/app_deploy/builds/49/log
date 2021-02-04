@@ -1,0 +1,58 @@
+Started by user [8mha:////4E20/w1GckiA/nocQ1f5cF/jB0ZhiDWNy4jAx3sKJkWvAAAAlx+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAyWEgZu/dLi1CL9xJTczDwAZ3pnlMAAAAA=[0miGot
+Running as SYSTEM
+Building in workspace /var/lib/jenkins/workspace/igot-deploy/app_deploy
+[app_deploy] $ /bin/bash /tmp/jenkins7511766172041130859.sh
+[1;35m [WARNING]: While constructing a mapping from[0m
+[1;35m/home/ubuntu/test/ansible_workspace_dir/vars/main.yml, line 6, column 1, found[0m
+[1;35ma duplicate dict key (service_sb_telemetry_port). Using last defined value[0m
+[1;35monly.[0m
+[1;35m[0m
+[1;35m [WARNING]: While constructing a mapping from[0m
+[1;35m/home/ubuntu/test/ansible_workspace_dir/roles/deploy-lex-core-[0m
+[1;35mservice/defaults/main.yml, line 3, column 1, found a duplicate dict key[0m
+[1;35m(sunbird_time_zone). Using last defined value only.[0m
+[1;35m[0m
+[1;35m [WARNING]: While constructing a mapping from[0m
+[1;35m/home/ubuntu/test/ansible_workspace_dir/roles/deploy-lex-core-[0m
+[1;35mservice/defaults/main.yml, line 3, column 1, found a duplicate dict key[0m
+[1;35m(nginx_per_ip_connection_limit). Using last defined value only.[0m
+[1;35m[0m
+[1;35m [WARNING]: While constructing a mapping from[0m
+[1;35m/home/ubuntu/test/ansible_workspace_dir/roles/deploy-lex-core-[0m
+[1;35mservice/defaults/main.yml, line 3, column 1, found a duplicate dict key[0m
+[1;35m(sunbird_portal_player_cdn_enabled). Using last defined value only.[0m
+[1;35m[0m
+[1;35m [WARNING]: While constructing a mapping from[0m
+[1;35m/home/ubuntu/test/ansible_workspace_dir/roles/deploy-lex-core-[0m
+[1;35mservice/defaults/main.yml, line 3, column 1, found a duplicate dict key[0m
+[1;35m(search_liveness_readiness). Using last defined value only.[0m
+[1;35m[0m
+[1;35m [WARNING]: While constructing a mapping from[0m
+[1;35m/home/ubuntu/test/ansible_workspace_dir/roles/deploy-lex-core-[0m
+[1;35mservice/defaults/main.yml, line 3, column 1, found a duplicate dict key[0m
+[1;35m(taxonomy_liveness_readiness). Using last defined value only.[0m
+[1;35m[0m
+
+PLAY [dev] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+[0;32mok: [localhost][0m
+
+TASK [deploy-ui-cbp-igot : include_vars] ***************************************
+[0;32mok: [localhost][0m
+
+TASK [deploy-ui-cbp-igot : template values.yaml file] **************************
+[0;32mok: [localhost][0m
+
+TASK [deploy-ui-cbp-igot : template configmap file] ****************************
+[0;33mchanged: [localhost][0m
+
+TASK [deploy-ui-cbp-igot : create env configmap] *******************************
+[0;33mchanged: [localhost][0m
+
+TASK [deploy-ui-cbp-igot : remove env configmap file] **************************
+[0;33mchanged: [localhost][0m
+/tmp/jenkins7511766172041130859.sh: line 3:  6903 Terminated              ansible-playbook -i inventory/hosts -e "deploy_host_name=dev" -e "sb_tag=$sb_tag" main.yml --tag $app_tag
+Build was aborted
+Aborted by [8mha:////4E20/w1GckiA/nocQ1f5cF/jB0ZhiDWNy4jAx3sKJkWvAAAAlx+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAyWEgZu/dLi1CL9xJTczDwAZ3pnlMAAAAA=[0miGot
+Finished: ABORTED

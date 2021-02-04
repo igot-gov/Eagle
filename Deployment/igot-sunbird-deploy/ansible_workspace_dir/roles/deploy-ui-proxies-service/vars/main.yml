@@ -1,0 +1,31 @@
+---
+# vars file for deploy-ui-proxies
+#Script
+release_name: "{{ network_alias_ui_proxies }}"
+template_compose_file_name: ui-proxies.j2
+template_env_file_name: "../../shared_files/templates/ui-shared-env.j2"
+compose_file_name: "{{ service_ui_proxies_service }}.yml"
+env_file_name: "{{ service_ui_proxies_service }}.env"
+env_file_deployment_location: "{{ env_files_dir }}/{{ env_file_name }}"
+helm_env_file_location: "../kubernetes-deploy/templates"
+helm_env_file_name: "{{ helm_env_file_location }}/{{ service_ui_proxies_service }}.env"
+chart_path: "../kubernetes-deploy/ui-proxies"
+compose_file_deployment_location: "{{ compose_files_dir }}/{{ compose_file_name }}"
+user_friendly_name: UI proxies service
+
+
+# For service
+application_port: "{{ service_ui_proxies_port }}"
+image_name: "{{ image_ui_proxies }}"
+tag: "{{ tags_ui_proxies }}"
+host_port: "{{ application_port }}"
+docker_port: "{{ application_port }}"
+replicas: "{{ service_replicas_ui_proxies_service }}"
+reserved_memory: "{{ service_mem_reserved_ui_proxies_service }}"
+limited_memory: "{{ service_mem_limit_ui_proxies_service }}"
+health_check_endpoint: http://127.0.0.1:{{ docker_port }}/healthcheck
+network_alias_name: "{{ network_alias_ui_proxies }}"
+docker_service_stack_name: ui
+docker_service_name: "{{ service_ui_proxies_service }}"
+force_reload: "{{ force_reload_ui_proxies_service }}"
+host_bulk_upload: "{{ host_bulk_upload_path }}"

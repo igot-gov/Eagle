@@ -1,0 +1,194 @@
+{    
+      "resources" : {
+        "properties" : {
+          "compositeScore" : {
+            "type" : "float"
+          },
+          "criteriaModels" : {
+            "properties" : {
+              "criteria" : {
+                "type" : "text",
+                "fields" : {
+                  "keyword" : {
+                    "type" : "keyword",
+                    "ignore_above" : 256
+                  }
+                }
+              },
+              "maxScore" : {
+                "type" : "float"
+              },
+              "maxWeightedAvg" : {
+                "type" : "float"
+              },
+              "minScore" : {
+                "type" : "float"
+              },
+              "minWeightedAvg" : {
+                "type" : "float"
+              },
+              "qualifiers" : {
+                "properties" : {
+                  "description" : {
+                    "type" : "text",
+                    "fields" : {
+                      "keyword" : {
+                        "type" : "keyword",
+                        "ignore_above" : 256
+                      }
+                    }
+                  },
+                  "evaluated" : {
+                    "type" : "text",
+                    "fields" : {
+                      "keyword" : {
+                        "type" : "keyword",
+                        "ignore_above" : 256
+                      }
+                    }
+                  },
+                  "name" : {
+                    "type" : "text",
+                    "fields" : {
+                      "keyword" : {
+                        "type" : "keyword",
+                        "ignore_above" : 256
+                      }
+                    }
+                  },
+                  "scoreValue" : {
+                    "type" : "float"
+                  },
+                  "scoringType" : {
+                    "type" : "text",
+                    "fields" : {
+                      "keyword" : {
+                        "type" : "keyword",
+                        "ignore_above" : 256
+                      }
+                    }
+                  }
+                }
+              },
+              "totalScore" : {
+                "type" : "float"
+              },
+              "weightage" : {
+                "type" : "float"
+              },
+              "weightedAvg" : {
+                "type" : "float"
+              },
+              "weightedScore" : {
+                "type" : "float"
+              }
+            }
+          },
+          "finalMaxScore" : {
+            "type" : "float"
+          },
+          "finalMaxWeightedAvg" : {
+            "type" : "float"
+          },
+          "finalMinScore" : {
+            "type" : "float"
+          },
+          "finalMinWeightedAvg" : {
+            "type" : "float"
+          },
+          "finalTotalScore" : {
+            "type" : "float"
+          },
+          "finalWeightedAvg" : {
+            "type" : "float"
+          },
+          "finalWeightedScore" : {
+            "type" : "float"
+          },
+          "identifier" : {
+            "type" : "text",
+            "fields" : {
+              "keyword" : {
+                "type" : "keyword",
+                "ignore_above" : 256
+              }
+            }
+          },
+          "minimunQualifier" : {
+            "type" : "float"
+          },
+          "org" : {
+            "type" : "text",
+            "fields" : {
+              "keyword" : {
+                "type" : "keyword",
+                "ignore_above" : 256
+              }
+            }
+          },
+          "resourceId" : {
+            "type" : "text",
+            "fields" : {
+              "keyword" : {
+                "type" : "keyword",
+                "ignore_above" : 256
+              }
+            }
+          },
+          "resourceType" : {
+            "type" : "text",
+            "fields" : {
+              "keyword" : {
+                "type" : "keyword",
+                "ignore_above" : 256
+              }
+            }
+          },
+          "rootOrg" : {
+            "type" : "text",
+            "fields" : {
+              "keyword" : {
+                "type" : "keyword",
+                "ignore_above" : 256
+              }
+            }
+          },
+          "templateId" : {
+            "type" : "text",
+            "fields" : {
+              "keyword" : {
+                "type" : "keyword",
+                "ignore_above" : 256
+              }
+            }
+          },
+          "templeteName" : {
+            "type" : "text",
+            "fields" : {
+              "keyword" : {
+                "type" : "keyword",
+                "ignore_above" : 256
+              }
+            }
+          },
+          "timeStamp" : {
+            "type" : "text",
+            "fields" : {
+              "keyword" : {
+                "type" : "keyword",
+                "ignore_above" : 256
+              }
+            }
+          },
+          "userId" : {
+            "type" : "text",
+            "fields" : {
+              "keyword" : {
+                "type" : "keyword",
+                "ignore_above" : 256
+              }
+            }
+          }
+        }
+      }
+    }

@@ -1,0 +1,86 @@
+Started by user [8mha:////4E20/w1GckiA/nocQ1f5cF/jB0ZhiDWNy4jAx3sKJkWvAAAAlx+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAyWEgZu/dLi1CL9xJTczDwAZ3pnlMAAAAA=[0miGot
+Running as SYSTEM
+Building in workspace /var/lib/jenkins/workspace/igot-deploy/app_deploy
+[app_deploy] $ /bin/bash /tmp/jenkins972690311435202510.sh
+[1;35m [WARNING]: While constructing a mapping from[0m
+[1;35m/home/ubuntu/test/ansible_workspace_dir/vars/main.yml, line 6, column 1, found[0m
+[1;35ma duplicate dict key (service_sb_telemetry_port). Using last defined value[0m
+[1;35monly.[0m
+[1;35m[0m
+[1;35m [WARNING]: While constructing a mapping from[0m
+[1;35m/home/ubuntu/test/ansible_workspace_dir/roles/deploy-lex-core-[0m
+[1;35mservice/defaults/main.yml, line 3, column 1, found a duplicate dict key[0m
+[1;35m(sunbird_time_zone). Using last defined value only.[0m
+[1;35m[0m
+[1;35m [WARNING]: While constructing a mapping from[0m
+[1;35m/home/ubuntu/test/ansible_workspace_dir/roles/deploy-lex-core-[0m
+[1;35mservice/defaults/main.yml, line 3, column 1, found a duplicate dict key[0m
+[1;35m(nginx_per_ip_connection_limit). Using last defined value only.[0m
+[1;35m[0m
+[1;35m [WARNING]: While constructing a mapping from[0m
+[1;35m/home/ubuntu/test/ansible_workspace_dir/roles/deploy-lex-core-[0m
+[1;35mservice/defaults/main.yml, line 3, column 1, found a duplicate dict key[0m
+[1;35m(sunbird_portal_player_cdn_enabled). Using last defined value only.[0m
+[1;35m[0m
+[1;35m [WARNING]: While constructing a mapping from[0m
+[1;35m/home/ubuntu/test/ansible_workspace_dir/roles/deploy-lex-core-[0m
+[1;35mservice/defaults/main.yml, line 3, column 1, found a duplicate dict key[0m
+[1;35m(search_liveness_readiness). Using last defined value only.[0m
+[1;35m[0m
+[1;35m [WARNING]: While constructing a mapping from[0m
+[1;35m/home/ubuntu/test/ansible_workspace_dir/roles/deploy-lex-core-[0m
+[1;35mservice/defaults/main.yml, line 3, column 1, found a duplicate dict key[0m
+[1;35m(taxonomy_liveness_readiness). Using last defined value only.[0m
+[1;35m[0m
+
+PLAY [dev] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+[0;32mok: [localhost][0m
+
+TASK [deploy-ui-cbp-igot : include_vars] ***************************************
+[0;32mok: [localhost][0m
+
+TASK [deploy-ui-cbp-igot : template values.yaml file] **************************
+[0;33mchanged: [localhost][0m
+
+TASK [deploy-ui-cbp-igot : template configmap file] ****************************
+[0;33mchanged: [localhost][0m
+
+TASK [deploy-ui-cbp-igot : create env configmap] *******************************
+[0;33mchanged: [localhost][0m
+
+TASK [deploy-ui-cbp-igot : remove env configmap file] **************************
+[0;33mchanged: [localhost][0m
+
+TASK [deploy-ui-cbp-igot : helm upgrade] ***************************************
+[0;31mfatal: [localhost]: FAILED! => {[0m
+[0;31m    "changed": true, [0m
+[0;31m    "cmd": "helm upgrade --install --atomic --timeout 10m ui-cbp-igot ../kubernetes-deploy/ui-cbp-igot -n dev", [0m
+[0;31m    "delta": "0:10:01.856447", [0m
+[0;31m    "end": "2021-01-12 16:36:49.223892", [0m
+[0;31m    "rc": 1, [0m
+[0;31m    "start": "2021-01-12 16:26:47.367445"[0m
+[0;31m}[0m
+[0;31m[0m
+[0;31mSTDOUT:[0m
+[0;31m[0m
+[0;31mRelease "ui-cbp-igot" does not exist. Installing it now.[0m
+[0;31m[0m
+[0;31m[0m
+[0;31mSTDERR:[0m
+[0;31m[0m
+[0;31mError: release ui-cbp-igot failed, and has been uninstalled due to atomic being set: timed out waiting for the condition[0m
+[0;31m[0m
+[0;31m[0m
+[0;31mMSG:[0m
+[0;31m[0m
+[0;31mnon-zero return code[0m
+[0;31m[0m
+	to retry, use: --limit @/home/ubuntu/test/ansible_workspace_dir/main.retry
+
+PLAY RECAP *********************************************************************
+[0;31mlocalhost[0m                  : [0;32mok=6   [0m [0;33mchanged=4   [0m unreachable=0    [0;31mfailed=1   [0m
+
+Build step 'Execute shell' marked build as failure
+Finished: FAILURE
