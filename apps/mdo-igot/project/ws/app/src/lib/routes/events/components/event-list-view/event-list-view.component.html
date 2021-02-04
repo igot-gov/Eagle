@@ -1,0 +1,77 @@
+<div class="example-container">
+    <div class="example-loading-shade"></div>
+    <div class="example-table-container">
+        <div class="container-balanced">
+            <div class="flex flex-1 custom">
+                <div class="flex-3">
+                    <div class="search">
+                        <div class=rsearch>
+                            <mat-icon class="color-60 search-icon">search</mat-icon>
+                            <input class="sinput color-60" type="Standard" label=""
+                                (input)="applyFilter($event.target.value)" placeholder="Search">
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-1 right-align">
+                    <button type="button" mat-button class="create-btn" *ngIf="isCreate" (click)="onCreateClick()">
+                        Create new
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- </mat-form-field> -->
+        <mat-table #table matSort [ngStyle]="{'height': bodyHeight}" [matSortActive]="tableData!.sortColumn"
+            [matSortDirection]="tableData!.sortState" [dataSource]="dataSource"
+            class="example-table table1 responsiveTable" *ngIf="dataSource.filteredData.length > 0">
+            <ng-container matColumnDef="{{col.key}}" *ngFor="let col of tableData!.columns">
+                <mat-header-cell *matHeaderCellDef mat-sort-header class=".h-400-r-14-l color-60"> {{col.displayName}}
+                </mat-header-cell>
+                <mat-cell *matCellDef="let element" (click)="onRowClick(element)">
+                    <span *ngIf="col.isList" class="h-400-r-14-l color-87 textclass">
+                        <div innerHTML="{{element[col.key]}}"></div>
+                    </span>
+                    <span *ngIf="!col.isList && col.key != 'eventThumbnail'" class="h-400-r-14-l color-87 textclass">
+                        {{element[col.key]}} {{col.isList}}
+                    </span>
+                    <span *ngIf="!col.isList && col.key == 'eventThumbnail'" class="h-400-r-14-l color-87 textclass">
+                        <img src="{{element[col.key]}}" width="50" height="50" *ngIf="element[col.key] != undefined" (click)="showImageDialog(element[col.key])">
+                        <ng-container *ngIf="element[col.key] == undefined">
+                            <span style="padding-left:7px;">---</span>
+                        </ng-container>
+                    </span>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="Menu">
+                <mat-header-cell *matHeaderCellDef class="clr-darkish-blue action-header">
+                    <mat-icon>view_comfy</mat-icon>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row" class="action-cell">
+                    <button type="button" mat-icon-button i18n-aria-label aria-label="action items"
+                        [matMenuTriggerFor]="cardMenu" [matMenuTriggerData]="{'data':row}" class="action-btn">
+                        <mat-icon>more_horiz</mat-icon>
+                    </button>
+                </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="getFinalColumns()"></mat-header-row>
+            <mat-row 
+                *matRowDef="let row; columns: getFinalColumns();" 
+                (click)="selection.toggle(row);">
+            </mat-row>
+            <div *ngIf="dataSource.filteredData.length <= 0">
+                <mat-row *matRowDef="let row; columns: getFinalColumns();"
+                    (click)="selection.toggle(row); onRowClick(row)">
+                    ssss
+                </mat-row>
+            </div>
+        </mat-table>
+    </div>
+    <div *ngIf="dataSource.filteredData.length <= 0" 
+        class="h-600-s-20-m color-60 text-center">
+        No result found
+    </div>
+    <mat-paginator 
+        [length]="length" 
+        [pageSize]="pageSize" 
+        [pageSizeOptions]="pageSizeOptions">
+    </mat-paginator>
+</div>

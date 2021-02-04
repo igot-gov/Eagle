@@ -1,0 +1,16 @@
+<div class="pad-l-4r">
+  <mat-nav-list class="margin-top-m flex-1" aria-label="left menu">
+    <ng-container *ngFor="let tab of widgetData">
+      <a mat-list-item class="mat-body-2 flex flex-1 outline-1" *ngIf="tab?.enabled && !tab.customRouting" matRipple
+        active i18n-aria-label [routerLink]="[tab.routerLink]" [queryParamsHandling]="preserve"
+        routerLinkActive="ws-active-route-menu">
+        <span class="padding-left-xs">{{tab?.name}}</span>
+      </a>
+      <a mat-list-item class="mat-body-2 flex flex-1 outline-1" *ngIf="tab?.enabled && tab.customRouting" matRipple
+        active i18n-aria-label [routerLink]="getLink(tab)" [queryParamsHandling]="preserve"
+        routerLinkActive="ws-active-route-menu">
+        <span class="padding-left-xs">{{tab?.name}}</span>
+      </a>
+    </ng-container>
+  </mat-nav-list>
+</div>

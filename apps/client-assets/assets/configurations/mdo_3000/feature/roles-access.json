@@ -1,0 +1,75 @@
+{
+  "menus": {
+    "widgetType": "menus",
+    "widgetSubType": "leftMenu",
+    "widgetData": {
+      "logo": true,
+      "menus": [
+        {
+          "name": "Users",
+          "key": "users",
+          "fragment": false,
+          "render": true,
+          "badges": {
+            "enabled": false,
+            "uri": ""
+          },
+          "enabled": true,
+          "paramaterName": "role",
+          "routerLink": "/app/home/users",
+          "customRouting": true
+        },
+        {
+          "name": "Roles and Access",
+          "key": "roles-access",
+          "fragment": false,
+          "render": true,
+          "badges": {
+              "enabled": false,
+              "uri": ""
+          },
+          "enabled": true,
+          "routerLink": "/app/home/roles-access"
+        },
+        {
+            "name": "Approvals",
+            "key": "approvals",
+            "fragment": false,
+            "render": true,
+            "badges": {
+                "enabled": false,
+                "uri": ""
+            },
+            "enabled": true,
+            "routerLink": "/app/home/approvals"
+        },
+        {
+            "name": "Events",
+            "key": "events",
+            "fragment": false,
+            "render": true,
+            "badges": {
+                "enabled": false,
+                "uri": ""
+            },
+            "enabled": true,
+            "routerLink": "/app/events"
+        },
+        {
+          "name": "Privileges",
+          "key": "privileges",
+          "fragment": false,
+          "render": false,
+          "badges": {
+            "enabled": false,
+            "uri": ""
+          },
+          "enabled": false,
+          "paramaterName": "role",
+          "routerLink": "/app/roles/<param>/privileges",
+          "customRouting": true
+        }
+      ]
+    }
+  }
+}

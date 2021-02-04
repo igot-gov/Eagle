@@ -1,0 +1,118 @@
+<mat-card id="personalInfo"
+  class="flex flex-1 flex-column margin-left-m margin-bottom-m margin-right-m ws-mat-accent-border">
+  <div class="flex-custom">
+    <mat-card-content class="margin-top-m margin-bottom-m margin-left-m margin-right-m">
+      <span class="mat-subheading-1 flex-4 mobile-margin appr-section-heading" role="link" tabindex="0">
+        Personal details
+      </span>
+
+      <div class="margin-top-xl new-mobile" *ngIf="basicInfo">
+        <div class="flex flex-wrap mobile-break">
+          <div class="w-full profile-cols-full bg-grey">
+            <ng-container>
+              <mat-grid-list cols="1" rowHeight="100px">
+                <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
+                  <img style="width: auto;height: 100px;" [src]="imagePath" alt="User Image"
+                    (error)="changeToGlobalSymbol($event)" />
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
+                  <label class="appr-text-label">First name</label>
+                  <input type="text" [disabled]="true" [value]="basicInfo.firstname" class="appr-text-field">
+                </mat-grid-tile>
+
+                <!-- <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
+                              <label class="appr-text-label">Middle Name</label>
+                              <input type="text" [disabled]="true" [value]="basicInfo.middlename" class="appr-text-field">
+                            </mat-grid-tile> -->
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
+                  <label class="appr-text-label">Last name</label>
+                  <input type="text" [disabled]="true" [value]="basicInfo.surname" class="appr-text-field">
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
+                  <label class="appr-text-label">Date of birth (dd-mm-yy)</label>
+                  <input type="text" [disabled]="true" [value]="basicInfo.dob" class="appr-text-field">
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
+                  <label class="appr-text-label">Nationality</label>
+                  <input type="text" [disabled]="true" [value]="basicInfo.nationality" class="appr-text-field">
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
+                  <label class="appr-text-label">Gender</label>
+                  <mat-radio-group [value]="basicInfo.gender" [disabled]="true" aria-label="Select an option">
+                    <mat-radio-button value="Male" class="radio-btn">Male</mat-radio-button>
+                    <mat-radio-button value="Female" class="radio-btn">Female</mat-radio-button>
+                    <mat-radio-button value="Others" class="radio-btn">Others</mat-radio-button>
+                  </mat-radio-group>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
+                  <label class="appr-text-label">Marital status</label>
+                  <mat-radio-group [value]="basicInfo.maritalStatus" [disabled]="true" aria-label="Select an option">
+                    <mat-radio-button value="Single" class="radio-btn">Single</mat-radio-button>
+                    <mat-radio-button value="Married" class="radio-btn">Married</mat-radio-button>
+                  </mat-radio-group>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
+                  <label class="appr-text-label">Category</label>
+                  <mat-radio-group [value]="basicInfo.category" [disabled]="true" aria-label="Select an option">
+                    <mat-radio-button value="General" class="radio-btn">General</mat-radio-button>
+                    <mat-radio-button value="OBC" class="radio-btn">OBC</mat-radio-button>
+                    <mat-radio-button value="SC" class="radio-btn">SC</mat-radio-button>
+                    <mat-radio-button value="ST" class="radio-btn">ST</mat-radio-button>
+                  </mat-radio-group>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
+                  <label class="appr-text-label">Domicile medium (Mother tongue)</label>
+                  <input type="text" [disabled]="true" [value]="basicInfo.domicileMedium" class="appr-text-field">
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
+                  <label class="appr-text-label">Other languages known</label>
+                  <input type="text" [disabled]="true" [value]="basicInfo.knownLanguages" class="appr-text-field">
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
+                  <label class="appr-text-label">Mobile number</label>
+                  <input type="text" [disabled]="true" [value]="basicInfo.mobile" class="appr-text-field">
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
+                  <label class="appr-text-label">Telephone number</label>
+                  <input type="text" [disabled]="true" [value]="basicInfo.telephone" class="appr-text-field">
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
+                  <label class="appr-text-label">Primary email</label>
+                  <input type="text" [disabled]="true" [value]="basicInfo.primaryEmail" class="appr-text-field">
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
+                  <label class="appr-text-label">Secondary email</label>
+                  <input type="text" [disabled]="true" [value]="basicInfo.personalEmail" class="appr-text-field">
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
+                  <label class="appr-text-label">Postal address</label>
+                  <textarea [disabled]="true" rows="3" [value]="basicInfo.postalAddress"
+                    class="appr-text-field"></textarea>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
+                  <label class="appr-text-label">Pin code</label>
+                  <input type="text" [disabled]="true" [value]="basicInfo.pincode" class="appr-text-field">
+                </mat-grid-tile>
+
+              </mat-grid-list>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </div>
+</mat-card>

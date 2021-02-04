@@ -1,0 +1,24 @@
+<mat-card class="example-card" style="box-shadow: none; text-align: center; justify-content: center;" fxLayoutAlign="center">
+     <mat-card-header>
+        <div style="justify-content: center;">
+            <img src="/assets/icons/success.png" style="width:150px;">    
+        </div>
+        <div style="margin-top: 30px;">
+            <mat-card-title >Event Created Successfully</mat-card-title>
+        </div>
+    </mat-card-header>
+    <mat-card-content style="margin-top:40px;">
+        <p>
+            Event will be listed under 'Upcoming'. You will be able to make updates to <br/>
+            the event later.
+        </p>
+    </mat-card-content>
+</mat-card>
+<div style="margin-top:70px;">
+    <mat-divider></mat-divider>
+    <div class="flex flex-1 custom button-row" align="end" style="margin-top:20px;">
+        <button mat-stroked-button color="accent" type="button" class="mat-accent-border flex-auto-display" (click)="dialogRef.close()">
+            <span i18n>Dismiss</span>
+        </button>
+    </div>
+</div>

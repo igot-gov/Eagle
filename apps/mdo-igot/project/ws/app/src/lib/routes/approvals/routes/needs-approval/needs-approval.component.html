@@ -1,0 +1,77 @@
+<mat-card id="needsapproval"
+  class="flex flex-1 flex-column margin-left-m margin-bottom-m margin-right-m ws-mat-accent-border"
+  style="background: #FDECDE;">
+  <div class="flex-custom">
+    <mat-card-content class="margin-top-m margin-bottom-m margin-left-m margin-right-m">
+      <span class="mat-subheading-1 flex-4 mobile-margin appr-section-heading" role="link" tabindex="0"
+        *ngIf="needApprovalList.length>0">
+        Needs approval
+      </span>
+      <span class="needs-appr-count-text" *ngIf="needApprovalList.length>0">
+        <mat-icon class="pending-icon">hourglass_empty</mat-icon> Pending approval
+      </span>
+      <div class="new-mobile margin-top-l">
+        <div class="flex flex-wrap mobile-break">
+          <div class="w-full profile-cols-full bg-grey" *ngIf="needApprovalList.length>0">
+            <ng-container *ngFor="let field of needApprovalList">
+              <div class="appr-label">
+                <label class="appr-text-label">{{field.label}}</label>
+              </div>
+              <div>
+                <input type="text" class="appr-text-field" [value]="field.value">
+                <button mat-icon-button aria-label="Reject" (click)="onClickHandleWorkflow(field,'REJECT')">
+                  <mat-icon class="reject">cancel_presentation</mat-icon>
+                </button>
+                <button mat-icon-button aria-label="Accept" class="accept-btn"
+                  (click)="onClickHandleWorkflow(field,'APPROVE')">
+                  <mat-icon class="accept">check_box</mat-icon>
+                </button>
+              </div>
+            </ng-container>
+          </div>
+          <div class="w-full profile-cols-full bg-grey" *ngIf="needApprovalList.length <= 0">
+            <ng-container>
+              <div class="appr-label" *ngIf="changeLog">
+                <label class="field-key">{{changeLog.fieldKey}}</label>
+                <label class="field-name">{{changeLog.fieldName}}</label>
+                <label class="field-name">Changed from {{changeLog.fromVal}} to {{changeLog.toVal}}</label>
+                <label class="change-date">15/12/2020 18:31</label>
+              </div>
+              <div class="appr-label">
+                <label class="no-request-text">Currently there are no items pending approval</label>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </div>
+</mat-card>
+
+
+<ng-template #approveDialog>
+  <p mat-dialog-title class="dialog-title">Accept request?</p>
+  <mat-dialog-content>
+    <p class="appr-text margin-top-l">Once you accept, the feilds will get updated in user's profile.<br />
+      You can make changes to any field at any point.</p>
+  </mat-dialog-content>
+  <mat-dialog-actions class="flex flex-wrap justify-end">
+    <button mat-button class="goback-dialog-btn" matDialogClose>Go Back</button>
+    <button mat-button class="accept-dialog-btn" [mat-dialog-close]="true">Accept</button>
+  </mat-dialog-actions>
+</ng-template>
+
+<ng-template #rejectDialog>
+  <form>
+    <p mat-dialog-title class="dialog-title">Reject request?</p>
+    <mat-dialog-content>
+      <p class="appr-text margin-top-l">Please specify the reason for rejection</p>
+      <textarea rows="4" [(ngModel)]="comment" placeholder="Type here" name="comment"
+        class="reject-reason-text"></textarea>
+    </mat-dialog-content>
+    <mat-dialog-actions class="flex flex-wrap justify-end">
+      <button mat-button class="goback-dialog-btn" matDialogClose>Go Back</button>
+      <button mat-button class="reject-dialog-btn" [mat-dialog-close]="true">Reject</button>
+    </mat-dialog-actions>
+  </form>
+</ng-template>

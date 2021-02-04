@@ -1,0 +1,60 @@
+.appr-section-heading{
+  font-size:20px
+}
+
+.appr-text-field{
+  width: 272px;
+  border: 1px solid #DDDDDD;
+  border-radius: 4px;
+  padding: 9px;
+  font: 400 14px Lato;
+}
+
+.appr-text-label{
+  width: 100%;
+  padding-bottom: 10px;
+  margin-bottom: 0;
+  color: #000000;
+  display: block;
+  font: 700 14px Lato;
+}
+
+
+
+::ng-deep .mat-grid-tile .mat-figure {
+  display:block !important; /* or whichever you need */
+}
+
+.radio-btn{
+  border: 2px solid #DDDDDD;
+  padding: 5px 15px;
+  border-radius: 4px;
+  margin-right: 15px;
+}
+
+textarea {
+  resize: none;
+}
+
+.needs-appr-count-text{
+  border-radius: 100px 4px 4px 100px;
+  padding: 0 12px;
+  font-size: 18px;
+  float: right;
+}
+
+.pending-icon{
+  position: absolute;
+  right: 170px;
+}
+
+#personalInfo{
+  background: #F5F5F5;
+}
+
+
+::ng-deep .mat-radio-label-content{
+  font-family: 'Lato';
+  font-size: 14px;
+  font-weight: 400;
+}

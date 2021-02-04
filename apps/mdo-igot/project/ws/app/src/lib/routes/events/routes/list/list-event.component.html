@@ -1,0 +1,28 @@
+<div class="flex flex-4 flex-column">
+  <mat-card class="flex-custom">
+    <mat-card-header class="flex-custom-m">
+      <div class="flex-1" role="link" tabindex="0">
+        <div class="flex flex-1">
+          <mat-card-title class="flex-4 mobile-margin text-capitalize">
+            <span class="h-600-s-20-m color-87">Events</span>
+          </mat-card-title>
+        </div>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="flex flex-1 flex-column margin-fix">
+        <div class="flex flex-1 filter max-height-60">
+          <a href="javascript:void(0)" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'upcoming',
+            'ws-mat-accent-border font-medium':currentFilter !== 'upcoming'}" mat-button (click)="filter('upcoming')"
+            role="button">Upcoming</a>
+          <a href="javascript:void(0)" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'past',
+            'ws-mat-accent-border font-medium':currentFilter !== 'past'}" mat-button
+            (click)="filter('past')" role="button">Past</a>
+        </div>
+      </div>
+      <ng-container>
+        <ws-event-list-view [tableData]='tabledata' [data]='data' isCreate=true></ws-event-list-view>
+      </ng-container>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,32 @@
+<div class="flex flex-4 flex-column">
+  <mat-card class="flex-custom">
+    <mat-card-header class="flex-custom-m">
+      <div class="flex-1" role="link" tabindex="0">
+        <div class="flex flex-1">
+          <mat-card-title class="flex-4 mobile-margin text-capitalize">
+            <span class="mat-subheading-1">Approvals</span>
+          </mat-card-title>
+        </div>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="flex flex-1 flex-column margin-fix">
+        <div class="flex flex-1 filter max-height-60">
+          <a href="javascript:void(0)" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'toapprove',
+              'ws-mat-accent-border font-medium':currentFilter !== 'toapprove'}" mat-button
+            (click)="filter('toapprove')" role="button">To Approve</a>
+          <!-- <a href="javascript:void(0)" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'userflags',
+              'ws-mat-accent-border font-medium':currentFilter !== 'userflags'}" mat-button
+            (click)="filter('userflags')" role="button">User flags</a> -->
+        </div>
+      </div>
+      <ng-container *ngIf="getTableData && getTableData.length>0">
+        <ws-widget-ui-user-table [tableData]='tabledata' [data]='getTableData' (eOnRowClick)="onApprovalClick($event)">
+        </ws-widget-ui-user-table>
+      </ng-container>
+      <ng-container *ngIf="!getTableData || getTableData.length<=0">
+        <p class="text-center">No Approvals Pending</p>
+      </ng-container>
+    </mat-card-content>
+  </mat-card>
+</div>
