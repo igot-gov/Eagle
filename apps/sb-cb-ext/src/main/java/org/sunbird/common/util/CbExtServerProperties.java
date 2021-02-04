@@ -16,6 +16,9 @@ public class CbExtServerProperties {
 	
 	@Value("${sb.service.url}")
 	private String sbUrl;
+	
+	@Value("${sb.hub.graph.service.url}")
+	private String sbHubGraphServiceUrl;
 
 	
 	public String getWfServiceHost() {
@@ -50,10 +53,22 @@ public class CbExtServerProperties {
 		this.sbUrl = sbUrl;
 	}
 
+	public String getSbHubGraphServiceUrl() {
+		return sbHubGraphServiceUrl;
+	}
+
+	public void setSbHubGraphServiceUrl(String sbHubGraphServiceUrl) {
+		this.sbHubGraphServiceUrl = sbHubGraphServiceUrl;
+	}
 
 	@Override
 	public String toString() {
-		return "LexServerProperties [ wfServiceHost=" + wfServiceHost 
-				+", wfServicePath="+ wfServicePath + ", isUserMultiMapDeptEnabled=" + isUserMultiMapDeptEnabled + ", sbUrl="+sbUrl+"]";
+		StringBuilder str = new StringBuilder("SB-CB-Ext Server Properties: ");
+		str.append("[wfServiceHost=").append(wfServiceHost).append("],");
+		str.append("[wfServicePath=").append(wfServicePath).append("],");
+		str.append("[isUserMultiMapDeptEnabled=").append(isUserMultiMapDeptEnabled).append("],");
+		str.append("[sbUrl=").append(sbUrl).append("],");
+		str.append("[sbHubGraphServiceUrl=").append(sbHubGraphServiceUrl).append("]");
+		return str.toString();
 	}
 }

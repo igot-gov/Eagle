@@ -10,11 +10,13 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.sunbird.common.model.OpenSaberApiResp;
+import org.sunbird.common.model.OpenSaberApiUserProfile;
 import org.sunbird.common.model.SunbirdApiResp;
-import org.sunbird.common.model.SunbirdApiRespContent;
 import org.sunbird.common.util.CbExtServerProperties;
 import org.sunbird.common.util.Constants;
 import org.sunbird.core.exception.ApplicationLogicError;
+import org.sunbird.core.logger.CbExtLogger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -30,6 +32,8 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 
 	@Autowired
 	CbExtServerProperties props;
+	
+	private CbExtLogger logger = new CbExtLogger(getClass().getName());
 
 	@Override
 	public boolean validateUser(String rootOrg, String userId) throws ApplicationLogicError {
@@ -71,30 +75,30 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 
 		Map<String, Object> result = new HashMap<>();
 
-		Map<String, Object> requestMap = new HashMap<String, Object>();
-		Map<String, Object> request = new HashMap<String, Object>();
-
-		Map<String, String> filters = new HashMap<String, String>();
-		// filters.put(Constants.ROOT_ORG, rootOrg);
-		filters.put(Constants.USER_ID, userIds.get(0).toString());
-		request.put(Constants.FILTERS, filters);
-
-		requestMap.put("request", request);
+		Map<String, Object> filters = new HashMap<String, Object>();
+		Map<String, Object> idKeyword = new HashMap<String, Object>();
+		idKeyword.put("or", userIds);
+		filters.put("id.keyword", idKeyword);
+		filters.put("limit", userIds.size());
+		filters.put("offset", 0);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		try {
-			String reqBodyData = new ObjectMapper().writeValueAsString(requestMap);
+			String reqBodyData = new ObjectMapper().writeValueAsString(filters);
 
 			HttpEntity<String> requestEnty = new HttpEntity<>(reqBodyData, headers);
 
-			String serverUrl = props.getSbUrl() + "private/user/v1/search";
+			String serverUrl = props.getSbHubGraphServiceUrl() + "/v1/user/search/profile";
 
-			SunbirdApiResp sunbirdApiResp = restTemplate.postForObject(serverUrl, requestEnty, SunbirdApiResp.class);
-
-			if (sunbirdApiResp != null && "OK".equalsIgnoreCase(sunbirdApiResp.getResponseCode())
-					&& sunbirdApiResp.getResult().getResponse().getCount() >= 1) {
-				SunbirdApiRespContent content = sunbirdApiResp.getResult().getResponse().getContent().get(0);
-				result.put(userIds.get(0).toString(), content);
+			logger.info("Calling URL -> " + serverUrl + ", with request body -> " + reqBodyData);
+			OpenSaberApiResp openSaberApiResp = restTemplate.postForObject(serverUrl, requestEnty,
+					OpenSaberApiResp.class);
+			logger.info("Received Response -> " + (new ObjectMapper()).writeValueAsString(openSaberApiResp));
+			if (openSaberApiResp != null && "OK".equalsIgnoreCase(openSaberApiResp.getResponseCode())
+					&& openSaberApiResp.getResult().getUserProfile().size() >= 1) {
+				for (OpenSaberApiUserProfile userProfile : openSaberApiResp.getResult().getUserProfile()) {
+					result.put(userProfile.getUserId(), userProfile);
+				}
 				return result;
 			}
 
