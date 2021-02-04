@@ -80,8 +80,8 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 		Map<String, Object> idKeyword = new HashMap<String, Object>();
 		idKeyword.put("or", userIds);
 		filters.put("id.keyword", idKeyword);
-		filters.put("limit", userIds.size());
-		filters.put("offset", 0);
+		request.put("limit", userIds.size());
+		request.put("offset", 0);
 		request.put("filters", filters);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
