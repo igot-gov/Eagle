@@ -87,32 +87,17 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		try {
 			String reqBodyData = new ObjectMapper().writeValueAsString(request);
-
 			HttpEntity<String> requestEnty = new HttpEntity<>(reqBodyData, headers);
-
 			String serverUrl = props.getSbHubGraphServiceUrl() + "/v1/user/search/profile";
-
-			logger.info("Calling URL -> " + serverUrl + ", with request body -> " + reqBodyData);
-			
-			try {
-				Map<String, Object> response = restTemplate.postForObject(serverUrl, requestEnty, Map.class);
-				logger.info("Response by Map -> " + (new ObjectMapper()).writeValueAsString(response));
-			}catch(Exception e) {
-				logger.error(e);
-			}
-			
 			OpenSaberApiResp openSaberApiResp = restTemplate.postForObject(serverUrl, requestEnty,
 					OpenSaberApiResp.class);
-			logger.info("Received Response -> " + (new ObjectMapper()).writeValueAsString(openSaberApiResp));
 			if (openSaberApiResp != null && "OK".equalsIgnoreCase(openSaberApiResp.getResponseCode())
 					&& openSaberApiResp.getResult().getUserProfile().size() >= 1) {
 				for (OpenSaberApiUserProfile userProfile : openSaberApiResp.getResult().getUserProfile()) {
 					result.put(userProfile.getUserId(), userProfile);
 				}
-				logger.info("Return result -> " + (new ObjectMapper()).writeValueAsString(result));
 				return result;
 			}
-
 		} catch (Exception e) {
 			throw new ApplicationLogicError("Sunbird Service ERROR: ", e);
 		}
