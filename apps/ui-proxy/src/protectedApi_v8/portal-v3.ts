@@ -358,3 +358,13 @@ portalApi.get('/userrole/:userId', async (req, res) => {
         )
     }
 })
+
+export async function getRoles(userId: string) {
+    try {
+        const response = await axios.get(API_END_POINTS.userRolesApi(userId))
+        return response.data
+    } catch (error) {
+        logError('ERROR WHILE FETCHING THE USER ROLES --> ', error)
+        return []
+    }
+}
