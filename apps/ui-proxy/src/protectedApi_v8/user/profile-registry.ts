@@ -336,3 +336,20 @@ profileRegistryApi.post('/createUserRegistryV2/:userId', async (req, res) => {
     res.status((err && err.response && err.response.status) || 500).send(err)
   }
 })
+
+export async function getProfileStatus(userId: string) {
+  try {
+    const response = await axios.get(API_END_POINTS.getUserRegistryById(userId), {
+      ...axiosRequestConfig,
+    })
+    const userProfileResult = response.data.result.UserProfile
+    if ((typeof userProfileResult !== 'undefined' && userProfileResult.length > 0) && (userId === userProfileResult[0].userId)) {
+      return true
+    }
+    return false
+
+  } catch (error) {
+    logError('ERROR WHILE FETCHING THE USER DETAILS FROM REGISTERY --> ', error)
+    return false
+  }
+}

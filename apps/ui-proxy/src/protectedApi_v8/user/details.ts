@@ -8,10 +8,9 @@ import { ERROR } from '../../utils/message'
 import { extractUserIdFromRequest } from '../../utils/requestExtract'
 import { getUserByEmail } from '../discussionHub/users'
 import { createDiscussionHubUser } from '../discussionHub/writeApi'
+import { getRoles } from '../portal-v3'
 import { getUserProfile } from './profile'
-import { getUserProfileStatus } from './profile-details'
-import { getUserRoles } from './roles'
-import { getTncStatus } from './tnc'
+import { getProfileStatus } from './profile-registry'
 
 export const detailsApi = Router()
 
@@ -27,19 +26,17 @@ detailsApi.get('/', async (req, res) => {
     const userId = extractUserIdFromRequest(req)
     const rootOrg = req.header('rootOrg') || ''
     const org = req.header('org') || ''
-    const locale = req.header('langCode')
     if (!org || !rootOrg) {
       res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
       return
     }
-    const tncStatus = await getTncStatus(userId, rootOrg, org, locale)
-    const roles = await getUserRoles(userId, rootOrg)
-    const profileDetailsStatus = await getUserProfileStatus(userId)
-    const returnRoles = [...roles.default_roles, ...roles.user_roles]
+    const tncStatus = true
+    const roles = await getRoles(userId)
+    const profileDetailsStatus = await getProfileStatus(userId)
     res.json({
       group: [],
       profileDetailsStatus,
-      roles: returnRoles,
+      roles,
       tncStatus,
     })
   } catch (err) {
