@@ -89,7 +89,7 @@ export class MyContentComponent implements OnInit, OnDestroy {
   leftmenues!: ILeftMenu
   public filterMenuItems: any = []
   /* tslint:disable */
-  courseTaken = this.activatedRoute.snapshot.data.courseTaken.data
+  courseTaken = _.get(this.activatedRoute, 'snapshot.data.courseTaken.data')
   resourses: any
   dataSource: any
   hasChild = (_: number, node: IMenuFlatNode) => node.expandable
@@ -212,7 +212,7 @@ export class MyContentComponent implements OnInit, OnDestroy {
       offset: 0,
       limit: 24,
     }
-    this.newDesign = this.accessService.authoringConfig.newDesign
+    this.newDesign = _.get(this.accessService, 'authoringConfig.newDesign')
     this.ordinals = this.authInitService.ordinals
     this.allLanguages = this.authInitService.ordinals.subTitles || []
     this.defaultSideNavBarOpenedSubscription = this.isLtMedium$.subscribe(isLtMedium => {

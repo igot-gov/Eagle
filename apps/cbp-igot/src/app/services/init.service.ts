@@ -20,8 +20,11 @@ import {
   NsUser,
   UserPreferenceService,
 } from '@ws-widget/utils'
+import { retry } from 'rxjs/operators'
 import { environment } from '../../environments/environment'
-
+/* tslint:disable */
+import _ from 'lodash'
+/* tslint:enable */
 interface IDetailsResponse {
   tncStatus: boolean
   roles: string[]
@@ -245,10 +248,10 @@ export class InitService {
         throw new Error('Invalid user')
       }
       if (userPidProfile) {
-        if (userPidProfile.result.response.organisations.length > 0) {
-          const organisationData = userPidProfile.result.response.organisations
-          userRoles = (organisationData[0].roles.length > 0) ? organisationData[0].roles : []
-        }
+        // if (userPidProfile.result.response.organisations.length > 0) {
+        //   const organisationData = userPidProfile.result.response.organisations
+        //   userRoles = (organisationData[0].roles.length > 0) ? organisationData[0].roles : []
+        // }
         this.configSvc.unMappedUser = userPidProfile.result.response
         this.configSvc.userProfile = {
 
@@ -286,7 +289,12 @@ export class InitService {
       const details = { group: [], profileDetailsStatus: true, roles: (userRoles || []).map(v => v.toLowerCase()), tncStatus: true }
       this.configSvc.hasAcceptedTnc = details.tncStatus
       this.configSvc.profileDetailsStatus = details.profileDetailsStatus
-      this.configSvc.userRoles = new Set((userRoles || []).map(v => v.toLowerCase()))
+      // this.configSvc.userRoles = new Set((userRoles || []).map(v => v.toLowerCase()))
+      const detailsV: IDetailsResponse = await this.http
+        .get<IDetailsResponse>(endpoint.details).pipe(retry(3))
+        .toPromise()
+      this.configSvc.userGroups = new Set(detailsV.group)
+      this.configSvc.userRoles = new Set((detailsV.roles || []).map(v => v.toLowerCase()))
       return details
     } else {
       return { group: [], profileDetailsStatus: true, roles: userRoles, tncStatus: true }
@@ -313,22 +321,22 @@ export class InitService {
         throw new Error('Invalid user')
       }
       if (userPidProfileV2) {
-        const userData: any = userPidProfileV2.result.UserProfile
+        const userData: any = _.first(userPidProfileV2.result.UserProfile)
         this.configSvc.userProfileV2 = {
-          userId: userData[0].userId,
-          firstName: userData[0].personalDetails.firstname,
-          surName: userData[0].personalDetails.surname,
-          middleName: userData[0].personalDetails.middlename,
-          departmentName: userData[0].employmentDetails.departmentName,
+          userId: userData.userId,
+          firstName: userData.personalDetails.firstname,
+          surName: userData.personalDetails.surname,
+          middleName: userData.personalDetails.middlename,
+          departmentName: _.get(userData, 'employmentDetails.departmentName'),
           // tslint:disable-next-line: max-line-length
-          userName: `${userData[0].personalDetails.firstname ? userData[0].personalDetails.firstname : ''}${userData[0].personalDetails.surname ? userData[0].personalDetails.surname : ''}`,
-          profileImage: userData[0] && userData[0].photo,
+          userName: `${userData.personalDetails.firstname ? userData.personalDetails.firstname : ''}${userData.personalDetails.surname ? userData.personalDetails.surname : ''}`,
+          profileImage: userData && userData.photo,
           dealerCode: null,
           isManager: false,
         }
         if (this.configSvc.userProfile) {
           // tslint:disable-next-line: max-line-length
-          this.configSvc.userProfile.departmentName = (userData[0].employmentDetails.departmentName) ? userData[0].employmentDetails.departmentName : null
+          this.configSvc.userProfile.departmentName = _.get(userData, 'employmentDetails.departmentName') ? userData.employmentDetails.departmentName : null
         }
 
       }
