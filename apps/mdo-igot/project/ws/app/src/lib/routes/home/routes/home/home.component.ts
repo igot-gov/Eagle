@@ -60,7 +60,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         this.bindUrl(event.urlAfterRedirects.replace('/app/home/', ''))
         // this.widgetData = this.activeRoute.snapshot.data &&
         //   this.activeRoute.snapshot.data.pageData.data.menus || []
-        if (this.activeRoute.snapshot.data.department.data) {
+        if (_.get(this.activeRoute.snapshot, 'data.department.data')) {
           const leftData = this.activeRoute.snapshot.data.pageData.data.menus
           _.set(leftData, 'widgetData.logo', true)
           _.set(leftData, 'widgetData.logoPath', _.get(this.activeRoute, 'snapshot.data.department.data.logo'))
@@ -69,12 +69,12 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
           _.set(leftData, 'widgetData.userRoles', this.myRoles)
           this.widgetData = leftData
         } else {
-          this.widgetData = this.activeRoute.snapshot.data.pageData.data.menus
+          this.widgetData = _.get(this.activeRoute, 'snapshot.data.pageData.data.menus')
         }
 
-        this.department = this.activeRoute.snapshot.data.department.data
+        this.department = _.get(this.activeRoute, 'snapshot.data.department.data')
         this.departmentName = this.department ? this.department.deptName : ''
-        this.configService.departName = this.departmentName
+        this.configService.departName = this.departmentName || 'Not Available'
       }
     })
 

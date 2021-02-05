@@ -21,6 +21,7 @@ const routes: Routes = [
     component: HomeComponent,
     resolve: {
       department: DepartmentResolve,
+      tabs: HomeResolve,
     },
     children: [
       {

@@ -29,7 +29,7 @@ export class UsersViewComponent implements OnInit, OnDestroy {
   userDetails: any
   location!: string | null
   tabs: any
-  tabsData: NSProfileDataV2.IProfileTab[]
+  // tabsData: NSProfileDataV2.IProfileTab[]
   currentUser!: string | null
   connectionRequests!: any[]
   tabledata!: ITableData
@@ -49,7 +49,7 @@ export class UsersViewComponent implements OnInit, OnDestroy {
   ) {
     this.Math = Math
     this.currentUser = this.configSvc.userProfile && this.configSvc.userProfile.userId
-    this.tabsData = this.route.parent && this.route.parent.snapshot.data.pageData.data.tabs || []
+    // this.tabsData = this.route.parent && this.route.parent.snapshot.data.pageData.data.tabs || []
     this.tabs = this.route.data.subscribe(data => {
       this.portalProfile = data.profile
         && data.profile.data
