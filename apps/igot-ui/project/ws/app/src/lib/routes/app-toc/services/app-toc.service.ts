@@ -12,6 +12,7 @@ const PROTECTED_SLAG_V8 = '/apis/protected/v8'
 const PROXY_SLAG_V8 = '/apis/proxies/v8'
 
 const API_END_POINTS = {
+  BATCH_CREATE: `${PROXY_SLAG_V8}/learner/course/v1/batch/create`,
   CONTENT_PARENTS: `${PROTECTED_SLAG_V8}/content/parents`,
   CONTENT_NEXT: `${PROTECTED_SLAG_V8}/content/next`,
   CONTENT_PARENT: (contentId: string) => `${PROTECTED_SLAG_V8}/content/${contentId}/parent`,
@@ -310,6 +311,13 @@ export class AppTocService {
         )
         : API_END_POINTS.CONTENT_PARENT(contentId),
       data,
+    )
+  }
+
+  createBatch(batchData: any) {
+    return this.http.post(
+      API_END_POINTS.BATCH_CREATE,
+      { request : batchData },
     )
   }
 }

@@ -25,7 +25,8 @@ import {
   MatFormFieldModule,
   MatSelectModule,
   MatSnackBarModule,
-
+  MatDatepickerModule,
+  MatNativeDateModule,
 } from '@angular/material'
 
 // comps
@@ -98,6 +99,7 @@ import { ApiService, AccessControlService } from '../../../../../author/src/publ
 import { AppTocSinglePageComponent } from './components/app-toc-single-page/app-toc-single-page.component'
 import { AppTocSinglePageComponent as AppTocSinglePageRootComponent } from './routes/app-toc-single-page/app-toc-single-page.component'
 import { AppTocSinglePageDirective } from './routes/app-toc-single-page/app-toc-single-page.directive'
+import { CreateBatchDialogComponent } from './components/create-batch-dialog/create-batch-dialog.component'
 @NgModule({
   declarations: [
     AppTocAnalyticsComponent,
@@ -120,6 +122,7 @@ import { AppTocSinglePageDirective } from './routes/app-toc-single-page/app-toc-
     AppTocSinglePageComponent,
     AppTocSinglePageRootComponent,
     AppTocSinglePageDirective,
+    CreateBatchDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -149,6 +152,8 @@ import { AppTocSinglePageDirective } from './routes/app-toc-single-page/app-toc-
     MatSelectModule,
     MatSnackBarModule,
     MatExpansionModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     DisplayContentTypeModule,
     DisplayContentTypeIconModule,
     PipeDurationTransformModule,
@@ -201,6 +206,7 @@ import { AppTocSinglePageDirective } from './routes/app-toc-single-page/app-toc-
     AppTocHomeComponent,
     AppTocSinglePageComponent,
     AppTocSinglePageRootComponent,
+    CreateBatchDialogComponent,
   ],
 })
 export class AppTocModule { }

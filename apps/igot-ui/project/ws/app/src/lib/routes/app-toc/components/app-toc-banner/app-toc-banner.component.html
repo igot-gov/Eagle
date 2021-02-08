@@ -197,6 +197,11 @@
                 The content is in review.
               </h3>
             </div>
+            <div class="header-actions mt-8 mb-4" [hidden]="isResource">
+              <a [color]="'primary'" class="margin-right-m resumeButton" mat-flat-button (click)="openDialog(content)">
+                Create Batch
+              </a>
+            </div>
           </div>
         </div>
       </div>

@@ -22,6 +22,7 @@ import { MobileAppsService } from 'src/app/services/mobile-apps.service'
 import { FormControl, Validators } from '@angular/forms'
 import * as dayjs from 'dayjs'
 import * as  lodash from 'lodash'
+import { CreateBatchDialogComponent } from '../create-batch-dialog/create-batch-dialog.component'
 
 @Component({
   selector: 'ws-app-toc-banner',
@@ -83,6 +84,7 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
     private utilitySvc: UtilityService,
     private mobileAppsSvc: MobileAppsService,
     private snackBar: MatSnackBar,
+    public createBatchDialog: MatDialog,
     // private authAccessService: AccessControlService,
   ) { }
 
@@ -523,5 +525,16 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
     } catch (e) {
       return true
     }
+  }
+
+  openDialog(content: any): void {
+    const dialogRef = this.createBatchDialog.open(CreateBatchDialogComponent, {
+      height: '400px',
+      width: '600px',
+      data: { content },
+    })
+
+    dialogRef.afterClosed().subscribe((_result: any) => {
+    })
   }
 }
