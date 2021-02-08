@@ -250,6 +250,7 @@ export namespace NsUser {
     firstName?: string
     surName?: string
     middleName?: string
+    profileImage?: string
   }
   export interface IUserPidProfile {
     kid_updated: boolean
@@ -265,7 +266,7 @@ export namespace NsUser {
 
   export interface IUserPidProfileVer2 {
     result: {
-      UserProfile: IUserVer2
+      UserProfile: IUserVer2[]
     }
   }
   interface ISourceData {
@@ -336,25 +337,25 @@ export namespace NsUser {
   }
   interface IUserVer2 {
     'firstname': string,
-  'motherTongue': string,
-  'secondaryEmail': string,
-  'gender': string,
-  '@type': string,
-  'mobile': number,
-  'middlename': string,
-  'telephone': number,
-  'osid': string,
-  'primaryEmailType': string,
-  'knownLanguages': ILanguages[],
-  'wid': string,
-  'nationality': string,
-  'surname': string,
-  'dob': string,
-  'category': string,
-  'primaryEmail': string,
-  'maritalStatus': string,
-  'residenceAddress': string,
-  'result': any
+    'motherTongue': string,
+    'secondaryEmail': string,
+    'gender': string,
+    '@type': string,
+    'mobile': number,
+    'middlename': string,
+    'telephone': number,
+    'osid': string,
+    'primaryEmailType': string,
+    'knownLanguages': ILanguages[],
+    'wid': string,
+    'nationality': string,
+    'surname': string,
+    'dob': string,
+    'category': string,
+    'primaryEmail': string,
+    'maritalStatus': string,
+    'residenceAddress': string,
+    'result': any
   }
 
   export interface ILanguages {

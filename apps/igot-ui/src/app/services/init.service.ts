@@ -21,7 +21,10 @@ import {
   UserPreferenceService,
 } from '@ws-widget/utils'
 import { environment } from '../../environments/environment'
-
+/* tslint:disable */
+import _ from 'lodash'
+import { retry } from 'rxjs/operators'
+/* tslint:enable */
 interface IDetailsResponse {
   tncStatus: boolean
   roles: string[]
@@ -254,12 +257,13 @@ export class InitService {
         throw new Error('Invalid user')
       }
       if (userPidProfile) {
-        if (userPidProfile.result.response.organisations.length > 0) {
-          const organisationData = userPidProfile.result.response.organisations
-          userRoles = (organisationData[0].roles.length > 0) ? organisationData[0].roles : []
-        }
+        // if (userPidProfile.result.response.organisations.length > 0) {
+        //   const organisationData = userPidProfile.result.response.organisations
+        //   userRoles = (organisationData[0].roles.length > 0) ? organisationData[0].roles : []
+        // }
         this.configSvc.unMappedUser = userPidProfile.result.response
         this.configSvc.userProfile = {
+
           country: userPidProfile.result.response.countryCode || null,
           email: userPidProfile.result.response.email,
           givenName: userPidProfile.result.response.firstName,
@@ -269,6 +273,7 @@ export class InitService {
 
           // tslint:disable-next-line: max-line-length
           userName: `${userPidProfile.result.response.firstName ? userPidProfile.result.response.firstName : ' '}${userPidProfile.result.response.lastName ? userPidProfile.result.response.lastName : ' '}`,
+          profileImage: userPidProfile.result.response.thumbnail,
           dealerCode: null,
           isManager: false,
           // departmentName: userPidProfile.user.department_name || '',
@@ -290,25 +295,30 @@ export class InitService {
           // userName: `${userPidProfile.user.first_name} ${userPidProfile.user.last_name}`,
         }
       }
+      const details = { group: [], profileDetailsStatus: true, roles: (userRoles || []).map(v => v.toLowerCase()), tncStatus: true }
+      this.configSvc.hasAcceptedTnc = details.tncStatus
+      this.configSvc.profileDetailsStatus = details.profileDetailsStatus
+      // this.configSvc.userRoles = new Set((userRoles || []).map(v => v.toLowerCase()))
+      const detailsV: IDetailsResponse = await this.http
+        .get<IDetailsResponse>(endpoint.details).pipe(retry(3))
+        .toPromise()
+      this.configSvc.userGroups = new Set(detailsV.group)
+      this.configSvc.userRoles = new Set((detailsV.roles || []).map(v => v.toLowerCase()))
+      return details
+    } else {
+      return { group: [], profileDetailsStatus: true, roles: userRoles, tncStatus: true }
+      // const details: IDetailsResponse = await this.http
+      //   .get<IDetailsResponse>(endpoint.details).pipe(retry(3))
+      //   .toPromise()
+      // this.configSvc.userGroups = new Set(details.group)
+      // this.configSvc.userRoles = new Set((details.roles || []).map(v => v.toLowerCase()))
+      // if (this.configSvc.userProfile && this.configSvc.userProfile.isManager) {
+      //   this.configSvc.userRoles.add('is_manager')
     }
-    // const details: IDetailsResponse = await this.http
-    //   .get<IDetailsResponse>(endpoint.details).pipe(retry(3))
-    //   .toPromise()
-    // this.configSvc.userGroups = new Set(details.group)
-    // this.configSvc.userRoles = new Set(details.roles)
-    // if (this.configSvc.userProfile && this.configSvc.userProfile.isManager) {
-    //   this.configSvc.userRoles.add('is_manager')
-    // }
-    // tslint:disable-next-line: max-line-length
-    const details = { group: [], profileDetailsStatus: true, roles: userRoles, tncStatus: true }
-    this.configSvc.hasAcceptedTnc = details.tncStatus
-    this.configSvc.profileDetailsStatus = details.profileDetailsStatus
-    this.configSvc.userRoles = new Set(userRoles)
-    return details
   }
 
-  private async fetchUserProfileV2(): Promise<IDetailsResponse> {
-    const userRoles: string[] = []
+  private async fetchUserProfileV2(): Promise<any> {
+    // const userRoles: string[] = []
     if (this.configSvc.instanceConfig && !Boolean(this.configSvc.instanceConfig.disablePidCheck)) {
       let userPidProfileV2: NsUser.IUserPidProfileVer2 | null = null
       try {
@@ -320,19 +330,24 @@ export class InitService {
         throw new Error('Invalid user')
       }
       if (userPidProfileV2) {
-        const userData: any = userPidProfileV2.result.UserProfile
+        const userData: any = _.first(userPidProfileV2.result.UserProfile)
         this.configSvc.userProfileV2 = {
-          userId: userData[0].userId,
-          firstName: userData[0].personalDetails.firstname,
-          surName: userData[0].personalDetails.surname,
-          middleName: userData[0].personalDetails.middlename,
-          departmentName: userData[0].employmentDetails.departmentName,
+          userId: userData.userId,
+          firstName: userData.personalDetails.firstname,
+          surName: userData.personalDetails.surname,
+          middleName: userData.personalDetails.middlename,
+          departmentName: _.get(userData, 'employmentDetails.departmentName'),
           // tslint:disable-next-line: max-line-length
-          userName: `${userData[0].personalDetails.firstname ? userData[0].personalDetails.firstname : ''}${userData[0].personalDetails.surname ? userData[0].personalDetails.surname : ''}`,
-
+          userName: `${userData.personalDetails.firstname ? userData.personalDetails.firstname : ''}${userData.personalDetails.surname ? userData.personalDetails.surname : ''}`,
+          profileImage: userData && userData.photo,
           dealerCode: null,
           isManager: false,
         }
+        if (this.configSvc.userProfile) {
+          // tslint:disable-next-line: max-line-length
+          this.configSvc.userProfile.departmentName = _.get(userData, 'employmentDetails.departmentName') ? userData.employmentDetails.departmentName : null
+        }
+
       }
     }
     // const details: IDetailsResponse = await this.http
@@ -344,11 +359,11 @@ export class InitService {
     //   this.configSvc.userRoles.add('is_manager')
     // }
     // tslint:disable-next-line: max-line-length
-    const details = { group: [], profileDetailsStatus: true, roles: userRoles, tncStatus: true }
-    this.configSvc.hasAcceptedTnc = details.tncStatus
-    this.configSvc.profileDetailsStatus = details.profileDetailsStatus
-    this.configSvc.userRoles = new Set(userRoles)
-    return details
+    // const details = { group: [], profileDetailsStatus: true, roles: userRoles, tncStatus: true }
+    // this.configSvc.hasAcceptedTnc = details.tncStatus
+    // this.configSvc.profileDetailsStatus = details.profileDetailsStatus
+    // this.configSvc.userRoles = new Set(userRoles)
+    // return details
   }
 
   private async fetchInstanceConfig(): Promise<NsInstanceConfig.IConfig> {
