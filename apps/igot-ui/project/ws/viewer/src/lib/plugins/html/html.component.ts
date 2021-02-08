@@ -147,9 +147,15 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
       //   a.click()
       //   URL.revokeObjectURL(objectUrl)
       // })
-      this.iframeUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(
-        `https://igot.blob.core.windows.net/content/content/html/do_1131998292873625601506-snapshot/index.html`
-      )
+      if (this.htmlContent.status !== 'Live') {
+        this.iframeUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(
+          `https://igot.blob.core.windows.net/content/content/html/${this.htmlContent.identifier}-latest/index.html`
+        )
+      } else {
+        this.iframeUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(
+          `https://igot.blob.core.windows.net/content/content/html/${this.htmlContent.identifier}-snapshot/index.html`
+        )
+      }
       // testing purpose only
       // setTimeout(
       //   () => {

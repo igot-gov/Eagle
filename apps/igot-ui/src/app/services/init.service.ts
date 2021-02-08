@@ -266,7 +266,8 @@ export class InitService {
           userId: userPidProfile.result.response.userId,
           firstName: userPidProfile.result.response.firstName,
           lastName: userPidProfile.result.response.lastName,
-
+          rootOrgId: userPidProfile.result.response.rootOrgId,
+          rootOrgName: userPidProfile.result.response.rootOrgName,
           // tslint:disable-next-line: max-line-length
           userName: `${userPidProfile.result.response.firstName ? userPidProfile.result.response.firstName : ' '}${userPidProfile.result.response.lastName ? userPidProfile.result.response.lastName : ' '}`,
           dealerCode: null,

@@ -251,7 +251,7 @@ export namespace NsUser {
     surName?: string
     middleName?: string
     rootOrgId?: string
-    rootOrgName? :string
+    rootOrgName?: string
   }
   export interface IUserPidProfile {
     kid_updated: boolean
