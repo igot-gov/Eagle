@@ -32,7 +32,7 @@ const contentTypeValue = `${CONSTANTS.CONTENT_TYPE_VALUE}`
 const authorizationHeader = `${CONSTANTS.AUTHORIZATION}`
 const xAppId = `${CONSTANTS.X_APP_ID}`
 const xAppIdVAlue = `${CONSTANTS.X_APP_ID_VALUE}`
-const createUserRegistryApi = 'https://localhost:3004/apis/protected/v8/user/profileRegistry/createUserRegistryV2'
+const createUserRegistryApi = `${CONSTANTS.USER_SUNBIRD_DETAILS_API_BASE}/apis/protected/v8/user/profileRegistry/createUserRegistryV2`
 
 export async function getUserProfileStatus(wid: string) {
     try {
@@ -248,22 +248,23 @@ profileDeatailsApi.post('/createUser', async (req, res) => {
                 const userRegistry: IUser = {
                     personalDetails: personalDetailsRegistry,
                 }
-                const userId = response.data.result.userId
+                const sBuserId = response.data.result.userId
                 const userRegistryResponse = await axios({
                     ...axiosRequestConfig,
-                    data: { request: userRegistry },
+                    data: userRegistry,
                     headers: {
-                        wid: userId,
+                        Authorization: authorization,
+                        wid: sBuserId,
                     },
                     method: 'POST',
-                    url: createUserRegistryApi,
+                    url: `${createUserRegistryApi}/${sBuserId}`,
                 })
                 if (userRegistryResponse.data === null) {
-                    res.status(500).send('')
+                    throw new Error('Not able to create User Registry in Opensaber')
                 } else {
                     const sbUserProfileResponse: Partial<ISunbirdbUserResponse> = {
                         email: sbemail_, firstName: sbfirstName_, lastName: sblastName_,
-                        userId,
+                        userId: sBuserId,
                     }
                     res.send(sbUserProfileResponse)
                 }
