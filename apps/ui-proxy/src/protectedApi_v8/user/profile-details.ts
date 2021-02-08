@@ -2,13 +2,13 @@ import axios from 'axios'
 import { Router } from 'express'
 import * as fs from 'fs'
 import { axiosRequestConfig, axiosRequestConfigLong, axiosRequestConfigVeryLong } from '../../configs/request.config'
-import { ISBUser, IPersonalDetails, IUser, ISunbirdbUserResponse } from '../../models/user.model'
+import { IPersonalDetails, ISBUser, ISunbirdbUserResponse, IUser } from '../../models/user.model'
 import { CONSTANTS } from '../../utils/env'
 import { logError, logInfo } from '../../utils/logger'
 import { ERROR } from '../../utils/message'
 import {
-    extractUserIdFromRequest, extractAuthorizationFromRequest,
-    extractUserTokenFromRequest, extractRootOrgFromRequest
+    extractAuthorizationFromRequest, extractRootOrgFromRequest,
+    extractUserIdFromRequest, extractUserTokenFromRequest
 } from '../../utils/requestExtract'
 
 const API_END_POINTS = {
@@ -23,6 +23,7 @@ const API_END_POINTS = {
     // tslint:disable-next-line: object-literal-sort-keys
     migrateRegistry: `${CONSTANTS.USER_PROFILE_API_BASE}/public/v8/profileDetails/migrateRegistry`,
     createSb: `${CONSTANTS.USER_SUNBIRD_DETAILS_API_BASE}/api/user/v1/create`,
+    searchSb: `${CONSTANTS.USER_SUNBIRD_DETAILS_API_BASE}/api/user/v1/search`,
 }
 
 const xAuthUser = `${CONSTANTS.X_AUTH_USER}`
@@ -210,57 +211,68 @@ profileDeatailsApi.post('/createUser', async (req, res) => {
         axios.defaults.headers.common[contentType] = contentTypeValue
         axios.defaults.headers.common[xAppId] = xAppIdVAlue
         const sbemail_ = req.body.personalDetails.email
-        const sbemailVerified_: boolean = true
+        const sbemailVerified_ = true
         const sbfirstName_ = req.body.personalDetails.firstName
         const sblastName_ = req.body.personalDetails.lastName
         const sbchannel_ = extractRootOrgFromRequest(req)
         const sbuserName_ = req.body.personalDetails.email
-        const sbUserProfile: Partial<ISBUser> = {
-            channel: sbchannel_, email: sbemail_, emailVerified: sbemailVerified_, firstName: sbfirstName_,
-            lastName: sblastName_, userName: sbuserName_,
-        }
-        const response = await axios({
+
+        const searchresponse = await axios({
             ...axiosRequestConfig,
-            data: { request: sbUserProfile },
+            data: { request: { query: '', filters: { userName: sbuserName_.toLowerCase() } } },
             method: 'POST',
-            url: API_END_POINTS.createSb,
+            url: API_END_POINTS.searchSb,
         })
-        if (response.data === null) {
+        if (searchresponse.data.params.status !== 'success') {
             res.status(500).send('')
         } else {
-            const personalDetailsRegistry: IPersonalDetails = {
-                firstname: sbfirstName_,
-                primaryEmail: sbemail_,
-                surname: sblastName_,
-                username: sbuserName_,
+            const sbUserProfile: Partial<ISBUser> = {
+                channel: sbchannel_, email: sbemail_, emailVerified: sbemailVerified_, firstName: sbfirstName_,
+                lastName: sblastName_, userName: sbuserName_,
             }
-            const userRegistry: IUser = {
-                personalDetails: personalDetailsRegistry,
-            }
-            const userId = response.data.result.userId
-            const userRegistryResponse = await axios({
+            const response = await axios({
                 ...axiosRequestConfig,
-                data: { request: userRegistry },
-                headers: {
-                    'wid': userId,
-                },
+                data: { request: sbUserProfile },
                 method: 'POST',
-                url: createUserRegistryApi,
+                url: API_END_POINTS.createSb,
             })
-            if (userRegistryResponse.data === null) {
+            if (response.data === null) {
                 res.status(500).send('')
             } else {
-                const sbUserProfileResponse: Partial<ISunbirdbUserResponse> = {
-                    email: sbemail_, firstName: sbfirstName_, lastName: sblastName_,
-                    userId: userId,
+                const personalDetailsRegistry: IPersonalDetails = {
+                    firstname: sbfirstName_,
+                    primaryEmail: sbemail_,
+                    surname: sblastName_,
+                    username: sbuserName_,
                 }
-                res.send(sbUserProfileResponse)
+                const userRegistry: IUser = {
+                    personalDetails: personalDetailsRegistry,
+                }
+                const userId = response.data.result.userId
+                const userRegistryResponse = await axios({
+                    ...axiosRequestConfig,
+                    data: { request: userRegistry },
+                    headers: {
+                        wid: userId,
+                    },
+                    method: 'POST',
+                    url: createUserRegistryApi,
+                })
+                if (userRegistryResponse.data === null) {
+                    res.status(500).send('')
+                } else {
+                    const sbUserProfileResponse: Partial<ISunbirdbUserResponse> = {
+                        email: sbemail_, firstName: sbfirstName_, lastName: sblastName_,
+                        userId,
+                    }
+                    res.send(sbUserProfileResponse)
+                }
+
             }
-
-
         }
+
     } catch (err) {
-        logError('ERROR CREATING USER REGISTRY >', err)
+        logError('ERROR CREATING USER >', err)
         res.status((err && err.response && err.response.status) || 500).send(err)
     }
 })

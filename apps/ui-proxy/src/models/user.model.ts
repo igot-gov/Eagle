@@ -135,14 +135,14 @@ export interface ISBUser {
 }
 
 export interface IPersonalDetails {
-  firstname: string;
-  surname: string;
-  primaryEmail: string;
-  username: string;
+  firstname: string
+  surname: string
+  primaryEmail: string
+  username: string
 }
 
 export interface IUser {
-  personalDetails: IPersonalDetails;
+  personalDetails: IPersonalDetails
 }
 
 export interface ISunbirdbUserResponse {
