@@ -223,8 +223,8 @@ profileDeatailsApi.post('/createUser', async (req, res) => {
             method: 'POST',
             url: API_END_POINTS.searchSb,
         })
-        if (searchresponse.data.params.status !== 'success') {
-            res.status(500).send('')
+        if (searchresponse.data.result.response.count > 0) {
+            throw new Error('UserName Already Exist')
         } else {
             const sbUserProfile: Partial<ISBUser> = {
                 channel: sbchannel_, email: sbemail_, emailVerified: sbemailVerified_, firstName: sbfirstName_,
@@ -236,8 +236,8 @@ profileDeatailsApi.post('/createUser', async (req, res) => {
                 method: 'POST',
                 url: API_END_POINTS.createSb,
             })
-            if (response.data === null) {
-                res.status(500).send('')
+            if (response.data.responseCode === 'CLIENT_ERROR') {
+                throw new Error('Not able to create User in SunBird')
             } else {
                 const personalDetailsRegistry: IPersonalDetails = {
                     firstname: sbfirstName_,
