@@ -331,6 +331,8 @@ export class MyContentComponent implements OnInit, OnDestroy {
           'channel',
           'organisation',
           'trackable',
+          'status',
+          'authoringDisabled',
         ],
         facets: [
           'primaryCategory',

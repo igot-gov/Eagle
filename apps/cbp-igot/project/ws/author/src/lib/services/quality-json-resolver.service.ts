@@ -5,6 +5,7 @@ import { ApiService } from '../modules/shared/services/api.service'
 import { catchError, map } from 'rxjs/operators'
 import { NSIQuality } from '../interface/content-quality'
 // import { ConfigurationsService } from '@ws-widget/utils'
+import { GET_JSON } from '../constants/apiEndpoints'
 
 @Injectable()
 export class QualityJSONResolver implements Resolve<NSIQuality.IContentQualityConfig> {
@@ -19,9 +20,8 @@ export class QualityJSONResolver implements Resolve<NSIQuality.IContentQualityCo
 
   resolve(
   ): Observable<NSIQuality.IContentQualityConfig> {
-
     return this.apiService.get<NSIQuality.IContentQualityConfig>(
-      `http://localhost:3003/protected/v8/scoring/getTemplate/content_scoring_template`, {}
+      `${GET_JSON}content_scoring_template`, {}
     ).pipe(map((data: any) => {
       return data.result.result
     })).pipe(
@@ -30,6 +30,7 @@ export class QualityJSONResolver implements Resolve<NSIQuality.IContentQualityCo
         return of(v)
       }),
     )
+    /** for testing purpose */
     // return this.apiService.get<NSIQuality.IContentQualityConfig>(
     //   `${this.configSvc.baseUrl}/feature/auth-content-quality.json`,
     // ).pipe(

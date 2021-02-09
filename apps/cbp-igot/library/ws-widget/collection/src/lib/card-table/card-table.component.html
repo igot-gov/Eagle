@@ -114,12 +114,10 @@
         <div class="card-container" *ngFor="let cardData of data">
           <mat-card class="no-box-shadow custom-border">
             <div style="position: relative; z-index: 1;">
-              <img mat-card-image class="card-img mat-lite-background" role="link"
-                [src]="cardData.appIcon | relativeUrlTable" (error)="changeToDefaultImg($event)" [alt]="cardData.name"
-                class="card-img" />
+              <img mat-card-image class="card-img mat-lite-background" role="link" [src]="cardData.appIcon"
+                (error)="changeToDefaultImg($event)" [alt]="cardData.name" class="card-img" />
               <div class="source-div">
-                <img [src]="cardData.creatorLogo | relativeUrlTable" class="source-icon"
-                  (error)="changeToDefaultSourceImg($event)"
+                <img [src]="cardData.creatorLogo" class="source-icon" (error)="changeToDefaultSourceImg($event)"
                   [alt]="(cardData.sourceName + '_' + cardData.identifier)" />
               </div>
             </div>

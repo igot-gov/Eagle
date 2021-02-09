@@ -2,7 +2,7 @@
   <div class="flex-3 flex-column">
     <div class="flex flex-1 flex-column">
       <div class="mt-10">
-        <img mat-card-image class="content-image" [src]="contentMeta?.appIcon | relativeUrl" alt="Content Image"
+        <img mat-card-image class="content-image" [src]="contentMeta?.appIcon" alt="Content Image"
           (error)="changeToDefaultImg($event)" />
       </div>
       <div class="flex flex-column margin-top-m">
