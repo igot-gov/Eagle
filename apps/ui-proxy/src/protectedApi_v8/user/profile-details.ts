@@ -215,7 +215,9 @@ profileDeatailsApi.post('/createUser', async (req, res) => {
         const sbfirstName_ = req.body.personalDetails.firstName
         const sblastName_ = req.body.personalDetails.lastName
         const sbchannel_ = extractRootOrgFromRequest(req)
-        const sbuserName_ = req.body.personalDetails.email
+        const dataArr = sbemail_.split('@')
+        const sbuserName_ = dataArr[0]
+        const password_ = req.body.personalDetails.password
 
         const searchresponse = await axios({
             ...axiosRequestConfig,
@@ -228,7 +230,7 @@ profileDeatailsApi.post('/createUser', async (req, res) => {
         } else {
             const sbUserProfile: Partial<ISBUser> = {
                 channel: sbchannel_, email: sbemail_, emailVerified: sbemailVerified_, firstName: sbfirstName_,
-                lastName: sblastName_, userName: sbuserName_,
+                lastName: sblastName_, password: password_, userName: sbuserName_,
             }
             const response = await axios({
                 ...axiosRequestConfig,

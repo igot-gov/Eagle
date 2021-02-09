@@ -132,6 +132,7 @@ export interface ISBUser {
   lastName: string
   channel: string
   userName: string
+  password: string
 }
 
 export interface IPersonalDetails {
