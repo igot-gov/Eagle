@@ -44,4 +44,23 @@ export const extractUserToken = (req: IAuthorizedRequest) => {
   return req.kauth && req.kauth.grant.access_token.token
 }
 
+export const extractAuthorizationFromRequest = (req: IAuthorizedRequest): string => {
+  const authorization = req.header('Authorization')
+
+  return authorization as string
+}
+export const extractUserTokenFromRequest = (req: IAuthorizedRequest): string => {
+  const xAuthorization = req.header('X-Authenticated-User-Token')
+
+  return xAuthorization as string
+
+}
+
+export const extractRootOrgFromRequest = (req: IAuthorizedRequest): string => {
+  const rootOrg = req.header('rootorg')
+
+  return rootOrg as string
+
+}
+
 export const getUUID = () => uuid.v1()

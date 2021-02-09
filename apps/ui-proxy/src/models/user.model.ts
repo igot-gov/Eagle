@@ -124,3 +124,30 @@ export interface IUserAutocomplete {
   root_org: string
   wid: string
 }
+
+export interface ISBUser {
+  email: string
+  emailVerified: boolean
+  firstName: string
+  lastName: string
+  channel: string
+  userName: string
+}
+
+export interface IPersonalDetails {
+  firstname: string
+  surname: string
+  primaryEmail: string
+  username: string
+}
+
+export interface IUser {
+  personalDetails: IPersonalDetails
+}
+
+export interface ISunbirdbUserResponse {
+  email: string
+  firstName: string
+  lastName: string
+  userId: string
+}

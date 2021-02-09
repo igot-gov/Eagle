@@ -2,10 +2,14 @@ import axios from 'axios'
 import { Router } from 'express'
 import * as fs from 'fs'
 import { axiosRequestConfig, axiosRequestConfigLong, axiosRequestConfigVeryLong } from '../../configs/request.config'
+import { IPersonalDetails, ISBUser, ISunbirdbUserResponse, IUser } from '../../models/user.model'
 import { CONSTANTS } from '../../utils/env'
 import { logError, logInfo } from '../../utils/logger'
 import { ERROR } from '../../utils/message'
-import { extractUserIdFromRequest } from '../../utils/requestExtract'
+import {
+    extractAuthorizationFromRequest, extractRootOrgFromRequest,
+    extractUserIdFromRequest, extractUserTokenFromRequest
+} from '../../utils/requestExtract'
 
 const API_END_POINTS = {
     createUserRegistry: `${CONSTANTS.USER_PROFILE_API_BASE}/public/v8/profileDetails/createUserRegistry`,
@@ -18,7 +22,17 @@ const API_END_POINTS = {
     userProfileStatus: `${CONSTANTS.USER_PROFILE_API_BASE}/public/v8/profileDetails/userProfileStatus`,
     // tslint:disable-next-line: object-literal-sort-keys
     migrateRegistry: `${CONSTANTS.USER_PROFILE_API_BASE}/public/v8/profileDetails/migrateRegistry`,
+    createSb: `${CONSTANTS.USER_SUNBIRD_DETAILS_API_BASE}/api/user/v1/create`,
+    searchSb: `${CONSTANTS.USER_SUNBIRD_DETAILS_API_BASE}/api/user/v1/search`,
 }
+
+const xAuthUser = `${CONSTANTS.X_AUTH_USER}`
+const contentType = `${CONSTANTS.CONTENT_TYPE}`
+const contentTypeValue = `${CONSTANTS.CONTENT_TYPE_VALUE}`
+const authorizationHeader = `${CONSTANTS.AUTHORIZATION}`
+const xAppId = `${CONSTANTS.X_APP_ID}`
+const xAppIdVAlue = `${CONSTANTS.X_APP_ID_VALUE}`
+const createUserRegistryApi = `${CONSTANTS.USER_SUNBIRD_DETAILS_API_BASE}/apis/protected/v8/user/profileRegistry/createUserRegistryV2`
 
 export async function getUserProfileStatus(wid: string) {
     try {
@@ -183,6 +197,83 @@ profileDeatailsApi.get('/migrateRegistry', async (req, res) => {
         })
     } catch (err) {
         logError('ERROR CREATING USER REGISTRY >', err)
+        res.status((err && err.response && err.response.status) || 500).send(err)
+    }
+})
+
+profileDeatailsApi.post('/createUser', async (req, res) => {
+    try {
+        const authorization = extractAuthorizationFromRequest(req)
+        const xAuthenticatedUserToken = extractUserTokenFromRequest(req)
+        const xAuth = authorization.split(' ')
+        axios.defaults.headers.common[xAuthUser] = xAuth[1]
+        axios.defaults.headers.common[authorizationHeader] = xAuth[0] + ' ' + xAuthenticatedUserToken
+        axios.defaults.headers.common[contentType] = contentTypeValue
+        axios.defaults.headers.common[xAppId] = xAppIdVAlue
+        const sbemail_ = req.body.personalDetails.email
+        const sbemailVerified_ = true
+        const sbfirstName_ = req.body.personalDetails.firstName
+        const sblastName_ = req.body.personalDetails.lastName
+        const sbchannel_ = extractRootOrgFromRequest(req)
+        const sbuserName_ = req.body.personalDetails.email
+
+        const searchresponse = await axios({
+            ...axiosRequestConfig,
+            data: { request: { query: '', filters: { userName: sbuserName_.toLowerCase() } } },
+            method: 'POST',
+            url: API_END_POINTS.searchSb,
+        })
+        if (searchresponse.data.result.response.count > 0) {
+            throw new Error('UserName Already Exist')
+        } else {
+            const sbUserProfile: Partial<ISBUser> = {
+                channel: sbchannel_, email: sbemail_, emailVerified: sbemailVerified_, firstName: sbfirstName_,
+                lastName: sblastName_, userName: sbuserName_,
+            }
+            const response = await axios({
+                ...axiosRequestConfig,
+                data: { request: sbUserProfile },
+                method: 'POST',
+                url: API_END_POINTS.createSb,
+            })
+            if (response.data.responseCode === 'CLIENT_ERROR') {
+                throw new Error('Not able to create User in SunBird')
+            } else {
+                const personalDetailsRegistry: IPersonalDetails = {
+                    firstname: sbfirstName_,
+                    primaryEmail: sbemail_,
+                    surname: sblastName_,
+                    username: sbuserName_,
+                }
+                const userRegistry: IUser = {
+                    personalDetails: personalDetailsRegistry,
+                }
+                const sBuserId = response.data.result.userId
+                const userRegistryResponse = await axios({
+                    ...axiosRequestConfig,
+                    data: userRegistry,
+                    headers: {
+                        Authorization: authorization,
+                        wid: sBuserId,
+                    },
+                    method: 'POST',
+                    url: `${createUserRegistryApi}/${sBuserId}`,
+                })
+                if (userRegistryResponse.data === null) {
+                    throw new Error('Not able to create User Registry in Opensaber')
+                } else {
+                    const sbUserProfileResponse: Partial<ISunbirdbUserResponse> = {
+                        email: sbemail_, firstName: sbfirstName_, lastName: sblastName_,
+                        userId: sBuserId,
+                    }
+                    res.send(sbUserProfileResponse)
+                }
+
+            }
+        }
+
+    } catch (err) {
+        logError('ERROR CREATING USER >', err)
         res.status((err && err.response && err.response.status) || 500).send(err)
     }
 })

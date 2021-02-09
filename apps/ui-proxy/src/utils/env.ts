@@ -109,6 +109,13 @@ export const CONSTANTS = {
   USER_CREATE_USERNAME: env.USER_CREATE_USERNAME || 'ui-client',
   USER_DETAILS_API_BASE: env.USER_DETAILS_API_BASE || env.SB_EXT_API_BASE_2,
   USER_PROFILE_API_BASE: env.USER_PROFILE_API_BASE || 'http://localhost:3004',
+  USER_SUNBIRD_DETAILS_API_BASE: 'https://igot-sunbird.idc.tarento.com',
+  X_AUTH_USER: 'X-Authenticated-User-Token',
+  CONTENT_TYPE: 'Content-Type',
+  CONTENT_TYPE_VALUE: 'application/json',
+  AUTHORIZATION: 'Authorization',
+  X_APP_ID: 'X-App-Id',
+  X_APP_ID_VALUE: 'sunbird.portal',
   USER_BULK_UPLOAD_DIR: env.USER_BULK_UPLOAD_DIR,
   USE_SERVING_HOST_COUNTER: env.USE_SERVING_HOST_COUNTER,
   VIEWER_PLUGIN_RDBMS_API_BASE:
