@@ -13,9 +13,7 @@
         "frequently asked questions"
       ],
       "name": "Help & Contact",
-      "permission": [
-        "FAQ"
-      ],
+      "permission": [],
       "show": true,
       "status": "beta",
       "toolTip": "FAQs",
@@ -60,9 +58,7 @@
         "terms and conditions of sale"
       ],
       "name": "Terms & Condition",
-      "permission": [
-        ""
-      ],
+      "permission": [],
       "show": true,
       "status": "live",
       "toolTip": "Terms & Condition",
@@ -81,9 +77,7 @@
         "about us"
       ],
       "name": "About Us",
-      "permission": [
-        "ABOUT_US"
-      ],
+      "permission": [],
       "show": true,
       "status": "live",
       "toolTip": "About Us",
@@ -102,9 +96,7 @@
         "discussion forum"
       ],
       "name": "Discuss",
-      "permission": [
-        "ABOUT_US"
-      ],
+      "permission": [],
       "show": true,
       "status": "live",
       "toolTip": "discuss",
@@ -121,9 +113,7 @@
         "learning"
       ],
       "name": "Learn",
-      "permission": [
-        "ABOUT_US"
-      ],
+      "permission": [],
       "show": true,
       "status": "live",
       "toolTip": "learn",
@@ -178,9 +168,7 @@
         "user goals"
       ],
       "name": "Goals",
-      "permission": [
-        "ABOUT_US"
-      ],
+      "permission": [],
       "show": true,
       "status": "live",
       "toolTip": "My goals",
@@ -197,9 +185,7 @@
         "dashboard"
       ],
       "name": "Home",
-      "permission": [
-        "ABOUT_US"
-      ],
+      "permission": [],
       "show": true,
       "status": "live",
       "toolTip": "Dashboard",
@@ -216,9 +202,7 @@
         "badges"
       ],
       "name": "Badges",
-      "permission": [
-        "PROFILE"
-      ],
+      "permission": [],
       "show": true,
       "status": "live",
       "toolTip": "Badges",
@@ -239,9 +223,7 @@
         "overview"
       ],
       "name": "Explore",
-      "permission": [
-        ""
-      ],
+      "permission": [],
       "show": true,
       "status": "live",
       "toolTip": "Explore",
@@ -284,9 +266,9 @@
         "editor",
         "author",
         "publisher",
-        "EDITOR",
-        "PUBLISHER",
-        "CONTENT_CREATOR"
+        "editor",
+        "publisher",
+        "content_creator"
       ],
       "show": true,
       "status": "live",
@@ -306,7 +288,7 @@
       "name": "MDO",
       "permission": [
         "admin",
-        "MDO ADMIN"
+        "mdo admin"
       ],
       "show": true,
       "status": "live",
@@ -326,7 +308,7 @@
       "name": "SPV",
       "permission": [
         "superAdmin",
-        "SPV ADMIN"
+        "spv admin"
       ],
       "show": true,
       "status": "live",
@@ -396,9 +378,7 @@
         "topics"
       ],
       "name": "Interests",
-      "permission": [
-        "INTERESTS"
-      ],
+      "permission": [],
       "show": true,
       "status": "live",
       "toolTip": "Interests",
@@ -417,9 +397,7 @@
         "la"
       ],
       "name": "Learning Analytics",
-      "permission": [
-        "LEARNING_ANALYTICS"
-      ],
+      "permission": [],
       "show": true,
       "status": "live",
       "toolTip": "Learning Analytics",
@@ -436,9 +414,7 @@
         "new"
       ],
       "name": "Notifications",
-      "permission": [
-        "NOTIFICATION"
-      ],
+      "permission": [],
       "show": true,
       "status": "live",
       "toolTip": "Notification",
@@ -457,9 +433,7 @@
         "collection"
       ],
       "name": "Playlists",
-      "permission": [
-        "PLAYLIST"
-      ],
+      "permission": [],
       "show": true,
       "status": "live",
       "toolTip": "Playlists",
@@ -478,9 +452,7 @@
         "me"
       ],
       "name": "Profile",
-      "permission": [
-        "PROFILE"
-      ],
+      "permission": [],
       "show": true,
       "status": "live",
       "toolTip": "Profile",
@@ -518,9 +490,7 @@
         "me"
       ],
       "name": "Account",
-      "permission": [
-        "PROFILE"
-      ],
+      "permission": [],
       "show": true,
       "status": "live",
       "toolTip": "Account",
@@ -582,9 +552,7 @@
         "explore"
       ],
       "name": "Search",
-      "permission": [
-        "SEARCH"
-      ],
+      "permission": [],
       "show": true,
       "status": "live",
       "toolTip": "Search",
@@ -603,9 +571,7 @@
         "setup"
       ],
       "name": "Settings",
-      "permission": [
-        "SETTINGS"
-      ],
+      "permission": [],
       "show": true,
       "status": "live",
       "toolTip": "Settings",
@@ -678,7 +644,10 @@
       "name": "Portals",
       "toolTip": "Portals",
       "hasRole": [
-        "admin"
+        "admin",
+        "mdo admin",
+        "cbp admin",
+        "spv admin"
       ]
     },
     {

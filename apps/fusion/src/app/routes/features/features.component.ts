@@ -8,6 +8,9 @@ import { NsWidgetResolver } from '@ws-widget/resolver'
 import { ROOT_WIDGET_CONFIG, CustomTourService } from '@ws-widget/collection'
 import { MatDialog } from '@angular/material'
 import { AccessControlService } from '../../../../project/ws/author/src/public-api'
+/* tslint:disable*/
+import _ from 'lodash'
+/* tslint:enable*/
 interface IGroupWithFeatureWidgets extends NsAppsConfig.IGroup {
   featureWidgets: NsWidgetResolver.IRenderConfigWithTypedData<NsPage.INavLink>[]
 }
@@ -55,22 +58,27 @@ export class FeaturesComponent implements OnInit, OnDestroy {
         (group: NsAppsConfig.IGroup): IGroupWithFeatureWidgets => (
           {
             ...group,
-            featureWidgets: group.featureIds.map(
-              (id: string): NsWidgetResolver.IRenderConfigWithTypedData<NsPage.INavLink> =>
-                ({
-                  widgetType: ROOT_WIDGET_CONFIG.actionButton._type,
-                  widgetSubType: ROOT_WIDGET_CONFIG.actionButton.feature,
-                  widgetHostClass: 'my-2 px-2 w-1/2 sm:w-1/3 md:w-1/6 w-lg-1-8 box-sizing-box',
-                  widgetData: {
-                    config: {
-                      type: 'feature-item',
-                      useShortName: false,
-                      treatAsCard: true,
+            featureWidgets: _.compact(group.featureIds.map(
+              (id: string): NsWidgetResolver.IRenderConfigWithTypedData<NsPage.INavLink> | undefined => {
+                const permissions = _.get(appsConfig, `features[${id}].permission`)
+                if (!permissions || permissions.length === 0 || this.accessService.hasRole(permissions)) {
+                  return ({
+                    widgetType: ROOT_WIDGET_CONFIG.actionButton._type,
+                    widgetSubType: ROOT_WIDGET_CONFIG.actionButton.feature,
+                    widgetHostClass: 'my-2 px-2 w-1/2 sm:w-1/3 md:w-1/6 w-lg-1-8 box-sizing-box',
+                    widgetData: {
+                      config: {
+                        type: 'feature-item',
+                        useShortName: false,
+                        treatAsCard: true,
+                      },
+                      actionBtn: appsConfig.features[id],
                     },
-                    actionBtn: appsConfig.features[id],
-                  },
-                }),
-            ),
+                  })
+                }
+                return undefined
+              },
+            )),
           }),
       )
     }
