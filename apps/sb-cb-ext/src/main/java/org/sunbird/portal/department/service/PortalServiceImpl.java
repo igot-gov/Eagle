@@ -666,23 +666,25 @@ public class PortalServiceImpl implements PortalService {
 							pUserInfo.setEmailId(userProfile.getPersonalDetails().getPrimaryEmail());
 							pUserInfo.setFirstName(userProfile.getPersonalDetails().getFirstname());
 							pUserInfo.setLastName(userProfile.getPersonalDetails().getSurname());
-						}
+							
+							// Assign RoleInfo
+							List<Role> userRoleInfo = new ArrayList<Role>();
+							for (Integer roleId : userDeptRole.getRoleIds()) {
+								Role r = deptRoleMap.get(roleId);
+								userRoleInfo.add(r);
+								r.incrementUserCount();
+							}
+							pUserInfo.setRoleInfo(userRoleInfo);
 
-						// Assign RoleInfo
-						List<Role> userRoleInfo = new ArrayList<Role>();
-						for (Integer roleId : userDeptRole.getRoleIds()) {
-							Role r = deptRoleMap.get(roleId);
-							userRoleInfo.add(r);
-							r.incrementUserCount();
-						}
-						pUserInfo.setRoleInfo(userRoleInfo);
-
-						if (userDeptRole.getIsBlocked()) {
-							deptInfo.addBlockedUser(pUserInfo);
-						} else if (userDeptRole.getIsActive()) {
-							deptInfo.addActiveUser(pUserInfo);
+							if (userDeptRole.getIsBlocked()) {
+								deptInfo.addBlockedUser(pUserInfo);
+							} else if (userDeptRole.getIsActive()) {
+								deptInfo.addActiveUser(pUserInfo);
+							} else {
+								deptInfo.addInActiveUser(pUserInfo);
+							}
 						} else {
-							deptInfo.addInActiveUser(pUserInfo);
+							logger.error(new Exception("UserRegistry not found for UserId --> " + userDeptRole.getUserId()));
 						}
 					}
 					
