@@ -1,0 +1,7 @@
+<!-- <div #element></div> -->
+<ng-container *ngIf="isSocialMediaLinkedinShareEnabled">
+  <a class="linked-in-link" [href]="sanitizeFbUrl"
+    onclick="window.open(this.href, 'mywin', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;">
+    <img src="mdo-assets/icons/linked-in.svg" alt="" class="linkedin-img" /><span class="linkedin-text">Linkedin</span>
+  </a>
+</ng-container>

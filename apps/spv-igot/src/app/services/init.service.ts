@@ -23,6 +23,7 @@ import {
 import { environment } from '../../environments/environment'
 import { Omit } from 'lodash'
 
+
 interface IDetailsResponse {
   tncStatus: boolean
   roles: string[]
@@ -45,7 +46,6 @@ const endpoint = {
 })
 export class InitService {
   private baseUrl = this.configSvc.baseUrl
-
   httpOptions = {
     headers: new HttpHeaders({
       wid: 'cc0c1749-4c47-49c8-9f46-2bbdd42ef877',
@@ -60,7 +60,7 @@ export class InitService {
     private settingsSvc: BtnSettingsService,
     private userPreference: UserPreferenceService,
     private http: HttpClient,
-    // private widgetContentSvc: WidgetContentService,
+
 
     @Inject(APP_BASE_HREF) private baseHref: string,
     // private router: Router,
@@ -73,27 +73,27 @@ export class InitService {
     // Usage: <mat-icon svgIcon="pin"></mat-icon>
     iconRegistry.addSvgIcon(
       'pin',
-      domSanitizer.bypassSecurityTrustResourceUrl('mdo-assets/icons/pin.svg'),
+      domSanitizer.bypassSecurityTrustResourceUrl('spv-assets/icons/pin.svg'),
     )
     iconRegistry.addSvgIcon(
       'facebook',
-      domSanitizer.bypassSecurityTrustResourceUrl('mdo-assets/icons/facebook.svg'),
+      domSanitizer.bypassSecurityTrustResourceUrl('spv-assets/icons/facebook.svg'),
     )
     iconRegistry.addSvgIcon(
       'linked-in',
-      domSanitizer.bypassSecurityTrustResourceUrl('mdo-assets/icons/linked-in.svg'),
+      domSanitizer.bypassSecurityTrustResourceUrl('spv-assets/icons/linked-in.svg'),
     )
     iconRegistry.addSvgIcon(
       'twitter',
-      domSanitizer.bypassSecurityTrustResourceUrl('mdo-assets/icons/twitter.svg'),
+      domSanitizer.bypassSecurityTrustResourceUrl('spv-assets/icons/twitter.svg'),
     )
     iconRegistry.addSvgIcon(
       'goi',
-      domSanitizer.bypassSecurityTrustResourceUrl('mdo-assets/icons/emblem-dark.png'),
+      domSanitizer.bypassSecurityTrustResourceUrl('spv-assets/icons/emblem-dark.png'),
     )
     iconRegistry.addSvgIcon(
       'hubs',
-      domSanitizer.bypassSecurityTrustResourceUrl('mdo-assets/icons/hubs.svg'),
+      domSanitizer.bypassSecurityTrustResourceUrl('spv-assets/icons/hubs.svg'),
     )
   }
 
@@ -131,6 +131,7 @@ export class InitService {
       //   this.configSvc.profileSettings = this.configSvc.userPreference.profileSettings
       // }
       await this.fetchUserProfileV2()
+
       const appsConfigPromise = this.fetchAppsConfig()
       const instanceConfigPromise = this.fetchInstanceConfig() // config: depends only on details
       const widgetStatusPromise = this.fetchWidgetStatus() // widget: depends only on details & feature
@@ -348,7 +349,6 @@ export class InitService {
     this.updateAppIndexMeta()
     return publicConfig
   }
-
   private async fetchUserProfileV2(): Promise<IDetailsResponse> {
     const userRoles: string[] = []
     if (this.configSvc.instanceConfig && !Boolean(this.configSvc.instanceConfig.disablePidCheck)) {

@@ -1,0 +1,117 @@
+.appr-text-field{
+  width: 272px;
+  border: 1px solid #DDDDDD;
+  border-radius: 4px;
+  padding: 9px;
+  font: 400 14px Lato;
+}
+
+.appr-text-label{
+  font: 700 14px Lato;
+  color: #000000;
+}
+
+.accept {
+  color: green;
+  font-size: 49px;
+}
+/* Note: If you're using an SVG icon, you should make the class target the `<svg>` element */
+.accept svg {
+    fill: green;
+}
+
+.reject {
+  color: red;
+  font-size: 49px;
+}
+/* Note: If you're using an SVG icon, you should make the class target the `<svg>` element */
+.reject svg {
+  fill: red;
+}
+
+.needs-appr-count-text{
+  border-radius: 100px 4px 4px 100px;
+  padding: 0 12px;
+  font:400 16px Lato;
+  float: right;
+}
+
+.dot{
+  background: #8C5741;
+  height: 9px;
+  width: 9px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-left: 6px;
+}
+
+.appr-label{
+  padding:15px 0;
+}
+
+.pending-icon{
+  position: absolute;
+  right: 172px;
+  top: 30px;
+}
+
+.appr-section-heading{
+  font: 600 20px Montserrat;
+}
+
+.accept-btn{
+  margin-left: 15px;
+}
+
+
+.accept-dialog-btn{
+  color: white !important;
+  font-family: 'Lato';
+  font-size: 14px;
+  font-weight: 400;
+  margin-left: 15px;
+  background-color:  #0074b6 !important;
+}
+
+.reject-dialog-btn{
+  color: white !important;
+  font-family: 'Lato';
+  font-size: 14px;
+  font-weight: 400;
+  margin-left: 15px;
+  background-color:  red !important;
+}
+
+.goback-dialog-btn{
+  color: #0074b6 !important;
+  border: 1px solid #0074b6;
+}
+
+.dialog-title{
+ font:600 20px Montserrat;
+}
+
+.no-request-text{
+  font-size: 15px;
+  color: #847A72;
+  font-weight: bold;
+}
+
+.reject-reason-text{
+ width: 96%;
+    resize: none;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid lightgray;
+}
+
+
+::ng-deep .mat-radio-label-content{
+  font-family: 'Lato';
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.appr-text{
+  font: 400 16px Lato;
+}

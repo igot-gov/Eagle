@@ -268,7 +268,6 @@ export namespace NsUser {
       UserProfile: IUserVer2
     }
   }
-
   interface ISourceData {
     GID: string
     SNAMPRE: string
@@ -335,7 +334,6 @@ export namespace NsUser {
     json_unmapped_fields?: any
     source_data: ISourceData
   }
-
   interface IRootOrg {
     dateTime: string
     preferredLanguage: string

@@ -10,7 +10,7 @@ const API_END_POINTS = {
   PROFILE_DETAIL: `${PROTECTED_SLAG_V8}/social/post/timeline`,
   SOCIAL_VIEW_CONVERSATION: `${PROTECTED_SLAG_V8}/social/post/viewConversation`,
   getUserdetailsV2FromRegistry: '/apis/protected/v8/user/profileDetails/getUserRegistryById',
-  GET_MY_DEPARTMENT: '/apis/protected/v8/portal/spv/mydepartment?allUsers=false',
+  GET_MY_DEPARTMENT: '/apis/protected/v8/portal/spv/mydepartment?allUsers=true',
 }
 
 @Injectable({

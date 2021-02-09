@@ -1,0 +1,13 @@
+<ng-container class="cb-group-warpper">
+  <mat-card class="checkbox-card">
+    <h3 *ngIf="title" class="cb-title">{{title}}</h3>
+    <!-- <mat-icon>more_horiz</mat-icon> -->
+    <mat-grid-list [cols]="noOfCol" rowHeight="6:1" class="checkbox-sub-wrapper">
+      <mat-grid-tile *ngFor="let data of checkboxData; let i = index">
+        <mat-checkbox class="checkbox-text" [checked]="data.checked">
+          {{data.name}}
+        </mat-checkbox>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card>
+</ng-container>

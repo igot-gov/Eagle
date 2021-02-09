@@ -1,0 +1,97 @@
+<mat-card id="academics"
+  class="flex flex-1 flex-column margin-left-m margin-bottom-m margin-right-m ws-mat-accent-border">
+  <div class="flex-custom">
+    <mat-card-content class="margin-top-m margin-bottom-m margin-left-m margin-right-m">
+      <span class="mat-subheading-1 flex-4 mobile-margin appr-section-heading" role="link" tabindex="0">
+        Academics
+      </span>
+      <div class="margin-top-xl new-mobile" *ngIf="academicDetails">
+        <div class="flex flex-wrap mobile-break">
+          <div class="w-full profile-cols-full bg-grey" *ngFor="let academic of academicDetails">
+
+            <ng-container *ngIf="academic.type == 'X_STANDARD'">
+              <mat-grid-list cols="1" rowHeight="50px">
+                <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
+                  <label class="header-text">10th Standard</label>
+                </mat-grid-tile>
+              </mat-grid-list>
+              <mat-grid-list cols="1" rowHeight="100px">
+                <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
+                  <label class="appr-text-label">School name</label>
+                  <input type="text" class="appr-text-field" [disabled]="true" [value]="academic.nameOfInstitute">
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
+                  <label class="appr-text-label">Year of passing</label>
+                  <input type="text" class="appr-text-field" [disabled]="true" [value]="academic.yearOfPassing">
+                </mat-grid-tile>
+              </mat-grid-list>
+            </ng-container>
+
+            <ng-container *ngIf="academic.type == 'XII_STANDARD'">
+              <mat-grid-list cols="1" rowHeight="50px">
+                <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
+                  <label class="header-text">12th Standard</label>
+                </mat-grid-tile>
+              </mat-grid-list>
+              <mat-grid-list cols="1" rowHeight="100px">
+                <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
+                  <label class="appr-text-label">School name</label>
+                  <input type="text" class="appr-text-field" [disabled]="true" [value]="academic.nameOfInstitute">
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
+                  <label class="appr-text-label">Year of passing</label>
+                  <input type="text" class="appr-text-field" [disabled]="true" [value]="academic.yearOfPassing">
+                </mat-grid-tile>
+              </mat-grid-list>
+            </ng-container>
+
+            <ng-container *ngIf="academic.type == 'GRADUATE'">
+              <mat-grid-list cols="1" rowHeight="50px">
+                <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
+                  <label class="header-text">Graduation details</label>
+                </mat-grid-tile>
+              </mat-grid-list>
+              <mat-grid-list cols="1" rowHeight="100px">
+                <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
+                  <label class="appr-text-label">Degree</label>
+                  <input type="text" class="appr-text-field" [disabled]="true" [value]="academic.nameOfQualification">
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
+                  <label class="appr-text-label">Institute name</label>
+                  <input type="text" class="appr-text-field" [disabled]="true" [value]="academic.nameOfInstitute">
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
+                  <label class="appr-text-label">Year of passing</label>
+                  <input type="text" class="appr-text-field" [disabled]="true" [value]="academic.yearOfPassing">
+                </mat-grid-tile>
+              </mat-grid-list>
+            </ng-container>
+
+            <ng-container *ngIf="academic.type == 'POST_GRADUATE'">
+              <mat-grid-list cols="1" rowHeight="50px">
+                <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
+                  <label class="header-text">Post graduation details</label>
+                </mat-grid-tile>
+              </mat-grid-list>
+              <mat-grid-list cols="1" rowHeight="100px">
+                <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
+                  <label class="appr-text-label">Degree</label>
+                  <input type="text" class="appr-text-field" [disabled]="true" [value]="academic.nameOfQualification">
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
+                  <label class="appr-text-label">Institute name</label>
+                  <input type="text" class="appr-text-field" [disabled]="true" [value]="academic.nameOfInstitute">
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
+                  <label class="appr-text-label">Year of passing</label>
+                  <input type="text" class="appr-text-field" [disabled]="true" [value]="academic.yearOfPassing">
+                </mat-grid-tile>
+              </mat-grid-list>
+            </ng-container>
+
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </div>
+</mat-card>

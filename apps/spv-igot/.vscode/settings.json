@@ -172,5 +172,11 @@
   },
   "[ignore]": {
     "editor.defaultFormatter": "foxundermoon.shell-format"
+<<<<<<< HEAD
+=======
+  },
+  "[dockerfile]": {
+    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+>>>>>>> sunbird-spv
   }
 }

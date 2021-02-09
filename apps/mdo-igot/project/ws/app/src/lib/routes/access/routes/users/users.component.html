@@ -1,0 +1,10 @@
+<div class="flex flex-4 flex-column">
+  <mat-card class="flex-custom">
+    <mat-card-content>
+      <ng-container>
+        <ws-widget-ui-user-table [tableData]="tabledata" [data]="data" (actionsClick)="menuActions($event)">
+        </ws-widget-ui-user-table>
+      </ng-container>
+    </mat-card-content>
+  </mat-card>
+</div>

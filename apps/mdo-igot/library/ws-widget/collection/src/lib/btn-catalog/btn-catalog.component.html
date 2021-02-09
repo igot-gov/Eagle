@@ -1,0 +1,9 @@
+<button mat-button (click)="getCatalog()" #rootTrigger="matMenuTrigger" [matMenuTriggerFor]="rootMenu.childMenu">
+  <mat-icon>apps</mat-icon>
+  <span class="padding-left-xs" i18n></span>
+  <mat-icon>arrow_drop_down</mat-icon>
+</button>
+
+<ws-widget-tree-catalog-menu #rootMenu [rootTrigger]="rootTrigger" [catalogItems]="catalogItems | slice: 0:10"
+  [fetchStatus]="catalogFetchStatus" isRoot="true">
+</ws-widget-tree-catalog-menu>
