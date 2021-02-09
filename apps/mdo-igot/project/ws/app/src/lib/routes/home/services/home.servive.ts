@@ -9,7 +9,7 @@ const API_END_POINTS = {
   DISCUSS_PROFILE: '/apis/protected/v8/discussionHub/users',
   PROFILE_DETAIL: `${PROTECTED_SLAG_V8}/social/post/timeline`,
   SOCIAL_VIEW_CONVERSATION: `${PROTECTED_SLAG_V8}/social/post/viewConversation`,
-  getUserdetailsV2FromRegistry: '/apis/protected/v8/user/profileDetails/getUserRegistryById',
+  getUserdetailsV2FromRegistry: '/apis/protected/v8/user/profileRegistry/getUserRegistryByUser',
   CHECK_ISADMIN: '/apis/protected/v8/portal/isAdmin/mdo',
   GET_MY_DEPARTMENT: '/apis/protected/v8/portal/mdo/mydepartment?allUsers=false',
   GET_MY_DEPARTMENT_ALL: '/apis/protected/v8/portal/mdo/mydepartment?allUsers=true',

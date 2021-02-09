@@ -78,6 +78,7 @@ export class UsersComponent implements OnInit, AfterViewInit, OnDestroy {
           //   })
           // }
           user.roleInfo.forEach((eachrole: any) => {
+            eachrole.roleName = eachrole.roleName.replace('_', ' ')
             if (eachrole.roleName === this.roleName) {
               users.push({
                 fullName: `${user.firstName} ${user.lastName}`,
