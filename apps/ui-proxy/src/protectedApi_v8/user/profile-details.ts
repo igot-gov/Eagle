@@ -216,12 +216,12 @@ profileDeatailsApi.post('/createUser', async (req, res) => {
         const sblastName_ = req.body.personalDetails.lastName
         const sbchannel_ = extractRootOrgFromRequest(req)
         const dataArr = sbemail_.split('@')
-        const sbuserName_ = dataArr[0]
+        const extractUserName = dataArr[dataArr.length - 2]
         const password_ = req.body.personalDetails.password
 
         const searchresponse = await axios({
             ...axiosRequestConfig,
-            data: { request: { query: '', filters: { userName: sbuserName_.toLowerCase() } } },
+            data: { request: { query: '', filters: { userName: extractUserName.toLowerCase() } } },
             method: 'POST',
             url: API_END_POINTS.searchSb,
         })
@@ -230,7 +230,7 @@ profileDeatailsApi.post('/createUser', async (req, res) => {
         } else {
             const sbUserProfile: Partial<ISBUser> = {
                 channel: sbchannel_, email: sbemail_, emailVerified: sbemailVerified_, firstName: sbfirstName_,
-                lastName: sblastName_, password: password_, userName: sbuserName_,
+                lastName: sblastName_, password: password_, userName: extractUserName,
             }
             const response = await axios({
                 ...axiosRequestConfig,
@@ -245,7 +245,7 @@ profileDeatailsApi.post('/createUser', async (req, res) => {
                     firstname: sbfirstName_,
                     primaryEmail: sbemail_,
                     surname: sblastName_,
-                    username: sbuserName_,
+                    username: extractUserName,
                 }
                 const userRegistry: IUser = {
                     personalDetails: personalDetailsRegistry,
