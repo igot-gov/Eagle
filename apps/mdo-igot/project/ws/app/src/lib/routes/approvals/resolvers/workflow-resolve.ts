@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router'
-import { Observable, of } from 'rxjs'
+import { EMPTY, Observable, of } from 'rxjs'
 import { map, catchError } from 'rxjs/operators'
 import { } from '@ws-widget/collection'
 import { ConfigurationsService, IResolveResponse } from '@ws-widget/utils'
@@ -16,8 +16,10 @@ export class WorkflowResolve
   resolve(
     _route: ActivatedRouteSnapshot,
     _state: RouterStateSnapshot,
+
   ): Observable<IResolveResponse<NSProfileDataV2.IProfile>> {
     const path = _route.routeConfig && _route.routeConfig.path
+    const departName = this.configSvc.departName
     let userId = ''
     if (path !== 'me') {
       userId = _route.params.userId
@@ -34,12 +36,16 @@ export class WorkflowResolve
       serviceName: 'profile',
       applicationStatus: 'SEND_FOR_APPROVAL',
       applicationIds: [userId],
+      deptName: departName,
       offset: 0,
       limit: 100,
     }
-    return this.needApprService.fetchNeedApprovals(req).pipe(
-      map(data => ({ data, error: null })),
-      catchError(error => of({ error, data: null })),
-    )
+    if (departName) {
+      return this.needApprService.fetchNeedApprovals(req).pipe(
+        map(data => ({ data, error: null })),
+        catchError(error => of({ error, data: null })),
+      )
+    }
+    return EMPTY
   }
 }

@@ -1,0 +1,103 @@
+@import 'ws-mixins';
+@import 'ws-common';
+
+.container-balanced {
+  @extend %page-center;
+}
+
+.view-more {
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  .icon {
+    $icon-size: 24px;
+    font-size: $icon-size;
+    width: $icon-size;
+    height: $icon-size;
+    border: 1px solid;
+    border-radius: 50%;
+    padding: 8px;
+    margin-bottom: 8px;
+  }
+}
+
+.mob {
+  @include breakpoint-767 {
+    display: none;
+  }
+}
+
+.view-all {
+  display: flex;
+  margin: 0 auto;
+  // border: 1px solid;
+  // font-weight: 500;
+  box-shadow: 0px 10px 30p;
+  /*#99999933*/
+
+  border-radius: 4px;
+}
+
+.pad {
+  padding: 0; // $size-l $size-l $size-l $size-l;
+}
+
+.margin-bottom-custom {
+  margin-bottom: 60px
+}
+
+.new-width {
+  max-width: $max-screen;
+  display: inline-block;
+  // margin: 0 auto;
+  // padding-top: 0;
+
+  // @include breakpoint-xl {
+  //   padding-top: 4rem;
+  // }
+
+  // @include breakpoint-l {
+  //   padding-top: 1.8rem;
+  // }
+
+  // @include breakpoint-m {
+  //   padding-top: 2rem;
+  // }
+
+  // @include breakpoint-s {
+  //   padding-top: 0;
+  // }
+
+  // @include breakpoint-xs {
+  //   padding-top: 0;
+  // }
+}
+
+.rotate-t-90 {
+  transform: rotate(90deg);
+}
+
+.transform-2x {
+  transform: scale(2);
+}
+
+.oneBox {
+  position: relative;
+}
+
+.background-norepeat {
+  background-repeat: no-repeat;
+  background-size: 100%;
+  // background-size: 100% 269px;
+  background-attachment: local;
+  background-position-y: top;
+  height: 269px;
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+
+  @include breakpoint-lt-l {
+    background-size: auto;
+  }
+}

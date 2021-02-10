@@ -1,0 +1,99 @@
+<mat-card class="checkbox-card" *ngIf="submittedForm">
+  <h2 class="cb-title">Basic Information</h2>
+  <div class="flex-container">
+    <div class="flex-container-div">
+      <form [formGroup]="contentForm" (ngSubmit)="onSubmit()">
+        <div class="mobile-break mat-app-background">
+          <div class="margin-top-s">
+            <div class="margin-top-xs">
+              <p class="margin-remove-bottom" i18n="Title label|Label which explains the user to enter title"
+                [ngClass]="{ required: checkCondition('name', 'required') }">
+                {{department}} Name
+              </p>
+              <mat-form-field appearance="outline" class="margin-top-xs"
+                [ngClass]="{ 'mat-form-field-invalid': showError('name') }">
+                <input matInput #name formControlName="name" maxlength="500" i18n-placeholder placeholder="Type here"
+                  type="text" [required]="checkCondition('name', 'required') ? true : null" pattern="[a-zA-Z ]*" />
+                <mat-error *ngIf="showError('name')" i18n="Name Error|Explains name is required">
+                  Department name not valid
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+          </div>
+          <div class="margin-top-s">
+            <p class="margin-remove-bottom" [ngClass]="{ required: checkCondition('subTitle', 'required') }">
+              Head Quaters
+            </p>
+            <mat-form-field appearance="outline" class="margin-top-xs"
+              [ngClass]="{ 'mat-form-field-invalid': showError('subTitle') }">
+              <input matInput formControlName="head" #subTitle maxlength="1000" i18n-placeholder placeholder="Type here"
+                [required]="checkCondition('subTitle', 'required') ? true : null" />
+              <mat-error *ngIf="showError('subTitle')" i18n="Subtitle Error|Explains Subtitle is required">
+                Head Quaters not valid
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="margin-top-s">
+            <label>
+              <div class="margin-top-s flex flex-middle">
+                <span [ngClass]="{ required: checkCondition('deptSubTypeId', 'required') }" i18n>Department
+                  Type</span>
+              </div>
+            </label>
+            <div class="margin-top-s">
+              <mat-form-field appearance="outline" class="margin-top-xs"
+                [ngClass]="{ 'mat-form-field-invalid': showError('depatmentType') }">
+                <mat-select formControlName="deptSubTypeId" i18n-placeholder placeholder="--Select--" [value]="3"
+                  [required]="checkCondition('subTitle', 'required') ? true : null">
+                  <mat-option *ngFor="let subDepartment of subDepartments" [value]="subDepartment.id" i18n>
+                    {{subDepartment.deptSubType}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="showError('deptSubTypeId')" i18n>Department type is mandatory
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="margin-top-s">
+          <span i18n>Thumbnail</span> <span class="ws-mat-default-text"> &nbsp; 256 X 150 (pixel)</span>
+          <div class="margin-top-s">
+            <div [ngClass]="{'cursor-pointer': true,
+                                  'thumbnail-logo': true}"
+              (click)="contentForm.controls.appIcon.value || true ? false : uploadThumbnail.click()">
+              <img class="image max-width" height="150" width="100%" [src]="" />
+            </div>
+            <div class="photo mat-elevation-z4 ws-mat-primary-background" (click)="uploadThumbnail.click()">
+              <mat-icon class="photo-icon text-white">photo_camera</mat-icon>
+              <input type="file" #uploadThumbnail
+                (change)="uploadAppIcon($event.target.files[0]); uploadThumbnail.value = null" style="display: none;"
+                [accept]="imageTypes.toString()" />
+            </div>
+          </div>
+        </div>
+        <button *ngIf="!isUpdate" mat-raised-button type="submit"
+          class="text-white ws-mat-primary-background text-white margin-right-m">
+          <b class="text-white" i18n>Create Department</b>
+        </button>
+        <button *ngIf="isUpdate" mat-raised-button type="submit"
+          class="text-white ws-mat-primary-background text-white margin-right-m">
+          <b class="text-white" i18n>Update Department</b>
+        </button>
+      </form>
+    </div>
+
+  </div>
+</mat-card>
+
+<ng-container class="cb-group-warpper" *ngIf="!submittedForm">
+  <mat-card class="checkbox-card">
+    <h2 class="cb-title">{{department}} admin</h2>
+    <p>Admins will be able to add users and assign roles inside the {{department}}. Add Minimum one user as Admin</p>
+    <button mat-raised-button type="button" class="text-white ws-mat-primary-background text-white margin-right-m"
+      (click)="openPopup()">
+      <b class="text-white" i18n>Add User</b>
+    </button>
+    <ws-widget-ui-user-table [tableData]="tabledata" [data]="data" [isFromDirectory]="isFromDirectory">
+    </ws-widget-ui-user-table>
+  </mat-card>
+</ng-container>

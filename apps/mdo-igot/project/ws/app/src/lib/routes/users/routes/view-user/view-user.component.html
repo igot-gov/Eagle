@@ -51,12 +51,12 @@
 
                               <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
                                 <label class="appr-text-label">Date of birth (dd-mm-yy)</label>
-                                <input type="text" [disabled]="true" [value]="basicInfo.dob" class="appr-text-field">
+                                <input type="text" [disabled]="true" [value]="basicInfo.dob ? basicInfo.dob : ''" class="appr-text-field">
                               </mat-grid-tile>
 
                               <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
                                 <label class="appr-text-label">Nationality</label>
-                                <input type="text" [disabled]="true" [value]="basicInfo.nationality"
+                                <input type="text" [disabled]="true" [value]="basicInfo.nationality ? basicInfo.nationality : ''"
                                   class="appr-text-field">
                               </mat-grid-tile>
 
@@ -92,48 +92,48 @@
 
                               <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
                                 <label class="appr-text-label">Domicile medium (Mother tongue)</label>
-                                <input type="text" [disabled]="true" [value]="basicInfo.domicileMedium"
+                                <input type="text" [disabled]="true" [value]="basicInfo.domicileMedium ? basicInfo.domicileMedium : ''"
                                   class="appr-text-field">
                               </mat-grid-tile>
 
                               <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
                                 <label class="appr-text-label">Other languages known</label>
-                                <input type="text" [disabled]="true" [value]="basicInfo.knownLanguages"
+                                <input type="text" [disabled]="true" [value]="basicInfo.knownLanguages ? basicInfo.knownLanguages : ''"
                                   class="appr-text-field">
                               </mat-grid-tile>
 
                               <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
                                 <label class="appr-text-label">Mobile number</label>
-                                <input type="text" [disabled]="true" [value]="basicInfo.mobile" class="appr-text-field">
+                                <input type="text" [disabled]="true" [value]="basicInfo.mobile ? basicInfo.mobile : ''" class="appr-text-field">
                               </mat-grid-tile>
 
                               <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
                                 <label class="appr-text-label">Telephone number</label>
-                                <input type="text" [disabled]="true" [value]="basicInfo.telephone"
+                                <input type="text" [disabled]="true" [value]="basicInfo.telephone ? basicInfo.telephone : ''"
                                   class="appr-text-field">
                               </mat-grid-tile>
 
                               <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
                                 <label class="appr-text-label">Primary email</label>
-                                <input type="text" [disabled]="true" [value]="basicInfo.primaryEmail"
+                                <input type="text" [disabled]="true" [value]="basicInfo.primaryEmail ? basicInfo.primaryEmail : ''"
                                   class="appr-text-field">
                               </mat-grid-tile>
 
                               <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
                                 <label class="appr-text-label">Secondary email</label>
-                                <input type="text" [disabled]="true" [value]="basicInfo.personalEmail"
+                                <input type="text" [disabled]="true" [value]="basicInfo.personalEmail ? basicInfo.personalEmail : ''"
                                   class="appr-text-field">
                               </mat-grid-tile>
 
                               <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
                                 <label class="appr-text-label">Postal address</label>
-                                <textarea [disabled]="true" rows="3" [value]="basicInfo.postalAddress"
+                                <textarea [disabled]="true" rows="3" [value]="basicInfo.postalAddress ? basicInfo.postalAddress : ''"
                                   class="appr-text-field"></textarea>
                               </mat-grid-tile>
 
                               <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
                                 <label class="appr-text-label">Pin code</label>
-                                <input type="text" [disabled]="true" [value]="basicInfo.pincode"
+                                <input type="text" [disabled]="true" [value]="basicInfo.pincode ? basicInfo.pincode : ''"
                                   class="appr-text-field">
                               </mat-grid-tile>
 
@@ -283,26 +283,26 @@
                               <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
                                 <label class="appr-text-label">MDO</label>
                                 <input type="text" [disabled]="true" class="appr-text-field"
-                                  [value]="employmentDetails.departmentName">
+                                  [value]="professionalDetails.name || professionalDetails.nameOther || ''">
                               </mat-grid-tile>
                               <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
                                 <label class="appr-text-label">Industry</label>
-                                <input type="text" [disabled]="true" [value]="professionalDetails.industry"
+                                <input type="text" [disabled]="true" [value]="professionalDetails.industry || professionalDetails.industryOther || ''"
                                   class="appr-text-field">
                               </mat-grid-tile>
                               <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
                                 <label class="appr-text-label">Designation</label>
-                                <input type="text" [disabled]="true" [value]="professionalDetails.designation"
+                                <input type="text" [disabled]="true" [value]="professionalDetails.designation || professionalDetails.designationOther || ''"
                                   class="appr-text-field">
                               </mat-grid-tile>
                               <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
                                 <label class="appr-text-label">Location</label>
-                                <input type="text" [disabled]="true" [value]="professionalDetails.location"
+                                <input type="text" [disabled]="true" [value]="professionalDetails.location ? professionalDetails.location : ''"
                                   class="appr-text-field">
                               </mat-grid-tile>
                               <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
                                 <label class="appr-text-label">Description</label>
-                                <textarea [disabled]="true" rows="3" [value]="professionalDetails.description"
+                                <textarea [disabled]="true" rows="3" [value]="professionalDetails.description ? professionalDetails.description : ''"
                                   class="appr-text-field"></textarea>
                               </mat-grid-tile>
                             </mat-grid-list>
@@ -317,52 +317,52 @@
                             <mat-grid-list cols="2" rowHeight="100px">
                               <mat-grid-tile [colspan]="2" [rowspan]="1" class="input-wrapper">
                                 <label class="appr-text-label">Pay band (grade pay)</label>
-                                <input type="text" [disabled]="true" [value]="professionalDetails.industry"
+                                <input type="text" [disabled]="true" [value]="employmentDetails ? employmentDetails.payType : ''"
                                   class="appr-text-field">
                               </mat-grid-tile>
                               <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
                                 <label class="appr-text-label">Service</label>
-                                <input type="text" [disabled]="true" [value]="professionalDetails.industry"
+                                <input type="text" [disabled]="true" [value]="employmentDetails ? employmentDetails.service : ''"
                                   class="appr-text-field">
                               </mat-grid-tile>
                               <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
                                 <label class="appr-text-label">Cadre</label>
-                                <input type="text" [disabled]="true" [value]="professionalDetails.industry"
+                                <input type="text" [disabled]="true" [value]="employmentDetails ? employmentDetails.cadre : ''"
                                   class="appr-text-field">
                               </mat-grid-tile>
                               <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
                                 <label class="appr-text-label">Allotment year of service</label>
-                                <input type="text" [disabled]="true" [value]="professionalDetails.industry"
+                                <input type="text" [disabled]="true" [value]="employmentDetails ? employmentDetails.allotmentYearOfService : ''"
                                   class="appr-text-field">
                               </mat-grid-tile>
                               <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
                                 <label class="appr-text-label">Date of joining</label>
-                                <input type="text" [disabled]="true" [value]="professionalDetails.doj"
+                                <input type="text" [disabled]="true" [value]="employmentDetails ? employmentDetails.dojOfService : ''"
                                   class="appr-text-field">
                               </mat-grid-tile>
                               <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
                                 <label class="appr-text-label">Civil list number</label>
-                                <input type="text" [disabled]="true" [value]="professionalDetails.industry"
+                                <input type="text" [disabled]="true" [value]="employmentDetails ? employmentDetails.civilListNo : ''"
                                   class="appr-text-field">
                               </mat-grid-tile>
                               <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
                                 <label class="appr-text-label">Emplyee code</label>
-                                <input type="text" [disabled]="true" [value]="professionalDetails.industry"
+                                <input type="text" [disabled]="true" [value]="employmentDetails ? employmentDetails.employeeCode : ''"
                                   class="appr-text-field">
                               </mat-grid-tile>
-                              <mat-grid-tile [colspan]="2" [rowspan]="1" class="input-wrapper">
+                              <!-- <mat-grid-tile [colspan]="2" [rowspan]="1" class="input-wrapper">
                                 <label class="appr-text-label">Location</label>
                                 <input type="text" [disabled]="true" [value]="professionalDetails.location"
                                   class="appr-text-field">
-                              </mat-grid-tile>
+                              </mat-grid-tile> -->
                               <mat-grid-tile [colspan]="2" [rowspan]="1" class="input-wrapper">
                                 <label class="appr-text-label">Official postal address</label>
-                                <textarea [disabled]="true" rows="3" [value]="professionalDetails.completePostalAddress"
+                                <textarea [disabled]="true" rows="3" [value]="employmentDetails ? employmentDetails.officialPostalAddress : ''"
                                   class="appr-text-field"></textarea>
                               </mat-grid-tile>
                               <mat-grid-tile [colspan]="2" [rowspan]="1" class="input-wrapper">
                                 <label class="appr-text-label">Pin code</label>
-                                <input type="text" [disabled]="true" [value]="professionalDetails.industry"
+                                <input type="text" [disabled]="true" [value]="employmentDetails ? employmentDetails.pinCode : ''"
                                   class="appr-text-field">
                               </mat-grid-tile>
                             </mat-grid-list>
@@ -394,12 +394,12 @@
                             <mat-grid-list cols="1" rowHeight="150px">
                               <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
                                 <label class="appr-text-label">Additional skill acquired/course completed</label>
-                                <textarea [disabled]="true" rows="4" [value]="skillDetails.additionalSkills"
+                                <textarea [disabled]="true" rows="4" [value]="skillDetails.additionalSkills ? skillDetails.additionalSkills : ''"
                                   class="appr-text-field"></textarea>
                               </mat-grid-tile>
                               <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
                                 <label class="appr-text-label">Provide certification details</label>
-                                <textarea [disabled]="true" rows="4" [value]="skillDetails.certificateDetails"
+                                <textarea [disabled]="true" rows="4" [value]="skillDetails.certificateDetails ? skillDetails.certificateDetails : ''"
                                   class="appr-text-field"></textarea>
                               </mat-grid-tile>
                             </mat-grid-list>
@@ -411,12 +411,12 @@
                             <mat-grid-list cols="1" rowHeight="150px">
                               <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
                                 <label class="appr-text-label">Professional interests</label>
-                                <textarea [disabled]="true" rows="4" [value]="skillDetails.additionalSkills"
+                                <textarea [disabled]="true" rows="4" [value]="skillDetails.additionalSkills ? skillDetails.additionalSkills : ''"
                                   class="appr-text-field"></textarea>
                               </mat-grid-tile>
                               <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
                                 <label class="appr-text-label">Hobbies</label>
-                                <textarea [disabled]="true" rows="4" [value]="skillDetails.certificateDetails"
+                                <textarea [disabled]="true" rows="4" [value]="skillDetails.certificateDetails ? skillDetails.certificateDetails : ''"
                                   class="appr-text-field"></textarea>
                               </mat-grid-tile>
                             </mat-grid-list>

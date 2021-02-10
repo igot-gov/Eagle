@@ -60,6 +60,7 @@ export class UIUserTableComponent implements OnInit, AfterViewInit, OnChanges {
   ngOnChanges(data: SimpleChanges) {
     this.dataSource.data = _.get(data, 'data.currentValue')
     this.length = this.dataSource.data.length
+    this.paginator.firstPage()
   }
 
   ngAfterViewInit() { }

@@ -1,4 +1,4 @@
-<div class="example-container">
+<div class="example-container margin-top-m">
     <div class="example-loading-shade"></div>
 
     <div class="example-table-container">
@@ -83,7 +83,9 @@
                 </mat-row>
             </div> -->
         </mat-table>
-
+        <mat-card class="flex-1" role="none" *ngIf="dataSource.filteredData.length == 0">
+            <span class="mat-subtitle">No data found</span>
+        </mat-card>
     </div>
     <!-- <div *ngIf="dataSource.filteredData.length <= 0" class="h-600-s-20-m color-60 text-center">No result found
     </div> -->
@@ -100,22 +102,25 @@
         </button>
         <!-- </div> -->
         <!-- <div mat-menu-item> -->
-        <button (click)="buttonClick('block',rowData)" mat-menu-item name="channel-analytics-button"
-            class="ws-mat-primary-text" i18n-aria-label aria-label="Analytics">
-            <mat-icon>block</mat-icon><span>Block user</span>
+        <button (click)="rowData && rowData.blocked ? buttonClick('unblock',rowData): buttonClick('block',rowData)"
+            mat-menu-item name="channel-analytics-button" class="ws-mat-primary-text" i18n-aria-label
+            aria-label="Analytics">
+            <mat-icon>block</mat-icon><span>{{rowData && rowData.blocked ? 'Unblock user':'Block user' }}</span>
         </button>
         <!-- </div> -->
         <!-- <div mat-menu-item> -->
-        <button (click)="buttonClick('deactive',rowData)" mat-menu-item name="channel-analytics-button"
-            class="ws-mat-primary-text" i18n-aria-label aria-label="Analytics">
-            <mat-icon>edit_attributes</mat-icon><span>Deactivate User</span>
+        <button (click)="rowData && rowData.active ? buttonClick('deactive',rowData): buttonClick('active',rowData)"
+            mat-menu-item name="channel-analytics-button" class="ws-mat-primary-text" i18n-aria-label
+            aria-label="Analytics">
+            <mat-icon>edit_attributes</mat-icon>
+            <span>{{rowData && rowData.active? 'Deactivate User':'Activate User'}}</span>
         </button>
         <!-- </div> -->
         <!-- <div mat-menu-item> -->
-        <button (click)="buttonClick('delete',rowData)" mat-menu-item name="channel-analytics-button"
+        <!-- <button (click)="buttonClick('delete',rowData)" mat-menu-item name="channel-analytics-button"
             class="ws-mat-primary-text" i18n-aria-label aria-label="Analytics">
             <mat-icon>delete</mat-icon><span>Delete User</span>
-        </button>
+        </button> -->
         <!-- </div> -->
     </ng-template>
 </mat-menu>

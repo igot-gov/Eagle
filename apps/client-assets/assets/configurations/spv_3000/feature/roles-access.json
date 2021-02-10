@@ -1,0 +1,36 @@
+{
+  "menus": {
+    "widgetType": "menus",
+    "widgetSubType": "leftMenu",
+    "widgetData": [
+      {
+        "name": "Basic Info",
+        "key": "basicinfo",
+        "fragment": false,
+        "render": true,
+        "badges": {
+          "enabled": false,
+          "uri": ""
+        },
+        "enabled": true,
+        "paramaterName": "role",
+        "routerLink": "/app/roles/<param>/basicinfo",
+        "customRouting": true
+      },
+      {
+        "name": "MDO Admin",
+        "key": "mdoadmin",
+        "fragment": false,
+        "render": true,
+        "badges": {
+          "enabled": false,
+          "uri": ""
+        },
+        "enabled": true,
+        "paramaterName": "role",
+        "routerLink": "/app/roles/users",
+        "customRouting": true
+      }
+    ]
+  }
+}

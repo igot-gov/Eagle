@@ -60,10 +60,10 @@ export class EventsHomeComponent implements OnInit, AfterViewInit, OnDestroy {
         this.bindUrl(event.urlAfterRedirects.replace('/app/events/', ''))
         if (this.activeRoute.snapshot.data.pageData.data) {
           const leftData = this.activeRoute.snapshot.data.pageData.data.menus
-           _.set(leftData, 'widgetData.logo', true)
-           _.set(leftData, 'widgetData.logoPath', _.get(this.activeRoute, 'snapshot.data.pageData.data.logo'))
-           _.set(leftData, 'widgetData.name', _.get(this.activeRoute, 'snapshot.data.pageData.data.description'))
-           _.set(leftData, 'widgetData.userRoles', this.myRoles)
+          _.set(leftData, 'widgetData.logo', true)
+          _.set(leftData, 'widgetData.logoPath', _.get(this.activeRoute, 'snapshot.data.pageData.data.logo'))
+          _.set(leftData, 'widgetData.name', _.get(this.activeRoute, 'snapshot.data.pageData.data.deptName'))
+          _.set(leftData, 'widgetData.userRoles', this.myRoles)
           this.widgetData = leftData
         } else {
           this.widgetData = this.activeRoute.snapshot.data.pageData.data.menus

@@ -2,36 +2,59 @@
     "menus": {
       "widgetType": "menus",
       "widgetSubType": "leftMenu",
-      "widgetData": [
-        {
-          "name": "User Deatils",
-          "key": "details",
-          "fragment": false,
-          "render": true,
-          "badges": {
-            "enabled": false,
-            "uri": ""
-          },
-          "enabled": true,
-          "paramaterName": "approval",
-          "routerLink": "/app/users/<param>/details",
-          "customRouting": true
-        },
-        {
-            "name": "Create User",
-            "key": "create-user",
-            "fragment": false,
-            "render": true,
-            "badges": {
-              "enabled": false,
-              "uri": ""
+      "widgetData": {
+        "logo": true,
+        "menus": [
+            {
+                "name": "Users",
+                "key": "users",
+                "fragment": false,
+                "render": true,
+                "badges": {
+                    "enabled": false,
+                    "uri": ""
+                },
+                "enabled": true,
+                "routerLink": "/app/home/users"
             },
-            "enabled": true,
-            "paramaterName": "approval",
-            "routerLink": "/app/users/create-user",
-            "customRouting": true
-          }
-      ]
+            {
+                "name": "Roles and Access",
+                "key": "roles-access",
+                "fragment": false,
+                "render": true,
+                "badges": {
+                    "enabled": false,
+                    "uri": ""
+                },
+                "enabled": true,
+                "routerLink": "/app/home/roles-access"
+            },
+            {
+                "name": "Approvals",
+                "key": "approvals",
+                "fragment": false,
+                "render": true,
+                "badges": {
+                    "enabled": false,
+                    "uri": ""
+                },
+                "enabled": true,
+                "routerLink": "/app/home/approvals"
+            },
+            {
+                "name": "Events",
+                "key": "events",
+                "fragment": false,
+                "render": true,
+                "badges": {
+                    "enabled": false,
+                    "uri": ""
+                },
+                "enabled": true,
+                "routerLink": "/app/events"
+            }
+        ]
+    }
     },
     "profileData": [
       {

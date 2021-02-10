@@ -1,0 +1,98 @@
+@import 'ws-common';
+@import 'ws-vars';
+@import 'ws-mixins';
+
+.start-card {
+  // width: 40%;
+  min-width: 1200px;
+  margin: 0px 30px 30px 30px;
+  font-size: 16px;
+
+  mat-card-content {
+    margin-top: 20px;
+  }
+}
+.mat-dialog-actions{
+  padding: 9px 0;
+}
+.flex-auto-display {
+  @include breakpoint-xs {
+    flex: auto;
+    margin-left: 0 !important;
+    margin-top: 1rem;
+  }
+
+  @include breakpoint-s {
+    flex: auto;
+  }
+}
+.similar {
+  display: none !important;
+
+  @include breakpoint-xs {
+    display: none !important;
+  }
+
+  @include breakpoint-s {
+    display: none !important;
+  }
+}
+
+.mob {
+  @include breakpoint-xs {
+    margin-left: 0 !important;
+  }
+
+  @include breakpoint-s {
+    margin-left: 0 !important;
+  }
+}
+
+.custom {
+  flex-direction: row;
+
+  @include breakpoint-xs {
+    flex-direction: column;
+  }
+
+  @include breakpoint-s {
+    flex-direction: column;
+  }
+}
+
+.pad-fix {
+  padding: 0 0 0 24px;
+}
+.mat-dialog{
+  height: 90% !important;
+}
+.flex-4 {
+  flex: 4;
+}
+
+.flex-3 {
+  flex: 3;
+}
+
+.flex-2 {
+  flex: 2;
+}
+
+.mb-0-imp {
+  margin-bottom: 0 !important;
+}
+
+.w-full-imp {
+  width: 100% !important;
+}
+.score-red{
+    color: red;
+}
+.score-green{
+  color: green;
+}
+.parent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

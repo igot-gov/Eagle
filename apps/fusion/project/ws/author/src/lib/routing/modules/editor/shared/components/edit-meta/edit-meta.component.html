@@ -32,6 +32,8 @@
                       <label>
                         <div class="margin-top-xs flex flex-middle thumb-text"
                           [ngClass]="{ required: checkCondition('appIcon', 'required') }">
+                          <span>{{contentForm.controls.appIcon.value}}</span>
+                          <span>{{relativeUrl}}</span>
                           <span i18n>Thumbnail</span> <span class="ws-mat-default-text"> &nbsp; 256 X 150 (pixel)</span>
                           <!-- <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('appIcon')">info
                     </mat-icon> -->
