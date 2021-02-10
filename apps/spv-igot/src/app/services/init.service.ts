@@ -23,7 +23,6 @@ import {
 import { environment } from '../../environments/environment'
 import { Omit } from 'lodash'
 
-
 interface IDetailsResponse {
   tncStatus: boolean
   roles: string[]
@@ -60,7 +59,6 @@ export class InitService {
     private settingsSvc: BtnSettingsService,
     private userPreference: UserPreferenceService,
     private http: HttpClient,
-
 
     @Inject(APP_BASE_HREF) private baseHref: string,
     // private router: Router,
@@ -363,13 +361,12 @@ export class InitService {
       }
       if (userPidProfileV2) {
         const userData: any = userPidProfileV2.result.UserProfile
-        console.log(userData[0])
         this.configSvc.userProfileV2 = {
           userId: userData[0].userId,
           firstName: userData[0].personalDetails.firstname,
           surName: userData[0].personalDetails.surname,
           middleName: userData[0].personalDetails.middlename,
-          departmentName: "SPV",
+          departmentName: 'SPV',
           // tslint:disable-next-line: max-line-length
           userName: `${userData[0].personalDetails.firstname ? userData[0].personalDetails.firstname : ''}${userData[0].personalDetails.surname ? userData[0].personalDetails.surname : ''}`,
 
