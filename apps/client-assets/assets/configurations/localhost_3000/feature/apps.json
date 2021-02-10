@@ -242,8 +242,10 @@
       "name": "Author",
       "permission": [
         "editor",
-        "admin",
-        "publisher"
+        "publisher",
+        "content_creator",
+        "content-creator",
+        "reviewer"
       ],
       "show": true,
       "status": "live",
@@ -264,11 +266,10 @@
       "name": "CBP",
       "permission": [
         "editor",
-        "author",
         "publisher",
-        "editor",
-        "publisher",
-        "content_creator"
+        "content_creator",
+        "content-creator",
+        "reviewer"
       ],
       "show": true,
       "status": "live",
@@ -625,8 +626,7 @@
         "kb-creator",
         "editor",
         "reviewer",
-        "publisher",
-        "admin"
+        "publisher"
       ]
     },
     {
@@ -645,6 +645,11 @@
       "toolTip": "Portals",
       "hasRole": [
         "admin",
+        "editor",
+        "publisher",
+        "content_creator",
+        "content-creator",
+        "reviewer",
         "mdo admin",
         "cbp admin",
         "spv admin"
