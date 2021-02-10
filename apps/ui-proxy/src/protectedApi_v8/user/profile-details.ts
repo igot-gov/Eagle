@@ -33,6 +33,7 @@ const authorizationHeader = `${CONSTANTS.AUTHORIZATION}`
 const xAppId = `${CONSTANTS.X_APP_ID}`
 const xAppIdVAlue = `${CONSTANTS.X_APP_ID_VALUE}`
 const createUserRegistryApi = `${CONSTANTS.USER_SUNBIRD_DETAILS_API_BASE}/apis/protected/v8/user/profileRegistry/createUserRegistryV2`
+const userPassword = 'Test.1234'
 
 export async function getUserProfileStatus(wid: string) {
     try {
@@ -217,8 +218,7 @@ profileDeatailsApi.post('/createUser', async (req, res) => {
         const sbchannel_ = extractRootOrgFromRequest(req)
         const dataArr = sbemail_.split('@')
         const extractUserName = dataArr[dataArr.length - 2]
-        const password_ = req.body.personalDetails.password
-
+        const password_ = userPassword
         const searchresponse = await axios({
             ...axiosRequestConfig,
             data: { request: { query: '', filters: { userName: extractUserName.toLowerCase() } } },
