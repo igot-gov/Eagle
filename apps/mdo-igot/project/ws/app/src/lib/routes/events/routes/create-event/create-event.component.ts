@@ -204,12 +204,15 @@ export class CreateEventComponent implements OnInit {
   }
 
   onFileSelect(event: any) {
-    if (event.target.files.length > 0 && !event.target.files[0].name.includes(' ')) {
+    if (event.target.files !== undefined && event.target.files.length > 0) {
       const reader = new FileReader()
       const file = event.target.files[0]
+      const data = new FormData()
+      data.append('file', file, file.name.replace(' ', '-'))
+      const _file = new Blob([file], { type: file.type })
       reader.onload = () => this.imageSrcURL = reader.result
-      reader.readAsDataURL(file)
-      this.imageSrc = file
+      reader.readAsDataURL(_file)
+      this.imageSrc = _file
       this.createEventForm.controls['eventPicture'].setValue(this.imageSrc)
       this.fileError = false
     } else {
