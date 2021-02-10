@@ -6,7 +6,8 @@ import { Observable } from 'rxjs'
 const API_ENDPOINTS = {
   searchCompetency: '/apis/protected/v8/competency/searchCompetency',
   fetchProfileNyId: (id: string) => `/apis/protected/v8/user/profileDetails/getUserRegistryById${id}`,
-  fetchProfile: '/apis/protected/v8/user/profileDetails/getUserRegistry',
+  // fetchProfile: '/apis/protected/v8/user/profileDetails/getUserRegistry',
+  fetchProfile: '/apis/protected/v8/user/profileRegistry/getUserRegistryById',
   updateProfile: '/apis/protected/v8/user/profileRegistry/createUserRegistry',
 
 }

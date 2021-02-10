@@ -245,7 +245,7 @@ export class InitService {
   }
 
   private async fetchStartUpDetails(): Promise<IDetailsResponse> {
-    let userRoles: string[] = []
+    const userRoles: string[] = []
     if (this.configSvc.instanceConfig && !Boolean(this.configSvc.instanceConfig.disablePidCheck)) {
       let userPidProfile: NsUser.IUserPidProfileV2 | null = null
       try {
