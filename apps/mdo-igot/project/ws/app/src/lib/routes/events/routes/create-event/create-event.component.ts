@@ -38,6 +38,7 @@ export class CreateEventComponent implements OnInit {
   departmentName = ''
   toastSuccess: any
   pictureObj: any
+  fileError = false
   myreg = /(^|\s)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/gi
 
   eventTypes = [
@@ -203,13 +204,18 @@ export class CreateEventComponent implements OnInit {
   }
 
   onFileSelect(event: any) {
-    if (event.target.files.length > 0) {
+    if (event.target.files.length > 0 && !event.target.files[0].name.includes(' ')) {
       const reader = new FileReader()
       const file = event.target.files[0]
       reader.onload = () => this.imageSrcURL = reader.result
       reader.readAsDataURL(file)
       this.imageSrc = file
       this.createEventForm.controls['eventPicture'].setValue(this.imageSrc)
+      this.fileError = false
+    } else {
+      this.imageSrcURL = ''
+      this.createEventForm.controls['eventPicture'].setValue('')
+      this.fileError = true
     }
   }
 
@@ -367,4 +373,5 @@ export class CreateEventComponent implements OnInit {
     const k = event.charCode
     return((k > 64 && k < 91) || (k > 96 && k < 123) || k === 8 || k === 32 || (k >= 48 && k <= 57))
   }
+
 }

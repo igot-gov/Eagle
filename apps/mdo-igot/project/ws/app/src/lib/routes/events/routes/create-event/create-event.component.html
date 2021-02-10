@@ -34,8 +34,13 @@
                                         <div class="input-column px-2 ws-mat-accent-border mb-10" style="padding:32px;" id="eventInfo">
                                             <label class="heading">Event Details</label>
                                             <div class="input-wrapper margin-top-s">
+                                                <div class="input-error-alert" *ngIf="fileError">
+                                                    <mat-error [hidden]="false" i18n-aria-label>
+                                                        Please upload a valid image file with name
+                                                    </mat-error>
+                                                </div>
                                                 <div style="display:flex; justify-content: right;">
-                                                    <mat-card class="mb-10" [ngClass]="imageSrcURL ? 'button-row' : 'button-row-inline'" style="width: 200px;box-shadow: none;border:1px solid #ededed; margin-right:20px; text-align: center;">
+                                                    <mat-card class="mb-10 mt-10" [ngClass]="imageSrcURL ? 'button-row' : 'button-row-inline'" style="width: 200px;box-shadow: none;border:1px solid #ededed; margin-right:20px; text-align: center;">
                                                         <div class="item">
                                                             <img src="/assets/icons/jpg.svg" style="width: 35px;">
                                                             <div id="thumbnail" class="deleteIcon" *ngIf="imageSrcURL">
@@ -160,7 +165,7 @@
                                                     Date
                                                 </label>
                                                 <mat-form-field color="accent" appearance="outline">
-                                                    <input matInput [matDatepicker]="eventDate" formControlName="eventDate" [min]="minDate" [max]="maxDate" [(ngModel)]="todayDate">
+                                                    <input #ref matInput [matDatepicker]="eventDate" formControlName="eventDate" [min]="minDate" [max]="maxDate" [(ngModel)]="todayDate">
                                                     <mat-datepicker-toggle matSuffix [for]="eventDate"></mat-datepicker-toggle>
                                                     <mat-datepicker #eventDate></mat-datepicker>
                                                     <mat-error [hidden]="false" i18n="eventDate Error|Explains eventDate is required" i18n-aria-label
@@ -181,7 +186,7 @@
                                                 <mat-form-field appearance="outline">
                                                     <mat-select formControlName="eventTime" #eventTime [(ngModel)]="todayTime">
                                                         <ng-container *ngFor="let timeObj of timeArr">
-                                                            <mat-option *ngIf="timeObj.value > currentTime" [value]="timeObj.value">
+                                                            <mat-option [value]="timeObj.value">
                                                                 {{ timeObj.value }}
                                                             </mat-option>
                                                         </ng-container>
