@@ -54,30 +54,30 @@ export class EventsComponent implements OnInit {
     getAllEventData() {
         const reqObj = {
             locale: [
-                'en',
+            'en',
             ],
             pageSize: 50,
             query: 'all',
             didYouMean: true,
             filters: [
+            {
+                andFilters: [
                 {
-                    andFilters: [
-                        {
-                            lastUpdatedOn: [
-                                'month',
-                            ],
-                        },
-                        {
-                            contentType: [
-                                'Event',
-                            ],
-                        },
+                    lastUpdatedOn: [
+                    'month',
                     ],
                 },
+                {
+                    contentType: [
+                    'Event',
+                    ],
+                },
+                ],
+            },
             ],
             includeSourceFields: [
-                'creatorLogo',
-                'appIcon',
+            'creatorLogo',
+            'appIcon',
             ],
         }
 
@@ -120,93 +120,73 @@ export class EventsComponent implements OnInit {
                             eventStartDate: eventStartEndDateArr[0],
                             eventEndDate: eventStartEndDateArr[1],
                             isPast: this.compareDate(eventStartEndDateArr[0], eventStartEndDateArr[1]),
-                            participants: this.participantsArr,
+                            participants: (this.participantsArr !== undefined) ? this.participantsArr : [],
                         }
                         if (this.setJoinedByMeEvents(this.participantsArr)) {
                             this.eventData['joinedByMe'].push(joinEventDataObj)
                         }
-                    })
-                    const eventDataObj = {
-                        eventName: eventObj.name.replace(/http?.*?(?= |$)/g, ''),
-                        eventDate: expiryDateFormat,
-                        eventUpdatedOn: eventObj.lastUpdatedOn,
-                        eventDuration: eventObj.duration,
-                        eventjoined: (eventObj.creatorDetails !== undefined && eventObj.creatorDetails.length > 0) ?
-                        ((eventObj.creatorDetails.length === 1) ? '1 person' :  `${eventObj.creatorDetails.length} people`) : ' --- ',
-                        eventThumbnail: (eventObj.appIcon !== null || eventObj.appIcon !== undefined) ? eventObj.appIcon : '---',
-                        eventDescription: eventObj.description,
-                        eventStatus: eventObj.status,
-                        eventObjective: eventObj.learningObjective,
-                        eventPresenters: (eventObj.creatorContacts !== undefined && eventObj.creatorContacts.length > 0)
-                        ? eventObj.creatorContacts : '',
-                        identifier: eventObj.identifier,
-                        presenters: eventObj.creatorDetails,
-                        eventJoinURL: eventObj.artifactUrl,
-                        eventSource: eventObj.sourceName,
-                        expirtyDate: eventObj.expiryDate,
-                        todayEventDate: this.eventDateFormat(eventObj.expiryDate, ''),
-                        todayEventDateStr: this.eventDateFormat(eventObj.expiryDate, eventObj.duration),
-                        allEventDate: this.allEventDateFormat(eventObj.expiryDate),
-                        eventStartDate: eventStartEndDateArr[0],
-                        eventEndDate: eventStartEndDateArr[1],
-                        isPast: this.compareDate(eventStartEndDateArr[0], eventStartEndDateArr[1]),
-                        participants: this.participantsArr,
-                    }
-                    // Today's events
-                    if (moment(eventStartEndDateArr[0]).isSame(moment(), 'day')) {
-                        const todayEventObj = {
-                            eventId: eventObj.identifier,
-                            eventName: eventObj.name.replace(/http?.*?(?= |$)/g, ''),
-                           todayEventDate: this.eventDateFormat(eventObj.expiryDate, ''),
-                           todayEventDateStr: this.eventDateFormat(eventObj.expiryDate, eventObj.duration),
+                        this.eventData['allEvents'].push(joinEventDataObj)
+                        if (moment(eventStartEndDateArr[0]).isSame(moment(), 'day')) {
+                            const todayEventObj = {
+                                eventId: eventObj.identifier,
+                                eventName: eventObj.name.replace(/http?.*?(?= |$)/g, ''),
+                                todayEventDate: this.eventDateFormat(eventObj.expiryDate, ''),
+                                todayEventDateStr: this.eventDateFormat(eventObj.expiryDate, eventObj.duration),
+                                expirtyDate: eventObj.expirtyDate,
+                                duration: eventObj.eventDuration,
+                            }
+                            this.eventData['todayEvents'].push(todayEventObj)
                         }
-                        this.eventData['todayEvents'].push(todayEventObj)
-                    }
-                    this.eventData['allEvents'].push(eventDataObj)
+                    })
                 })
             }
-            this.todayEventsCount = this.eventData['todayEvents'].length
-            this.joinedByMeEventsCount = this.eventData['joinedByMe'].length
-            this.filter('all')
-            if (this.todayEventsCount > 0) {
-                this.sortTodayEvents()
-            }
-            this.getMyMDOEvents()
+            setTimeout(
+                () => {
+                    this.todayEventsCount = this.eventData['todayEvents'].length
+                    this.joinedByMeEventsCount = this.eventData['joinedByMe'].length
+                    this.filter('all')
+                    if (this.todayEventsCount > 0) {
+                        this.sortTodayEvents()
+                    }
+                    this.getMyMDOEvents()
+                },
+                1000
+            )
         })
     }
 
     getMyMDOEvents() {
         const reqObj = {
             locale: [
-                'en',
+            'en',
             ],
             pageSize: 50,
             query: 'all',
             didYouMean: true,
             filters: [
+            {
+                andFilters: [
                 {
-                    andFilters: [
-                        {
-                            lastUpdatedOn: [
-                                'month',
-                            ],
-                        },
-                        {
-                            contentType: [
-                                'Event',
-                            ],
-                        },
-                        {
-                            sourceName: [
-                                this.department,
-                            ],
-                        },
+                    lastUpdatedOn: [
+                    'month',
                     ],
                 },
+                {
+                    contentType: [
+                    'Event',
+                    ],
+                },
+                {
+                    sourceName: [
+                    this.department,
+                    ],
+                },
+                ],
+            },
             ],
             includeSourceFields: [
-                'creatorLogo',
-                'appIcon',
+            'creatorLogo',
+            'appIcon',
             ],
         }
 
@@ -296,7 +276,7 @@ export class EventsComponent implements OnInit {
     }
 
     scroll(el: HTMLElement) {
-      el.scrollIntoView()
+        el.scrollIntoView()
     }
 
     customDateFormat(date: any) {
@@ -342,28 +322,28 @@ export class EventsComponent implements OnInit {
         const allData: any[] = []
         const mdoData: any[] = []
         if (this.eventData['allEvents'] && this.eventData['allEvents'].length > 0) {
-          this.eventData['allEvents'].forEach((event: any) => {
-            allData.push(event)
-          })
+            this.eventData['allEvents'].forEach((event: any) => {
+                allData.push(event)
+            })
         }
 
         if (this.eventData['myMDOEvents'] && this.eventData['myMDOEvents'].length > 0) {
-           this.eventData['myMDOEvents'].forEach((event: any) => {
-             mdoData.push(event)
-          })
+            this.eventData['myMDOEvents'].forEach((event: any) => {
+                mdoData.push(event)
+            })
         }
 
         if (key) {
             this.currentFilter = key
             switch (key) {
                 case 'all':
-                    this.data = allData
+                this.data = allData
                 break
                 case 'myMDO':
-                    this.data = mdoData
+                this.data = mdoData
                 break
                 default:
-                    this.data = allData
+                this.data = allData
                 break
             }
         }
@@ -398,13 +378,13 @@ export class EventsComponent implements OnInit {
             this.currentSubFilter = eventValue
             switch (eventValue) {
                 case 'upcoming':
-                    this.subData = upcomingEvents
+                this.subData = upcomingEvents
                 break
                 case 'past':
-                    this.subData = pastEvents
+                this.subData = pastEvents
                 break
                 default:
-                    this.subData = upcomingEvents
+                this.subData = upcomingEvents
                 break
             }
         }
@@ -479,13 +459,13 @@ export class EventsComponent implements OnInit {
     }
 
     formatTimeAmPm(futureDate: any) {
-      let hours = futureDate.getHours()
-      let minutes = futureDate.getMinutes()
-      const ampm = hours >= 12 ? 'pm' : 'am'
-      hours = hours % 12
-      hours = hours ? hours : 12
-      minutes = minutes < 10 ? `0${minutes}` : minutes
-      const strTime = `${hours}:${minutes} ${ampm}`
-      return strTime
-  }
+        let hours = futureDate.getHours()
+        let minutes = futureDate.getMinutes()
+        const ampm = hours >= 12 ? 'pm' : 'am'
+        hours = hours % 12
+        hours = hours ? hours : 12
+        minutes = minutes < 10 ? `0${minutes}` : minutes
+        const strTime = `${hours}:${minutes} ${ampm}`
+        return strTime
+    }
 }

@@ -33,9 +33,10 @@ export class PresenterCardComponent implements OnInit, OnChanges {
                     }
                     this.userdata.push(obj)
                 } else {
+                    const name = `${userData[index].first_name} ${userData[index].last_name}`
                     const obj = {
                         id: userData[index].user_id,
-                        name: `${userData[index].first_name} ${userData[index].last_name}`,
+                        name: `${name}`,
                         shortName: this.getShortName(name),
                         type: '',
                         designation: userData[index].designation,

@@ -41,7 +41,7 @@ export class TodayEventCardComponent implements OnInit, OnChanges {
             if (moment(currentDate).isBetween(startDate, endDate)) {
                this.isLive = true
             }
-            this.identifier = this.eventDetails.identifier
+            this.identifier = this.eventDetails.eventId
         }
     }
 
