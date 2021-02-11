@@ -5,6 +5,7 @@ import java.util.List;
 import org.sunbird.portal.department.dto.Department;
 import org.sunbird.portal.department.dto.UserDepartmentRole;
 import org.sunbird.portal.department.model.DepartmentInfo;
+import org.sunbird.portal.department.model.DeptPublicInfo;
 import org.sunbird.portal.department.model.SearchUserInfo;
 import org.sunbird.portal.department.model.UserDepartmentInfo;
 
@@ -12,6 +13,10 @@ public interface PortalService {
 	List<DepartmentInfo> getAllDepartments(String rootOrg);
 	
 	List<String> getDeptNameList();
+	
+	List<DeptPublicInfo> getAllDept();
+	
+	DeptPublicInfo searchDept(String deptName);
 
 	DepartmentInfo getDepartmentById(Integer deptId, boolean isUserInfoRequired,String rootOrg);
 

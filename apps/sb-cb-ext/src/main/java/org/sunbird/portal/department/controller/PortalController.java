@@ -40,6 +40,16 @@ public class PortalController {
 		return new ResponseEntity<>(portalService.getDeptNameList(), HttpStatus.OK);
 	}
 
+	@GetMapping("/portal/getAllDept")
+	public ResponseEntity<?> getAllDepartment() throws Exception {
+		return new ResponseEntity<>(portalService.getAllDept(), HttpStatus.OK);
+	}
+	
+	@GetMapping("/portal/deptSearch")
+	public ResponseEntity<?> searchDepartment(@RequestParam(name = "friendlyName", required = true) String deptName) throws Exception {
+		return new ResponseEntity<>(portalService.searchDept(deptName), HttpStatus.OK);
+	}
+
 	// ----------------- END of Public APIs --------------------
 	// ----------------- SPV APIs -----------------------
 	@GetMapping("/portal/spv/isAdmin")

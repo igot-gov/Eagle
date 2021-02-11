@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Type;
 import org.sunbird.portal.department.model.DepartmentInfo;
+import org.sunbird.portal.department.model.DeptPublicInfo;
 
 @Entity
 @Table(name = "departments", schema = "wingspan")
@@ -141,5 +142,14 @@ public class Department {
 		dept.setRootOrg(deptInfo.getRootOrg());
 		dept.setLogo(deptInfo.getLogo());
 		return dept;
+	}
+	
+	public DeptPublicInfo getPublicInfo() {
+		DeptPublicInfo pDept = new DeptPublicInfo();
+		pDept.setDescription(getDescription());
+		pDept.setId(getDeptId());
+		pDept.setFriendly_name(getDeptName());
+		pDept.setRoot_org(getRootOrg());
+		return pDept;
 	}
 }

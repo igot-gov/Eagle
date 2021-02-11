@@ -20,11 +20,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.client.RestTemplate;
 import org.sunbird.common.model.OpenSaberApiUserProfile;
-import org.sunbird.common.model.SunbirdApiRespContent;
 import org.sunbird.common.service.UserUtilityService;
+import org.sunbird.common.util.CbExtServerProperties;
 import org.sunbird.common.util.Constants;
 import org.sunbird.common.util.DataValidator;
-import org.sunbird.common.util.CbExtServerProperties;
 import org.sunbird.core.logger.CbExtLogger;
 import org.sunbird.portal.department.PortalConstants;
 import org.sunbird.portal.department.dto.Department;
@@ -33,6 +32,7 @@ import org.sunbird.portal.department.dto.DepartmentType;
 import org.sunbird.portal.department.dto.Role;
 import org.sunbird.portal.department.dto.UserDepartmentRole;
 import org.sunbird.portal.department.model.DepartmentInfo;
+import org.sunbird.portal.department.model.DeptPublicInfo;
 import org.sunbird.portal.department.model.DeptTypeInfo;
 import org.sunbird.portal.department.model.PortalUserInfo;
 import org.sunbird.portal.department.model.SearchUserInfo;
@@ -101,6 +101,28 @@ public class PortalServiceImpl implements PortalService {
 		}
 
 		return Collections.emptyList();
+	}
+
+	@Override
+	public List<DeptPublicInfo> getAllDept() {
+		List<Department> deptList = deptRepo.findAll();
+		if (!DataValidator.isCollectionEmpty(deptList)) {
+			List<DeptPublicInfo> publicDeptList = new ArrayList<DeptPublicInfo>(deptList.size());
+			for (Department dept : deptList) {
+				publicDeptList.add(dept.getPublicInfo());
+			}
+			return publicDeptList;
+		}
+		return Collections.emptyList();
+	}
+	
+	@Override
+	public DeptPublicInfo searchDept(String deptName) {
+		Department dept = deptRepo.findByDeptNameIgnoreCase(deptName);
+		if(dept != null) {
+			return dept.getPublicInfo();
+		}
+		return null;
 	}
 
 	@Override
@@ -464,8 +486,10 @@ public class PortalServiceImpl implements PortalService {
 		headers.set(ROOT_ORG_CONST, rootOrg);
 		headers.set(ORG_CONST, org);
 		HttpEntity<Object> entity = new HttpEntity<>(request, headers);
-		/*restTemplate.postForObject(serverConfig.getWfServiceHost() + serverConfig.getWfServicePath(), entity,
-				Map.class);*/
+		/*
+		 * restTemplate.postForObject(serverConfig.getWfServiceHost() +
+		 * serverConfig.getWfServicePath(), entity, Map.class);
+		 */
 		return userDeptInfo;
 	}
 
@@ -662,11 +686,12 @@ public class PortalServiceImpl implements PortalService {
 						pUserInfo.setBlocked(userDeptRole.getIsBlocked());
 						// Fetch User Data
 						if (result != null && result.containsKey(userDeptRole.getUserId())) {
-							OpenSaberApiUserProfile userProfile = (OpenSaberApiUserProfile) result.get(userDeptRole.getUserId());
+							OpenSaberApiUserProfile userProfile = (OpenSaberApiUserProfile) result
+									.get(userDeptRole.getUserId());
 							pUserInfo.setEmailId(userProfile.getPersonalDetails().getPrimaryEmail());
 							pUserInfo.setFirstName(userProfile.getPersonalDetails().getFirstname());
 							pUserInfo.setLastName(userProfile.getPersonalDetails().getSurname());
-							
+
 							// Assign RoleInfo
 							List<Role> userRoleInfo = new ArrayList<Role>();
 							for (Integer roleId : userDeptRole.getRoleIds()) {
@@ -684,10 +709,11 @@ public class PortalServiceImpl implements PortalService {
 								deptInfo.addInActiveUser(pUserInfo);
 							}
 						} else {
-							logger.error(new Exception("UserRegistry not found for UserId --> " + userDeptRole.getUserId()));
+							logger.error(
+									new Exception("UserRegistry not found for UserId --> " + userDeptRole.getUserId()));
 						}
 					}
-					
+
 					logger.info("enrichDepartmentInfo: " + deptInfo);
 					List<PortalUserInfo> portalActiveUsers = deptInfo.getActive_users();
 					if (!CollectionUtils.isEmpty(portalActiveUsers)) {

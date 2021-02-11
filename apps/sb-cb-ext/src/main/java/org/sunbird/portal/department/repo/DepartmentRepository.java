@@ -16,7 +16,7 @@ public interface DepartmentRepository extends CrudRepository<Department, Integer
 
 	List<Department> findAllByIdIn(Iterable<Integer> deptTypeIds);
 
-	Department findByDeptName(String deptKey);
+	Department findByDeptNameIgnoreCase(String deptKey);
 
 //	@Query("select dept from departments where dept.dept_type_id in (select id from department_types where dept_type = ?0)")
 //	List<Department> findDeptUsingType(String deptTypeKey);
