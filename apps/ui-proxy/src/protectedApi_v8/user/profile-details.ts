@@ -33,6 +33,7 @@ const authorizationHeader = `${CONSTANTS.AUTHORIZATION}`
 const xAppId = `${CONSTANTS.X_APP_ID}`
 const xAppIdVAlue = `${CONSTANTS.X_APP_ID_VALUE}`
 const createUserRegistryApi = `${CONSTANTS.USER_SUNBIRD_DETAILS_API_BASE}/apis/protected/v8/user/profileRegistry/createUserRegistryV2`
+const userPassword = 'Test.1234'
 
 export async function getUserProfileStatus(wid: string) {
     try {
@@ -215,11 +216,12 @@ profileDeatailsApi.post('/createUser', async (req, res) => {
         const sbfirstName_ = req.body.personalDetails.firstName
         const sblastName_ = req.body.personalDetails.lastName
         const sbchannel_ = extractRootOrgFromRequest(req)
-        const sbuserName_ = req.body.personalDetails.email
-
+        const dataArr = sbemail_.split('@')
+        const extractUserName = dataArr[dataArr.length - 2]
+        const password_ = userPassword
         const searchresponse = await axios({
             ...axiosRequestConfig,
-            data: { request: { query: '', filters: { userName: sbuserName_.toLowerCase() } } },
+            data: { request: { query: '', filters: { userName: extractUserName.toLowerCase() } } },
             method: 'POST',
             url: API_END_POINTS.searchSb,
         })
@@ -228,7 +230,7 @@ profileDeatailsApi.post('/createUser', async (req, res) => {
         } else {
             const sbUserProfile: Partial<ISBUser> = {
                 channel: sbchannel_, email: sbemail_, emailVerified: sbemailVerified_, firstName: sbfirstName_,
-                lastName: sblastName_, userName: sbuserName_,
+                lastName: sblastName_, password: password_, userName: extractUserName,
             }
             const response = await axios({
                 ...axiosRequestConfig,
@@ -243,7 +245,7 @@ profileDeatailsApi.post('/createUser', async (req, res) => {
                     firstname: sbfirstName_,
                     primaryEmail: sbemail_,
                     surname: sblastName_,
-                    username: sbuserName_,
+                    username: extractUserName,
                 }
                 const userRegistry: IUser = {
                     personalDetails: personalDetailsRegistry,
