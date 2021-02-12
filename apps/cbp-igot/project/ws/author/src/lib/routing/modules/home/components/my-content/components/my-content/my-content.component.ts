@@ -760,6 +760,7 @@ export class MyContentComponent implements OnInit, OnDestroy {
       case 'review':
       case 'publish':
       case 'edit':
+        // need to check edit of published content
         this.router.navigateByUrl(`/author/editor/${event.data.identifier}`)
         break
       case 'remove':
