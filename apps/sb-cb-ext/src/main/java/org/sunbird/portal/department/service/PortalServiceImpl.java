@@ -418,9 +418,9 @@ public class PortalServiceImpl implements PortalService {
 		headers.set(ROOT_ORG_CONST, rootOrg);
 		headers.set(ORG_CONST, org);
 		HttpEntity<Object> entity = new HttpEntity<>(request, headers);
-		// restTemplate.postForObject(serverConfig.getWfServiceHost() +
-		// serverConfig.getWfServicePath(), entity,
-		// Map.class);
+		restTemplate.postForObject(serverConfig.getWfServiceHost() +
+		serverConfig.getWfServicePath(), entity,
+		Map.class);
 		return userDeptInfo;
 	}
 
@@ -486,10 +486,10 @@ public class PortalServiceImpl implements PortalService {
 		headers.set(ROOT_ORG_CONST, rootOrg);
 		headers.set(ORG_CONST, org);
 		HttpEntity<Object> entity = new HttpEntity<>(request, headers);
-		/*
-		 * restTemplate.postForObject(serverConfig.getWfServiceHost() +
-		 * serverConfig.getWfServicePath(), entity, Map.class);
-		 */
+	
+		  restTemplate.postForObject(serverConfig.getWfServiceHost() +
+		  serverConfig.getWfServicePath(), entity, Map.class);
+		 
 		return userDeptInfo;
 	}
 
