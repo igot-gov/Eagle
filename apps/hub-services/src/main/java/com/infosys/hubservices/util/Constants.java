@@ -71,6 +71,11 @@ public class Constants {
             throw new IllegalStateException(UTIL_CLASS);
         }
         public static final String ROOT_ORG = "rootOrg";
+        public static final String FIRST_NAME = "first_name";
+        public static final String SURNAME = "surname";
+    	public static final String PRIMARY_EMAIL = "primaryEmail";
+    	public static final String USERNAME = "username";
+    	public static final String USER_ID = "userId";
 
     }
 
