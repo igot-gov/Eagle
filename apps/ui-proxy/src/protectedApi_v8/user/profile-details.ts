@@ -216,8 +216,7 @@ profileDeatailsApi.post('/createUser', async (req, res) => {
         const sbfirstName_ = req.body.personalDetails.firstName
         const sblastName_ = req.body.personalDetails.lastName
         const sbchannel_ = extractRootOrgFromRequest(req)
-        const dataArr = sbemail_.split('@')
-        const extractUserName = dataArr[dataArr.length - 2]
+        const extractUserName = req.body.personalDetails.userName
         const password_ = userPassword
         const searchresponse = await axios({
             ...axiosRequestConfig,
@@ -226,7 +225,7 @@ profileDeatailsApi.post('/createUser', async (req, res) => {
             url: API_END_POINTS.searchSb,
         })
         if (searchresponse.data.result.response.count > 0) {
-            throw new Error('UserName Already Exist')
+            res.status(500).send('UserName Already Exist')
         } else {
             const sbUserProfile: Partial<ISBUser> = {
                 channel: sbchannel_, email: sbemail_, emailVerified: sbemailVerified_, firstName: sbfirstName_,
@@ -239,7 +238,7 @@ profileDeatailsApi.post('/createUser', async (req, res) => {
                 url: API_END_POINTS.createSb,
             })
             if (response.data.responseCode === 'CLIENT_ERROR') {
-                throw new Error('Not able to create User in SunBird')
+                res.status(500).send('Not able to create User in SunBird')
             } else {
                 const personalDetailsRegistry: IPersonalDetails = {
                     firstname: sbfirstName_,
@@ -262,7 +261,7 @@ profileDeatailsApi.post('/createUser', async (req, res) => {
                     url: `${createUserRegistryApi}/${sBuserId}`,
                 })
                 if (userRegistryResponse.data === null) {
-                    throw new Error('Not able to create User Registry in Opensaber')
+                    res.status(500).send('Not able to create User Registry in Opensaber')
                 } else {
                     const sbUserProfileResponse: Partial<ISunbirdbUserResponse> = {
                         email: sbemail_, firstName: sbfirstName_, lastName: sblastName_,
