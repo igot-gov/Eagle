@@ -12,6 +12,7 @@ import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import java.io.IOException;
@@ -29,18 +30,20 @@ public class AutoCompleteService {
     @Autowired
     private RestHighLevelClient esClient;
 
+    final String[] includeFields = {"personalDetails.firstname", "personalDetails.surname", "personalDetails.primaryEmail", "id", "professionalDetails.name"};
+
     public List<Map<String, Object>> getUserSearchData(String searchTerm) throws IOException {
         if (StringUtils.isEmpty(searchTerm))
             throw new ApplicationException("Search term should not be empty!");
         List<Map<String, Object>> resultArray = new ArrayList<>();
         Map<String, Object> result;
+        String depName;
         final BoolQueryBuilder query = QueryBuilders.boolQuery();
         query
                 .should(QueryBuilders.matchPhrasePrefixQuery("personalDetails.primaryEmail", searchTerm))
                 .should(QueryBuilders.matchPhrasePrefixQuery("personalDetails.firstname", searchTerm))
                 .should(QueryBuilders.matchPhrasePrefixQuery("personalDetails.surname", searchTerm));
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder().query(query);
-        String[] includeFields = {"personalDetails.firstname", "personalDetails.surname", "personalDetails.primaryEmail", "id", "professionalDetails.name"};
         sourceBuilder.fetchSource(includeFields, new String[]{});
         SearchRequest searchRequest = new SearchRequest();
         searchRequest.indices(connectionProperties.getEsProfileIndex());
@@ -50,12 +53,18 @@ public class AutoCompleteService {
         for (SearchHit hit : searchResponse.getHits()) {
             Map<String, Object> searObjectMap = hit.getSourceAsMap();
             Map<String, Object> personalDetails = (Map<String, Object>) searObjectMap.get("personalDetails");
+            List<Map<String, Object>> professionalDetails = (List<Map<String, Object>>) searObjectMap.get("professionalDetails");
+            depName = null;
+            if (!CollectionUtils.isEmpty(professionalDetails)) {
+                Map<String, Object> propDetails = professionalDetails.stream().findFirst().get();
+                depName = CollectionUtils.isEmpty(propDetails) ? "" : (String) propDetails.get("name");
+            }
             result = new HashMap<>();
             result.put("first_name", personalDetails.get("firstname"));
             result.put("last_name", personalDetails.get("surname"));
             result.put("email", personalDetails.get("primaryEmail"));
             result.put("wid", searObjectMap.get("id"));
-            result.put("department_name", ((Map<String, Object>) searObjectMap.get("professionalDetails")).get("name"));
+            result.put("department_name", depName);
             result.put("rank", hit.getScore());
             resultArray.add(result);
         }
