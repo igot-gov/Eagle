@@ -218,6 +218,7 @@ export async function UpdateKeycloakUserPassword(keycloakId: string, isTemporary
 
 export async function sendActionsEmail(userId: string) {
     // try {
+    logInfo(`Admin authentication started for email`)
     await kcAdminClient.auth({
         clientId: 'portal',
         grantType: 'password',
