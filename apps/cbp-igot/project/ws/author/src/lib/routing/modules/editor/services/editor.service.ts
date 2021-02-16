@@ -243,7 +243,6 @@ export class EditorService {
     id: string,
     status: string,
   ): Observable<null> {
-    debugger
     const requestBody: NSApiRequest.IForwardBackwardAction = {
       actor: this.accessService.userId,
       ...meta,
@@ -259,7 +258,6 @@ export class EditorService {
 
   sendToReview(id: string) {
     let requestbody = {}
-    debugger
     return this.apiService.post<null>(SEND_TO_REVIEW + id, requestbody)
   }
 

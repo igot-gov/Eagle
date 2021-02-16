@@ -430,7 +430,6 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
         //   this.editorService.sendToReview(element.identifier)
         // })
       }
-      debugger
       const saveCall = (needSave ? this.triggerSave() : of({} as any)).pipe(
         mergeMap(() =>
           this.editorService
