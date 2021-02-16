@@ -205,10 +205,9 @@ profileDeatailsApi.get('/migrateRegistry', async (req, res) => {
 profileDeatailsApi.post('/createUser', async (req, res) => {
     try {
         const authorization = extractAuthorizationFromRequest(req)
-        const xAuthenticatedUserToken = extractUserTokenFromRequest(req)
         const xAuth = authorization.split(' ')
         axios.defaults.headers.common[xAuthUser] = xAuth[1]
-        axios.defaults.headers.common[authorizationHeader] = xAuth[0] + ' ' + xAuthenticatedUserToken
+        axios.defaults.headers.common[authorizationHeader] = `${CONSTANTS.SB_API_KEY}`
         axios.defaults.headers.common[contentType] = contentTypeValue
         axios.defaults.headers.common[xAppId] = xAppIdVAlue
         const sbemail_ = req.body.personalDetails.email
