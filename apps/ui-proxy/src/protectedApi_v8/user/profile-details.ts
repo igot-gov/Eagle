@@ -8,7 +8,7 @@ import { logError, logInfo } from '../../utils/logger'
 import { ERROR } from '../../utils/message'
 import {
     extractAuthorizationFromRequest, extractRootOrgFromRequest,
-    extractUserIdFromRequest, extractUserTokenFromRequest
+    extractUserIdFromRequest
 } from '../../utils/requestExtract'
 
 const API_END_POINTS = {
