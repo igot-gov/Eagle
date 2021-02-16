@@ -4,6 +4,7 @@ import * as fs from 'fs'
 import { axiosRequestConfig, axiosRequestConfigLong, axiosRequestConfigVeryLong } from '../../configs/request.config'
 import { IPersonalDetails, ISBUser, ISunbirdbUserResponse, IUser } from '../../models/user.model'
 import { CONSTANTS } from '../../utils/env'
+import { KEYCLOAK_USER_CREATION } from '../../utils/keycloak-user-creation'
 import { logError, logInfo } from '../../utils/logger'
 import { ERROR } from '../../utils/message'
 import {
@@ -267,7 +268,13 @@ profileDeatailsApi.post('/createUser', async (req, res) => {
                         email: sbemail_, firstName: sbfirstName_, lastName: sblastName_,
                         userId: sBuserId,
                     }
+                    try {
+                        await KEYCLOAK_USER_CREATION.sendActionsEmail(sBuserId)
+                    } catch (err) {
+                        logError('ERROR ON sendActionsEmail', err)
+                    }
                     res.send(sbUserProfileResponse)
+
                 }
 
             }
