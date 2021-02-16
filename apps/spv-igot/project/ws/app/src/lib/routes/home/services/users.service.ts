@@ -6,7 +6,7 @@ const API_END_POINTS = {
   GET_ALL_USERS: '/apis/protected/v8/portal/spv/mydepartment?allUsers=false',
   GET_ALL_DEPARTMENTS: '/apis/protected/v8/portal/spv/department',
   GET_MY_DEPARTMENT: '/apis/protected/v8/portal/spv/mydepartment?allUsers=false',
-  CREATE_USER: 'apis/protected/v8/admin/userRegistration/create-user',
+  CREATE_USER: '/apis/protected/v8/user/profileDetails/createUser',
   PROFILE_REGISTRY: 'apis/protected/v8/user/profileRegistry/getUserRegistryByUser/',
   CREATE_PROFILE_REGISTRY: 'apis/protected/v8/user/profileRegistry/createUserRegistryV2',
   ADD_USER_TO_DEPARTMENT: 'apis/protected/v8/portal/deptAction',
