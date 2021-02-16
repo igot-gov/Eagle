@@ -92,8 +92,16 @@ export class CreateUserComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(form: any) {
+    const newobj = {
+      personalDetails: {
+          email: form.value.email,
+          userName : form.value.fname,
+          firstName: form.value.fname,
+          lastName: form.value.lname,
+      },
+    }
 
-    this.usersSvc.createUser(form.value).subscribe(res => {
+    this.usersSvc.createUser(newobj).subscribe(res => {
       // let user
       // const deptRole = this.department.rolesInfo.filter((role: { roleName: string }) => role.roleName === 'MEMBER')[0]
       this.openSnackbar(res.data)
@@ -113,89 +121,102 @@ export class CreateUserComponent implements OnInit, OnDestroy {
           req.departments.push(this.department.deptName)
         }
 
-        this.usersSvc.onSearchUserByEmail(form.value.email, req).subscribe(data => {
-          // user = data[0]
-          const userreq = {
-            personalDetails: {
-                firstname: data[0].first_name,
-                surname: data[0].last_name,
-                primaryEmail: data[0].email,
-            },
-            professionalDetails: [
-                {
-                    name: data[0].department_name,
-                },
-            ],
-            academics: [
-              {
-                nameOfQualification: '',
-                yearOfPassing: '',
-                nameOfInstitute: '',
-                type: 'X_STANDARD',
-              },
-              {
-                nameOfQualification: '',
-                yearOfPassing: '',
-                nameOfInstitute: '',
-                type: 'XII_STANDARD',
-              },
-              {
-                nameOfQualification: '',
-                yearOfPassing: '',
-                nameOfInstitute: '',
-                type: 'GRADUATE',
-              },
-              {
-                nameOfQualification: '',
-                yearOfPassing: '',
-                nameOfInstitute: '',
-                type: 'POSTGRADUATE',
-              },
-            ],
-            interests: {
-              hobbies: [],
-              professional: [],
-            },
-            skills: {
-              certificateDetails: '',
-              additionalSkills: '',
-              osCreatedBy: '',
-            },
-            employmentDetails: {
-              departmentName: '',
-              officialPostalAddress: '',
-              employeeCode: '',
-              allotmentYearOfService: '',
-              payType: '',
-              civilListNo: '',
-              dojOfService: '',
-              service: '',
-              pinCode: '',
-              cadre: '',
-            },
-          }
+        const dreq = {
+          userId: res.userId,
+          deptId: this.department ? this.department.id : null,
+          roles: form.value.roles,
+          isActive: true,
+          isBlocked: false,
+        }
 
-          this.usersSvc.createUserById(data[0].wid, userreq).subscribe(userdata => {
-            if (userdata) {
-              const dreq = {
-                userId: data[0] ? data[0].wid : null,
-                deptId: this.department ? this.department.id : null,
-                // deptRoleId: deptRole ? deptRole.deptRoleId : null,
-                roles: form.value.roles,
-                isActive: true,
-                isBlocked: false,
-              }
-              this.usersSvc.addUserToDepartment(dreq).subscribe(dres => {
-                if (dres) {
-                  this.createUserForm.reset({ fname: '', lname: '', email: '', department: this.departmentName, roles: '' })
-                  this.router.navigate(['/app/home/users'])
-                }
-              })
-            }
-          })
+        this.usersSvc.addUserToDepartment(dreq).subscribe(dres => {
+          if (dres) {
+            this.createUserForm.reset({ fname: '', lname: '', email: '', department: this.departmentName, roles: '' })
+            this.router.navigate(['/app/home/users'])
+          }
         })
+
+        // this.usersSvc.onSearchUserByEmail(form.value.email, req).subscribe(data => {
+        //   const userreq = {
+        //     personalDetails: {
+        //         firstname: data[0].first_name,
+        //         surname: data[0].last_name,
+        //         primaryEmail: data[0].email,
+        //     },
+        //     professionalDetails: [
+        //         {
+        //             name: data[0].department_name,
+        //         },
+        //     ],
+        //     academics: [
+        //       {
+        //         nameOfQualification: '',
+        //         yearOfPassing: '',
+        //         nameOfInstitute: '',
+        //         type: 'X_STANDARD',
+        //       },
+        //       {
+        //         nameOfQualification: '',
+        //         yearOfPassing: '',
+        //         nameOfInstitute: '',
+        //         type: 'XII_STANDARD',
+        //       },
+        //       {
+        //         nameOfQualification: '',
+        //         yearOfPassing: '',
+        //         nameOfInstitute: '',
+        //         type: 'GRADUATE',
+        //       },
+        //       {
+        //         nameOfQualification: '',
+        //         yearOfPassing: '',
+        //         nameOfInstitute: '',
+        //         type: 'POSTGRADUATE',
+        //       },
+        //     ],
+        //     interests: {
+        //       hobbies: [],
+        //       professional: [],
+        //     },
+        //     skills: {
+        //       certificateDetails: '',
+        //       additionalSkills: '',
+        //       osCreatedBy: '',
+        //     },
+        //     employmentDetails: {
+        //       departmentName: '',
+        //       officialPostalAddress: '',
+        //       employeeCode: '',
+        //       allotmentYearOfService: '',
+        //       payType: '',
+        //       civilListNo: '',
+        //       dojOfService: '',
+        //       service: '',
+        //       pinCode: '',
+        //       cadre: '',
+        //     },
+        //   }
+
+        //   this.usersSvc.createUserById(data[0].wid, userreq).subscribe(userdata => {
+        //     if (userdata) {
+        //       const dreq = {
+        //         userId: data[0] ? data[0].wid : null,
+        //         deptId: this.department ? this.department.id : null,
+        //         roles: form.value.roles,
+        //         isActive: true,
+        //         isBlocked: false,
+        //       }
+        //       this.usersSvc.addUserToDepartment(dreq).subscribe(dres => {
+        //         if (dres) {
+        //           this.createUserForm.reset({ fname: '', lname: '', email: '', department: this.departmentName, roles: '' })
+        //           this.router.navigate(['/app/home/users'])
+        //         }
+        //       })
+        //     }
+        //   })
+        // })
       }
-    },                                             (err: { error: string }) => {
+    },                                         (err: { error: string }) => {
       this.openSnackbar(err.error.split(':')[1])
     })
   }
