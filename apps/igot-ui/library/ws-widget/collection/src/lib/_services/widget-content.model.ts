@@ -353,6 +353,7 @@ export namespace NsContent {
   export enum EMimeTypes {
     COLLECTION = 'application/vnd.ekstep.content-collection',
     HTML = 'application/html',
+    HTML_TEXT = 'text/html',
     ILP_FP = 'application/ilpfp',
     IAP = 'application/iap-assessment',
     M4A = 'audio/m4a',

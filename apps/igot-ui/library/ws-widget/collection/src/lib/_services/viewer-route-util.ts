@@ -14,6 +14,7 @@ export const VIEWER_ROUTE_FROM_MIME = (mimeType: NsContent.EMimeTypes) => {
     case NsContent.EMimeTypes.CERTIFICATION:
       return 'certification'
     case NsContent.EMimeTypes.HTML:
+    case NsContent.EMimeTypes.HTML_TEXT:
       return 'html'
     case NsContent.EMimeTypes.IAP:
       return 'iap'
