@@ -14,6 +14,7 @@ import {
   SEARCH_V6_ADMIN,
   SEARCH_V6_AUTH,
   AUTHORING_BASE,
+  SEND_TO_REVIEW
 } from '@ws/author/src/lib/constants/apiEndpoints'
 import { NSApiResponse } from '@ws/author/src/lib/interface//apiResponse'
 import { NSApiRequest } from '@ws/author/src/lib/interface/apiRequest'
@@ -242,6 +243,7 @@ export class EditorService {
     id: string,
     status: string,
   ): Observable<null> {
+    debugger
     const requestBody: NSApiRequest.IForwardBackwardAction = {
       actor: this.accessService.userId,
       ...meta,
@@ -253,6 +255,12 @@ export class EditorService {
       action: this.accessService.getAction(status, meta.operation),
     }
     return this.apiService.post<null>(STATUS_CHANGE + id, requestBody)
+  }
+
+  sendToReview(id: string) {
+    let requestbody = {}
+    debugger
+    return this.apiService.post<null>(SEND_TO_REVIEW + id, requestbody)
   }
 
   readJSON(artifactUrl: string): Observable<any> {

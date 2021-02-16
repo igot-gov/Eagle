@@ -135,7 +135,7 @@ export class EditorComponent implements OnInit, OnDestroy {
         ) {
           this.route.navigate(['upload'], { relativeTo: this.router })
         } else if (
-          contents[0].content.mimeType === 'application/html' &&
+          contents[0].content.mimeType === 'text/x-url' &&
           !contents[0].content.isExternal
         ) {
           this.route.navigate(['upload'], { relativeTo: this.router })

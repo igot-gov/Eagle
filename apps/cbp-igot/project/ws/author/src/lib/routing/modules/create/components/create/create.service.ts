@@ -28,7 +28,7 @@ export class CreateService {
         authoringDisabled: false,
         isContentEditingDisabled: false,
         isMetaEditingDisabled: false,
-        isExternal: meta.mimeType === 'application/html',
+        isExternal: meta.mimeType === 'text/x-url',
       },
     }
     if (this.accessService.rootOrg === 'client2') {
@@ -74,7 +74,7 @@ export class CreateService {
           mimeType: meta.mimeType,
           name: meta.name,
           organisation: [environment.organisation],
-          isExternal: meta.mimeType === 'application/html',
+          isExternal: meta.mimeType === 'text/x-url',
           primaryCategory: meta.primaryCategory,
           license: 'CC BY 4.0',
         },

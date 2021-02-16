@@ -298,7 +298,7 @@ export class AllContentComponent implements OnInit, OnDestroy {
           publisherDetails: <string[]>[],
           isMetaEditingDisabled: [false],
           isContentEditingDisabled: [false],
-          sourceName: [_.get(this.departmentData, 'data.deptName')],
+          // sourceName: [_.get(this.departmentData, 'data.deptName')],
         },
         // pageNo: loadMoreFlag ? this.pagination.offset : 0,
         sort_by: { lastUpdatedOn: 'desc' },
