@@ -6,8 +6,12 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.infosys.lexauthoringservices.exception.ApplicationLogicError;
 import com.infosys.lexauthoringservices.exception.BadRequestException;
@@ -22,6 +26,15 @@ public class OrdinalsServiceImpl implements OrdinalsService{
 
 	@Autowired
 	OrdinalsRepository ordinalsRepo;
+	
+	@Value("${lex.core.host}")
+	private String lexCoreHost;
+
+	@Value("${lex.core.listDept.path}")
+	private String lexCoreListDeptPath;
+
+	@Autowired
+	private OutBoundRequestServiceImpl outBoundRequestService;
 	
 	@SuppressWarnings("unchecked")
 	@Override
@@ -51,6 +64,7 @@ public class OrdinalsServiceImpl implements OrdinalsService{
 					responseMap.put(entity, values);
 				}
 			}
+			responseMap.put("sourceName", getDepatNameList());
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
@@ -264,6 +278,16 @@ public class OrdinalsServiceImpl implements OrdinalsService{
 		}
 		
 		return null;
+	}
+	
+	private List<String> getDepatNameList() {
+		List<String> deptNameList = new ArrayList<String>();
+		StringBuilder builder = new StringBuilder();
+		builder.append(lexCoreHost).append(lexCoreListDeptPath);
+		deptNameList = (List<String>) outBoundRequestService.fetchResult(builder);
+		if (ObjectUtils.isEmpty(deptNameList))
+			return Collections.emptyList();
+		return deptNameList;
 	}
 	
 }
