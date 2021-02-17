@@ -133,6 +133,8 @@ export const CONSTANTS = {
   WORKFLOW_HANDLER_SERVICE_API_BASE: env.WORKFLOW_HANDLER_SERVICE_API_BASE || 'http://localhost:5099',
   SUNBIRD_PROXY_URL: 'https://igot-sunbird.idc.tarento.com/apis/proxies/v8/action',
   SCORING_SERVICE_API_BASE: env.SCORING_SERVICE_API_BASE || 'http://localhost:7014',
+  // tslint:disable-next-line:max-line-length
+  SB_API_KEY: env.SB_API_KEY || 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJRekw4VVA1dUtqUFdaZVpMd1ZtTFJvNHdqWTg2a2FrcSJ9.TPjV0xLacSbp3FbJ7XeqHoKFN35Rl4YHx3DZNN9pm0o',
 }
 
 export const RESTRICTED_PYTHON_STMT: string[] = process.env.RESTRICTED_CHARACTERS
