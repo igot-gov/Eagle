@@ -882,9 +882,9 @@ async function setCookieOnResource(uuid, contentId, cookiePolicy, res, cbpArtifa
       CONTENT_CDN
     } = getCDNsFromKey(key);
 
-    if (!artifactUrl.includes(IMAGES_CDN) && !artifactUrl.includes(CONTENT_CDN)) {
-      throw errors.BadRequest('The artifact URL does not point to S3');
-    }
+    // if (!artifactUrl.includes(IMAGES_CDN) && !artifactUrl.includes(CONTENT_CDN)) {
+    //   throw errors.BadRequest('The artifact URL does not point to S3');
+    // }
 
     contentAccessPaths.replaceWhiteSpacesWithUnderscore();
 
