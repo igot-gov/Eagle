@@ -4,7 +4,9 @@ import { NsDiscussStripNewMultiple } from './discuss-strip-multiple.model'
 import { ContentStripNewMultipleService } from './discuss-strip-multiple.service'
 import { WidgetContentService } from '../_services/widget-content.service'
 import { NsContent } from '../_services/widget-content.model'
-import { Router } from '@angular/router';
+import { Router } from '@angular/router'
+// import { setConfig } from '../../../../../../src/app/component/discuss/discussion.constant'
+import { DiscussUtilsService } from '../../../../../../project/ws/app/src/lib/routes/discuss/services/discuss-utils.service'
 
 import {
   TFetchStatus,
@@ -72,6 +74,7 @@ export class DiscussStripMultipleComponent extends WidgetBaseComponent
     // private eventSvc: EventService,
     // private configSvc: ConfigurationsService,
     protected utilitySvc: UtilityService,
+    private discussUtilitySvc: DiscussUtilsService,
     public router: Router
     // private searchServSvc: SearchServService,
   ) {
@@ -89,13 +92,32 @@ export class DiscussStripMultipleComponent extends WidgetBaseComponent
   }
 
   navigate() {
-    const result = [6];
-    this.router.navigate(['/app/discussion-forum'], {
-      queryParams: {
-        categories: JSON.stringify({ result }),
-        userName: 'ntptest104',
+    this.discussUtilitySvc.setDiscussionConfig({
+      menuOptions: [
+        {
+          route: 'categories',
+          enable: true,
+        },
+        {
+          route: 'tags',
+          enable: true,
+        },
+        {
+          route: 'All discussions',
+          enable: false,
+        },
+        {
+          route: 'my-discussion',
+          enable: false,
+        },
+      ],
+      userName: 'nptest',
+      context: {
+        id: 1,
       },
-    });
+      categories: { result: [2] },
+    })
+    this.router.navigate(['/app/discussion-forum'])
   }
 
   private initData() {

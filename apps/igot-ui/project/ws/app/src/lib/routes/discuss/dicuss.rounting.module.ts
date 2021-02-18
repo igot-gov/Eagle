@@ -16,6 +16,8 @@ import { DiscussRecentResolve } from './resolvers/discuss-recent-resolve'
 import { DiscussTopicResolve } from './resolvers/discuss-topic-resolve'
 import { DiscussUnreadResolve } from './resolvers/discuss-unread-resolve'
 import { DiscussProfileResolve } from './resolvers/discuss-profile-resolve'
+// import { discussionConfig } from '../../../../../../../src/app/component/discuss/discussion.constant'
+import { DiscussConfigResolve } from './resolvers/discuss-config-resolve'
 
 const routes: Routes = [
 
@@ -80,6 +82,10 @@ const routes: Routes = [
     //   },
     // ],
     loadChildren: () => import('./wrapper/wrapper.module').then(u => u.WrapperModule),
+    // component: DiscussionLib,
+    resolve: {
+      data: DiscussConfigResolve,
+    },
   },
 ]
 
@@ -92,6 +98,7 @@ const routes: Routes = [
     DiscussRecentResolve,
     DiscussTopicResolve,
     DiscussUnreadResolve,
+    DiscussConfigResolve,
     DiscussProfileResolve,
   ],
 })
