@@ -863,11 +863,11 @@ function sortAccessPathsOnLevels(accessPaths) {
  *
  */
 
-async function setCookieOnResource(uuid, contentId, cookiePolicy, res) {
+async function setCookieOnResource(uuid, contentId, cookiePolicy, res, cbpArtifactUrl) {
   try {
     let meta = await getContentMeta(contentId);
 
-    let artifactUrl = meta._source.artifactUrl;
+    let artifactUrl = !!cbpArtifactUrl ? cbpArtifactUrl : meta._source.artifactUrl;
     let contentAccessPaths = meta._source.accessPaths;
 
     if (!artifactUrl || !contentAccessPaths) {

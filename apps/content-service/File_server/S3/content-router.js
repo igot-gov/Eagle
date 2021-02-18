@@ -870,10 +870,11 @@ router.post('/cookie/', (req, res) => {
     let uuid = req.body.uuid;
     let contentId = req.body.contentId;
     let cookiePolicy = req.headers.policy;
+    let cbpArtifactUrl = req.body.cbpArtifactUrl || null;
 
     if (!uuid || !contentId) res.send(errors.BadRequest(`uuid and contentId are required`));
     // Set the cookie
-    else utility.setCookieOnResource(uuid, contentId, cookiePolicy, res);
+    else utility.setCookieOnResource(uuid, contentId, cookiePolicy, res, cbpArtifactUrl);
   } catch (err) {
     log.error(err);
     res.send(errors.InternalServerError());
