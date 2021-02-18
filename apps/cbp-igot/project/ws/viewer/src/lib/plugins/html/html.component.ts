@@ -137,7 +137,7 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
         )
       }
       this.iframeUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(
-        `${this.htmlContent.artifactUrl}?timestamp='${new Date().getTime()}`
+        `${this.htmlContent.downloadUrl}?timestamp='${new Date().getTime()}`
       )
       // testing purpose only
       // setTimeout(
@@ -150,7 +150,7 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
       //   },
       //   1000,
       // )
-    } else if (this.htmlContent && this.htmlContent.artifactUrl === '') {
+    } else if (this.htmlContent && this.htmlContent.downloadUrl === '') {
       this.iframeUrl = null
       this.pageFetchStatus = 'artifactUrlMissing'
     } else {

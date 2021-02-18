@@ -319,18 +319,23 @@ export class FileUploadComponent implements OnInit {
         tap(v => {
           this.canUpdate = false
           let url = ''
+          let downloadUrl = ''
           if (this.mimeType === 'application/html') {
             // tslint:disable-next-line:max-line-length
             url = `${environment.karmYogi}content-store/${this.accessService.rootOrg}/${this.accessService.org}/Public/${this.currentContent}/web-hosted/${this.fileUploadCondition.url}`
             // document.location.origin
+            // tslint:disable-next-line:max-line-length
+            downloadUrl = `${document.location.origin}/content-store/${this.accessService.rootOrg}/${this.accessService.org}/Public/${this.currentContent}/web-hosted/${this.fileUploadCondition.url}`
           } else {
             url = (v.authArtifactURL || v.artifactURL).replace(/%2F/g, '/')
           }
           this.fileUploadForm.controls.artifactUrl.setValue(url)
-          this.fileUploadForm.controls.downloadUrl.setValue(v ? v.downloadURL : '')
           this.fileUploadForm.controls.mimeType.setValue(this.mimeType)
           if (this.mimeType === 'application/html' && this.file && this.file.name.toLowerCase().endsWith('.zip')) {
             this.fileUploadForm.controls.isExternal.setValue(false)
+            this.fileUploadForm.controls.downloadUrl.setValue(v ? v.downloadURL : downloadUrl)
+          } else {
+            this.fileUploadForm.controls.downloadUrl.setValue(v ? v.downloadURL : '')
           }
           // if (this.mimeType === 'application/x-mpegURL') {
           //   this.fileUploadForm.controls.transcoding.setValue({
