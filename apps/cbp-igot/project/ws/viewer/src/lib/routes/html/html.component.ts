@@ -12,6 +12,7 @@ import {
 import { fromEvent, Subscription } from 'rxjs'
 import { filter } from 'rxjs/operators'
 import { ViewerUtilService } from '../../viewer-util.service'
+import { environment } from '../../../../../../../src/environments/environment'
 @Component({
   selector: 'viewer-html',
   templateUrl: './html.component.html',
@@ -75,7 +76,7 @@ export class HtmlComponent implements OnInit, OnDestroy {
                 : `https://${data.artifactUrl}`).replace(/ /ig, '').replace(/%20/ig, '').replace(/\n/ig, '')
             if (this.accessControlSvc.hasAccess(data as any, true)) {
               if (data && data.artifactUrl.indexOf('content-store') >= 0) {
-                await this.setS3Cookie(data.identifier)
+                await this.setS3Cookie(data.identifier, data.artifactUrl)
                 this.htmlData = data
               } else {
                 this.htmlData = data
@@ -114,7 +115,7 @@ export class HtmlComponent implements OnInit, OnDestroy {
             this.formDiscussionForumWidget(tempHtmlData)
           }
           if (tempHtmlData && tempHtmlData.artifactUrl.indexOf('content-store') >= 0) {
-            await this.setS3Cookie(tempHtmlData.identifier)
+            await this.setS3Cookie(tempHtmlData.identifier, data.artifactUrl)
             this.htmlData = tempHtmlData
           } else {
             this.htmlData = tempHtmlData
@@ -211,7 +212,7 @@ export class HtmlComponent implements OnInit, OnDestroy {
     })
   }
 
-  async  ngOnDestroy() {
+  async ngOnDestroy() {
     if (this.htmlData) {
       if (!this.subApp || this.activatedRoute.snapshot.queryParams.collectionId) {
         await this.saveContinueLearning(this.htmlData)
@@ -253,9 +254,11 @@ export class HtmlComponent implements OnInit, OnDestroy {
     }
   }
 
-  private async setS3Cookie(contentId: string) {
+  private async setS3Cookie(contentId: string, artifactUrl: string) {
+    const cbpArtifactUrl = artifactUrl.replace(environment.karmYogi, `${document.location.origin}/`)
+    // const cbpArtifactUrl = artifactUrl.replace(environment.karmYogi, 'https://cbp-igot-dev.idc.tarento.com/')
     await this.contentSvc
-      .setS3Cookie(contentId)
+      .setS3Cookie(contentId, cbpArtifactUrl)
       .toPromise()
       .catch(() => {
         // throw new DataResponseError('COOKIE_SET_FAILURE')

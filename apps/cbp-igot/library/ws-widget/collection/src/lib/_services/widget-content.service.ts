@@ -131,13 +131,13 @@ export class WidgetContentService {
     const url = API_END_POINTS.USER_CONTINUE_LEARNING
     return this.http.post<any>(url, content)
   }
-
+  /** FOR now _path is optional and only used by Scrom "project/ws/viewer/src/lib/routes/html/html.component.ts" */
   setS3Cookie(
     contentId: string,
-    // _path: string,
+    _path?: string,
   ): Observable<any> {
     return this.http
-      .post(API_END_POINTS.SET_S3_COOKIE, { contentId })
+      .post(API_END_POINTS.SET_S3_COOKIE, { contentId, cbpArtifactUrl: _path })
       .pipe(catchError(_err => of(true)))
   }
 

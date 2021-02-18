@@ -39,7 +39,7 @@ export class HtmlComponent implements OnInit, OnChanges {
   }
   // async setcookies() {
   //   if (this.htmlData && this.htmlData.artifactUrl && (this.htmlData.artifactUrl.indexOf('/content-store/') > -1)) {
-  //     return await this.contentSvc.setS3Cookie(this.htmlData.identifier || '').toPromise()
+  //     return await this.contentSvc.setS3Cookie(this.htmlData.identifier || '', this.htmlData.artifactUrl).toPromise()
   //   }
   // }
   ngOnInit() {
