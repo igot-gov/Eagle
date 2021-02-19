@@ -23,10 +23,11 @@ export class CreateUserComponent implements OnInit {
   queryParam: any
   currentDept: any
 
-  constructor(private router: Router,
-              private route: ActivatedRoute,
-              private snackBar: MatSnackBar,
-              private usersSvc: UsersService) {
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar,
+    private usersSvc: UsersService) {
     this.route.queryParams.subscribe(params => {
       this.queryParam = params['id']
       this.currentDept = params['currentDept']
@@ -112,79 +113,18 @@ export class CreateUserComponent implements OnInit {
   }
   onSubmit(form: any) {
     form.value.department = this.selectedDept ? this.selectedDept.deptName : this.receivedDept.deptName
-
-    this.usersSvc.createUser(form.value).subscribe(res => {
-      // let user
-      this.openSnackbar(res.data)
-      if (res) {
-        // const req = { departments: [] }
-        // req.departments = this.selectedDept ? this.selectedDept.deptName : this.receivedDept.deptName
-
-        this.usersSvc.onSearchUserByEmail(form.value.email).subscribe(data => {
-          // user = data[0]
-          const userreq = {
-            personalDetails: {
-              firstname: data[0].first_name,
-              surname: data[0].last_name,
-              primaryEmail: data[0].email,
-            },
-            professionalDetails: [
-              {
-                name: data[0].department_name,
-              },
-            ],
-            academics: [
-              {
-                nameOfQualification: '',
-                yearOfPassing: '',
-                nameOfInstitute: '',
-                type: 'X_STANDARD',
-              },
-              {
-                nameOfQualification: '',
-                yearOfPassing: '',
-                nameOfInstitute: '',
-                type: 'XII_STANDARD',
-              },
-              {
-                nameOfQualification: '',
-                yearOfPassing: '',
-                nameOfInstitute: '',
-                type: 'GRADUATE',
-              },
-              {
-                nameOfQualification: '',
-                yearOfPassing: '',
-                nameOfInstitute: '',
-                type: 'POSTGRADUATE',
-              },
-            ],
-            interests: {
-              hobbies: [],
-              professional: [],
-            },
-            skills: {
-              certificateDetails: '',
-              additionalSkills: '',
-              osCreatedBy: '',
-            },
-            employmentDetails: {
-              departmentName: '',
-              officialPostalAddress: '',
-              employeeCode: '',
-              allotmentYearOfService: '',
-              payType: '',
-              civilListNo: '',
-              dojOfService: '',
-              service: '',
-              pinCode: '',
-              cadre: '',
-            },
-          }
-          this.usersSvc.createUserById(data[0].wid, userreq).subscribe(userdata => {
+    const userreq = {
+      personalDetails: {
+          email: form.value.email,
+          userName : form.value.fname,
+          firstName: form.value.fname,
+          lastName: form.value.lname,
+      },
+    }
+this.usersSvc.createUser(userreq).subscribe(userdata => {
             if (userdata) {
               const dreq = {
-                userId: data[0] ? data[0].wid : null,
+                userId: userdata.userId,
                 deptId: this.selectedDept ? this.selectedDept.id : this.receivedDept.id,
                 roles: form.value.roles,
                 isActive: true,
@@ -202,12 +142,9 @@ export class CreateUserComponent implements OnInit {
                 }
               })
             }
+          },                                (err: { error: string }) => {
+            this.openSnackbar(err.error)
           })
-        })
-      }
-    },                                             (err: { error: string }) => {
-      this.openSnackbar(err.error.split(':')[1])
-    })
   }
 
   private openSnackbar(primaryMsg: string, duration: number = 5000) {

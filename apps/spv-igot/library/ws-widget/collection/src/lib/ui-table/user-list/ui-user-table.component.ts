@@ -138,7 +138,7 @@ export class UIUserTableComponent implements OnInit, AfterViewInit, OnChanges {
               this.router.navigate(['/app/home/directory', { department: this.departmentRole }])
             }
           },                                                                                            (err: { error: any }) => {
-            this.openSnackbar(err.error.errors[0].message)
+            this.openSnackbar(err.error.message)
           })
         }
       })

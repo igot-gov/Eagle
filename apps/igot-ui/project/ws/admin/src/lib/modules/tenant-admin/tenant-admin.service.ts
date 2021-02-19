@@ -7,7 +7,6 @@ import { map } from 'rxjs/operators'
 const API_ENDPOINTS = {
   getAllSources: '/apis/protected/v8/admin/userRegistration/getAllSources',
   registerUsers: '/apis/protected/v8/admin/userRegistration/register',
-  createUser: '/apis/protected/v8/admin/userRegistration/create-user',
   getOrdinals: '/apis/authApi/action/meta/v2/ordinals/list',
   getAccessPaths: '/apis/protected/v8/admin/userRegistration/user/access-path',
   updateAccessPaths: '/apis/protected/v8/admin/userRegistration/user/update-access-path',
@@ -34,14 +33,6 @@ export class TenantAdminService {
 
   async registerUsers(data: any) {
     return await this.http.post(API_ENDPOINTS.registerUsers, data).toPromise()
-  }
-
-  createUser(data: any): Observable<any> {
-    return this.http.post<any>(API_ENDPOINTS.createUser, data).pipe(
-      map(response => {
-        return response.result
-      }),
-    )
   }
 
   async getOrdinals(rootOrg: string | null, org: string[] | null) {
