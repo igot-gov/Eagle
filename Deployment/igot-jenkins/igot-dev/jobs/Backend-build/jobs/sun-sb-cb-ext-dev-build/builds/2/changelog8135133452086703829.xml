@@ -1,0 +1,21 @@
+commit 0f54d1b111a2ce2e51b3641bae12697b52e020f0
+tree f1b216ba035b9c7b958156f0405399dbf52156f3
+parent 87cf791bd4c5677c31475ece0ecc8fbd693214e7
+author Karthikeyan Rajendran <70887864+karthik-tarento@users.noreply.github.com> 2021-02-03 13:38:46 +0530
+committer GitHub <noreply@github.com> 2021-02-03 13:38:46 +0530
+
+    Using private API for user search
+
+:100644 100644 7f66bbb8787a7538341d88eaad7083027a5254fa 897e9f96adc54256f1828fa3424a6b65f218c99c M	apps/sb-cb-ext/src/main/java/org/sunbird/common/service/UserUtilityServiceImpl.java
+commit 87cf791bd4c5677c31475ece0ecc8fbd693214e7
+tree 333f5e17e741582efdfa5362604a5538b315adfe
+parent b52e962929dd294982b24a574ecc9c614c486f88
+author somvitbhowmik <38094153+somvitbhowmik@users.noreply.github.com> 2021-02-02 15:34:12 +0530
+committer somvitbhowmik <38094153+somvitbhowmik@users.noreply.github.com> 2021-02-02 15:34:12 +0530
+
+    updated properties file
+    
+    updated properties file
+
+
+:100644 100644 e97dcbd9ef1ad4a36da48918b60691003fc10c44 3193c5581c3f0c2425c906f9dfa3a101fb1aaa1d M	apps/sb-cb-ext/src/main/resources/application.properties

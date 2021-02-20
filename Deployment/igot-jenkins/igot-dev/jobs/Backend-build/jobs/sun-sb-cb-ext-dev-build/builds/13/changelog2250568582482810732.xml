@@ -1,0 +1,10 @@
+commit a7599ca31fdb8ceec0554e3b365cb2c47e251b29
+tree edb4aa83a33dabf65044ddeb948d24fb9806253b
+parent 5bb841c1182cc60f90fd668d2b1678f7ee72d04e
+author karthik-tarento <karthikeyan.rajendran@tarento.com> 2021-02-04 13:51:29 +0530
+committer karthik-tarento <karthikeyan.rajendran@tarento.com> 2021-02-04 13:51:29 +0530
+
+    NPE fix for user processing
+
+:100644 100644 4e0ba5e6d43c45c5f7546f63c51a71d7e9a32a2f 69c9bb01a8b6ea36ccccdcaed382246bf71e81f5 M	apps/sb-cb-ext/src/main/java/org/sunbird/common/service/UserUtilityServiceImpl.java
+:100644 100644 176ea426394e72e4e8afec1b9aeae9e4b21be307 7a7530dfb497fb0cf3b98804fb7ebe38deb1e112 M	apps/sb-cb-ext/src/main/java/org/sunbird/portal/department/service/PortalServiceImpl.java

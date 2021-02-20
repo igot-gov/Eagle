@@ -1,0 +1,19 @@
+commit f663c6008192512e83a8ca30bc6cd945ac8d2431
+tree ac29b110030ab4267798d7f88a07ef38ff05c275
+parent 7d9542e266ec890d2ebbe21c575637754710d878
+author karthik-tarento <karthikeyan.rajendran@tarento.com> 2021-02-04 12:58:19 +0530
+committer karthik-tarento <karthikeyan.rajendran@tarento.com> 2021-02-04 12:58:19 +0530
+
+    Using OpenSaber instead of SB user profile for user info.
+
+:000000 100644 0000000000000000000000000000000000000000 a5d95095ccaaf9549ee22ff2fbf684bfa43d31c9 A	apps/sb-cb-ext/.classpath
+:000000 100644 0000000000000000000000000000000000000000 0d3c7a9ee056e996da58fdb64ee0a6189228425d A	apps/sb-cb-ext/.project
+:000000 100644 0000000000000000000000000000000000000000 abdea9ac032d4655898933f93050f48bf9581d14 A	apps/sb-cb-ext/.settings/org.eclipse.core.resources.prefs
+:000000 100644 0000000000000000000000000000000000000000 71df5229cedf196c23a7f7e9bd3ea925f0af4e17 A	apps/sb-cb-ext/.settings/org.eclipse.jdt.core.prefs
+:000000 100644 0000000000000000000000000000000000000000 f897a7f1cb2389f85fe6381425d29f0a9866fb65 A	apps/sb-cb-ext/.settings/org.eclipse.m2e.core.prefs
+:000000 100644 0000000000000000000000000000000000000000 59390dbaf5b95fd5efe76fa8af749761c7498b9b A	apps/sb-cb-ext/src/main/java/org/sunbird/common/model/OpenSaberApiPersonalDetail.java
+:000000 100644 0000000000000000000000000000000000000000 dcbe3e2b4298b39b27f33aaa1fff41f949880d75 A	apps/sb-cb-ext/src/main/java/org/sunbird/common/model/OpenSaberApiResp.java
+:000000 100644 0000000000000000000000000000000000000000 dcb5da65b231574468baf41b44f7765412744310 A	apps/sb-cb-ext/src/main/java/org/sunbird/common/model/OpenSaberApiRespResult.java
+:000000 100644 0000000000000000000000000000000000000000 2e9fd8c85ee9dd3ad451021c8c0e34330c419f6a A	apps/sb-cb-ext/src/main/java/org/sunbird/common/model/OpenSaberApiUserProfile.java
+:100644 100644 e7394fbf3b208919b105fcb063b33bcbaf626013 4e0ba5e6d43c45c5f7546f63c51a71d7e9a32a2f M	apps/sb-cb-ext/src/main/java/org/sunbird/common/service/UserUtilityServiceImpl.java
+:100644 100644 4ff1b294901b3eea766b5d95f13cdf5ed1b17943 4670414c54609f17fb8fb1c44b5ebf145e63129f M	apps/sb-cb-ext/src/main/java/org/sunbird/common/util/CbExtServerProperties.java

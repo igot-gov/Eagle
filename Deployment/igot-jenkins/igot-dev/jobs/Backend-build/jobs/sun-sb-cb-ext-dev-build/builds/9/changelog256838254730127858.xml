@@ -1,0 +1,12 @@
+commit 7a00c3e105562496aabeafc037dc08c2402d09e7
+tree c1cc4830b432bc8f5dd3de94baba515e2b05be09
+parent fa3857c5ef9f0ccc404437ef1d84191c01ecbd3c
+author amit-kumaryadav <amtydv630@gmail.com> 2021-02-03 20:21:34 +0530
+committer amit-kumaryadav <amtydv630@gmail.com> 2021-02-03 20:21:34 +0530
+
+    Added user role API
+
+
+:100644 100644 c8a1483c674cc5d23891ec7b9ba33ff36c538dfe d700961000d5a7e3e6ee70e06cd9e0d817c32829 M	apps/sb-cb-ext/src/main/java/org/sunbird/portal/department/controller/RoleController.java
+:100644 100644 d4cef84edbb81cf3a92da88478024b8ef9e1fcbf d86e026f27879e43fdade220d2a6f163970d0a0e M	apps/sb-cb-ext/src/main/java/org/sunbird/portal/department/service/RoleService.java
+:100644 100644 c7ae909b6319b701fd10d7175957f084f8bfff04 438522b6a05ab38884613296a56e42e18196f757 M	apps/sb-cb-ext/src/main/java/org/sunbird/portal/department/service/RoleServiceImpl.java

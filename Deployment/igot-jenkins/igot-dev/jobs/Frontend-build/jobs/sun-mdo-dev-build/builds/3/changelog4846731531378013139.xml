@@ -1,0 +1,28 @@
+commit 2b63cefe491ae24fa00cbed03a139464499748ac
+tree f28a92b9aa2789099d860f3ceaddfc0f4caef12e
+parent 24affb66b873f35a9f5e72d102868e6fb8530221
+author Amit Kumar <amit.sengar@tarento.com> 2021-02-05 18:50:44 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2021-02-05 18:50:55 +0530
+
+    lint fix
+
+
+:100644 100644 4cdc9466625de173884c22a16c7627a27a1156a0 ff58f90d87547855c282a65adeb7716afdd084b2 M	apps/mdo-igot/library/ws-widget/utils/src/lib/services/configurations.model.ts
+:100644 100644 74215a7c601bb8aca0daa7ab658fa6fefe563dc3 689c32f8a1f6e81750f7918124229b2eb0a3e28f M	apps/mdo-igot/project/ws/app/src/lib/routes/events/resolvers/department-resolve.ts
+:100644 100644 d513a2b3fa8a155bbb7a3588c59270dcf31ae769 d6d617fea1c105a133cba948beb3d1cf1de9f169 M	apps/mdo-igot/project/ws/app/src/lib/routes/home/home.rounting.module.ts
+:100644 100644 c4685a0a2ef2b81d73c9e2917e98722deb100068 321b75b2006158d4d1425c4acaa9d84c96ac46d2 M	apps/mdo-igot/project/ws/app/src/lib/routes/home/resolvers/department-resolve.ts
+:100644 100644 d803f6592bdc6bdd1d8c8498403efbc911b7c20a f868b111f4b3f88e652a1d3467e0a60c6c5ac350 M	apps/mdo-igot/project/ws/app/src/lib/routes/home/routes/home/home.component.ts
+:100644 100644 ae8cf626b4fc84471d9197db406f67eb93023b1e 968501d3c6f792fbbe9569b3afd8e15a359b4fb4 M	apps/mdo-igot/project/ws/app/src/lib/routes/home/routes/users-view/users-view.component.ts
+:100644 100644 74215a7c601bb8aca0daa7ab658fa6fefe563dc3 b372353a18748acaf51701a995da6119ac51832b M	apps/mdo-igot/project/ws/app/src/lib/routes/users/resolvers/department-resolve.ts
+:100644 100644 075b4fc46a6b327129056fe84e21c9ed0633c3ed bf6c41e37259ac7c006ddfbd8382975f0c593c17 M	apps/mdo-igot/proxy/localhost.proxy.json
+:100644 100644 c278a27d13abafc9e94e095e4288908ce1a227f1 f9bb567d95cb2578d1420fbb2387fa32770b48a5 M	apps/mdo-igot/src/app/services/init.service.ts
+commit 24affb66b873f35a9f5e72d102868e6fb8530221
+tree 75d7b69376128bff89bae0b3185075a796f9a0cd
+parent 2c8afe1642a33aec643402a642ce86a1a991550c
+author Keyur Rathod <keyur.rathod84@gmail.com> 2021-02-05 18:14:53 +0530
+committer Keyur Rathod <keyur.rathod84@gmail.com> 2021-02-05 18:14:53 +0530
+
+    project/ws/app/src/lib/routes/events/services/users.service.ts
+
+
+:000000 100644 0000000000000000000000000000000000000000 ab3d80585168784859de31500882c0e7ab1b15f4 A	apps/mdo-igot/project/ws/app/src/lib/routes/events/services/users.service.ts

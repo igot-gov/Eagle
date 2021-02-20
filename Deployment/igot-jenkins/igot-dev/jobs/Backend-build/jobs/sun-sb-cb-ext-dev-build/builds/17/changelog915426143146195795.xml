@@ -1,0 +1,9 @@
+commit a20c2a3be90455b52a84d7283d01289bda5673a8
+tree 5c12280dddda93932e73bfc43094bff99a7666b5
+parent f8fdf41126d093a511b6d1b2c413fad20a46f4d0
+author karthik-tarento <karthikeyan.rajendran@tarento.com> 2021-02-04 16:19:35 +0530
+committer karthik-tarento <karthikeyan.rajendran@tarento.com> 2021-02-04 16:19:35 +0530
+
+    Code cleanup
+
+:100644 100644 015c058394a7cefe231af734a4e6ef8483a15edd dba62bb8e55d29e9003166c1b7b9dea7c59a324c M	apps/sb-cb-ext/src/main/java/org/sunbird/common/service/UserUtilityServiceImpl.java

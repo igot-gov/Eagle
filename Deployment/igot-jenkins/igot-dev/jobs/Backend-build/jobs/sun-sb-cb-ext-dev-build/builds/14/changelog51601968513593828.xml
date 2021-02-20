@@ -1,0 +1,9 @@
+commit 688c705b5a94f62dbe3a9a56dc2b1763525f49b6
+tree 9f8bc17fd073a8a013707f45ef6687001e62884a
+parent a7599ca31fdb8ceec0554e3b365cb2c47e251b29
+author karthik-tarento <karthikeyan.rajendran@tarento.com> 2021-02-04 14:26:37 +0530
+committer karthik-tarento <karthikeyan.rajendran@tarento.com> 2021-02-04 14:26:37 +0530
+
+    Testing OpenSaber response
+
+:100644 100644 69c9bb01a8b6ea36ccccdcaed382246bf71e81f5 5f35e96e5b69a3adf18d76f939e9fa1e43cdfca5 M	apps/sb-cb-ext/src/main/java/org/sunbird/common/service/UserUtilityServiceImpl.java

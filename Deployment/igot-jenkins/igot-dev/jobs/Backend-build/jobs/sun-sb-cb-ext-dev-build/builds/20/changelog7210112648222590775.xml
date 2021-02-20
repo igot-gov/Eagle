@@ -1,0 +1,9 @@
+commit a7d03bc46ee66649a701ca6fa07f2214cbea31d7
+tree 64e66b6c276c54da412ca7ea691efd4a167a21c4
+parent 29b28eab7d3ae58b4fde418f691ea42e291979a3
+author karthik-tarento <karthikeyan.rajendran@tarento.com> 2021-02-09 13:44:23 +0530
+committer karthik-tarento <karthikeyan.rajendran@tarento.com> 2021-02-09 13:44:23 +0530
+
+    Fix for NPE when enriching departmentInfo
+
+:100644 100644 e50fb5eecfcdc3fa1717a7540eba36af4fc20001 b489a43e2a224f099ee16a1c14775fed9e9ae910 M	apps/sb-cb-ext/src/main/java/org/sunbird/portal/department/service/PortalServiceImpl.java

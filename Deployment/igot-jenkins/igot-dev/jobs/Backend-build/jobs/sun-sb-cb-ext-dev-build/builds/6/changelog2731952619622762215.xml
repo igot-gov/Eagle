@@ -1,0 +1,17 @@
+commit fa3857c5ef9f0ccc404437ef1d84191c01ecbd3c
+tree 9d6f0f113616fcf8824534d05af9e115c14d5a81
+parent a6edc355aa542aa41b1a53d4bc4f64cc1fcc99fb
+author karthik-tarento <karthikeyan.rajendran@tarento.com> 2021-02-03 17:22:43 +0530
+committer karthik-tarento <karthikeyan.rajendran@tarento.com> 2021-02-03 17:22:43 +0530
+
+    Removed auth and x-auth headers from all APIs
+
+:100644 100644 4ab3818f148974390f0bad81ee262a2e81e3bb26 a7ff5a9db927589dc60e9436433be7f2d2a94bd2 M	apps/sb-cb-ext/src/main/java/org/sunbird/common/service/UserUtilityService.java
+:100644 100644 86b3619ef39321b76f9b00339fb60e44891d6b57 e7394fbf3b208919b105fcb063b33bcbaf626013 M	apps/sb-cb-ext/src/main/java/org/sunbird/common/service/UserUtilityServiceImpl.java
+:100644 100644 1a168c43d0ddee911449ee3d12885d3ab2a730a6 a3c0fdaf02aed3acfa7983bfa7ec8230b92cb464 M	apps/sb-cb-ext/src/main/java/org/sunbird/portal/department/controller/PortalController.java
+:100644 100644 0dd41cbc5ef849b46b6cf4d692949c3b4e8e4e01 9f06ac62ecacc9696a4da7e13d5a2adcd0d39bda M	apps/sb-cb-ext/src/main/java/org/sunbird/portal/department/service/MdoPortalService.java
+:100644 100644 d1260f636240b80bd0b6f0d4877659e4d4678c62 c488fe4ac2229d0ede2d3de70ed79edaef2e7045 M	apps/sb-cb-ext/src/main/java/org/sunbird/portal/department/service/MdoPortalServiceImpl.java
+:100644 100644 643a8ab2066bad36ffb263f73db0717daa6c9e88 98fac8281cd8a7f4ac35e734234b91ded25a4f08 M	apps/sb-cb-ext/src/main/java/org/sunbird/portal/department/service/PortalService.java
+:100644 100644 f88e8a9ca20cff53099ac913e340dd522e8a64fb 176ea426394e72e4e8afec1b9aeae9e4b21be307 M	apps/sb-cb-ext/src/main/java/org/sunbird/portal/department/service/PortalServiceImpl.java
+:100644 100644 0697aed6db15cafeccda25ec48911df6cd513bf3 99ac6b4755647b794de4df1bb4dfc32e5566e672 M	apps/sb-cb-ext/src/main/java/org/sunbird/portal/department/service/SpvPortalService.java
+:100644 100644 1b3bfaadfdd27b5f8be656e7e28339fff2d6cbfa 65db34370595800b2a34b6f28f77e645ea0dd0bb M	apps/sb-cb-ext/src/main/java/org/sunbird/portal/department/service/SpvPortalServiceImpl.java

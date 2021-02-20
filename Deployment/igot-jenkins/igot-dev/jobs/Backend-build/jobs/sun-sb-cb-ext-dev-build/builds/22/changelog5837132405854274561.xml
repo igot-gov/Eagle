@@ -1,0 +1,9 @@
+commit af2557555980b636f0e43fd07eeb357f03352896
+tree 5fbcd870af2c35b82d8d1da23ef17850ec2ad495
+parent 0d194b38255587d5f63fa27cbd9a783e45f101d3
+author Amit Kumar Yadav <36166686+amit-kumaryadav@users.noreply.github.com> 2021-02-12 10:50:52 +0530
+committer GitHub <noreply@github.com> 2021-02-12 10:50:52 +0530
+
+    Update PortalServiceImpl.java
+
+:100644 100644 2e3633701b6ad8ec308f778a38f5e70e12436a57 2be9c714233cc6369d7a8999b1346e93e9c88fb2 M	apps/sb-cb-ext/src/main/java/org/sunbird/portal/department/service/PortalServiceImpl.java

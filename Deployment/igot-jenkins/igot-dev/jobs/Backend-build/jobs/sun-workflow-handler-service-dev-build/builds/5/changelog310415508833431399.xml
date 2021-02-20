@@ -1,0 +1,10 @@
+commit 1951e290c8ea66edc46f2fe9f40f414d90cfe4a4
+tree 5be6038885c042bd4add5505222634adc0cbb2dc
+parent 472e8d2a50ac8218fc024348c9cb5592147ce1dc
+author amit-kumaryadav <amtydv630@gmail.com> 2021-02-11 17:17:24 +0530
+committer amit-kumaryadav <amtydv630@gmail.com> 2021-02-11 17:17:24 +0530
+
+    Added logger for exception
+
+
+:100644 100644 99b07092442846942a3d2e4d5a2bb8b4b97b788c 961df8cf278faefb49bb609c8b76d3aaf7d0f7c2 M	src/main/java/org/sunbird/workflow/service/impl/UserProfileWfServiceImpl.java

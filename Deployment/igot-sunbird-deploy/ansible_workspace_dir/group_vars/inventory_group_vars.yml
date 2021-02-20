@@ -15,12 +15,20 @@ sunbird_cassandra_password: password
 
 frac_api_base: https://frac_url
 
+profanity_service_host: http://IP:4001 #profanity-service host details
+
 # Cassandra configuration
 enable_password_for_cassandra: "false"  #can be true or false
 cassandra_host: cassandra_host_ip #10.0.1.2
 cassandra_port: cassandra_host_port #9042
 cassandra_username: username
 cassandra_password: username
+
+discussion_hub_api_base: https://domainname/nodebb
+discussion_hub_default_password: password
+discussion_hub_write_api_key: key # key will get from write_api plugins
+discussion_hub_write_api_uid: 1
+discussion_category_list: cid[]=2
 
 # Cassandra keyspaces
 keyspace_bodhi: bodhi

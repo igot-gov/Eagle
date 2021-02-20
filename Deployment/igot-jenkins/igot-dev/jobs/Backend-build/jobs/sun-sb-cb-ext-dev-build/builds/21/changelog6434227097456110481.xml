@@ -1,0 +1,14 @@
+commit 0d194b38255587d5f63fa27cbd9a783e45f101d3
+tree 1500593894c926f67684301ca13d4376c2e2f338
+parent a7d03bc46ee66649a701ca6fa07f2214cbea31d7
+author karthik-tarento <karthikeyan.rajendran@tarento.com> 2021-02-11 11:04:17 +0530
+committer karthik-tarento <karthikeyan.rajendran@tarento.com> 2021-02-11 11:04:17 +0530
+
+    Added public APIs to get department details
+
+:100644 100644 a3c0fdaf02aed3acfa7983bfa7ec8230b92cb464 3e32d469e65fa717cc53cda8b40e887504536362 M	apps/sb-cb-ext/src/main/java/org/sunbird/portal/department/controller/PortalController.java
+:100644 100644 ea55982e13eeb61a32f1b404243aa6cb46a4144e 41fc3c9adf5a6c9a5d44a6896e7da526ef9577a7 M	apps/sb-cb-ext/src/main/java/org/sunbird/portal/department/dto/Department.java
+:000000 100644 0000000000000000000000000000000000000000 36475960b44d4bfc839058f6a6cef76b9f6f7b48 A	apps/sb-cb-ext/src/main/java/org/sunbird/portal/department/model/DeptPublicInfo.java
+:100644 100644 4cb60db334904f72cabb6de9c3ca7e082ac8465d 66114bdd74bb1edc529a7c6521980ee958be1af5 M	apps/sb-cb-ext/src/main/java/org/sunbird/portal/department/repo/DepartmentRepository.java
+:100644 100644 98fac8281cd8a7f4ac35e734234b91ded25a4f08 c7fb9482ce32402a06f92f4df1e3e0933b04362f M	apps/sb-cb-ext/src/main/java/org/sunbird/portal/department/service/PortalService.java
+:100644 100644 b489a43e2a224f099ee16a1c14775fed9e9ae910 2e3633701b6ad8ec308f778a38f5e70e12436a57 M	apps/sb-cb-ext/src/main/java/org/sunbird/portal/department/service/PortalServiceImpl.java

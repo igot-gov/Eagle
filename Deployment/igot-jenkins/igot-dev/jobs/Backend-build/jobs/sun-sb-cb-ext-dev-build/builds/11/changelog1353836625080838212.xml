@@ -1,0 +1,10 @@
+commit 27ae5246fcb29c796ce32468d82f5f25a00d8bec
+tree 435ef7d51deb322eb384c7a50ae77175799c842e
+parent f663c6008192512e83a8ca30bc6cd945ac8d2431
+author karthik-tarento <karthikeyan.rajendran@tarento.com> 2021-02-04 13:23:24 +0530
+committer karthik-tarento <karthikeyan.rajendran@tarento.com> 2021-02-04 13:23:24 +0530
+
+    Updated property. Using capital letter for variable.
+
+:100644 100644 dcb5da65b231574468baf41b44f7765412744310 6fc8b3d43f106bc1741ca120d2d7a76b9d253d5c M	apps/sb-cb-ext/src/main/java/org/sunbird/common/model/OpenSaberApiRespResult.java
+:100644 100644 d4deb7b1c6f44fd2625cfecb0b8f7dbbddaae6a9 c3584101ffdcc51b6383cc5b59de7e954b84b9a0 M	apps/sb-cb-ext/src/main/resources/application.properties

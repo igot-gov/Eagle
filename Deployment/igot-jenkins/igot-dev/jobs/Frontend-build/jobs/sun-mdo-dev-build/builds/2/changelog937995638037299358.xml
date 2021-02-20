@@ -1,0 +1,24 @@
+commit 2c8afe1642a33aec643402a642ce86a1a991550c
+tree 758465a381fa887451258228670fd34c18340657
+parent 439a5f713c383a1e011ba28c4ec193b98fa044e4
+author Amit Kumar <amit.sengar@tarento.com> 2021-02-05 13:07:32 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2021-02-05 13:07:32 +0530
+
+    build fix with package file
+
+
+:100644 000000 00a2c8764451bd95c5a6c070d854c889a67eb67d 0000000000000000000000000000000000000000 D	apps/mdo-igot/library/ws-widget/collection/src/lib/_services/videojs-util.ts
+:100644 000000 f97c298deb4fd94be2621a455264e03cb8a303a7 0000000000000000000000000000000000000000 D	apps/mdo-igot/library/ws-widget/collection/src/lib/player-audio/player-audio.component.html
+:100644 000000 87052b47b1cbc9e581f8feb5081c4313f5b0cbdd 0000000000000000000000000000000000000000 D	apps/mdo-igot/library/ws-widget/collection/src/lib/player-audio/player-audio.component.scss
+:100644 000000 33170ce4d7a751d4d02bb68188b17f7c26e8959b 0000000000000000000000000000000000000000 D	apps/mdo-igot/library/ws-widget/collection/src/lib/player-audio/player-audio.component.spec.ts
+:100644 000000 e3a23e219d7a65ec5c156a6b69261e0de53fc8f2 0000000000000000000000000000000000000000 D	apps/mdo-igot/library/ws-widget/collection/src/lib/player-audio/player-audio.component.ts
+:100644 000000 da15aadc9377a2a032607906022aba6e225b80e6 0000000000000000000000000000000000000000 D	apps/mdo-igot/library/ws-widget/collection/src/lib/player-audio/player-audio.module.ts
+:100644 000000 f50b4f35eb8c245d067fbf2c7260485de8108e13 0000000000000000000000000000000000000000 D	apps/mdo-igot/library/ws-widget/collection/src/lib/player-video/player-video.component.html
+:100644 000000 87052b47b1cbc9e581f8feb5081c4313f5b0cbdd 0000000000000000000000000000000000000000 D	apps/mdo-igot/library/ws-widget/collection/src/lib/player-video/player-video.component.scss
+:100644 000000 83e45f2e5ed5c58370ffa47c9af0e105eaeff9a0 0000000000000000000000000000000000000000 D	apps/mdo-igot/library/ws-widget/collection/src/lib/player-video/player-video.component.spec.ts
+:100644 000000 de38d54c4116533964a972fe655762d603bca56c 0000000000000000000000000000000000000000 D	apps/mdo-igot/library/ws-widget/collection/src/lib/player-video/player-video.component.ts
+:100644 000000 fbdf0393daf785e642bca2572a77a177d2554398 0000000000000000000000000000000000000000 D	apps/mdo-igot/library/ws-widget/collection/src/lib/player-video/player-video.module.ts
+:100644 100644 2333b175ac0aa1316da665318648d92aa57fd548 954c3688a76048118dc5cdde5efd511ef2ae0148 M	apps/mdo-igot/library/ws-widget/collection/src/lib/registration.config.ts
+:100644 100644 4617dfb74da3c25089c53c7c89f0251f31a5cc9f bc0f4cdac0c528728a763aab1bcb1c411b462647 M	apps/mdo-igot/library/ws-widget/collection/src/public-api.ts
+:100644 100644 d1b1af7701f2aa3a393c82e096c229825640750c f9909308a14566a703f866543b4c9ce13b39b616 M	apps/mdo-igot/package.json
+:100644 100644 5717e09562ed6549953110c65feaf2cd28cbba87 fb6259b95e07665c9e106def4de4f46d57060bd2 M	apps/mdo-igot/src/styles/libraries.scss

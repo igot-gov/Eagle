@@ -1,0 +1,11 @@
+commit a8171d2075c95bbf07ced1157806825d9a161840
+tree 56a436f698ce6ea00c8e5b62ae2070ab80c52cd8
+parent 0f54d1b111a2ce2e51b3641bae12697b52e020f0
+author somvitbhowmik <38094153+somvitbhowmik@users.noreply.github.com> 2021-02-03 13:54:05 +0530
+committer somvitbhowmik <38094153+somvitbhowmik@users.noreply.github.com> 2021-02-03 13:54:05 +0530
+
+    Using private API for user search
+
+
+:100644 100644 897e9f96adc54256f1828fa3424a6b65f218c99c 86b3619ef39321b76f9b00339fb60e44891d6b57 M	apps/sb-cb-ext/src/main/java/org/sunbird/common/service/UserUtilityServiceImpl.java
+:100644 100644 3193c5581c3f0c2425c906f9dfa3a101fb1aaa1d d4deb7b1c6f44fd2625cfecb0b8f7dbbddaae6a9 M	apps/sb-cb-ext/src/main/resources/application.properties

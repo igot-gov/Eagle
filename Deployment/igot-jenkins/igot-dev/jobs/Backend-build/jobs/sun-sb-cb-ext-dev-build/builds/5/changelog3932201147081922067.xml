@@ -1,0 +1,10 @@
+commit a6edc355aa542aa41b1a53d4bc4f64cc1fcc99fb
+tree 9c38bb200349dfbcef9d6ddf67124bf8d38c9138
+parent a8171d2075c95bbf07ced1157806825d9a161840
+author somvitbhowmik <38094153+somvitbhowmik@users.noreply.github.com> 2021-02-03 16:31:07 +0530
+committer somvitbhowmik <38094153+somvitbhowmik@users.noreply.github.com> 2021-02-03 16:31:07 +0530
+
+    Modified primitive type to object
+
+
+:100644 100644 c164dbb1c2e5775bef341677366e95d725bf7a3d ea55982e13eeb61a32f1b404243aa6cb46a4144e M	apps/sb-cb-ext/src/main/java/org/sunbird/portal/department/dto/Department.java

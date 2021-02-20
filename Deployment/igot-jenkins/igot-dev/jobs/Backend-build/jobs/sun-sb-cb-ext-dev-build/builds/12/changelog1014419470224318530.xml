@@ -1,0 +1,9 @@
+commit 5bb841c1182cc60f90fd668d2b1678f7ee72d04e
+tree 4816fd4c26eb7a5516581d6493f869d51c0a4a26
+parent 27ae5246fcb29c796ce32468d82f5f25a00d8bec
+author karthik-tarento <karthikeyan.rajendran@tarento.com> 2021-02-04 13:31:01 +0530
+committer karthik-tarento <karthikeyan.rajendran@tarento.com> 2021-02-04 13:31:01 +0530
+
+    Using jsonProperty to define member name
+
+:100644 100644 6fc8b3d43f106bc1741ca120d2d7a76b9d253d5c 63366d4f32288e440f09d6d7b5e1b174ebf0579e M	apps/sb-cb-ext/src/main/java/org/sunbird/common/model/OpenSaberApiRespResult.java

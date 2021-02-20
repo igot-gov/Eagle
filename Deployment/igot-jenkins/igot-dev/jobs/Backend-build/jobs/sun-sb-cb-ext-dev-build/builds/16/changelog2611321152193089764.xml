@@ -1,0 +1,9 @@
+commit f8fdf41126d093a511b6d1b2c413fad20a46f4d0
+tree e537582ec589590a83fc1bb117be7b62061aeee0
+parent cb739bb168691adf250d5455474aac4f0f2589a2
+author karthik-tarento <karthikeyan.rajendran@tarento.com> 2021-02-04 16:10:53 +0530
+committer karthik-tarento <karthikeyan.rajendran@tarento.com> 2021-02-04 16:10:53 +0530
+
+    Fix for hub-graph service call
+
+:100644 100644 c5e9d20b4007fbd2a6c23766b7023ec02e5051e3 015c058394a7cefe231af734a4e6ef8483a15edd M	apps/sb-cb-ext/src/main/java/org/sunbird/common/service/UserUtilityServiceImpl.java

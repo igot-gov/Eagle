@@ -1,0 +1,10 @@
+commit 99019d4131f5e1473df67abc009b21d14d129f70
+tree 63ec6055f3bd4c180f0761e47bdb7dc9e5890247
+parent 5f4d5f482f3f0893e72115da0d07b077ff5cc60d
+author Jenifer Ramsingh <jenifer.ramsingh@tarento.com> 2021-02-10 12:39:13 +0530
+committer Jenifer Ramsingh <jenifer.ramsingh@tarento.com> 2021-02-10 12:39:13 +0530
+
+    code cleaning
+
+
+:100644 100644 b693cb621d2352c087c0b0d0ec3d27481b55c3e8 a041afc55b3e29b0cccbc3fb80a4e7e35ef489aa M	apps/spv-igot/src/app/services/init.service.ts
