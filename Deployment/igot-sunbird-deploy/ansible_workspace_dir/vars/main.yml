@@ -56,6 +56,10 @@ service_sb_hub_graph_service: sb-hub-graph-service
 service_profanity_filter_service: profanity-filter
 service_ui_cbp_igot_service: ui-cbp-igot
 service_scoring_engine_service: scoring-engine-service
+service_workflow_handler_service: workflow-handler-service
+service_sb_cb_ext_service: sb-cb-ext-service
+service_ui_mdo_igot_service: ui-mdo-igot
+service_ui_spv_igot_service: ui-spv-igot
 
 # Ports
 service_antivirus_port: 3310
@@ -113,6 +117,11 @@ service_sb_hub_graph_port: 4013
 service_profanity_filter_port: 5000
 service_ui_cbp_igot_port: 3024
 service_scoring_engine_port: 7014
+service_workflow_handler_port: 5099
+service_sb_cb_ext_port: 7001
+service_ui_mdo_igot_port: 3034
+service_ui_spv_igot_port: 3044
+
 
 # Network alias names, so that one service can talk to another
 network_alias_content_service: private-content-service
@@ -172,6 +181,10 @@ network_alias_sb_hub_graph_service: hub-graph-service
 network_alias_profanity_filter_service: profanity-filter
 network_alias_ui_cbp_igot_service: ui-cbp-igot
 network_alias_scoring_engine_service: scoring-engine-service
+network_alias_workflow_handler_service: workflow-handler-service
+network_alias_sb_cb_ext_service: sb-cb-ext-service
+network_alias_ui_mdo_igot_service: ui-mdo-igot
+network_alias_ui_spv_igot_service: ui-spv-igot
 
 # Image names, this is used by the service alone, but since we want to have all the images in one place, we are oncfiguring the images here
 image_ui_static: ui-static
@@ -221,7 +234,12 @@ image_social_share_service: social-share
 image_sb_hub_graph_service: sb-hub-graph-service
 image_profanity_filter_service: profanity-filter
 image_ui_cbp_igot: ui-cbp-igot
+image_workflow_handler_service: workflow-handler-service
 image_scoring_engine_service: scoring-engine-service
+image_sb_cb_ext_service: sb-cb-ext-service
+image_ui_mdo_igot: ui-mdo-igot
+image_ui_spv_igot: ui-spv-igot
+
 
 health_end_point_sb_ext_service: "http://localhost:{{ service_sb_ext_port }}/v1/latest/terms/user"
 elasticsearch_hosts_list: "{{ elasticsearch_http_hosts_list | map('regex_replace','^(?P<host>.+):(?P<port>\\d+)$', '\\g<host>') | list | join (',') }}"
