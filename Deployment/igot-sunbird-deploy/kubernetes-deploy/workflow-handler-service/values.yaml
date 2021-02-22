@@ -1,0 +1,30 @@
+### Default variable file for lms-service ###
+
+namespace: dev
+imagepullsecrets: devregistrysecret
+dockerhub: eagle-docker.tarento.com
+
+
+env:
+  javaoptions: -Xmx600m
+
+replicaCount: 1
+repository: workflow-handler-service
+image_tag: d7fcf16
+resources:
+  requests:
+    cpu: 100m
+    memory: 100Mi
+  limits:
+    cpu: 1
+    memory: 1024Mi
+network:
+  port: 5099
+  targetport: 5099
+strategy:
+  type: RollingUpdate
+  maxsurge: 25%
+  maxunavailable: 25%
+
+
+
