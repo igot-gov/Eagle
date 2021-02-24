@@ -14,7 +14,8 @@ import {
   SEARCH_V6_ADMIN,
   SEARCH_V6_AUTH,
   AUTHORING_BASE,
-  SEND_TO_REVIEW
+  SEND_TO_REVIEW,
+  PUBLISH_CONTENT,
 } from '@ws/author/src/lib/constants/apiEndpoints'
 import { NSApiResponse } from '@ws/author/src/lib/interface//apiResponse'
 import { NSApiRequest } from '@ws/author/src/lib/interface/apiRequest'
@@ -34,6 +35,7 @@ export class EditorService {
     private apiService: ApiService,
     private accessService: AccessControlService,
     private userAutoComplete: UserAutocompleteService,
+    // private configSvc: ConfigurationsService
   ) { }
 
   create(meta: NSApiRequest.ICreateMetaRequestGeneral): Observable<string> {
@@ -256,9 +258,21 @@ export class EditorService {
     return this.apiService.post<null>(STATUS_CHANGE + id, requestBody)
   }
 
-  sendToReview(id: string) {
-    let requestbody = {}
-    return this.apiService.post<null>(SEND_TO_REVIEW + id, requestbody)
+  sendToReview(id: string, status: string) {
+    if (status === 'Review') {
+      let requestbody = {
+        request: {
+          content: {
+            publisher: this.accessService.userName,
+            lastPublishedBy: this.accessService.userName,
+          }
+        }
+      }
+      return this.apiService.post<null>(PUBLISH_CONTENT + id, requestbody)
+    } else {
+      let requestbody = {}
+      return this.apiService.post<null>(SEND_TO_REVIEW + id, requestbody)
+    }
   }
 
   readJSON(artifactUrl: string): Observable<any> {

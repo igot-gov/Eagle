@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
-// import { DepartmentResolver } from '../../../services/department-resolv.servive'
+import { DepartmentResolver } from '../../../services/department-resolv.servive'
 import { InitResolver } from '../../../services/init-resolve.service'
 // import { DashboardComponent } from './components/dashboard/dashboard.component'
 // import { MyContentComponent } from '../my-content/components/my-content/my-content.component'
@@ -20,7 +20,7 @@ const routes: Routes = [
     data: { load: ['ordinals', 'ckeditor', 'meta'] },
     resolve: {
       script: InitResolver,
-      // departmentData: DepartmentResolver, comment for sunbird BE to work should be removed
+      departmentData: DepartmentResolver,
     },
   },
   {

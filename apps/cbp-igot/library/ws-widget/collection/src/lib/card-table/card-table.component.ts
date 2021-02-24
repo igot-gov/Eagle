@@ -210,7 +210,7 @@ export class CardTableComponent extends WidgetBaseComponent
           }
           break
         case 'review':
-          if (row.status === 'InReview' || row.status === 'QualityReview') {
+          if (row.status === 'Review' || row.status === 'QualityReview') {
             returnValue = this.hasAccess(row)
           }
           break

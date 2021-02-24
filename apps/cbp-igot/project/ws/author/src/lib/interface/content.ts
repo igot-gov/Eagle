@@ -217,6 +217,8 @@ export namespace NSContent {
     difficultyLevel: string
     instructions: string
     purpose: string
+    reviewer: string
+    lastPublishedBy: string
   }
 
   export interface IClient {

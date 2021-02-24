@@ -76,16 +76,16 @@ export class MyContentService {
         let requestObj: any = {}
         Object.keys(this.authInitService.authConfig).map(
           v =>
-            (requestObj[v as any] = content[v as keyof NSContent.IContentMeta]
-              ? content[v as keyof NSContent.IContentMeta]
-              : JSON.parse(
-                JSON.stringify(
-                  this.authInitService.authConfig[v as keyof IFormMeta].defaultValue[
-                    content.contentType
-                    // tslint:disable-next-line: ter-computed-property-spacing
-                  ][0].value,
-                ),
-              )),
+          (requestObj[v as any] = content[v as keyof NSContent.IContentMeta]
+            ? content[v as keyof NSContent.IContentMeta]
+            : JSON.parse(
+              JSON.stringify(
+                this.authInitService.authConfig[v as keyof IFormMeta].defaultValue[
+                  content.contentType
+                  // tslint:disable-next-line: ter-computed-property-spacing
+                ][0].value,
+              ),
+            )),
         )
         requestObj = {
           ...requestObj,

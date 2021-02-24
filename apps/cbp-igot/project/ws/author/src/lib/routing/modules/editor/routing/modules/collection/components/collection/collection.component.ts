@@ -27,11 +27,11 @@ import { NotificationService } from '@ws/author/src/lib/services/notification.se
 import { AccessControlService } from '@ws/author/src/lib/modules/shared/services/access-control.service'
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout'
 import { isNumber } from 'lodash'
-// import { ContentQualityService } from '../../../../../shared/services/content-quality.service'
+import { ContentQualityService } from '../../../../../shared/services/content-quality.service'
 import { ConfigurationsService } from '../../../../../../../../../../../../../library/ws-widget/utils/src/public-api'
 /* tslint:disable */
 import _ from 'lodash'
-// import { NSIQuality } from '../../../../../../../../interface/content-quality'
+import { NSIQuality } from '../../../../../../../../interface/content-quality'
 /* tslint:enable */
 /**
  * @description
@@ -95,7 +95,7 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
     private notificationSvc: NotificationService,
     private accessControlSvc: AccessControlService,
     private breakpointObserver: BreakpointObserver,
-    // private _qualityService: ContentQualityService,
+    private _qualityService: ContentQualityService,
     private _configurationsService: ConfigurationsService,
   ) {
     this.selectedIndex = 0
@@ -344,64 +344,64 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
     // }
     if (this.validationCheck && this._configurationsService.userProfile) {
       /** final call */
-      const dialogRef = this.dialog.open(CommentsDialogComponent, {
-        width: '750px',
-        height: '450px',
-        data: this.contentService.getOriginalMeta(this.currentParentId),
-      })
-
-      dialogRef.afterClosed().subscribe((commentsForm: FormGroup) => {
-        this.finalCall(commentsForm)
-      })
-      /** final call */
-      // const reqObj = {
-      //   resourceId: this.currentContent,
-      //   resourceType: 'content',
-      //   userId: this._configurationsService.userProfile.userId,
-      //   getLatestRecordEnabled: true,
-      // }
-      // let minPassPercentage = 20
-      // this._qualityService.fetchresult(reqObj).subscribe((result: any) => {
-      //   if (result && result.result && result.result.resources) {
-      //     const rse = result.result.resources || []
-      //     if (rse.length === 1) {
-      //       let qualityScore: NSIQuality.IQualityResponse
-      //       qualityScore = rse[0]
-      //       if (qualityScore) {
-      //         if (qualityScore) {
-      //           const score = qualityScore.finalWeightedScore || 0
-      //           if (this.initService.authAdditionalConfig.contentQuality) {
-      //             minPassPercentage = this.initService.authAdditionalConfig.contentQuality.passPercentage
-      //           }
-      //           if (score >= minPassPercentage && qualityScore.qualifiedMinCriteria) {
-      //             /** final call */
-      //             const dialogRef = this.dialog.open(CommentsDialogComponent, {
-      //               width: '750px',
-      //               height: '450px',
-      //               data: this.contentService.getOriginalMeta(this.currentParentId),
-      //             })
-
-      //             dialogRef.afterClosed().subscribe((commentsForm: FormGroup) => {
-      //               this.finalCall(commentsForm)
-      //             })
-      //             /** final call */
-      //           } else {
-      //             this.snackBar.open(`To proceed further minimum quality score must be
-      //             ${minPassPercentage}% or greater, and need to qualify in all the sections`)
-      //           }
-      //         } else {
-      //           this.snackBar.open(`To proceed further minimum quality score must be
-      //           ${minPassPercentage}% or greater, and need to qualify in all the sections`)
-      //         }
-      //       } else {
-      //         this.snackBar.open(`To proceed further minimum quality score must be
-      //          ${minPassPercentage}% or greater, and need to qualify in all the sections`)
-      //       }
-      //     } else {
-      //       this.snackBar.open(`To proceed further minimum quality score is required, and need to qualify in all the sections`)
-      //     }
-      //   }
+      // const dialogRef = this.dialog.open(CommentsDialogComponent, {
+      //   width: '750px',
+      //   height: '450px',
+      //   data: this.contentService.getOriginalMeta(this.currentParentId),
       // })
+
+      // dialogRef.afterClosed().subscribe((commentsForm: FormGroup) => {
+      //   this.finalCall(commentsForm)
+      // })
+      /** final call */
+      const reqObj = {
+        resourceId: this.currentContent,
+        resourceType: 'content',
+        userId: this._configurationsService.userProfile.userId,
+        getLatestRecordEnabled: true,
+      }
+      let minPassPercentage = 20
+      this._qualityService.fetchresult(reqObj).subscribe((result: any) => {
+        if (result && result.result && result.result.resources) {
+          const rse = result.result.resources || []
+          if (rse.length === 1) {
+            let qualityScore: NSIQuality.IQualityResponse
+            qualityScore = rse[0]
+            if (qualityScore) {
+              if (qualityScore) {
+                const score = qualityScore.finalWeightedScore || 0
+                if (this.initService.authAdditionalConfig.contentQuality) {
+                  minPassPercentage = this.initService.authAdditionalConfig.contentQuality.passPercentage
+                }
+                if (score >= minPassPercentage && qualityScore.qualifiedMinCriteria) {
+                  /** final call */
+                  const dialogRef = this.dialog.open(CommentsDialogComponent, {
+                    width: '750px',
+                    height: '450px',
+                    data: this.contentService.getOriginalMeta(this.currentParentId),
+                  })
+
+                  dialogRef.afterClosed().subscribe((commentsForm: FormGroup) => {
+                    this.finalCall(commentsForm)
+                  })
+                  /** final call */
+                } else {
+                  this.snackBar.open(`To proceed further minimum quality score must be
+                  ${minPassPercentage}% or greater, and need to qualify in all the sections`)
+                }
+              } else {
+                this.snackBar.open(`To proceed further minimum quality score must be
+                ${minPassPercentage}% or greater, and need to qualify in all the sections`)
+              }
+            } else {
+              this.snackBar.open(`To proceed further minimum quality score must be
+               ${minPassPercentage}% or greater, and need to qualify in all the sections`)
+            }
+          } else {
+            this.snackBar.open(`To proceed further minimum quality score is required, and need to qualify in all the sections`)
+          }
+        }
+      })
     }
   }
   async finalCall(commentsForm: FormGroup) {
@@ -420,15 +420,13 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
       const needSave =
         Object.keys(this.contentService.upDatedContent || {}).length ||
         Object.keys(this.storeService.changedHierarchy).length
+      debugger
       if (updatedMeta && updatedMeta.children && updatedMeta.children.length > 0) {
         for (const element of updatedMeta.children) {
-          await this.editorService.sendToReview(element.identifier).subscribe(
+          await this.editorService.sendToReview(element.identifier, element.status).subscribe(
             data => console.log(data)
           )
         }
-        // updatedMeta.children.forEach(element => {
-        //   this.editorService.sendToReview(element.identifier)
-        // })
       }
       const saveCall = (needSave ? this.triggerSave() : of({} as any)).pipe(
         mergeMap(() =>
@@ -438,7 +436,7 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
             //   this.currentParentId,
             //   this.contentService.originalContent[this.currentParentId].status,
             // )
-            .sendToReview(updatedMeta.identifier)
+            .sendToReview(updatedMeta.identifier, updatedMeta.status)
             .pipe(
               mergeMap(() =>
                 this.notificationSvc
@@ -615,6 +613,18 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
           (isNumber(requestBody.request.content.duration)
             ? `${requestBody.request.content.duration}` : requestBody.request.content.duration)
       }
+      if (requestBody.request.content.trackContacts && requestBody.request.content.trackContacts.length > 0) {
+        requestBody.request.content.reviewer = ''
+        requestBody.request.content.trackContacts.forEach((element, index) => {
+          if (index === 0) {
+            requestBody.request.content.reviewer = requestBody.request.content.reviewer + element.id
+          } else {
+            requestBody.request.content.reviewer = requestBody.request.content.reviewer + ', ' + element.id
+          }
+        })
+        delete requestBody.request.content.trackContacts
+      }
+      debugger
       return this.editorService.updateContentV3(requestBody, this.contentService.currentContent).pipe(
         tap(() => {
           this.storeService.changedHierarchy = {}

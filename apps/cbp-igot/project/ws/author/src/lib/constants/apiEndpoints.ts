@@ -54,3 +54,4 @@ export const CONTENT_VIDEO_ENCODE = `${AUTHORING_CONTENT_BASE}contentv3/video-tr
 export const API_PROXY_V8 = 'apis/proxies/v8/'
 export const ACTION_CONTENT_V3 = `${API_PROXY_V8}action/content/v3/`
 export const SEND_TO_REVIEW = `${ACTION_CONTENT_V3}review/`
+export const PUBLISH_CONTENT = `${ACTION_CONTENT_V3}publish/`
