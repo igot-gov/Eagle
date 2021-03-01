@@ -134,3 +134,18 @@ SUBMISSION_API_BASE={{ lms_core_high_api_base }}
 LEADERBOARD_API_BASE={{ lms_core_cassandra_api_base }}
 LEARNING_HUB_API_BASE={{ lms_core_lhub_api_base }}
 MULTI_TENANT_KEYCLOAK={{ vault_rootorg_to_authdomain_and_realm_mapping }}
+
+SCORING_SERVICE_API_BASE={{ scoring_service_api_base }}
+
+SB_EXT_API_BASE_2={{ sb_ext_api_base }}
+
+WORKFLOW_HANDLER_SERVICE_API_BASE={{ workflow_handler_service_api_base }}
+
+#DISCUSSION_HUB_MIDDLEWARE
+
+KEYCLOAK_SESSION_TTL=86,400,000
+KNOWLEDGE_MW_API_BASE=http://knowledge-mw-service:5000
+KONG_API_BASE=http://kong:8000
+SUNBIRD_PROXY_API_BASE=https://{{ domain_name }}/api
+DISCUSSION_HUB_MIDDLEWARE=http://discussionsmw-service:3002
+
