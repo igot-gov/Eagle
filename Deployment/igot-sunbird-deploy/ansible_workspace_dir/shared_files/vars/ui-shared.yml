@@ -43,3 +43,9 @@ lms_core_lhub_api_base: "http://{{ network_alias_lex_core_lhub_service }}:{{ ser
 lms_core_cassandra_api_base: "http://{{ network_alias_lex_core_cassandra_service }}:{{ service_lex_core_cassandra_port }}"
 #network_hub_service: "http://{{ service_sb_hub_service }}:{{ service_sb_hub_port }}"
 network_hub_service: "http://{{ network_alias_sb_hub_graph_service }}:{{ service_sb_hub_graph_port }}"
+
+scoring_service_api_base: "http://{{ network_alias_scoring_engine_service }}:{{ service_scoring_engine_port }}"
+sb_ext_api_base: "http://{{ network_alias_sb_cb_ext_service }}:{{ service_sb_cb_ext_port }}"
+
+workflow_handler_service_api_base: "http://{{ network_alias_workflow_handler_service }}:{{ service_workflow_handler_port }}"
+
