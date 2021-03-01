@@ -20,6 +20,7 @@ package com.infosys.lex.progress.service;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -181,10 +182,80 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		updateParentProgressBasedOnChildren(rootOrg, userId, contentId, meta);
 
 		// updating in the db
 		contentProgressRepo.updateProgress(meta.values());
 		return "Success";
+	}
+	
+	private void updateParentProgressBasedOnChildren(String rootOrg, String userUUID, String contentId,
+			Map<String, ContentProgressModel> meta) {
+		StringBuilder str = new StringBuilder("updateParentProgressBasedOnChildren:");
+		str.append(System.lineSeparator());
+		str.append("rootOrg: ").append(rootOrg).append(", userUUID: ").append(userUUID).append(", contentId: ")
+				.append(contentId);
+		// Let's find parent Id.
+		List<String> parentIdList = getParentId(contentId, meta);
+		if (parentIdList.size() > 0) {
+			boolean isChildrenCompleted = isAllChilerenCompleted(rootOrg, userUUID, meta.get(parentIdList.get(0)), str);
+			if (isChildrenCompleted) {
+				str.append(System.lineSeparator()).append("Trying to update Parent");
+				meta.get(parentIdList.get(0)).setProgress(1f);
+			} else {
+				str.append(System.lineSeparator()).append("Children not completed... Ignoring Parent");
+			}
+		}
+		logger.info(str.toString());
+	}
+	
+	private boolean isAllChilerenCompleted(String rootOrg, String userId, ContentProgressModel cpm, StringBuilder str) {
+		boolean retValue = false;
+		if (cpm.getChildrenList() == null || cpm.getChildrenList().size() == 0) {
+			if (str != null) {
+				str.append(System.lineSeparator()).append("cpm: ").append(cpm.getPrimaryKey().getContentId());
+				str.append(", doesn't have child. returning - false");
+			}
+			return retValue;
+		}
+		List<ContentProgressModel> contentProgressList = contentProgressRepo.findProgress(rootOrg, userId,
+				cpm.getChildrenList());
+		for (ContentProgressModel childCpm : contentProgressList) {
+			if (childCpm.getChildrenList() == null || cpm.getChildrenList().size() == 0) {
+				retValue = (childCpm.getProgress() == 1f) ? true : false;
+			} else {
+				retValue = isAllChilerenCompleted(rootOrg, userId, childCpm, str);
+			}
+			if (retValue) {
+				continue;
+			} else {
+				break;
+			}
+		}
+		if (str != null) {
+			str.append(System.lineSeparator()).append(" cpm: ").append(cpm.getPrimaryKey().getContentId());
+			str.append(" returns -> ").append(retValue);
+		}
+		return retValue;
+	}
+	
+	private List<String> getParentId(String contentId, Map<String, ContentProgressModel> meta) {
+		List<String> parentList = new ArrayList<String>();
+		for (ContentProgressModel cpm : meta.values()) {
+			if (cpm.getParentList() == null || cpm.getParentList().size() == 0) {
+				//There is no parent for this content... so this is the parent one..
+				if ((contentId.equalsIgnoreCase(cpm.getPrimaryKey().getContentId()))
+						|| (cpm.getChildrenList() != null && cpm.getChildrenList().size() > 0)) {
+					parentList.add(cpm.getPrimaryKey().getContentId());
+				}
+			}
+		}
+		if(parentList.size() != 1) {
+			//we are expecting only one parent... if that's not the case, then we can ignore this at all..
+			return Collections.emptyList();
+		}
+		return parentList;
 	}
 
 	private ContentProgressDTO markedReadPreprocess(String rootOrg, ContentProgressDTO resourceInfo) {
