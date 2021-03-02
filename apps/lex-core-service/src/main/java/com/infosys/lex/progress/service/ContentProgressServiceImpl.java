@@ -221,6 +221,13 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 		}
 		List<ContentProgressModel> contentProgressList = contentProgressRepo.findProgress(rootOrg, userId,
 				cpm.getChildrenList());
+		try {
+			str.append(System.lineSeparator()).append(" child Progress: ").append(mapper.writeValueAsString(contentProgressList));
+		} catch (JsonProcessingException e) {
+			str.append(System.lineSeparator()).append(" failed to print child progress");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		for (ContentProgressModel childCpm : contentProgressList) {
 			if (childCpm.getChildrenList() == null || cpm.getChildrenList().size() == 0) {
 				retValue = (childCpm.getProgress() == 1f) ? true : false;
