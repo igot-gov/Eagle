@@ -223,6 +223,9 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 			Map<String, Object> hierarchy = getHierarchyForResource(rootOrg,
 					Arrays.asList(cpm.getPrimaryKey().getContentId()), userId);
 			List<String> contentIds = new ArrayList<String>((Set<String>) hierarchy.get("progress_id_set"));
+			if(contentIds.contains(cpm.getPrimaryKey().getContentId())) {
+				contentIds.remove(cpm.getPrimaryKey().getContentId());
+			}
 			List<ContentProgressModel> contentProgressList = contentProgressRepo.findProgress(rootOrg, userId,
 					contentIds);
 			if (str != null) {
