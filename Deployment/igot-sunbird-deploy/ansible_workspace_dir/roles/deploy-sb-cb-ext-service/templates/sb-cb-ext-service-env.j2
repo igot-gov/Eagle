@@ -23,3 +23,18 @@ user.enable.multidept.mapping=false
 
 #learner.service.url=learner-service:9000
 sb.service.url=http://learner-service:9000
+
+spring.data.cassandra.sb.startupTimeoutInSeconds=100000
+spring.data.cassandra.sb.contact-points={{ sunbird_cassandra_db_host }}
+spring.data.cassandra.sb.port=9042
+spring.data.cassandra.sb.keyspace-name={{ keyspace_sunbird }}
+spring.data.cassandra.sb.username=
+spring.data.cassandra.sb.password=
+
+#sunbird.course.service.host=https://staging.open-sunbird.org/api/course/
+sunbird.course.service.host={{ lms_service_host }}
+progress.api.endpoint=v1/content/state/read
+
+
+sb.api.key={{ bearer_token }}
+

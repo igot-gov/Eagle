@@ -67,3 +67,5 @@ access_control_url: http://{{ network_alias_sb_ext_service }}:{{ service_sb_ext_
 sb_learner_service_url: http://{{ sb_learner_service }}:{{ sb_learner_service_port }}/
 
 wf_service_host: http://{{ network_alias_workflow_handler_service }}:{{ service_workflow_handler_port }}/
+
+lms_service_host: http://lms-service:9000/
