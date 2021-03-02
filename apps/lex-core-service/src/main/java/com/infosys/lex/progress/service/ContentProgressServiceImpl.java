@@ -219,27 +219,43 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 			}
 			return retValue;
 		}
-		List<ContentProgressModel> contentProgressList = contentProgressRepo.findProgress(rootOrg, userId,
-				cpm.getChildrenList());
 		try {
-			str.append(System.lineSeparator()).append(" child Progress: ").append(mapper.writeValueAsString(contentProgressList));
-		} catch (JsonProcessingException e) {
-			str.append(System.lineSeparator()).append(" failed to print child progress");
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		for (ContentProgressModel childCpm : contentProgressList) {
-			if (childCpm.getChildrenList() == null || cpm.getChildrenList().size() == 0) {
-				retValue = (childCpm.getProgress() == 1f) ? true : false;
-			} else {
-				retValue = isAllChilerenCompleted(rootOrg, userId, childCpm, str);
+			Map<String, Object> hierarchy = getHierarchyForResource(rootOrg,
+					Arrays.asList(cpm.getPrimaryKey().getContentId()), userId);
+			List<String> contentIds = new ArrayList<String>((Set<String>) hierarchy.get("progress_id_set"));
+			List<ContentProgressModel> contentProgressList = contentProgressRepo.findProgress(rootOrg, userId,
+					contentIds);
+			if (str != null) {
+				try {
+					str.append(System.lineSeparator()).append(" contentIds Size ->").append(contentIds.size()).append(contentIds);
+					str.append(System.lineSeparator()).append(" childProgressList size -> ")
+							.append(contentProgressList != null ? contentProgressList.size() : "0")
+							.append("child Progress: ").append(mapper.writeValueAsString(contentProgressList));
+				} catch (JsonProcessingException e) {
+					str.append(System.lineSeparator()).append(" failed to print child progress. Exception: ")
+							.append(e.getMessage());
+				}
 			}
-			if (retValue) {
-				continue;
-			} else {
-				break;
+			if (contentProgressList != null && contentProgressList.size() == contentIds.size()) {
+				for (ContentProgressModel childCpm : contentProgressList) {
+					if (childCpm.getChildrenList() == null || cpm.getChildrenList().size() == 0) {
+						retValue = (childCpm.getProgress() == 1f) ? true : false;
+					} else {
+						retValue = isAllChilerenCompleted(rootOrg, userId, childCpm, str);
+					}
+					if (retValue) {
+						continue;
+					} else {
+						break;
+					}
+				}
+			}
+		} catch (Exception e1) {
+			if(str != null) {
+			str.append(System.lineSeparator()).append("Failed to get Hierarchy for parent. Exception: ").append(e1.getMessage());
 			}
 		}
+		
 		if (str != null) {
 			str.append(System.lineSeparator()).append(" cpm: ").append(cpm.getPrimaryKey().getContentId());
 			str.append(" returns -> ").append(retValue);
