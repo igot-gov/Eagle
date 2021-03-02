@@ -24,6 +24,8 @@ cassandra_port: cassandra_host_port #9042
 cassandra_username: username
 cassandra_password: username
 
+sunbird_cassandra_db_host: sunbird_db_ip
+
 discussion_hub_api_base: https://domainname/nodebb
 discussion_hub_default_password: password
 discussion_hub_write_api_key: key # key will get from write_api plugins
@@ -497,3 +499,5 @@ var_pid_service_pgport: 5432
 
 # For kafka service
 var_kafka_service_kafka_offset_reset_config: latest
+
+bearer_token: "bearersunbird_ bearer_tocken"
