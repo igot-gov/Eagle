@@ -44,7 +44,7 @@ STATIC_ILP_PROXY={{ static_ilp_api_base }}
 NODE_API_BASE={{ social_forum_api_base }}
 
 # Core services endpoint
-SBEXT_API_BASE_2={{ lms_core_api_base }}
+SBEXT_API_BASE_2={{ sb_ext_api_base }}
 client_id={{ lms_core_client_id }}
 client_secret={{ lms_core_client_secret }}
 
@@ -150,3 +150,7 @@ SUNBIRD_PROXY_API_BASE=https://{{ domain_name }}/api
 DISCUSSION_HUB_MIDDLEWARE=http://discussionsmw-service:3002
 
 SB_API_KEY={{ bearer_token }}
+
+#Frac Variables
+REACT_APP_KEYCLOAK_URL=https://{{ domain_name }}/auth
+REACT_APP_PROXY_URL={{ domain_name }}

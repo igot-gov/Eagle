@@ -48,4 +48,3 @@ scoring_service_api_base: "http://{{ network_alias_scoring_engine_service }}:{{ 
 sb_ext_api_base: "http://{{ network_alias_sb_cb_ext_service }}:{{ service_sb_cb_ext_port }}"
 
 workflow_handler_service_api_base: "http://{{ network_alias_workflow_handler_service }}:{{ service_workflow_handler_port }}"
-
