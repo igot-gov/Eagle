@@ -15,3 +15,5 @@ CREATE TABLE if not exists wingspan.wf_status
     CONSTRAINT userprofile_wf_status_pkey PRIMARY KEY (wf_id)
 );
 
+
+alter table wf_status add column dept_name varchar(128);
