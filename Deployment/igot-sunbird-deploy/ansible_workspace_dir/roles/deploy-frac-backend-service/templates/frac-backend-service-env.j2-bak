@@ -38,21 +38,3 @@ progress.api.endpoint=v1/content/state/read
 
 sb.api.key={{ bearer_token }}
 
-#ES
-es.host={{ elasticsearch_host }}
-es.port={{ elasticsearch_http_port }}
-es.username={{ elasticsearch_username }}
-es.password={{ elasticsearch_password }}
-es.profile.index=userprofile
-es.profile.index.type=_doc
-workallocation.index.name=workallocation
-workallocation.index.type=_doc
-
-#Kafka Server
-spring.kafka.bootstrap.servers={{ kafka_servers_list }}
-
-#kafka properties
-kakfa.offset.reset.value=latest
-kafka.max.poll.interval.ms=5000
-kafka.max.poll.records=100
-

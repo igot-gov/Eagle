@@ -501,3 +501,8 @@ var_pid_service_pgport: 5432
 var_kafka_service_kafka_offset_reset_config: latest
 
 bearer_token: "bearersunbird_ bearer_tocken"
+
+mysql_host: 10.0.0.12
+mysql_username: user
+mysql_password: passwd
+

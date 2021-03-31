@@ -1,0 +1,46 @@
+# SET CONTEXT PATH
+server.connection-timeout=5000
+server.tomcat.max-threads=2048
+server.tomcat.min-spare-threads=20
+server.tomcat.max-connections=15000
+server.tomcat.accept-count=500
+server.port={{ application_port }}
+
+spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+spring.datasource.url=jdbc:mysql://{{ mysql_host }}:3306/reviewservice?autoReconnect=true&zeroDateTimeBehavior=convertToNull
+spring.datasource.username={{ mysql_username }}
+spring.datasource.password={{ mysql_password }}
+spring.http.multipart.max-file-size=10MB
+spring.http.multipart.max-request-size=10MB
+
+#----------------------------- ELASTIC SEARCH CONFIGURATIONS -----------------------------#
+services.esindexer.host={{ elasticsearch_host }}
+services.esindexer.host.name=http://{{ elasticsearch_host }}/
+services.esindexer.host.port={{ elasticsearch_http_port }}
+services.esindexer.host.nameport=http://{{ elasticsearch_host }}:{{ elasticsearch_http_port }}/
+services.esindexer.username={{ elasticsearch_username }}
+services.esindexer.password={{ elasticsearch_password }}
+elasticsearch.url={{ elasticsearch_host }}
+elasticsearch.configuration=frac-configuration
+elasticsearch.positions.index=frac-positions
+elasticsearch.roles.index=frac-roles
+elasticsearch.activities.index=frac-activities
+elasticsearch.competencies.index=frac-competencies
+elasticsearch.knowledgeresources.index=frac-knowledgeresources
+elasticsearch.competencieslevel.index=frac-competencieslevel
+elasticsearch.competencyarea.index=frac-competencyarea
+elasticsearch.nodemapping.index=frac-nodemapping
+elasticsearch.keys.index=frac-keys
+elasticsearch.commentrating.index=frac-commentrating
+elasticsearch.collectionlogs.index=frac-collection-logs
+elasticsearch.type=doc
+elasticsearch.logs.type=logs
+
+webhook.callback.url=http://13.233.247.8:3040/api/v1/site/update
+
+elk.data.up=true
+image.source.aws=true
+image.source.attachment.aws=true
+auth-verification-url=https://{{ domain_name }}/auth/realms/{{ keycloak_realm_name }}/protocol/openid-connect/userinfo
+application.environment=production
+
