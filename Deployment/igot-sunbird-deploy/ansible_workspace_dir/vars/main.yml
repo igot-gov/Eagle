@@ -60,6 +60,8 @@ service_workflow_handler_service: workflow-handler-service
 service_sb_cb_ext_service: sb-cb-ext-service
 service_ui_mdo_igot_service: ui-mdo-igot
 service_ui_spv_igot_service: ui-spv-igot
+service_frac_backend_service: frac-backend-service
+service_frac_web_service: frac-web-service
 
 # Ports
 service_antivirus_port: 3310
@@ -121,7 +123,8 @@ service_workflow_handler_port: 5099
 service_sb_cb_ext_port: 7001
 service_ui_mdo_igot_port: 3034
 service_ui_spv_igot_port: 3044
-
+service_frac_backend_port: 8095
+service_frac_web_service_port: 5000
 
 # Network alias names, so that one service can talk to another
 network_alias_content_service: private-content-service
@@ -185,6 +188,8 @@ network_alias_workflow_handler_service: workflow-handler-service
 network_alias_sb_cb_ext_service: sb-cb-ext-service
 network_alias_ui_mdo_igot_service: ui-mdo-igot
 network_alias_ui_spv_igot_service: ui-spv-igot
+network_alias_frac_backend_service: frac-backend-service
+network_alias_frac_web_service: frac-web-service
 
 # Image names, this is used by the service alone, but since we want to have all the images in one place, we are oncfiguring the images here
 image_ui_static: ui-static
@@ -239,7 +244,8 @@ image_scoring_engine_service: scoring-engine-service
 image_sb_cb_ext_service: sb-cb-ext-service
 image_ui_mdo_igot: ui-mdo-igot
 image_ui_spv_igot: ui-spv-igot
-
+image_frac_backend_service: projecx-frac-service
+image_frac_web_service: frac-web-service
 
 health_end_point_sb_ext_service: "http://localhost:{{ service_sb_ext_port }}/v1/latest/terms/user"
 elasticsearch_hosts_list: "{{ elasticsearch_http_hosts_list | map('regex_replace','^(?P<host>.+):(?P<port>\\d+)$', '\\g<host>') | list | join (',') }}"
