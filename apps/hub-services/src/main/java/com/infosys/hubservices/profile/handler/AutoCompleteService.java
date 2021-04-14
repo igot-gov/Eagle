@@ -30,7 +30,7 @@ public class AutoCompleteService {
     @Autowired
     private RestHighLevelClient esClient;
 
-    final String[] includeFields = {"personalDetails.firstname", "personalDetails.surname", "personalDetails.primaryEmail", "id", "professionalDetails.name"};
+    final String[] includeFields = {"employmentDetails.departmentName", "personalDetails.firstname", "personalDetails.surname", "personalDetails.primaryEmail", "id", "professionalDetails.name"};
 
     public List<Map<String, Object>> getUserSearchData(String searchTerm) throws IOException {
         if (StringUtils.isEmpty(searchTerm))
