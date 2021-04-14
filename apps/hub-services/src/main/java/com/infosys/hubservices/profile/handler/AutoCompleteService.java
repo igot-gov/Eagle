@@ -54,7 +54,7 @@ public class AutoCompleteService {
             Map<String, Object> searObjectMap = hit.getSourceAsMap();
             Map<String, Object> personalDetails = (Map<String, Object>) searObjectMap.get("personalDetails");
            Map<String, Object> employmentDetails = (Map<String, Object>) searObjectMap.get("employmentDetails");
-            depName = null;
+            depName = "";
             if (!CollectionUtils.isEmpty(employmentDetails)) {
                 depName = StringUtils.isEmpty(employmentDetails.get("departmentName")) ? "" : (String) employmentDetails.get("departmentName");
             }
