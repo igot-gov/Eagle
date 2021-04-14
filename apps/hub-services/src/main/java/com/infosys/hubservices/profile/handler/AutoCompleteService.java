@@ -53,11 +53,10 @@ public class AutoCompleteService {
         for (SearchHit hit : searchResponse.getHits()) {
             Map<String, Object> searObjectMap = hit.getSourceAsMap();
             Map<String, Object> personalDetails = (Map<String, Object>) searObjectMap.get("personalDetails");
-            List<Map<String, Object>> professionalDetails = (List<Map<String, Object>>) searObjectMap.get("professionalDetails");
+           Map<String, Object> employmentDetails = (Map<String, Object>) searObjectMap.get("employmentDetails");
             depName = null;
-            if (!CollectionUtils.isEmpty(professionalDetails)) {
-                Map<String, Object> propDetails = professionalDetails.stream().findFirst().get();
-                depName = CollectionUtils.isEmpty(propDetails) ? "" : (String) propDetails.get("name");
+            if (!CollectionUtils.isEmpty(employmentDetails)) {
+                depName = StringUtils.isEmpty(employmentDetails.get("departmentName")) ? "" : (String) employmentDetails.get("departmentName");
             }
             result = new HashMap<>();
             result.put("first_name", personalDetails.get("firstname"));
