@@ -1,0 +1,25 @@
+server.connection-timeout=5000
+server.tomcat.max-threads=2048
+server.tomcat.min-spare-threads=20
+server.tomcat.max-connections=15000
+server.tomcat.accept-count=500
+server.port={{ application_port }}
+
+#spring data jpa for postgres
+spring.datasource.jdbc-url={{ spring_datasource_jdbc_url }}
+spring.datasource.username={{ postgresql_username_wingspan }}
+spring.datasource.password={{ postgresql_password_wingspan }}
+
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.properties.hibernate.format_sql=true
+spring.jpa.show-sql=false
+
+#Workflow - Service details
+wf.service.host={{ wf_service_host }}
+wf.service.updateUserProfilePath=v1/workflow/updateUserProfileWF
+
+#Configuration for Multi Department Mapping for User
+user.enable.multidept.mapping=false
+
+#learner.service.url=learner-service:9000
+sb.service.url=https://{{ domain_name }}/

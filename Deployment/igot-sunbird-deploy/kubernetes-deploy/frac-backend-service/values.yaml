@@ -10,7 +10,7 @@ env:
 
 replicaCount: 1
 repository: projecx-frac-service
-image_tag: 808620f
+image_tag: 7cb4218
 resources:
   requests:
     cpu: 100m
