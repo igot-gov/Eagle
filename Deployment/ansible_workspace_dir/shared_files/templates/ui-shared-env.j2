@@ -18,30 +18,22 @@ CONTENT_HIERARCHY={{ content_hierarchy_base }}
 # Sb-ext service
 SBEXT_API_BASE={{ sb_ext_api_base }}
 
-#profanity_service_host
-PROFANITY_SERVICE_API_BASE={{ profanity_service_host }}
-
-#workflow_handler_service_host
-WORKFLOW_HANDLER_SERVICE_API_BASE={{ workflow_handler_service_host }}
-
 # frac-api service
 FRAC_API_BASE={{ frac_api_base }}
+
+#profanity_service_host
+PROFANITY_SERVICE_API_BASE={{ profanity_service_host }}
 
 # network_hub Service
 NETWORK_HUB_SERVICE_BACKEND={{ network_hub_service }}
 
-#content_validation_api_base
-CONTENT_VALIDATION_API_BASE={{ content_validation_api_base }}
-
 # Telemetry service
 TELEMETRY_API_BASE={{ telemetry_api_base }}
 
+CONTENT_VALIDATION_API_BASE={{ content_validation_api_base }}
+
 # dbms api service
 VIEWER_PLUGIN_RDBMS_API_BASE={{ dbms_api_base }}
-
-#ui-proxy service
-KEYCLOAK_ADMIN_USERNAME={{ keycloak_admin_user }}
-KEYCLOAK_ADMIN_PASSWORD={{ keycloak_admin_pass }}
 
 # Web host service
 WEB_HOST_PROXY={{ web_hosted_api_base }}
@@ -52,7 +44,7 @@ STATIC_ILP_PROXY={{ static_ilp_api_base }}
 NODE_API_BASE={{ social_forum_api_base }}
 
 # Core services endpoint
-SBEXT_API_BASE_2={{ lms_core_api_base }}
+SBEXT_API_BASE_2={{ sb_ext_api_base }}
 client_id={{ lms_core_client_id }}
 client_secret={{ lms_core_client_secret }}
 
@@ -87,7 +79,14 @@ USER_PROFILE_API_BASE=http://up_eagle-user-profile:3008
 
 KEYCLOAK_ADMIN_PASSWORD={{ keycloak_password }}
 KEYCLOAK_ADMIN_USERNAME={{ keycloak_username }}
-KC_NEW_USER_DEFAULT_PWD={{ keycloak_new_user_def_pwd }}
+KC_NEW_USER_DEFAULT_PWD=Us3r@12kC
+
+DISCUSSION_HUB_API_BASE={{ discussion_hub_api_base }}
+DISCUSSION_HUB_DEFAULT_PASSWORD={{ discussion_hub_default_password }}
+DISCUSSION_HUB_WRITE_API_KEY={{ discussion_hub_write_api_key }}
+DISCUSSION_HUB_WRITE_API_UID={{ discussion_hub_write_api_uid }}
+DISCUSSION_CATEGORY_LIST={{ discussion_category_list }}
+#DISCUSSION_CATEGORY_LIST=cid[]='5&cid[]=6&cid[]=8&cid[]=9&cid[]=10&cid[]=11&cid[]=12&cid[]=13'
 
 DEFAULT_ORG={{ default_org }}
 DEFAULT_ROOT_ORG={{ default_root_org }}
@@ -135,3 +134,28 @@ SUBMISSION_API_BASE={{ lms_core_high_api_base }}
 LEADERBOARD_API_BASE={{ lms_core_cassandra_api_base }}
 LEARNING_HUB_API_BASE={{ lms_core_lhub_api_base }}
 MULTI_TENANT_KEYCLOAK={{ vault_rootorg_to_authdomain_and_realm_mapping }}
+
+SCORING_SERVICE_API_BASE={{ scoring_service_api_base }}
+
+SB_EXT_API_BASE_2={{ sb_ext_api_base }}
+
+WORKFLOW_HANDLER_SERVICE_API_BASE={{ workflow_handler_service_api_base }}
+
+#DISCUSSION_HUB_MIDDLEWARE
+
+KEYCLOAK_SESSION_TTL=86,400,000
+KNOWLEDGE_MW_API_BASE=http://knowledge-mw-service:5000
+KONG_API_BASE=http://kong:8000
+SUNBIRD_PROXY_API_BASE=https://{{ domain_name }}/api
+DISCUSSION_HUB_MIDDLEWARE=http://discussionsmw-service:3002
+
+SB_API_KEY={{ bearer_token }}
+
+#Frac Variables
+REACT_APP_KEYCLOAK_URL=https://{{ domain_name }}/auth
+REACT_APP_PROXY_URL={{ domain_name }}
+REACT_APP_API_URL=https://igot-frac.tarento.com/api
+
+SUNBIRD_PROXY_URL=https://{{ domain_name }}/apis/proxies/v8/action
+
+X_CHANNEL_ID={{ x_channel_id }}
