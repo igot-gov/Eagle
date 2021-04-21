@@ -69,7 +69,7 @@
       <configVersion>2</configVersion>
       <userRemoteConfigs>
         <hudson.plugins.git.UserRemoteConfig>
-          <url>git@git.idc.tarento.com:nxt/data-platform/analytics.git</url>
+          <url>git@git.idc.tarento.com:nxt/nxt-retail/retail-analytics-core-user.git</url>
           <credentialsId>git-lab</credentialsId>
         </hudson.plugins.git.UserRemoteConfig>
       </userRemoteConfigs>
