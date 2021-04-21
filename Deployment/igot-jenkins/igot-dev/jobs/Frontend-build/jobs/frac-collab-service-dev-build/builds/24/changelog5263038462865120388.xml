@@ -1,0 +1,11 @@
+commit b7eab98421315684f8b1a74b752eba8c9e5ac836
+tree ec5129dd6ca27928dc769d01096ad0c00a36109e
+parent 5c56ff5a23b5a53a4c74f26305e2e622f127a541
+author Sakthivel <sakthivel.govindan@tarento.com> 2021-04-17 19:59:25 +0530
+committer Sakthivel <sakthivel.govindan@tarento.com> 2021-04-17 19:59:25 +0530
+
+    refactor: remove socket service path
+
+
+:100644 100644 c7273a1e290860ea3f3fae24366953b72809acf1 fd4d1dafc1b9ceff229e1f7bc6f562a154042c6c M	server-compiled.js
+:100644 100644 a336b385a7f9eb277aedd2855696ccab4197ccc0 acf7ed0951b10324682d0fa719ec37acac1ec9e4 M	server.js

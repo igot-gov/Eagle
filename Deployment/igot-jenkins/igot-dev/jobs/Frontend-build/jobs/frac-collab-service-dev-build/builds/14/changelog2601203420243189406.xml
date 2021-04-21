@@ -1,0 +1,21 @@
+commit 6c1a98258b3a899bd1feb7aa4e839913ae7cf144
+tree ec65b8d1de39fc2b8ce9b78bf08d88527f8187ad
+parent f9a8232302c42784b20ea5a65027670ce39448e3
+author Sakthivel <sakthivel.govindan@tarento.com> 2021-04-15 20:52:23 +0530
+committer Sakthivel <sakthivel.govindan@tarento.com> 2021-04-15 20:52:23 +0530
+
+    refactor: CORS update 11
+
+
+:100644 100644 e1e7b9a59c3006294baf7cc4dd3c9bc7592bc245 6c87895abb3836336420c28fbf37c8e95ffefa79 M	server-compiled.js
+:100644 100644 24e06facf31dfe51b1fa91ff646a0b1a8e38ee0a 52787ae7a1ef01d5d8d0796b793478ba0c63138c M	server.js
+commit f9a8232302c42784b20ea5a65027670ce39448e3
+tree 45cd2fbae6db68e10a3861d564d1dae0e5afc2c8
+parent 1c24ae3e21d9feac79f6e7ebd0fdf7a311cb4473
+author Sakthivel <sakthivel.govindan@tarento.com> 2021-04-15 20:11:25 +0530
+committer Sakthivel <sakthivel.govindan@tarento.com> 2021-04-15 20:11:25 +0530
+
+    refactor: CORS update 10
+
+
+:100644 100644 cb535e3600d989056ae605321e20853f3e7d8980 24e06facf31dfe51b1fa91ff646a0b1a8e38ee0a M	server.js

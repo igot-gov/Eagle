@@ -1,0 +1,27 @@
+commit c9558d8371da51f7e387fb15d55fc71048e1e860
+tree 4e324c1a8326ce1457af1c76654d502984db5296
+parent 056eb34dcff41db900298980e86f2fea530f5f5a
+author Sakthivel <sakthivel.govindan@tarento.com> 2021-04-19 19:20:42 +0530
+committer Sakthivel <sakthivel.govindan@tarento.com> 2021-04-19 19:20:42 +0530
+
+    build: update docker commands
+
+
+:100644 100644 8b16710f498ebe0793bc7ee5865c172a4957ced0 908e65384dfef8e19c6ab61ad9e135713ca1b2be M	Dockerfile.igot
+commit 056eb34dcff41db900298980e86f2fea530f5f5a
+tree aa142e85d6f85e242ecac903b97d9a7a331c0542
+parent 7625d1fcdf4e6be6b51949a7d04bde0a25136cf4
+author Sakthivel <sakthivel.govindan@tarento.com> 2021-04-19 19:12:45 +0530
+committer Sakthivel <sakthivel.govindan@tarento.com> 2021-04-19 19:12:45 +0530
+
+    feat: add keycloak token verification for JWT
+
+
+:100644 100644 daa10a1450413f8ca48118d3ca39b6f29df64bdf cdbb59fd3518e5a9c4b5856391396a7a08a456b9 M	.env.local
+:100644 100644 ec5b93084f21197cc7bac32e720f3420fda8ff45 225010a9bebe3f8c5c6c4e6df80aed674db24561 M	.env.production
+:100644 100644 ec5b93084f21197cc7bac32e720f3420fda8ff45 35d42e1bf8e843e0c583cecc10f38bac6a0a0421 M	.env.staging
+:100644 100644 be318e8179bf3501b8bf8ad9cde98b0166c4b7ab 037cfca0f3f1a31c0d8e8e5f691c4740a9582b15 M	app/routes/fracSession.routes.js
+:100644 100644 11602de95ef8218e2f4becf1632324a84bf4c205 822acc4acf9fd5a29f60a06771d93b2e619303b5 M	package.json
+:100644 100644 39a9ea30406025a1da92e3d8fbc971229c2dc243 ee36dfe395507dfc109346e8553529133cfccb48 M	server-compiled.js
+:100644 100644 f2713ca910fa244880498deafa974146a7167057 06cba3241ea9ca6a48d9e11f5a0baa930e3abe26 M	server.js
+:100644 100644 be0d3e280133b3b1219d800f5302ccb26b81247c 35bd90be24a455d0854fc68da9db7ed88e6b9e5b M	yarn.lock

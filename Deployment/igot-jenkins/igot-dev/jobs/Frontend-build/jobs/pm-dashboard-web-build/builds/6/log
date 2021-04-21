@@ -1,0 +1,295 @@
+Started by user [8mha:////4IC/XGvaJgDWPDkzydBhNmQZQV0m+OlPLzVeSdGBpAbTAAAAlx+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzOEgZu/dLi1CL9xJTczDwAawhpaMAAAAA=[0midc-eagle
+Rebuilds build #[8mha:////4IzjmlLJ8SPb1MApdD6FJQue5WRLox0strsmyR9LQ0/QAAAAvR+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLQIwSBlv9rPwk/cz0/BLdlNQyMMetKD+vJDUvRTepNDMnBSxUkKubklickZSfWJSiW56aBJUyBQCnsSFp8gAAAA==[0m5
+Checking out git git@git.idc.tarento.com:nxt/nxt-retail/rain-dashboard-react-web.git into /var/lib/jenkins/workspace/igot-dev/Frontend-build/pm-dashboard-web-build@script to read Jenkinsfile.igot
+using credential git-lab
+ > git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url git@git.idc.tarento.com:nxt/nxt-retail/rain-dashboard-react-web.git # timeout=10
+Fetching upstream changes from git@git.idc.tarento.com:nxt/nxt-retail/rain-dashboard-react-web.git
+ > git --version # timeout=10
+using GIT_SSH to set credentials Git Lab
+ > git fetch --tags --progress git@git.idc.tarento.com:nxt/nxt-retail/rain-dashboard-react-web.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse origin/igot-product-dashboard^{commit} # timeout=10
+Checking out Revision 6894e9a652c98dbad7fc83b23fd7c932416f6d46 (origin/igot-product-dashboard)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 6894e9a652c98dbad7fc83b23fd7c932416f6d46 # timeout=10
+Commit message: "updated Dockerfile.igot"
+ > git rev-list --no-walk 83dda720c7307c64995319db81d5b010109aced3 # timeout=10
+Running in Durability level: MAX_SURVIVABILITY
+[8mha:////4CogtAq7rn74jxj7uLVCcsx+t/y35kGeqvPkPZObyMXKAAAAoh+LCAAAAAAAAP9tjTEOwjAQBM8BClpKHuFItIiK1krDC0x8GCfWnbEdkooX8TX+gCESFVvtrLSa5wtWKcKBo5UdUu8otU4GP9jS5Mixv3geZcdn2TIl9igbHBs2eJyx4YwwR1SwULBGaj0nRzbDRnX6rmuvydanHMu2V1A5c4MHCFXMWcf8hSnC9jqYxPTz/BXAFEIGsfuclm8zQVqFvQAAAA==[0m[Pipeline] Start of Pipeline
+[8mha:////4M4HhYYw5g8Q/T69bF4Q03CXP5QrGLTB/3G02QXJo6U5AAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycohUghExsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jduZBmjwAAAAA==[0m[Pipeline] node
+Running on [8mha:////4I8dzKCIF5MAVfX6mSSVw/7BBA8CLo8Y4KOcAQfTfDT/AAAAnh+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAz2EgZh/eT83ILSktQifY3cxGIgrakPAHib2iPIAAAA[0mJenkins in /var/lib/jenkins/workspace/igot-dev/Frontend-build/pm-dashboard-web-build
+[8mha:////4LB3xgJ5/i6rvwz3UzIGQskalXp7BJ5rM3CcuPAq8uCGAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0gA0xsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jfoP95RwAAAAA==[0m[Pipeline] {
+[8mha:////4BIodQLml+s7Yz/VUwXw69YMXxgGKkA2g9ogG2rdJzvnAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0gQkxsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jc09154wAAAAA==[0m[Pipeline] ansiColor
+[8mha:////4I+DPNrJrY6nGXv0HKYd6twr+ClidgSYIrE439NWgujzAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0ggUxsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jek7ggRwAAAAA==[0m[Pipeline] {
+[8mha:////4E6ZFoOz08tWaQiXki4hIu1lr7b/L8x53DGJZd+Tu1RuAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0gwExsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jcChmMxwAAAAA==[0m[Pipeline] stage
+[8mha:////4EOWAYBHBge05it7SsmJIpeBzlZnHLfW1vjcORdWPYclAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0BAkxsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jfpX/cvwAAAAA==[0m[Pipeline] { (Checkout)
+[8mha:////4P8hajGSU1NmcDK7zr6c+qSTk1RCMgeBZweWlwN28t5yAAAAoh+LCAAAAAAAAP9tjTEOAiEURD9rLGwtPQTbaoyVLaHxBMgiwpL/WWDdrTyRV/MOEjexcpJJ5k3zXm9Y5wQnSpZ7g73DrB2PYbR18YlSfws0cU9XrgkzBcOlmSR15rygpGJgCWtgJWBjUAfKDm2BrfDqodqg0LaXkup3FNC4boAnMFHNRaXyhTnB7j52mfDn+SuAORZg+9pD/AAeoCAqvAAAAA==[0m[Pipeline] cleanWs
+[WS-CLEANUP] Deleting project workspace...
+[WS-CLEANUP] Deferred wipeout is used...
+[WS-CLEANUP] done
+[8mha:////4O62hg3nuWQGYzJSRPAYJinD89yjNHB3k3WDfrzy132vAAAAox+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMKBDglR0VppeIFJjHFi3QX7QlLxIr7GH4iIRMVWO9PM641lijhydKqx1HpKlVdd6N301MCxvQYeVMMXVTElDlaVdii5tqcZSxaLeVmOhcbKUhU4eXKCtW7MwxTBkCvOEid30Mh9fccTmZ7KYqJ8YYzY3Po6Mf06fwMYO0G2F+S7bfcBITL9lL0AAAA=[0m[Pipeline] checkout
+using credential git-lab
+Cloning the remote Git repository
+Cloning repository git@git.idc.tarento.com:nxt/nxt-retail/rain-dashboard-react-web.git
+ > git init /var/lib/jenkins/workspace/igot-dev/Frontend-build/pm-dashboard-web-build # timeout=10
+Fetching upstream changes from git@git.idc.tarento.com:nxt/nxt-retail/rain-dashboard-react-web.git
+ > git --version # timeout=10
+using GIT_SSH to set credentials Git Lab
+ > git fetch --tags --progress git@git.idc.tarento.com:nxt/nxt-retail/rain-dashboard-react-web.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url git@git.idc.tarento.com:nxt/nxt-retail/rain-dashboard-react-web.git # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url git@git.idc.tarento.com:nxt/nxt-retail/rain-dashboard-react-web.git # timeout=10
+Fetching upstream changes from git@git.idc.tarento.com:nxt/nxt-retail/rain-dashboard-react-web.git
+using GIT_SSH to set credentials Git Lab
+ > git fetch --tags --progress git@git.idc.tarento.com:nxt/nxt-retail/rain-dashboard-react-web.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse origin/igot-product-dashboard^{commit} # timeout=10
+Checking out Revision 6894e9a652c98dbad7fc83b23fd7c932416f6d46 (origin/igot-product-dashboard)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 6894e9a652c98dbad7fc83b23fd7c932416f6d46 # timeout=10
+Commit message: "updated Dockerfile.igot"
+[8mha:////4PphThmGcYjzIXYO8baHSsc/I1mRgpU76NMkOh1sjp0sAAAAox+LCAAAAAAAAP9tjbEOgjAURS8YB1dHP6KEzcQ4uTYsfkGFWgvNe9g+hMkv8tf8B4kkTt7pnrOc1xvrFHHk6FRrqfOUaq/6MLj5qZFjdw08qpYvqmZKHKyq7FhxY08LViwWy7IcK42NpTpw8uQEW92ahymCIVecJc7uoJH75o4nMj2XxUT5whSxuw1NYvp1/gYw9b0gL0tBtv8AHk6T5r0AAAA=[0m[Pipeline] }
+[8mha:////4N1Qgn8AATg0PJlfa+zx4/XZh3bPHqh2xDfBbhJgS8Y2AAAAox+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMIRNBSIitZKwwtMYowT6y7YF5KKF/E1/kBEJCq22plmXm8sU8SRo1ONpdZTqrzqQu+mpwaO7TXwoBq+qIopcbCqtEPJtT3NWLJYzMtyLDRWlqrAyZMTrHVjHqYIhlxxlji5g0bu6zueyPRUFhPlC2PE5tbXienX+RvA2HWCfLsTZPsPXymMMb0AAAA=[0m[Pipeline] // stage
+[8mha:////4EMnktzjW7yUEZ67srpVpNNd9ZDB2RgNDQ8SkV11xlyUAAAApB+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMIRQqJBVLRWGl5gEmOcWHfBvpBUvIiv8QciIlGx1c4083pjmSKOHJ1qLLWeUuVVF3o3PTVwbK+BB9XwRVVMiYNVpR1Kru1pxpLFYl6WY6GxslQFTp6cYK0b8zBFMOSKs8TJHTRyX9/xRKanspgoXxgjNre+Tky/zt8Axq4T5NudINt/AHkw63u9AAAA[0m[Pipeline] }
+[8mha:////4P0iBvoKjc4AyO3aqqUerJXSHuX/cs0cWTvuLSIHcSjvAAAAox+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMIRElSIitZKwwtMYowT6y7YF5KKF/E1/kBEJCq22plmXm8sU8SRo1ONpdZTqrzqQu+mpwaO7TXwoBq+qIopcbCqtEPJtT3NWLJYzMtyLDRWlqrAyZMTrHVjHqYIhlxxlji5g0bu6zueyPRUFhPlC2PE5tbXienX+RvA2HWCfLsTZPsP073CUL0AAAA=[0m[Pipeline] // ansiColor
+[8mha:////4CNnUvLMQQkxTLdb9/c6+Fx6wGWbU8RzyyrIP2Q7WnhBAAAAph+LCAAAAAAAAP9tjTEOwjAQBM9BKWgpeYQjJKgQFa3lhheY2Bgn1l2wLyQVL+Jr/IFAJCq22llpNc8XlDnBgZKXjcM2YK6D7GLvpyYHSu0l0iAbOsuaMFN0UrtBk3XHGTWxgzmigIWCpcM6Ug7oGVaqMXdTRYO+OnGatr2CItgbPECoycwm8RfGBOtrbzPhz/NXAGPHILYMxWb3OZZvBXXnAcEAAAA=[0m[Pipeline] stage
+[8mha:////4CBaTsQr90lV5hpKm/1Gi+wkLJENS/ytk4SMdVNyA5vCAAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUDLAgpq5RFk4QmhDSRv+Xn5R24kRcjTvQUokJD5ZtyXqvNxSR4UTsRGOx9RhrL7rQuymJgbi9BhpEQxdRE0YKVig7KDK2WqqiZGFRlsNKwtpiHSh6dAk2stEPXQaNrjwnnrajhNybOzwhkxM5aU7fMjJsb72JhD/OXwCMXYJ8t5/tMD+LD/s94rDCAAAA[0m[Pipeline] { (docker-build)
+[8mha:////4HHuxzc+yx4ZPKmtro1JSpobF3oS2uHDg6qhlNjVyMk5AAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiGigQVVrLDS8wsTFOrDtjOyQVL+Jr/IFAJCq2WO1sM88XLFOEI0eLraHOUWocBt/baeHAsbt4HrDlMzZMib1BaQbJ2tQzSs4G5hQlLASsDDWekyObYS1adVeVV2SrU47TdxBQOn2DBxRiMmcV8xfGCJtrrxPTz/NXAGPIUG53n9qHN27Iu42+AAAA[0m[Pipeline] sh
++ git rev-parse --short HEAD
++ commit_id=6894e9a
++ echo 6894e9a
++ docker build -f Dockerfile.igot -t eagle-docker.tarento.com/pm-web-service:6894e9a .
+Sending build context to Docker daemon  32.61MB
+Step 1/9 : FROM node:10.15.3-stretch
+ ---> 5a401340b79f
+Step 2/9 : ARG NODE_ENV=staging
+ ---> Using cache
+ ---> aba5c4736763
+Step 3/9 : WORKDIR /app
+ ---> Using cache
+ ---> 908b6c1ccb63
+Step 4/9 : COPY . .
+ ---> 1a67b377601e
+Step 5/9 : RUN npm install
+ ---> Running in b4b83e126be2
+
+> core-js@2.6.11 postinstall /app/node_modules/babel-runtime/node_modules/core-js
+> node -e "try{require('./postinstall')}catch(e){}"
+
+[96mThank you for using core-js ([94m https://github.com/zloirock/core-js [96m) for polyfilling JavaScript standard library![0m
+
+[96mThe project needs your help! Please consider supporting of core-js on Open Collective or Patreon: [0m
+[96m>[94m https://opencollective.com/core-js [0m
+[96m>[94m https://www.patreon.com/zloirock [0m
+
+[96mAlso, the author of core-js ([94m https://github.com/zloirock [96m) is looking for a good job -)[0m
+
+
+> core-js@3.6.4 postinstall /app/node_modules/core-js
+> node -e "try{require('./postinstall')}catch(e){}"
+
+[96mThank you for using core-js ([94m https://github.com/zloirock/core-js [96m) for polyfilling JavaScript standard library![0m
+
+[96mThe project needs your help! Please consider supporting of core-js on Open Collective or Patreon: [0m
+[96m>[94m https://opencollective.com/core-js [0m
+[96m>[94m https://www.patreon.com/zloirock [0m
+
+[96mAlso, the author of core-js ([94m https://github.com/zloirock [96m) is looking for a good job -)[0m
+
+
+> core-js-pure@3.6.5 postinstall /app/node_modules/core-js-pure
+> node -e "try{require('./postinstall')}catch(e){}"
+
+[96mThank you for using core-js ([94m https://github.com/zloirock/core-js [96m) for polyfilling JavaScript standard library![0m
+
+[96mThe project needs your help! Please consider supporting of core-js on Open Collective or Patreon: [0m
+[96m>[94m https://opencollective.com/core-js [0m
+[96m>[94m https://www.patreon.com/zloirock [0m
+
+[96mAlso, the author of core-js ([94m https://github.com/zloirock [96m) is looking for a good job -)[0m
+
+[91mnpm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.13 (node_modules/webpack-dev-server/node_modules/fsevents):
+npm WARN [0m[91mnotsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.13: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+[0m[91mnpm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.13 (node_modules/watchpack-chokidar2/node_modules/fsevents):
+[0m[91mnpm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.13: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+[0m[91mnpm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.13 (node_modules/jest-haste-map/node_modules/fsevents):
+npm[0m[91m WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.13: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+npm WARN[0m[91m optional SKIPPING OPTIONAL DEPENDENCY: fsevents@2.1.2 (node_modules/fsevents):
+[0m[91mnpm WARN notsup[0m[91m SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@2.1.2: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+[0m[91m
+[0madded 1789 packages from 883 contributors and audited 1797 packages in 34.568s
+found 24 vulnerabilities (1 low, 4 moderate, 19 high)
+  run `npm audit fix` to fix them, or `npm audit` for details
+Removing intermediate container b4b83e126be2
+ ---> 2a5025d15572
+Step 6/9 : RUN npm install -g serve
+ ---> Running in 30cba3b32a04
+/usr/local/bin/serve -> /usr/local/lib/node_modules/serve/bin/serve.js
++ serve@11.3.2
+added 78 packages from 39 contributors in 2.847s
+Removing intermediate container 30cba3b32a04
+ ---> 53406b004b25
+Step 7/9 : RUN npm run build:staging
+ ---> Running in ba05ddc45182
+
+> rain-dashboard-react-web@0.1.0 build:staging /app
+> env-cmd -f ./.env.staging npm run build
+
+
+> rain-dashboard-react-web@0.1.0 build /app
+> react-scripts build
+
+Creating an optimized production build...
+[91mBrowserslist: caniuse-lite is outdated. Please run:
+npx browserslist@latest --update-db
+
+Why you should do it regularly:
+https://github.com/browserslist/browserslist#browsers-data-updating
+[0mCompiled successfully.
+
+File sizes after gzip:
+
+  289.81 KB  build/static/js/6.a5f2bf1c.chunk.js
+  96.79 KB   build/static/js/2.fc299273.chunk.js
+  19.38 KB   build/static/js/main.59ecfb4c.chunk.js
+  11.57 KB   build/static/js/3.c69f8660.chunk.js
+  8.38 KB    build/static/js/0.1ff6ee64.chunk.js
+  7.1 KB     build/static/js/1.a54fa5c2.chunk.js
+  7.03 KB    build/static/js/7.71b7006e.chunk.js
+  2.98 KB    build/static/js/8.e422b22c.chunk.js
+  2.61 KB    build/static/js/10.88f23cf9.chunk.js
+  2.57 KB    build/static/js/9.9d6dcddd.chunk.js
+  1.79 KB    build/static/css/7.f42e59c9.chunk.css
+  1.59 KB    build/static/js/runtime-main.65733a4e.js
+  1.08 KB    build/static/js/11.76558a8c.chunk.js
+  490 B      build/static/css/main.87a45740.chunk.css
+
+The project was built assuming it is hosted at /.
+You can control this with the homepage field in your package.json.
+
+The build folder is ready to be deployed.
+You may serve it with a static server:
+
+  serve -s build
+
+Find out more about deployment here:
+
+  bit.ly/CRA-deploy
+
+Removing intermediate container ba05ddc45182
+ ---> 7ecd5b8987f6
+Step 8/9 : EXPOSE 3000
+ ---> Running in cbcaef976bfb
+Removing intermediate container cbcaef976bfb
+ ---> 88cbaf591f34
+Step 9/9 : CMD [ "serve" "-s" "build:staging"]
+ ---> Running in 27637b714f00
+Removing intermediate container 27637b714f00
+ ---> 17715e734b2c
+Successfully built 17715e734b2c
+Successfully tagged eagle-docker.tarento.com/pm-web-service:6894e9a
++ docker tag eagle-docker.tarento.com/pm-web-service:6894e9a eagle-docker.tarento.com/pm-web-service:sbbronze
+[8mha:////4DW9QfjIqkQjbk0As03mWXshjqakH9wcOztMVQanDcdGAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiGoSEqNJabniBiY1xYt0Z2yGpeBFf4w8EIlGxxWpnm3m+YJkiHDlabA11jlLjMPjeTgsHjt3F84Atn7FhSuwNSjNI1qaeUXI2MKcoYSFgZajxnBzZDGvRqruqvCJbnXKcvoOA0ukbPKAQkzmrmL8wRthce52Yfp6/AhhDyFBu95/avQHhgNoTvgAAAA==[0m[Pipeline] }
+[8mha:////4EuThnuO/bxP/NWEHp5uhxRcX5RxIFZUATvKwJeb4b/6AAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiCgqEqNJabniBiY1xYt0Z2yGpeBFf4w8EIlGxxWpnm3m+YJkiHDlabA11jlLjMPjeTgsHjt3F84Atn7FhSuwNSjNI1qaeUXI2MKcoYSFgZajxnBzZDGvRqruqvCJbnXKcvoOA0ukbPKAQkzmrmL8wRthce52Yfp6/AhhDyFBu95/avQH+Ao9BvgAAAA==[0m[Pipeline] // stage
+[8mha:////4AXU9pjXrV3DcNQ6Eb6d+G4sMdtRURTPJn5v5jBgzo08AAAAph+LCAAAAAAAAP9tjTEOwjAQBM9BKWgpeYSDEB2iorXc8AITG+PEugv2haTiRXyNPxCIRMVWOyut5vmCMic4UPKycdgGzHWQXez91ORAqb1EGmRDZ1kTZopOajdosu44oyZ2MEcUsFCwdFhHygE9w0o15m6qaNBXJ07TtldQBHuDBwg1mdkk/sKYYH3tbSb8ef4KYOwYxI6h2G4+x/INK/7CYMEAAAA=[0m[Pipeline] stage
+[8mha:////4P8otm/db14WqDuVB8uFWYQY1DxABVDArZsA1CmUEBBgAAAAph+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycogUWBFT1ygLJwhNCGmj/8tPSjtxIq7GHWipxIQHy7ZkvdcbishwInaisdh6jLUXXejdlMRA3F4DDaKhi6gJIwUrlB0UGVstVVGysCjLYSVhbbEOFD26BBvZ6Icug0ZXnhNP21FC7s0dnpDJiZw0p28ZGba33kTCH+cvAMYuQX7Yzbafn8UHbGnGmsIAAAA=[0m[Pipeline] { (docker-push)
+[8mha:////4I93nRfJXXHYqNQ9n8ZryBqCBI50TLJhruonpCB0f+KSAAAAox+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIi0iIqWisNLzCJMXasO8d2cCpexNf4A4FIVGyx2tlmni9YxwBHDhqtot5QbA16N+p5YebQXx1ntHzBlimyU9io3HCnTgs2nBQsKUpYCdgoah1HQzrBVlh5l5WTpKtzCvN3EFCaboAHFGI2JxnSF6YAu9vYRaaf568AJp+grPefqv0bH7uiub4AAAA=[0m[Pipeline] sh
++ pwd
+/var/lib/jenkins/workspace/igot-dev/Frontend-build/pm-dashboard-web-build
++ git rev-parse --short HEAD
++ commit_id=6894e9a
++ docker push eagle-docker.tarento.com/pm-web-service:6894e9a
+The push refers to repository [eagle-docker.tarento.com/pm-web-service]
+63f0168e6689: Preparing
+4a27456183b8: Preparing
+88d54f19858d: Preparing
+f400304f5f35: Preparing
+d694df1747dc: Preparing
+2371e8a98212: Preparing
+5f7bfa7e154c: Preparing
+a27518e43e49: Preparing
+910d7fd9e23e: Preparing
+4230ff7f2288: Preparing
+2c719774c1e1: Preparing
+ec62f19bb3aa: Preparing
+f94641f1fe1f: Preparing
+2371e8a98212: Waiting
+5f7bfa7e154c: Waiting
+a27518e43e49: Waiting
+2c719774c1e1: Waiting
+910d7fd9e23e: Waiting
+ec62f19bb3aa: Waiting
+4230ff7f2288: Waiting
+f94641f1fe1f: Waiting
+d694df1747dc: Layer already exists
+2371e8a98212: Layer already exists
+5f7bfa7e154c: Layer already exists
+a27518e43e49: Layer already exists
+910d7fd9e23e: Layer already exists
+4230ff7f2288: Layer already exists
+2c719774c1e1: Layer already exists
+ec62f19bb3aa: Layer already exists
+f94641f1fe1f: Layer already exists
+4a27456183b8: Pushed
+f400304f5f35: Pushed
+63f0168e6689: Pushed
+88d54f19858d: Pushed
+6894e9a: digest: sha256:676a89daf5aaa31160074cbe6c4cfa7465e849b9c3fc6792e9d8a5b4f1296d0d size: 3062
++ docker push eagle-docker.tarento.com/pm-web-service:sbbronze
+The push refers to repository [eagle-docker.tarento.com/pm-web-service]
+63f0168e6689: Preparing
+4a27456183b8: Preparing
+88d54f19858d: Preparing
+f400304f5f35: Preparing
+d694df1747dc: Preparing
+2371e8a98212: Preparing
+5f7bfa7e154c: Preparing
+a27518e43e49: Preparing
+910d7fd9e23e: Preparing
+4230ff7f2288: Preparing
+2c719774c1e1: Preparing
+ec62f19bb3aa: Preparing
+f94641f1fe1f: Preparing
+5f7bfa7e154c: Waiting
+a27518e43e49: Waiting
+910d7fd9e23e: Waiting
+4230ff7f2288: Waiting
+ec62f19bb3aa: Waiting
+f94641f1fe1f: Waiting
+d694df1747dc: Layer already exists
+4a27456183b8: Layer already exists
+88d54f19858d: Layer already exists
+63f0168e6689: Layer already exists
+f400304f5f35: Layer already exists
+5f7bfa7e154c: Layer already exists
+2371e8a98212: Layer already exists
+a27518e43e49: Layer already exists
+910d7fd9e23e: Layer already exists
+4230ff7f2288: Layer already exists
+f94641f1fe1f: Layer already exists
+ec62f19bb3aa: Layer already exists
+2c719774c1e1: Layer already exists
+sbbronze: digest: sha256:676a89daf5aaa31160074cbe6c4cfa7465e849b9c3fc6792e9d8a5b4f1296d0d size: 3062
++ docker rmi -f eagle-docker.tarento.com/pm-web-service:6894e9a
+Untagged: eagle-docker.tarento.com/pm-web-service:6894e9a
++ docker rmi -f eagle-docker.tarento.com/pm-web-service:sbbronze
+Untagged: eagle-docker.tarento.com/pm-web-service:sbbronze
+Untagged: eagle-docker.tarento.com/pm-web-service@sha256:676a89daf5aaa31160074cbe6c4cfa7465e849b9c3fc6792e9d8a5b4f1296d0d
+Deleted: sha256:17715e734b2caf291f7a3d31a17b3f7196fdab11acd7ea5e41c9056bd19f8c2b
+Deleted: sha256:88cbaf591f34fdb42ca8cbd903bf45f933e1e1ce8b616157cc4139f2a370c564
+Deleted: sha256:7ecd5b8987f679bc4423cf0b4298606f0d4e3615026e9c72847608422a8e4a4f
+Deleted: sha256:105f8fc0350b2d89289052443e6ccd817adc1e291f845d1ac96ad9e220bb64f6
+Deleted: sha256:53406b004b25a691f7e26d13d984f31e2039d7806fd72aa763c0b1e4b58f9c31
+Deleted: sha256:358ed758d8d12a03d28fbcccba30265458fa7990cd742c83886a08f4bd1c4853
+Deleted: sha256:2a5025d1557264fd3ac22b22f10bdcb7ba06b7d5183eec4ca61409f28164c9f8
+Deleted: sha256:a67cc4a834f1f0a111f762554ac63506b4bb57bcc3d7fe95b1858360e66ef85d
+Deleted: sha256:1a67b377601ef89426a1973f4e3ac4e902e5f7019d5b383bc8152ae1aabd2e00
+Deleted: sha256:2dd5af461281d3aade47ca2a6bd965e9611c0fc8e56f9e6f3dfb599cc70cf222
++ rm -rf dist
++ rm -rf dist.zip
+[8mha:////4MXsYXnb4p7FgiEOMp7sCWEPUy1bdW722lZ/PP4Z+CyxAAAAox+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIioERUaS03vMDExjix7oztkFS8iK/xBwKRqNhitbPNPF+wTBGOHC22hjpHqXEYfG+nhQPH7uJ5wJbP2DAl9galGSRrU88oORuYU5SwELAy1HhOjmyGtWjVXVVeka1OOU7fQUDp9A0eUIjJnFXMXxgjbK69Tkw/z18BjCFkKHf7T23f36y8/b4AAAA=[0m[Pipeline] }
+[8mha:////4ADhGD/71LyTTCLwqIdrANDxNP6S4NTyh7Fc/Zz1XH+5AAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOKCEB2iSmu54QUmNsaJdWdsh6TiRXyNPxCIRMUWq51t5vmCZYpw5GixNdQ5So3D4Hs7LRw4dhfPA7Z8xoYpsTcozSBZm3pGydnAnKKEhYCVocZzcmQzrEWr7qryimx1ynH6DgJKp2/wgEJM5qxi/sIYYXPtdWL6ef4KYAwhQ7nbf2r7BvGsvpe+AAAA[0m[Pipeline] // stage
+[8mha:////4CW/ezPvyc8QUPh/3zWEQ8IUWegke4QKdGw/DPOOEip2AAAAox+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMKREFSIitZKwwtMYowT6y7YF5KKF/E1/kBEJCq22plmXm8sU8SRo1ONpdZTqrzqQu+mpwaO7TXwoBq+qIopcbCqtEPJtT3NWLJYzMtyLDRWlqrAyZMTrHVjHqYIhlxxlji5g0bu6zueyPRUFhPlC2PE5tbXienX+RvA2HWCfLsXZLsPW9YxnL0AAAA=[0m[Pipeline] }
+[8mha:////4MIz47fr/8W2ok/wdLyXevLEobhhFUrq2v7hzRttFCPmAAAApB+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMKRQKJBVLRWGl5gEmOcWHfBvpBUvIiv8QciIlGx1c4083pjmSKOHJ1qLLWeUuVVF3o3PTVwbK+BB9XwRVVMiYNVpR1Kru1pxpLFYl6WY6GxslQFTp6cYK0b8zBFMOSKs8TJHTRyX9/xRKanspgoXxgjNre+Tky/zt8Axq4T5Nu9INt9ACg59UW9AAAA[0m[Pipeline] // node
+[8mha:////4FaMOl5AMjox+QrCVKyAXLPFK/PyL7vtBCCK2UbaBmuZAAAAox+LCAAAAAAAAP9tjbEOgjAURS8YB1dHP6IkLA7GybVh8Qsq1Fpo3sP2IUx+kb/mP0gkcfJO95zlvN5Yp4gjR6daS52nVHvVh8HNT40cu2vgUbV8UTVT4mBVZceKG3tasGKxWJblWGlsLNWBkycn2OrWPEwRDLniLHF2B43cN3c8kem5LCbKF6aI3W1oEtOv8zeAqe8FebkXZOUHDiCSD70AAAA=[0m[Pipeline] End of Pipeline
+Finished: SUCCESS

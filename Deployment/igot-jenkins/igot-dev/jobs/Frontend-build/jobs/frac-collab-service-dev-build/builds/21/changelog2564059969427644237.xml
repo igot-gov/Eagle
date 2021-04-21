@@ -1,0 +1,11 @@
+commit 85548b5ad8e0bf19eea4995da91c8b09e18b5b98
+tree d57972fea2149069abb5604cf3a5ec2e9add4882
+parent 606018724103bcd3a9690381ad115f181c9973d2
+author Sakthivel <sakthivel.govindan@tarento.com> 2021-04-16 21:57:21 +0530
+committer Sakthivel <sakthivel.govindan@tarento.com> 2021-04-16 21:57:21 +0530
+
+    refactor: add sockets keyword for events
+
+
+:100644 100644 fd4d1dafc1b9ceff229e1f7bc6f562a154042c6c cd8a0152d6f6737c4648c2fb947f89232fba462f M	server-compiled.js
+:100644 100644 acf7ed0951b10324682d0fa719ec37acac1ec9e4 90ba99badb0038e841e682074404204e7750cfb1 M	server.js

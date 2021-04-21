@@ -1,0 +1,10 @@
+commit 1601b825b9aa3b55a0ed0847607e24dd2d3831ac
+tree 1a969afb87165854472e9f816b2385d7a8b1dfef
+parent 75173ebf6663a74ed12c715ce6c104249cbce0b8
+author Sakthivel <sakthivel.govindan@tarento.com> 2021-04-15 18:33:04 +0530
+committer Sakthivel <sakthivel.govindan@tarento.com> 2021-04-15 18:33:04 +0530
+
+    refactor: update CORS 07
+
+
+:100644 100644 12aa82e1348e9d4e31e0beadf5c23739ecdefe52 0efd569981a478d3930b8eb7541e7d0ea140f02d M	server.js

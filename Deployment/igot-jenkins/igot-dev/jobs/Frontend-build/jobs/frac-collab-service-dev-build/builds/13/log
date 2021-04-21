@@ -1,0 +1,224 @@
+Started by user [8mha:////4IC/XGvaJgDWPDkzydBhNmQZQV0m+OlPLzVeSdGBpAbTAAAAlx+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzOEgZu/dLi1CL9xJTczDwAawhpaMAAAAA=[0midc-eagle
+Checking out git git@git.idc.tarento.com:igot-products/frac/collab-editor-backend.git into /var/lib/jenkins/workspace/igot-dev/Frontend-build/frac-collab-service-dev-build@script to read Jenkinsfile
+using credential git-lab
+ > git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url git@git.idc.tarento.com:igot-products/frac/collab-editor-backend.git # timeout=10
+Fetching upstream changes from git@git.idc.tarento.com:igot-products/frac/collab-editor-backend.git
+ > git --version # timeout=10
+using GIT_SSH to set credentials Git Lab
+ > git fetch --tags --progress git@git.idc.tarento.com:igot-products/frac/collab-editor-backend.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse origin/frac-collaboration^{commit} # timeout=10
+Checking out Revision 1c24ae3e21d9feac79f6e7ebd0fdf7a311cb4473 (origin/frac-collaboration)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 1c24ae3e21d9feac79f6e7ebd0fdf7a311cb4473 # timeout=10
+Commit message: "refactor: update CORS 09"
+ > git rev-list --no-walk 3c31552aa954a223f231f5667d4b833f85ea4ea5 # timeout=10
+Running in Durability level: MAX_SURVIVABILITY
+[8mha:////4CogtAq7rn74jxj7uLVCcsx+t/y35kGeqvPkPZObyMXKAAAAoh+LCAAAAAAAAP9tjTEOwjAQBM8BClpKHuFItIiK1krDC0x8GCfWnbEdkooX8TX+gCESFVvtrLSa5wtWKcKBo5UdUu8otU4GP9jS5Mixv3geZcdn2TIl9igbHBs2eJyx4YwwR1SwULBGaj0nRzbDRnX6rmuvydanHMu2V1A5c4MHCFXMWcf8hSnC9jqYxPTz/BXAFEIGsfuclm8zQVqFvQAAAA==[0m[Pipeline] Start of Pipeline
+[8mha:////4M4HhYYw5g8Q/T69bF4Q03CXP5QrGLTB/3G02QXJo6U5AAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycohUghExsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jduZBmjwAAAAA==[0m[Pipeline] node
+Running on [8mha:////4I8dzKCIF5MAVfX6mSSVw/7BBA8CLo8Y4KOcAQfTfDT/AAAAnh+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAz2EgZh/eT83ILSktQifY3cxGIgrakPAHib2iPIAAAA[0mJenkins in /var/lib/jenkins/workspace/igot-dev/Frontend-build/frac-collab-service-dev-build
+[8mha:////4LB3xgJ5/i6rvwz3UzIGQskalXp7BJ5rM3CcuPAq8uCGAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0gA0xsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jfoP95RwAAAAA==[0m[Pipeline] {
+[8mha:////4BIodQLml+s7Yz/VUwXw69YMXxgGKkA2g9ogG2rdJzvnAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0gQkxsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jc09154wAAAAA==[0m[Pipeline] ansiColor
+[8mha:////4I+DPNrJrY6nGXv0HKYd6twr+ClidgSYIrE439NWgujzAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0ggUxsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jek7ggRwAAAAA==[0m[Pipeline] {
+[8mha:////4E6ZFoOz08tWaQiXki4hIu1lr7b/L8x53DGJZd+Tu1RuAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0gwExsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jcChmMxwAAAAA==[0m[Pipeline] stage
+[8mha:////4EOWAYBHBge05it7SsmJIpeBzlZnHLfW1vjcORdWPYclAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0BAkxsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jfpX/cvwAAAAA==[0m[Pipeline] { (Checkout)
+[8mha:////4P8hajGSU1NmcDK7zr6c+qSTk1RCMgeBZweWlwN28t5yAAAAoh+LCAAAAAAAAP9tjTEOAiEURD9rLGwtPQTbaoyVLaHxBMgiwpL/WWDdrTyRV/MOEjexcpJJ5k3zXm9Y5wQnSpZ7g73DrB2PYbR18YlSfws0cU9XrgkzBcOlmSR15rygpGJgCWtgJWBjUAfKDm2BrfDqodqg0LaXkup3FNC4boAnMFHNRaXyhTnB7j52mfDn+SuAORZg+9pD/AAeoCAqvAAAAA==[0m[Pipeline] cleanWs
+[WS-CLEANUP] Deleting project workspace...
+[WS-CLEANUP] Deferred wipeout is used...
+[WS-CLEANUP] done
+[8mha:////4O62hg3nuWQGYzJSRPAYJinD89yjNHB3k3WDfrzy132vAAAAox+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMKBDglR0VppeIFJjHFi3QX7QlLxIr7GH4iIRMVWO9PM641lijhydKqx1HpKlVdd6N301MCxvQYeVMMXVTElDlaVdii5tqcZSxaLeVmOhcbKUhU4eXKCtW7MwxTBkCvOEid30Mh9fccTmZ7KYqJ8YYzY3Po6Mf06fwMYO0G2F+S7bfcBITL9lL0AAAA=[0m[Pipeline] checkout
+using credential git-lab
+Cloning the remote Git repository
+Cloning repository git@git.idc.tarento.com:igot-products/frac/collab-editor-backend.git
+ > git init /var/lib/jenkins/workspace/igot-dev/Frontend-build/frac-collab-service-dev-build # timeout=10
+Fetching upstream changes from git@git.idc.tarento.com:igot-products/frac/collab-editor-backend.git
+ > git --version # timeout=10
+using GIT_SSH to set credentials Git Lab
+ > git fetch --tags --progress git@git.idc.tarento.com:igot-products/frac/collab-editor-backend.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url git@git.idc.tarento.com:igot-products/frac/collab-editor-backend.git # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url git@git.idc.tarento.com:igot-products/frac/collab-editor-backend.git # timeout=10
+Fetching upstream changes from git@git.idc.tarento.com:igot-products/frac/collab-editor-backend.git
+using GIT_SSH to set credentials Git Lab
+ > git fetch --tags --progress git@git.idc.tarento.com:igot-products/frac/collab-editor-backend.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse origin/frac-collaboration^{commit} # timeout=10
+Checking out Revision 1c24ae3e21d9feac79f6e7ebd0fdf7a311cb4473 (origin/frac-collaboration)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 1c24ae3e21d9feac79f6e7ebd0fdf7a311cb4473 # timeout=10
+Commit message: "refactor: update CORS 09"
+[8mha:////4PphThmGcYjzIXYO8baHSsc/I1mRgpU76NMkOh1sjp0sAAAAox+LCAAAAAAAAP9tjbEOgjAURS8YB1dHP6KEzcQ4uTYsfkGFWgvNe9g+hMkv8tf8B4kkTt7pnrOc1xvrFHHk6FRrqfOUaq/6MLj5qZFjdw08qpYvqmZKHKyq7FhxY08LViwWy7IcK42NpTpw8uQEW92ahymCIVecJc7uoJH75o4nMj2XxUT5whSxuw1NYvp1/gYw9b0gL0tBtv8AHk6T5r0AAAA=[0m[Pipeline] }
+[8mha:////4N1Qgn8AATg0PJlfa+zx4/XZh3bPHqh2xDfBbhJgS8Y2AAAAox+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMIRNBSIitZKwwtMYowT6y7YF5KKF/E1/kBEJCq22plmXm8sU8SRo1ONpdZTqrzqQu+mpwaO7TXwoBq+qIopcbCqtEPJtT3NWLJYzMtyLDRWlqrAyZMTrHVjHqYIhlxxlji5g0bu6zueyPRUFhPlC2PE5tbXienX+RvA2HWCfLsTZPsPXymMMb0AAAA=[0m[Pipeline] // stage
+[8mha:////4EMnktzjW7yUEZ67srpVpNNd9ZDB2RgNDQ8SkV11xlyUAAAApB+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMIRQqJBVLRWGl5gEmOcWHfBvpBUvIiv8QciIlGx1c4083pjmSKOHJ1qLLWeUuVVF3o3PTVwbK+BB9XwRVVMiYNVpR1Kru1pxpLFYl6WY6GxslQFTp6cYK0b8zBFMOSKs8TJHTRyX9/xRKanspgoXxgjNre+Tky/zt8Axq4T5NudINt/AHkw63u9AAAA[0m[Pipeline] }
+[8mha:////4P0iBvoKjc4AyO3aqqUerJXSHuX/cs0cWTvuLSIHcSjvAAAAox+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMIRElSIitZKwwtMYowT6y7YF5KKF/E1/kBEJCq22plmXm8sU8SRo1ONpdZTqrzqQu+mpwaO7TXwoBq+qIopcbCqtEPJtT3NWLJYzMtyLDRWlqrAyZMTrHVjHqYIhlxxlji5g0bu6zueyPRUFhPlC2PE5tbXienX+RvA2HWCfLsTZPsP073CUL0AAAA=[0m[Pipeline] // ansiColor
+[8mha:////4CNnUvLMQQkxTLdb9/c6+Fx6wGWbU8RzyyrIP2Q7WnhBAAAAph+LCAAAAAAAAP9tjTEOwjAQBM9BKWgpeYQjJKgQFa3lhheY2Bgn1l2wLyQVL+Jr/IFAJCq22llpNc8XlDnBgZKXjcM2YK6D7GLvpyYHSu0l0iAbOsuaMFN0UrtBk3XHGTWxgzmigIWCpcM6Ug7oGVaqMXdTRYO+OnGatr2CItgbPECoycwm8RfGBOtrbzPhz/NXAGPHILYMxWb3OZZvBXXnAcEAAAA=[0m[Pipeline] stage
+[8mha:////4CBaTsQr90lV5hpKm/1Gi+wkLJENS/ytk4SMdVNyA5vCAAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUDLAgpq5RFk4QmhDSRv+Xn5R24kRcjTvQUokJD5ZtyXqvNxSR4UTsRGOx9RhrL7rQuymJgbi9BhpEQxdRE0YKVig7KDK2WqqiZGFRlsNKwtpiHSh6dAk2stEPXQaNrjwnnrajhNybOzwhkxM5aU7fMjJsb72JhD/OXwCMXYJ8t5/tMD+LD/s94rDCAAAA[0m[Pipeline] { (docker-build)
+[8mha:////4HHuxzc+yx4ZPKmtro1JSpobF3oS2uHDg6qhlNjVyMk5AAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiGigQVVrLDS8wsTFOrDtjOyQVL+Jr/IFAJCq2WO1sM88XLFOEI0eLraHOUWocBt/baeHAsbt4HrDlMzZMib1BaQbJ2tQzSs4G5hQlLASsDDWekyObYS1adVeVV2SrU47TdxBQOn2DBxRiMmcV8xfGCJtrrxPTz/NXAGPIUG53n9qHN27Iu42+AAAA[0m[Pipeline] sh
++ git rev-parse --short HEAD
++ commit_id=1c24ae3
++ echo 1c24ae3
++ docker build -f Dockerfile.igot -t eagle-docker.tarento.com/frac-collab-service:1c24ae3 .
+Sending build context to Docker daemon  392.7kB
+Step 1/9 : FROM node:10.15.3-stretch
+ ---> 5a401340b79f
+Step 2/9 : ARG NODE_ENV=staging
+ ---> Running in 2d6748f20d77
+Removing intermediate container 2d6748f20d77
+ ---> 9aee15f2f9c5
+Step 3/9 : WORKDIR /app
+ ---> Running in 6e0db36e051a
+Removing intermediate container 6e0db36e051a
+ ---> e626322a1a51
+Step 4/9 : COPY . .
+ ---> c78a27d44e13
+Step 5/9 : RUN yarn install
+ ---> Running in 5caea0fd61f9
+yarn install v1.13.0
+[1/4] Resolving packages...
+[2/4] Fetching packages...
+info fsevents@2.3.2: The platform "linux" is incompatible with this module.
+info "fsevents@2.3.2" is an optional dependency and failed compatibility check. Excluding it from installation.
+[3/4] Linking dependencies...
+[4/4] Building fresh packages...
+Done in 10.98s.
+Removing intermediate container 5caea0fd61f9
+ ---> 77f948a4c182
+Step 6/9 : RUN yarn global add serve
+ ---> Running in f356589a92d7
+yarn global v1.13.0
+[1/4] Resolving packages...
+[2/4] Fetching packages...
+[3/4] Linking dependencies...
+[4/4] Building fresh packages...
+success Installed "serve@11.3.2" with binaries:
+      - serve
+Done in 1.38s.
+Removing intermediate container f356589a92d7
+ ---> c13770161890
+Step 7/9 : RUN yarn build
+ ---> Running in 6ba87b3803ef
+yarn run v1.13.0
+$ babel server.js --out-file server-compiled.js
+Done in 0.86s.
+Removing intermediate container 6ba87b3803ef
+ ---> 75523fcf8761
+Step 8/9 : EXPOSE 8080
+ ---> Running in 6f629526c6d9
+Removing intermediate container 6f629526c6d9
+ ---> 18c6a270964d
+Step 9/9 : CMD [ "yarn", "deploy" ]
+ ---> Running in 9e1090a27760
+Removing intermediate container 9e1090a27760
+ ---> 7539f20897c1
+Successfully built 7539f20897c1
+Successfully tagged eagle-docker.tarento.com/frac-collab-service:1c24ae3
++ docker tag eagle-docker.tarento.com/frac-collab-service:1c24ae3 eagle-docker.tarento.com/frac-collab-service:sbbronze
+[8mha:////4DW9QfjIqkQjbk0As03mWXshjqakH9wcOztMVQanDcdGAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiGoSEqNJabniBiY1xYt0Z2yGpeBFf4w8EIlGxxWpnm3m+YJkiHDlabA11jlLjMPjeTgsHjt3F84Atn7FhSuwNSjNI1qaeUXI2MKcoYSFgZajxnBzZDGvRqruqvCJbnXKcvoOA0ukbPKAQkzmrmL8wRthce52Yfp6/AhhDyFBu95/avQHhgNoTvgAAAA==[0m[Pipeline] }
+[8mha:////4EuThnuO/bxP/NWEHp5uhxRcX5RxIFZUATvKwJeb4b/6AAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiCgqEqNJabniBiY1xYt0Z2yGpeBFf4w8EIlGxxWpnm3m+YJkiHDlabA11jlLjMPjeTgsHjt3F84Atn7FhSuwNSjNI1qaeUXI2MKcoYSFgZajxnBzZDGvRqruqvCJbnXKcvoOA0ukbPKAQkzmrmL8wRthce52Yfp6/AhhDyFBu95/avQH+Ao9BvgAAAA==[0m[Pipeline] // stage
+[8mha:////4AXU9pjXrV3DcNQ6Eb6d+G4sMdtRURTPJn5v5jBgzo08AAAAph+LCAAAAAAAAP9tjTEOwjAQBM9BKWgpeYSDEB2iorXc8AITG+PEugv2haTiRXyNPxCIRMVWOyut5vmCMic4UPKycdgGzHWQXez91ORAqb1EGmRDZ1kTZopOajdosu44oyZ2MEcUsFCwdFhHygE9w0o15m6qaNBXJ07TtldQBHuDBwg1mdkk/sKYYH3tbSb8ef4KYOwYxI6h2G4+x/INK/7CYMEAAAA=[0m[Pipeline] stage
+[8mha:////4P8otm/db14WqDuVB8uFWYQY1DxABVDArZsA1CmUEBBgAAAAph+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycogUWBFT1ygLJwhNCGmj/8tPSjtxIq7GHWipxIQHy7ZkvdcbishwInaisdh6jLUXXejdlMRA3F4DDaKhi6gJIwUrlB0UGVstVVGysCjLYSVhbbEOFD26BBvZ6Icug0ZXnhNP21FC7s0dnpDJiZw0p28ZGba33kTCH+cvAMYuQX7Yzbafn8UHbGnGmsIAAAA=[0m[Pipeline] { (docker-push)
+[8mha:////4I93nRfJXXHYqNQ9n8ZryBqCBI50TLJhruonpCB0f+KSAAAAox+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIi0iIqWisNLzCJMXasO8d2cCpexNf4A4FIVGyx2tlmni9YxwBHDhqtot5QbA16N+p5YebQXx1ntHzBlimyU9io3HCnTgs2nBQsKUpYCdgoah1HQzrBVlh5l5WTpKtzCvN3EFCaboAHFGI2JxnSF6YAu9vYRaaf568AJp+grPefqv0bH7uiub4AAAA=[0m[Pipeline] sh
++ pwd
+/var/lib/jenkins/workspace/igot-dev/Frontend-build/frac-collab-service-dev-build
++ git rev-parse --short HEAD
++ commit_id=1c24ae3
++ docker push eagle-docker.tarento.com/frac-collab-service:1c24ae3
+The push refers to repository [eagle-docker.tarento.com/frac-collab-service]
+7579fee7f420: Preparing
+4c1dd014559b: Preparing
+95038ce4cbe9: Preparing
+9268945a1728: Preparing
+9291d3236184: Preparing
+2371e8a98212: Preparing
+5f7bfa7e154c: Preparing
+a27518e43e49: Preparing
+910d7fd9e23e: Preparing
+4230ff7f2288: Preparing
+2c719774c1e1: Preparing
+ec62f19bb3aa: Preparing
+f94641f1fe1f: Preparing
+2371e8a98212: Waiting
+5f7bfa7e154c: Waiting
+a27518e43e49: Waiting
+910d7fd9e23e: Waiting
+4230ff7f2288: Waiting
+2c719774c1e1: Waiting
+ec62f19bb3aa: Waiting
+f94641f1fe1f: Waiting
+9291d3236184: Pushed
+7579fee7f420: Pushed
+2371e8a98212: Layer already exists
+5f7bfa7e154c: Layer already exists
+a27518e43e49: Layer already exists
+910d7fd9e23e: Layer already exists
+9268945a1728: Pushed
+4230ff7f2288: Layer already exists
+2c719774c1e1: Layer already exists
+ec62f19bb3aa: Layer already exists
+f94641f1fe1f: Layer already exists
+4c1dd014559b: Pushed
+95038ce4cbe9: Pushed
+1c24ae3: digest: sha256:182f8101700da96386f6beccdc213d980bc258c526a490c530eee04540254ecc size: 3055
++ docker push eagle-docker.tarento.com/frac-collab-service:sbbronze
+The push refers to repository [eagle-docker.tarento.com/frac-collab-service]
+7579fee7f420: Preparing
+4c1dd014559b: Preparing
+95038ce4cbe9: Preparing
+9268945a1728: Preparing
+9291d3236184: Preparing
+2371e8a98212: Preparing
+5f7bfa7e154c: Preparing
+a27518e43e49: Preparing
+910d7fd9e23e: Preparing
+4230ff7f2288: Preparing
+2c719774c1e1: Preparing
+ec62f19bb3aa: Preparing
+f94641f1fe1f: Preparing
+2371e8a98212: Waiting
+910d7fd9e23e: Waiting
+4230ff7f2288: Waiting
+5f7bfa7e154c: Waiting
+2c719774c1e1: Waiting
+a27518e43e49: Waiting
+ec62f19bb3aa: Waiting
+f94641f1fe1f: Waiting
+95038ce4cbe9: Layer already exists
+9268945a1728: Layer already exists
+9291d3236184: Layer already exists
+4c1dd014559b: Layer already exists
+7579fee7f420: Layer already exists
+2371e8a98212: Layer already exists
+5f7bfa7e154c: Layer already exists
+4230ff7f2288: Layer already exists
+910d7fd9e23e: Layer already exists
+a27518e43e49: Layer already exists
+2c719774c1e1: Layer already exists
+f94641f1fe1f: Layer already exists
+ec62f19bb3aa: Layer already exists
+sbbronze: digest: sha256:182f8101700da96386f6beccdc213d980bc258c526a490c530eee04540254ecc size: 3055
++ docker rmi -f eagle-docker.tarento.com/frac-collab-service:1c24ae3
+Untagged: eagle-docker.tarento.com/frac-collab-service:1c24ae3
++ docker rmi -f eagle-docker.tarento.com/frac-collab-service:sbbronze
+Untagged: eagle-docker.tarento.com/frac-collab-service:sbbronze
+Untagged: eagle-docker.tarento.com/frac-collab-service@sha256:182f8101700da96386f6beccdc213d980bc258c526a490c530eee04540254ecc
+Deleted: sha256:7539f20897c157845361b0079adfdd85ae3961ae5041f116d0a38540604b62c6
+Deleted: sha256:18c6a270964dfaed74c772764a9e7beb6bea6df4fca9da59823e85cae69bd24f
+Deleted: sha256:75523fcf8761c662597d021ce22dd5a629836e9e35f9333269b7867f2f0e1271
+Deleted: sha256:11d86772918cf54948f53e605ad24a7775b3f18cf951bce4ea00914ddbeb392b
+Deleted: sha256:c137701618901017a21a842e56b054a4cd4f04cc563789ff7c02377b19eb259c
+Deleted: sha256:fa906a7d64949722cbe2bf677f4da9449ef4f9725d890c3a3cec55e85e9580f1
+Deleted: sha256:77f948a4c182644dc027e4f2fa8cf581813c07af948305349704c745710359df
+Deleted: sha256:7761e793b5b94719bdd6fe53de09f43279f319803c7e668c6e59a62fa2d8b565
+Deleted: sha256:c78a27d44e13caf56b13a295ec1149d18aaded7eabc5a689e892ba66dc334bd8
+Deleted: sha256:2a96a9bea3a89814a1f6a97c21d8aeb33829392364a04f2ed65e275e9cfd61e3
+Deleted: sha256:e626322a1a51defd8af72ee255d224cc21dc7a3ef6e003807ceee9239149ff89
+Deleted: sha256:14149b684780eb7a2505df5afd40f8415b4bb1f26e2b0da92fff02d11af6f563
+Deleted: sha256:9aee15f2f9c5752c407002b7dc5ee7c9a2e810096d3b7c124aa8c1579a8a6fb2
++ rm -rf dist
++ rm -rf dist.zip
+[8mha:////4MXsYXnb4p7FgiEOMp7sCWEPUy1bdW722lZ/PP4Z+CyxAAAAox+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIioERUaS03vMDExjix7oztkFS8iK/xBwKRqNhitbPNPF+wTBGOHC22hjpHqXEYfG+nhQPH7uJ5wJbP2DAl9galGSRrU88oORuYU5SwELAy1HhOjmyGtWjVXVVeka1OOU7fQUDp9A0eUIjJnFXMXxgjbK69Tkw/z18BjCFkKHf7T23f36y8/b4AAAA=[0m[Pipeline] }
+[8mha:////4ADhGD/71LyTTCLwqIdrANDxNP6S4NTyh7Fc/Zz1XH+5AAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOKCEB2iSmu54QUmNsaJdWdsh6TiRXyNPxCIRMUWq51t5vmCZYpw5GixNdQ5So3D4Hs7LRw4dhfPA7Z8xoYpsTcozSBZm3pGydnAnKKEhYCVocZzcmQzrEWr7qryimx1ynH6DgJKp2/wgEJM5qxi/sIYYXPtdWL6ef4KYAwhQ7nbf2r7BvGsvpe+AAAA[0m[Pipeline] // stage
+[8mha:////4CW/ezPvyc8QUPh/3zWEQ8IUWegke4QKdGw/DPOOEip2AAAAox+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMKREFSIitZKwwtMYowT6y7YF5KKF/E1/kBEJCq22plmXm8sU8SRo1ONpdZTqrzqQu+mpwaO7TXwoBq+qIopcbCqtEPJtT3NWLJYzMtyLDRWlqrAyZMTrHVjHqYIhlxxlji5g0bu6zueyPRUFhPlC2PE5tbXienX+RvA2HWCfLsXZLsPW9YxnL0AAAA=[0m[Pipeline] }
+[8mha:////4MIz47fr/8W2ok/wdLyXevLEobhhFUrq2v7hzRttFCPmAAAApB+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMKRQKJBVLRWGl5gEmOcWHfBvpBUvIiv8QciIlGx1c4083pjmSKOHJ1qLLWeUuVVF3o3PTVwbK+BB9XwRVVMiYNVpR1Kru1pxpLFYl6WY6GxslQFTp6cYK0b8zBFMOSKs8TJHTRyX9/xRKanspgoXxgjNre+Tky/zt8Axq4T5Nu9INt9ACg59UW9AAAA[0m[Pipeline] // node
+[8mha:////4FaMOl5AMjox+QrCVKyAXLPFK/PyL7vtBCCK2UbaBmuZAAAAox+LCAAAAAAAAP9tjbEOgjAURS8YB1dHP6IkLA7GybVh8Qsq1Fpo3sP2IUx+kb/mP0gkcfJO95zlvN5Yp4gjR6daS52nVHvVh8HNT40cu2vgUbV8UTVT4mBVZceKG3tasGKxWJblWGlsLNWBkycn2OrWPEwRDLniLHF2B43cN3c8kem5LCbKF6aI3W1oEtOv8zeAqe8FebkXZOUHDiCSD70AAAA=[0m[Pipeline] End of Pipeline
+Finished: SUCCESS

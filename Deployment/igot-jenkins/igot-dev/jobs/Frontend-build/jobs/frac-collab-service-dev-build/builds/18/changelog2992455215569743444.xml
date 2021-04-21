@@ -1,0 +1,24 @@
+commit dc1c6bccceb3e7823187616ad79e650174fe2149
+tree 75bf3a1ab94fe7ff9a9fcbab792477d84d828a96
+parent 43c9d20ebabec5afa1e89ba047e38cdfb2ba9543
+author Sakthivel <sakthivel.govindan@tarento.com> 2021-04-16 18:54:32 +0530
+committer Sakthivel <sakthivel.govindan@tarento.com> 2021-04-16 18:54:32 +0530
+
+    refactor: server port configuration update
+
+
+:100644 100644 0b2539ab16f32a4b64c11473848ccfb04f5712ff 0812ed4dc4f695cb77f76999f6b5e85c5083f8ec M	server.js
+commit 43c9d20ebabec5afa1e89ba047e38cdfb2ba9543
+tree 68b417c2e1d84b6c64d8a24d5b8219e43cc8ad19
+parent 840ec0172d19adda400da71d022f5ab6c063c467
+author Sakthivel <sakthivel.govindan@tarento.com> 2021-04-16 18:44:21 +0530
+committer Sakthivel <sakthivel.govindan@tarento.com> 2021-04-16 18:44:21 +0530
+
+    feat: add keycloak validation for authentication
+
+
+:100644 100644 041264c12f4ab0ca1fd5eb5c41c4f1f6d4afed33 901dbb624699fb214f14b80a6bed70984c5f6d5a M	app/middleWares/_middlewares/jwtAuthentication.js
+:100644 100644 4d1c5ebf195458852fef2a72860f9d68bb65754f be318e8179bf3501b8bf8ad9cde98b0166c4b7ab M	app/routes/fracSession.routes.js
+:100644 100644 cc33e9932a73e355ee1db120e8fc2217020b502b 11602de95ef8218e2f4becf1632324a84bf4c205 M	package.json
+:100644 100644 ea426a000d356aaf1bd6ea6ff9b51f6c8376420c 0b2539ab16f32a4b64c11473848ccfb04f5712ff M	server.js
+:100644 100644 f90dcdd7a013f00e7b520a3a09be0b7cf832914e be0d3e280133b3b1219d800f5302ccb26b81247c M	yarn.lock

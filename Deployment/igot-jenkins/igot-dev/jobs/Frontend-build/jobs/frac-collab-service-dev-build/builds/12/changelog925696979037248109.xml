@@ -1,0 +1,10 @@
+commit 3c31552aa954a223f231f5667d4b833f85ea4ea5
+tree 7177a27d053f3e87c887f4ce29ae8b99dac08346
+parent 1601b825b9aa3b55a0ed0847607e24dd2d3831ac
+author Sakthivel <sakthivel.govindan@tarento.com> 2021-04-15 19:11:24 +0530
+committer Sakthivel <sakthivel.govindan@tarento.com> 2021-04-15 19:11:24 +0530
+
+    refactor: update CORS 08
+
+
+:100644 100644 0efd569981a478d3930b8eb7541e7d0ea140f02d 2d18d100083538f3044a663642ad37b04d11f113 M	server.js

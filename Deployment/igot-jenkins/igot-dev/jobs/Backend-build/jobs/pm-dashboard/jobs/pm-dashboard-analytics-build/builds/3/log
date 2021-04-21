@@ -1,0 +1,18 @@
+Started by user [8mha:////4IC/XGvaJgDWPDkzydBhNmQZQV0m+OlPLzVeSdGBpAbTAAAAlx+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzOEgZu/dLi1CL9xJTczDwAawhpaMAAAAA=[0midc-eagle
+Checking out git git@git.idc.tarento.com:nxt/data-platform/analytics.git into /var/lib/jenkins/workspace/igot-dev/Backend-build/pm-dashboard/pm-dashboard-analytics-build@script to read Jenkinsfile.igot
+using credential git-lab
+ > git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url git@git.idc.tarento.com:nxt/data-platform/analytics.git # timeout=10
+Fetching upstream changes from git@git.idc.tarento.com:nxt/data-platform/analytics.git
+ > git --version # timeout=10
+using GIT_SSH to set credentials Git Lab
+ > git fetch --tags --progress git@git.idc.tarento.com:nxt/data-platform/analytics.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse origin/karmayogidashboards^{commit} # timeout=10
+Checking out Revision e74d38f4deb4005cf40c3f44dbceebed3f188e26 (origin/karmayogidashboards)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f e74d38f4deb4005cf40c3f44dbceebed3f188e26 # timeout=10
+Commit message: "Adding Configuration for settings changes and parameterizing Visualizations"
+First time build. Skipping changelog.
+ERROR: /var/lib/jenkins/workspace/igot-dev/Backend-build/pm-dashboard/pm-dashboard-analytics-build@script/Jenkinsfile.igot not found
+Finished: FAILURE

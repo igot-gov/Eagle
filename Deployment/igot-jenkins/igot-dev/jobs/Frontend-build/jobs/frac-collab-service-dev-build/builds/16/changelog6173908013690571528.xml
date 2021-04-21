@@ -1,0 +1,12 @@
+commit 4979817b37520d2e55f5efbe776d72138e7181b7
+tree f1ab3ddf4a33b87edd0d79ea07d78038807969ed
+parent 53b7e26492e5def98bf58e33c126304bc9985930
+author Sakthivel <sakthivel.govindan@tarento.com> 2021-04-16 12:50:50 +0530
+committer Sakthivel <sakthivel.govindan@tarento.com> 2021-04-16 12:50:50 +0530
+
+    refactor: CORS update 12
+
+
+:100644 100644 1ca4418530cf1c754caf50b06540cdc002616ff9 99aeadb2d593a6c819247f5b7a6021c883dbb57c M	app/routes/fracSession.routes.js
+:100644 100644 44f0b62488cd9f812ae9a980e5d892480a6c8b0e ea53cdb306bd1afd34e6d88ff3df598a68233ed7 M	server-compiled.js
+:100644 100644 4f33d1ee9aa33818a3e98fd9999df542efd04ed5 c53bb87f777a95ceea5d544b2c04111a60066ab4 M	server.js
