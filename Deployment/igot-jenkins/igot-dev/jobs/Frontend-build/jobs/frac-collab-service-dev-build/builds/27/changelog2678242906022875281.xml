@@ -1,0 +1,21 @@
+commit ba6f37b02c5418c57884cb8c4c717a85cdf8c03c
+tree da256354316621feeaf2a8daf1afc393de957d76
+parent eb698add9b09939253c47f2557e1c7cad722b2c9
+author haridas.kakunje <haridas.kakunje@tarento.com> 2021-04-21 11:06:14 +0530
+committer haridas.kakunje <haridas.kakunje@tarento.com> 2021-04-21 11:06:14 +0530
+
+    added Dockerfile.igot-pp
+
+
+:000000 100644 0000000000000000000000000000000000000000 8fc88eba040437045ace6821ecce476ec8d63e11 A	Dockerfile.igot-pp
+:100644 100644 5ea31f4b0209c0c1387ba2388d205403b6db3940 5753b3f7d5377c6df503acc49e3c4cffc5fadc0e M	Jenkinsfile
+commit eb698add9b09939253c47f2557e1c7cad722b2c9
+tree 0c2e5d26001f5faa2f44338a0fa687e1ac593a04
+parent c9558d8371da51f7e387fb15d55fc71048e1e860
+author Sakthivel <sakthivel.govindan@tarento.com> 2021-04-21 10:59:37 +0530
+committer Sakthivel <sakthivel.govindan@tarento.com> 2021-04-21 10:59:37 +0530
+
+    build: update production variables
+
+
+:100644 100644 225010a9bebe3f8c5c6c4e6df80aed674db24561 30fd71c8f278bdb876433391afb47a795052c1d5 M	.env.production

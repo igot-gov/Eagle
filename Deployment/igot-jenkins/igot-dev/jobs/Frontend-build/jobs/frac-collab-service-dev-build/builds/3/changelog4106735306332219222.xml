@@ -1,0 +1,21 @@
+commit 6cacb55022cedd80f019b8c3ec2310fc5c5d7766
+tree 1ee627c92ca5e83f6d1445af7c317f67545ce11d
+parent f28bc0acdd4785c5582c3dc5e40fc242c47f811f
+author Sakthivel <sakthivel.govindan@tarento.com> 2021-04-15 12:49:59 +0530
+committer Sakthivel <sakthivel.govindan@tarento.com> 2021-04-15 12:49:59 +0530
+
+    refactor: remove auth mechanism for db connection
+
+
+:100644 100644 04498b2af3b4355ea84a2980a3e7689423c0cf76 a47b688f4b7605bdb6e18ed02acf83f35db1a97d M	server.js
+commit f28bc0acdd4785c5582c3dc5e40fc242c47f811f
+tree 54d1eb58ecc929bf89e02a4af641e4f8c0c190ae
+parent e05d599c06161841e4ff5c02580df72a0425cf62
+author Sakthivel <sakthivel.govindan@tarento.com> 2021-04-15 12:47:39 +0530
+committer Sakthivel <sakthivel.govindan@tarento.com> 2021-04-15 12:47:39 +0530
+
+    refactor: add password uri component
+
+
+:100644 100644 850486b7b27c0a04b7b6f272bab48ef4e27d5dd9 bebb3b3fa7bbcb7ab61c9437f1ad1221ffd159d1 M	app/configurations/database.config.js
+:100644 100644 e796b42dd471d81364afe0ac14598b8bf3d02273 04498b2af3b4355ea84a2980a3e7689423c0cf76 M	server.js

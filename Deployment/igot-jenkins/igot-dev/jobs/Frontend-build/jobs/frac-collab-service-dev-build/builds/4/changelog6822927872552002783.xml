@@ -1,0 +1,21 @@
+commit c3c5386dc23c61fde1ded8128476e0b1b4353f55
+tree a844adc1d236f3b46a4c986903266b7b968e97cf
+parent 6cacb55022cedd80f019b8c3ec2310fc5c5d7766
+author Sakthivel <sakthivel.govindan@tarento.com> 2021-04-15 14:02:30 +0530
+committer Sakthivel <sakthivel.govindan@tarento.com> 2021-04-15 14:02:30 +0530
+
+    refactor: update CORS configurations
+
+
+:100644 100644 bebb3b3fa7bbcb7ab61c9437f1ad1221ffd159d1 c0a10edfd2a5c2d88a9df610807729dbe34b71ca M	app/configurations/database.config.js
+:100644 100644 a47b688f4b7605bdb6e18ed02acf83f35db1a97d 9bbd84c77f8da158bf8342dbaeb93b3e686755ba M	server.js
+commit 6cacb55022cedd80f019b8c3ec2310fc5c5d7766
+tree 1ee627c92ca5e83f6d1445af7c317f67545ce11d
+parent f28bc0acdd4785c5582c3dc5e40fc242c47f811f
+author Sakthivel <sakthivel.govindan@tarento.com> 2021-04-15 12:49:59 +0530
+committer Sakthivel <sakthivel.govindan@tarento.com> 2021-04-15 12:49:59 +0530
+
+    refactor: remove auth mechanism for db connection
+
+
+:100644 100644 04498b2af3b4355ea84a2980a3e7689423c0cf76 a47b688f4b7605bdb6e18ed02acf83f35db1a97d M	server.js

@@ -1,0 +1,11 @@
+commit 991e5a52d9b302d5b63006e3ff2900b38f4377ca
+tree 848eecaa6a112fb2c21016575a034ba0d61c13a8
+parent dc342b6a20e13e8b57613ebee8d3448d2dcdf6da
+author Sakthivel <sakthivel.govindan@tarento.com> 2021-04-15 12:18:31 +0530
+committer Sakthivel <sakthivel.govindan@tarento.com> 2021-04-15 12:18:31 +0530
+
+    refactor: update database configurations
+
+
+:100644 100644 bf94044fbcdbeb598b55a7cf7199c637eca6de3d 850486b7b27c0a04b7b6f272bab48ef4e27d5dd9 M	app/configurations/database.config.js
+:100644 100644 d8b017a9e64a67b74921803ca28459066e335e3c e796b42dd471d81364afe0ac14598b8bf3d02273 M	server.js

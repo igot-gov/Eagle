@@ -1,0 +1,10 @@
+commit bf1ec30d5bfa997c0a50470ee0a077db6e7d2329
+tree 339224bb19ef993f8c58d73407f3b69cf96fc3ac
+parent afd48eb3133d0e518f0dd16cb35e69b53cb6200f
+author Sakthivel <sakthivel.govindan@tarento.com> 2021-04-15 16:57:15 +0530
+committer Sakthivel <sakthivel.govindan@tarento.com> 2021-04-15 16:57:15 +0530
+
+    refactor: update CORS 03
+
+
+:100644 100644 b15f921a9867a4c870bb70e2e6b5c9bbe4f74ff3 98501bd624c9e0258148b24dbdb12375c4e0ecd0 M	server.js

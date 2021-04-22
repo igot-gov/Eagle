@@ -1,0 +1,13 @@
+commit 840ec0172d19adda400da71d022f5ab6c063c467
+tree 838e28d9a715f4eb265cdd7245ae9638470483a3
+parent 4979817b37520d2e55f5efbe776d72138e7181b7
+author Sakthivel <sakthivel.govindan@tarento.com> 2021-04-16 17:34:16 +0530
+committer Sakthivel <sakthivel.govindan@tarento.com> 2021-04-16 17:34:16 +0530
+
+    refactor: add https support for socket
+
+
+:100644 100644 486ed63154ee9389086409abf1e29a0a2c24d0e1 041264c12f4ab0ca1fd5eb5c41c4f1f6d4afed33 M	app/middleWares/_middlewares/jwtAuthentication.js
+:100644 100644 99aeadb2d593a6c819247f5b7a6021c883dbb57c 4d1c5ebf195458852fef2a72860f9d68bb65754f M	app/routes/fracSession.routes.js
+:100644 100644 ea53cdb306bd1afd34e6d88ff3df598a68233ed7 891f873da102f4b22e0cbe0cfa82eaab5d278a90 M	server-compiled.js
+:100644 100644 c53bb87f777a95ceea5d544b2c04111a60066ab4 ea426a000d356aaf1bd6ea6ff9b51f6c8376420c M	server.js

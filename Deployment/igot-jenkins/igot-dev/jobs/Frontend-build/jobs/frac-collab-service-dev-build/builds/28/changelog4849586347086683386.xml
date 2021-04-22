@@ -1,0 +1,13 @@
+commit ab51ccad26036fc99f098350ce0ce1b74e417577
+tree 4ccd147f46a59118989da40f195e7555751a76d4
+parent eb698add9b09939253c47f2557e1c7cad722b2c9
+author Sakthivel <sakthivel.govindan@tarento.com> 2021-04-21 11:22:50 +0530
+committer Sakthivel <sakthivel.govindan@tarento.com> 2021-04-21 11:22:50 +0530
+
+    build: update keycloak auth endpoint
+
+
+:100644 100644 cdbb59fd3518e5a9c4b5856391396a7a08a456b9 eece9972dc3100e4fad63c118febcb8d9b7534ff M	.env.local
+:100644 100644 30fd71c8f278bdb876433391afb47a795052c1d5 ecdf0ed68a6e76ee4363cd5a1e8b4ead58887b4b M	.env.production
+:100644 100644 35d42e1bf8e843e0c583cecc10f38bac6a0a0421 720907fa53eb36b47d71f9244ba6e8312b651d54 M	.env.staging
+:100644 100644 db212e6270dd92411e4e9760e62d88bd9779631b c68041fd02e74929631d331f139b2ca37bfac647 M	app/middleWares/_middlewares/jwtAuthentication.js
