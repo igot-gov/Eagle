@@ -1,0 +1,77 @@
+#--------------------------- PATH & PORT CONFIGURATIONS ---------------------------#
+
+# SET CONTEXT PATH
+server.port={{ service_pm_ingestpipeline_port }}
+
+# KAFKA SERVER CONFIGURATIONS
+spring.kafka.bootstrap.servers={{ kafka_servers_list }}
+
+spring.kafka.consumer.value-deserializer=com.ingestpipeline.consumer.HashMapDeserializer
+spring.kafka.consumer.key-deserializer=org.apache.kafka.common.serialization.StringDeserializer
+spring.kafka.consumer.group-id=pipeline-group
+spring.kafka.producer.key-serializer=org.apache.kafka.common.serialization.StringSerializer
+spring.kafka.producer.value-serializer=org.springframework.kafka.support.serializer.JsonSerializer
+
+# KAFKA CONSUMER CONFIGURATIONS
+kafka.consumer.config.auto_commit=true
+kafka.consumer.config.auto_commit_interval=100
+kafka.consumer.config.session_timeout=15000
+kafka.consumer.config.group_id=pipeline-group
+kafka.consumer.config.auto_offset_reset=earliest
+
+# KAFKA PRODUCER CONFIGURATIONS
+kafka.producer.config.retries_config=0
+kafka.producer.config.batch_size_config=100000
+kafka.producer.config.linger_ms_config=100
+kafka.producer.config.buffer_memory_config=66554432
+
+#----------------------------- ELASTIC SEARCH CONFIGURATIONS ------------------------------#
+#services.esindexer.host=es.rain.idc.tarento.com
+#services.esindexer.host.name=http://es.rain.idc.tarento.com/
+#services.esindexer.host.port=9200
+#services.esindexer.host.nameport=http://es.rain.idc.tarento.com:9200/
+#services.esindexer.username=elastic
+#services.esindexer.password=Elastic123
+
+# Kronos-RAIN Production
+services.esindexer.host=elasticsearch.idc.tarento.com
+services.esindexer.host.name=http://elasticsearch.idc.tarento.com/
+services.esindexer.host.port=9200
+services.esindexer.host.nameport=http://elasticsearch.idc.tarento.com:9200/
+services.esindexer.username=elastprod
+services.esindexer.password=El@st1cp
+
+kronos.esindexer.host=elasticsearch.idc.tarento.com
+kronos.esindexer.username=elastprod
+kronos.esindexer.password=El@st1cp
+
+kafka.topics.incoming.data.course=coursecompletion
+kafka.topics.incoming.data.assessment=assessmentanalysis
+kafka.topics.enriched.data=enricheddata
+kafka.topics.enriched.key=enrData
+es.target.index.name=dss-target_v1
+es.index.name=kronos_time_analytics
+es.document.type=time_data
+es.host.schema=https
+es.push.direct=true
+es.index.searchQuery.collection={\"size\": \"10\",\"query\":{\"bool\":{\"must\":[{\"wildcard\": {\"Data.tenantId.keyword\":\"pb.*\"}}]}}}
+es.index.searchQuery.billing={"size": 500}
+es.index.searchQuery.kronos={\"size\":10,\"query\":{\"bool\":{\"must\":[{\"range\":{\"ts\":{\"gte\":1580515200000,\"lte\":1583020800000}}},{\"match\":{\"org\":\"Tarento\"}}],\"must_not\":{\"bool\":{\"must\":[{\"match\":{\"prjid\":0}},{\"match\":{\"st\":0}}]}}}}}
+es.index.searchQuery.kronostraining={\"size\":10, \"query\":{\"match_all\":{}}}
+es.index.searchQuery.kronosskills={\"size\":10, \"query\":{\"match_all\":{}}}
+egov.services.esindexer.host.search=/_search
+
+spring.data.elasticsearch.cluster.name=elasticsearch-v1
+spring.data.elasticsearch.cluster.nodes=elasticsearch-v1
+
+#----------------------------- Pipeline Schema Config Locations ------------------------------#
+transformation.config.location=config/transform_transaction_v1.json
+
+schema.transaction.validation=config/validator_transaction_v1.json
+schema.transaction.transformation=config/transform_transaction_v1.json
+schema.transaction.enrichment=config/enrichment_transaction_v1.json
+
+config.schema.paths=classpath*:config/*.json
+
+external.data.fetch.api.endpoint=https://api.covid19india.org/state_district_wise.json?
+

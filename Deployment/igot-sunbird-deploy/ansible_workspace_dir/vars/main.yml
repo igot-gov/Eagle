@@ -63,12 +63,14 @@ service_ui_spv_igot_service: ui-spv-igot
 service_frac_backend_service: frac-backend-service
 service_frac_web_service: frac-web-service
 service_frac_collab_service: frac-collab-service
-service_profanity_image_filter_service: profanity-image-filter
+service_profanity_image_moderation_service: profanity-image-moderation
 service_pm_web_service: pm-web-service
 service_pm_analytics_service: pm-analytics-service
 service_pm_zuul_service: pm-zuul-service
 service_pm_user_service: pm-user-service
 service_pm_ingestpipeline_service: pm-ingestpipeline-service
+service_vega_rasa_service_service: vega-rasa-service
+service_rasa_action_service_service: rasa-action-service
 
 
 # Ports
@@ -134,13 +136,14 @@ service_ui_spv_igot_port: 3044
 service_frac_backend_port: 8095
 service_frac_web_service_port: 5000
 service_frac_collab_service_port: 8080
-service_profanity_image_filter_port: 5006
+service_profanity_image_moderation_port: 80
 service_pm_web_service_port: 5000
 service_pm_analytics_port: 8091
 service_pm_zuul_port: 8080
 service_pm_user_port: 8081
 service_pm_ingestpipeline_port: 8097
-
+service_vega_rasa_service_port: 5005
+service_rasa_action_service_port: 5055
 
 
 # Network alias names, so that one service can talk to another
@@ -208,12 +211,14 @@ network_alias_ui_spv_igot_service: ui-spv-igot
 network_alias_frac_backend_service: frac-backend-service
 network_alias_frac_web_service: frac-web-service
 network_alias_frac_collab_service: frac-collab-service
-network_alias_profanity_image_filter_service: profanity-image-filter
+network_alias_profanity_image_moderation_service: profanity-image-moderation
 network_alias_pm_web_service: pm-web-service
 network_alias_pm_analytics_service: pm-analytics-service
 network_alias_pm_zuul_service: pm-zuul-service
 network_alias_pm_user_service: pm-user-service
 network_alias_pm_ingestpipeline_service: pm-ingestpipeline-service
+network_alias_vega_rasa_service_service: vega-rasa-service
+network_alias_rasa_action_service_service: rasa-action-service
 
 # Image names, this is used by the service alone, but since we want to have all the images in one place, we are oncfiguring the images here
 image_ui_static: ui-static
@@ -271,13 +276,14 @@ image_ui_spv_igot: ui-spv-igot
 image_frac_backend_service: projecx-frac-service
 image_frac_web_service: frac-web-service
 image_frac_collab_service: frac-collab-service
-image_profanity_image_filter_service: profanity-image-filter
+image_profanity_image_moderation_service: profanity-image-moderation
 image_pm_web_service: pm-web-service
 image_pm_analytics_service: pm-analytics-service
 image_pm_zuul_service: pm-zuul-service
 image_pm_user_service: pm-user-service
 image_pm_ingestpipeline_service: pm-ingestpipeline-service
-
+image_vega_rasa_service_service: vega-rasa-server
+image_rasa_action_service_service: rasa-action-server
 
 health_end_point_sb_ext_service: "http://localhost:{{ service_sb_ext_port }}/v1/latest/terms/user"
 elasticsearch_hosts_list: "{{ elasticsearch_http_hosts_list | map('regex_replace','^(?P<host>.+):(?P<port>\\d+)$', '\\g<host>') | list | join (',') }}"
