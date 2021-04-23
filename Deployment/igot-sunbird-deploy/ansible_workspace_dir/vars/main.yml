@@ -69,8 +69,9 @@ service_pm_analytics_service: pm-analytics-service
 service_pm_zuul_service: pm-zuul-service
 service_pm_user_service: pm-user-service
 service_pm_ingestpipeline_service: pm-ingestpipeline-service
-service_vega_rasa_service_service: vega-rasa-service
+service_vega_rasa_service_service: rasa-service
 service_rasa_action_service_service: rasa-action-service
+service_vega_rasa_router_service_service: rasa-router-service
 
 
 # Ports
@@ -144,7 +145,7 @@ service_pm_user_port: 8081
 service_pm_ingestpipeline_port: 8097
 service_vega_rasa_service_port: 5005
 service_rasa_action_service_port: 5055
-
+service_vega_rasa_router_service_port: 4005
 
 # Network alias names, so that one service can talk to another
 network_alias_content_service: private-content-service
@@ -217,8 +218,9 @@ network_alias_pm_analytics_service: pm-analytics-service
 network_alias_pm_zuul_service: pm-zuul-service
 network_alias_pm_user_service: pm-user-service
 network_alias_pm_ingestpipeline_service: pm-ingestpipeline-service
-network_alias_vega_rasa_service_service: vega-rasa-service
+network_alias_vega_rasa_service_service: rasa-service
 network_alias_rasa_action_service_service: rasa-action-service
+network_alias_vega_rasa_router_service_service: rasa-router-service
 
 # Image names, this is used by the service alone, but since we want to have all the images in one place, we are oncfiguring the images here
 image_ui_static: ui-static
@@ -284,6 +286,7 @@ image_pm_user_service: pm-user-service
 image_pm_ingestpipeline_service: pm-ingestpipeline-service
 image_vega_rasa_service_service: vega-rasa-server
 image_rasa_action_service_service: rasa-action-server
+image_vega_rasa_router_service_service: vega-rasa-router
 
 health_end_point_sb_ext_service: "http://localhost:{{ service_sb_ext_port }}/v1/latest/terms/user"
 elasticsearch_hosts_list: "{{ elasticsearch_http_hosts_list | map('regex_replace','^(?P<host>.+):(?P<port>\\d+)$', '\\g<host>') | list | join (',') }}"

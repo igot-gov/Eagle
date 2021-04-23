@@ -1,0 +1,29 @@
+---
+# vars file for deploy-ui-static
+# For script
+release_name: "{{ network_alias_vega_rasa_router_service_service }}"
+user_friendly_name: Profanity Filter service
+template_compose_file_name: profanity-moderation.j2
+template_env_file_name: "../../shared_files/templates/profanity-moderation-env.j2"
+compose_file_name: "{{ service_vega_rasa_router_service_service }}.yml"
+env_file_name: "{{ service_vega_rasa_router_service_service }}.env"
+env_file_deployment_location: "{{ env_files_dir }}/{{ env_file_name }}"
+helm_env_file_location: "../kubernetes-deploy/templates"
+helm_env_file_name: "{{ helm_env_file_location }}/{{ service_vega_rasa_router_service_service }}.env"
+chart_path: "../kubernetes-deploy/rasa-router-service"
+compose_file_deployment_location: "{{ compose_files_dir }}/{{ compose_file_name }}"
+
+# For service
+application_port: "{{ service_vega_rasa_router_service_port }}"
+image_name: "{{ image_vega_rasa_router_service_service }}"
+tag: "{{ tags_vega_rasa_router_service_service }}"
+host_port: "{{ application_port }}"
+docker_port: "{{ application_port }}"
+replicas: "{{ service_replicas_vega_rasa_router_service_service }}"
+reserved_memory: "{{ service_mem_reserved_vega_rasa_router_service_service }}"
+limited_memory: "{{ service_mem_limit_vega_rasa_router_service_service }}"
+health_check_endpoint: http://127.0.0.1:{{ docker_port }}/healthcheck
+network_alias_name: "{{ network_alias_vega_rasa_router_service_service }}"
+docker_service_stack_name: profanity
+docker_service_name: "{{ service_vega_rasa_router_service_service }}"
+force_reload: "{{ force_reload_vega_rasa_router_service_service }}"
