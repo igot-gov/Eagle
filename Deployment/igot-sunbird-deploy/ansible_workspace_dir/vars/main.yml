@@ -188,6 +188,7 @@ network_alias_lex_core_critical_service: lex-core
 network_alias_lex_core_cassandra_service: lex-core
 #network_alias_lex_core_high_service: lex-core-high
 network_alias_lex_core_high_service: lex-core
+network_alias_lex_core_high_service: sb-cb-ext-service
 network_alias_lex_core_lhub_service: lex-core-lhub
 network_alias_lex_health_core_critical_service: lex-health-core-critical
 network_alias_lex_hierarchy_service: hierarchy-service
