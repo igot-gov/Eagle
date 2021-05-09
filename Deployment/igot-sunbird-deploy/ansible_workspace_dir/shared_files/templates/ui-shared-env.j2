@@ -128,7 +128,7 @@ INTEREST_API_BASE={{ lms_core_high_api_base }}
 PLAYLIST_API_BASE={{ lms_core_api_base }}
 LIKE_API_BASE={{ lms_core_cassandra_api_base }}
 RATING_API_BASE={{ lms_core_cassandra_api_base }}
-COHORTS_API_BASE={{ lms_core_api_base }}
+COHORTS_API_BASE={{ sb_ext_api_base }}
 LEARNING_HISTORY_API_BASE={{ lms_core_high_api_base }}
 SUBMISSION_API_BASE={{ lms_core_high_api_base }}
 LEADERBOARD_API_BASE={{ lms_core_cassandra_api_base }}
@@ -154,5 +154,11 @@ SB_API_KEY={{ bearer_token }}
 #Frac Variables
 REACT_APP_KEYCLOAK_URL=https://{{ domain_name }}/auth
 REACT_APP_PROXY_URL={{ domain_name }}
+REACT_APP_API_URL=https://igot-frac.tarento.com/api
 
 SUNBIRD_PROXY_URL=https://{{ domain_name }}/apis/proxies/v8/action
+
+iX_CHANNEL_ID={{ x_channel_id }}
+
+CONTENT_SERVICE_API_BASE={{ content_service_api_base }}
+VM_LEARNING_SERVICE_URL=http://{{learningservice_ip}}:8080/learning-service
