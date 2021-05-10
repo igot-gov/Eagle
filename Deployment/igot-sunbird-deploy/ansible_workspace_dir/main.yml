@@ -102,6 +102,31 @@
       tags: [deploy-frac-backend-service]
     - role: deploy-frac-web-service
       tags: [deploy-frac-web-service]
+    - role: deploy-frac-collab-service
+      tags: [deploy-frac-collab-service]
+    - role: deploy-profanity-image-moderation-service
+      tags: [deploy-profanity-image-moderation-service]
+    - role: deploy-pm-web-service
+      tags: [deploy-pm-web-service]
+    - role: deploy-pm-analytics-service
+      tags: [deploy-pm-analytics-service]
+    - role: deploy-pm-zuul-service
+      tags: [deploy-pm-zuul-service]
+    - role: deploy-pm-user-service
+      tags: [deploy-pm-user-service]
+    - role: deploy-pm-ingestpipeline-service
+      tags: [deploy-pm-ingestpipeline-service]
+    - role: deploy-vega-rasa-service
+      tags: [deploy-vega-rasa-service]
+    - role: deploy-rasa-action-service
+      tags: [deploy-rasa-action-service]
+    - role: deploy-vega-rasa-router-service
+      tags: [deploy-vega-rasa-router-service]
+    - role: deploy-frac-dictionary-service
+      tags: [deploy-frac-dictionary-service]
+    - role: deploy-ui-cbc-igot
+      tags: [deploy-ui-cbc-igot]
+
 
   tasks:
     - name: Remove the env directory

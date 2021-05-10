@@ -1,0 +1,9 @@
+---
+  - name: Ensure env directory exists
+    file:
+      path: "{{ env_files_dir }}"
+      state: directory
+  - name: Create and save env template
+    template:
+      src: "{{ template_env_file_name }}"
+      dest: "{{ env_file_deployment_location }}"
