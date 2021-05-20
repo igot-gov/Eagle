@@ -1,0 +1,16 @@
+commit baf6539924b2b503576b0d219a8f5b242e2a84a1
+tree f14d527c0f16602df93a6f900d293557192f5f6a
+parent afcd03df31ea38856a31dd02499b13fe3f64f6e2
+author Amit Kumar <amit.sengar@tarento.com> 2021-05-06 21:20:30 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2021-05-06 21:20:30 +0530
+
+    lint and build : fix
+
+
+:100644 100644 dbd002fc4ccb1664e80693c896fd3d842303df80 90571168b9d596b7d1c227b186f83bed89be8583 M	package.json
+:100644 100644 e98c7f32b8dedefa943bc59e64171f6315107848 439afcef0be20178d0efe4b71e7ff7bb365430bc M	project/ws/app/src/lib/routes/create-mdo/create-mdo.module.ts
+:100644 100644 1c4988bb7d55861d81d626281c9dbccb220a0b99 6bfca54a9a1bd88eeb52a8028ace2d6cf975bc23 M	project/ws/app/src/lib/routes/home/home.module.ts
+:100644 100644 bfba88a8682d2194d4f555870a382bb65820268d a4b298c9ab1b3800451f264267b05f7b8cdd96b8 M	project/ws/app/src/lib/routes/home/home.rounting.module.ts
+:100644 100644 4f3b4458a7cb950e1770c6512f3e155251ea3183 b8f6de4f7b9bfdc3f059d52dac249d43ab60a812 M	project/ws/app/src/lib/routes/home/routes/my-content/components/all-content/all-content.component.ts
+:100644 100644 14842d1af200489b947ccc831d0458174f1c7d93 d7372d89a2b58f030632b6a137555d60715e9c77 M	project/ws/app/src/lib/routes/home/routes/my-content/services/my-content.service.ts
+:100644 100644 40ced46c624f8694cf68a33c0e8a8229ee74c50e 03bf3751f01fcc680ec74f0dd47f0608c9106440 M	project/ws/app/src/lib/routes/home/routes/users-view/users-view.component.html

@@ -1,0 +1,11 @@
+commit b703fe5c250df3db0bd84c61d53f20bbd0c3cc6f
+tree fb3c65e1f4784430ddf1c047724d6880892915d1
+parent bd2c64fcc4223e808768ea5fc7f2ff6230c75c2d
+author Keyur Rathod <keyur.rathod84@gmail.com> 2021-05-18 14:59:10 +0530
+committer Keyur Rathod <keyur.rathod84@gmail.com> 2021-05-18 14:59:10 +0530
+
+    Fix the link issue
+
+
+:100644 100644 3cb304cca29ddb0af776bdcadf2cfbc302b666e3 256f3ab3fc85dfeb2bc0265304abf375fec3c576 M	package.json
+:100644 100644 28e337bae607c07b0765da3da7fada2c45293792 cff4d469ea0077017fc7c78cce45d602ee80070f M	project/ws/app/src/lib/routes/home/routes/content-detail/components/content-detail/content-detail.component.ts

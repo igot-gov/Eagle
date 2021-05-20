@@ -1,0 +1,17 @@
+commit 75feeef30502c82b09ed87338b8d193f131aba2d
+tree b70c3cd659dd347abce9c7a92ed6c19e509eb658
+parent d02ab5ca378313ffdb652c00b149aa7f681f9684
+author Keyur Rathod <keyur.rathod84@gmail.com> 2021-05-19 16:33:39 +0530
+committer Keyur Rathod <keyur.rathod84@gmail.com> 2021-05-19 16:33:39 +0530
+
+    Fixed user role and permission for left menu and set dynamic urls
+
+
+:100644 100644 4c99313396265a28a13d9c2099109868ef609a28 57c7a564f722d40f799e72fa15fbba7e38138e12 M	project/ws/app/src/lib/routes/home/home.rounting.module.ts
+:100644 100644 8d43ea6a1677e8067dc44304a2d8a1d80dce4727 bd18e8c62ecd7a555a1a3e23a62c6a2d65cae036 M	project/ws/app/src/lib/routes/home/resolvers/department-resolve.ts
+:000000 100644 0000000000000000000000000000000000000000 b24de3ad674102cfef222158fbb0d1db6cae918a A	project/ws/app/src/lib/routes/home/resolvers/userrole-resolve.ts
+:100644 100644 df90797716af840f4881fc9efb941669867c55f1 4a72a24bf63f4ef044bc5b990823e82676ba9ba2 M	project/ws/app/src/lib/routes/home/routes/home/home.component.ts
+:100644 100644 6b72d0e1121784e93ce90d3763aacb69794ec08a 5c03ec7975068b9fc9aed10c46ab53bbf6da8039 M	src/app/services/init.service.ts
+:100644 100644 554463588585281eb23e12b1aaef1ceb02974365 c7d45e849973fde84cabe966d30a5c44b4eda576 M	src/environments/environment.dev.ts
+:100644 100644 928cf847ec6059358838b5e80045c2467215fe43 3295dbe99733ae4b0be191fa49aa96610c43d2b5 M	src/environments/environment.preprod.ts
+:100644 100644 62c6818140c59f5ffc25612d55a46cf3c2635d2f b8f18b71fd8398e22e9f40b92a84137e317a508e M	src/environments/environment.prod.ts

@@ -1,0 +1,52 @@
+commit 3509fe3d9c9bc211cf2193802a2182c2da853e0e
+tree a24487854c39c3e2a221bb82281df31dbecbcd34
+parent c3fdb60b0a37a1dbbcdda901e8ef5a49e7f2486e
+author Amit Kumar <amit.sengar@tarento.com> 2021-05-11 00:41:18 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2021-05-11 00:41:18 +0530
+
+    ui updated
+
+
+:100644 100644 5799239075fc5f82c4796aedcfe1f6e61185c22e c41f6d333bf6e209b656866116e09537e4936bdf M	package.json
+:100644 100644 c4919c0052f794688ae6c04aa34ef70a642c51d7 2c51f9387f13ddce4c47db3658ce576b2b2b0dc2 M	project/ws/app/src/lib/routes/home/home.module.ts
+:100644 100644 e16a52069a3e78db206811a078d555e0f9a2186f 344379147ce61ca79a3eb605529e7c336201ea05 M	project/ws/app/src/lib/routes/home/home.rounting.module.ts
+:100644 100644 6571c37800ae78c62b7ad8eb73af2e26998d40f8 66fbb9882599b3e0801c4e23ab81f5e464e4b07a M	project/ws/app/src/lib/routes/home/routes/coming-soon/coming-soon.component.html
+:100644 100644 90331bf18adc2d2400a81268b2f66e42540b72ca 8ebcda922b4f2d51c357a1a8e2ce76dcd2af19df M	project/ws/app/src/lib/routes/home/routes/coming-soon/coming-soon.component.scss
+:100644 100644 e8e2125368094a9946f3420047b44d547a80135a 7c1014ab0915d2f640a86f3fb68c33ead900b8e1 M	project/ws/app/src/lib/routes/home/routes/coming-soon/coming-soon.component.ts
+:000000 100644 0000000000000000000000000000000000000000 70b922dc7fe503427cc8391ccd51f99267a90f71 A	project/ws/app/src/lib/routes/home/routes/content-detail/components/content-Insights/content-Insights.component.html
+:000000 100644 0000000000000000000000000000000000000000 eeb92f1c115f27e32d3a153a27acd519d0f46b03 A	project/ws/app/src/lib/routes/home/routes/content-detail/components/content-Insights/content-Insights.component.scss
+:000000 100644 0000000000000000000000000000000000000000 6835b43188f7f7c1cc6b905433a1a77d7d854398 A	project/ws/app/src/lib/routes/home/routes/content-detail/components/content-Insights/content-Insights.component.spec.ts
+:000000 100644 0000000000000000000000000000000000000000 4f6b13b51df1ab53a4067efc1e3e9132a91e3ba4 A	project/ws/app/src/lib/routes/home/routes/content-detail/components/content-Insights/content-Insights.component.ts
+:000000 100644 0000000000000000000000000000000000000000 5e6c2fb94fbad5ec94caa586329d2dcb154abeca A	project/ws/app/src/lib/routes/home/routes/content-detail/components/content-detail-home/content-detail-home.component.html
+:000000 100644 0000000000000000000000000000000000000000 00b11ef96b64b8217587850b8e941719ecba6df1 A	project/ws/app/src/lib/routes/home/routes/content-detail/components/content-detail-home/content-detail-home.component.scss
+:000000 100644 0000000000000000000000000000000000000000 af6d58d82171b9850a4767ab94b0515da0cef6c9 A	project/ws/app/src/lib/routes/home/routes/content-detail/components/content-detail-home/content-detail-home.component.spec.ts
+:000000 100644 0000000000000000000000000000000000000000 01a1cd156a8ef6e0033e7727b28793bbfb715ee8 A	project/ws/app/src/lib/routes/home/routes/content-detail/components/content-detail-home/content-detail-home.component.ts
+:000000 100644 0000000000000000000000000000000000000000 c56445147221c3727e51bbe4830c1b3910546925 A	project/ws/app/src/lib/routes/home/routes/content-detail/components/content-detail/content-detail.component.html
+:000000 100644 0000000000000000000000000000000000000000 a4a1d544af19abed04102cedc26cedeb06552521 A	project/ws/app/src/lib/routes/home/routes/content-detail/components/content-detail/content-detail.component.scss
+:000000 100644 0000000000000000000000000000000000000000 14de43d3f0a714f9828d98664db92c7aa3e57c68 A	project/ws/app/src/lib/routes/home/routes/content-detail/components/content-detail/content-detail.component.spec.ts
+:000000 100644 0000000000000000000000000000000000000000 d65eab50384aeae1dbae27d5b189a48f4ed65430 A	project/ws/app/src/lib/routes/home/routes/content-detail/components/content-detail/content-detail.component.ts
+:000000 100644 0000000000000000000000000000000000000000 a476e4cc86581c79376adb1584540369c62ffebd A	project/ws/app/src/lib/routes/home/routes/content-detail/components/content-discussion/content-discussion.component.html
+:000000 100644 0000000000000000000000000000000000000000 9e731fe12231f7a6c771df3034f03d4089a5fa3e A	project/ws/app/src/lib/routes/home/routes/content-detail/components/content-discussion/content-discussion.component.scss
+:000000 100644 0000000000000000000000000000000000000000 f846db9880ef0ffb38c7c62958cec03b77e17538 A	project/ws/app/src/lib/routes/home/routes/content-detail/components/content-discussion/content-discussion.component.spec.ts
+:000000 100644 0000000000000000000000000000000000000000 b285e03eec8e1597a677d47e3555785cacf39c7c A	project/ws/app/src/lib/routes/home/routes/content-detail/components/content-discussion/content-discussion.component.ts
+:000000 100644 0000000000000000000000000000000000000000 1fd287c65a704b2d0218e3521e4772c6f38edb4d A	project/ws/app/src/lib/routes/home/routes/content-detail/content-detail-routing.module.ts
+:000000 100644 0000000000000000000000000000000000000000 21840a435f58261f2e4725613d4665099bed96d4 A	project/ws/app/src/lib/routes/home/routes/content-detail/content-detail.module.ts
+:000000 100644 0000000000000000000000000000000000000000 3c7d81759bd0a3442edc320ce07c760d6a4f035b A	project/ws/app/src/lib/routes/home/routes/content-detail/interface/app-toc-analytics.model.ts
+:000000 100644 0000000000000000000000000000000000000000 c765d2700711082de01a924bd9e0b36e0b136532 A	project/ws/app/src/lib/routes/home/routes/content-detail/interface/app-toc.model.ts
+:000000 100644 0000000000000000000000000000000000000000 22d0d0f7596210aaf932625709eb7f59771700dd A	project/ws/app/src/lib/routes/home/routes/content-detail/interface/content-detail.ts
+:000000 100644 0000000000000000000000000000000000000000 71ca4ae67aa2e724e09869a3e57d15f60e556ddb A	project/ws/app/src/lib/routes/home/routes/content-detail/interface/meta-tag.model.ts
+:000000 100644 0000000000000000000000000000000000000000 c9ae28b16f9cafcf1629a589e5d4da26108703d1 A	project/ws/app/src/lib/routes/home/routes/content-detail/resolvers/app-toc-resolver.service.spec.ts
+:000000 100644 0000000000000000000000000000000000000000 4a222c1e18e58cae69ae8e0376b99a9a7c48c9f9 A	project/ws/app/src/lib/routes/home/routes/content-detail/resolvers/app-toc-resolver.service.ts
+:000000 100644 0000000000000000000000000000000000000000 a66965e0a15b477c1d33befa045a2ddd4b346d68 A	project/ws/app/src/lib/routes/home/routes/content-detail/services/app-toc.service.spec.ts
+:000000 100644 0000000000000000000000000000000000000000 7b0452e0e479b28ec619faabb6a1db0c42e5efc0 A	project/ws/app/src/lib/routes/home/routes/content-detail/services/app-toc.service.ts
+:000000 100644 0000000000000000000000000000000000000000 c6c966509b69776e827f5d11f6d5b38c7a9f1ae2 A	project/ws/app/src/lib/routes/home/routes/content-detail/services/content-detail.service.spec.ts
+:000000 100644 0000000000000000000000000000000000000000 2ef50b75b52a81ee227418dc4cc1005ee948ac38 A	project/ws/app/src/lib/routes/home/routes/content-detail/services/content-detail.service.ts
+:000000 100644 0000000000000000000000000000000000000000 8a84516083095a47d7261f87aeba975dcf38a568 A	project/ws/app/src/lib/routes/home/routes/content-detail/services/local-data.service.ts
+:000000 100644 0000000000000000000000000000000000000000 b8fea7efff15f0d59261864da0a2d738608912c1 A	project/ws/app/src/lib/routes/home/routes/content-detail/services/my-toc.service.ts
+:000000 100644 0000000000000000000000000000000000000000 41474d26f92fffeec7077ca4a15237d1e160580f A	project/ws/app/src/lib/routes/home/routes/content-detail/services/title-tag.service.spec.ts
+:000000 100644 0000000000000000000000000000000000000000 aae670d3a065eb609e4226ae2358c4a7bce0119a A	project/ws/app/src/lib/routes/home/routes/content-detail/services/title-tag.service.ts
+:100644 100644 c1cf593d0306578372652181dad83e9c7a49d654 1659f22d3cd4766495167537120cea7922c94a47 M	project/ws/app/src/lib/routes/home/routes/my-content/components/all-content/all-content.component.html
+:100644 100644 b8f6de4f7b9bfdc3f059d52dac249d43ab60a812 ebaaf1762014670c20db6c348513141f56ace609 M	project/ws/app/src/lib/routes/home/routes/my-content/components/all-content/all-content.component.ts
+:000000 100644 0000000000000000000000000000000000000000 dd0e9fa2347f8eb9ee9f69f4691e14bc7e327e24 A	project/ws/app/src/lib/routes/home/routes/welcome/welcome.component.html
+:000000 100644 0000000000000000000000000000000000000000 81dccc80f92626ec6c31284746fdda55311b196e A	project/ws/app/src/lib/routes/home/routes/welcome/welcome.component.scss
+:000000 100644 0000000000000000000000000000000000000000 d19d37e6115ac48f9da9515c7681c6d43bcf49c4 A	project/ws/app/src/lib/routes/home/routes/welcome/welcome.component.ts

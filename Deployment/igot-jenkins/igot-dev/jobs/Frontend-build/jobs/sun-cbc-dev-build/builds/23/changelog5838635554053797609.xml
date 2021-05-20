@@ -1,0 +1,10 @@
+commit 4db1c7ff62890d2cd5363e6d387b6f116c8146ba
+tree 0603de633359bdcff0c1c4f4d137284fc7b0eca7
+parent 02847ff7e379f7a21c0f4f0f2ba8371427073dc8
+author Keyur Rathod <keyur.rathod84@gmail.com> 2021-05-19 19:05:26 +0530
+committer Keyur Rathod <keyur.rathod84@gmail.com> 2021-05-19 19:05:26 +0530
+
+    Fixed docker build command in jenkinsfile
+
+
+:100644 100644 2c0382ebf18ad7497e74aae791ab7e0f8b116000 0973b8dbb3ff393bec72ab899ce5bf1dbc86f099 M	Jenkinsfile

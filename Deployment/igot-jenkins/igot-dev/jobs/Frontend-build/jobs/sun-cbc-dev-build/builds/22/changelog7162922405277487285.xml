@@ -1,0 +1,35 @@
+commit 02847ff7e379f7a21c0f4f0f2ba8371427073dc8
+tree c57e3edfff43209d2a993dea7b6be679477add79
+parent 9841aa407dc78258da6f2a088873d71a4a83d1ab
+author Keyur Rathod <keyur.rathod84@gmail.com> 2021-05-19 17:31:47 +0530
+committer Keyur Rathod <keyur.rathod84@gmail.com> 2021-05-19 17:31:47 +0530
+
+    Added configuration for stage environment
+
+
+:000000 100644 0000000000000000000000000000000000000000 0a026b8449a0af6f14b4743c619f0c97301b3e8b A	Dockerfile.stage
+:100644 100644 13e0becf9fecdae189be3e0c3b6afca97dad93cd 1fa3084b5c7bc753372e6565be426cae4ac5c0b6 M	angular.json
+:100644 100644 0725e93ccb210ba9257140372dd2f8cefe3d2ff0 fcd3d51af0b3c442cc94032e5a976b102cf7aef8 M	package.json
+commit 9841aa407dc78258da6f2a088873d71a4a83d1ab
+tree 6594c27bca3ecd56b41f45562a6db2223578912e
+parent 884c166a75464a4d9badeaaeb836ef75c42580e5
+author Keyur Rathod <keyur.rathod84@gmail.com> 2021-05-19 17:23:23 +0530
+committer Keyur Rathod <keyur.rathod84@gmail.com> 2021-05-19 17:23:23 +0530
+
+    fix build errors
+
+
+:100644 100644 dc96cbc450494af43a0123683f74192ee5087a66 3b3166ca5ec27dd4856e1f90a10f15c90dcb30ad M	project/ws/app/src/lib/routes/home/resolvers/department-resolve.ts
+commit 884c166a75464a4d9badeaaeb836ef75c42580e5
+tree 0eac9c447a85aba652f76081cf5f8a66448f477e
+parent 961346d8ab20b321cb1696f90aa719029b5cd1f1
+author Keyur Rathod <keyur.rathod84@gmail.com> 2021-05-19 17:14:00 +0530
+committer Keyur Rathod <keyur.rathod84@gmail.com> 2021-05-19 17:14:00 +0530
+
+    fix lint errors
+
+
+:100644 100644 57c7a564f722d40f799e72fa15fbba7e38138e12 b6aff1edc4bedff8a0cc733cc59886e0acc90203 M	project/ws/app/src/lib/routes/home/home.rounting.module.ts
+:100644 100644 bd18e8c62ecd7a555a1a3e23a62c6a2d65cae036 dc96cbc450494af43a0123683f74192ee5087a66 M	project/ws/app/src/lib/routes/home/resolvers/department-resolve.ts
+:100644 100644 b24de3ad674102cfef222158fbb0d1db6cae918a a33e3d8f577a80df9295cea6f7ef73ccb872c0d2 M	project/ws/app/src/lib/routes/home/resolvers/userrole-resolve.ts
+:100644 100644 5c03ec7975068b9fc9aed10c46ab53bbf6da8039 ace55d54c1c160d10544fc5d3c400e4c421028aa M	src/app/services/init.service.ts

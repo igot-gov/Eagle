@@ -1,0 +1,10 @@
+commit 427a24e7de9947036073d35452cfde74dcee0087
+tree 5a36e3c5850396d3e1859fe9e47e7548ee7e2394
+parent fcda74b7d6e28063469e341e231d810f748f6960
+author Amit Kumar <amit.sengar@tarento.com> 2021-05-11 12:16:10 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2021-05-11 12:16:10 +0530
+
+    lint fix
+
+
+:100644 100644 f0c978fabf5d17841018f216231ccf674a2690c5 b9f7ba0f1dd325c17c5abb5fd936185f3557eaea M	project/ws/app/src/lib/routes/home/home.rounting.module.ts

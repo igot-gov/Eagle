@@ -1,0 +1,21 @@
+commit bd2c64fcc4223e808768ea5fc7f2ff6230c75c2d
+tree ace24570c7c5d3960139b0979d4dfdcf707eb3ad
+parent 63d7e6c6d4b0a0bdb7e999bdaa9e1674002cf237
+author Keyur Rathod <keyur.rathod84@gmail.com> 2021-05-18 13:29:46 +0530
+committer Keyur Rathod <keyur.rathod84@gmail.com> 2021-05-18 13:29:46 +0530
+
+    Made changes in cbc portal for karmayogi, cbp redirects, competency in glance, role checking and removed discussion
+
+
+:100644 100644 2f392038632f308c58c3bfaa44d744b34b0bd103 3cb304cca29ddb0af776bdcadf2cfbc302b666e3 M	package.json
+:100644 100644 c56445147221c3727e51bbe4830c1b3910546925 abc883b38d76a6e0355f088f01833770d4ed2a0b M	project/ws/app/src/lib/routes/home/routes/content-detail/components/content-detail/content-detail.component.html
+:100644 100644 d65eab50384aeae1dbae27d5b189a48f4ed65430 28e337bae607c07b0765da3da7fada2c45293792 M	project/ws/app/src/lib/routes/home/routes/content-detail/components/content-detail/content-detail.component.ts
+:100644 100644 88e72ccad5fcdbd65e33acfee2d182ce5d4c4c0b e9bda28f15d438ede9cdb4a756e1f95fc2a48be4 M	project/ws/app/src/lib/routes/home/routes/welcome/welcome.component.html
+:100644 100644 61b13e64c3a408a5e99eef7de8c885b3a0dd88e4 92d69344f0f16ed2b54cad387554a9c4801839fe M	project/ws/app/src/lib/routes/home/routes/welcome/welcome.component.ts
+:100644 100644 5e74c49f30461004206acd46ef64c7fac7d0f0bc 2999a74011e1a28ec6351e64e8a62b3d32562721 M	project/ws/app/src/lib/routes/home/services/home.servive.ts
+:100644 100644 d328b6439a46e7bf572ad1ebb1c418c9327674a2 7110bff6c029628d80edfffceb90a8c7ef96f81b M	proxy/cbc-dev-ip.proxy.json
+:100644 100644 bf6c41e37259ac7c006ddfbd8382975f0c593c17 53806dbd4c895d0c2efb01f41c3d24e9bc48a807 M	proxy/localhost.proxy.json
+:100644 100644 17918e65b8fcd44e193ab831e3e45c479b733afc 1629b39c18f97529c8aef7817fd91cfaee65a98a M	src/environments/environment.dev.ts
+:100644 100644 17918e65b8fcd44e193ab831e3e45c479b733afc 928cf847ec6059358838b5e80045c2467215fe43 M	src/environments/environment.preprod.ts
+:100644 100644 b8343f609868f5a66407eeb88af11e2001af1842 62c6818140c59f5ffc25612d55a46cf3c2635d2f M	src/environments/environment.prod.ts
+:100644 100644 c184e9b596ffeb515d4c526540392de6bb5086b5 6c10ad141a2475a6c476532822ee9c4506568166 M	src/environments/environment.ts

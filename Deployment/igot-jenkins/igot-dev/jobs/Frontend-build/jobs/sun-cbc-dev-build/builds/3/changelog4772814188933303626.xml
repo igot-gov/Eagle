@@ -1,0 +1,11 @@
+commit a780bea4f40313f9460e2a50f98df39354d62e50
+tree 51089a49f3e741c86f161717e82ca2ee51117d49
+parent baf6539924b2b503576b0d219a8f5b242e2a84a1
+author Amit Kumar <amit.sengar@tarento.com> 2021-05-07 17:56:34 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2021-05-07 17:56:34 +0530
+
+    dep name field update
+
+
+:100644 100644 90571168b9d596b7d1c227b186f83bed89be8583 027d240df604893208db712905603785fd796865 M	package.json
+:100644 100644 e0054d81c7973a9f507a302af914db3c4c4bb168 df90797716af840f4881fc9efb941669867c55f1 M	project/ws/app/src/lib/routes/home/routes/home/home.component.ts

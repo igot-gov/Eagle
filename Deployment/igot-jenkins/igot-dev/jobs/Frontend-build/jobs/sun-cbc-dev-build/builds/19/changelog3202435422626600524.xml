@@ -1,0 +1,31 @@
+commit 88cc84262e9cd4a76ed62b6875b42338009e6d1c
+tree 267aba440b5f8ac196faffd509bd3407c8bbfd25
+parent b703fe5c250df3db0bd84c61d53f20bbd0c3cc6f
+author Keyur Rathod <keyur.rathod84@gmail.com> 2021-05-19 12:16:52 +0530
+committer Keyur Rathod <keyur.rathod84@gmail.com> 2021-05-19 12:16:52 +0530
+
+    Fix URL and at a glance collection UI issue
+
+
+:100644 100644 256f3ab3fc85dfeb2bc0265304abf375fec3c576 0725e93ccb210ba9257140372dd2f8cefe3d2ff0 M	package.json
+:100644 100644 1629b39c18f97529c8aef7817fd91cfaee65a98a c952b5b6089ddd487e11eafce3b421ffa1d62a09 M	src/environments/environment.dev.ts
+commit 1d49bef3c1fa54f8b9d634565a011b741ae76326
+tree 940ba7eb15f712033b90e30fd5635113ce1d13a9
+parent 75f78583edb3c62d578f3b6a061de1bba3d16f52
+author Keyur Rathod <keyur.rathod84@gmail.com> 2021-05-19 10:50:22 +0530
+committer Keyur Rathod <keyur.rathod84@gmail.com> 2021-05-19 10:50:22 +0530
+
+    Fix dev site path
+
+
+:100644 100644 31e20cb361c72824b2bddd9d6771636f30455729 554463588585281eb23e12b1aaef1ceb02974365 M	src/environments/environment.dev.ts
+commit 75f78583edb3c62d578f3b6a061de1bba3d16f52
+tree b8909544e99f392a7b1e51284fb47da9681a262e
+parent b703fe5c250df3db0bd84c61d53f20bbd0c3cc6f
+author Keyur Rathod <keyur.rathod84@gmail.com> 2021-05-19 10:38:30 +0530
+committer Keyur Rathod <keyur.rathod84@gmail.com> 2021-05-19 10:38:30 +0530
+
+    Fixing dev URL
+
+
+:100644 100644 1629b39c18f97529c8aef7817fd91cfaee65a98a 31e20cb361c72824b2bddd9d6771636f30455729 M	src/environments/environment.dev.ts

@@ -1,0 +1,35 @@
+commit 63d7e6c6d4b0a0bdb7e999bdaa9e1674002cf237
+tree 037f917e5d562204738062c24114f3c1a1f8e06a
+parent 5cf991d915c76a8474f4c1da829077624fc899d6
+author Amit Kumar <amit.sengar@tarento.com> 2021-05-11 17:09:14 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2021-05-11 17:09:14 +0530
+
+    lint fix
+
+
+:100644 100644 42121aac63356b68be02bbac9750b3563e3dabd7 dd13d52d165a5248cc11264a4202dafa8f9066d1 M	project/ws/app/src/lib/routes/home/routes/welcome/count-component/count.component.ts
+:100644 100644 c36475db2efc85ce97313ecd123421b681769d5b 70e3951ec10d42eeb5db0f8512a8b4b140ae1365 M	project/ws/app/src/lib/routes/home/routes/welcome/count-component/count.model.ts
+:100644 100644 83cccbe250b20325dd3d7371c0dd8a310c819dc0 61b13e64c3a408a5e99eef7de8c885b3a0dd88e4 M	project/ws/app/src/lib/routes/home/routes/welcome/welcome.component.ts
+commit 5cf991d915c76a8474f4c1da829077624fc899d6
+tree 3157d0473e4d0b3358c1c9b15f739b86abe938ce
+parent 427a24e7de9947036073d35452cfde74dcee0087
+author Amit Kumar <amit.sengar@tarento.com> 2021-05-11 17:03:38 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2021-05-11 17:03:38 +0530
+
+    welcome page added
+
+
+:100644 100644 2c51f9387f13ddce4c47db3658ce576b2b2b0dc2 2882df340d5b04de76916e0f9ef6df83da74a1db M	project/ws/app/src/lib/routes/home/home.module.ts
+:100644 100644 b9f7ba0f1dd325c17c5abb5fd936185f3557eaea 4c99313396265a28a13d9c2099109868ef609a28 M	project/ws/app/src/lib/routes/home/home.rounting.module.ts
+:100644 100644 ad781e40b861cbbbc44eb53c502d1214c9e925d2 21bc587878d463e71a5e394a983205b2b48bfed9 M	project/ws/app/src/lib/routes/home/routes/directory/directory.component.html
+:100644 100644 77e9f1eb1b88e461e63e77a51e15a57c867c89ae fb23886d0b6e29747571f5682f90ea50e5d0b1c5 M	project/ws/app/src/lib/routes/home/routes/home/home.component.html
+:000000 100644 0000000000000000000000000000000000000000 fab7cca3daf6cb23dc945f83e985ac5a780aa212 A	project/ws/app/src/lib/routes/home/routes/welcome/count-component/count.component.html
+:000000 100644 0000000000000000000000000000000000000000 9083b5a635151ee53f6fb1922cf43769adb80f5f A	project/ws/app/src/lib/routes/home/routes/welcome/count-component/count.component.scss
+:000000 100644 0000000000000000000000000000000000000000 42121aac63356b68be02bbac9750b3563e3dabd7 A	project/ws/app/src/lib/routes/home/routes/welcome/count-component/count.component.ts
+:000000 100644 0000000000000000000000000000000000000000 c36475db2efc85ce97313ecd123421b681769d5b A	project/ws/app/src/lib/routes/home/routes/welcome/count-component/count.model.ts
+:000000 100644 0000000000000000000000000000000000000000 af4503d3e342ed6f9b4dea62c22604483203f9d6 A	project/ws/app/src/lib/routes/home/routes/welcome/count-component/count.module.ts
+:100644 100644 dd0e9fa2347f8eb9ee9f69f4691e14bc7e327e24 88e72ccad5fcdbd65e33acfee2d182ce5d4c4c0b M	project/ws/app/src/lib/routes/home/routes/welcome/welcome.component.html
+:100644 100644 81dccc80f92626ec6c31284746fdda55311b196e 569ff88bcf06b8da634ad0c6e173ffa0cdaad493 M	project/ws/app/src/lib/routes/home/routes/welcome/welcome.component.scss
+:100644 100644 d19d37e6115ac48f9da9515c7681c6d43bcf49c4 83cccbe250b20325dd3d7371c0dd8a310c819dc0 M	project/ws/app/src/lib/routes/home/routes/welcome/welcome.component.ts
+:100644 100644 020f488280254e004a51cced868cf43a63a86504 6b72d0e1121784e93ce90d3763aacb69794ec08a M	src/app/services/init.service.ts
+:000000 100644 0000000000000000000000000000000000000000 b2c80739c066e1eef51d94a23f26ff41749ed545 A	src/cbc-assets/icons/iGOT_symbol.svg
