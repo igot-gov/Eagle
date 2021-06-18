@@ -1,0 +1,52 @@
+server.port=8099
+
+spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+spring.datasource.url=jdbc:mysql://{{ mysql_host }}:3306/retail_user
+spring.datasource.username={{ mysql_username }}
+spring.datasource.password={{ mysql_password }}
+
+
+#----------------------------- ELASTIC SEARCH CONFIGURATIONS ------------------------------#
+services.esindexer.host=elastic.pulz.app
+services.esindexer.host.name=elastic.pulz.app
+services.esindexer.host.port=443
+services.esindexer.username=elastic
+services.esindexer.password=Ela12#$
+
+es.fs.forms.index.name=fs-forms
+es.fs.forms.document.type=forms
+es.fs.formsdata.index.name=fs-forms-data
+es.fs.formsdata.document.type=forms-data
+
+
+es.forms.fail.records.index.name=form-failure-records
+es.forms.fail.records.index.type=formfailurerecords
+
+file.config.path=/
+file.config.name=FormConfig.yml
+
+#services.esindexer.host=10.2.1.30
+#services.esindexer.host.name=http://10.2.1.30/
+#services.esindexer.host.port=9200
+#services.esindexer.username=elastic
+#services.esindexer.password=Elastic123
+#es.fs.forms.index.name=fs-forms
+#es.fs.forms.document.type=forms
+#es.fs.formsdata.index.name=fs-forms-data
+#es.fs.formsdata.document.type=forms-data
+
+# KAFKA SERVER CONFIGURATIONS
+spring.kafka.bootstrap.servers=localhost:9092
+
+spring.kafka.producer.key-serializer=org.apache.kafka.common.serialization.StringSerializer
+spring.kafka.producer.value-serializer=org.springframework.kafka.support.serializer.JsonSerializer
+
+# KAFKA PRODUCER CONFIGURATIONS
+kafka.producer.config.retries_config=0
+kafka.producer.config.batch_size_config=100000
+kafka.producer.config.linger_ms_config=100
+kafka.producer.config.buffer_memory_config=66554432
+
+spring.http.multipart.max-file-size=100MB
+spring.http.multipart.max-request-size=100MB
+
