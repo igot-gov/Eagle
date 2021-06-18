@@ -14,7 +14,8 @@ sunbird_cassandra_username: username
 sunbird_cassandra_password: password
 
 frac_api_base: https://frac_url
-frac_dict_url: #frac_dictionary_url
+frac_dict_url: #https://frac_dictionary_backend_url/api/v1/site/update
+frac_role_verification: https://Karmayogi_domain/apis/protected/v8/portal/userrole/
 
 profanity_service_host: http://IP:4001 #profanity-service host details
 

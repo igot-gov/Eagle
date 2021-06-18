@@ -126,6 +126,10 @@
       tags: [deploy-frac-dictionary-service]
     - role: deploy-ui-cbc-igot
       tags: [deploy-ui-cbc-igot]
+    - role: deploy-pm-microsurvey-service
+      tags: deploy-pm-microsurvey-service
+    - role: deploy-pm-microsurvey-web-service
+      tags: deploy-pm-microsurvey-web-service
 
 
   tasks:

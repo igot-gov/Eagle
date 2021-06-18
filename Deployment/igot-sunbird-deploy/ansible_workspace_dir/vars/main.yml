@@ -74,6 +74,8 @@ service_rasa_action_service_service: rasa-action-service
 service_vega_rasa_router_service_service: rasa-router-service
 service_frac_dictionary_service: frac-dictionary-service
 service_ui_cbc_igot_service: ui-cbc-igot
+service_pm_microsurvey_service: pm-microsurvey-service
+service_pm_microsurvey_web_service: pm-microsurvey-web-service
 
 # Ports
 service_antivirus_port: 3310
@@ -149,6 +151,8 @@ service_rasa_action_service_port: 5055
 service_vega_rasa_router_service_port: 4005
 service_frac_dictionary_service_port: 3040
 service_ui_cbc_igot_port: 3054
+service_pm_microsurvey_port: 8099
+service_pm_microsurvey_web_service_port: 5000
 
 # Network alias names, so that one service can talk to another
 network_alias_content_service: private-content-service
@@ -227,6 +231,8 @@ network_alias_rasa_action_service_service: rasa-action-service
 network_alias_vega_rasa_router_service_service: rasa-router-service
 network_alias_frac_dictionary_service: frac-dictionary-service
 network_alias_ui_cbc_igot_service: ui-cbc-igot
+network_alias_pm_microsurvey_service: pm-microsurvey-service
+network_alias_pm_microsurvey_web_service: pm-microsurvey-web-service
 
 # Image names, this is used by the service alone, but since we want to have all the images in one place, we are oncfiguring the images here
 image_ui_static: ui-static
@@ -295,6 +301,8 @@ image_rasa_action_service_service: rasa-action-server
 image_vega_rasa_router_service_service: vega-rasa-router
 image_frac_dictionary_service: frac-dictionary-service
 image_ui_cbc_igot: ui-cbc-igot
+image_pm_microsurvey_service: pm-microsurvey-service
+image_pm_microsurvey_web_service: pm-survey-web-service
 
 health_end_point_sb_ext_service: "http://localhost:{{ service_sb_ext_port }}/v1/latest/terms/user"
 elasticsearch_hosts_list: "{{ elasticsearch_http_hosts_list | map('regex_replace','^(?P<host>.+):(?P<port>\\d+)$', '\\g<host>') | list | join (',') }}"
