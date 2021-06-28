@@ -1,0 +1,31 @@
+### Default variable file for lms-service ###
+
+namespace: dev
+imagepullsecrets: devregistrysecret
+dockerhub: eagle-docker.tarento.com
+
+
+env:
+  javaoptions: -Xmx600m
+
+replicaCount: 1
+repository: content_tagging
+image_tag: content1
+resources:
+  requests:
+    cpu: 200m
+    memory: 100Mi
+  limits:
+    cpu: 1
+    memory: 5120Mi
+network:
+  port: 5008
+  targetport: 5008
+strategy:
+  type: RollingUpdate
+  maxsurge: 25%
+  maxunavailable: 25%
+
+ui_proxies_bulk_upload: /mydata/bulk_upload
+
+

@@ -1,5 +1,12 @@
 ---
 # Variables common to all the roles, but which not not dependant on the environmwent will stay here
+
+#sunbird-service-variables
+
+sb_learner_service: learner-service
+sb_learner_service_port: 9000
+
+
 service_content_service: lex-content-service
 service_sb_ext_service: lex-sb-ext-service
 service_sb_ext_authtool_service: lex-sb-ext-authtool-service
@@ -38,24 +45,40 @@ service_lex_hierarchy_service: hierarchy-service
 service_lex_kafka_service: kafka-service
 service_support_script_service: support-script-service
 service_redis_service: redis-service
-service_opensaber_service: opensaber	
+service_opensaber_service: opensaber
 service_user_profile_service: eagle-user-profile
 service_sb_recommendation_service: sb-recommendation_service
 service_sb_discuss_connect_service: sb-discuss_connect_service
 service_sb_hub_service: sb-hub-service
-service_profanity_filter_service: profanity-filter
-service_ui_cbp_igot_service: ui-cbp-igot
-service_ui_mdo_igot_service: ui-mdo-igot
 service_content_validation_service: content_validation_service
 service_social_share: social-share
 service_sb_hub_graph_service: sb-hub-graph-service
-service_workflow_handler_service: workflow-handler-service
+service_profanity_filter_service: profanity-filter
+service_ui_cbp_igot_service: ui-cbp-igot
 service_scoring_engine_service: scoring-engine-service
+service_workflow_handler_service: workflow-handler-service
+service_sb_cb_ext_service: sb-cb-ext-service
+service_ui_mdo_igot_service: ui-mdo-igot
+service_ui_spv_igot_service: ui-spv-igot
 service_frac_backend_service: frac-backend-service
 service_frac_web_service: frac-web-service
+service_frac_collab_service: frac-collab-service
+service_profanity_image_moderation_service: profanity-image-moderation
+service_pm_web_service: pm-web-service
+service_pm_analytics_service: pm-analytics-service
+service_pm_zuul_service: pm-zuul-service
+service_pm_user_service: pm-user-service
+service_pm_ingestpipeline_service: pm-ingestpipeline-service
+service_vega_rasa_service_service: rasa-service
+service_rasa_action_service_service: rasa-action-service
+service_vega_rasa_router_service_service: rasa-router-service
+service_frac_dictionary_service: frac-dictionary-service
+service_ui_cbc_igot_service: ui-cbc-igot
+service_pm_microsurvey_service: pm-microsurvey-service
+service_pm_microsurvey_web_service: pm-microsurvey-web-service
+service_content_tagging_service: content-tagging-service
 
 # Ports
-
 service_antivirus_port: 3310
 service_authtool_ui_port: 3006
 service_bulk_upload_port: 3009
@@ -74,48 +97,71 @@ service_sb_ext_auth_tool_port: 3011
 service_sb_ext_port: 5902
 service_social_forum_port: 3000
 service_catalog_port: 3000
-service_telemetry_port: 8090
+#service_telemetry_port: 8090
+service_telemetry_port: 9001
 service_ui_proxies_port: 9001
-service_ui_static_port: 3004
+service_ui_static_port: 3002
 service_ui_proxies_fusion_port: 
 service_ui_static_fusion_port: 
 service_support_api_port: 3005
 service_sb_telemetry_port: 8091
-
+service_sb_telemetry_port: 9001
 #service_pid_service_port: 9200
 service_pid_service_port: 3008
 service_notification_service_port: 5805
 service_la_port: 1234
 service_access_control_port: 5904
-service_lex_core_critical_port: 7006
-service_lex_core_high_port: 7003
+#service_lex_core_critical_port: 7006
+service_lex_core_critical_port: 7001
+#service_lex_core_high_port: 7003
+service_lex_core_high_port: 7001
 service_lex_core_lhub_port: 7004
-service_lex_core_cassandra_port: 7005
+#service_lex_core_cassandra_port: 7005
+service_lex_core_cassandra_port: 7001
 service_lex_health_core_critical_port: 5907
 service_lex_hierarchy_service_port: 5906
 service_lex_kafka_service_port: 5908
 service_support_script_port: 3007
 service_redis_port: 6379
-service_opensaber_port: 8080	
+service_opensaber_port: 8080
 service_user_profile_port: 3008
 service_sb_recommendation_port: 3012
 service_sb_discuss_connect_port: 9050
 service_sb_hub_port: 3013
-service_profanity_filter_port: 5000
-service_ui_cbp_igot_port: 3024
-service_ui_mdo_igot_port: 3034
 service_content_validation_port: 6590
 service_social_share_port: 3009
 service_sb_hub_graph_port: 4013
-service_workflow_handler_port: 5099
+service_profanity_filter_port: 5000
+service_ui_cbp_igot_port: 3024
 service_scoring_engine_port: 7014
+service_workflow_handler_port: 5099
+service_sb_cb_ext_port: 7001
+service_ui_mdo_igot_port: 3034
+service_ui_spv_igot_port: 3044
 service_frac_backend_port: 8095
 service_frac_web_service_port: 5000
+service_frac_collab_service_port: 8080
+service_profanity_image_moderation_port: 80
+service_pm_web_service_port: 5000
+service_pm_analytics_port: 8091
+service_pm_zuul_port: 8080
+service_pm_user_port: 8081
+service_pm_ingestpipeline_port: 8097
+service_vega_rasa_service_port: 5005
+service_rasa_action_service_port: 5055
+service_vega_rasa_router_service_port: 4005
+service_frac_dictionary_service_port: 3040
+service_ui_cbc_igot_port: 3054
+service_pm_microsurvey_port: 8099
+service_pm_microsurvey_web_service_port: 5000
+service_content_tagging_port: 5008
 
 
 # Network alias names, so that one service can talk to another
 network_alias_content_service: private-content-service
-network_alias_static_host: private-static-host
+#network_alias_static_host: private-static-host
+network_alias_static_host: nginx-public-ingress-metrics
+#network_alias_telemetry_service: telemetry-service
 network_alias_telemetry_service: telemetry-service
 network_alias_sb_ext_service: sb-ext-service
 network_alias_sb_ext_authoring_service: sb-ext-authoring-service
@@ -139,37 +185,58 @@ network_alias_chatbot_service: chat-bot-service
 network_alias_monitoring_service: monitoring-service
 network_alias_dbms_api_service: dbms-api
 network_alias_support_api_service: support-api
-network_alias_sb_telemetry_service: sb-telemetry-service
-network_alias_profanity_filter_service: profanity-filter
-network_alias_ui_cbp_igot_service: ui-cbp-igot
-network_alias_ui_mdo_igot_service: ui-mdo-igot
-
+#network_alias_sb_telemetry_service: sb-telemetry-service
+network_alias_sb_telemetry_service: telemetry-service
 #network_alias_pid_service: pid-service
 network_alias_pid_service: eagle-user-profile
 network_alias_notification_service: notification-service
 network_alias_la_service: la-service
 network_alias_access_control_service: access-control-service
-network_alias_lex_core_critical_service: lex-core-critical
-network_alias_lex_core_cassandra_service: lex-core-cassandra
-network_alias_lex_core_high_service: lex-core-high
+#network_alias_lex_core_critical_service: lex-core-critical
+network_alias_lex_core_critical_service: lex-core
+#network_alias_lex_core_cassandra_service: lex-core-cassandra
+network_alias_lex_core_cassandra_service: lex-core
+#network_alias_lex_core_high_service: lex-core-high
+#network_alias_lex_core_high_service: lex-core
+network_alias_lex_core_high_service: sb-cb-ext-service
 network_alias_lex_core_lhub_service: lex-core-lhub
 network_alias_lex_health_core_critical_service: lex-health-core-critical
 network_alias_lex_hierarchy_service: hierarchy-service
 network_alias_lex_kafka_service: kafka-service
 network_alias_support_script_service: support-script
 network_alias_redis_service: redis-service
-network_alias_opensaber: sb-opensaber	
+network_alias_opensaber: sb-opensaber
 network_alias_user_profile: user-profile
 network_alias_sb_recommendation_service: recommendation_service
 network_alias_sb_discuss_connect_service: discuss-connect-service
-network_alias_sb_hub_service: hub-service
+network_alias_sb_hub_service: sb-hub-service
 network_alias_content_validation_service: content-validation-service
 network_alias_social_share_service: social_share
 network_alias_sb_hub_graph_service: hub-graph-service
-network_alias_workflow_handler_service: workflow-handler-service
+network_alias_profanity_filter_service: profanity-filter
+network_alias_ui_cbp_igot_service: ui-cbp-igot
 network_alias_scoring_engine_service: scoring-engine-service
+network_alias_workflow_handler_service: workflow-handler-service
+network_alias_sb_cb_ext_service: sb-cb-ext-service
+network_alias_ui_mdo_igot_service: ui-mdo-igot
+network_alias_ui_spv_igot_service: ui-spv-igot
 network_alias_frac_backend_service: frac-backend-service
 network_alias_frac_web_service: frac-web-service
+network_alias_frac_collab_service: frac-collab-service
+network_alias_profanity_image_moderation_service: profanity-image-moderation
+network_alias_pm_web_service: pm-web-service
+network_alias_pm_analytics_service: pm-analytics-service
+network_alias_pm_zuul_service: pm-zuul-service
+network_alias_pm_user_service: pm-user-service
+network_alias_pm_ingestpipeline_service: pm-ingestpipeline-service
+network_alias_vega_rasa_service_service: rasa-service
+network_alias_rasa_action_service_service: rasa-action-service
+network_alias_vega_rasa_router_service_service: rasa-router-service
+network_alias_frac_dictionary_service: frac-dictionary-service
+network_alias_ui_cbc_igot_service: ui-cbc-igot
+network_alias_pm_microsurvey_service: pm-microsurvey-service
+network_alias_pm_microsurvey_web_service: pm-microsurvey-web-service
+network_alias_content_tagging_service: content-tagging-service
 
 # Image names, this is used by the service alone, but since we want to have all the images in one place, we are oncfiguring the images here
 image_ui_static: ui-static
@@ -209,21 +276,38 @@ image_lex_health_core_service_critical: lex-health-core-service
 image_lex_hierarchy_service: lex-hierarchy-service
 iamge_lex_kafka_service: wn-kafka-service
 image_support_script_service: support-jobs
-image_opensaber: opensaber	
+image_opensaber: opensaber
 image_user_profile: user-profile
 image_sb_recommendation_service: sb-recommendation-service
 image_sb_discuss_connect_service: discuss-connect-service
 image_sb_hub_service: sb-hub-service
-image_profanity_filter_service: profanity-filter
-image_ui_cbp_igot: ui-cbp-igot
-image_ui_mdo_igot: ui-mdo-igot
 image_content_validation_service: content-validation-service
 image_social_share_service: social-share
 image_sb_hub_graph_service: sb-hub-graph-service
+image_profanity_filter_service: profanity-filter
+image_ui_cbp_igot: ui-cbp-igot
 image_workflow_handler_service: workflow-handler-service
 image_scoring_engine_service: scoring-engine-service
+image_sb_cb_ext_service: sb-cb-ext-service
+image_ui_mdo_igot: ui-mdo-igot
+image_ui_spv_igot: ui-spv-igot
 image_frac_backend_service: projecx-frac-service
 image_frac_web_service: frac-web-service
+image_frac_collab_service: frac-collab-service
+image_profanity_image_moderation_service: profanity-image-moderation
+image_pm_web_service: pm-web-service
+image_pm_analytics_service: pm-analytics-service
+image_pm_zuul_service: pm-zuul-service
+image_pm_user_service: pm-user-service
+image_pm_ingestpipeline_service: pm-ingestpipeline-service
+image_vega_rasa_service_service: vega-rasa-server
+image_rasa_action_service_service: rasa-action-server
+image_vega_rasa_router_service_service: vega-rasa-router
+image_frac_dictionary_service: frac-dictionary-service
+image_ui_cbc_igot: ui-cbc-igot
+image_pm_microsurvey_service: pm-microsurvey-service
+image_pm_microsurvey_web_service: pm-survey-web-service
+image_content_tagging_service: content_tagging
 
 health_end_point_sb_ext_service: "http://localhost:{{ service_sb_ext_port }}/v1/latest/terms/user"
 elasticsearch_hosts_list: "{{ elasticsearch_http_hosts_list | map('regex_replace','^(?P<host>.+):(?P<port>\\d+)$', '\\g<host>') | list | join (',') }}"
